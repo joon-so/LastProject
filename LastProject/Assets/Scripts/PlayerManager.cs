@@ -50,21 +50,25 @@ public class PlayerManager : MonoBehaviour
     void changeMainSub()
     {
         // C1 : main -> sub
-        if (isChange)
+        if (!isChange)
         {
+            mainCameraControl.focus = character2.transform;
+
             C1_mainScript.enabled = false;
             C1_subScript.enabled = true;
             C2_mainScript.enabled = true;
             C2_subScript.enabled = false;
-            isChange = false;
+            isChange = true;
         }
         else
         {
+            mainCameraControl.focus = character1.transform;
+
             C1_mainScript.enabled = true;
             C1_subScript.enabled = false;
             C2_mainScript.enabled = false;
             C2_subScript.enabled = true;
-            isChange = true;
+            isChange = false;
         }
     }
 }
