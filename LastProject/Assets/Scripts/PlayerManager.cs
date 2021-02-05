@@ -45,6 +45,7 @@ public class PlayerManager : MonoBehaviour
         {
             changeMainSub();
         }
+        Zoom();
     }
 
     void changeMainSub()
@@ -70,5 +71,11 @@ public class PlayerManager : MonoBehaviour
             C2_subScript.enabled = true;
             isChange = false;
         }
+    }
+
+    void Zoom()
+    {
+        var scroll = Input.mouseScrollDelta;
+        mainCamera.fieldOfView = Mathf.Clamp(mainCamera.fieldOfView - scroll.y, 30f, 70f);
     }
 }
