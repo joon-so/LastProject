@@ -5,8 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class CameraController : MonoBehaviour
 {
-    [SerializeField]
-    Transform focus = default;
+    public Transform focus = default;
 
     [SerializeField, Range(1f, 20f)]
     float distance = 5f;
