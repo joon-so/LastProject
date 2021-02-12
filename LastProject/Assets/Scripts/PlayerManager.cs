@@ -13,12 +13,16 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     GameObject character2 = default;
 
-    private CameraController mainCameraControl;
+    [SerializeField]
+    GameObject clickEffect = default;
 
+    private CameraController mainCameraControl;
     private MainCharacter C1_mainScript;
     private SubCharacter C1_subScript;
     private MainCharacter C2_mainScript;
     private SubCharacter C2_subScript;
+    
+    RaycastHit hit;
 
     private bool isChange;
 
@@ -37,6 +41,7 @@ public class PlayerManager : MonoBehaviour
         C2_subScript.enabled = true;
 
         isChange = false;
+        clickEffect.SetActive(false);
     }
 
     void Update()
@@ -46,6 +51,7 @@ public class PlayerManager : MonoBehaviour
             changeMainSub();
         }
         Zoom();
+        Click();
     }
 
     void changeMainSub()
@@ -77,5 +83,24 @@ public class PlayerManager : MonoBehaviour
     {
         var scroll = Input.mouseScrollDelta;
         mainCamera.fieldOfView = Mathf.Clamp(mainCamera.fieldOfView - scroll.y, 30f, 70f);
+    }
+
+    void Click()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            Physics.Raycast(ray, out hit);
+
+            clickEffect.transform.position = hit.point;
+            StartCoroutine(ActiveEffect());
+        }
+    }
+
+    IEnumerator ActiveEffect()
+    {
+        clickEffect.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        clickEffect.SetActive(false);
     }
 }
