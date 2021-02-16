@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class MainCharacter : MonoBehaviour
 {
+    [SerializeField]
+    GameObject attackRange = default;
+
     public float moveSpeed = 5.0f;
     Vector3 vecTarget;
 
@@ -17,6 +20,7 @@ public class MainCharacter : MonoBehaviour
     void Update()
     {
         Move();
+        AttackRange();
     }
 
     void Move()
@@ -36,5 +40,18 @@ public class MainCharacter : MonoBehaviour
             }
         }
         transform.position = Vector3.MoveTowards(transform.position, vecTarget, moveSpeed * Time.deltaTime);
+    }
+
+    void AttackRange()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            attackRange.transform.position = transform.position;
+            attackRange.SetActive(true);
+        }
+        else if (Input.GetKeyUp(KeyCode.A))
+        {
+            attackRange.SetActive(false);
+        }
     }
 }
