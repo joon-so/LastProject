@@ -10,16 +10,15 @@ public class MainCharacter : MonoBehaviour
     public float moveSpeed = 5.0f;
     Vector3 vecTarget;
 
-    // Start is called before the first frame update
     void Start()
     {
         vecTarget = transform.position;
     }
 
-    // Update is called once per frame
     void Update()
     {
         Move();
+        Stop();
         AttackRange();
     }
 
@@ -27,6 +26,7 @@ public class MainCharacter : MonoBehaviour
     {
         if (Input.GetMouseButton(1))
         {
+            moveSpeed = 5.0f;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -52,6 +52,14 @@ public class MainCharacter : MonoBehaviour
         else if (Input.GetKeyUp(KeyCode.A))
         {
             attackRange.SetActive(false);
+        }
+    }
+
+    void Stop()
+    {
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            moveSpeed = 0f;
         }
     }
 }
