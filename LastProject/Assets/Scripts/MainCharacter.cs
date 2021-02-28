@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class MainCharacter : MonoBehaviour
 {
-    [SerializeField]
-    GameObject attackRange = default;
+    [SerializeField] GameObject attackRange = default;
 
     private Rigidbody rigid;
 

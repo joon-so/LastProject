@@ -4,17 +4,10 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    [SerializeField]
-    Camera mainCamera = default;
-
-    [SerializeField]
-    GameObject character1 = default;
-
-    [SerializeField]
-    GameObject character2 = default;
-
-    [SerializeField]
-    GameObject clickEffect = default;
+    [SerializeField] Camera mainCamera = null;
+    [SerializeField] GameObject character1 = null;
+    [SerializeField] GameObject character2 = null;
+    [SerializeField] GameObject clickEffect = null;
 
     private CameraController mainCameraControl;
     private MainCharacter C1_mainScript;
