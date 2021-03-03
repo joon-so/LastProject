@@ -54,15 +54,28 @@ public class PlayerManager : MonoBehaviour
         {
             mainCameraControl.focus = character2.transform;
 
+            character1.gameObject.tag = "SubCharacter";
+            character2.gameObject.tag = "MainCharacter";
+
+            character1.gameObject.layer = 7;
+            character2.gameObject.layer = 6;
+
             C1_mainScript.enabled = false;
             C1_subScript.enabled = true;
             C2_mainScript.enabled = true;
             C2_subScript.enabled = false;
             isChange = true;
         }
+        // C1 : sub -> main
         else
         {
             mainCameraControl.focus = character1.transform;
+
+            character1.gameObject.tag = "MainCharacter";
+            character2.gameObject.tag = "SubCharacter";
+
+            character1.gameObject.layer = 6;
+            character2.gameObject.layer = 7;
 
             C1_mainScript.enabled = true;
             C1_subScript.enabled = false;

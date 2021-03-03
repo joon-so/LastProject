@@ -12,7 +12,7 @@ public class Turret : MonoBehaviour
 
     float currentFireRate;
     Transform target = null;
-    
+
     void Start()
     {
         currentFireRate = fireRate;
@@ -32,13 +32,13 @@ public class Turret : MonoBehaviour
             turretGun.rotation = Quaternion.Euler(0, euler.y, 0);
 
             Quaternion fireRotation = Quaternion.Euler(0, lookRotation.eulerAngles.y, 0);
-            if(Quaternion.Angle(turretGun.rotation, fireRotation) < 5f)
+            if (Quaternion.Angle(turretGun.rotation, fireRotation) < 5f)
             {
                 currentFireRate -= Time.deltaTime;
                 if (currentFireRate <= 0)
                 {
                     currentFireRate = fireRate;
-                    Debug.Log("발사");    
+                    Debug.Log("발사");
                 }
             }
         }
@@ -49,13 +49,13 @@ public class Turret : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, range, layerMask);
         Transform closestTarget = null;
 
-        if (colliders.Length>0)
+        if (colliders.Length > 0)
         {
             float closestDistance = Mathf.Infinity;
-            foreach(Collider colliderTarget in colliders)
+            foreach (Collider colliderTarget in colliders)
             {
                 float distance = Vector3.SqrMagnitude(transform.position - colliderTarget.transform.position);
-                if (closestDistance > distance) 
+                if (closestDistance > distance)
                 {
                     closestDistance = distance;
                     closestTarget = colliderTarget.transform;
