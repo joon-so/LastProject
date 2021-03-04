@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    // player info to server
+
     public int playerKill = 0;
     public int playerDeath = 0;
     public int playerAssist = 0;

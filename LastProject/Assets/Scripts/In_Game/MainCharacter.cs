@@ -6,27 +6,33 @@ public class MainCharacter : MonoBehaviour
 {
     [SerializeField] GameObject attackRange = default;
 
-    private Rigidbody rigid;
-
     public float moveSpeed = 5.0f;
+    public float dodgeCoolTime = 5.0f;
+
     Vector3 vecTarget;
 
-    public float jumpPower = 3.0f;
-    bool isJump;
+    bool onDodge;
+    float curDodgeCoolTime = 0;
+
+    Animator anim;
 
     void Start()
     {
+        anim = GetComponentInChildren<Animator>();
+
         vecTarget = transform.position;
-        rigid = GetComponent<Rigidbody>();
-        isJump = false;
+
+        curDodgeCoolTime = dodgeCoolTime;
+        onDodge = true;
     }
 
     void Update()
     {
         Move();
-        Jump();
+        Dodge();
         Stop();
         AttackRange();
+        CoolTime();
     }
 
     void Move()
@@ -47,20 +53,28 @@ public class MainCharacter : MonoBehaviour
             }
         }
         transform.position = Vector3.MoveTowards(transform.position, vecTarget, moveSpeed * Time.deltaTime);
+        
+        anim.SetBool("isRun", vecTarget != transform.position);
     }
 
-    void Jump()
+    void Dodge()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && curDodgeCoolTime >= dodgeCoolTime && onDodge)
         {
-            if (!isJump)
-            {
-                isJump = true;
-                rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
-            }
-            else
-                return;
+            curDodgeCoolTime = 0.0f;
+
+            moveSpeed = 10.0f;
+            anim.SetTrigger("doDodge");
+
+            onDodge = false;
+
+            Invoke("DodgeOut", 0.5f);
         }
+    }
+
+    void DodgeOut()
+    {
+        moveSpeed = 5.0f;
     }
 
     void Stop()
@@ -68,6 +82,8 @@ public class MainCharacter : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.S))
         {
             moveSpeed = 0f;
+            anim.SetBool("isRun", false);
+            vecTarget = transform.position;
         }
     }
 
@@ -84,11 +100,15 @@ public class MainCharacter : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void CoolTime()
     {
-        if (collision.gameObject.CompareTag("Floor"))
+        if (curDodgeCoolTime < dodgeCoolTime)
         {
-            isJump = false;
+            curDodgeCoolTime += Time.deltaTime;
+        }
+        else
+        {
+            onDodge = true;
         }
     }
 }
