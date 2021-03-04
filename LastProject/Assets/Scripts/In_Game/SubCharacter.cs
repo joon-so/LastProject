@@ -11,6 +11,10 @@ public class SubCharacter : MonoBehaviour
 
     void Update()
     {
-       // Debug.Log("sub");
+    }
+
+    void Follow()
+    {
+
     }
 }
