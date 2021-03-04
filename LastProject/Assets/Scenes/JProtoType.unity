@@ -457,7 +457,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 235974336}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 1
   m_Speed: 6
@@ -680,6 +680,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 498991652}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!198 &510624962 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 939776833617208983, guid: 3b868d0499188ab498467bd67c2650f3, type: 3}
+  m_PrefabInstance: {fileID: 939776834499992854}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &843788241
 GameObject:
   m_ObjectHideFlags: 0
@@ -1178,6 +1183,7 @@ MonoBehaviour:
     m_Bits: 64
   spinSpeed: 300
   fireRate: 1
+  effect: {fileID: 0}
 --- !u!4 &1439176840
 Transform:
   m_ObjectHideFlags: 0
@@ -1914,9 +1920,29 @@ PrefabInstance:
       propertyPath: m_ConnectedAnchor.z
       value: 69.21495
       objectReference: {fileID: 0}
+    - target: {fileID: 939776833598701075, guid: 3b868d0499188ab498467bd67c2650f3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 939776833598701105, guid: 3b868d0499188ab498467bd67c2650f3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 939776833598701127, guid: 3b868d0499188ab498467bd67c2650f3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 939776833598701173, guid: 3b868d0499188ab498467bd67c2650f3, type: 3}
       propertyPath: m_Name
       value: Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 939776833598701489, guid: 3b868d0499188ab498467bd67c2650f3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 939776833598701559, guid: 3b868d0499188ab498467bd67c2650f3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 939776833598857813, guid: 3b868d0499188ab498467bd67c2650f3, type: 3}
       propertyPath: m_RootOrder
@@ -1962,9 +1988,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 939776833617208983, guid: 3b868d0499188ab498467bd67c2650f3, type: 3}
+      propertyPath: scalingMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 939776833617208983, guid: 3b868d0499188ab498467bd67c2650f3, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 939776834703226659, guid: 3b868d0499188ab498467bd67c2650f3, type: 3}
       propertyPath: range
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 939776834703226659, guid: 3b868d0499188ab498467bd67c2650f3, type: 3}
+      propertyPath: effect
+      value: 
+      objectReference: {fileID: 510624962}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b868d0499188ab498467bd67c2650f3, type: 3}

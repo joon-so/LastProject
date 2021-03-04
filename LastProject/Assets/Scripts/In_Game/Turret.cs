@@ -9,6 +9,7 @@ public class Turret : MonoBehaviour
     [SerializeField] LayerMask layerMask = 0;
     [SerializeField] float spinSpeed = 0f;
     [SerializeField] float fireRate = 0f;
+    [SerializeField] ParticleSystem effect;
 
     float currentFireRate;
     Transform target = null;
@@ -38,7 +39,7 @@ public class Turret : MonoBehaviour
                 if (currentFireRate <= 0)
                 {
                     currentFireRate = fireRate;
-                    Debug.Log("น฿ป็");
+                    effect.Play();
                 }
             }
         }
