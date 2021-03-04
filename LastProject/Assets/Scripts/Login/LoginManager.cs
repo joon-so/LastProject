@@ -46,7 +46,7 @@ public class LoginManager : MonoBehaviour
 
         if (pass == password.text)
         {
-            SceneManager.LoadScene(1);
+            SceneManager.LoadScene("Main");
         }
         else
         {
