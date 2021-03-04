@@ -31,6 +31,7 @@ public class MainCharacter : MonoBehaviour
         Move();
         Dodge();
         Stop();
+        Attack();
         AttackRange();
         CoolTime();
     }
@@ -85,6 +86,11 @@ public class MainCharacter : MonoBehaviour
             anim.SetBool("isRun", false);
             vecTarget = transform.position;
         }
+    }
+
+    void Attack()
+    {
+
     }
 
     void AttackRange()

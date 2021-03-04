@@ -273,6 +273,36 @@ MonoBehaviour:
   focusRadius: 1
   focusCentering: 0.5
   focus: {fileID: 1736153741}
+--- !u!1 &87149355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 87149356}
+  m_Layer: 0
+  m_Name: Bullet LeftPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &87149356
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 87149355}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.37, y: 3.235, z: 1.65}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &235974336
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,6 +657,36 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 498991652}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &843788241
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 843788242}
+  m_Layer: 0
+  m_Name: Bullet RightPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &843788242
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 843788241}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.37, y: 3.235, z: 1.65}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &866804967
 GameObject:
   m_ObjectHideFlags: 0
@@ -1819,6 +1879,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 939776833594933169, guid: 3b868d0499188ab498467bd67c2650f3, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 0.83519834
+      objectReference: {fileID: 0}
+    - target: {fileID: 939776833594933171, guid: 3b868d0499188ab498467bd67c2650f3, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: 0.83519834
+      objectReference: {fileID: 0}
+    - target: {fileID: 939776833594933171, guid: 3b868d0499188ab498467bd67c2650f3, type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: 69.21495
+      objectReference: {fileID: 0}
     - target: {fileID: 939776833598701173, guid: 3b868d0499188ab498467bd67c2650f3, type: 3}
       propertyPath: m_Name
       value: Turret
