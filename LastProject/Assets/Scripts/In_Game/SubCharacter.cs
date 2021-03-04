@@ -24,7 +24,7 @@ public class SubCharacter : MonoBehaviour
 
     void LateUpdate()
     {
-        Follow();
+       // Follow();
     }
 
     void Follow()
