@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -14,7 +15,10 @@ public class PlayerManager : MonoBehaviour
     private SubCharacter C1_subScript;
     private MainCharacter C2_mainScript;
     private SubCharacter C2_subScript;
-    
+    private NavMeshAgent C1_Nav;
+    private NavMeshAgent C2_Nav;
+
+
     RaycastHit hit;
 
     private bool isChange;
@@ -27,6 +31,9 @@ public class PlayerManager : MonoBehaviour
         C1_subScript = character1.GetComponent<SubCharacter>();
         C2_mainScript = character2.GetComponent<MainCharacter>();
         C2_subScript = character2.GetComponent<SubCharacter>();
+
+        C1_Nav = character1.GetComponent<NavMeshAgent>();
+        C2_Nav = character2.GetComponent<NavMeshAgent>();
 
         C1_mainScript.enabled = true;
         C1_subScript.enabled = false;
@@ -64,6 +71,10 @@ public class PlayerManager : MonoBehaviour
             C1_subScript.enabled = true;
             C2_mainScript.enabled = true;
             C2_subScript.enabled = false;
+
+            C1_Nav.enabled = true;
+            C2_Nav.enabled = false;
+
             isChange = true;
         }
         // C1 : sub -> main
@@ -81,6 +92,10 @@ public class PlayerManager : MonoBehaviour
             C1_subScript.enabled = false;
             C2_mainScript.enabled = false;
             C2_subScript.enabled = true;
+
+            C1_Nav.enabled = false;
+            C2_Nav.enabled = true;
+
             isChange = false;
         }
     }
