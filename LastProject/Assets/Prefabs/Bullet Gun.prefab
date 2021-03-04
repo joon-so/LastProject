@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1075686755962700640}
   - component: {fileID: 1075686755962700641}
   - component: {fileID: 1075686755962700646}
+  - component: {fileID: -6459738234068804705}
   m_Layer: 0
   m_Name: Bullet Gun
   m_TagString: Untagged
@@ -169,3 +170,16 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.2
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-6459738234068804705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1075686755962700647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f4be10bc4aaa7849951a6220ed35f3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 20

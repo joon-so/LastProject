@@ -12,9 +12,13 @@ public class MainCharacter : MonoBehaviour
     Vector3 vecTarget;
 
     bool onDodge;
+    bool onFire;
+
     float curDodgeCoolTime = 0;
+    float fireDelay;
 
     Animator anim;
+    Weapon weapon;
 
     void Start()
     {
@@ -90,7 +94,15 @@ public class MainCharacter : MonoBehaviour
 
     void Attack()
     {
+        fireDelay += Time.deltaTime;
+        //onFire = weapon.shotSpeed < fireDelay;
 
+        if (Input.GetMouseButtonDown(0) && !onDodge)
+        {
+            weapon.Use();
+            anim.SetTrigger("doShot");
+            fireDelay = 0;
+        }
     }
 
     void AttackRange()
