@@ -8,9 +8,15 @@ public class MainCharacter : MonoBehaviour
 
     public float moveSpeed = 5.0f;
     public float dodgeCoolTime = 5.0f;
+    public float fireCoolTime = 0.5f;
 
     Vector3 vecTarget;
 
+    public Transform RbulletPos;
+    public Transform LbulletPos;
+    public GameObject bullet;
+    Vector3 moveVec;
+    
     bool onDodge;
     bool onFire;
 
@@ -97,11 +103,35 @@ public class MainCharacter : MonoBehaviour
         fireDelay += Time.deltaTime;
         //onFire = weapon.shotSpeed < fireDelay;
 
-        if (Input.GetMouseButtonDown(0) && !onDodge)
+        if (Input.GetMouseButtonDown(0))
         {
-            weapon.Use();
-            anim.SetTrigger("doShot");
-            fireDelay = 0;
+            if (fireDelay > fireCoolTime)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+                {
+                    Vector3 nextVec = hit.point - transform.position;
+                    nextVec.y = 0;
+                    transform.LookAt(transform.position + nextVec);
+                }
+
+                GameObject instantBullet = Instantiate(bullet, RbulletPos.position, RbulletPos.rotation);
+                Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
+                bulletRigid.velocity = RbulletPos.forward * 50;
+
+                instantBullet = Instantiate(bullet, LbulletPos.position, LbulletPos.rotation);
+                bulletRigid = instantBullet.GetComponent<Rigidbody>();
+                bulletRigid.velocity = LbulletPos.forward * 50;
+
+
+                moveSpeed = 0f;
+                anim.SetBool("isRun", false);
+                vecTarget = transform.position;
+
+                anim.SetTrigger("doShot");
+                fireDelay = 0;
+            }
         }
     }
 

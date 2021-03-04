@@ -45,7 +45,6 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            Debug.Log("gkdl");
         }
     }
 }

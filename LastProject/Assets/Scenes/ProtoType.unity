@@ -318,6 +318,7 @@ GameObject:
   - component: {fileID: 235974341}
   - component: {fileID: 235974337}
   - component: {fileID: 235974343}
+  - component: {fileID: 235974344}
   m_Layer: 7
   m_Name: Character2
   m_TagString: SubCharacter
@@ -433,6 +434,10 @@ MonoBehaviour:
   attackRange: {fileID: 866804967}
   moveSpeed: 5
   dodgeCoolTime: 5
+  fireCoolTime: 0.5
+  RbulletPos: {fileID: 0}
+  LbulletPos: {fileID: 0}
+  bullet: {fileID: 0}
 --- !u!54 &235974343
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -449,6 +454,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!195 &235974344
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 235974336}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 6
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &270315783
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,7 +533,7 @@ Transform:
   m_GameObject: {fileID: 317610704}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.01, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 866804968}
   m_RootOrder: 0
@@ -1422,6 +1449,7 @@ GameObject:
   - component: {fileID: 1736153742}
   - component: {fileID: 1736153743}
   - component: {fileID: 1736153738}
+  - component: {fileID: 1736153740}
   m_Layer: 6
   m_Name: Character1
   m_TagString: MainCharacter
@@ -1444,6 +1472,10 @@ MonoBehaviour:
   attackRange: {fileID: 866804967}
   moveSpeed: 5
   dodgeCoolTime: 5
+  fireCoolTime: 0.5
+  RbulletPos: {fileID: 843788242}
+  LbulletPos: {fileID: 87149356}
+  bullet: {fileID: 1075686755962700647, guid: 17d2b0cfa16038549877a35700ee766b, type: 3}
 --- !u!136 &1736153738
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1499,6 +1531,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!195 &1736153740
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736153736}
+  m_Enabled: 0
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 6
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!4 &1736153741
 Transform:
   m_ObjectHideFlags: 0
@@ -1969,6 +2023,10 @@ PrefabInstance:
     - target: {fileID: 939776833598701173, guid: 3b868d0499188ab498467bd67c2650f3, type: 3}
       propertyPath: m_Name
       value: Turret
+      objectReference: {fileID: 0}
+    - target: {fileID: 939776833598701173, guid: 3b868d0499188ab498467bd67c2650f3, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 939776833598857813, guid: 3b868d0499188ab498467bd67c2650f3, type: 3}
       propertyPath: m_RootOrder
