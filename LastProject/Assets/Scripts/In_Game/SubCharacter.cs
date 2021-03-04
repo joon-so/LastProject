@@ -1,23 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class SubCharacter : MonoBehaviour
 {
     [SerializeField] GameObject MainCharacter = null;
 
+    NavMeshAgent nav;
     public Transform target;
     public float distance = 5.0f;
-    private float rotationDamping = 3.0f;
-    private float heightDamping = 2.0f;
+    float distanceWithPlayer;
 
     void Start()
     {
-        
+        nav = GetComponent<NavMeshAgent>();
     }
 
     void Update()
     {
+        distanceWithPlayer = Vector3.Distance(MainCharacter.transform.position, transform.position);
     }
 
     void LateUpdate()
@@ -27,27 +29,14 @@ public class SubCharacter : MonoBehaviour
 
     void Follow()
     {
-        if (!target)
-
-            return;
-
-        var wantedRotationAngle = target.eulerAngles.y;
-
-        var currentRotationAngle = transform.eulerAngles.y;
-        var currentHeight = transform.position.y;
-
-
-        currentRotationAngle = Mathf.LerpAngle(currentRotationAngle, wantedRotationAngle, rotationDamping * Time.deltaTime);
-
-        currentHeight = Mathf.Lerp(currentHeight, 0, heightDamping * Time.deltaTime);
-
-        var currentRotation = Quaternion.Euler(0, currentRotationAngle, 0);
-
-        transform.position = target.position;
-        transform.position -= currentRotation * Vector3.forward * distance;
-
-        transform.position = new Vector3(transform.position.x, currentHeight, transform.position.z);
-
-        transform.LookAt(target);
+        //메인 플레이어와의 거리가 범위를 넘어가는 경우
+        if (distanceWithPlayer > distance)
+        {
+            nav.SetDestination(MainCharacter.transform.position);
+        }
+        else
+        {
+            nav.SetDestination(transform.position);
+        }
     }
 }
