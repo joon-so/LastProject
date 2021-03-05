@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] [Range(3f, 8f)] float detectDistance;
+    [SerializeField] [Range(3f, 10f)] float detectDistance;
 
     NavMeshAgent nav;
     float playerDistance;
@@ -49,11 +49,9 @@ public class Enemy : MonoBehaviour
         else
         {
             playerDistance = Vector3.Distance(mainCharacter.transform.position, transform.position);
-            Debug.Log(playerDistance);
 
             if(playerDistance < detectDistance)
             {
-                Debug.Log("°¨Áö");
                 nav.SetDestination(mainCharacter.transform.position);
             }
             else
