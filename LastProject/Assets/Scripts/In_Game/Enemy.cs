@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] [Range(3f, 8f)] float detectDistance;
 
+    NavMeshAgent nav;
     float playerDistance;
     GameObject mainCharacter;
 
@@ -15,7 +17,8 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
-                
+        nav = GetComponent<NavMeshAgent>();
+        InvokeRepeating("Find", 0f, 0.5f);
     }
 
     void Update()
@@ -45,6 +48,18 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            playerDistance = Vector3.Distance(mainCharacter.transform.position, transform.position);
+            Debug.Log(playerDistance);
+
+            if(playerDistance < detectDistance)
+            {
+                Debug.Log("°¨Áö");
+                nav.SetDestination(mainCharacter.transform.position);
+            }
+            else
+            {
+                nav.SetDestination(transform.position);
+            }
         }
     }
 }
