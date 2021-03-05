@@ -8,6 +8,7 @@ public class SubCharacter : MonoBehaviour
     [SerializeField] GameObject MainCharacter = null;
 
     NavMeshAgent nav;
+    Animator anim;
     public Transform target;
     public float distance = 5.0f;
     float distanceWithPlayer;
@@ -15,6 +16,7 @@ public class SubCharacter : MonoBehaviour
     void Start()
     {
         nav = GetComponent<NavMeshAgent>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -24,7 +26,7 @@ public class SubCharacter : MonoBehaviour
 
     void LateUpdate()
     {
-       // Follow();
+       Follow();
     }
 
     void Follow()
@@ -33,10 +35,12 @@ public class SubCharacter : MonoBehaviour
         if (distanceWithPlayer > distance)
         {
             nav.SetDestination(MainCharacter.transform.position);
+            anim.SetBool("isRun", true);
         }
         else
         {
             nav.SetDestination(transform.position);
+            anim.SetBool("isRun", false);
         }
     }
 }
