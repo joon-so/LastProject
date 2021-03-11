@@ -38,7 +38,9 @@ public class MainCharacter : MonoBehaviour
 
     void Update()
     {
-        Move();
+        //계산량 많을듯 -> 애니메이션 이벤트로 변경
+        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("DodgeForward"))
+            Move();
         Dodge();
         Stop();
         Attack();
@@ -78,14 +80,12 @@ public class MainCharacter : MonoBehaviour
             anim.SetTrigger("doDodge");
 
             onDodge = false;
-
-            Invoke("DodgeOut", 0.5f);
         }
-    }
-
-    void DodgeOut()
-    {
-        moveSpeed = 5.0f;
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("DodgeForward"))
+        {
+            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+            vecTarget = transform.position;
+        }
     }
 
     void Stop()
