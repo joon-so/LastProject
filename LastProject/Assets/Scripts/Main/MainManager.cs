@@ -6,19 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class MainManager : MonoBehaviour
 {
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-
-    }
-
     public void OnClickPvE()
     {
-        SceneManager.LoadScene("Stage1-1");
+        SceneManager.LoadScene("CharacterSelect");
     }
     public void OnClickPvP()
     {
@@ -26,10 +16,12 @@ public class MainManager : MonoBehaviour
     }
     public void OnClickExit()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#else
-        Application.Quit();
-#endif
+        SceneManager.LoadScene("Login");
+
+//#if UNITY_EDITOR
+//        UnityEditor.EditorApplication.isPlaying = false;
+//#else
+//        Application.Quit();
+//#endif
     }
 }

@@ -18,6 +18,7 @@ public class PlayerManager : MonoBehaviour
     private NavMeshAgent C1_Nav;
     private NavMeshAgent C2_Nav;
 
+    GameManager instance;
 
     RaycastHit hit;
 

@@ -7,8 +7,13 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    // player info to server
+    // characterselect
+    public bool isKarmen;
+    public bool isJade;
+    public bool isLeina;
+    public bool isEva;
 
+    // player info to server
     public int playerKill = 0;
     public int playerDeath = 0;
     public int playerAssist = 0;
@@ -23,6 +28,10 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void Start()
+    {
     }
 
     void PlayerKill()
