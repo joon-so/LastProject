@@ -24,11 +24,48 @@ public class PlayerManager : MonoBehaviour
     {
         mainCameraControl = mainCamera.GetComponent<CameraController>();
 
-        character1 = GameObject.FindWithTag("MainCharacter");
-        character2 = GameObject.FindWithTag("SubCharacter");
+        //character1 = GameObject.FindWithTag("MainCharacter");
+        //character2 = GameObject.FindWithTag("SubCharacter");
+
+        if (GameManager.instance.isMainKarmen)
+        {
+            GameObject child = transform.Find("Karmen").gameObject;
+            character1 = child;
+            character1.gameObject.tag = "MainCharacter";
+            character1.gameObject.layer = 6;
+            character1.SetActive(true);
+        }
+        if (GameManager.instance.isMainJade)
+        {
+            GameObject child = transform.Find("Jade").gameObject;
+            character1 = child;
+            character1.gameObject.tag = "MainCharacter";
+            character1.gameObject.layer = 6;
+            character1.SetActive(true);
+        }
+
+        if (GameManager.instance.isSubKarmen)
+        {
+            GameObject child = transform.Find("Karmen").gameObject;
+            character2 = child;
+            character2.gameObject.tag = "SubCharacter";
+            character2.gameObject.layer = 7;
+            character2.SetActive(true);
+        }
+        if (GameManager.instance.isSubJade)
+        {
+            GameObject child = transform.Find("Jade").gameObject;
+            character2 = child;
+            character2.gameObject.tag = "SubCharacter";
+            character2.gameObject.layer = 7;
+            character2.SetActive(true);
+        }
 
         C1_Nav = character1.GetComponent<NavMeshAgent>();
         C2_Nav = character2.GetComponent<NavMeshAgent>();
+
+        C1_Nav.enabled = false;
+        C2_Nav.enabled = true;
 
         isChange = false;
         clickEffect.SetActive(false);

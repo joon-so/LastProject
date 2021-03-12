@@ -14,26 +14,25 @@ public class CharacterSelect : MonoBehaviour
     [SerializeField] GameObject mainEva;
     [SerializeField] GameObject subEva;
 
-    private bool selectKarmen;
-    private bool selectJade;
-    private bool selectLeina;
-    private bool selectEva;
-
     private int mainOrsub;  // main: 1 sub: 2
 
     void Start()
     {
-        selectKarmen = false;
-        selectJade = false;
-        selectLeina = false;
-        selectEva = false;
+        GameManager.instance.isMainKarmen = false;
+        GameManager.instance.isMainJade = false;
+        GameManager.instance.isMainLeina = false;
+        GameManager.instance.isMainEva = false;
+
+        GameManager.instance.isSubKarmen = false;
+        GameManager.instance.isSubJade = false;
+        GameManager.instance.isSubLeina = false;
+        GameManager.instance.isSubEva = false;
 
         mainOrsub = 1;
     }
 
     public void OnClickSelectKarmen()
     {
-        selectKarmen = true;
         if (mainOrsub == 1)
         {
             mainKarmen.SetActive(true);
@@ -51,7 +50,6 @@ public class CharacterSelect : MonoBehaviour
     }
     public void OnClickSelectJade()
     {
-        selectJade = true;
         if (mainOrsub == 1)
         {
             mainKarmen.SetActive(false);
@@ -69,7 +67,6 @@ public class CharacterSelect : MonoBehaviour
     }
     public void OnClickSelectLeina()
     {
-        selectLeina = true;
         if (mainOrsub == 1)
         {
             mainKarmen.SetActive(false);
@@ -87,7 +84,6 @@ public class CharacterSelect : MonoBehaviour
     }
     public void OnClickSelectEva()
     {
-        selectEva = true;
         if (mainOrsub == 1)
         {
             mainKarmen.SetActive(false);
@@ -107,48 +103,48 @@ public class CharacterSelect : MonoBehaviour
     {
         if (mainOrsub == 1)
         {
-            if (selectKarmen)
+            if (mainKarmen.activeSelf)
             {
-                //GameManager.instance.isKarmen = true;
+                GameManager.instance.isMainKarmen = true;
             }
-            if (selectJade)
+            if (mainJade.activeSelf)
             {
-               // GameManager.instance.isJade = true;
+                GameManager.instance.isMainJade = true;
             }
-            if (selectLeina)
+            if (mainLeina.activeSelf)
             {
-                //GameManager.instance.isLeina = true;
+                GameManager.instance.isMainLeina = true;
             }
-            if (selectEva)
+            if (mainEva.activeSelf)
             {
-               // GameManager.instance.isEva = true;
+                GameManager.instance.isMainEva = true;
             }
             mainOrsub = 2;
         }
         else if (mainOrsub == 2)
         {
-            if (selectKarmen)
+            if (subKarmen.activeSelf)
             {
-                //GameManager.instance.isKarmen = true;
+                GameManager.instance.isSubKarmen = true;
             }
-            if (selectJade)
+            if (subJade.activeSelf)
             {
-                //GameManager.instance.isJade = true;
+                GameManager.instance.isSubJade = true;
             }
-            if (selectLeina)
+            if (subLeina.activeSelf)
             {
-                //GameManager.instance.isLeina = true;
+                GameManager.instance.isSubLeina = true;
             }
-            if (selectEva)
+            if (subEva.activeSelf)
             {
-               // GameManager.instance.isEva = true;
+                GameManager.instance.isSubEva = true;
             }
         }
     }
 
     public void OnClickStart()
     {
-        SceneManager.LoadScene("ProtoType 1");
+        SceneManager.LoadScene("TagProtoType 1");
     }
     public void OnClickExit()
     {

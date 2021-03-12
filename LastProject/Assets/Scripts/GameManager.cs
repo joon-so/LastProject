@@ -8,10 +8,15 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     // characterselect
-    public bool isKarmen;
-    public bool isJade;
-    public bool isLeina;
-    public bool isEva;
+    public bool isMainKarmen;
+    public bool isMainJade;
+    public bool isMainLeina;
+    public bool isMainEva;
+
+    public bool isSubKarmen;
+    public bool isSubJade;
+    public bool isSubLeina;
+    public bool isSubEva;
 
     // player info to server
     public int playerKill = 0;
