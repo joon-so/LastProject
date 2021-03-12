@@ -30,29 +30,45 @@ public class Jade : MonoBehaviour
     float distanceWithPlayer;
     public float followDistance = 5.0f;
     NavMeshAgent nav;
+    GameObject tagCharacter;
+
+    Vector3 editPivot;
 
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
+        nav = GetComponent<NavMeshAgent>();
+
+        if (gameObject.tag == "MainCharacter")
+            tagCharacter = GameObject.FindWithTag("SubCharacter");
+        else
+            tagCharacter = GameObject.FindWithTag("MainCharacter");
 
         vecTarget = transform.position;
 
         curDodgeCoolTime = dodgeCoolTime;
         onDodge = true;
+        editPivot.x = 0;
+        editPivot.y = -2;
+        editPivot.z = 0;
+
     }
 
     void Update()
     {
-        if (gameObject.transform.parent.tag == "MainCharacter")
+        if (gameObject.transform.tag == "MainCharacter")
         {
             //계산량 많을듯 -> 애니메이션 이벤트로 변경
             if (!anim.GetCurrentAnimatorStateInfo(0).IsName("DodgeForward"))
+            {
                 Move();
+                Stop();
+                Attack();
+            }
             Dodge();
-            Stop();
-            Attack();
             AttackRange();
             CoolTime();
+            //gameObject.transform.parent.position = transform.position - editPivot;
         }
         else
         {
@@ -174,18 +190,18 @@ public class Jade : MonoBehaviour
 
     void Follow()
     {
-        //distanceWithPlayer = Vector3.Distance(MainCharacter.transform.position, transform.position);
+        distanceWithPlayer = Vector3.Distance(tagCharacter.transform.position, transform.position);
 
-        ////메인 플레이어와의 거리가 범위를 넘어가는 경우
-        //if (distanceWithPlayer > followDistance)
-        //{
-        //    nav.SetDestination(MainCharacter.transform.position);
-        //    anim.SetBool("isRun", true);
-        //}
-        //else
-        //{
-        //    nav.SetDestination(transform.position);
-        //    anim.SetBool("isRun", false);
-        //}
+        //메인 플레이어와의 거리가 범위를 넘어가는 경우
+        if (distanceWithPlayer > followDistance)
+        {
+            nav.SetDestination(tagCharacter.transform.position);
+            anim.SetBool("isRun", true);
+        }
+        else
+        {
+            nav.SetDestination(transform.position);
+            anim.SetBool("isRun", false);
+        }
     }
 }

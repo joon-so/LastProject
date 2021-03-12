@@ -6,15 +6,11 @@ using UnityEngine.AI;
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] Camera mainCamera = null;
-    [SerializeField] GameObject character1 = null;
-    [SerializeField] GameObject character2 = null;
     [SerializeField] GameObject clickEffect = null;
 
+    private GameObject character1;
+    private GameObject character2;
     private CameraController mainCameraControl;
-    private MainCharacter C1_mainScript;
-    private SubCharacter C1_subScript;
-    private MainCharacter C2_mainScript;
-    private SubCharacter C2_subScript;
     private NavMeshAgent C1_Nav;
     private NavMeshAgent C2_Nav;
 
@@ -28,18 +24,11 @@ public class PlayerManager : MonoBehaviour
     {
         mainCameraControl = mainCamera.GetComponent<CameraController>();
 
-        C1_mainScript = character1.GetComponent<MainCharacter>();
-        C1_subScript = character1.GetComponent<SubCharacter>();
-        C2_mainScript = character2.GetComponent<MainCharacter>();
-        C2_subScript = character2.GetComponent<SubCharacter>();
+        character1 = GameObject.FindWithTag("MainCharacter");
+        character2 = GameObject.FindWithTag("SubCharacter");
 
         C1_Nav = character1.GetComponent<NavMeshAgent>();
         C2_Nav = character2.GetComponent<NavMeshAgent>();
-
-        C1_mainScript.enabled = true;
-        C1_subScript.enabled = false;
-        C2_mainScript.enabled = false;
-        C2_subScript.enabled = true;
 
         isChange = false;
         clickEffect.SetActive(false);
@@ -68,11 +57,6 @@ public class PlayerManager : MonoBehaviour
             character1.gameObject.layer = 7;
             character2.gameObject.layer = 6;
 
-            C1_mainScript.enabled = false;
-            C1_subScript.enabled = true;
-            C2_mainScript.enabled = true;
-            C2_subScript.enabled = false;
-
             C1_Nav.enabled = true;
             C2_Nav.enabled = false;
 
@@ -88,11 +72,6 @@ public class PlayerManager : MonoBehaviour
 
             character1.gameObject.layer = 6;
             character2.gameObject.layer = 7;
-
-            C1_mainScript.enabled = true;
-            C1_subScript.enabled = false;
-            C2_mainScript.enabled = false;
-            C2_subScript.enabled = true;
 
             C1_Nav.enabled = false;
             C2_Nav.enabled = true;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Karmen : MonoBehaviour
 {
@@ -12,9 +13,6 @@ public class Karmen : MonoBehaviour
 
     Vector3 vecTarget;
 
-    //public Transform RbulletPos;
-    //public Transform LbulletPos;
-    //public GameObject bullet;
     Vector3 moveVec;
 
     bool onDodge;
@@ -26,9 +24,20 @@ public class Karmen : MonoBehaviour
     Animator anim;
     Weapon weapon;
 
+    float distanceWithPlayer;
+    public float followDistance = 5.0f;
+    NavMeshAgent nav;
+    GameObject tagCharacter;
+
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
+        nav = GetComponent<NavMeshAgent>();
+
+        if (gameObject.tag == "MainCharacter")
+            tagCharacter = GameObject.FindWithTag("SubCharacter");
+        else
+            tagCharacter = GameObject.FindWithTag("MainCharacter");
 
         vecTarget = transform.position;
 
@@ -37,15 +46,24 @@ public class Karmen : MonoBehaviour
     }
 
     void Update()
-    {
-        //계산량 많을듯 -> 애니메이션 이벤트로 변경
-        if (!anim.GetCurrentAnimatorStateInfo(0).IsName("salto2SS"))
-            Move();
-        Dodge();
-        Stop();
-        Attack();
-        AttackRange();
-        CoolTime();
+    { 
+        if (gameObject.transform.tag == "MainCharacter")
+        {
+            //계산량 많을듯 -> 애니메이션 이벤트로 변경
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("salto2SS"))
+            {
+                Move();
+                Stop();
+                Attack();
+            }
+            Dodge();
+            AttackRange();
+            CoolTime();
+        }
+        else
+        {
+            Follow();
+        }
     }
 
     void Move()
@@ -105,33 +123,33 @@ public class Karmen : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (fireDelay > comboTime)
-            {
-                //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                //RaycastHit hit;
-                //if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-                //{
-                //    Vector3 nextVec = hit.point - transform.position;
-                //    nextVec.y = 0;
-                //    transform.LookAt(transform.position + nextVec);
-                //}
+            //if (fireDelay > fireCoolTime)
+            //{
+            //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            //    RaycastHit hit;
+            //    if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            //    {
+            //        Vector3 nextVec = hit.point - transform.position;
+            //        nextVec.y = 0;
+            //        transform.LookAt(transform.position + nextVec);
+            //    }
 
-                //GameObject instantBullet = Instantiate(bullet, RbulletPos.position, RbulletPos.rotation);
-                //Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
-                //bulletRigid.velocity = RbulletPos.forward * 50;
+            //    GameObject instantBullet = Instantiate(bullet, RbulletPos.position, RbulletPos.rotation);
+            //    Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
+            //    bulletRigid.velocity = RbulletPos.forward * 50;
 
-                //instantBullet = Instantiate(bullet, LbulletPos.position, LbulletPos.rotation);
-                //bulletRigid = instantBullet.GetComponent<Rigidbody>();
-                //bulletRigid.velocity = LbulletPos.forward * 50;
+            //    instantBullet = Instantiate(bullet, LbulletPos.position, LbulletPos.rotation);
+            //    bulletRigid = instantBullet.GetComponent<Rigidbody>();
+            //    bulletRigid.velocity = LbulletPos.forward * 50;
 
 
-                //moveSpeed = 0f;
-                //anim.SetBool("isRun", false);
-                //vecTarget = transform.position;
+            //    moveSpeed = 0f;
+            //    anim.SetBool("isRun", false);
+            //    vecTarget = transform.position;
 
-                //anim.SetTrigger("doShot");
-                //fireDelay = 0;
-            }
+            //    anim.SetTrigger("doShot");
+            //    fireDelay = 0;
+            //}
         }
     }
 
@@ -157,6 +175,22 @@ public class Karmen : MonoBehaviour
         else
         {
             onDodge = true;
+        }
+    }
+
+    void Follow()
+    {
+        distanceWithPlayer = Vector3.Distance(tagCharacter.transform.position, transform.position);
+
+        if (distanceWithPlayer > followDistance)
+        {
+            nav.SetDestination(tagCharacter.transform.position);
+            anim.SetBool("isRun", true);
+        }
+        else
+        {
+            nav.SetDestination(transform.position);
+            anim.SetBool("isRun", false);
         }
     }
 } 
