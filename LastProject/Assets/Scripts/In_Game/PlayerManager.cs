@@ -14,8 +14,6 @@ public class PlayerManager : MonoBehaviour
     private NavMeshAgent C1_Nav;
     private NavMeshAgent C2_Nav;
 
-    GameManager instance;
-
     RaycastHit hit;
 
     private bool isChange;
@@ -35,7 +33,7 @@ public class PlayerManager : MonoBehaviour
             character1.gameObject.layer = 6;
             character1.SetActive(true);
         }
-        if (GameManager.instance.isMainJade)
+        else if (GameManager.instance.isMainJade)
         {
             GameObject child = transform.Find("Jade").gameObject;
             character1 = child;
@@ -52,7 +50,7 @@ public class PlayerManager : MonoBehaviour
             character2.gameObject.layer = 7;
             character2.SetActive(true);
         }
-        if (GameManager.instance.isSubJade)
+        else if (GameManager.instance.isSubJade)
         {
             GameObject child = transform.Find("Jade").gameObject;
             character2 = child;

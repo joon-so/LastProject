@@ -5,7 +5,11 @@ using UnityEngine.AI;
 
 public class Jade : MonoBehaviour
 {
-    [SerializeField] GameObject attackRange = default;
+    [SerializeField] GameObject attackRange = null;
+    [SerializeField] GameObject useAssaultRifle = null;
+    [SerializeField] GameObject useMissileLauncher = null;
+    [SerializeField] GameObject backAssaultRifle = null;
+    [SerializeField] GameObject backMissileLauncher = null;
 
     public float moveSpeed = 5.0f;
     public float dodgeCoolTime = 5.0f;
@@ -13,8 +17,7 @@ public class Jade : MonoBehaviour
 
     Vector3 vecTarget;
 
-    public Transform RbulletPos;
-    public Transform LbulletPos;
+    public Transform bulletPos;
     public GameObject bullet;
     Vector3 moveVec;
 
@@ -51,7 +54,6 @@ public class Jade : MonoBehaviour
         editPivot.x = 0;
         editPivot.y = -2;
         editPivot.z = 0;
-
     }
 
     void Update()
@@ -144,14 +146,9 @@ public class Jade : MonoBehaviour
                     transform.LookAt(transform.position + nextVec);
                 }
 
-                GameObject instantBullet = Instantiate(bullet, RbulletPos.position, RbulletPos.rotation);
+                GameObject instantBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation);
                 Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
-                bulletRigid.velocity = RbulletPos.forward * 50;
-
-                instantBullet = Instantiate(bullet, LbulletPos.position, LbulletPos.rotation);
-                bulletRigid = instantBullet.GetComponent<Rigidbody>();
-                bulletRigid.velocity = LbulletPos.forward * 50;
-
+                bulletRigid.velocity = bulletPos.forward * 50;
 
                 moveSpeed = 0f;
                 anim.SetBool("isRun", false);
@@ -203,5 +200,17 @@ public class Jade : MonoBehaviour
             nav.SetDestination(transform.position);
             anim.SetBool("isRun", false);
         }
+    }
+
+
+    // 스킬 관련
+    void ChangeRifleToMissile()
+    {
+
+    }
+
+    void ChangeMissileToRifle()
+    {
+
     }
 }

@@ -9,7 +9,7 @@ public class SubAI : MonoBehaviour
     public characterState currentState = characterState.idle;
 
     private NavMeshAgent navMeshAgent;
-    private Transform 
+    //private Transform 
     private float traceDistance = 10.0f;
     private float attackDistance = 5.0f;
 

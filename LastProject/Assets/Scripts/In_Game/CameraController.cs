@@ -18,6 +18,10 @@ public class CameraController : MonoBehaviour
         focusPoint = focus.position;    
     }
 
+    void Start()
+    {
+    }
+
     void LateUpdate()
     {
         UpdateFocusPoint();
