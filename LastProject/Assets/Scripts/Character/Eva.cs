@@ -8,7 +8,7 @@ public class Eva : MonoBehaviour
     [SerializeField] GameObject attackRange = default;
     [SerializeField] GameObject flame = default;
 
-    public float moveSpeed = 5.0f;
+    public float moveSpeed = 30.0f;
     public float dodgeCoolTime = 5.0f;
     public float qSkillCoolTime = 20.0f;
 
@@ -85,6 +85,7 @@ public class Eva : MonoBehaviour
         }
         else
         {
+            flame.SetActive(false);
             Follow();
         }
     }

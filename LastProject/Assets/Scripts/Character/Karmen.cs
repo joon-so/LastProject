@@ -7,7 +7,7 @@ public class Karmen : MonoBehaviour
 {
     [SerializeField] GameObject attackRange = default;
 
-    public float moveSpeed = 5.0f;
+    public float moveSpeed = 30.0f;
     public float dodgeCoolTime = 5.0f;
     bool doAttack = false;
     bool motionEndCheck = true;
@@ -29,7 +29,7 @@ public class Karmen : MonoBehaviour
     Weapon weapon;
 
     float distanceWithPlayer;
-    public float followDistance = 5.0f;
+    public float followDistance = 20.0f;
     NavMeshAgent nav;
     GameObject tagCharacter;
 
