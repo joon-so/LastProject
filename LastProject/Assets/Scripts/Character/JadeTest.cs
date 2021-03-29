@@ -21,7 +21,7 @@ public class JadeTest : MonoBehaviour
     [SerializeField] Transform grenadePos = null;
     [SerializeField] GameObject Grenade = null;
 
-    public float moveSpeed = 5.0f;
+    public float moveSpeed = 30.0f;
 
     public float fireCoolTime = 0.5f;
 
@@ -73,28 +73,31 @@ public class JadeTest : MonoBehaviour
     }
     void Update()
     {
-        if (endDodge)
+        if (gameObject.transform.tag == "MainCharacter")
         {
-            Move();
-            Stop();
-            if (onAttack)
+            if (endDodge)
             {
-                Attack();
+                Move();
+                Stop();
+                if (onAttack)
+                {
+                    Attack();
+                }
             }
-        }
-        Dodge();
-        AttackRange();
-        CoolTime();
+            Dodge();
+            AttackRange();
+            CoolTime();
 
-        Q_Skill();
-        W_Skill();
-        E_Skill();
+            Q_Skill();
+            W_Skill();
+            E_Skill();
+        }
     }
     void Move()
     {
         if (Input.GetMouseButton(1))
         {
-            moveSpeed = 5.0f;
+            moveSpeed = 30.0f;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -125,7 +128,7 @@ public class JadeTest : MonoBehaviour
         {
             curDodgeCoolTime = 0.0f;
 
-            moveSpeed = 10.0f;
+            moveSpeed = 60.0f;
             anim.SetTrigger("Dodge");
 
             onDodge = false;
