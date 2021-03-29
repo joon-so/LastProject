@@ -13,12 +13,10 @@ public class JadeTest : MonoBehaviour
     [SerializeField] Transform assaultRifleBulletPos = null;
     [SerializeField] GameObject assaultRifleBullet = null;
 
-    [SerializeField] Transform missileTopLeftPos = null;
-    [SerializeField] Transform missileTopRightPos = null;
-    [SerializeField] Transform missileButtomLeftPos = null;
-    [SerializeField] Transform missileButtomRightPos = null;
+    [SerializeField] Transform missileBulletPos = null;
     [SerializeField] GameObject missileBullet = null;
     [SerializeField] GameObject missileRange = null;
+    [SerializeField] GameObject missileEffect = null;
 
     [SerializeField] Transform grenadePos = null;
     [SerializeField] GameObject Grenade = null;
@@ -184,7 +182,18 @@ public class JadeTest : MonoBehaviour
     }
     void Missile()
     {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit rayHit;
+        if (Physics.Raycast(ray, out rayHit, 100))
+        {
+            Vector3 nextVec = rayHit.point - transform.position;
+            nextVec.y = 2;
+            transform.LookAt(transform.position + nextVec);
 
+            GameObject instantMissile = Instantiate(missileBullet, missileBulletPos.position, missileBulletPos.rotation);
+            Rigidbody rigidMissile = instantMissile.GetComponent<Rigidbody>();
+            rigidMissile.velocity = missileBulletPos.forward * 50;
+        }
     }
     
     void CoolTime()
@@ -213,17 +222,17 @@ public class JadeTest : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if(onQSkill)
+            anim.SetBool("Run", false);
+            if (onQSkill)
             {
-                onAttack = false;
+                //onAttack = false;
                 // 버튼을 누르면 범위 표시
-                attackRange.SetActive(true);
-                missileRange.SetActive(true);
+                //attackRange.SetActive(true);
+                //missileRange.SetActive(true);
 
                 //missileRange.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
                 // 만약 클릭하면
-
 
 
                 onQSkill = false;
@@ -234,6 +243,7 @@ public class JadeTest : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.Q))
         {
+
             attackRange.SetActive(false);
         }
     }
@@ -243,7 +253,6 @@ public class JadeTest : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W))
         {
             anim.SetBool("Run", false);
-            anim.SetBool("Idle", false);
             vecTarget = transform.position;
 
             anim.SetTrigger("shootGrenade");
@@ -263,8 +272,6 @@ public class JadeTest : MonoBehaviour
                 rigidGrenade.AddForce(nextVec, ForceMode.Impulse);
                 rigidGrenade.AddTorque(Vector3.back * 10, ForceMode.Impulse);
             }
-
-
  //           StopCoroutine("ShootGrenade");
         }
     }
@@ -301,24 +308,44 @@ public class JadeTest : MonoBehaviour
     }
     IEnumerator ShootMissile()
     {
-        // 미사일 장착
-        anim.SetTrigger("drawMissileLauncher");
-        yield return new WaitForSeconds(0.5f);
-        useAssaultRifle.SetActive(false);
-        useMissileLauncher.SetActive(true);
+        vecTarget = transform.position;
 
-        // 스킬 적용
-        yield return new WaitForSeconds(1.0f);
-        Missile();
-        yield return new WaitForSeconds(1.0f);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit rayHit;
+        if (Physics.Raycast(ray, out rayHit, 100))
+        {
+            Vector3 nextVec = rayHit.point - transform.position;
+            nextVec.y = 2;
+            transform.LookAt(transform.position + nextVec);
 
+            // 미사일 장착
+            anim.SetTrigger("drawMissileLauncher");
+            yield return new WaitForSeconds(0.5f);
+            useAssaultRifle.SetActive(false);
+            useMissileLauncher.SetActive(true);
 
-        // 라이플 장착
-        anim.SetTrigger("drawAssaultRifle");
-        yield return new WaitForSeconds(0.5f);
-        useMissileLauncher.SetActive(false);
-        useAssaultRifle.SetActive(true);
-        onAttack = true;
+            // 기모으기
+            anim.SetBool("AimMissile", true);
+            yield return new WaitForSeconds(0.5f);
+            missileEffect.SetActive(true);
+            yield return new WaitForSeconds(1.0f);
+            anim.SetBool("AimMissile", false);
+            missileEffect.SetActive(false);
+
+            anim.SetTrigger("shootMissileLauncher");
+            GameObject instantMissile = Instantiate(missileBullet, missileBulletPos.position, missileBulletPos.rotation);
+            Rigidbody rigidMissile = instantMissile.GetComponent<Rigidbody>();
+            rigidMissile.velocity = missileBulletPos.forward * 50;
+        
+            yield return new WaitForSeconds(1.0f);
+
+            // 라이플 장착
+            anim.SetTrigger("drawAssaultRifle");
+            yield return new WaitForSeconds(0.5f);
+            useMissileLauncher.SetActive(false);
+            useAssaultRifle.SetActive(true);
+            onAttack = true;
+        }
     }
     IEnumerator ShootGrenade()
     {
