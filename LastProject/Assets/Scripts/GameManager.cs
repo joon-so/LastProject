@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public bool isSubLeina;
     public bool isSubEva;
 
-
+    
     // player info to server
     public int playerKill = 0;
     public int playerDeath = 0;
@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        DontDestroyOnLoad(gameObject);
     }
 
     void Start()

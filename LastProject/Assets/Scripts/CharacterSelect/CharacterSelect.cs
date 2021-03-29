@@ -105,6 +105,7 @@ public class CharacterSelect : MonoBehaviour
         {
             if (mainKarmen.activeSelf)
             {
+                Debug.Log("메인 카르멘 선택");
                 GameManager.instance.isMainKarmen = true;
             }
             if (mainJade.activeSelf)
@@ -129,6 +130,7 @@ public class CharacterSelect : MonoBehaviour
             }
             if (subJade.activeSelf)
             {
+                Debug.Log("서브 제이드 선택");
                 GameManager.instance.isSubJade = true;
             }
             if (subLeina.activeSelf)
@@ -144,7 +146,7 @@ public class CharacterSelect : MonoBehaviour
 
     public void OnClickStart()
     {
-        SceneManager.LoadScene("Stage1-1");
+        SceneManager.LoadScene("Stage1-1 1");
     }
     public void OnClickExit()
     {
