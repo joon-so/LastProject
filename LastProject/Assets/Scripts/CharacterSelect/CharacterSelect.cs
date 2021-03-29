@@ -144,7 +144,7 @@ public class CharacterSelect : MonoBehaviour
 
     public void OnClickStart()
     {
-        SceneManager.LoadScene("TagProtoType 1");
+        SceneManager.LoadScene("Stage1-1");
     }
     public void OnClickExit()
     {

@@ -66,7 +66,7 @@ public class Karmen : MonoBehaviour
         }
         else
         {
-            Follow();
+           // Follow();
         }
     }
 
@@ -74,7 +74,7 @@ public class Karmen : MonoBehaviour
     {
         if (Input.GetMouseButton(1))
         {
-            moveSpeed = 5.0f;
+            moveSpeed = 30.0f;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))

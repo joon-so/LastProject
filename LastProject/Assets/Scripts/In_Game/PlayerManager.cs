@@ -6,7 +6,10 @@ using UnityEngine.AI;
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] Camera mainCamera = null;
-    [SerializeField] GameObject clickEffect = null;
+    //[SerializeField] GameObject clickEffect = null;
+
+    public GameObject C_Karmen;
+    public GameObject C_Jade;
 
     private GameObject character1;
     private GameObject character2;
@@ -14,59 +17,84 @@ public class PlayerManager : MonoBehaviour
     private NavMeshAgent C1_Nav;
     private NavMeshAgent C2_Nav;
 
-    RaycastHit hit;
-
     private bool isChange;
 
     void Start()
     {
         mainCameraControl = mainCamera.GetComponent<CameraController>();
 
-        //character1 = GameObject.FindWithTag("MainCharacter");
-        //character2 = GameObject.FindWithTag("SubCharacter");
-
         if (GameManager.instance.isMainKarmen)
         {
-            GameObject child = transform.Find("Karmen").gameObject;
-            character1 = child;
-            character1.gameObject.tag = "MainCharacter";
-            character1.gameObject.layer = 6;
-            character1.SetActive(true);
+            C_Karmen.SetActive(true);
+            C_Karmen.gameObject.tag = "MainCharacter";
+            C_Karmen.gameObject.layer = 6;
+            character1 = C_Karmen;
         }
         else if (GameManager.instance.isMainJade)
         {
-            GameObject child = transform.Find("Jade").gameObject;
-            character1 = child;
-            character1.gameObject.tag = "MainCharacter";
-            character1.gameObject.layer = 6;
-            character1.SetActive(true);
+            C_Jade.SetActive(true);
+            C_Jade.gameObject.tag = "MainCharacter";
+            C_Jade.gameObject.layer = 6;
+            character1 = C_Jade;
         }
 
         if (GameManager.instance.isSubKarmen)
         {
-            GameObject child = transform.Find("Karmen").gameObject;
-            character2 = child;
-            character2.gameObject.tag = "SubCharacter";
-            character2.gameObject.layer = 7;
-            character2.SetActive(true);
+            C_Karmen.SetActive(true);
+            C_Karmen.gameObject.tag = "SubCharacter";
+            C_Karmen.gameObject.layer = 7;
+            character2 = C_Karmen;
         }
         else if (GameManager.instance.isSubJade)
         {
-            GameObject child = transform.Find("Jade").gameObject;
-            character2 = child;
-            character2.gameObject.tag = "SubCharacter";
-            character2.gameObject.layer = 7;
-            character2.SetActive(true);
+            C_Jade.SetActive(true);
+            C_Jade.gameObject.tag = "SubCharacter";
+            C_Jade.gameObject.layer = 7;
+            character2 = C_Jade;
         }
 
-        C1_Nav = character1.GetComponent<NavMeshAgent>();
-        C2_Nav = character2.GetComponent<NavMeshAgent>();
+        //if (GameManager.instance.isMainKarmen)
+        //{
+        //    GameObject child = transform.Find("Karmen").gameObject;
+        //    character1 = child;
+        //    character1.gameObject.tag = "MainCharacter";
+        //    character1.gameObject.layer = 6;
+        //    character1.SetActive(true);
+        //}
+        //else if (GameManager.instance.isMainJade)
+        //{
+        //    GameObject child = transform.Find("Jade").gameObject;
+        //    character1 = child;
+        //    character1.gameObject.tag = "MainCharacter";
+        //    character1.gameObject.layer = 6;
+        //    character1.SetActive(true);
+        //}
 
-        C1_Nav.enabled = false;
-        C2_Nav.enabled = true;
+        //if (GameManager.instance.isSubKarmen)
+        //{
+        //    GameObject child = transform.Find("Karmen").gameObject;
+        //    character2 = child;
+        //    character2.gameObject.tag = "SubCharacter";
+        //    character2.gameObject.layer = 7;
+        //    character2.SetActive(true);
+        //}
+        //else if (GameManager.instance.isSubJade)
+        //{
+        //    GameObject child = transform.Find("Jade").gameObject;
+        //    character2 = child;
+        //    character2.gameObject.tag = "SubCharacter";
+        //    character2.gameObject.layer = 7;
+        //    character2.SetActive(true);
+        //}
+
+        //C1_Nav = character1.GetComponent<NavMeshAgent>();
+        //C2_Nav = character2.GetComponent<NavMeshAgent>();
+
+        //C1_Nav.enabled = false;
+        //C2_Nav.enabled = true;
 
         isChange = false;
-        clickEffect.SetActive(false);
+        //clickEffect.SetActive(false);
     }
 
     void Update()
@@ -76,7 +104,7 @@ public class PlayerManager : MonoBehaviour
             changeMainSub();
         }
         Zoom();
-        Click();
+        //Click();
     }
 
     void changeMainSub()
@@ -92,8 +120,8 @@ public class PlayerManager : MonoBehaviour
             character1.gameObject.layer = 7;
             character2.gameObject.layer = 6;
 
-            C1_Nav.enabled = true;
-            C2_Nav.enabled = false;
+            //C1_Nav.enabled = true;
+            //C2_Nav.enabled = false;
 
             isChange = true;
         }
@@ -108,8 +136,8 @@ public class PlayerManager : MonoBehaviour
             character1.gameObject.layer = 6;
             character2.gameObject.layer = 7;
 
-            C1_Nav.enabled = false;
-            C2_Nav.enabled = true;
+            //C1_Nav.enabled = false;
+            //C2_Nav.enabled = true;
 
             isChange = false;
         }
@@ -121,22 +149,22 @@ public class PlayerManager : MonoBehaviour
         mainCamera.fieldOfView = Mathf.Clamp(mainCamera.fieldOfView - scroll.y, 30f, 70f);
     }
 
-    void Click()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-            Physics.Raycast(ray, out hit);
+    //void Click()
+    //{
+    //    if (Input.GetMouseButtonDown(1))
+    //    {
+    //        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+    //        Physics.Raycast(ray, out hit);
 
-            clickEffect.transform.position = hit.point;
-            StartCoroutine(ActiveEffect());
-        }
-    }
+    //        clickEffect.transform.position = hit.point;
+    //        StartCoroutine(ActiveEffect());
+    //    }
+    //}
 
-    IEnumerator ActiveEffect()
-    {
-        clickEffect.SetActive(true);
-        yield return new WaitForSeconds(1f);
-        clickEffect.SetActive(false);
-    }
+    //IEnumerator ActiveEffect()
+    //{
+    //    clickEffect.SetActive(true);
+    //    yield return new WaitForSeconds(1f);
+    //    clickEffect.SetActive(false);
+    //}
 }
