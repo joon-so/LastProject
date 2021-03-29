@@ -15,11 +15,11 @@ public class CameraController : MonoBehaviour
 
     void Awake()
     {
-        focusPoint = focus.position;    
     }
 
     void Start()
     {
+        focusPoint = focus.position;
     }
 
     void LateUpdate()

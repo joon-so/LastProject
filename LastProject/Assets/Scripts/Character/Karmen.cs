@@ -7,7 +7,7 @@ public class Karmen : MonoBehaviour
 {
     [SerializeField] GameObject attackRange = default;
 
-    public float moveSpeed = 5.0f;
+    public float moveSpeed = 30;
     public float dodgeCoolTime = 5.0f;
     bool doAttack = false;
     bool motionEndCheck = true;
@@ -66,7 +66,7 @@ public class Karmen : MonoBehaviour
         }
         else
         {
-            Follow();
+           // Follow();
         }
     }
 
@@ -74,7 +74,7 @@ public class Karmen : MonoBehaviour
     {
         if (Input.GetMouseButton(1))
         {
-            moveSpeed = 5.0f;
+            moveSpeed = 30.f;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
