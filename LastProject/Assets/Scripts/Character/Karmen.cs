@@ -74,7 +74,7 @@ public class Karmen : MonoBehaviour
     {
         if (Input.GetMouseButton(1))
         {
-            moveSpeed = 5.0f;
+            moveSpeed = 30.0f;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -115,11 +115,11 @@ public class Karmen : MonoBehaviour
             if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
                 && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.6f)
             {
-                moveSpeed = 3.0f;
+                moveSpeed = 18.0f;
             }
             else
             {
-                moveSpeed = 10.0f;
+                moveSpeed = 60.0f;
             }
 
             transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
