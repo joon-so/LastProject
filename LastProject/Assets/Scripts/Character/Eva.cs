@@ -94,7 +94,7 @@ public class Eva : MonoBehaviour
     {
         if (Input.GetMouseButton(1))
         {
-            moveSpeed = 5.0f;
+            moveSpeed = 30.0f;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -135,11 +135,11 @@ public class Eva : MonoBehaviour
             if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
                 && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8f)
             {
-                moveSpeed = 1.0f;
+                moveSpeed = 6.0f;
             }
             else
             {
-                moveSpeed = 6.0f;
+                moveSpeed = 36.0f;
             }
 
             transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
