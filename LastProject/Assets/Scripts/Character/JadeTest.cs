@@ -9,8 +9,19 @@ public class JadeTest : MonoBehaviour
     [SerializeField] GameObject useMissileLauncher = null;
     [SerializeField] GameObject backAssaultRifle = null;
     [SerializeField] GameObject backMissileLauncher = null;
-    [SerializeField] Transform bulletPos;
-    [SerializeField] GameObject bullet;
+    
+    [SerializeField] Transform assaultRifleBulletPos = null;
+    [SerializeField] GameObject assaultRifleBullet = null;
+
+    [SerializeField] Transform missileTopLeftPos = null;
+    [SerializeField] Transform missileTopRightPos = null;
+    [SerializeField] Transform missileButtomLeftPos = null;
+    [SerializeField] Transform missileButtomRightPos = null;
+    [SerializeField] GameObject missileBullet = null;
+    [SerializeField] GameObject missileRange = null;
+
+    [SerializeField] Transform grenadePos = null;
+    [SerializeField] GameObject Grenade = null;
 
     public float moveSpeed = 5.0f;
 
@@ -21,6 +32,13 @@ public class JadeTest : MonoBehaviour
     public float dodgeCoolTime = 3.0f;
     float curDodgeCoolTime = 0;
 
+    // 스킬
+    public float qskillCoolTime = 5.0f;
+    float curQSkillCoolTime = 0;
+    bool onQSkill;
+
+
+    bool onAttack;
     bool onDodge;
     bool endDodge;
 
@@ -40,26 +58,31 @@ public class JadeTest : MonoBehaviour
     {
         anim = GetComponent<Animator>();
     }
-
-
     void Start()
     {
         vecTarget = transform.position;
         onDodge = true;
         endDodge = true;
+        onAttack = true;
 
         curDodgeCoolTime = dodgeCoolTime;
         StartCoroutine("DrawAssaultRifle");
         StartCoroutine("DrawAssaultRifle");
-    }
 
+
+        // 스킬
+        onQSkill = true;
+    }
     void Update()
     {
         if (endDodge)
         {
             Move();
             Stop();
-            //Attack();
+            if (onAttack)
+            {
+                Attack();
+            }
         }
         Dodge();
         AttackRange();
@@ -69,7 +92,6 @@ public class JadeTest : MonoBehaviour
         W_Skill();
         E_Skill();
     }
-
     void Move()
     {
         if (Input.GetMouseButton(1))
@@ -99,7 +121,6 @@ public class JadeTest : MonoBehaviour
             vecTarget = transform.position;
         }
     }
-
     void Dodge()
     {
         if (Input.GetKeyDown(KeyCode.Space) && curDodgeCoolTime >= dodgeCoolTime && onDodge)
@@ -118,7 +139,6 @@ public class JadeTest : MonoBehaviour
             endDodge = false;
         }
     }
-
     void Attack()
     {
         fireDelay += Time.deltaTime;
@@ -137,12 +157,12 @@ public class JadeTest : MonoBehaviour
                     transform.LookAt(transform.position + nextVec);
                 }
 
-                GameObject instantBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation);
+                GameObject instantBullet = Instantiate(assaultRifleBullet, assaultRifleBulletPos.position, assaultRifleBulletPos.rotation);
                 Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
-                bulletRigid.velocity = bulletPos.forward * 50;
+                bulletRigid.velocity = assaultRifleBulletPos.forward * 50;
 
                 moveSpeed = 0f;
-                anim.SetBool("isRun", false);
+                anim.SetBool("Run", false);
                 vecTarget = transform.position;
 
                 anim.SetTrigger("shootAssaultRifle");
@@ -150,7 +170,6 @@ public class JadeTest : MonoBehaviour
             }
         }
     }
-
     void AttackRange()
     {
         attackRange.transform.position = transform.position;
@@ -163,7 +182,11 @@ public class JadeTest : MonoBehaviour
             attackRange.SetActive(false);
         }
     }
+    void Missile()
+    {
 
+    }
+    
     void CoolTime()
     {
         // 회피
@@ -175,19 +198,43 @@ public class JadeTest : MonoBehaviour
         {
             onDodge = true;
         }
+
+        // Q스킬
+        if (curQSkillCoolTime < qskillCoolTime)
+        {
+            curQSkillCoolTime += Time.deltaTime;
+        }
+        else
+        {
+            onQSkill = true;
+        }
     }
     void Q_Skill()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            StartCoroutine("ChangeRifleToMissile");
-            StartCoroutine("ChangeRifleToMissile");
-            // 스킬 
+            if(onQSkill)
+            {
+                onAttack = false;
+                // 버튼을 누르면 범위 표시
+                attackRange.SetActive(true);
+                missileRange.SetActive(true);
+
+                //missileRange.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+                // 만약 클릭하면
 
 
-            // 스킬끝
-            //StartCoroutine("ChangeMissileToRifle");
-            //StartCoroutine("ChangeMissileToRifle");
+
+                onQSkill = false;
+                curQSkillCoolTime = 0;
+                // 스킬 사용
+                StartCoroutine("ShootMissile");
+            }
+        }
+        else if (Input.GetKeyUp(KeyCode.Q))
+        {
+            attackRange.SetActive(false);
         }
     }
     void W_Skill()
@@ -195,8 +242,30 @@ public class JadeTest : MonoBehaviour
         // 수류탄
         if (Input.GetKeyDown(KeyCode.W))
         {
-            StartCoroutine("ShootGrenade");
-            StopCoroutine("ShootGrenade");
+            anim.SetBool("Run", false);
+            anim.SetBool("Idle", false);
+            vecTarget = transform.position;
+
+            anim.SetTrigger("shootGrenade");
+            // 클릭?
+    //        StartCoroutine("ShootGrenade");
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit rayHit;
+            if (Physics.Raycast(ray, out rayHit, 100))
+            {
+                Vector3 nextVec = rayHit.point - transform.position;
+                nextVec.y = 2;
+                transform.LookAt(transform.position + nextVec);
+
+                GameObject instantGrenade = Instantiate(Grenade, grenadePos.position, grenadePos.rotation);
+                Rigidbody rigidGrenade = instantGrenade.GetComponent<Rigidbody>();
+                rigidGrenade.AddForce(nextVec, ForceMode.Impulse);
+                rigidGrenade.AddTorque(Vector3.back * 10, ForceMode.Impulse);
+            }
+
+
+ //           StopCoroutine("ShootGrenade");
         }
     }
     void E_Skill()
@@ -207,7 +276,6 @@ public class JadeTest : MonoBehaviour
         }
     }
 
-    // 시작
     IEnumerator DrawAssaultRifle()
     {
         anim.SetTrigger("Idle");
@@ -217,7 +285,6 @@ public class JadeTest : MonoBehaviour
         backAssaultRifle.SetActive(false);
         useAssaultRifle.SetActive(true);
     }
-    // 무기 교체
     IEnumerator ChangeRifleToMissile()
     {
         anim.SetTrigger("drawMissileLauncher");
@@ -232,11 +299,33 @@ public class JadeTest : MonoBehaviour
         useMissileLauncher.SetActive(false);
         useAssaultRifle.SetActive(true);
     }
+    IEnumerator ShootMissile()
+    {
+        // 미사일 장착
+        anim.SetTrigger("drawMissileLauncher");
+        yield return new WaitForSeconds(0.5f);
+        useAssaultRifle.SetActive(false);
+        useMissileLauncher.SetActive(true);
+
+        // 스킬 적용
+        yield return new WaitForSeconds(1.0f);
+        Missile();
+        yield return new WaitForSeconds(1.0f);
+
+
+        // 라이플 장착
+        anim.SetTrigger("drawAssaultRifle");
+        yield return new WaitForSeconds(0.5f);
+        useMissileLauncher.SetActive(false);
+        useAssaultRifle.SetActive(true);
+        onAttack = true;
+    }
     IEnumerator ShootGrenade()
     {
         anim.SetTrigger("shootGrenade");
         yield return new WaitForSeconds(3.0f);
     }
+
 
 
     // 태그시 초기화할 것들을 생각해보자 ex) 플레이어 이동속도, 클릭했던 좌표 등

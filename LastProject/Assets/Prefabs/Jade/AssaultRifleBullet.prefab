@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1075686755962700641}
   - component: {fileID: 1075686755962700646}
   - component: {fileID: -6459738234068804705}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AssaultRifleBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,9 +192,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1075686755962700643}
     m_Modifications:
+    - target: {fileID: 1000011144422356, guid: 1e15d82f04b99aa4c9b28e87530510d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1000012327391772, guid: 1e15d82f04b99aa4c9b28e87530510d6, type: 3}
       propertyPath: m_Name
       value: Bullet1(3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012327391772, guid: 1e15d82f04b99aa4c9b28e87530510d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012741561742, guid: 1e15d82f04b99aa4c9b28e87530510d6, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4000013080835110, guid: 1e15d82f04b99aa4c9b28e87530510d6, type: 3}
       propertyPath: m_RootOrder

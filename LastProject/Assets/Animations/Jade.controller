@@ -209,7 +209,7 @@ AnimatorStateMachine:
     m_Position: {x: 330, y: -170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5141794389222375489}
-    m_Position: {x: 990, y: -160, z: 0}
+    m_Position: {x: 990, y: -210, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2441267822884897088}
     m_Position: {x: 330, y: -70, z: 0}
@@ -221,7 +221,7 @@ AnimatorStateMachine:
     m_Position: {x: 330, y: 80, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3572871688311473709}
-    m_Position: {x: 990, y: -250, z: 0}
+    m_Position: {x: 990, y: -310, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5795279365210863931}
     m_Position: {x: 330, y: -220, z: 0}
@@ -256,7 +256,7 @@ AnimatorStateMachine:
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 830, y: -100, z: 0}
-  m_EntryPosition: {x: 830, y: -200, z: 0}
+  m_EntryPosition: {x: 830, y: -150, z: 0}
   m_ExitPosition: {x: 830, y: 320, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -5141794389222375489}
@@ -267,7 +267,10 @@ AnimatorStateTransition:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_Conditions: []
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: shootMissileLauncher
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7805308649659938400}
   m_Solo: 0
@@ -774,49 +777,49 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Idle
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Dodge
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: shootAssaultRifle
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: shootGrenade
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: shootMissileLauncher
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: drawAssaultRifle
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: drawMissileLauncher
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer

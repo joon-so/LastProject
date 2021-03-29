@@ -4,22 +4,24 @@ using UnityEngine;
 
 public class JadeGrenade : MonoBehaviour
 {
+    public GameObject msehObj;
+    public GameObject effectObj;
+    public Rigidbody rigid;
+
     void Start()
     {
-        
+        StartCoroutine(Explosion());
     }
-
-    void Update()
-    {
-        
-    }
-
     IEnumerator Explosion()
     {
         yield return new WaitForSeconds(3.0f);
+        rigid.velocity = Vector3.zero;
+        rigid.angularVelocity = Vector3.zero;
+        effectObj.SetActive(true);
+        msehObj.SetActive(false);
 
-
-        RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, 15, Vector3.up, 0f, LayerMask.GetMask("Enemy"));
-
+        yield return new WaitForSeconds(1.0f);
+        Destroy(gameObject);
+        //RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, 15, Vector3.up, 0f, LayerMask.GetMask("Enemy"));
     }
 }
