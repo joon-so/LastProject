@@ -10,6 +10,7 @@ public class PlayerManager : MonoBehaviour
 
     public GameObject C_Karmen;
     public GameObject C_Jade;
+    public GameObject C_Eva;
 
     private GameObject character1;
     private GameObject character2;
@@ -40,6 +41,13 @@ public class PlayerManager : MonoBehaviour
             C_Jade.gameObject.layer = 6;
             character1 = C_Jade;
         }
+        else if (GameManager.instance.isMainEva)
+        {
+            C_Eva.SetActive(true);
+            C_Eva.gameObject.tag = "MainCharacter";
+            C_Eva.gameObject.layer = 6;
+            character1 = C_Eva;
+        }
 
         if (GameManager.instance.isSubKarmen)
         {
@@ -55,6 +63,14 @@ public class PlayerManager : MonoBehaviour
             C_Jade.gameObject.tag = "SubCharacter";
             C_Jade.gameObject.layer = 7;
             character2 = C_Jade;
+        }
+        else if (GameManager.instance.isSubEva)
+        {
+            Debug.Log("서브 제이드");
+            C_Eva.SetActive(true);
+            C_Eva.gameObject.tag = "SubCharacter";
+            C_Eva.gameObject.layer = 7;
+            character2 = C_Eva;
         }
 
         //if (GameManager.instance.isMainKarmen)

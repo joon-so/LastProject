@@ -86,7 +86,7 @@ public class Eva : MonoBehaviour
         else
         {
             flame.SetActive(false);
-            Follow();
+           // Follow();
         }
     }
 
