@@ -160,7 +160,7 @@ public class JadeTest : MonoBehaviour
 
                 GameObject instantBullet = Instantiate(assaultRifleBullet, assaultRifleBulletPos.position, assaultRifleBulletPos.rotation);
                 Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
-                bulletRigid.velocity = assaultRifleBulletPos.forward * 50;
+                bulletRigid.velocity = assaultRifleBulletPos.forward * 80.0f;
 
                 moveSpeed = 0f;
                 anim.SetBool("Run", false);
@@ -241,7 +241,7 @@ public class JadeTest : MonoBehaviour
                 onQSkill = false;
                 curQSkillCoolTime = 0;
                 // 스킬 사용
-                StartCoroutine("ShootMissile");
+                StartCoroutine(ShootMissile());
             }
         }
         else if (Input.GetKeyUp(KeyCode.Q))
@@ -260,7 +260,6 @@ public class JadeTest : MonoBehaviour
 
             anim.SetTrigger("shootGrenade");
             // 클릭?
-    //        StartCoroutine("ShootGrenade");
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit rayHit;
@@ -275,7 +274,6 @@ public class JadeTest : MonoBehaviour
                 rigidGrenade.AddForce(nextVec, ForceMode.Impulse);
                 rigidGrenade.AddTorque(Vector3.back * 10, ForceMode.Impulse);
             }
- //           StopCoroutine("ShootGrenade");
         }
     }
     void E_Skill()
