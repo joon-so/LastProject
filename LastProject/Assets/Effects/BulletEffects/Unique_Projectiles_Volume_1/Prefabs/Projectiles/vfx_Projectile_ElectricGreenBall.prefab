@@ -360,7 +360,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 0.41460454, g: 0.18382353, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.6397566, b: 0.18382353, a: 1}
+      maxColor: {r: 0.6901961, g: 1, b: 0.3372549, a: 0.23529412}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -5238,8 +5238,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.18382353, g: 0.8311361, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.7079108, b: 0.33823532, a: 1}
+      minColor: {r: 0, g: 1, b: 0.7406416, a: 0.26666668}
+      maxColor: {r: 0.6901961, g: 1, b: 0.3372549, a: 0.23529412}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -10056,7 +10056,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 0.022426466, g: 0.08079715, b: 0.12199998, a: 0.39215687}
-      maxColor: {r: 0.134, g: 0.085727386, b: 0.024632353, a: 0.39215687}
+      maxColor: {r: 1, g: 0.94509804, b: 0.19215687, a: 0.45490196}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -14815,8 +14815,8 @@ TrailRenderer:
       m_RotationOrder: 0
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.384, g: 0.24691278, b: 0.07341177, a: 1}
-      key1: {r: 0.134, g: 0.084857605, b: 0.022661762, a: 1}
+      key0: {r: 0.7450751, g: 0.8773585, b: 0.086908154, a: 1}
+      key1: {r: 0.24528301, g: 0.2334925, b: 0.13074046, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -14867,7 +14867,7 @@ GameObject:
   - component: {fileID: 65138394354385980}
   - component: {fileID: 54780134100305680}
   m_Layer: 0
-  m_Name: vfx_Projectile_ElectricOrangeBall
+  m_Name: vfx_Projectile_ElectricGreenBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15002,8 +15002,8 @@ MonoBehaviour:
   lights: 1
   trails: 1
   changeColor: 1
-  newMaxColor: {r: 1, g: 0.60081136, b: 0.09558821, a: 1}
-  newMinColor: {r: 0.09558821, g: 0.8128805, b: 1, a: 1}
+  newMaxColor: {r: 0.6901961, g: 1, b: 0.3372549, a: 0.23529412}
+  newMinColor: {r: 1, g: 0.18431373, b: 0.18431371, a: 0.26666668}
   ParticleSystems:
   - {fileID: 1823173409967616}
   - {fileID: 1590967563268456}
@@ -15201,8 +15201,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.35321155, g: 0.8836768, b: 1.0220588, a: 1}
-      maxColor: {r: 1, g: 0.6981744, b: 0.31617647, a: 1}
+      minColor: {r: 0.78431374, g: 1, b: 0.18431373, a: 0.26666668}
+      maxColor: {r: 0.6901961, g: 1, b: 0.3372549, a: 0.23529412}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}

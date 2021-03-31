@@ -225,6 +225,39 @@ public class Karmen : MonoBehaviour
         }
     }
 
+    void Q_Skill()
+    {
+
+    }
+
+    void W_Skill()
+    {
+
+    }
+
+    void E_Skill()
+    {
+
+    }
+
+    IEnumerator BigAttack()
+    {
+        anim.SetTrigger("BigAttack");
+        yield return null;
+    }
+
+    IEnumerator StraightAttack()
+    {
+        anim.SetTrigger("StraightAttack");
+        yield return null;
+    }
+
+
+
+
+
+
+
     void Follow()
     {
         distanceWithPlayer = Vector3.Distance(tagCharacter.transform.position, transform.position);
