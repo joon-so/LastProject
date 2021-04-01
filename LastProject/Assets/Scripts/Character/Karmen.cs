@@ -7,6 +7,11 @@ public class Karmen : MonoBehaviour
 {
     [SerializeField] GameObject attackRange = default;
 
+    [SerializeField] GameObject effectLeftStaff = null;
+    [SerializeField] GameObject effectRightStaff = null;
+    [SerializeField] GameObject effectQSkillStaff1 = null;
+    [SerializeField] GameObject effectQSkillStaff2 = null;
+
     public float moveSpeed = 30.0f;
     public float dodgeCoolTime = 5.0f;
     bool doAttack = false;
@@ -32,6 +37,14 @@ public class Karmen : MonoBehaviour
     public float followDistance = 20.0f;
     NavMeshAgent nav;
     GameObject tagCharacter;
+
+    public float qskillCoolTime = 5.0f;
+    float curqskillCoolTime = 0f;
+    bool onQSkill = true;
+
+    public float wskillCoolTime = 5.0f;
+    float curwskillCoolTime = 0f;
+    bool onWSkill = true;
 
     void Start()
     {
@@ -63,6 +76,8 @@ public class Karmen : MonoBehaviour
             Dodge();
             AttackRange();
             CoolTime();
+            Q_Skill();
+            W_Skill();
         }
         else
         {
@@ -223,16 +238,48 @@ public class Karmen : MonoBehaviour
         {
             onDodge = true;
         }
+
+        if (curqskillCoolTime < qskillCoolTime)
+        {
+            curqskillCoolTime += Time.deltaTime;
+        }
+        else
+        {
+            onQSkill = true;
+        }
+
+        if (curwskillCoolTime < wskillCoolTime)
+        {
+            curwskillCoolTime += Time.deltaTime;
+        }
+        else
+        {
+            onWSkill = true;
+        }
     }
 
     void Q_Skill()
     {
-
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (onQSkill)
+            {
+                onQSkill = false;
+                StartCoroutine(BigAttack());
+            }
+        }
     }
 
     void W_Skill()
     {
-
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            if (onWSkill)
+            {
+                onWSkill = false;
+                StartCoroutine(StraightAttack());
+            }
+        }
     }
 
     void E_Skill()
@@ -242,8 +289,20 @@ public class Karmen : MonoBehaviour
 
     IEnumerator BigAttack()
     {
+        effectLeftStaff.SetActive(false);
+        effectRightStaff.SetActive(false);
+
         anim.SetTrigger("BigAttack");
-        yield return null;
+        effectQSkillStaff1.SetActive(true);
+        yield return new WaitForSeconds(0.25f);
+        effectQSkillStaff2.SetActive(true);
+
+        yield return new WaitForSeconds(1.0f);
+        effectQSkillStaff1.SetActive(false);
+        effectQSkillStaff2.SetActive(false);
+
+        effectLeftStaff.SetActive(true);
+        effectRightStaff.SetActive(true);
     }
 
     IEnumerator StraightAttack()
