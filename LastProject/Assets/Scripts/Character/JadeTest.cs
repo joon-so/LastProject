@@ -286,7 +286,6 @@ public class JadeTest : MonoBehaviour
 
     IEnumerator DrawAssaultRifle()
     {
-        anim.SetTrigger("Idle");
         yield return new WaitForSeconds(0.5f);
         anim.SetTrigger("drawAssaultRifle");
         yield return new WaitForSeconds(0.5f);

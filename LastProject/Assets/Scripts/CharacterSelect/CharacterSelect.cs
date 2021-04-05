@@ -13,6 +13,10 @@ public class CharacterSelect : MonoBehaviour
     [SerializeField] GameObject subLeina;
     [SerializeField] GameObject mainEva;
     [SerializeField] GameObject subEva;
+    [SerializeField] GameObject selectEffectKarmen;
+    [SerializeField] GameObject selectEffectJade;
+    [SerializeField] GameObject selectEffectLeina;
+    [SerializeField] GameObject selectEffectEva;
 
     private int mainOrsub;  // main: 1 sub: 2
 
@@ -105,20 +109,23 @@ public class CharacterSelect : MonoBehaviour
         {
             if (mainKarmen.activeSelf)
             {
-                Debug.Log("메인 카르멘 선택");
                 GameManager.instance.isMainKarmen = true;
+                selectEffectKarmen.SetActive(true);
             }
             if (mainJade.activeSelf)
             {
                 GameManager.instance.isMainJade = true;
+                selectEffectJade.SetActive(true);
             }
             if (mainLeina.activeSelf)
             {
                 GameManager.instance.isMainLeina = true;
+                selectEffectLeina.SetActive(true);
             }
             if (mainEva.activeSelf)
             {
                 GameManager.instance.isMainEva = true;
+                selectEffectEva.SetActive(true);
             }
             mainOrsub = 2;
         }
@@ -127,20 +134,24 @@ public class CharacterSelect : MonoBehaviour
             if (subKarmen.activeSelf)
             {
                 GameManager.instance.isSubKarmen = true;
+                selectEffectKarmen.SetActive(true);
             }
             if (subJade.activeSelf)
             {
-                Debug.Log("서브 제이드 선택");
                 GameManager.instance.isSubJade = true;
+                selectEffectJade.SetActive(true);
             }
             if (subLeina.activeSelf)
             {
                 GameManager.instance.isSubLeina = true;
+                selectEffectLeina.SetActive(true);
             }
             if (subEva.activeSelf)
             {
                 GameManager.instance.isSubEva = true;
+                selectEffectEva.SetActive(true);
             }
+            mainOrsub = 0;
         }
     }
 
