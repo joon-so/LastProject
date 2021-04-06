@@ -43,6 +43,8 @@ public class Enemy1Bullet : MonoBehaviour {
 
     private float bulletSize = 1.0f;
     private float maxBulletSize = 7.0f;
+    private float lifeTime = 1.0f;
+    private float curLifeTime = 0.0f;
 
 	void Start () {
         startPos = transform.position;
@@ -68,7 +70,9 @@ public class Enemy1Bullet : MonoBehaviour {
 				}
 			}
 		}
-			
+
+        curLifeTime = lifeTime;
+
 		if (muzzlePrefab != null) {
 			var muzzleVFX = Instantiate (muzzlePrefab, transform.position, Quaternion.identity);
 			muzzleVFX.transform.forward = gameObject.transform.forward + offset;
@@ -92,14 +96,18 @@ public class Enemy1Bullet : MonoBehaviour {
         //Debug.Log(bullet);
         if (bulletSize < maxBulletSize)
         {
-            bulletSize += Time.deltaTime * 3;
-            //Debug.Log(transform.GetChild(1));
+            bulletSize += Time.deltaTime * 5;
             bullet.transform.localScale = new Vector3(bulletSize, bulletSize, bulletSize);
         }
         else
         {
             if (speed != 0 && rb != null)
+            {
+                curLifeTime -= Time.deltaTime;
+                if (curLifeTime < 0.0f)
+                    Destroy(gameObject);
                 rb.position += (transform.forward + offset) * (speed * Time.deltaTime);
+            }
         }
     }
 
