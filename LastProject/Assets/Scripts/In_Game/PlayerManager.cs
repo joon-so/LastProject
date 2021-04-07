@@ -23,12 +23,8 @@ public class PlayerManager : MonoBehaviour
     {
         mainCameraControl = mainCamera.GetComponent<CameraController>();
 
-        Debug.Log(GameManager.instance.isMainKarmen);
-        Debug.Log(GameManager.instance.isSubJade);
-
         if (GameManager.instance.isMainKarmen)
         {
-            Debug.Log("메인 카르멘");
             C_Karmen.SetActive(true);
             C_Karmen.gameObject.tag = "MainCharacter";
             C_Karmen.gameObject.layer = 6;
@@ -58,7 +54,6 @@ public class PlayerManager : MonoBehaviour
         }
         else if (GameManager.instance.isSubJade)
         {
-            Debug.Log("서브 제이드");
             C_Jade.SetActive(true);
             C_Jade.gameObject.tag = "SubCharacter";
             C_Jade.gameObject.layer = 7;
@@ -66,7 +61,6 @@ public class PlayerManager : MonoBehaviour
         }
         else if (GameManager.instance.isSubEva)
         {
-            Debug.Log("서브 제이드");
             C_Eva.SetActive(true);
             C_Eva.gameObject.tag = "SubCharacter";
             C_Eva.gameObject.layer = 7;
