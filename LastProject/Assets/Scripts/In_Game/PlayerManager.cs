@@ -6,43 +6,74 @@ using UnityEngine.AI;
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] Camera mainCamera = null;
-    //[SerializeField] GameObject clickEffect = null;
 
     public GameObject C_Karmen;
     public GameObject C_Jade;
+    public GameObject C_Leina;
     public GameObject C_Eva;
 
-    private GameObject character1;
-    private GameObject character2;
     private CameraController mainCameraControl;
-    private NavMeshAgent C1_Nav;
-    private NavMeshAgent C2_Nav;
+
+    private Karmen _Karmen;
+    private Jade _Jade;
+    private Leina _Leina;
+    private Eva _Eva;
 
     private bool isChange;
+
+     void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     void Start()
     {
         mainCameraControl = mainCamera.GetComponent<CameraController>();
 
+        InitMainSub();
+
+        isChange = false;
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Tag();
+        }
+        Zoom();
+        //Click();
+    }
+
+    void InitMainSub()
+    {
         if (GameManager.instance.isMainKarmen)
         {
             C_Karmen.SetActive(true);
             C_Karmen.gameObject.tag = "MainCharacter";
             C_Karmen.gameObject.layer = 6;
-            character1 = C_Karmen;
+            GameManager.instance.character1 = C_Karmen;
         }
         else if (GameManager.instance.isMainJade)
         {
             C_Jade.SetActive(true);
             C_Jade.gameObject.tag = "MainCharacter";
             C_Jade.gameObject.layer = 6;
-            character1 = C_Jade;
+            GameManager.instance.character1 = C_Jade;
+        }
+        else if (GameManager.instance.isMainLeina)
+        {
+            C_Eva.SetActive(true);
+            C_Eva.gameObject.tag = "MainCharacter";
+            C_Eva.gameObject.layer = 6;
+            GameManager.instance.character1 = C_Leina;
         }
         else if (GameManager.instance.isMainEva)
         {
             C_Eva.SetActive(true);
             C_Eva.gameObject.tag = "MainCharacter";
             C_Eva.gameObject.layer = 6;
-            character1 = C_Eva;
+            GameManager.instance.character1 = C_Eva;
         }
 
         if (GameManager.instance.isSubKarmen)
@@ -50,111 +81,58 @@ public class PlayerManager : MonoBehaviour
             C_Karmen.SetActive(true);
             C_Karmen.gameObject.tag = "SubCharacter";
             C_Karmen.gameObject.layer = 7;
-            character2 = C_Karmen;
+            GameManager.instance.character2 = C_Karmen;
         }
         else if (GameManager.instance.isSubJade)
         {
             C_Jade.SetActive(true);
             C_Jade.gameObject.tag = "SubCharacter";
             C_Jade.gameObject.layer = 7;
-            character2 = C_Jade;
+            GameManager.instance.character2 = C_Jade;
+        }
+        else if (GameManager.instance.isSubLeina)
+        {
+            C_Jade.SetActive(true);
+            C_Jade.gameObject.tag = "SubCharacter";
+            C_Jade.gameObject.layer = 7;
+            GameManager.instance.character2 = C_Leina;
         }
         else if (GameManager.instance.isSubEva)
         {
             C_Eva.SetActive(true);
             C_Eva.gameObject.tag = "SubCharacter";
             C_Eva.gameObject.layer = 7;
-            character2 = C_Eva;
+            GameManager.instance.character2 = C_Eva;
         }
-
-        //if (GameManager.instance.isMainKarmen)
-        //{
-        //    GameObject child = transform.Find("Karmen").gameObject;
-        //    character1 = child;
-        //    character1.gameObject.tag = "MainCharacter";
-        //    character1.gameObject.layer = 6;
-        //    character1.SetActive(true);
-        //}
-        //else if (GameManager.instance.isMainJade)
-        //{
-        //    GameObject child = transform.Find("Jade").gameObject;
-        //    character1 = child;
-        //    character1.gameObject.tag = "MainCharacter";
-        //    character1.gameObject.layer = 6;
-        //    character1.SetActive(true);
-        //}
-
-        //if (GameManager.instance.isSubKarmen)
-        //{
-        //    GameObject child = transform.Find("Karmen").gameObject;
-        //    character2 = child;
-        //    character2.gameObject.tag = "SubCharacter";
-        //    character2.gameObject.layer = 7;
-        //    character2.SetActive(true);
-        //}
-        //else if (GameManager.instance.isSubJade)
-        //{
-        //    GameObject child = transform.Find("Jade").gameObject;
-        //    character2 = child;
-        //    character2.gameObject.tag = "SubCharacter";
-        //    character2.gameObject.layer = 7;
-        //    character2.SetActive(true);
-        //}
-
-        //C1_Nav = character1.GetComponent<NavMeshAgent>();
-        //C2_Nav = character2.GetComponent<NavMeshAgent>();
-
-        //C1_Nav.enabled = false;
-        //C2_Nav.enabled = true;
-
-        isChange = false;
-        //clickEffect.SetActive(false);
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            changeMainSub();
-        }
-        Zoom();
-        //Click();
-    }
-
-    void changeMainSub()
+    void Tag()
     {
         // C1 : main -> sub
         if (!isChange)
         {
-            mainCameraControl.focus = character2.transform;
-
-            character1.gameObject.tag = "SubCharacter";
-            character2.gameObject.tag = "MainCharacter";
-
-            character1.gameObject.layer = 7;
-            character2.gameObject.layer = 6;
-
-            //C1_Nav.enabled = true;
-            //C2_Nav.enabled = false;
+            mainCameraControl.focus = GameManager.instance.character2.transform;
+            GameManager.instance.TagObject1();
+            GameManager.instance.TagSkillSlot1();
+            GameManager.instance.TagMask1();
 
             isChange = true;
         }
         // C1 : sub -> main
         else
         {
-            mainCameraControl.focus = character1.transform;
-
-            character1.gameObject.tag = "MainCharacter";
-            character2.gameObject.tag = "SubCharacter";
-
-            character1.gameObject.layer = 6;
-            character2.gameObject.layer = 7;
-
-            //C1_Nav.enabled = false;
-            //C2_Nav.enabled = true;
+            mainCameraControl.focus = GameManager.instance.character1.transform;
+            GameManager.instance.TagObject2();
+            GameManager.instance.TagSkillSlot2();
+            GameManager.instance.TagMask2();
 
             isChange = false;
         }
+        // ½ºÅ³
+
+        // hp
+        GameManager.instance.TagHpEp();
+        GameManager.instance.EffectFillBar();
     }
 
     void Zoom()

@@ -19,7 +19,6 @@ public class InGameUI : MonoBehaviour
     [SerializeField] Text playerDeath;
     [SerializeField] Text playerScore;
 
-
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -73,6 +72,7 @@ public class InGameUI : MonoBehaviour
 
     void TagMaskMainToSub()
     {
+
     }
 
     public void OnClickOptionButton()

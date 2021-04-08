@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
     // stage info
     public string stageInfo;
 
-
     // player info
     public int playerKill = 0;
     public int playerDeath = 0;
@@ -37,9 +36,20 @@ public class GameManager : MonoBehaviour
     public float subPlayerHp;
     public float subPlayerEp;
 
-    // 초상화
-    public GameObject mainMask;
-    public GameObject subMask;
+    public float tagCoolTime = 3.0f;
+
+    public GameObject character1;
+    public GameObject character2;
+
+    public GameObject mainCharacter1SkillSlot;
+    public GameObject subCharacter1SkillSlot;
+    public GameObject mainCharacter2SkillSlot;
+    public GameObject subCharacter2SkillSlot;
+
+    public GameObject mainMaskCharacter1;
+    public GameObject subMaskCharacter1;
+    public GameObject mainMaskCharacter2;
+    public GameObject subMaskCharacter2;
 
     void Awake()
     {
@@ -55,7 +65,93 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    public void TagObject1()
+    {
+        character1.gameObject.tag = "SubCharacter";
+        character2.gameObject.tag = "MainCharacter";
+        character1.gameObject.layer = 7;
+        character2.gameObject.layer = 6;
+    }
+    public void TagObject2()
+    {
+       character1.gameObject.tag = "MainCharacter";
+       character2.gameObject.tag = "SubCharacter";
+       character1.gameObject.layer = 6;
+       character2.gameObject.layer = 7;
+    }
+    public void TagSkillSlot1()
+    {
+        mainCharacter1SkillSlot.SetActive(false);
+        subCharacter1SkillSlot.SetActive(true);
 
-    // 태그 여기서 정의
+        mainCharacter2SkillSlot.SetActive(true);
+        subCharacter2SkillSlot.SetActive(false);
+    }
+    public void TagSkillSlot2()
+    {
+        mainCharacter1SkillSlot.SetActive(true);
+        subCharacter1SkillSlot.SetActive(false);
 
+        mainCharacter2SkillSlot.SetActive(false);
+        subCharacter2SkillSlot.SetActive(true);
+    }
+    public void TagMask1()
+    {
+        mainMaskCharacter1.SetActive(false);
+        subMaskCharacter1.SetActive(true);
+        mainMaskCharacter2.SetActive(true);
+        subMaskCharacter2.SetActive(false);
+    }
+    public void TagMask2()
+    {
+        mainMaskCharacter1.SetActive(true);
+        subMaskCharacter1.SetActive(false);
+        mainMaskCharacter2.SetActive(false);
+        subMaskCharacter2.SetActive(true);
+    }
+    public void TagHpEp()
+    {
+        float temp = mainPlayerHp;
+        mainPlayerHp = subPlayerHp;
+        subPlayerHp = temp;
+
+        temp = GameManager.instance.mainPlayerEp;
+        mainPlayerEp = subPlayerEp;
+        subPlayerEp = temp;
+
+        temp = GameManager.instance.mainPlayerMaxHp;
+        mainPlayerMaxHp = subPlayerMaxHp;
+        subPlayerMaxHp = temp;
+
+        temp = GameManager.instance.mainPlayerMaxEp;
+        mainPlayerMaxEp = subPlayerMaxEp;
+        subPlayerMaxEp = temp;
+    }
+    public void EffectFillBar()
+    {
+        float temp = mainPlayerHp;
+        mainPlayerHp = 0;
+        if (mainPlayerHp < temp)
+        {
+            mainPlayerHp += 1.0f;
+        }
+        temp = mainPlayerEp;
+        mainPlayerEp = 0;
+        if (mainPlayerEp < temp)
+        {
+            mainPlayerEp += 1.0f;
+        }
+        temp = subPlayerHp;
+        subPlayerHp = 0;
+        if (subPlayerHp < temp)
+        {
+            subPlayerHp += 1.0f;
+        }
+        temp = subPlayerEp;
+        subPlayerEp = 0;
+        if (subPlayerEp < temp)
+        {
+            subPlayerEp += 1.0f;
+        }
+    }
 }

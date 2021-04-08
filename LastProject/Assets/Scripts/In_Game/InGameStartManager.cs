@@ -15,72 +15,112 @@ public class InGameStartManager : MonoBehaviour
     [SerializeField] GameObject subJadeMask;
     [SerializeField] GameObject subLeinaMask;
     [SerializeField] GameObject subEvaMask;
+
+    [SerializeField] GameObject mainKarmenSkillSlot;
+    [SerializeField] GameObject mainJadeSkillSlot;
+    [SerializeField] GameObject mainLeinaSkillSlot;
+    [SerializeField] GameObject mainEvaSkillSlot;
+
+    [SerializeField] GameObject subKarmenSkillSlot;
+    [SerializeField] GameObject subJadeSkillSlot;
+    [SerializeField] GameObject subLeinaSkillSlot;
+    [SerializeField] GameObject subEvaSkillSlot;
+
+
     void Start()
+    {
+        InitCharacterSetting();
+        StartCoroutine(FillbarAndStageInfo());
+    }
+
+    void Update()
+    {
+        FillBar();
+    }
+
+    void InitCharacterSetting()
     {
         if (GameManager.instance.isMainKarmen)
         {
             SetHp(500, true);
             SetEp(150, true);
-            GameManager.instance.mainMask = mainKarmenMask;
-            GameManager.instance.mainMask.SetActive(true);
+            GameManager.instance.mainMaskCharacter1 = mainKarmenMask;
+            GameManager.instance.subMaskCharacter1 = subKarmenMask;
+            GameManager.instance.mainMaskCharacter1.SetActive(true);
+            GameManager.instance.mainCharacter1SkillSlot = mainKarmenSkillSlot;
+            GameManager.instance.subCharacter1SkillSlot = subKarmenSkillSlot;
         }
         else if (GameManager.instance.isMainJade)
         {
             SetHp(400, true);
             SetEp(200, true);
-            GameManager.instance.mainMask = mainJadeMask;
-            GameManager.instance.mainMask.SetActive(true);
+            GameManager.instance.mainMaskCharacter1 = mainJadeMask;
+            GameManager.instance.subMaskCharacter1 = subJadeMask;
+            GameManager.instance.mainMaskCharacter1.SetActive(true);
+            GameManager.instance.mainCharacter1SkillSlot = mainJadeSkillSlot;
+            GameManager.instance.subCharacter1SkillSlot = subJadeSkillSlot;
         }
         else if (GameManager.instance.isMainLeina)
         {
             SetHp(400, true);
             SetEp(200, true);
-            GameManager.instance.mainMask = mainLeinaMask;
-            GameManager.instance.mainMask.SetActive(true);
+            GameManager.instance.mainMaskCharacter1 = mainLeinaMask;
+            GameManager.instance.subMaskCharacter1 = subLeinaMask;
+            GameManager.instance.mainMaskCharacter1.SetActive(true);
+            GameManager.instance.mainCharacter1SkillSlot = mainLeinaSkillSlot;
+            GameManager.instance.subCharacter1SkillSlot = subLeinaSkillSlot;
         }
         else if (GameManager.instance.isMainEva)
         {
             SetHp(600, true);
             SetEp(150, true);
-            GameManager.instance.mainMask = mainEvaMask;
-            GameManager.instance.mainMask.SetActive(true);
+            GameManager.instance.mainMaskCharacter1 = mainEvaMask;
+            GameManager.instance.subMaskCharacter1 = subEvaMask;
+            GameManager.instance.mainMaskCharacter1.SetActive(true);
+            GameManager.instance.mainCharacter1SkillSlot = mainEvaSkillSlot;
+            GameManager.instance.subCharacter1SkillSlot = subEvaSkillSlot;
         }
 
         if (GameManager.instance.isSubKarmen)
         {
             SetHp(500, false);
             SetEp(150, false);
-            GameManager.instance.subMask = subKarmenMask;
-            GameManager.instance.subMask.SetActive(true);
+            GameManager.instance.mainMaskCharacter2 = mainKarmenMask;
+            GameManager.instance.subMaskCharacter2 = subKarmenMask;
+            GameManager.instance.subMaskCharacter2.SetActive(true);
+            GameManager.instance.mainCharacter2SkillSlot = mainKarmenSkillSlot;
+            GameManager.instance.subCharacter2SkillSlot = subKarmenSkillSlot;
         }
         else if (GameManager.instance.isSubJade)
         {
             SetHp(400, false);
             SetEp(200, false);
-            GameManager.instance.subMask = subJadeMask;
-            GameManager.instance.subMask.SetActive(true);
+            GameManager.instance.mainMaskCharacter2 = mainJadeMask;
+            GameManager.instance.subMaskCharacter2 = subJadeMask;
+            GameManager.instance.subMaskCharacter2.SetActive(true);
+            GameManager.instance.mainCharacter2SkillSlot = mainJadeSkillSlot;
+            GameManager.instance.subCharacter2SkillSlot = subJadeSkillSlot;
         }
         else if (GameManager.instance.isSubLeina)
         {
             SetHp(400, false);
             SetEp(200, false);
-            GameManager.instance.subMask = subLeinaMask;
-            GameManager.instance.subMask.SetActive(true);
+            GameManager.instance.mainMaskCharacter2 = mainLeinaMask;
+            GameManager.instance.subMaskCharacter2 = subLeinaMask;
+            GameManager.instance.subMaskCharacter2.SetActive(true);
+            GameManager.instance.mainCharacter2SkillSlot = mainLeinaSkillSlot;
+            GameManager.instance.subCharacter2SkillSlot = subLeinaSkillSlot;
         }
         else if (GameManager.instance.isSubEva)
         {
             SetHp(600, false);
             SetEp(150, false);
-            GameManager.instance.subMask = subEvaMask;
-            GameManager.instance.subMask.SetActive(true);
+            GameManager.instance.mainMaskCharacter2 = mainEvaMask;
+            GameManager.instance.subMaskCharacter2 = subEvaMask;
+            GameManager.instance.subMaskCharacter2.SetActive(true);
+            GameManager.instance.mainCharacter2SkillSlot = mainEvaSkillSlot;
+            GameManager.instance.subCharacter2SkillSlot = subEvaSkillSlot;
         }
-
-        StartCoroutine(FillbarAndStageInfo());
-    }
-
-    void Update()
-    {
-        FillHpBar();
     }
 
     void SetHp(float hp, bool isMain)
@@ -106,7 +146,7 @@ public class InGameStartManager : MonoBehaviour
         }
     }
 
-    void FillHpBar()
+    void FillBar()
     {
         if (GameManager.instance.mainPlayerHp < GameManager.instance.mainPlayerMaxHp)
         {
@@ -128,7 +168,6 @@ public class InGameStartManager : MonoBehaviour
 
     IEnumerator FillbarAndStageInfo()
     {
-        FillHpBar();
         yield return new WaitForSeconds(0.5f);
         stageInformation.SetActive(true);
         yield return new WaitForSeconds(1.5f);

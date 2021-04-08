@@ -21,21 +21,10 @@ public class CharacterSelect : MonoBehaviour
     [SerializeField] GameObject backAssaultRifle;
     [SerializeField] GameObject handAssaultRifle;
 
-
     private int mainOrsub;  // main: 1 sub: 2
 
     void Start()
     {
-        GameManager.instance.isMainKarmen = false;
-        GameManager.instance.isMainJade = false;
-        GameManager.instance.isMainLeina = false;
-        GameManager.instance.isMainEva = false;
-
-        GameManager.instance.isSubKarmen = false;
-        GameManager.instance.isSubJade = false;
-        GameManager.instance.isSubLeina = false;
-        GameManager.instance.isSubEva = false;
-
         mainOrsub = 1;
     }
 
