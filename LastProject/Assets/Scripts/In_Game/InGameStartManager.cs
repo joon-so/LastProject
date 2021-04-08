@@ -49,6 +49,7 @@ public class InGameStartManager : MonoBehaviour
             GameManager.instance.mainMaskCharacter1.SetActive(true);
             GameManager.instance.mainCharacter1SkillSlot = mainKarmenSkillSlot;
             GameManager.instance.subCharacter1SkillSlot = subKarmenSkillSlot;
+            GameManager.instance.mainCharacter1SkillSlot.SetActive(true);
         }
         else if (GameManager.instance.isMainJade)
         {
@@ -59,6 +60,7 @@ public class InGameStartManager : MonoBehaviour
             GameManager.instance.mainMaskCharacter1.SetActive(true);
             GameManager.instance.mainCharacter1SkillSlot = mainJadeSkillSlot;
             GameManager.instance.subCharacter1SkillSlot = subJadeSkillSlot;
+            GameManager.instance.mainCharacter1SkillSlot.SetActive(true);
         }
         else if (GameManager.instance.isMainLeina)
         {
@@ -69,6 +71,7 @@ public class InGameStartManager : MonoBehaviour
             GameManager.instance.mainMaskCharacter1.SetActive(true);
             GameManager.instance.mainCharacter1SkillSlot = mainLeinaSkillSlot;
             GameManager.instance.subCharacter1SkillSlot = subLeinaSkillSlot;
+            GameManager.instance.mainCharacter1SkillSlot.SetActive(true);
         }
         else if (GameManager.instance.isMainEva)
         {
@@ -79,6 +82,7 @@ public class InGameStartManager : MonoBehaviour
             GameManager.instance.mainMaskCharacter1.SetActive(true);
             GameManager.instance.mainCharacter1SkillSlot = mainEvaSkillSlot;
             GameManager.instance.subCharacter1SkillSlot = subEvaSkillSlot;
+            GameManager.instance.mainCharacter1SkillSlot.SetActive(true);
         }
 
         if (GameManager.instance.isSubKarmen)
@@ -90,6 +94,7 @@ public class InGameStartManager : MonoBehaviour
             GameManager.instance.subMaskCharacter2.SetActive(true);
             GameManager.instance.mainCharacter2SkillSlot = mainKarmenSkillSlot;
             GameManager.instance.subCharacter2SkillSlot = subKarmenSkillSlot;
+            GameManager.instance.subCharacter2SkillSlot.SetActive(true);
         }
         else if (GameManager.instance.isSubJade)
         {
@@ -100,6 +105,7 @@ public class InGameStartManager : MonoBehaviour
             GameManager.instance.subMaskCharacter2.SetActive(true);
             GameManager.instance.mainCharacter2SkillSlot = mainJadeSkillSlot;
             GameManager.instance.subCharacter2SkillSlot = subJadeSkillSlot;
+            GameManager.instance.subCharacter2SkillSlot.SetActive(true);
         }
         else if (GameManager.instance.isSubLeina)
         {
@@ -110,6 +116,7 @@ public class InGameStartManager : MonoBehaviour
             GameManager.instance.subMaskCharacter2.SetActive(true);
             GameManager.instance.mainCharacter2SkillSlot = mainLeinaSkillSlot;
             GameManager.instance.subCharacter2SkillSlot = subLeinaSkillSlot;
+            GameManager.instance.subCharacter2SkillSlot.SetActive(true);
         }
         else if (GameManager.instance.isSubEva)
         {
@@ -120,6 +127,7 @@ public class InGameStartManager : MonoBehaviour
             GameManager.instance.subMaskCharacter2.SetActive(true);
             GameManager.instance.mainCharacter2SkillSlot = mainEvaSkillSlot;
             GameManager.instance.subCharacter2SkillSlot = subEvaSkillSlot;
+            GameManager.instance.subCharacter2SkillSlot.SetActive(true);
         }
     }
 

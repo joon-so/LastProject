@@ -819,7 +819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d82a181a2345794b8eef90b68bd7376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TargetSlot: {fileID: 1836114591}
+  m_TargetSlot: {fileID: 0}
   m_TargetGraphic: {fileID: 50956603}
   m_TargetText: {fileID: 0}
   m_FinishGraphic: {fileID: 0}
@@ -1255,7 +1255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &79176970
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1883,7 +1883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d82a181a2345794b8eef90b68bd7376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TargetSlot: {fileID: 1657093834}
+  m_TargetSlot: {fileID: 0}
   m_TargetGraphic: {fileID: 99019895}
   m_TargetText: {fileID: 0}
   m_FinishGraphic: {fileID: 0}
@@ -2202,7 +2202,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!222 &107815894
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4191,7 +4191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d82a181a2345794b8eef90b68bd7376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TargetSlot: {fileID: 631647084}
+  m_TargetSlot: {fileID: 0}
   m_TargetGraphic: {fileID: 201993082}
   m_TargetText: {fileID: 0}
   m_FinishGraphic: {fileID: 0}
@@ -4619,7 +4619,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d82a181a2345794b8eef90b68bd7376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TargetSlot: {fileID: 1537519998}
+  m_TargetSlot: {fileID: 0}
   m_TargetGraphic: {fileID: 246919532}
   m_TargetText: {fileID: 0}
   m_FinishGraphic: {fileID: 0}
@@ -5078,7 +5078,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d82a181a2345794b8eef90b68bd7376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TargetSlot: {fileID: 902747397}
+  m_TargetSlot: {fileID: 0}
   m_TargetGraphic: {fileID: 273133624}
   m_TargetText: {fileID: 0}
   m_FinishGraphic: {fileID: 0}
@@ -5235,7 +5235,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 275655087}
-  - component: {fileID: 275655088}
   - component: {fileID: 275655093}
   - component: {fileID: 275655092}
   - component: {fileID: 275655091}
@@ -5272,55 +5271,6 @@ RectTransform:
   m_AnchoredPosition: {x: -322, y: 21}
   m_SizeDelta: {x: 142, y: 142}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &275655088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 275655086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3586bc509b21ba342a225296e6d60f14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iconGraphic: {fileID: 494452069}
-  m_CloneTarget: {fileID: 494452067}
-  m_DragAndDropEnabled: 1
-  m_IsStatic: 0
-  m_AllowThrowAway: 1
-  m_DragKeyModifier: 0
-  m_TooltipEnabled: 1
-  m_TooltipDelay: 1
-  hoverTransition: 1
-  hoverTargetGraphic: {fileID: 1204533732}
-  hoverNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  hoverHighlightColor: {r: 1, g: 1, b: 1, a: 1}
-  hoverTransitionDuration: 0.1
-  hoverOverrideSprite: {fileID: 0}
-  hoverNormalTrigger: Normal
-  hoverHighlightTrigger: Highlighted
-  pressTransition: 1
-  pressTargetGraphic: {fileID: 1317471543}
-  pressNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  pressPressColor: {r: 1, g: 1, b: 1, a: 1}
-  pressTransitionDuration: 0.1
-  pressOverrideSprite: {fileID: 0}
-  pressNormalTrigger: Normal
-  pressPressTrigger: Pressed
-  m_PressTransitionInstaOut: 0
-  m_PressForceHoverNormal: 1
-  m_SlotGroup: 1
-  m_ID: 3
-  onAssign:
-    m_PersistentCalls:
-      m_Calls: []
-  onUnassign:
-    m_PersistentCalls:
-      m_Calls: []
-  onClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &275655089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5333,7 +5283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffc2cdd6e3425b0449655905c020bc2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slot: {fileID: 275655088}
+  slot: {fileID: 0}
   assignSpell: 3
 --- !u!114 &275655090
 MonoBehaviour:
@@ -7126,7 +7076,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!222 &368542782
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7201,7 +7151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!222 &373333730
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7883,7 +7833,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 393003746}
-  - component: {fileID: 393003747}
   - component: {fileID: 393003752}
   - component: {fileID: 393003751}
   - component: {fileID: 393003750}
@@ -7920,55 +7869,6 @@ RectTransform:
   m_AnchoredPosition: {x: -450, y: 21}
   m_SizeDelta: {x: 142, y: 142}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &393003747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 393003745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3586bc509b21ba342a225296e6d60f14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iconGraphic: {fileID: 425830811}
-  m_CloneTarget: {fileID: 425830809}
-  m_DragAndDropEnabled: 1
-  m_IsStatic: 0
-  m_AllowThrowAway: 1
-  m_DragKeyModifier: 0
-  m_TooltipEnabled: 1
-  m_TooltipDelay: 1
-  hoverTransition: 1
-  hoverTargetGraphic: {fileID: 975942712}
-  hoverNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  hoverHighlightColor: {r: 1, g: 1, b: 1, a: 1}
-  hoverTransitionDuration: 0.1
-  hoverOverrideSprite: {fileID: 0}
-  hoverNormalTrigger: Normal
-  hoverHighlightTrigger: Highlighted
-  pressTransition: 1
-  pressTargetGraphic: {fileID: 1214574408}
-  pressNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  pressPressColor: {r: 1, g: 1, b: 1, a: 1}
-  pressTransitionDuration: 0.1
-  pressOverrideSprite: {fileID: 0}
-  pressNormalTrigger: Normal
-  pressPressTrigger: Pressed
-  m_PressTransitionInstaOut: 0
-  m_PressForceHoverNormal: 1
-  m_SlotGroup: 1
-  m_ID: 2
-  onAssign:
-    m_PersistentCalls:
-      m_Calls: []
-  onUnassign:
-    m_PersistentCalls:
-      m_Calls: []
-  onClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &393003748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7981,7 +7881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffc2cdd6e3425b0449655905c020bc2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slot: {fileID: 393003747}
+  slot: {fileID: 0}
   assignSpell: 2
 --- !u!114 &393003749
 MonoBehaviour:
@@ -8776,7 +8676,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!222 &425830810
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9775,7 +9675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d82a181a2345794b8eef90b68bd7376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TargetSlot: {fileID: 275655088}
+  m_TargetSlot: {fileID: 0}
   m_TargetGraphic: {fileID: 467946862}
   m_TargetText: {fileID: 0}
   m_FinishGraphic: {fileID: 0}
@@ -10537,7 +10437,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!222 &494452068
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10688,7 +10588,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!222 &504991573
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13070,7 +12970,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 631647083}
-  - component: {fileID: 631647084}
   - component: {fileID: 631647089}
   - component: {fileID: 631647088}
   - component: {fileID: 631647087}
@@ -13107,55 +13006,6 @@ RectTransform:
   m_AnchoredPosition: {x: -194, y: 21}
   m_SizeDelta: {x: 142, y: 142}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &631647084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 631647082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3586bc509b21ba342a225296e6d60f14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iconGraphic: {fileID: 504991574}
-  m_CloneTarget: {fileID: 504991572}
-  m_DragAndDropEnabled: 1
-  m_IsStatic: 0
-  m_AllowThrowAway: 1
-  m_DragKeyModifier: 0
-  m_TooltipEnabled: 1
-  m_TooltipDelay: 1
-  hoverTransition: 1
-  hoverTargetGraphic: {fileID: 1121856360}
-  hoverNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  hoverHighlightColor: {r: 1, g: 1, b: 1, a: 1}
-  hoverTransitionDuration: 0.1
-  hoverOverrideSprite: {fileID: 0}
-  hoverNormalTrigger: Normal
-  hoverHighlightTrigger: Highlighted
-  pressTransition: 1
-  pressTargetGraphic: {fileID: 1194078186}
-  pressNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  pressPressColor: {r: 1, g: 1, b: 1, a: 1}
-  pressTransitionDuration: 0.1
-  pressOverrideSprite: {fileID: 0}
-  pressNormalTrigger: Normal
-  pressPressTrigger: Pressed
-  m_PressTransitionInstaOut: 0
-  m_PressForceHoverNormal: 1
-  m_SlotGroup: 1
-  m_ID: 4
-  onAssign:
-    m_PersistentCalls:
-      m_Calls: []
-  onUnassign:
-    m_PersistentCalls:
-      m_Calls: []
-  onClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &631647085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13168,7 +13018,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffc2cdd6e3425b0449655905c020bc2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slot: {fileID: 631647084}
+  slot: {fileID: 0}
   assignSpell: 4
 --- !u!114 &631647086
 MonoBehaviour:
@@ -15410,7 +15260,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &752814562
 RectTransform:
   m_ObjectHideFlags: 0
@@ -15520,7 +15370,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!222 &759320517
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15893,7 +15743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d82a181a2345794b8eef90b68bd7376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TargetSlot: {fileID: 1075926677}
+  m_TargetSlot: {fileID: 0}
   m_TargetGraphic: {fileID: 768886552}
   m_TargetText: {fileID: 0}
   m_FinishGraphic: {fileID: 0}
@@ -16302,7 +16152,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 803329301}
-  - component: {fileID: 803329302}
   - component: {fileID: 803329307}
   - component: {fileID: 803329306}
   - component: {fileID: 803329305}
@@ -16339,55 +16188,6 @@ RectTransform:
   m_AnchoredPosition: {x: -194, y: 21}
   m_SizeDelta: {x: 142, y: 142}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &803329302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 803329300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3586bc509b21ba342a225296e6d60f14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iconGraphic: {fileID: 107815895}
-  m_CloneTarget: {fileID: 107815893}
-  m_DragAndDropEnabled: 1
-  m_IsStatic: 0
-  m_AllowThrowAway: 1
-  m_DragKeyModifier: 0
-  m_TooltipEnabled: 1
-  m_TooltipDelay: 1
-  hoverTransition: 1
-  hoverTargetGraphic: {fileID: 930677269}
-  hoverNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  hoverHighlightColor: {r: 1, g: 1, b: 1, a: 1}
-  hoverTransitionDuration: 0.1
-  hoverOverrideSprite: {fileID: 0}
-  hoverNormalTrigger: Normal
-  hoverHighlightTrigger: Highlighted
-  pressTransition: 1
-  pressTargetGraphic: {fileID: 1498799007}
-  pressNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  pressPressColor: {r: 1, g: 1, b: 1, a: 1}
-  pressTransitionDuration: 0.1
-  pressOverrideSprite: {fileID: 0}
-  pressNormalTrigger: Normal
-  pressPressTrigger: Pressed
-  m_PressTransitionInstaOut: 0
-  m_PressForceHoverNormal: 1
-  m_SlotGroup: 1
-  m_ID: 4
-  onAssign:
-    m_PersistentCalls:
-      m_Calls: []
-  onUnassign:
-    m_PersistentCalls:
-      m_Calls: []
-  onClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &803329303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16400,7 +16200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffc2cdd6e3425b0449655905c020bc2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slot: {fileID: 803329302}
+  slot: {fileID: 0}
   assignSpell: 4
 --- !u!114 &803329304
 MonoBehaviour:
@@ -18318,7 +18118,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 902747396}
-  - component: {fileID: 902747397}
   - component: {fileID: 902747402}
   - component: {fileID: 902747401}
   - component: {fileID: 902747400}
@@ -18355,55 +18154,6 @@ RectTransform:
   m_AnchoredPosition: {x: -450, y: 21}
   m_SizeDelta: {x: 142, y: 142}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &902747397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 902747395}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3586bc509b21ba342a225296e6d60f14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iconGraphic: {fileID: 1188032705}
-  m_CloneTarget: {fileID: 1188032703}
-  m_DragAndDropEnabled: 1
-  m_IsStatic: 0
-  m_AllowThrowAway: 1
-  m_DragKeyModifier: 0
-  m_TooltipEnabled: 1
-  m_TooltipDelay: 1
-  hoverTransition: 1
-  hoverTargetGraphic: {fileID: 1158813051}
-  hoverNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  hoverHighlightColor: {r: 1, g: 1, b: 1, a: 1}
-  hoverTransitionDuration: 0.1
-  hoverOverrideSprite: {fileID: 0}
-  hoverNormalTrigger: Normal
-  hoverHighlightTrigger: Highlighted
-  pressTransition: 1
-  pressTargetGraphic: {fileID: 1971190117}
-  pressNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  pressPressColor: {r: 1, g: 1, b: 1, a: 1}
-  pressTransitionDuration: 0.1
-  pressOverrideSprite: {fileID: 0}
-  pressNormalTrigger: Normal
-  pressPressTrigger: Pressed
-  m_PressTransitionInstaOut: 0
-  m_PressForceHoverNormal: 1
-  m_SlotGroup: 1
-  m_ID: 2
-  onAssign:
-    m_PersistentCalls:
-      m_Calls: []
-  onUnassign:
-    m_PersistentCalls:
-      m_Calls: []
-  onClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &902747398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18416,7 +18166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffc2cdd6e3425b0449655905c020bc2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slot: {fileID: 902747397}
+  slot: {fileID: 0}
   assignSpell: 2
 --- !u!114 &902747399
 MonoBehaviour:
@@ -18730,7 +18480,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!222 &916014428
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -20059,7 +19809,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 984569532}
-  - component: {fileID: 984569533}
   - component: {fileID: 984569538}
   - component: {fileID: 984569537}
   - component: {fileID: 984569536}
@@ -20096,55 +19845,6 @@ RectTransform:
   m_AnchoredPosition: {x: -450, y: 21}
   m_SizeDelta: {x: 142, y: 142}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &984569533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 984569531}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3586bc509b21ba342a225296e6d60f14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iconGraphic: {fileID: 1021217417}
-  m_CloneTarget: {fileID: 1021217415}
-  m_DragAndDropEnabled: 1
-  m_IsStatic: 0
-  m_AllowThrowAway: 1
-  m_DragKeyModifier: 0
-  m_TooltipEnabled: 1
-  m_TooltipDelay: 1
-  hoverTransition: 1
-  hoverTargetGraphic: {fileID: 976323065}
-  hoverNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  hoverHighlightColor: {r: 1, g: 1, b: 1, a: 1}
-  hoverTransitionDuration: 0.1
-  hoverOverrideSprite: {fileID: 0}
-  hoverNormalTrigger: Normal
-  hoverHighlightTrigger: Highlighted
-  pressTransition: 1
-  pressTargetGraphic: {fileID: 600512282}
-  pressNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  pressPressColor: {r: 1, g: 1, b: 1, a: 1}
-  pressTransitionDuration: 0.1
-  pressOverrideSprite: {fileID: 0}
-  pressNormalTrigger: Normal
-  pressPressTrigger: Pressed
-  m_PressTransitionInstaOut: 0
-  m_PressForceHoverNormal: 1
-  m_SlotGroup: 1
-  m_ID: 2
-  onAssign:
-    m_PersistentCalls:
-      m_Calls: []
-  onUnassign:
-    m_PersistentCalls:
-      m_Calls: []
-  onClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &984569534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20157,7 +19857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffc2cdd6e3425b0449655905c020bc2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slot: {fileID: 984569533}
+  slot: {fileID: 0}
   assignSpell: 2
 --- !u!114 &984569535
 MonoBehaviour:
@@ -21148,7 +20848,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!222 &1021217416
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -21177,7 +20877,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: e3ffcbec8ac42fe4eba3a00dd394f67f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -23508,7 +23208,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1075926676}
-  - component: {fileID: 1075926677}
   - component: {fileID: 1075926682}
   - component: {fileID: 1075926681}
   - component: {fileID: 1075926680}
@@ -23545,55 +23244,6 @@ RectTransform:
   m_AnchoredPosition: {x: -322, y: 21}
   m_SizeDelta: {x: 142, y: 142}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &1075926677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1075926675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3586bc509b21ba342a225296e6d60f14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iconGraphic: {fileID: 1466482333}
-  m_CloneTarget: {fileID: 1466482331}
-  m_DragAndDropEnabled: 1
-  m_IsStatic: 0
-  m_AllowThrowAway: 1
-  m_DragKeyModifier: 0
-  m_TooltipEnabled: 1
-  m_TooltipDelay: 1
-  hoverTransition: 1
-  hoverTargetGraphic: {fileID: 765383623}
-  hoverNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  hoverHighlightColor: {r: 1, g: 1, b: 1, a: 1}
-  hoverTransitionDuration: 0.1
-  hoverOverrideSprite: {fileID: 0}
-  hoverNormalTrigger: Normal
-  hoverHighlightTrigger: Highlighted
-  pressTransition: 1
-  pressTargetGraphic: {fileID: 1973852331}
-  pressNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  pressPressColor: {r: 1, g: 1, b: 1, a: 1}
-  pressTransitionDuration: 0.1
-  pressOverrideSprite: {fileID: 0}
-  pressNormalTrigger: Normal
-  pressPressTrigger: Pressed
-  m_PressTransitionInstaOut: 0
-  m_PressForceHoverNormal: 1
-  m_SlotGroup: 1
-  m_ID: 3
-  onAssign:
-    m_PersistentCalls:
-      m_Calls: []
-  onUnassign:
-    m_PersistentCalls:
-      m_Calls: []
-  onClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1075926678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23606,7 +23256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffc2cdd6e3425b0449655905c020bc2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slot: {fileID: 1075926677}
+  slot: {fileID: 0}
   assignSpell: 3
 --- !u!114 &1075926679
 MonoBehaviour:
@@ -25591,7 +25241,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1169273045}
-  - component: {fileID: 1169273046}
   - component: {fileID: 1169273051}
   - component: {fileID: 1169273050}
   - component: {fileID: 1169273049}
@@ -25628,55 +25277,6 @@ RectTransform:
   m_AnchoredPosition: {x: -322, y: 21}
   m_SizeDelta: {x: 142, y: 142}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &1169273046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1169273044}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3586bc509b21ba342a225296e6d60f14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iconGraphic: {fileID: 916014429}
-  m_CloneTarget: {fileID: 916014427}
-  m_DragAndDropEnabled: 1
-  m_IsStatic: 0
-  m_AllowThrowAway: 1
-  m_DragKeyModifier: 0
-  m_TooltipEnabled: 1
-  m_TooltipDelay: 1
-  hoverTransition: 1
-  hoverTargetGraphic: {fileID: 202475888}
-  hoverNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  hoverHighlightColor: {r: 1, g: 1, b: 1, a: 1}
-  hoverTransitionDuration: 0.1
-  hoverOverrideSprite: {fileID: 0}
-  hoverNormalTrigger: Normal
-  hoverHighlightTrigger: Highlighted
-  pressTransition: 1
-  pressTargetGraphic: {fileID: 1824469133}
-  pressNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  pressPressColor: {r: 1, g: 1, b: 1, a: 1}
-  pressTransitionDuration: 0.1
-  pressOverrideSprite: {fileID: 0}
-  pressNormalTrigger: Normal
-  pressPressTrigger: Pressed
-  m_PressTransitionInstaOut: 0
-  m_PressForceHoverNormal: 1
-  m_SlotGroup: 1
-  m_ID: 3
-  onAssign:
-    m_PersistentCalls:
-      m_Calls: []
-  onUnassign:
-    m_PersistentCalls:
-      m_Calls: []
-  onClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1169273047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25689,7 +25289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffc2cdd6e3425b0449655905c020bc2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slot: {fileID: 1169273046}
+  slot: {fileID: 0}
   assignSpell: 3
 --- !u!114 &1169273048
 MonoBehaviour:
@@ -26407,7 +26007,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!222 &1188032704
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -27542,7 +27142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d82a181a2345794b8eef90b68bd7376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TargetSlot: {fileID: 393003747}
+  m_TargetSlot: {fileID: 0}
   m_TargetGraphic: {fileID: 1239846578}
   m_TargetText: {fileID: 0}
   m_FinishGraphic: {fileID: 0}
@@ -30793,7 +30393,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1381543990}
-  - component: {fileID: 1381543991}
   - component: {fileID: 1381543995}
   - component: {fileID: 1381543994}
   - component: {fileID: 1381543993}
@@ -30829,55 +30428,6 @@ RectTransform:
   m_AnchoredPosition: {x: -384, y: 0}
   m_SizeDelta: {x: 142, y: 142}
   m_Pivot: {x: 1, y: 1}
---- !u!114 &1381543991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1381543989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3586bc509b21ba342a225296e6d60f14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iconGraphic: {fileID: 1737357432}
-  m_CloneTarget: {fileID: 1737357430}
-  m_DragAndDropEnabled: 1
-  m_IsStatic: 0
-  m_AllowThrowAway: 1
-  m_DragKeyModifier: 0
-  m_TooltipEnabled: 1
-  m_TooltipDelay: 1
-  hoverTransition: 1
-  hoverTargetGraphic: {fileID: 1157596109}
-  hoverNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  hoverHighlightColor: {r: 1, g: 1, b: 1, a: 1}
-  hoverTransitionDuration: 0.1
-  hoverOverrideSprite: {fileID: 0}
-  hoverNormalTrigger: Normal
-  hoverHighlightTrigger: Highlighted
-  pressTransition: 1
-  pressTargetGraphic: {fileID: 215359273}
-  pressNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  pressPressColor: {r: 1, g: 1, b: 1, a: 1}
-  pressTransitionDuration: 0.1
-  pressOverrideSprite: {fileID: 0}
-  pressNormalTrigger: Normal
-  pressPressTrigger: Pressed
-  m_PressTransitionInstaOut: 0
-  m_PressForceHoverNormal: 1
-  m_SlotGroup: 1
-  m_ID: 5
-  onAssign:
-    m_PersistentCalls:
-      m_Calls: []
-  onUnassign:
-    m_PersistentCalls:
-      m_Calls: []
-  onClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1381543992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31163,7 +30713,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d82a181a2345794b8eef90b68bd7376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TargetSlot: {fileID: 1580534930}
+  m_TargetSlot: {fileID: 0}
   m_TargetGraphic: {fileID: 1386342361}
   m_TargetText: {fileID: 0}
   m_FinishGraphic: {fileID: 0}
@@ -32252,7 +31802,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!222 &1466482332
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -32625,7 +32175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d82a181a2345794b8eef90b68bd7376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TargetSlot: {fileID: 1381543991}
+  m_TargetSlot: {fileID: 0}
   m_TargetGraphic: {fileID: 1491553767}
   m_TargetText: {fileID: 0}
   m_FinishGraphic: {fileID: 0}
@@ -33019,7 +32569,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!222 &1510016624
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -33048,7 +32598,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: f590cc30a09ff7d43b1f4cc65d7926f7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -33658,7 +33208,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1537519997}
-  - component: {fileID: 1537519998}
   - component: {fileID: 1537520003}
   - component: {fileID: 1537520002}
   - component: {fileID: 1537520001}
@@ -33695,55 +33244,6 @@ RectTransform:
   m_AnchoredPosition: {x: -194, y: 21}
   m_SizeDelta: {x: 142, y: 142}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &1537519998
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1537519996}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3586bc509b21ba342a225296e6d60f14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iconGraphic: {fileID: 373333731}
-  m_CloneTarget: {fileID: 373333729}
-  m_DragAndDropEnabled: 1
-  m_IsStatic: 0
-  m_AllowThrowAway: 1
-  m_DragKeyModifier: 0
-  m_TooltipEnabled: 1
-  m_TooltipDelay: 1
-  hoverTransition: 1
-  hoverTargetGraphic: {fileID: 969203496}
-  hoverNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  hoverHighlightColor: {r: 1, g: 1, b: 1, a: 1}
-  hoverTransitionDuration: 0.1
-  hoverOverrideSprite: {fileID: 0}
-  hoverNormalTrigger: Normal
-  hoverHighlightTrigger: Highlighted
-  pressTransition: 1
-  pressTargetGraphic: {fileID: 2018384309}
-  pressNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  pressPressColor: {r: 1, g: 1, b: 1, a: 1}
-  pressTransitionDuration: 0.1
-  pressOverrideSprite: {fileID: 0}
-  pressNormalTrigger: Normal
-  pressPressTrigger: Pressed
-  m_PressTransitionInstaOut: 0
-  m_PressForceHoverNormal: 1
-  m_SlotGroup: 1
-  m_ID: 4
-  onAssign:
-    m_PersistentCalls:
-      m_Calls: []
-  onUnassign:
-    m_PersistentCalls:
-      m_Calls: []
-  onClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1537519999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33756,7 +33256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffc2cdd6e3425b0449655905c020bc2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slot: {fileID: 1537519998}
+  slot: {fileID: 0}
   assignSpell: 4
 --- !u!114 &1537520000
 MonoBehaviour:
@@ -33883,7 +33383,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1555140157
 RectTransform:
   m_ObjectHideFlags: 0
@@ -34244,7 +33744,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1580534929}
-  - component: {fileID: 1580534930}
   - component: {fileID: 1580534934}
   - component: {fileID: 1580534933}
   - component: {fileID: 1580534932}
@@ -34280,55 +33779,6 @@ RectTransform:
   m_AnchoredPosition: {x: -256, y: 0}
   m_SizeDelta: {x: 142, y: 142}
   m_Pivot: {x: 1, y: 1}
---- !u!114 &1580534930
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1580534928}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3586bc509b21ba342a225296e6d60f14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iconGraphic: {fileID: 368542783}
-  m_CloneTarget: {fileID: 368542781}
-  m_DragAndDropEnabled: 1
-  m_IsStatic: 0
-  m_AllowThrowAway: 1
-  m_DragKeyModifier: 0
-  m_TooltipEnabled: 1
-  m_TooltipDelay: 1
-  hoverTransition: 1
-  hoverTargetGraphic: {fileID: 1377526923}
-  hoverNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  hoverHighlightColor: {r: 1, g: 1, b: 1, a: 1}
-  hoverTransitionDuration: 0.1
-  hoverOverrideSprite: {fileID: 0}
-  hoverNormalTrigger: Normal
-  hoverHighlightTrigger: Highlighted
-  pressTransition: 1
-  pressTargetGraphic: {fileID: 395434891}
-  pressNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  pressPressColor: {r: 1, g: 1, b: 1, a: 1}
-  pressTransitionDuration: 0.1
-  pressOverrideSprite: {fileID: 0}
-  pressNormalTrigger: Normal
-  pressPressTrigger: Pressed
-  m_PressTransitionInstaOut: 0
-  m_PressForceHoverNormal: 1
-  m_SlotGroup: 1
-  m_ID: 6
-  onAssign:
-    m_PersistentCalls:
-      m_Calls: []
-  onUnassign:
-    m_PersistentCalls:
-      m_Calls: []
-  onClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1580534931
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36146,7 +35596,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 241de5aedb1007c4c83ee1d38133dea3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f590cc30a09ff7d43b1f4cc65d7926f7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -36411,7 +35861,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1657093833}
-  - component: {fileID: 1657093834}
   - component: {fileID: 1657093839}
   - component: {fileID: 1657093838}
   - component: {fileID: 1657093837}
@@ -36448,55 +35897,6 @@ RectTransform:
   m_AnchoredPosition: {x: -194, y: 21}
   m_SizeDelta: {x: 142, y: 142}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &1657093834
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1657093832}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3586bc509b21ba342a225296e6d60f14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iconGraphic: {fileID: 1851351110}
-  m_CloneTarget: {fileID: 1851351108}
-  m_DragAndDropEnabled: 1
-  m_IsStatic: 0
-  m_AllowThrowAway: 1
-  m_DragKeyModifier: 0
-  m_TooltipEnabled: 1
-  m_TooltipDelay: 1
-  hoverTransition: 1
-  hoverTargetGraphic: {fileID: 1558228730}
-  hoverNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  hoverHighlightColor: {r: 1, g: 1, b: 1, a: 1}
-  hoverTransitionDuration: 0.1
-  hoverOverrideSprite: {fileID: 0}
-  hoverNormalTrigger: Normal
-  hoverHighlightTrigger: Highlighted
-  pressTransition: 1
-  pressTargetGraphic: {fileID: 1028977395}
-  pressNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  pressPressColor: {r: 1, g: 1, b: 1, a: 1}
-  pressTransitionDuration: 0.1
-  pressOverrideSprite: {fileID: 0}
-  pressNormalTrigger: Normal
-  pressPressTrigger: Pressed
-  m_PressTransitionInstaOut: 0
-  m_PressForceHoverNormal: 1
-  m_SlotGroup: 1
-  m_ID: 4
-  onAssign:
-    m_PersistentCalls:
-      m_Calls: []
-  onUnassign:
-    m_PersistentCalls:
-      m_Calls: []
-  onClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1657093835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36509,7 +35909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffc2cdd6e3425b0449655905c020bc2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slot: {fileID: 1657093834}
+  slot: {fileID: 0}
   assignSpell: 4
 --- !u!114 &1657093836
 MonoBehaviour:
@@ -36764,7 +36164,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1674610879
 RectTransform:
   m_ObjectHideFlags: 0
@@ -37005,7 +36405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d82a181a2345794b8eef90b68bd7376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TargetSlot: {fileID: 1169273046}
+  m_TargetSlot: {fileID: 0}
   m_TargetGraphic: {fileID: 1680556444}
   m_TargetText: {fileID: 0}
   m_FinishGraphic: {fileID: 0}
@@ -37176,7 +36576,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1697541936
 RectTransform:
   m_ObjectHideFlags: 0
@@ -37526,7 +36926,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1721289112
 RectTransform:
   m_ObjectHideFlags: 0
@@ -37765,7 +37165,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!222 &1737357431
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -38098,7 +37498,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1747509327}
-  - component: {fileID: 1747509328}
   - component: {fileID: 1747509333}
   - component: {fileID: 1747509332}
   - component: {fileID: 1747509331}
@@ -38135,55 +37534,6 @@ RectTransform:
   m_AnchoredPosition: {x: -450, y: 21}
   m_SizeDelta: {x: 142, y: 142}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &1747509328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1747509326}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3586bc509b21ba342a225296e6d60f14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iconGraphic: {fileID: 759320518}
-  m_CloneTarget: {fileID: 759320516}
-  m_DragAndDropEnabled: 1
-  m_IsStatic: 0
-  m_AllowThrowAway: 1
-  m_DragKeyModifier: 0
-  m_TooltipEnabled: 1
-  m_TooltipDelay: 1
-  hoverTransition: 1
-  hoverTargetGraphic: {fileID: 1119818345}
-  hoverNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  hoverHighlightColor: {r: 1, g: 1, b: 1, a: 1}
-  hoverTransitionDuration: 0.1
-  hoverOverrideSprite: {fileID: 0}
-  hoverNormalTrigger: Normal
-  hoverHighlightTrigger: Highlighted
-  pressTransition: 1
-  pressTargetGraphic: {fileID: 1945178059}
-  pressNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  pressPressColor: {r: 1, g: 1, b: 1, a: 1}
-  pressTransitionDuration: 0.1
-  pressOverrideSprite: {fileID: 0}
-  pressNormalTrigger: Normal
-  pressPressTrigger: Pressed
-  m_PressTransitionInstaOut: 0
-  m_PressForceHoverNormal: 1
-  m_SlotGroup: 1
-  m_ID: 2
-  onAssign:
-    m_PersistentCalls:
-      m_Calls: []
-  onUnassign:
-    m_PersistentCalls:
-      m_Calls: []
-  onClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1747509329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38196,7 +37546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffc2cdd6e3425b0449655905c020bc2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slot: {fileID: 1747509328}
+  slot: {fileID: 0}
   assignSpell: 2
 --- !u!114 &1747509330
 MonoBehaviour:
@@ -39305,7 +38655,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1836114590}
-  - component: {fileID: 1836114591}
   - component: {fileID: 1836114596}
   - component: {fileID: 1836114595}
   - component: {fileID: 1836114594}
@@ -39342,55 +38691,6 @@ RectTransform:
   m_AnchoredPosition: {x: -322, y: 21}
   m_SizeDelta: {x: 142, y: 142}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &1836114591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1836114589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3586bc509b21ba342a225296e6d60f14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iconGraphic: {fileID: 1510016625}
-  m_CloneTarget: {fileID: 1510016623}
-  m_DragAndDropEnabled: 1
-  m_IsStatic: 0
-  m_AllowThrowAway: 1
-  m_DragKeyModifier: 0
-  m_TooltipEnabled: 1
-  m_TooltipDelay: 1
-  hoverTransition: 1
-  hoverTargetGraphic: {fileID: 1294739592}
-  hoverNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  hoverHighlightColor: {r: 1, g: 1, b: 1, a: 1}
-  hoverTransitionDuration: 0.1
-  hoverOverrideSprite: {fileID: 0}
-  hoverNormalTrigger: Normal
-  hoverHighlightTrigger: Highlighted
-  pressTransition: 1
-  pressTargetGraphic: {fileID: 948183957}
-  pressNormalColor: {r: 1, g: 1, b: 1, a: 0}
-  pressPressColor: {r: 1, g: 1, b: 1, a: 1}
-  pressTransitionDuration: 0.1
-  pressOverrideSprite: {fileID: 0}
-  pressNormalTrigger: Normal
-  pressPressTrigger: Pressed
-  m_PressTransitionInstaOut: 0
-  m_PressForceHoverNormal: 1
-  m_SlotGroup: 1
-  m_ID: 3
-  onAssign:
-    m_PersistentCalls:
-      m_Calls: []
-  onUnassign:
-    m_PersistentCalls:
-      m_Calls: []
-  onClick:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1836114592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39403,7 +38703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffc2cdd6e3425b0449655905c020bc2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slot: {fileID: 1836114591}
+  slot: {fileID: 0}
   assignSpell: 3
 --- !u!114 &1836114593
 MonoBehaviour:
@@ -39627,7 +38927,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!222 &1851351109
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -40146,7 +39446,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1899285641
 RectTransform:
   m_ObjectHideFlags: 0
@@ -40847,7 +40147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d82a181a2345794b8eef90b68bd7376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TargetSlot: {fileID: 984569533}
+  m_TargetSlot: {fileID: 0}
   m_TargetGraphic: {fileID: 1941306976}
   m_TargetText: {fileID: 0}
   m_FinishGraphic: {fileID: 0}
@@ -42295,7 +41595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d82a181a2345794b8eef90b68bd7376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TargetSlot: {fileID: 1747509328}
+  m_TargetSlot: {fileID: 0}
   m_TargetGraphic: {fileID: 1989325998}
   m_TargetText: {fileID: 0}
   m_FinishGraphic: {fileID: 0}
@@ -42719,7 +42019,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 735deb1d753f1b340833443686deb837, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e3ffcbec8ac42fe4eba3a00dd394f67f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -44044,7 +43344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d82a181a2345794b8eef90b68bd7376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TargetSlot: {fileID: 803329302}
+  m_TargetSlot: {fileID: 0}
   m_TargetGraphic: {fileID: 2053469045}
   m_TargetText: {fileID: 0}
   m_FinishGraphic: {fileID: 0}
@@ -44177,7 +43477,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2062564774
 RectTransform:
   m_ObjectHideFlags: 0
