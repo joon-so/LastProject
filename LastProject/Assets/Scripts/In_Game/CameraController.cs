@@ -5,20 +5,17 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class CameraController : MonoBehaviour
 {
-    [SerializeField, Range(1f, 100f)] float distance = 50f;
+    [SerializeField, Range(1f, 100f)] float distance = 100;
     [SerializeField, Min(0f)] float focusRadius = 1f;
     [SerializeField, Range(0f, 1f)] float focusCentering = 0.5f;
-    
-    public Transform focus = null;
+
+    public Transform focus = default;
 
     Vector3 focusPoint;
 
-    void Awake()
-    {
-    }
-
     void Start()
     {
+        focus = GameManager.instance.character1.transform;
         focusPoint = focus.position;
     }
 

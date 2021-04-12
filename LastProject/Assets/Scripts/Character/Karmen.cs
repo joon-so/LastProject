@@ -12,13 +12,16 @@ public class Karmen : MonoBehaviour
     [SerializeField] GameObject effectQSkillStaff1 = null;
     [SerializeField] GameObject effectQSkillStaff2 = null;
 
+
     public float moveSpeed = 30.0f;
     public float dodgeCoolTime = 5.0f;
+
+    // 공격중에 다른 이벤트 못하게 선언하는 변수
+
     bool doAttack = false;
     bool motionEndCheck = true;
     bool comboContinue = true;
     bool isRun = false;
-    //float comboDelay = 0f;
 
     Vector3 vecTarget;
 
