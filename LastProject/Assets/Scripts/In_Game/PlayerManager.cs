@@ -134,7 +134,7 @@ public class PlayerManager : MonoBehaviour
         GameManager.instance.TagHpEp();
         GameManager.instance.EffectFillBar();
     }
-
+    
     void Zoom()
     {
         var scroll = Input.mouseScrollDelta;
