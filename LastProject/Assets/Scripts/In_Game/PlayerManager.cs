@@ -5,7 +5,8 @@ using UnityEngine.AI;
 
 public class PlayerManager : MonoBehaviour
 {
-    [SerializeField] Camera mainCamera = null;
+    [SerializeField] Camera mainCamera = default;
+    [SerializeField] GameObject clickEffect = default;
 
     public GameObject C_Karmen;
     public GameObject C_Jade;
@@ -13,11 +14,6 @@ public class PlayerManager : MonoBehaviour
     public GameObject C_Eva;
 
     private CameraController mainCameraControl;
-
-    private Karmen _Karmen;
-    private Jade _Jade;
-    private Leina _Leina;
-    private Eva _Eva;
 
     private bool isChange;
 
@@ -42,7 +38,7 @@ public class PlayerManager : MonoBehaviour
             Tag();
         }
         Zoom();
-        //Click();
+        Click();
     }
 
     void InitMainSub()
@@ -63,9 +59,9 @@ public class PlayerManager : MonoBehaviour
         }
         else if (GameManager.instance.isMainLeina)
         {
-            C_Eva.SetActive(true);
-            C_Eva.gameObject.tag = "MainCharacter";
-            C_Eva.gameObject.layer = 6;
+            C_Leina.SetActive(true);
+            C_Leina.gameObject.tag = "MainCharacter";
+            C_Leina.gameObject.layer = 6;
             GameManager.instance.character1 = C_Leina;
         }
         else if (GameManager.instance.isMainEva)
@@ -92,9 +88,9 @@ public class PlayerManager : MonoBehaviour
         }
         else if (GameManager.instance.isSubLeina)
         {
-            C_Jade.SetActive(true);
-            C_Jade.gameObject.tag = "SubCharacter";
-            C_Jade.gameObject.layer = 7;
+            C_Leina.SetActive(true);
+            C_Leina.gameObject.tag = "SubCharacter";
+            C_Leina.gameObject.layer = 7;
             GameManager.instance.character2 = C_Leina;
         }
         else if (GameManager.instance.isSubEva)
@@ -141,22 +137,23 @@ public class PlayerManager : MonoBehaviour
         mainCamera.fieldOfView = Mathf.Clamp(mainCamera.fieldOfView - scroll.y, 30f, 70f);
     }
 
-    //void Click()
-    //{
-    //    if (Input.GetMouseButtonDown(1))
-    //    {
-    //        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-    //        Physics.Raycast(ray, out hit);
+    void Click()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            Physics.Raycast(ray, out hit);
 
-    //        clickEffect.transform.position = hit.point;
-    //        StartCoroutine(ActiveEffect());
-    //    }
-    //}
+            clickEffect.transform.position = hit.point;
+            StartCoroutine(ActiveEffect());
+        }
+    }
 
-    //IEnumerator ActiveEffect()
-    //{
-    //    clickEffect.SetActive(true);
-    //    yield return new WaitForSeconds(1f);
-    //    clickEffect.SetActive(false);
-    //}
+    IEnumerator ActiveEffect()
+    {
+        clickEffect.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        clickEffect.SetActive(false);
+    }
 }

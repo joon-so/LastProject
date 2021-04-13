@@ -68,13 +68,6 @@ public class InGameUI : MonoBehaviour
         GameManager.instance.subPlayerEp = GameManager.instance.subPlayerMaxEp;
     }
 
-
-
-    void TagMaskMainToSub()
-    {
-
-    }
-
     public void OnClickOptionButton()
     {
 
