@@ -18,12 +18,19 @@ public class Leina : MonoBehaviour
     // 스킬
     public float qskillCoolTime = 5.0f;
     float curQSkillCoolTime = 0;
-    bool onQSkill;
 
+    public float wskillCoolTime = 5.0f;
+    float curWSkillCoolTime = 0;
+
+    bool onQSkill;
+    bool onWSkill;
 
     bool canAttack;
     bool canDodge;
     bool canMove;
+    bool canSkill;
+
+    bool onDodge;
 
     Vector3 vecTarget;
 
@@ -39,34 +46,37 @@ public class Leina : MonoBehaviour
     void Start()
     {
         vecTarget = transform.position;
-        canDodge = false;
+        onQSkill = true;
+        onWSkill = true;
+        onDodge = true;
+        
         canAttack = true;
+        canDodge = true;
         canMove = true;
+        canSkill = true;
 
         curDodgeCoolTime = dodgeCoolTime;
-        // 스킬
-        onQSkill = true;
     }
     void Update()
     {
         if (gameObject.transform.tag == "MainCharacter")
         {
-            if (canMove && canAttack)
-            {
+            if (canMove)
                 Move();
-                Stop();
-            }
             if (canAttack)
-            {
                 Attack();
+            if (canDodge)
+                Dodge();
+
+            if (canSkill)
+            {
+                Q_Skill();
+                W_Skill();
+                E_Skill();
             }
-            Dodge();
+            Stop();
             AttackRange();
             CoolTime();
-
-            Q_Skill();
-            W_Skill();
-            E_Skill();
         }
     }
     void Move()
@@ -100,8 +110,11 @@ public class Leina : MonoBehaviour
     }
     void Dodge()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && curDodgeCoolTime >= dodgeCoolTime && canDodge)
+        if (Input.GetKeyDown(KeyCode.Space) && onDodge)
         {
+            canAttack = false;
+            canMove = false;
+
             curDodgeCoolTime = 0.0f;
 
             moveSpeed = 40.0f;
@@ -137,15 +150,7 @@ public class Leina : MonoBehaviour
                 transform.LookAt(transform.position + nextVec);
             }
 
-            //GameObject instantBullet = Instantiate(arrow, arrowPos.position, arrowPos.rotation);
-            //Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
-            //bulletRigid.velocity = arrowPos.forward * 80.0f;
-            StartCoroutine(attack());
-
-            //moveSpeed = 0f;
-            //anim.SetBool("isRun", false);
-            //anim.SetBool("doAttack", true);
-            //vecTarget = transform.position;
+            StartCoroutine(AttackMotion());
         }
     }
     void AttackRange()
@@ -182,6 +187,16 @@ public class Leina : MonoBehaviour
         {
             onQSkill = true;
         }
+        // W스킬
+        if (curWSkillCoolTime < wskillCoolTime)
+        {
+            curWSkillCoolTime += Time.deltaTime;
+        }
+        else
+        {
+            onWSkill = true;
+        }
+
     }
     void Q_Skill()
     {
@@ -220,7 +235,7 @@ public class Leina : MonoBehaviour
 
         }
     }
-    IEnumerator attack()
+    IEnumerator AttackMotion()
     {
         //발사
         moveSpeed = 0f;

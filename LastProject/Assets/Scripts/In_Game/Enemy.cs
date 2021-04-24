@@ -15,6 +15,18 @@ public class Enemy : MonoBehaviour
     [SerializeField] float distance = 0f;
     [SerializeField] LayerMask layerMask = 0;
 
+    public int maxHp;
+    public int curHp;
+    Rigidbody rigid;
+    BoxCollider boxCollider;
+
+    void Awake()
+    {
+        rigid = GetComponent<Rigidbody>();
+        boxCollider = GetComponent<BoxCollider>();
+    }
+
+
     void Start()
     {
         nav = GetComponent<NavMeshAgent>();
@@ -58,6 +70,17 @@ public class Enemy : MonoBehaviour
             {
                 nav.SetDestination(transform.position);
             }
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Bullet")
+        {
+            JadeAssaultRifleBullet bullet = other.GetComponent<JadeAssaultRifleBullet>();
+            curHp -= bullet.damage;
+
+            Debug.Log("Emeny HP: " + curHp);
         }
     }
 }
