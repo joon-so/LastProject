@@ -8,6 +8,10 @@ public class Leina : MonoBehaviour
     [SerializeField] GameObject arrow = null;
     [SerializeField] Transform arrowPos = null;
 
+    [SerializeField] GameObject chargingEffect = null;
+    [SerializeField] GameObject posionArrow = null;
+    [SerializeField] Transform chargingShotPos = null;
+
     public float moveSpeed = 30.0f;
     public float followDistance = 5.0f;
 
@@ -273,6 +277,38 @@ public class Leina : MonoBehaviour
 
     IEnumerator ChargingShot()
     {
+        vecTarget = transform.position;
+       
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit rayHit;
+        if (Physics.Raycast(ray, out rayHit, Mathf.Infinity))
+        {
+            Vector3 nextVec = rayHit.point - transform.position;
+            nextVec.y = 0;
+            transform.LookAt(transform.position + nextVec);
+            transform.Rotate(0, transform.rotation.y + 90, 0);
+
+            anim.SetTrigger("chargingShot");
+            
+            // 시위 댕기고
+            yield return new WaitForSeconds(3.0f);
+            chargingEffect.SetActive(true);
+
+            GameObject instantArrow = Instantiate(posionArrow, chargingShotPos.position, chargingShotPos.rotation);
+            //instantArrow.transform.localScale += new Vector3(Time.deltaTime, Time.deltaTime, Time.deltaTime);
+            Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
+            arrowRigid.velocity = chargingShotPos.forward * 100;
+
+            // 화살 크기 커지면서 
+
+
+            // 차징
+            yield return new WaitForSeconds(1.8f);
+            //anim.SetFloat("Delay", 1.0f);
+            chargingEffect.SetActive(false);
+            // 샷
+
+        }
         yield return new WaitForSeconds(1);
         canAttack = true;
         canMove = true;
