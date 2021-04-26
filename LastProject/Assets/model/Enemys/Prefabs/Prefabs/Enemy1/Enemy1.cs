@@ -8,6 +8,7 @@ public class Enemy1 : MonoBehaviour
     [SerializeField] [Range(30f, 100f)] float detectDistance;
     [SerializeField] [Range(30f, 100f)] float shootDistance = 30f;
     [SerializeField] GameObject bullet = null;
+    [SerializeField] GameObject explosion = null;
     [SerializeField] Transform bulletStartPoint;
     [SerializeField] Transform bulletEndPoint;
 
@@ -17,6 +18,7 @@ public class Enemy1 : MonoBehaviour
 
     bool shootable = true;
     bool movable = true;
+    bool alive = true;
 
     NavMeshAgent nav;
     float playerDistance;
@@ -46,6 +48,11 @@ public class Enemy1 : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (currentHp <= 0 && alive)
+        {
+            alive = false;
+            StartCoroutine(ExploseAndDistroy());
+        }
         Find();
     }
 
@@ -124,6 +131,16 @@ public class Enemy1 : MonoBehaviour
         //쿨타임 지난 후 
         yield return new WaitForSeconds(shootCooltime - chargingTime);
         shootable = true;
+    }
+
+    IEnumerator ExploseAndDistroy()
+    {
+        Instantiate(explosion, transform.position + new Vector3(0, 10, 0), transform.rotation);
+        shootable = false;
+        movable = false;
+        bulletLine.enabled = false;
+        yield return new WaitForSeconds(1f);
+        gameObject.SetActive(false);
     }
 
     void OnCollisionEnter(Collision collision)
