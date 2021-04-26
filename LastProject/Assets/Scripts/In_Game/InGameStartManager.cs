@@ -26,16 +26,23 @@ public class InGameStartManager : MonoBehaviour
     [SerializeField] GameObject subLeinaSkillSlot;
     [SerializeField] GameObject subEvaSkillSlot;
 
+    private bool isFillBar;
 
     void Start()
     {
+        isFillBar = false;
+
         InitCharacterSetting();
+
         StartCoroutine(FillbarAndStageInfo());
+
+        FillBar();
     }
 
     void Update()
     {
-        FillBar();
+        //if (!isFillBar)
+        //    FillBar();
     }
 
     void InitCharacterSetting()
@@ -156,22 +163,10 @@ public class InGameStartManager : MonoBehaviour
 
     void FillBar()
     {
-        if (GameManager.instance.mainPlayerHp < GameManager.instance.mainPlayerMaxHp)
-        {
-            GameManager.instance.mainPlayerHp += 1.0f;
-        }
-        if (GameManager.instance.mainPlayerEp < GameManager.instance.mainPlayerMaxEp)
-        {
-            GameManager.instance.mainPlayerEp += 1.0f;
-        }
-        if (GameManager.instance.subPlayerHp < GameManager.instance.subPlayerMaxHp)
-        {
-            GameManager.instance.subPlayerHp += 1.0f;
-        }
-        if (GameManager.instance.subPlayerEp < GameManager.instance.subPlayerMaxEp)
-        {
-            GameManager.instance.subPlayerEp += 1.0f;
-        }
+        GameManager.instance.mainPlayerHp = GameManager.instance.mainPlayerMaxHp;
+        GameManager.instance.mainPlayerEp = GameManager.instance.mainPlayerMaxEp;
+        GameManager.instance.subPlayerHp = GameManager.instance.subPlayerMaxHp;
+        GameManager.instance.subPlayerEp = GameManager.instance.subPlayerMaxEp;
     }
 
     IEnumerator FillbarAndStageInfo()

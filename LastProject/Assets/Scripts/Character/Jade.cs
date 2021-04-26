@@ -381,7 +381,6 @@ public class Jade : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy1Bullet")
         {
-            Debug.Log("dmdkr3");
             Enemy1Bullet enemy1bullet = collision.gameObject.GetComponent<Enemy1Bullet>(); 
             if (GameManager.instance.mainPlayerHp > 0)
             {
@@ -390,10 +389,10 @@ public class Jade : MonoBehaviour
         }
         if (collision.gameObject.tag == "Enemy2Bullet")
         {
-            Enemy2Bullet enemy1bullet = collision.gameObject.GetComponent<Enemy2Bullet>();
+            Enemy2Bullet enemy2bullet = collision.gameObject.GetComponent<Enemy2Bullet>();
             if (GameManager.instance.mainPlayerHp > 0)
             {
-//                GameManager.instance.mainPlayerHp -= enemy1bullet.damage;
+                GameManager.instance.mainPlayerHp -= enemy2bullet.damage;
             }
         }
     }

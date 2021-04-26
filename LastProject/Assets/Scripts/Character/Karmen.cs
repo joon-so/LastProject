@@ -348,11 +348,6 @@ public class Karmen : MonoBehaviour
     }
 
 
-
-
-
-
-
     void Follow()
     {
         distanceWithPlayer = Vector3.Distance(tagCharacter.transform.position, transform.position);
@@ -370,4 +365,26 @@ public class Karmen : MonoBehaviour
             anim.SetBool("isRun", isRun);
         }
     }
-} 
+
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemy1Bullet")
+        {
+            Enemy1Bullet enemy1bullet = collision.gameObject.GetComponent<Enemy1Bullet>();
+            if (GameManager.instance.mainPlayerHp > 0)
+            {
+                GameManager.instance.mainPlayerHp -= enemy1bullet.damage;
+            }
+        }
+        if (collision.gameObject.tag == "Enemy2Bullet")
+        {
+            Enemy2Bullet enemy2bullet = collision.gameObject.GetComponent<Enemy2Bullet>();
+            if (GameManager.instance.mainPlayerHp > 0)
+            {
+                GameManager.instance.mainPlayerHp -= enemy2bullet.damage;
+            }
+        }
+    }
+
+}

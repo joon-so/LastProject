@@ -128,7 +128,7 @@ public class PlayerManager : MonoBehaviour
 
         // hp
         GameManager.instance.TagHpEp();
-        GameManager.instance.EffectFillBar();
+        //GameManager.instance.EffectFillBar();
     }
     
     void Zoom()

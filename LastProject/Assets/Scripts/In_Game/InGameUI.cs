@@ -19,6 +19,9 @@ public class InGameUI : MonoBehaviour
     [SerializeField] Text playerDeath;
     [SerializeField] Text playerScore;
 
+    [SerializeField] Text textOtherHp;
+    [SerializeField] Text textOtherEp;
+
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -44,6 +47,8 @@ public class InGameUI : MonoBehaviour
         textMainEp.text = string.Format("{0}/{1}", GameManager.instance.mainPlayerEp, GameManager.instance.mainPlayerMaxEp);
         textSubHp.text = string.Format("{0}/{1}", GameManager.instance.subPlayerHp, GameManager.instance.subPlayerMaxHp);
         textSubEp.text = string.Format("{0}/{1}", GameManager.instance.subPlayerEp, GameManager.instance.subPlayerMaxEp);
+
+    //    Debug.Log(textMainHp.text);
     }
 
     void UpdatePlayerKD()
