@@ -15,6 +15,7 @@ public class Karmen : MonoBehaviour
 
     public float moveSpeed = 30.0f;
     public float dodgeCoolTime = 5.0f;
+    float curDodgeCoolTime = 0;
 
     // 공격중에 다른 이벤트 못하게 선언하는 변수
 
@@ -25,29 +26,25 @@ public class Karmen : MonoBehaviour
 
     Vector3 vecTarget;
 
-    Vector3 moveVec;
-
-    bool onDodge;
-    bool onFire;
-
-    float curDodgeCoolTime = 0;
-    float fireDelay;
-
     Animator anim;
     Weapon weapon;
-
-    float distanceWithPlayer;
-    public float followDistance = 20.0f;
     NavMeshAgent nav;
     GameObject tagCharacter;
 
-    public float qskillCoolTime = 5.0f;
-    float curqskillCoolTime = 0f;
-    bool onQSkill = true;
+    float distanceWithPlayer;
+    public float followDistance = 20.0f;
 
+    public float qskillCoolTime = 5.0f;
+    float curQskillCoolTime = 0f;
     public float wskillCoolTime = 5.0f;
-    float curwskillCoolTime = 0f;
-    bool onWSkill = true;
+    float curWskillCoolTime = 0f;
+
+    bool canDodge;
+    bool canMove;
+    bool canQSkill;
+    bool canWSkill;
+    bool doingDodge;
+    bool doingSkill;
 
     void Start()
     {
@@ -62,25 +59,42 @@ public class Karmen : MonoBehaviour
         vecTarget = transform.position;
 
         curDodgeCoolTime = dodgeCoolTime;
-        onDodge = true;
+        curQskillCoolTime = qskillCoolTime;
+        curWskillCoolTime = wskillCoolTime;
+
+        canDodge = true;
+        canMove = true;
+        canQSkill = true;
+        canWSkill = true;
+
+        doingDodge = false;
+        doingSkill = false;
     }
 
     void Update()
     { 
         if (gameObject.transform.tag == "MainCharacter")
         {
-            //계산량 많을듯 -> 애니메이션 이벤트로 변경
-            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("salto2SS"))
+            if (canMove)
             {
                 Move();
                 Stop();
                 Attack();
             }
-            Dodge();
+            if (canDodge)
+                Dodge();
+            if (doingDodge)
+            {
+                transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+                vecTarget = transform.position;
+            }
             AttackRange();
             CoolTime();
-            Q_Skill();
-            W_Skill();
+            if (!doingSkill && !doingDodge)
+            {
+                Q_Skill();
+                W_Skill();
+            }
         }
         else
         {
@@ -120,28 +134,9 @@ public class Karmen : MonoBehaviour
 
     void Dodge()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && curDodgeCoolTime >= dodgeCoolTime && onDodge)
+        if (Input.GetKeyDown(KeyCode.Space) && canDodge)
         {
-            curDodgeCoolTime = 0.0f;
-
-            anim.SetTrigger("doDodge");
-
-            onDodge = false;
-        }
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("salto2SS"))
-        {
-            if(anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
-                && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.6f)
-            {
-                moveSpeed = 18.0f;
-            }
-            else
-            {
-                moveSpeed = 60.0f;
-            }
-
-            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
-            vecTarget = transform.position;
+            StartCoroutine(dodge());
         }
     }
 
@@ -236,28 +231,31 @@ public class Karmen : MonoBehaviour
         if (curDodgeCoolTime < dodgeCoolTime)
         {
             curDodgeCoolTime += Time.deltaTime;
+            canDodge = false;
         }
         else
         {
-            onDodge = true;
+            canDodge = true;
         }
 
-        if (curqskillCoolTime < qskillCoolTime)
+        if (curQskillCoolTime < qskillCoolTime)
         {
-            curqskillCoolTime += Time.deltaTime;
+            curQskillCoolTime += Time.deltaTime;
+            canQSkill = false;
         }
         else
         {
-            onQSkill = true;
+            canQSkill = true;
         }
 
-        if (curwskillCoolTime < wskillCoolTime)
+        if (curWskillCoolTime < wskillCoolTime)
         {
-            curwskillCoolTime += Time.deltaTime;
+            curWskillCoolTime += Time.deltaTime;
+            canWSkill = false;
         }
         else
         {
-            onWSkill = true;
+            canWSkill = true;
         }
     }
 
@@ -265,9 +263,8 @@ public class Karmen : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (onQSkill)
+            if (canQSkill)
             {
-                onQSkill = false;
                 StartCoroutine(BigAttack());
             }
         }
@@ -277,9 +274,8 @@ public class Karmen : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            if (onWSkill)
+            if (canWSkill)
             {
-                onWSkill = false;
                 StartCoroutine(StraightAttack());
             }
         }
@@ -292,26 +288,63 @@ public class Karmen : MonoBehaviour
 
     IEnumerator BigAttack()
     {
+        //0,9sec
         effectLeftStaff.SetActive(false);
         effectRightStaff.SetActive(false);
-
         anim.SetTrigger("BigAttack");
+        doingSkill = true;
+        canMove = false;
+        curQskillCoolTime = 0.0f;
         effectQSkillStaff1.SetActive(true);
         yield return new WaitForSeconds(0.25f);
-        effectQSkillStaff2.SetActive(true);
 
-        yield return new WaitForSeconds(1.0f);
+        effectQSkillStaff2.SetActive(true);
+        yield return new WaitForSeconds(0.65f);
+
         effectQSkillStaff1.SetActive(false);
         effectQSkillStaff2.SetActive(false);
-
         effectLeftStaff.SetActive(true);
         effectRightStaff.SetActive(true);
+
+        vecTarget = transform.position;
+        canMove = true;
+        isRun = false;
+        doingSkill = false;
+        anim.SetBool("isRun", isRun);
     }
 
     IEnumerator StraightAttack()
     {
+        //2.8sec
         anim.SetTrigger("StraightAttack");
-        yield return null;
+        canMove = false;
+        doingSkill = true;
+        curWskillCoolTime = 0.0f;
+        yield return new WaitForSeconds(2.8f);
+
+        vecTarget = transform.position;
+        canMove = true;
+        isRun = false;
+        doingSkill = false;
+        anim.SetBool("isRun", isRun);
+    }
+
+    IEnumerator dodge()
+    {
+        //1.6sec
+        curDodgeCoolTime = 0.0f;
+        anim.SetTrigger("doDodge");
+        canMove = false;
+        doingDodge = true;
+        moveSpeed = 18.0f;
+        yield return new WaitForSeconds(0.3f);
+        moveSpeed = 60.0f;
+        yield return new WaitForSeconds(0.8f);
+        moveSpeed = 18.0f;
+        yield return new WaitForSeconds(0.5f);
+        moveSpeed = 30.0f;
+        canMove = true;
+        doingDodge = false;
     }
 
 
