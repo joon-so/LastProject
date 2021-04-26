@@ -43,6 +43,7 @@ public class Enemy2Bullet : MonoBehaviour {
     private float lifeTime = 1.0f;
     private float curLifeTime = 0.0f;
 
+    public int damage = 40;
     void Start () {
         startPos = transform.position;
         rb = GetComponent <Rigidbody> ();
