@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JadeAssaultRifleBullet : MonoBehaviour
+public class LeinaPosionArrow : MonoBehaviour
 {
     public float speed;
     [Tooltip("From 0% to 100%")]

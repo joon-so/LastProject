@@ -24,6 +24,10 @@ public class Enemy1 : MonoBehaviour
     Animator anim;
     LineRenderer bulletLine;
     Vector3 startPoint;
+    Rigidbody rigid;
+
+    public int maxHp = 200;
+    public int currentHp;
 
     void Start()
     {
@@ -36,6 +40,8 @@ public class Enemy1 : MonoBehaviour
 
         InvokeRepeating("Find", 0f, 0.5f);
         startPoint = transform.position;
+
+        currentHp = maxHp;
     }
 
     void FixedUpdate()
@@ -118,5 +124,28 @@ public class Enemy1 : MonoBehaviour
         //쿨타임 지난 후 
         yield return new WaitForSeconds(shootCooltime - chargingTime);
         shootable = true;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Bullet")
+        {
+            JadeAssaultRifleBullet bullet = collision.gameObject.GetComponent<JadeAssaultRifleBullet>();
+            if (currentHp > 0)
+            {
+                currentHp -= bullet.damage;
+                Debug.Log("Emeny HP: " + currentHp);
+            }
+            else
+            {
+                // die animation
+            }
+            GetComponent<Rigidbody>().isKinematic = true;
+        }
+
+        if (collision.gameObject.tag == "MainCharacter" || collision.gameObject.tag == "Enemy")
+        {
+            GetComponent<Rigidbody>().isKinematic = false;
+        }
     }
 }

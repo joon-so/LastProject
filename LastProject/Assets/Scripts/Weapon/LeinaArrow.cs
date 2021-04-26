@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JadeAssaultRifleBullet : MonoBehaviour
+public class LeinaArrow : MonoBehaviour
 {
     public float speed;
     [Tooltip("From 0% to 100%")]
@@ -18,8 +18,6 @@ public class JadeAssaultRifleBullet : MonoBehaviour
     private Rigidbody rigid;
     private RotateToMouseScript rotateToMouse;
     private GameObject target;
-
-    public int damage = 20;
 
     void Start()
     {
@@ -74,8 +72,9 @@ public class JadeAssaultRifleBullet : MonoBehaviour
         if (speed != 0 && rigid != null)
             rigid.position += (transform.forward + offset) * (speed * Time.deltaTime);
 
+
         // ¹üÀ§
-        if (Vector3.Distance(startPos, transform.position) > 50.0f)
+        if (Vector3.Distance(startPos, transform.position) > 80.0f)
             Destroy(gameObject);
     }
 

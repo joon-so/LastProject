@@ -4848,12 +4848,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5777092894065029257}
-  - component: {fileID: 5887427955140089359}
+  - component: {fileID: 4431329082295360842}
   - component: {fileID: 5821550192557950005}
   - component: {fileID: 5827701600547688731}
   m_Layer: 0
-  m_Name: vfx_Projectile_ArrowFire
-  m_TagString: Untagged
+  m_Name: Arrow
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4866,14 +4866,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5775468925520252961}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.100214005, y: 13.08, z: 14.699581}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5778826704308514175}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5887427955140089359
+--- !u!114 &4431329082295360842
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4882,15 +4882,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5775468925520252961}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12ba759cd568c0e47a7018ab70867a0d, type: 3}
+  m_Script: {fileID: 11500000, guid: a0cd40e3a2b9ded409ed4a6d33da2e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotate: 0
-  rotateAmount: 45
-  bounce: 0
-  bounceForce: 10
-  speed: 40
-  accuracy: 95
+  speed: 100
+  accuracy: 100
   fireRate: 4
   muzzlePrefab: {fileID: 1232470965182556, guid: 51bd01b23e91fda4bad128a9d11ac143, type: 3}
   hitPrefab: {fileID: 1444971686239000, guid: 2a08b3071ec108040959cc25cf08be4b, type: 3}

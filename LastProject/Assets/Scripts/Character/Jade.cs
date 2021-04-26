@@ -31,10 +31,14 @@ public class Jade : MonoBehaviour
     public float dodgeCoolTime = 3.0f;
     float curDodgeCoolTime = 0;
 
-    // 스킬
-    public float qskillCoolTime = 5.0f;
+    public float qskillCoolTime = 7.0f;
     float curQSkillCoolTime = 0;
+    public float wskillCoolTime = 4.0f;
+    float curWSkillCoolTime = 0;
+
+    bool onDodge;
     bool onQSkill;
+    bool onWSkill;
 
     bool canMove;
     bool canAttack;
@@ -58,49 +62,49 @@ public class Jade : MonoBehaviour
     void Start()
     {
         vecTarget = transform.position;
-        canMove = true;
-        canAttack = true;
-        canDodge = true;
+        onDodge = true;
+        onQSkill = true;
+        onWSkill = true;
+
+        canAttack = false;
+        canMove = false;
+        canDodge = false;
+        canSkill = false;
 
         curDodgeCoolTime = dodgeCoolTime;
-        StartCoroutine("DrawAssaultRifle");
-        StartCoroutine("DrawAssaultRifle");
-
-
-        // 스킬
-        onQSkill = true;
+        StartCoroutine(DrawAssaultRifle());
     }
+
     void Update()
     {
         if (gameObject.transform.tag == "MainCharacter")
         {
+            fireDelay += Time.deltaTime;
             if (canMove)
-            {
                 Move();
-            }
             if (canAttack)
-            {
                 Attack();
-            }
             if (canDodge)
-            {
                 Dodge();
-            }
+
             if (canSkill)
             {
                 Q_Skill();
                 W_Skill();
                 E_Skill();
             }
-
             Stop();
             AttackRange();
             CoolTime();
         }
+        else if (gameObject.transform.tag == "SubCharacter")
+        {
+
+        }
     }
     void Move()
     {
-        if (Input.GetMouseButton(1) && canMove)
+        if (Input.GetMouseButton(1))
         {
             moveSpeed = 30.0f;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -129,37 +133,40 @@ public class Jade : MonoBehaviour
     }
     void Dodge()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && curDodgeCoolTime >= dodgeCoolTime && canDodge)
+        if (Input.GetKeyDown(KeyCode.Space) && onDodge)
         {
+            canAttack = false;
+            canMove = false;
+            canSkill = false;
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit rayHit;
-            if (Physics.Raycast(ray, out rayHit, 100))
+            if (Physics.Raycast(ray, out rayHit, Mathf.Infinity))
             {
-                Vector3 nextVec = rayHit.point - transform.position;
-                transform.LookAt(transform.position + nextVec);
+                vecTarget = rayHit.point - transform.position;
+                transform.LookAt(transform.position + vecTarget);
             }
             curDodgeCoolTime = 0.0f;
 
-            moveSpeed = 60.0f;
+            moveSpeed *=2;
+
+            transform.position = Vector3.MoveTowards(transform.position, vecTarget, moveSpeed * Time.deltaTime);
+//            transform.position += transform.position + Vector3.forward * moveSpeed * Time.deltaTime;
+//            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+            vecTarget = transform.position;
+
             anim.SetTrigger("Dodge");
-
-            canDodge = false;
+            StartCoroutine(DodgeDelay());
         }
-
-        //if (anim.GetCurrentAnimatorStateInfo(0).IsName("DodgeForward"))
-        //{
-        //    transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
-        //    vecTarget = transform.position;
-        //    endDodge = false;
-        //}
     }
     void Attack()
     {
-        fireDelay += Time.deltaTime;
-        //onFire = weapon.shotSpeed < fireDelay;
-
-        if (Input.GetMouseButtonDown(0) && canAttack)
+        if (Input.GetMouseButtonDown(0))
         {
+            canMove = false;
+            canDodge = false;
+            canSkill = false;
+
             if (fireDelay > fireCoolTime)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -173,7 +180,7 @@ public class Jade : MonoBehaviour
 
                 GameObject instantBullet = Instantiate(assaultRifleBullet, assaultRifleBulletPos.position, assaultRifleBulletPos.rotation);
                 Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
-                bulletRigid.velocity = assaultRifleBulletPos.forward * 80.0f;
+                bulletRigid.velocity = assaultRifleBulletPos.forward;
 
                 moveSpeed = 0f;
                 anim.SetBool("Run", false);
@@ -181,6 +188,8 @@ public class Jade : MonoBehaviour
 
                 anim.SetTrigger("shootAssaultRifle");
                 fireDelay = 0;
+
+                StartCoroutine(AttackDelay());
             }
         }
     }
@@ -196,22 +205,6 @@ public class Jade : MonoBehaviour
             attackRange.SetActive(false);
         }
     }
-    void Missile()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit rayHit;
-        if (Physics.Raycast(ray, out rayHit, 100))
-        {
-            Vector3 nextVec = rayHit.point - transform.position;
-            nextVec.y = 2;
-            transform.LookAt(transform.position + nextVec);
-
-            GameObject instantMissile = Instantiate(missileBullet, missileBulletPos.position, missileBulletPos.rotation);
-            Rigidbody rigidMissile = instantMissile.GetComponent<Rigidbody>();
-            rigidMissile.velocity = missileBulletPos.forward * 50;
-        }
-    }
-
     void CoolTime()
     {
         // 회피
@@ -221,9 +214,8 @@ public class Jade : MonoBehaviour
         }
         else
         {
-            canDodge = true;
+            onDodge = true;
         }
-
         // Q스킬
         if (curQSkillCoolTime < qskillCoolTime)
         {
@@ -233,67 +225,46 @@ public class Jade : MonoBehaviour
         {
             onQSkill = true;
         }
+        // W스킬
+        if (curWSkillCoolTime < wskillCoolTime)
+        {
+            curWSkillCoolTime += Time.deltaTime;
+        }
+        else
+        {
+            onWSkill = true;
+        }
     }
     void Q_Skill()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) && onQSkill)
         {
+            onQSkill = false;
+            curQSkillCoolTime = 0;
             anim.SetBool("Run", false);
-            if (onQSkill)
-            {
-                canAttack = false;
-                canMove = false;
-                canDodge = false;
-                //onAttack = false;
-                // 버튼을 누르면 범위 표시
-                //attackRange.SetActive(true);
-                //missileRange.SetActive(true);
 
-                //missileRange.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            canAttack = false;
+            canMove = false;
+            canDodge = false;
+            canSkill = false;
 
-                // 만약 클릭하면
-
-
-                onQSkill = false;
-                curQSkillCoolTime = 0;
-                // 스킬 사용
-                StartCoroutine(ShootMissile());
-            }
-        }
-        else if (Input.GetKeyUp(KeyCode.Q))
-        {
-
-            attackRange.SetActive(false);
+            StartCoroutine(ShootMissile());
         }
     }
     void W_Skill()
     {
-        // 수류탄
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) && onWSkill)
         {
+            onWSkill = false;
+            curWSkillCoolTime = 0;
+            anim.SetBool("Run", false);
+
             canAttack = false;
             canMove = false;
             canDodge = false;
+            canSkill = false;
 
-            anim.SetBool("Run", false);
-            vecTarget = transform.position;
-
-            anim.SetTrigger("shootGrenade");
-            // 클릭?
-
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit rayHit;
-            if (Physics.Raycast(ray, out rayHit, 100))
-            {
-                Vector3 nextVec = rayHit.point - transform.position;
-                nextVec.y = 2;
-                transform.LookAt(transform.position + nextVec);
-
-                GameObject instantGrenade = Instantiate(Grenade, grenadePos.position, grenadePos.rotation);
-                Rigidbody rigidGrenade = instantGrenade.GetComponent<Rigidbody>();
-                rigidGrenade.AddForce(nextVec, ForceMode.Impulse);
-                rigidGrenade.AddTorque(Vector3.back * 10, ForceMode.Impulse);
-            }
+            StartCoroutine(ShootGrenade());
         }
     }
     void E_Skill()
@@ -304,6 +275,20 @@ public class Jade : MonoBehaviour
         }
     }
 
+    IEnumerator AttackDelay()
+    {
+        yield return new WaitForSeconds(0.2f);
+        canMove = true;
+        canDodge = true;
+        canSkill = true;
+    }
+    IEnumerator DodgeDelay()
+    {
+        yield return new WaitForSeconds(0.9f);
+        canAttack = true;
+        canMove = true;
+        canSkill = true;
+    }
     IEnumerator DrawAssaultRifle()
     {
         yield return new WaitForSeconds(0.5f);
@@ -311,20 +296,10 @@ public class Jade : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         backAssaultRifle.SetActive(false);
         useAssaultRifle.SetActive(true);
-    }
-    IEnumerator ChangeRifleToMissile()
-    {
-        anim.SetTrigger("drawMissileLauncher");
-        yield return new WaitForSeconds(0.5f);
-        useAssaultRifle.SetActive(false);
-        useMissileLauncher.SetActive(true);
-    }
-    IEnumerator ChangeMissileToRifle()
-    {
-        anim.SetTrigger("drawAssaultRifle");
-        yield return new WaitForSeconds(0.5f);
-        useMissileLauncher.SetActive(false);
-        useAssaultRifle.SetActive(true);
+        canMove = true;
+        canAttack = true;
+        canDodge = true;
+        canSkill = true;
     }
     IEnumerator ShootMissile()
     {
@@ -365,18 +340,63 @@ public class Jade : MonoBehaviour
             useMissileLauncher.SetActive(false);
             useAssaultRifle.SetActive(true);
 
+            yield return new WaitForSeconds(0.3f);
             canAttack = true;
             canMove = true;
             canDodge = true;
+            canSkill = true;
         }
     }
     IEnumerator ShootGrenade()
     {
+        vecTarget = transform.position;
         anim.SetTrigger("shootGrenade");
-        yield return new WaitForSeconds(3.0f);
+     
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit rayHit;
+        if (Physics.Raycast(ray, out rayHit))
+        {
+            Vector3 nextVec = rayHit.point - transform.position;
+            if (Vector3.Distance(nextVec, transform.position) > 80.0f)
+                nextVec = nextVec.normalized * 80.0f;
+            
+            Debug.Log(nextVec);
+            nextVec.y = 0;
+            transform.LookAt(transform.position + nextVec);
+
+            GameObject instantGrenade = Instantiate(Grenade, grenadePos.position, grenadePos.rotation);
+            Rigidbody rigidGrenade = instantGrenade.GetComponent<Rigidbody>();
+            rigidGrenade.AddForce(nextVec * 0.5f, ForceMode.Impulse);
+            rigidGrenade.AddTorque(Vector3.back * 10, ForceMode.Impulse);
+        }
+
+        yield return new WaitForSeconds(0.3f);
+        canAttack = true;
+        canMove = true;
+        canDodge = true;
+        canSkill = true;
     }
 
-
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemy1Bullet")
+        {
+            Debug.Log("dmdkr3");
+            Enemy1Bullet enemy1bullet = collision.gameObject.GetComponent<Enemy1Bullet>(); 
+            if (GameManager.instance.mainPlayerHp > 0)
+            {
+                GameManager.instance.mainPlayerHp -= enemy1bullet.damage;
+            }
+        }
+        if (collision.gameObject.tag == "Enemy2Bullet")
+        {
+            Enemy2Bullet enemy1bullet = collision.gameObject.GetComponent<Enemy2Bullet>();
+            if (GameManager.instance.mainPlayerHp > 0)
+            {
+//                GameManager.instance.mainPlayerHp -= enemy1bullet.damage;
+            }
+        }
+    }
 
     // 태그시 초기화할 것들을 생각해보자 ex) 플레이어 이동속도, 클릭했던 좌표 등
 }
