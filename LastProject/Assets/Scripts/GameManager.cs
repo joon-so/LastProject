@@ -64,7 +64,6 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
-
     public void TagObject1()
     {
         character1.gameObject.tag = "SubCharacter";
@@ -115,15 +114,15 @@ public class GameManager : MonoBehaviour
         mainPlayerHp = subPlayerHp;
         subPlayerHp = temp;
 
-        temp = GameManager.instance.mainPlayerEp;
+        temp = mainPlayerEp;
         mainPlayerEp = subPlayerEp;
         subPlayerEp = temp;
 
-        temp = GameManager.instance.mainPlayerMaxHp;
+        temp =mainPlayerMaxHp;
         mainPlayerMaxHp = subPlayerMaxHp;
         subPlayerMaxHp = temp;
 
-        temp = GameManager.instance.mainPlayerMaxEp;
+        temp = mainPlayerMaxEp;
         mainPlayerMaxEp = subPlayerMaxEp;
         subPlayerMaxEp = temp;
     }
@@ -153,5 +152,9 @@ public class GameManager : MonoBehaviour
         {
             subPlayerEp += 1.0f;
         }
+    }
+    public void FillBar(float mainHp, float mainEp, float subHp, float subEp)
+    {
+        
     }
 }
