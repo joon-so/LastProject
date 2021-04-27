@@ -385,6 +385,7 @@ public class Karmen : MonoBehaviour
                 GameManager.instance.mainPlayerHp -= enemy2bullet.damage;
             }
         }
+
     }
 
 }

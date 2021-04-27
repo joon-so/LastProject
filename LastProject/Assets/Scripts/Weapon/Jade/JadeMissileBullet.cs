@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JadeAssaultRifleBullet : MonoBehaviour
+public class JadeMissileBullet : MonoBehaviour
 {
     public float speed;
     [Tooltip("From 0% to 100%")]
@@ -19,14 +19,13 @@ public class JadeAssaultRifleBullet : MonoBehaviour
     private RotateToMouseScript rotateToMouse;
     private GameObject target;
 
-    public int damage = 20;
+    public int damage = 100;
 
     void Start()
     {
         startPos = transform.position;
         rigid = GetComponent<Rigidbody>();
 
-        //used to create a radius for the accuracy and have a very unique randomness
         if (accuracy != 100)
         {
             accuracy = 1 - (accuracy / 100);
@@ -75,7 +74,7 @@ public class JadeAssaultRifleBullet : MonoBehaviour
             rigid.position += (transform.forward + offset) * (speed * Time.deltaTime);
 
         // ¹üÀ§
-        if (Vector3.Distance(startPos, transform.position) > 50.0f)
+        if (Vector3.Distance(startPos, transform.position) > 100.0f)
             Destroy(gameObject);
     }
 

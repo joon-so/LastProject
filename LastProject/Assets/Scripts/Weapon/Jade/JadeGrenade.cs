@@ -8,6 +8,8 @@ public class JadeGrenade : MonoBehaviour
     public GameObject effectObj;
     public Rigidbody rigid;
 
+    public int damage = 70;
+
     void Start()
     {
         StartCoroutine(Explosion());
@@ -24,6 +26,10 @@ public class JadeGrenade : MonoBehaviour
 
         yield return new WaitForSeconds(0.7f);
         Destroy(gameObject);
-        //RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, 15, Vector3.up, 0f, LayerMask.GetMask("Enemy"));
+        RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, 15, Vector3.up, 0f, LayerMask.GetMask("Enemy"));
+        foreach(RaycastHit hitObj in rayHits)
+        {
+            hitObj.transform.GetComponent<Enemy1>().HitJadeGrenade();
+        }
     }
 }

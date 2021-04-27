@@ -28,8 +28,12 @@ public class Enemy1 : MonoBehaviour
     Vector3 startPoint;
     Rigidbody rigid;
 
+    
+    
+    // Ã¼·Â
     public int maxHp = 200;
     public int currentHp;
+    public HpBar hpBar;
 
     void Start()
     {
@@ -44,6 +48,7 @@ public class Enemy1 : MonoBehaviour
         startPoint = transform.position;
 
         currentHp = maxHp;
+        hpBar.SetMaxHp(maxHp);
     }
 
     void FixedUpdate()
@@ -143,22 +148,44 @@ public class Enemy1 : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    public void HitJadeGrenade()
+    {
+        currentHp -= 80;
+        hpBar.SetHp(currentHp);
+    }
+
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Bullet")
+
+
+        // Jade
+        if (collision.gameObject.tag == "JadeAttack")
         {
             JadeAssaultRifleBullet bullet = collision.gameObject.GetComponent<JadeAssaultRifleBullet>();
-            if (currentHp > 0)
-            {
-                currentHp -= bullet.damage;
-                Debug.Log("Emeny HP: " + currentHp);
-            }
-            else
-            {
-                // die animation
-            }
+            currentHp -= bullet.damage;
+            hpBar.SetHp(currentHp);
             GetComponent<Rigidbody>().isKinematic = true;
         }
+        if (collision.gameObject.tag == "JadeQSkill")
+        {
+            JadeMissileBullet bullet = collision.gameObject.GetComponent<JadeMissileBullet>();
+            currentHp -= bullet.damage;
+            hpBar.SetHp(currentHp);
+            GetComponent<Rigidbody>().isKinematic = true;
+        }
+        //if (collision.gameObject.tag == "JadeWSkill")
+        //{
+        //    JadeGrenade bullet = collision.gameObject.GetComponent<JadeGrenade>();
+        //    currentHp -= bullet.damage;
+        //    hpBar.SetHp(currentHp);
+        //    GetComponent<Rigidbody>().isKinematic = true;
+        //}
+
+
+
+
+
+
 
         if (collision.gameObject.tag == "MainCharacter" || collision.gameObject.tag == "Enemy")
         {
