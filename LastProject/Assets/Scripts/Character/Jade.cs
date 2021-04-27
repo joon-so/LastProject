@@ -45,6 +45,8 @@ public class Jade : MonoBehaviour
     bool canDodge;
     bool canSkill;
 
+    bool doingDodge;
+
     Vector3 vecTarget;
 
     float fireDelay;
@@ -71,6 +73,8 @@ public class Jade : MonoBehaviour
         canDodge = false;
         canSkill = false;
 
+        doingDodge = false;
+
         curDodgeCoolTime = dodgeCoolTime;
         StartCoroutine(DrawAssaultRifle());
     }
@@ -86,6 +90,11 @@ public class Jade : MonoBehaviour
                 Attack();
             if (canDodge)
                 Dodge();
+            if (doingDodge)
+            {
+                transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+                vecTarget = transform.position;
+            }
 
             if (canSkill)
             {
@@ -133,30 +142,31 @@ public class Jade : MonoBehaviour
     }
     void Dodge()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && onDodge)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            canAttack = false;
-            canMove = false;
-            canSkill = false;
+            //            canAttack = false;
+            //            canMove = false;
+            //            canSkill = false;
 
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit rayHit;
-            if (Physics.Raycast(ray, out rayHit, Mathf.Infinity))
-            {
-                vecTarget = rayHit.point - transform.position;
-                transform.LookAt(transform.position + vecTarget);
-            }
-            curDodgeCoolTime = 0.0f;
+            //            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            //            RaycastHit rayHit;
+            //            if (Physics.Raycast(ray, out rayHit, Mathf.Infinity))
+            //            {
+            //                vecTarget = rayHit.point - transform.position;
+            //                transform.LookAt(transform.position + vecTarget);
+            //            }
+            //            curDodgeCoolTime = 0.0f;
 
-            moveSpeed *=2;
+            //            moveSpeed *=2;
 
-            transform.position = Vector3.MoveTowards(transform.position, vecTarget, moveSpeed * Time.deltaTime);
-//            transform.position += transform.position + Vector3.forward * moveSpeed * Time.deltaTime;
-//            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
-            vecTarget = transform.position;
+            //            transform.position = Vector3.MoveTowards(transform.position, vecTarget, moveSpeed * Time.deltaTime);
+            ////            transform.position += transform.position + Vector3.forward * moveSpeed * Time.deltaTime;
+            ////            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+            //            vecTarget = transform.position;
 
-            anim.SetTrigger("Dodge");
-            StartCoroutine(DodgeDelay());
+            //            anim.SetTrigger("Dodge");
+            //            StartCoroutine(DodgeDelay());
+            StartCoroutine(dodge());
         }
     }
     void Attack()
@@ -214,6 +224,7 @@ public class Jade : MonoBehaviour
         }
         else
         {
+            canDodge = true;
             onDodge = true;
         }
         // Q½ºÅ³
@@ -281,6 +292,25 @@ public class Jade : MonoBehaviour
         canMove = true;
         canDodge = true;
         canSkill = true;
+    }
+    IEnumerator dodge()
+    {
+        //0.9sec
+        curDodgeCoolTime = 0.0f;
+        anim.SetTrigger("Dodge");
+        canMove = false;
+        canAttack = false;
+        canSkill = false;
+        doingDodge = true;
+        moveSpeed = 60.0f;
+        yield return new WaitForSeconds(0.6f);
+        moveSpeed = 18.0f;
+        yield return new WaitForSeconds(0.25f);
+        moveSpeed = 30.0f;
+        canMove = true;
+        canAttack = true;
+        canSkill = true;
+        doingDodge = false;
     }
     IEnumerator DodgeDelay()
     {
