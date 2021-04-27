@@ -37,6 +37,10 @@ public class Enemy1 : MonoBehaviour
 
     void Start()
     {
+        // 모든 적은 로직이 비슷하기 때문에 같은 스크립트를 쓰지만
+        // Layer나 Tag를 주어 데미지 등 고유 값만 바꾸어주자
+
+
         anim = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
         bulletLine = GetComponent<LineRenderer>();
@@ -181,7 +185,14 @@ public class Enemy1 : MonoBehaviour
         //    GetComponent<Rigidbody>().isKinematic = true;
         //}
 
-
+        // Leina
+        if (collision.gameObject.tag == "LeinaAttack")
+        {
+            LeinaArrow arrow = collision.gameObject.GetComponent<LeinaArrow>();
+            currentHp -= arrow.damage;
+            hpBar.SetHp(currentHp);
+            GetComponent<Rigidbody>().isKinematic = true;
+        }
 
 
 

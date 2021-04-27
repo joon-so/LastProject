@@ -137,9 +137,9 @@ public class Leina : MonoBehaviour
                     transform.LookAt(transform.position + nextVec);
                 }
 
-                GameObject instantBullet = Instantiate(arrow, arrowPos.position, arrowPos.rotation);
-                Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
-                bulletRigid.velocity = arrowPos.forward;
+                GameObject instantArrow = Instantiate(arrow, arrowPos.position, arrowPos.rotation);
+                Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
+                arrowRigid.velocity = arrowPos.forward;
 
                 moveSpeed = 0f;
                 anim.SetBool("Run", false);
@@ -265,6 +265,7 @@ public class Leina : MonoBehaviour
         canMove = true;
         canDodge = true;
         canSkill = true;
+        canAttack = true;
     }
 
     IEnumerator DodgeDelay()
@@ -294,17 +295,18 @@ public class Leina : MonoBehaviour
             yield return new WaitForSeconds(3.0f);
             chargingEffect.SetActive(true);
 
-            GameObject instantArrow = Instantiate(posionArrow, chargingShotPos.position, chargingShotPos.rotation);
-            //instantArrow.transform.localScale += new Vector3(Time.deltaTime, Time.deltaTime, Time.deltaTime);
-            Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
-            arrowRigid.velocity = chargingShotPos.forward * 100;
+
 
             // 화살 크기 커지면서 
 
 
             // 차징
-            yield return new WaitForSeconds(1.8f);
+            yield return new WaitForSeconds(2.3f);
             //anim.SetFloat("Delay", 1.0f);
+            GameObject instantArrow = Instantiate(posionArrow, chargingShotPos.position, chargingShotPos.rotation);
+            instantArrow.transform.Rotate(new Vector3(0, 90, 0));
+            Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
+            arrowRigid.velocity = chargingShotPos.forward * 100;
             chargingEffect.SetActive(false);
             // 샷
 
@@ -314,5 +316,25 @@ public class Leina : MonoBehaviour
         canMove = true;
         canDodge = true;
         canSkill = true;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemy1Bullet")
+        {
+            Enemy1Bullet enemy1bullet = collision.gameObject.GetComponent<Enemy1Bullet>();
+            if (GameManager.instance.mainPlayerHp > 0)
+            {
+                GameManager.instance.mainPlayerHp -= enemy1bullet.damage;
+            }
+        }
+        if (collision.gameObject.tag == "Enemy2Bullet")
+        {
+            Enemy2Bullet enemy2bullet = collision.gameObject.GetComponent<Enemy2Bullet>();
+            if (GameManager.instance.mainPlayerHp > 0)
+            {
+                GameManager.instance.mainPlayerHp -= enemy2bullet.damage;
+            }
+        }
     }
 }

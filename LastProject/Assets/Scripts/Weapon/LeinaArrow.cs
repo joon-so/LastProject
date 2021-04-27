@@ -19,12 +19,13 @@ public class LeinaArrow : MonoBehaviour
     private RotateToMouseScript rotateToMouse;
     private GameObject target;
 
+    public int damage = 30;
+
     void Start()
     {
         startPos = transform.position;
         rigid = GetComponent<Rigidbody>();
 
-        //used to create a radius for the accuracy and have a very unique randomness
         if (accuracy != 100)
         {
             accuracy = 1 - (accuracy / 100);
