@@ -145,7 +145,7 @@ public class Enemy1 : MonoBehaviour
         movable = false;
         bulletLine.enabled = false;
         yield return new WaitForSeconds(1f);
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 
     public void HitJadeGrenade()
