@@ -20,13 +20,17 @@ public class LeinaPosionArrow : MonoBehaviour
     private GameObject target;
 
     public int damage = 20;
+    [SerializeField] GameObject arrowObj;
+    private float curScale;
+    private float maxScale;
 
     void Start()
     {
+        curScale = 1;
+        maxScale = 5;
         startPos = transform.position;
         rigid = GetComponent<Rigidbody>();
 
-        //used to create a radius for the accuracy and have a very unique randomness
         if (accuracy != 100)
         {
             accuracy = 1 - (accuracy / 100);
@@ -75,8 +79,14 @@ public class LeinaPosionArrow : MonoBehaviour
             rigid.position += (transform.forward + offset) * (speed * Time.deltaTime);
 
         // ¹üÀ§
-        if (Vector3.Distance(startPos, transform.position) > 50.0f)
+        if (Vector3.Distance(startPos, transform.position) > 100.0f)
             Destroy(gameObject);
+
+        if (curScale < maxScale)
+        {
+            curScale += Time.deltaTime * 5;
+            arrowObj.transform.localScale = new Vector3(curScale, curScale, curScale);
+        }
     }
 
     void OnCollisionEnter(Collision collision)
@@ -149,11 +159,5 @@ public class LeinaPosionArrow : MonoBehaviour
 
         yield return new WaitForSeconds(waitTime);
         Destroy(gameObject);
-    }
-
-    public void SetTarget(GameObject trg, RotateToMouseScript rotateTo)
-    {
-        target = trg;
-        rotateToMouse = rotateTo;
     }
 }

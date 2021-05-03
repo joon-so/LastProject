@@ -10,6 +10,7 @@ public class Leina : MonoBehaviour
 
     [SerializeField] GameObject chargingEffect = null;
     [SerializeField] GameObject posionArrow = null;
+    [SerializeField] GameObject posionArrowObj = null;
     [SerializeField] Transform chargingShotPos = null;
 
     public float moveSpeed = 30.0f;
@@ -37,6 +38,9 @@ public class Leina : MonoBehaviour
 
     bool onDodge;
 
+    float curScale;
+    float maxScale;
+
     Vector3 vecTarget;
 
     Animator anim;
@@ -62,6 +66,8 @@ public class Leina : MonoBehaviour
 
         curfireDelay = 1.0f;
         curDodgeCoolTime = dodgeCoolTime;
+        curScale = 1;
+        maxScale = 5;
     }
     void Update()
     {
@@ -291,25 +297,24 @@ public class Leina : MonoBehaviour
 
             anim.SetTrigger("chargingShot");
             
-            // ½ÃÀ§ ´ó±â°í
+            // Â÷Â¡
             yield return new WaitForSeconds(3.0f);
             chargingEffect.SetActive(true);
-
-
-
-            // È­»ì Å©±â Ä¿Áö¸é¼­ 
-
-
-            // Â÷Â¡
-            yield return new WaitForSeconds(2.3f);
-            //anim.SetFloat("Delay", 1.0f);
+            //posionArrowObj.SetActive(true);
+            //while (curScale < maxScale)
+            //{
+            //    posionArrowObj.transform.localScale = new Vector3(curScale, curScale, curScale);
+            //    curScale += 0.1f;
+            //    Debug.Log(curScale);
+            //}
+            //posionArrowObj.SetActive(false);
             GameObject instantArrow = Instantiate(posionArrow, chargingShotPos.position, chargingShotPos.rotation);
-            instantArrow.transform.Rotate(new Vector3(0, 90, 0));
-            Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
-            arrowRigid.velocity = chargingShotPos.forward * 100;
-            chargingEffect.SetActive(false);
             // ¼¦
-
+            yield return new WaitForSeconds(2.3f);
+            
+            Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
+            arrowRigid.velocity = chargingShotPos.forward * 200;
+            chargingEffect.SetActive(false);
         }
         yield return new WaitForSeconds(1);
         canAttack = true;
