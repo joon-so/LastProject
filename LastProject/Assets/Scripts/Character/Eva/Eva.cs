@@ -321,5 +321,7 @@ public class Eva : MonoBehaviour
     IEnumerator FireGun()
     {
         qSkill.SetActive(true);
+        yield return new WaitForSeconds(3.3f);
+        qSkill.SetActive(false);
     }
 }
