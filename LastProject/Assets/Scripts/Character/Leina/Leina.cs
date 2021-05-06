@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Leina : MonoBehaviour
 {
@@ -13,23 +14,18 @@ public class Leina : MonoBehaviour
     [SerializeField] GameObject posionArrowObj = null;
     [SerializeField] Transform chargingShotPos = null;
 
-    public float moveSpeed = 30.0f;
+    public float moveSpeed = 5.0f;
+    public float dodgeCoolTime = 7.0f;
+    public float qSkillCoolTime = 5.0f;
+    public float wSkillCoolTime = 5.0f;
+    public float fireDelay = 1.0f;
     public float followDistance = 5.0f;
 
-    public float fireDelay = 1.0f;
-    float curfireDelay;
+    float curDodgeCoolTime;
+    float curQSkillCoolTime;
+    float curWSkillCoolTime;
 
-    public float dodgeCoolTime = 3.0f;
-    float curDodgeCoolTime = 0;
-
-    public float qskillCoolTime = 5.0f;
-    float curQSkillCoolTime = 0;
-
-    public float wskillCoolTime = 5.0f;
-    float curWSkillCoolTime = 0;
-
-    bool onQSkill;
-    bool onWSkill;
+    float curFireDelay;
 
     bool canAttack;
     bool canDodge;
@@ -37,43 +33,45 @@ public class Leina : MonoBehaviour
     bool canSkill;
 
     bool onDodge;
+    bool onQSkill;
+    bool onWSkill;
 
-    float curScale;
-    float maxScale;
+    float distanceWithPlayer;
 
     Vector3 vecTarget;
 
     Animator anim;
-
-    float distanceWithPlayer;
+    NavMeshAgent nav;
     GameObject tagCharacter;
 
     void Awake()
     {
         anim = GetComponent<Animator>();
+        nav = GetComponent<NavMeshAgent>();
     }
     void Start()
     {
         vecTarget = transform.position;
-        onQSkill = true;
-        onWSkill = true;
-        onDodge = true;
-        
-        canAttack = true;
-        canDodge = true;
+        curDodgeCoolTime = 0;
+        curQSkillCoolTime = 0;
+        curWSkillCoolTime = 0;
+
         canMove = true;
+        canDodge = true;
+        canAttack = true;
         canSkill = true;
 
-        curfireDelay = 1.0f;
-        curDodgeCoolTime = dodgeCoolTime;
-        curScale = 1;
-        maxScale = 5;
+        onDodge = true;
+        onQSkill = true;
+        onWSkill = true;
+
+        curFireDelay = fireDelay;
     }
     void Update()
     {
         if (gameObject.transform.tag == "MainCharacter")
         {
-            curfireDelay += Time.deltaTime;
+            curFireDelay += Time.deltaTime;
             if (canMove)
                 Move();
             if (canAttack)
@@ -99,7 +97,7 @@ public class Leina : MonoBehaviour
     {
         if (Input.GetMouseButton(1))
         {
-            moveSpeed = 30.0f;
+            moveSpeed = 5.0f;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -122,40 +120,6 @@ public class Leina : MonoBehaviour
             moveSpeed = 0f;
             anim.SetBool("Run", false);
             vecTarget = transform.position;
-        }
-    }
-    void Attack()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            canMove = false;
-            canDodge = false;
-            canSkill = false;
-
-            if (curfireDelay > fireDelay)
-            {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-                {
-                    Vector3 nextVec = hit.point - transform.position;
-                    nextVec.y = 0;
-                    transform.LookAt(transform.position + nextVec);
-                }
-
-                GameObject instantArrow = Instantiate(arrow, arrowPos.position, arrowPos.rotation);
-                Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
-                arrowRigid.velocity = arrowPos.forward;
-
-                moveSpeed = 0f;
-                anim.SetBool("Run", false);
-                vecTarget = transform.position;
-                
-                anim.SetTrigger("shotArrow");
-                curfireDelay = 0;
-
-                StartCoroutine(AttackDelay());
-            }
         }
     }
     void Dodge()
@@ -186,9 +150,43 @@ public class Leina : MonoBehaviour
         }
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Dodge"))
         {
-            transform.Translate(Vector3.forward * 40 * Time.deltaTime);
+            transform.Translate(Vector3.forward * 5 * Time.deltaTime);
             vecTarget = transform.position;
             anim.SetBool("Run", false);
+        }
+    }
+    void Attack()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            canMove = false;
+            canDodge = false;
+            canSkill = false;
+
+            if (curFireDelay > fireDelay)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+                {
+                    Vector3 nextVec = hit.point - transform.position;
+                    nextVec.y = 0;
+                    transform.LookAt(transform.position + nextVec);
+                }
+
+                GameObject instantArrow = Instantiate(arrow, arrowPos.position, arrowPos.rotation);
+                Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
+                arrowRigid.velocity = arrowPos.forward;
+
+                moveSpeed = 0f;
+                anim.SetBool("Run", false);
+                vecTarget = transform.position;
+
+                anim.SetTrigger("shotArrow");
+                curFireDelay = 0;
+
+                StartCoroutine(AttackDelay());
+            }
         }
     }
     void AttackRange()
@@ -203,10 +201,8 @@ public class Leina : MonoBehaviour
             attackRange.SetActive(false);
         }
     }
-
     void CoolTime()
     {
-        // È¸ÇÇ
         if (curDodgeCoolTime < dodgeCoolTime)
         {
             curDodgeCoolTime += Time.deltaTime;
@@ -215,8 +211,7 @@ public class Leina : MonoBehaviour
         {
             onDodge = true;
         }
-        // Q½ºÅ³
-        if (curQSkillCoolTime < qskillCoolTime)
+        if (curQSkillCoolTime < qSkillCoolTime)
         {
             curQSkillCoolTime += Time.deltaTime;
         }
@@ -224,8 +219,7 @@ public class Leina : MonoBehaviour
         {
             onQSkill = true;
         }
-        // W½ºÅ³
-        if (curWSkillCoolTime < wskillCoolTime)
+        if (curWSkillCoolTime < wSkillCoolTime)
         {
             curWSkillCoolTime += Time.deltaTime;
         }
@@ -255,6 +249,16 @@ public class Leina : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
+            onWSkill = false;
+            curWSkillCoolTime = 0;
+            anim.SetBool("Run", false);
+
+            canAttack = false;
+            canMove = false;
+            canDodge = false;
+            canSkill = false;
+
+            StartCoroutine(ContinuityShot());
         }
     }
     void E_Skill()
@@ -264,16 +268,13 @@ public class Leina : MonoBehaviour
 
         }
     }
-
     IEnumerator AttackDelay()
     {
         yield return new WaitForSeconds(0.5f);
         canMove = true;
         canDodge = true;
         canSkill = true;
-        canAttack = true;
     }
-
     IEnumerator DodgeDelay()
     {
         yield return new WaitForSeconds(1.0f);
@@ -296,24 +297,14 @@ public class Leina : MonoBehaviour
             transform.Rotate(0, transform.rotation.y + 90, 0);
 
             anim.SetTrigger("chargingShot");
-            
             // Â÷Â¡
             yield return new WaitForSeconds(3.0f);
-            chargingEffect.SetActive(true);
-            //posionArrowObj.SetActive(true);
-            //while (curScale < maxScale)
-            //{
-            //    posionArrowObj.transform.localScale = new Vector3(curScale, curScale, curScale);
-            //    curScale += 0.1f;
-            //    Debug.Log(curScale);
-            //}
-            //posionArrowObj.SetActive(false);
             GameObject instantArrow = Instantiate(posionArrow, chargingShotPos.position, chargingShotPos.rotation);
             // ¼¦
             yield return new WaitForSeconds(2.3f);
             
             Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
-            arrowRigid.velocity = chargingShotPos.forward * 200;
+            arrowRigid.velocity = chargingShotPos.forward;
             chargingEffect.SetActive(false);
         }
         yield return new WaitForSeconds(1);
@@ -321,6 +312,11 @@ public class Leina : MonoBehaviour
         canMove = true;
         canDodge = true;
         canSkill = true;
+    }
+
+    IEnumerator ContinuityShot()
+    {
+        yield return new WaitForSeconds(1);
     }
 
     void OnCollisionEnter(Collision collision)

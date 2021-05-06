@@ -4890,7 +4890,7 @@ Transform:
   m_GameObject: {fileID: 978226826277819363}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 980475872763731925}
   - {fileID: 974131883311402485}
@@ -4909,7 +4909,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f4be10bc4aaa7849951a6220ed35f3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 200
+  speed: 40
   accuracy: 100
   fireRate: 5
   muzzlePrefab: {fileID: 1357030889595668, guid: 095b696d71e9fd5449b20b4751bef972, type: 3}
@@ -4917,6 +4917,7 @@ MonoBehaviour:
   trails:
   - {fileID: 978289400752649905}
   damage: 20
+  distance: 15
 --- !u!199 &1105139707363824799
 ParticleSystemRenderer:
   serializedVersion: 6

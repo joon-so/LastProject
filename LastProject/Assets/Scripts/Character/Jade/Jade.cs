@@ -22,80 +22,74 @@ public class Jade : MonoBehaviour
     [SerializeField] Transform grenadePos = null;
     [SerializeField] GameObject Grenade = null;
 
-    public float moveSpeed = 30.0f;
-
-    public float fireCoolTime = 0.5f;
-
+    public float moveSpeed = 5.0f;
+    public float dodgeCoolTime = 7.0f;
+    public float qSkillCoolTime = 5.0f;
+    public float wSkillCoolTime = 5.0f;
+    public float fireDelay = 0.5f;
     public float followDistance = 5.0f;
+    public float grenadeDistance = 10.0f;
 
-    public float dodgeCoolTime = 3.0f;
-    float curDodgeCoolTime = 0;
+    float curDodgeCoolTime;
+    float curQSkillCoolTime;
+    float curWSkillCoolTime;
 
-    public float qskillCoolTime = 7.0f;
-    float curQSkillCoolTime = 0;
-    public float wskillCoolTime = 4.0f;
-    float curWSkillCoolTime = 0;
+    float curFireDelay;
+
+    bool canMove;
+    bool canDodge;
+    bool canAttack;
+    bool canSkill;
 
     bool onDodge;
     bool onQSkill;
     bool onWSkill;
 
-    bool canMove;
-    bool canAttack;
-    bool canDodge;
-    bool canSkill;
-
-    bool doingDodge;
+    float distanceWithPlayer;
 
     Vector3 vecTarget;
 
-    float fireDelay;
-
     Animator anim;
-    Weapon weapon;
-
-    float distanceWithPlayer;
+    NavMeshAgent nav;
     GameObject tagCharacter;
 
     void Awake()
     {
         anim = GetComponent<Animator>();
+        nav = GetComponent<NavMeshAgent>();
     }
     void Start()
     {
         vecTarget = transform.position;
+
+        curDodgeCoolTime = 0;
+        curQSkillCoolTime = 0;
+        curWSkillCoolTime = 0;
+        
+        canMove = false;
+        canDodge = false;
+        canAttack = false;
+        canSkill = false;
+
         onDodge = true;
         onQSkill = true;
         onWSkill = true;
 
-        canAttack = false;
-        canMove = false;
-        canDodge = false;
-        canSkill = false;
+        curFireDelay = fireDelay;
 
-        doingDodge = false;
-
-        curDodgeCoolTime = dodgeCoolTime;
         StartCoroutine(DrawAssaultRifle());
     }
-
     void Update()
     {
         if (gameObject.transform.tag == "MainCharacter")
         {
-            fireDelay += Time.deltaTime;
+            curFireDelay += Time.deltaTime;
             if (canMove)
                 Move();
             if (canAttack)
                 Attack();
             if (canDodge)
                 Dodge();
-            if (doingDodge)
-            {
-                transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
-                vecTarget = transform.position;
-            }
-
             if (canSkill)
             {
                 Q_Skill();
@@ -115,7 +109,7 @@ public class Jade : MonoBehaviour
     {
         if (Input.GetMouseButton(1))
         {
-            moveSpeed = 30.0f;
+            moveSpeed = 5.0f;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -142,31 +136,35 @@ public class Jade : MonoBehaviour
     }
     void Dodge()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && onDodge)
         {
-            //            canAttack = false;
-            //            canMove = false;
-            //            canSkill = false;
+            onDodge = false;
 
-            //            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //            RaycastHit rayHit;
-            //            if (Physics.Raycast(ray, out rayHit, Mathf.Infinity))
-            //            {
-            //                vecTarget = rayHit.point - transform.position;
-            //                transform.LookAt(transform.position + vecTarget);
-            //            }
-            //            curDodgeCoolTime = 0.0f;
+            canAttack = false;
+            canMove = false;
+            canSkill = false;
 
-            //            moveSpeed *=2;
+            curDodgeCoolTime = 0.0f;
 
-            //            transform.position = Vector3.MoveTowards(transform.position, vecTarget, moveSpeed * Time.deltaTime);
-            ////            transform.position += transform.position + Vector3.forward * moveSpeed * Time.deltaTime;
-            ////            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
-            //            vecTarget = transform.position;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            {
+                Vector3 nextVec = hit.point - transform.position;
+                nextVec.y = 0;
+                transform.LookAt(transform.position + nextVec);
+            }
 
-            //            anim.SetTrigger("Dodge");
-            //            StartCoroutine(DodgeDelay());
-            StartCoroutine(dodge());
+            moveSpeed *= 2;
+            anim.SetTrigger("Dodge");
+            
+            StartCoroutine(DodgeDelay());
+        }
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("DodgeForward"))
+        {
+            transform.Translate(Vector3.forward * Time.deltaTime);
+            vecTarget = transform.position;
+            anim.SetBool("Run", false);
         }
     }
     void Attack()
@@ -177,7 +175,7 @@ public class Jade : MonoBehaviour
             canDodge = false;
             canSkill = false;
 
-            if (fireDelay > fireCoolTime)
+            if (curFireDelay > fireDelay)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
@@ -197,7 +195,7 @@ public class Jade : MonoBehaviour
                 vecTarget = transform.position;
 
                 anim.SetTrigger("shootAssaultRifle");
-                fireDelay = 0;
+                curFireDelay = 0;
 
                 StartCoroutine(AttackDelay());
             }
@@ -217,18 +215,15 @@ public class Jade : MonoBehaviour
     }
     void CoolTime()
     {
-        // 회피
         if (curDodgeCoolTime < dodgeCoolTime)
         {
             curDodgeCoolTime += Time.deltaTime;
         }
         else
         {
-            canDodge = true;
             onDodge = true;
         }
-        // Q스킬
-        if (curQSkillCoolTime < qskillCoolTime)
+        if (curQSkillCoolTime < qSkillCoolTime)
         {
             curQSkillCoolTime += Time.deltaTime;
         }
@@ -236,8 +231,7 @@ public class Jade : MonoBehaviour
         {
             onQSkill = true;
         }
-        // W스킬
-        if (curWSkillCoolTime < wskillCoolTime)
+        if (curWSkillCoolTime < wSkillCoolTime)
         {
             curWSkillCoolTime += Time.deltaTime;
         }
@@ -293,28 +287,9 @@ public class Jade : MonoBehaviour
         canDodge = true;
         canSkill = true;
     }
-    IEnumerator dodge()
-    {
-        //0.9sec
-        curDodgeCoolTime = 0.0f;
-        anim.SetTrigger("Dodge");
-        canMove = false;
-        canAttack = false;
-        canSkill = false;
-        doingDodge = true;
-        moveSpeed = 60.0f;
-        yield return new WaitForSeconds(0.6f);
-        moveSpeed = 18.0f;
-        yield return new WaitForSeconds(0.25f);
-        moveSpeed = 30.0f;
-        canMove = true;
-        canAttack = true;
-        canSkill = true;
-        doingDodge = false;
-    }
     IEnumerator DodgeDelay()
     {
-        yield return new WaitForSeconds(0.9f);
+        yield return new WaitForSeconds(1.0f);
         canAttack = true;
         canMove = true;
         canSkill = true;
@@ -323,7 +298,7 @@ public class Jade : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         anim.SetTrigger("drawAssaultRifle");
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.0f);
         backAssaultRifle.SetActive(false);
         useAssaultRifle.SetActive(true);
         canMove = true;
@@ -360,7 +335,7 @@ public class Jade : MonoBehaviour
             anim.SetTrigger("shootMissileLauncher");
             GameObject instantMissile = Instantiate(missileBullet, missileBulletPos.position, missileBulletPos.rotation);
             Rigidbody missileRigid = instantMissile.GetComponent<Rigidbody>();
-            missileRigid.velocity = missileBulletPos.forward * 100;
+            missileRigid.velocity = missileBulletPos.forward;
 
             yield return new WaitForSeconds(1.0f);
 
@@ -387,8 +362,8 @@ public class Jade : MonoBehaviour
         if (Physics.Raycast(ray, out rayHit))
         {
             Vector3 nextVec = rayHit.point - transform.position;
-            if (Vector3.Distance(nextVec, transform.position) > 80.0f)
-                nextVec = nextVec.normalized * 80.0f;
+            if (Vector3.Distance(nextVec, transform.position) > 10.0f)
+                nextVec = nextVec.normalized * 10.0f;
             
             Debug.Log(nextVec);
             nextVec.y = 0;
@@ -396,7 +371,7 @@ public class Jade : MonoBehaviour
 
             GameObject instantGrenade = Instantiate(Grenade, grenadePos.position, grenadePos.rotation);
             Rigidbody rigidGrenade = instantGrenade.GetComponent<Rigidbody>();
-            rigidGrenade.AddForce(nextVec * 0.5f, ForceMode.Impulse);
+            rigidGrenade.AddForce(nextVec, ForceMode.Impulse);
             rigidGrenade.AddTorque(Vector3.back * 10, ForceMode.Impulse);
         }
 
@@ -426,6 +401,4 @@ public class Jade : MonoBehaviour
             }
         }
     }
-
-    // 태그시 초기화할 것들을 생각해보자 ex) 플레이어 이동속도, 클릭했던 좌표 등
 }

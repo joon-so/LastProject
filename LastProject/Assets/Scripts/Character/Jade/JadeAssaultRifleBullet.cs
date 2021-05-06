@@ -20,7 +20,7 @@ public class JadeAssaultRifleBullet : MonoBehaviour
     private GameObject target;
 
     public int damage = 20;
-
+    public float distance = 10.0f;
     void Start()
     {
         startPos = transform.position;
@@ -74,7 +74,7 @@ public class JadeAssaultRifleBullet : MonoBehaviour
             rigid.position += (transform.forward + offset) * (speed * Time.deltaTime);
 
         // ¹üÀ§
-        if (Vector3.Distance(startPos, transform.position) > 50.0f)
+        if (Vector3.Distance(startPos, transform.position) > distance)
             Destroy(gameObject);
     }
 

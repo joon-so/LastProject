@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 481623615265087912}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children:
   - {fileID: 6061653824156838353}
   - {fileID: 6061290871238464215}
@@ -59,7 +59,7 @@ Transform:
   m_GameObject: {fileID: 1306669929162588143}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6061349752340280089}
   m_RootOrder: 2
@@ -4982,7 +4982,7 @@ Transform:
   m_GameObject: {fileID: 3118958147257471760}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6061349752340280089}
   m_RootOrder: 4
@@ -9798,7 +9798,7 @@ Transform:
   m_GameObject: {fileID: 3988147371864147985}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6061349752340280089}
   m_RootOrder: 3
@@ -14849,7 +14849,7 @@ GameObject:
   - component: {fileID: 7699003047080610735}
   - component: {fileID: 1138767264185452654}
   m_Layer: 8
-  m_Name: Grenade
+  m_Name: JadeGrenade
   m_TagString: KarmenWSkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14918,6 +14918,7 @@ MonoBehaviour:
   msehObj: {fileID: 481623615265087912}
   effectObj: {fileID: 5894973626451312091}
   rigid: {fileID: 5049783153078298723}
+  damage: 70
 --- !u!199 &7699003047080610735
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -19824,15 +19825,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011693693590, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4000011693693590, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
       propertyPath: m_LocalScale.y
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4000011693693590, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4000011693693590, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
       propertyPath: m_LocalPosition.x

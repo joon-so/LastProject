@@ -20,6 +20,7 @@ public class JadeMissileBullet : MonoBehaviour
     private GameObject target;
 
     public int damage = 100;
+    public float distance = 20.0f;
 
     void Start()
     {
@@ -74,7 +75,7 @@ public class JadeMissileBullet : MonoBehaviour
             rigid.position += (transform.forward + offset) * (speed * Time.deltaTime);
 
         // ¹üÀ§
-        if (Vector3.Distance(startPos, transform.position) > 100.0f)
+        if (Vector3.Distance(startPos, transform.position) > distance)
             Destroy(gameObject);
     }
 
