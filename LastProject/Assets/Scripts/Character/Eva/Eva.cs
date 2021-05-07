@@ -7,6 +7,9 @@ public class Eva : MonoBehaviour
 {
     [SerializeField] GameObject attackRange = null;
     [SerializeField] GameObject qSkill = null;
+    [SerializeField] GameObject wSkillEffect = null;
+    [SerializeField] GameObject wSkillShockEffect = null;
+    public Transform wSkillPos = null;
 
     public float moveSpeed = 5.0f;
     public float dodgeCoolTime = 5.0f;
@@ -248,7 +251,7 @@ public class Eva : MonoBehaviour
             anim.SetBool("Run", false);
 
             canAttack = false;
-            canMove = false;
+            //canMove = false;
             canDodge = false;
             canSkill = false;
 
@@ -258,7 +261,19 @@ public class Eva : MonoBehaviour
 
     void W_Skill()
     {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            onWSkill = false;
+            curWSkillCoolTime = 0;
+            anim.SetBool("Run", false);
 
+            canAttack = false;
+            canMove = false;
+            canDodge = false;
+            canSkill = false;
+
+            StartCoroutine(ShockWave());
+        }
     }
     void E_Skill()
     {
@@ -320,8 +335,65 @@ public class Eva : MonoBehaviour
 
     IEnumerator FireGun()
     {
+        curQSkillCoolTime = 0.0f;
         qSkill.SetActive(true);
-        yield return new WaitForSeconds(3.3f);
+        anim.SetTrigger("QSkill");
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            Vector3 nextVec = hit.point - transform.position;
+            nextVec.y = 0;
+            transform.LookAt(transform.position + nextVec);
+        }
+
+        yield return new WaitForSeconds(5.0f);
         qSkill.SetActive(false);
+
+
+        vecTarget = transform.position;
+        anim.SetBool("Run", false);
+
+        canAttack = true;
+        canMove = true;
+        canDodge = true;
+        canSkill = true;
+    }
+
+    IEnumerator ShockWave()
+    {
+        curWSkillCoolTime = 0.0f;
+        anim.SetTrigger("WSkill");
+        Instantiate(wSkillEffect, wSkillPos.position, wSkillPos.rotation);
+        yield return new WaitForSeconds(0.5f);
+        anim.SetFloat("Speed", 0.0f);
+        yield return new WaitForSeconds(0.5f);
+        anim.SetFloat("Speed", 1.0f);
+
+
+        yield return new WaitForSeconds(0.3f);
+        // »ý¼º
+        wSkillShockEffect.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
+        Instantiate(wSkillShockEffect, transform.position + transform.forward * 1.5f, transform.rotation);
+        yield return new WaitForSeconds(0.4f);
+        wSkillShockEffect.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+        Instantiate(wSkillShockEffect, transform.position + transform.forward * 3.5f + transform.right, transform.rotation);
+        Instantiate(wSkillShockEffect, transform.position + transform.forward * 3.5f + -transform.right, transform.rotation);
+        yield return new WaitForSeconds(0.4f);
+        wSkillShockEffect.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+        Instantiate(wSkillShockEffect, transform.position + transform.forward * 5.5f + transform.right*2, transform.rotation);
+        Instantiate(wSkillShockEffect, transform.position + transform.forward * 5.5f, transform.rotation);
+        Instantiate(wSkillShockEffect, transform.position + transform.forward * 5.5f + -transform.right*2, transform.rotation);
+
+        yield return new WaitForSeconds(1.5f);
+        anim.SetFloat("Speed", 1.0f);
+
+
+        vecTarget = transform.position;
+
+        canAttack = true;
+        canMove = true;
+        canDodge = true;
+        canSkill = true;
     }
 }

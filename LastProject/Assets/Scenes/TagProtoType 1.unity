@@ -323,7 +323,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4159415346402986, guid: a1afe18496d01214a9c0e5619be5784a, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4159415346402986, guid: a1afe18496d01214a9c0e5619be5784a, type: 3}
       propertyPath: m_LocalScale.x
@@ -488,6 +488,79 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 498991652}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &643209225
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1344049707605344, guid: 0fec24248c09444459612b794514e226, type: 3}
+      propertyPath: m_Name
+      value: Fire2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1344049707605344, guid: 0fec24248c09444459612b794514e226, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4741941151688866, guid: 0fec24248c09444459612b794514e226, type: 3}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4741941151688866, guid: 0fec24248c09444459612b794514e226, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4741941151688866, guid: 0fec24248c09444459612b794514e226, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4741941151688866, guid: 0fec24248c09444459612b794514e226, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4741941151688866, guid: 0fec24248c09444459612b794514e226, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4741941151688866, guid: 0fec24248c09444459612b794514e226, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4741941151688866, guid: 0fec24248c09444459612b794514e226, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4741941151688866, guid: 0fec24248c09444459612b794514e226, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4741941151688866, guid: 0fec24248c09444459612b794514e226, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4741941151688866, guid: 0fec24248c09444459612b794514e226, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4741941151688866, guid: 0fec24248c09444459612b794514e226, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 199179873725819420, guid: 0fec24248c09444459612b794514e226, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 199374690278453272, guid: 0fec24248c09444459612b794514e226, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 199573062751694042, guid: 0fec24248c09444459612b794514e226, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0fec24248c09444459612b794514e226, type: 3}
 --- !u!1 &681370088
 GameObject:
   m_ObjectHideFlags: 0
@@ -533,7 +606,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &984148633 stripped
 ParticleSystem:
@@ -871,6 +944,36 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!1 &1367835541
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1367835542}
+  m_Layer: 6
+  m_Name: WSkill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1367835542
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367835541}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.6279, y: 0.021, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3663128967714655079}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &1473825748 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 939776833598701173, guid: 3b868d0499188ab498467bd67c2650f3, type: 3}
@@ -1071,7 +1174,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1882821413
 GameObject:
@@ -1260,7 +1363,7 @@ Transform:
   m_LocalScale: {x: 5, y: 1, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1937541275
 MonoBehaviour:
@@ -1306,6 +1409,71 @@ Transform:
   m_Father: {fileID: 18120671}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &2025256957
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1471962235837796, guid: d6ec55c27f24e0d4eb784216f08eeba4, type: 3}
+      propertyPath: m_Name
+      value: Fire3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1471962235837796, guid: d6ec55c27f24e0d4eb784216f08eeba4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4346979635813750, guid: d6ec55c27f24e0d4eb784216f08eeba4, type: 3}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4346979635813750, guid: d6ec55c27f24e0d4eb784216f08eeba4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4346979635813750, guid: d6ec55c27f24e0d4eb784216f08eeba4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4346979635813750, guid: d6ec55c27f24e0d4eb784216f08eeba4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4346979635813750, guid: d6ec55c27f24e0d4eb784216f08eeba4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4346979635813750, guid: d6ec55c27f24e0d4eb784216f08eeba4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4346979635813750, guid: d6ec55c27f24e0d4eb784216f08eeba4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4346979635813750, guid: d6ec55c27f24e0d4eb784216f08eeba4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4346979635813750, guid: d6ec55c27f24e0d4eb784216f08eeba4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4346979635813750, guid: d6ec55c27f24e0d4eb784216f08eeba4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4346979635813750, guid: d6ec55c27f24e0d4eb784216f08eeba4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 199173222215734134, guid: d6ec55c27f24e0d4eb784216f08eeba4, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d6ec55c27f24e0d4eb784216f08eeba4, type: 3}
 --- !u!1 &12198902862109102
 GameObject:
   m_ObjectHideFlags: 0
@@ -1315,7 +1483,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5185886650049104678}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1331,7 +1499,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 350922767706871416}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: thigh_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1348,7 +1516,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5978766997657902912}
   - component: {fileID: 6501251318125962037}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Mask_01_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1407,7 +1575,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4708718617798373622}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AttackRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1424,7 +1592,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2323696474700627074}
   - component: {fileID: 1003517113141388950}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Mask_Detail_01_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6184,7 +6352,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3830184371352210211}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ball_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6288,6 +6456,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: {fileID: 194734617629201897}
   qSkill: {fileID: 4994946663737070285}
+  wSkillEffect: {fileID: 1186704568076440110, guid: a1c92d07e96344349a6f775e717ce192, type: 3}
+  wSkillShockEffect: {fileID: 3508642095436736753, guid: 7a413da35185f0f4798feb19aee6e927, type: 3}
+  wSkillPos: {fileID: 1367835542}
   moveSpeed: 5
   dodgeCoolTime: 5
   qSkillCoolTime: 10
@@ -6362,7 +6533,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4818877757920400675}
   - component: {fileID: 3914366243775923216}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Body_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6379,7 +6550,7 @@ GameObject:
   m_Component:
   - component: {fileID: 987580873782771493}
   - component: {fileID: 8825360195243573987}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Firegun_Hose_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6396,7 +6567,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8968202063435796598}
   - component: {fileID: 1622256814200562954}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Mini_Bags_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6412,7 +6583,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4664780354046890043}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: clavicle_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6467,7 +6638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 939776833598857813, guid: 3b868d0499188ab498467bd67c2650f3, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 939776833598857813, guid: 3b868d0499188ab498467bd67c2650f3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6695,7 +6866,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5924484909123304811}
   - component: {fileID: 5509331450753725813}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Mask_Detail_02_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6726,7 +6897,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3129023893598928451}
   - component: {fileID: 6660641565587255944}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Belts_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6756,7 +6927,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7246701810676653100}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: index_01_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6787,7 +6958,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3663128967714655079}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: lowerarm_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6833,7 +7004,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1475480430236934821}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ring_03_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6949,7 +7120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4653330121823790390}
   - component: {fileID: 5646033593383984791}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Armors_08_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6966,7 +7137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8242366078575641970}
   - component: {fileID: 1916694476559765724}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: range
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6983,7 +7154,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7919692039335697407}
   - component: {fileID: 8730447695339892140}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Armors_04_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6999,7 +7170,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 152653739978775130}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pinky_01_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7066,7 +7237,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1253365551962645210}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: middle_03_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7097,7 +7268,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 416984273027523720}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: foot_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7200,7 +7371,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2629840243803819290}
   - component: {fileID: 3418548269819336527}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Firegun_Backpack_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7216,7 +7387,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4033713469881714747}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: index_03_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8979,7 +9150,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2525530891540674189}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: thumb_01_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13590,7 +13761,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2736963561702347738}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ring_01_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13606,7 +13777,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3630761213414377697}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: thumb_03_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13623,7 +13794,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3701619276707000431}
   - component: {fileID: 4560397072051240311}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Bag_02_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13696,7 +13867,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2989468642664871849}
   - component: {fileID: 2178223099187227553}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Head_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13712,7 +13883,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5960109029349277742}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: calf_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13743,7 +13914,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7270046693701892487}
   - component: {fileID: 523277895997081008}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Mask_Hose_02_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13759,7 +13930,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 828033410592916043}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: hand_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13776,7 +13947,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6027647249134718022}
   - component: {fileID: 5501053864040191964}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Mask_03_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13793,7 +13964,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4560268733781038903}
   - component: {fileID: 4821577412094531813}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Bag_01_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13877,7 +14048,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7045579168012561907}
   - component: {fileID: 4138306458749351696}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Mask_Hose_01_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13908,7 +14079,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2398732015944719258}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: upperarm_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13942,6 +14113,7 @@ Transform:
   m_Children:
   - {fileID: 828033410592916043}
   - {fileID: 440355455696031051}
+  - {fileID: 1367835542}
   m_Father: {fileID: 2398732015944719258}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14027,7 +14199,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 288876035907439745}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: index_03_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14043,7 +14215,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4675567209888593176}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: middle_02_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14116,7 +14288,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4116158428739653430}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ball_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14161,7 +14333,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 187459071671557481, guid: f795df5410442ea48b6051c468481842, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 187459071671557481, guid: f795df5410442ea48b6051c468481842, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14250,7 +14422,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7291739600761493918}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: index_02_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14482,7 +14654,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6103327798982856842}
   - component: {fileID: 6306809812057680045}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Grenades_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14579,7 +14751,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3904957187814619832}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: calf_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14595,7 +14767,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2671432669595520714}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ring_03_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14654,7 +14826,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 214198822777853284}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: middle_01_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14736,7 +14908,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7256380045162410651}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: lowerarm_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14913,7 +15085,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3829700842169526816}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: middle_01_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15016,7 +15188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8017430091624308027}
   - component: {fileID: 2367887830966344602}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Armors_10_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15032,7 +15204,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2156570188490217118}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pinky_03_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15048,7 +15220,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2023508875457677056}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ring_02_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15168,7 +15340,7 @@ GameObject:
   - component: {fileID: 4257443053553904719}
   - component: {fileID: 2750361396476706467}
   - component: {fileID: 4462405572528567440}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Flames
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15185,7 +15357,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1667641178983630829}
   - component: {fileID: 5189873432463415096}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Armors_06_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15201,7 +15373,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7743335614901928495}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: thumb_02_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15232,7 +15404,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1511872195729980648}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ring_01_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15263,7 +15435,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8386659851660385985}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: hand_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15336,7 +15508,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 164436069138897244}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: lowerarm_twist_01_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15366,7 +15538,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6386529329595941952}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: spine_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15383,7 +15555,7 @@ GameObject:
   m_Component:
   - component: {fileID: 167111812700499577}
   - component: {fileID: 5945883276257874671}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Bag_Detail_01_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15508,7 +15680,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2357175452176338182}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: middle_02_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15583,7 +15755,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4969977862517986680}
   - component: {fileID: 8854073107455262974}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Firegun_Base_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15599,7 +15771,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4683160571985828738}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pinky_01_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15615,7 +15787,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1433419766559885902}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: thumb_02_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15691,7 +15863,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4799957882510542775}
   - component: {fileID: 5902837014215721998}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Blade_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15875,7 +16047,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1302516836236596346}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: clavicle_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15905,7 +16077,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4419705724460643376}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: QSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15978,7 +16150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3914783279510923481}
   - component: {fileID: 4970388432448186164}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Armors_01_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15995,7 +16167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3222322458608351144}
   - component: {fileID: 1147365533160907533}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Bag_Detail_02_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16113,7 +16285,7 @@ GameObject:
   - component: {fileID: 1162075404362790211}
   - component: {fileID: 251915198153179039}
   - component: {fileID: 4231424677805159077}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FireEmbers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16186,7 +16358,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6449785639593237401}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -7, y: 0, z: -4.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4799957882510542775}
@@ -16242,9 +16414,9 @@ GameObject:
   - component: {fileID: 4909351846097480635}
   - component: {fileID: 2704550270281900603}
   - component: {fileID: 7224712997653087102}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Eva
-  m_TagString: Untagged
+  m_TagString: MainCharacter
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16314,7 +16486,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4367347763448980719}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: thumb_03_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16331,7 +16503,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2685891858578735089}
   - component: {fileID: 8620054266057921722}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Armors_03_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16410,7 +16582,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8032015803924043297}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: index_01_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16428,7 +16600,7 @@ GameObject:
   - component: {fileID: 5275316308806630662}
   - component: {fileID: 7491677051430139022}
   - component: {fileID: 2303443019976264258}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Cloth_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16444,7 +16616,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3486373801977395459}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: thigh_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16460,7 +16632,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 440355455696031051}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: lowerarm_twist_01_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16490,7 +16662,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2176779941423368607}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: spine_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16529,7 +16701,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4367457243146041738}
   - component: {fileID: 221485761298000912}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Armors_07_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16621,7 +16793,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3097050514807744867}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: middle_03_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16696,7 +16868,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4994409554727946064}
   - component: {fileID: 3818542806386063741}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Armors_09_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16741,7 +16913,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2595249836028985003}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pelvis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16773,7 +16945,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9162852296479113156}
   - component: {fileID: 6349514624642722735}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Armors_02_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16790,7 +16962,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7662542854035718375}
   - component: {fileID: 6035485285485071773}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Helmet_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16806,7 +16978,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8577298260615505090}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: upperarm_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16865,7 +17037,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7650591655146728711}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: foot_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16882,7 +17054,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6347804709368803948}
   - component: {fileID: 3727503816072926921}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Armors_05_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16945,7 +17117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2308834029449895601}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: spine_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16962,7 +17134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4642835082028083348}
   - component: {fileID: 394726777025092988}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Mask_02_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16978,7 +17150,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9011460187788725877}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pinky_02_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16994,7 +17166,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6367485487028643844}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: index_02_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17010,7 +17182,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8313106590010530563}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17026,7 +17198,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7250911131351754691}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ring_02_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17236,7 +17408,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 244538916165800041}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pinky_03_r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17252,7 +17424,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1392216676507866042}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: thumb_01_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17268,7 +17440,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1125136812865315021}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: pinky_02_l
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17339,7 +17511,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2967134430161953566}
   - component: {fileID: 8640140490508006374}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Pants_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17355,7 +17527,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5060255908198521041}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: neck_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17452,7 +17624,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3423167655763429570}
   - component: {fileID: 6444186669811934968}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dystopia_Soldier_2_Shoes_Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
