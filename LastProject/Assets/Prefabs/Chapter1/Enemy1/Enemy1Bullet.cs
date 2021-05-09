@@ -21,9 +21,9 @@ public class Enemy1Bullet : MonoBehaviour {
     private RotateToMouseScript rotateToMouse;
     private GameObject target;
 
-    private float bulletSize = 1.0f;
-    private float maxBulletSize = 7.0f;
-    private float lifeTime = 1.0f;
+    private float bulletSize = 0.1f;
+    private float maxBulletSize = 1.0f;
+    private float lifeTime = 0.85f;
     private float curLifeTime = 0.0f;
 
     public int damage = 20;
@@ -74,7 +74,7 @@ public class Enemy1Bullet : MonoBehaviour {
         //Debug.Log(bullet);
         if (bulletSize < maxBulletSize)
         {
-            bulletSize += Time.deltaTime * 5;
+            bulletSize += Time.deltaTime / 1.5f;
             bullet.transform.localScale = new Vector3(bulletSize, bulletSize, bulletSize);
         }
         else
