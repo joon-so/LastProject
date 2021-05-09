@@ -5982,6 +5982,7 @@ GameObject:
   - component: {fileID: 7966750312788935075}
   - component: {fileID: 7966750312788935074}
   - component: {fileID: 7966750312788935069}
+  - component: {fileID: 4406607603507027560}
   m_Layer: 6
   m_Name: Jade
   m_TagString: MainCharacter
@@ -6089,6 +6090,28 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!195 &4406607603507027560
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7966750312788935068}
+  m_Enabled: 0
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &7966750312826099965
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,6 +22,11 @@ public class Karmen : MonoBehaviour
     public float wSkillCoolTime = 5.0f;
     public float followDistance = 5.0f;
 
+    public int attackDamage = 20;
+    public int qSkillDamage = 50;
+    public int wSkillDamage = 30;
+
+
     float curDodgeCoolTime;
     float curQSkillCoolTime;
     float curWSkillCoolTime;

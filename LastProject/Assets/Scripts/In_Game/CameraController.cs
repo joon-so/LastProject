@@ -16,7 +16,6 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         focus = GameManager.instance.character1.transform;
-        focusPoint = focus.position;
     }
 
     void LateUpdate()

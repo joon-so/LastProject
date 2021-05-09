@@ -272,6 +272,9 @@ MonoBehaviour:
   qSkillCoolTime: 5
   wSkillCoolTime: 5
   followDistance: 5
+  attackDamage: 20
+  qSkillDamage: 40
+  wSkillDamage: 60
 --- !u!54 &3279302803575345236
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -309,7 +312,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 226157663523336483}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 4.5

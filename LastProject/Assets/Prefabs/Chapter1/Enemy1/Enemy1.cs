@@ -158,49 +158,63 @@ public class Enemy1 : MonoBehaviour
         hpBar.SetHp(currentHp);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "KarmenAttack")
+        {
+            Karmen karmen = other.gameObject.GetComponent<Karmen>();
+            currentHp -= karmen.attackDamage;
+            hpBar.SetHp(currentHp);
+        }
+    }
+
     void OnCollisionEnter(Collision collision)
     {
 
-
-        // Jade
-        if (collision.gameObject.tag == "JadeAttack")
-        {
-            JadeAssaultRifleBullet bullet = collision.gameObject.GetComponent<JadeAssaultRifleBullet>();
-            currentHp -= bullet.damage;
-            hpBar.SetHp(currentHp);
-            GetComponent<Rigidbody>().isKinematic = true;
-        }
-        if (collision.gameObject.tag == "JadeQSkill")
-        {
-            JadeMissileBullet bullet = collision.gameObject.GetComponent<JadeMissileBullet>();
-            currentHp -= bullet.damage;
-            hpBar.SetHp(currentHp);
-            GetComponent<Rigidbody>().isKinematic = true;
-        }
-        //if (collision.gameObject.tag == "JadeWSkill")
-        //{
-        //    JadeGrenade bullet = collision.gameObject.GetComponent<JadeGrenade>();
-        //    currentHp -= bullet.damage;
-        //    hpBar.SetHp(currentHp);
-        //    GetComponent<Rigidbody>().isKinematic = true;
-        //}
-
-        // Leina
-        if (collision.gameObject.tag == "LeinaAttack")
-        {
-            LeinaArrow arrow = collision.gameObject.GetComponent<LeinaArrow>();
-            currentHp -= arrow.damage;
-            hpBar.SetHp(currentHp);
-            GetComponent<Rigidbody>().isKinematic = true;
-        }
-
-
-
-
-
-        if (collision.gameObject.tag == "MainCharacter" || collision.gameObject.tag == "Enemy")
-        {
-            GetComponent<Rigidbody>().isKinematic = false;
-        }
     }
+    //void OnCollisionEnter(Collision collision)
+    //{
+
+
+    //    // Jade
+    //    if (collision.gameObject.tag == "JadeAttack")
+    //    {
+    //        JadeAssaultRifleBullet bullet = collision.gameObject.GetComponent<JadeAssaultRifleBullet>();
+    //        currentHp -= bullet.damage;
+    //        hpBar.SetHp(currentHp);
+    //        GetComponent<Rigidbody>().isKinematic = true;
+    //    }
+    //    if (collision.gameObject.tag == "JadeQSkill")
+    //    {
+    //        JadeMissileBullet bullet = collision.gameObject.GetComponent<JadeMissileBullet>();
+    //        currentHp -= bullet.damage;
+    //        hpBar.SetHp(currentHp);
+    //        GetComponent<Rigidbody>().isKinematic = true;
+    //    }
+    //    //if (collision.gameObject.tag == "JadeWSkill")
+    //    //{
+    //    //    JadeGrenade bullet = collision.gameObject.GetComponent<JadeGrenade>();
+    //    //    currentHp -= bullet.damage;
+    //    //    hpBar.SetHp(currentHp);
+    //    //    GetComponent<Rigidbody>().isKinematic = true;
+    //    //}
+
+    //    // Leina
+    //    if (collision.gameObject.tag == "LeinaAttack")
+    //    {
+    //        LeinaArrow arrow = collision.gameObject.GetComponent<LeinaArrow>();
+    //        currentHp -= arrow.damage;
+    //        hpBar.SetHp(currentHp);
+    //        GetComponent<Rigidbody>().isKinematic = true;
+    //    }
+
+
+
+
+
+    //    if (collision.gameObject.tag == "MainCharacter" || collision.gameObject.tag == "Enemy")
+    //    {
+    //        GetComponent<Rigidbody>().isKinematic = false;
+    //    }
+    //}
 }
