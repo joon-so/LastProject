@@ -80,6 +80,8 @@ public class Enemy1 : MonoBehaviour
             //Attack
             if(playerDistance < shootDistance)
             {
+                if (shootable)
+                    StartCoroutine(Attack());
                 if (movable)
                 {
                     Quaternion lookRotation = Quaternion.LookRotation(mainCharacter.transform.position - transform.position);
@@ -89,8 +91,6 @@ public class Enemy1 : MonoBehaviour
                 nav.SetDestination(transform.position);
                 anim.SetBool("isAttack", true);
 
-                if (shootable)
-                    StartCoroutine(Attack());
             }
             //Detect
             else if (playerDistance < detectDistance)
