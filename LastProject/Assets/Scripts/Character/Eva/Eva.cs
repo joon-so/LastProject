@@ -380,16 +380,23 @@ public class Eva : MonoBehaviour
         wSkillShockEffect.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
         Instantiate(wSkillShockEffect, transform.position + transform.forward * 1.5f, transform.rotation);
         yield return new WaitForSeconds(0.4f);
-        wSkillShockEffect.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
-        Instantiate(wSkillShockEffect, transform.position + transform.forward * 3.5f + transform.right, transform.rotation);
-        Instantiate(wSkillShockEffect, transform.position + transform.forward * 3.5f + -transform.right, transform.rotation);
+        wSkillShockEffect.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        Instantiate(wSkillShockEffect, transform.position + transform.forward * 3f + transform.right, transform.rotation);
+        Instantiate(wSkillShockEffect, transform.position + transform.forward * 3f + -transform.right, transform.rotation);
         yield return new WaitForSeconds(0.4f);
-        wSkillShockEffect.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-        Instantiate(wSkillShockEffect, transform.position + transform.forward * 5.5f + transform.right*2, transform.rotation);
-        Instantiate(wSkillShockEffect, transform.position + transform.forward * 5.5f, transform.rotation);
-        Instantiate(wSkillShockEffect, transform.position + transform.forward * 5.5f + -transform.right*2, transform.rotation);
+        wSkillShockEffect.transform.localScale = new Vector3(0.55f, 0.55f, 0.55f);
+        Instantiate(wSkillShockEffect, transform.position + transform.forward * 5f + transform.right * 2.0f, transform.rotation);
+        Instantiate(wSkillShockEffect, transform.position + transform.forward * 5f, transform.rotation);
+        Instantiate(wSkillShockEffect, transform.position + transform.forward * 5f + -transform.right * 2.0f, transform.rotation);
+        yield return new WaitForSeconds(0.4f);
+        wSkillShockEffect.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+        Instantiate(wSkillShockEffect, transform.position + transform.forward * 7f - transform.right * 3f, transform.rotation);
+        Instantiate(wSkillShockEffect, transform.position + transform.forward * 7f - transform.right * 1.2f, transform.rotation);
+        Instantiate(wSkillShockEffect, transform.position + transform.forward * 7f + transform.right * 1.2f, transform.rotation);
+        Instantiate(wSkillShockEffect, transform.position + transform.forward * 7f + transform.right * 3f, transform.rotation);
 
-        yield return new WaitForSeconds(1.5f);
+
+        yield return new WaitForSeconds(0.5f);
         anim.SetFloat("Speed", 1.0f);
 
 

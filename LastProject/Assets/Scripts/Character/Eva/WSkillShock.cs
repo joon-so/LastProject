@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WSkillShock : MonoBehaviour
 {
-    float destroyTime = 2f;
+    float destroyTime = 1.8f;
     // Start is called before the first frame update
     void Start()
     {
