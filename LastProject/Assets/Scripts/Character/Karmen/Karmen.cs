@@ -43,6 +43,9 @@ public class Karmen : MonoBehaviour
     bool motionEndCheck;
     bool comboContinue;
 
+    bool canCombo;
+    int comboStep;
+
     float distanceWithPlayer;
 
     Vector3 vecTarget;
@@ -175,67 +178,114 @@ public class Karmen : MonoBehaviour
     }
     void Attack()
     {
-        if (doingAttack)
-        {
-            if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
-                && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f)
-            {
-                if (Input.GetMouseButtonDown(0))
-                    if (comboContinue)
-                        comboContinue = false;
-                motionEndCheck = false;
-            }
-            else if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f && !motionEndCheck)
-            {
-                if (!comboContinue)
-                {
-                    anim.SetTrigger("nextCombo");
-                    comboContinue = true;
-                }
-                else if (comboContinue)
-                {
-                    doingAttack = false;
-                    anim.SetBool("Attack", false);
-                }
-                motionEndCheck = true;
-            }
-        }
         if (Input.GetMouseButtonDown(0))
         {
             canMove = false;
-            canDodge = false;
             canSkill = false;
-            anim.SetBool("Run", false);
 
-            if ((doingAttack && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
-                 && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8f)
-                 || anim.GetCurrentAnimatorStateInfo(0).IsName("Idle1SS")
-                 || anim.GetCurrentAnimatorStateInfo(0).IsName("runSS"))
+            doingAttack = true;
+
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+                Vector3 nextVec = hit.point - transform.position;
+                nextVec.y = 0;
+                transform.LookAt(transform.position + nextVec);
+            }
+            vecTarget = transform.position;
+            anim.SetBool("Attack", true);
+
+            if(comboStep == 0)
+            {
+                anim.Play("attack2SS");
+                comboStep = 1;
+                return;
+            }
+            if(comboStep!=0)
+            {
+                if (canCombo)
                 {
-                    Vector3 nextVec = hit.point - transform.position;
-                    nextVec.y = 0;
-                    transform.LookAt(transform.position + nextVec);
+                    canCombo = false;
+                    comboStep += 1;
                 }
-                vecTarget = transform.position;
             }
 
-            moveSpeed = 0f;
-            doingAttack = true;
-            anim.SetBool("Attack", true);
+
+            //if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
+            //    && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f)
+            //{
+            //        if (comboContinue)
+            //            comboContinue = false;
+            //    motionEndCheck = false;
+            //}
+
+
         }
 
-        if (Input.GetMouseButtonDown(1) && doingAttack)
-        {
-            anim.SetBool("Attack", false);
-            //canMove = true;
-            //canDodge = true;
-            //canSkill = true;
-            StartCoroutine(AttackDelay());
-        }
+
+        //if (doingAttack)
+        //{
+        //    if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
+        //        && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f)
+        //    {
+        //        if (Input.GetMouseButtonDown(0))
+        //            if (comboContinue)
+        //                comboContinue = false;
+        //        motionEndCheck = false;
+        //    }
+        //    else if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f && !motionEndCheck)
+        //    {
+        //        if (!comboContinue)
+        //        {
+        //            anim.SetTrigger("nextCombo");
+        //            comboContinue = true;
+        //        }
+        //        else if (comboContinue)
+        //        {
+        //            doingAttack = false;
+        //            anim.SetBool("Attack", false);
+        //        }
+        //        motionEndCheck = true;
+        //    }
+        //}
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    canMove = false;
+        //    canDodge = false;
+        //    canSkill = false;
+        //    anim.SetBool("Run", false);
+
+        //    if ((doingAttack && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
+        //         && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8f)
+        //         || anim.GetCurrentAnimatorStateInfo(0).IsName("Idle1SS")
+        //         || anim.GetCurrentAnimatorStateInfo(0).IsName("runSS"))
+        //    {
+        //        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //        RaycastHit hit;
+        //        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        //        {
+        //            Vector3 nextVec = hit.point - transform.position;
+        //            nextVec.y = 0;
+        //            transform.LookAt(transform.position + nextVec);
+        //        }
+        //        vecTarget = transform.position;
+        //    }
+
+        //    moveSpeed = 0f;
+        //    doingAttack = true;
+        //    anim.SetBool("Attack", true);
+        //}
+
+        //if (Input.GetMouseButtonDown(1) && doingAttack)
+        //{
+        //    anim.SetBool("Attack", false);
+        //    //canMove = true;
+        //    //canDodge = true;
+        //    //canSkill = true;
+        //    StartCoroutine(AttackDelay());
+        //}
     }
     void AttackRange()
     {
