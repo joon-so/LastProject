@@ -162,8 +162,7 @@ public class Enemy1 : MonoBehaviour
     {
         if(other.gameObject.tag == "KarmenAttack")
         {
-            Karmen karmen = other.gameObject.GetComponent<Karmen>();
-            currentHp -= karmen.attackDamage;
+            currentHp -= Karmen.attackDamage;
             hpBar.SetHp(currentHp);
         }
     }

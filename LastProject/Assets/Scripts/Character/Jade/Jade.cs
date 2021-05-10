@@ -30,6 +30,10 @@ public class Jade : MonoBehaviour
     public float followDistance = 5.0f;
     public float grenadeDistance = 10.0f;
 
+    public static int attackDamage = 20;
+    public static int qSkillDamage = 70;
+    public static int wSkillDamage = 50;
+
     float curDodgeCoolTime;
     float curQSkillCoolTime;
     float curWSkillCoolTime;

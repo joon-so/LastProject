@@ -17,6 +17,10 @@ public class Eva : MonoBehaviour
     public float wSkillCoolTime = 5.0f;
     public float followDistance = 5.0f;
 
+    public static int attackDamage = 20;
+    public static int qSkillDamage = 20;
+    public static int wSkillDamage = 60;
+
     float curDodgeCoolTime;
     float curQSkillCoolTime;
     float curWSkillCoolTime;

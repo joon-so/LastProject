@@ -7526,9 +7526,10 @@ GameObject:
   - component: {fileID: 7469861993227624600}
   - component: {fileID: 7313581049560546176}
   - component: {fileID: 7312562565835312732}
+  - component: {fileID: 2735229869488313139}
   m_Layer: 0
   m_Name: StaffEffect
-  m_TagString: Untagged
+  m_TagString: KarmenAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12397,6 +12398,20 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!136 &2735229869488313139
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7475281872380490522}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 3
+  m_Direction: 0
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7475885789681620354
 GameObject:
   m_ObjectHideFlags: 0
@@ -32055,7 +32070,7 @@ GameObject:
   - component: {fileID: 7739353152344310512}
   m_Layer: 0
   m_Name: WSkill
-  m_TagString: Untagged
+  m_TagString: KarmenWSkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -48352,7 +48367,7 @@ GameObject:
   - component: {fileID: 8652797105630888184}
   m_Layer: 0
   m_Name: WSkill
-  m_TagString: Untagged
+  m_TagString: KarmenWSkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72843,9 +72858,10 @@ GameObject:
   - component: {fileID: 8652797107436684208}
   - component: {fileID: 8652797107436684204}
   - component: {fileID: 8652797107436684205}
+  - component: {fileID: 3154694532297450032}
   m_Layer: 0
   m_Name: StaffEffect
-  m_TagString: Untagged
+  m_TagString: KarmenAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77714,6 +77730,20 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!136 &3154694532297450032
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8652797107436684209}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 3
+  m_Direction: 0
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8652797107538051537
 GameObject:
   m_ObjectHideFlags: 0

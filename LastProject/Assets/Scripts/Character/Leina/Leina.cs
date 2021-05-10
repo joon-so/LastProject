@@ -21,6 +21,10 @@ public class Leina : MonoBehaviour
     public float fireDelay = 1.0f;
     public float followDistance = 5.0f;
 
+    public static int attackDamage = 20;
+    public static int qSkillDamage = 70;
+    public static int wSkillDamage = 30;
+
     float curDodgeCoolTime;
     float curQSkillCoolTime;
     float curWSkillCoolTime;
