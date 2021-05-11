@@ -195,21 +195,18 @@ public class Karmen : MonoBehaviour
                 transform.LookAt(transform.position + nextVec);
             }
             vecTarget = transform.position;
-            anim.SetBool("Attack", true);
+    //        anim.SetBool("Attack", true);
 
-            if(comboStep == 0)
+            if (comboStep == 0)
             {
                 anim.Play("attack2SS");
                 comboStep = 1;
                 return;
             }
-            if(comboStep!=0)
+            if (comboStep != 0)
             {
-                if (canCombo)
-                {
-                    canCombo = false;
-                    comboStep += 1;
-                }
+                canCombo = false;
+                comboStep += 1;
             }
 
 
@@ -286,6 +283,26 @@ public class Karmen : MonoBehaviour
         //    //canSkill = true;
         //    StartCoroutine(AttackDelay());
         //}
+    }
+    public void CanCombo()
+    {
+        canCombo = true;
+    }
+
+    public void Combo()
+    {
+        if (comboStep == 2)
+            anim.Play("attack3SS");
+        if (comboStep == 3)
+            anim.Play("attack4SS");
+        if (comboStep == 4)
+            anim.Play("attack5SS");
+    }
+
+    public void ComboReset()
+    {
+        canCombo = false;
+        comboStep = 0;
     }
     void AttackRange()
     {
@@ -459,21 +476,10 @@ public class Karmen : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Enemy1Bullet")
+        if (collision.gameObject.tag == "Enemy1Attack")
         {
-            Enemy1Bullet enemy1bullet = collision.gameObject.GetComponent<Enemy1Bullet>();
             if (GameManager.instance.mainPlayerHp > 0)
-            {
-                GameManager.instance.mainPlayerHp -= enemy1bullet.damage;
-            }
-        }
-        if (collision.gameObject.tag == "Enemy2Bullet")
-        {
-            Enemy2Bullet enemy2bullet = collision.gameObject.GetComponent<Enemy2Bullet>();
-            if (GameManager.instance.mainPlayerHp > 0)
-            {
-                GameManager.instance.mainPlayerHp -= enemy2bullet.damage;
-            }
+                GameManager.instance.mainPlayerHp -= Enemy1.damage;
         }
     }
 }

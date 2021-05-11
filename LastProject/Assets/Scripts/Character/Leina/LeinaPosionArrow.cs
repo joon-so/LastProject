@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LeinaPosionArrow : MonoBehaviour
 {
-    public float speed;
+    public static float speed;
     [Tooltip("From 0% to 100%")]
     public float accuracy;
     public float fireRate;
@@ -19,15 +19,18 @@ public class LeinaPosionArrow : MonoBehaviour
     private RotateToMouseScript rotateToMouse;
     private GameObject target;
 
-    public int damage = 20;
-    [SerializeField] GameObject arrowObj;
+    [SerializeField] GameObject arrowObj1;
+    [SerializeField] GameObject arrowObj2;
+    [SerializeField] GameObject arrowObj3;
+    //[SerializeField] GameObject arrowObj4;
+
     private float curScale;
     private float maxScale;
 
     void Start()
     {
-        curScale = 1;
-        maxScale = 5;
+        curScale = 0.1f;
+        maxScale = 1.0f;
         startPos = transform.position;
         rigid = GetComponent<Rigidbody>();
 
@@ -78,15 +81,17 @@ public class LeinaPosionArrow : MonoBehaviour
         if (speed != 0 && rigid != null)
             rigid.position += (transform.forward + offset) * (speed * Time.deltaTime);
 
-        // 범위
-        if (Vector3.Distance(startPos, transform.position) > 100.0f)
-            Destroy(gameObject);
-
         if (curScale < maxScale)
         {
-            curScale += Time.deltaTime * 5;
-            arrowObj.transform.localScale = new Vector3(curScale, curScale, curScale);
+            curScale += Time.deltaTime;
+            arrowObj1.transform.localScale = new Vector3(curScale, curScale, curScale);
+            arrowObj2.transform.localScale = new Vector3(curScale, curScale, curScale);
+            arrowObj3.transform.localScale = new Vector3(curScale, curScale, curScale);
+         //   arrowObj4.transform.localScale = new Vector3(curScale, curScale, curScale);
         }
+        // 범위
+        if (Vector3.Distance(startPos, transform.position) > 40.0f)
+            Destroy(gameObject);
     }
 
     void OnCollisionEnter(Collision collision)
@@ -99,12 +104,15 @@ public class LeinaPosionArrow : MonoBehaviour
             {
                 for (int i = 0; i < trails.Count; i++)
                 {
-                    trails[i].transform.parent = null;
-                    var ps = trails[i].GetComponent<ParticleSystem>();
-                    if (ps != null)
+                    if (trails[i])
                     {
-                        ps.Stop();
-                        Destroy(ps.gameObject, ps.main.duration + ps.main.startLifetime.constantMax);
+                        trails[i].transform.parent = null;
+                        var ps = trails[i].GetComponent<ParticleSystem>();
+                        if (ps != null)
+                        {
+                            ps.Stop();
+                            Destroy(ps.gameObject, ps.main.duration + ps.main.startLifetime.constantMax);
+                        }
                     }
                 }
             }

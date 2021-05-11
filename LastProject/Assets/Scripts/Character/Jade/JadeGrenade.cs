@@ -8,8 +8,6 @@ public class JadeGrenade : MonoBehaviour
     public GameObject effectObj;
     public Rigidbody rigid;
 
-    public int damage = 70;
-
     void Start()
     {
         StartCoroutine(Explosion());

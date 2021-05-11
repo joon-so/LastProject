@@ -72,15 +72,4 @@ public class Enemy : MonoBehaviour
             }
         }
     }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Bullet")
-        {
-            JadeAssaultRifleBullet bullet = other.GetComponent<JadeAssaultRifleBullet>();
-            curHp -= bullet.damage;
-
-            Debug.Log("Emeny HP: " + curHp);
-        }
-    }
 }

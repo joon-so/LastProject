@@ -10,9 +10,9 @@ public class Leina : MonoBehaviour
     [SerializeField] Transform arrowPos = null;
 
     [SerializeField] GameObject chargingEffect = null;
-    [SerializeField] GameObject posionArrow = null;
-    [SerializeField] GameObject posionArrowObj = null;
     [SerializeField] Transform chargingShotPos = null;
+    [SerializeField] GameObject posionArrow = null;
+    [SerializeField] Transform posionArrowPos = null;
 
     public float moveSpeed = 5.0f;
     public float dodgeCoolTime = 7.0f;
@@ -303,15 +303,19 @@ public class Leina : MonoBehaviour
             anim.SetTrigger("chargingShot");
             // Â÷Â¡
             yield return new WaitForSeconds(3.0f);
-            GameObject instantArrow = Instantiate(posionArrow, chargingShotPos.position, chargingShotPos.rotation);
+            chargingEffect.SetActive(true);
+            GameObject instantArrow = Instantiate(posionArrow, posionArrowPos.position, posionArrowPos.rotation);
+            LeinaPosionArrow.speed = 0;
             // ¼¦
             yield return new WaitForSeconds(2.3f);
-            
+            chargingEffect.SetActive(false);
+
             Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
             arrowRigid.velocity = chargingShotPos.forward;
-            chargingEffect.SetActive(false);
+            LeinaPosionArrow.speed = 40;
         }
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.0f);
+
         canAttack = true;
         canMove = true;
         canDodge = true;
@@ -325,21 +329,10 @@ public class Leina : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Enemy1Bullet")
+        if (collision.gameObject.tag == "Enemy1Attack")
         {
-            Enemy1Bullet enemy1bullet = collision.gameObject.GetComponent<Enemy1Bullet>();
             if (GameManager.instance.mainPlayerHp > 0)
-            {
-                GameManager.instance.mainPlayerHp -= enemy1bullet.damage;
-            }
-        }
-        if (collision.gameObject.tag == "Enemy2Bullet")
-        {
-            Enemy2Bullet enemy2bullet = collision.gameObject.GetComponent<Enemy2Bullet>();
-            if (GameManager.instance.mainPlayerHp > 0)
-            {
-                GameManager.instance.mainPlayerHp -= enemy2bullet.damage;
-            }
+                GameManager.instance.mainPlayerHp -= Enemy1.damage;
         }
     }
 }

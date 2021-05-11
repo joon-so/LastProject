@@ -4872,8 +4872,8 @@ GameObject:
   - component: {fileID: 2714631046815378411}
   - component: {fileID: 1105139707363824799}
   - component: {fileID: 1104975827489405499}
-  - component: {fileID: 971814826729972503}
   - component: {fileID: 961384724900383237}
+  - component: {fileID: 971814826729972503}
   m_Layer: 0
   m_Name: JadeAssaultRifleBullet
   m_TagString: JadeAttack
@@ -4916,7 +4916,6 @@ MonoBehaviour:
   hitPrefab: {fileID: 1801918589960200, guid: 197a946b8192aa846a5615d6facf84f3, type: 3}
   trails:
   - {fileID: 978289400752649905}
-  damage: 20
   distance: 15
 --- !u!199 &1105139707363824799
 ParticleSystemRenderer:
@@ -9724,19 +9723,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!65 &971814826729972503
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 978226826277819363}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.256, y: 0.283, z: 0.9}
-  m_Center: {x: 0.026, y: 0.0019, z: 0}
 --- !u!54 &961384724900383237
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -9753,6 +9739,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &971814826729972503
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978226826277819363}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.256, y: 0.283, z: 0.9}
+  m_Center: {x: 0.026, y: 0.0019, z: 0}
 --- !u!1 &978289400752649905
 GameObject:
   m_ObjectHideFlags: 0

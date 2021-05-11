@@ -10710,9 +10710,9 @@ MonoBehaviour:
   arrow: {fileID: 5775468925520252961, guid: 9ad73451252dea242b626f843f2c8a4e, type: 3}
   arrowPos: {fileID: 3288096823556093573}
   chargingEffect: {fileID: 4380639911707036228}
-  posionArrow: {fileID: 9050593873740408903, guid: bca4bf11c841fed47a9bd49091ab934b, type: 3}
-  posionArrowObj: {fileID: 0}
   chargingShotPos: {fileID: 7879034679825638126}
+  posionArrow: {fileID: 2152290969651364495, guid: bca4bf11c841fed47a9bd49091ab934b, type: 3}
+  posionArrowPos: {fileID: 7879034679825638126}
   moveSpeed: 5
   dodgeCoolTime: 7
   qSkillCoolTime: 5
@@ -16983,7 +16983,7 @@ Transform:
   m_GameObject: {fileID: 4380639911707036228}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2460682514711270631}
   - {fileID: 8496304495527345275}
@@ -22276,14 +22276,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5383275034990369381}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -1.241, y: 1.593, z: 0.356}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1158863152210588123}
   m_Father: {fileID: 1905285522888397652}
   m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &5456456831553328466
 GameObject:
   m_ObjectHideFlags: 0

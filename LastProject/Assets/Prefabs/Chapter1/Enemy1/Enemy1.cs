@@ -28,8 +28,8 @@ public class Enemy1 : MonoBehaviour
     Vector3 startPoint;
     Rigidbody rigid;
 
-    
-    
+    public static int damage = 20;
+
     // Ã¼·Â
     public int maxHp = 200;
     public int currentHp;
@@ -78,7 +78,7 @@ public class Enemy1 : MonoBehaviour
             playerDistance = Vector3.Distance(mainCharacter.transform.position, transform.position);
 
             //Attack
-            if(playerDistance < shootDistance)
+            if (playerDistance < shootDistance)
             {
                 if (shootable)
                     StartCoroutine(Attack());
@@ -104,13 +104,13 @@ public class Enemy1 : MonoBehaviour
             }
             else
             {
-                if(Vector3.Distance(startPoint, transform.position) < 0.1f)
+                if (Vector3.Distance(startPoint, transform.position) < 0.1f)
                 {
                     anim.SetBool("isRun", false);
                 }
                 else
                 {
-                 anim.SetBool("isRun", true);
+                    anim.SetBool("isRun", true);
                 }
                 anim.SetBool("isAttack", false);
                 anim.SetBool("isDetected", false);
@@ -144,7 +144,7 @@ public class Enemy1 : MonoBehaviour
 
     IEnumerator ExploseAndDistroy()
     {
-        Instantiate(explosion, transform.position + new Vector3(0, 10, 0), transform.rotation);
+        Instantiate(explosion, transform.position, transform.rotation);
         shootable = false;
         movable = false;
         bulletLine.enabled = false;
@@ -154,67 +154,87 @@ public class Enemy1 : MonoBehaviour
 
     public void HitJadeGrenade()
     {
-        currentHp -= 80;
+        currentHp -= Jade.wSkillDamage;
         hpBar.SetHp(currentHp);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "KarmenAttack")
+        if (other.gameObject.tag == "KarmenAttack")
         {
             currentHp -= Karmen.attackDamage;
             hpBar.SetHp(currentHp);
             Debug.Log(currentHp);
         }
+
+
     }
 
     void OnCollisionEnter(Collision collision)
     {
-
+        // Karmen
+        if (collision.gameObject.tag == "KarmenAttack")
+        {
+            currentHp -= Karmen.attackDamage;
+            hpBar.SetHp(currentHp);
+        }
+        if (collision.gameObject.tag == "KarmenQSkill")
+        {
+            currentHp -= Karmen.qSkillDamage;
+            hpBar.SetHp(currentHp);
+        }
+        if (collision.gameObject.tag == "KarmenWSkill")
+        {
+            currentHp -= Karmen.wSkillDamage;
+            hpBar.SetHp(currentHp);
+        }
+        // Jade
+        if (collision.gameObject.tag == "JadeAttack")
+        {
+            currentHp -= Jade.attackDamage;
+            hpBar.SetHp(currentHp);
+        }
+        if (collision.gameObject.tag == "JadeQSkill")
+        {
+            currentHp -= Jade.qSkillDamage;
+            hpBar.SetHp(currentHp);
+        }
+        if (collision.gameObject.tag == "JadeWSkill")
+        {
+            currentHp -= Jade.wSkillDamage;
+            hpBar.SetHp(currentHp);
+        }
+        // Leina
+        if (collision.gameObject.tag == "LeinaAttack")
+        {
+            currentHp -= Leina.attackDamage;
+            hpBar.SetHp(currentHp);
+        }
+        if (collision.gameObject.tag == "LeinaQSkill")
+        {
+            currentHp -= Leina.qSkillDamage;
+            hpBar.SetHp(currentHp);
+        }
+        if (collision.gameObject.tag == "LeinaWSkill")
+        {
+            currentHp -= Leina.wSkillDamage;
+            hpBar.SetHp(currentHp);
+        }
+        // Eva
+        if (collision.gameObject.tag == "EvaAttack")
+        {
+            currentHp -= Eva.attackDamage;
+            hpBar.SetHp(currentHp);
+        }
+        if (collision.gameObject.tag == "EvaQSkill")
+        {
+            currentHp -= Eva.qSkillDamage;
+            hpBar.SetHp(currentHp);
+        }
+        if (collision.gameObject.tag == "EvaWSkill")
+        {
+            currentHp -= Eva.wSkillDamage;
+            hpBar.SetHp(currentHp);
+        }
     }
-    //void OnCollisionEnter(Collision collision)
-    //{
-
-
-    //    // Jade
-    //    if (collision.gameObject.tag == "JadeAttack")
-    //    {
-    //        JadeAssaultRifleBullet bullet = collision.gameObject.GetComponent<JadeAssaultRifleBullet>();
-    //        currentHp -= bullet.damage;
-    //        hpBar.SetHp(currentHp);
-    //        GetComponent<Rigidbody>().isKinematic = true;
-    //    }
-    //    if (collision.gameObject.tag == "JadeQSkill")
-    //    {
-    //        JadeMissileBullet bullet = collision.gameObject.GetComponent<JadeMissileBullet>();
-    //        currentHp -= bullet.damage;
-    //        hpBar.SetHp(currentHp);
-    //        GetComponent<Rigidbody>().isKinematic = true;
-    //    }
-    //    //if (collision.gameObject.tag == "JadeWSkill")
-    //    //{
-    //    //    JadeGrenade bullet = collision.gameObject.GetComponent<JadeGrenade>();
-    //    //    currentHp -= bullet.damage;
-    //    //    hpBar.SetHp(currentHp);
-    //    //    GetComponent<Rigidbody>().isKinematic = true;
-    //    //}
-
-    //    // Leina
-    //    if (collision.gameObject.tag == "LeinaAttack")
-    //    {
-    //        LeinaArrow arrow = collision.gameObject.GetComponent<LeinaArrow>();
-    //        currentHp -= arrow.damage;
-    //        hpBar.SetHp(currentHp);
-    //        GetComponent<Rigidbody>().isKinematic = true;
-    //    }
-
-
-
-
-
-    //    if (collision.gameObject.tag == "MainCharacter" || collision.gameObject.tag == "Enemy")
-    //    {
-    //        GetComponent<Rigidbody>().isKinematic = false;
-    //    }
-    //}
 }

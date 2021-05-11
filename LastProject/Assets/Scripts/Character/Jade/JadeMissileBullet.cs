@@ -19,7 +19,6 @@ public class JadeMissileBullet : MonoBehaviour
     private RotateToMouseScript rotateToMouse;
     private GameObject target;
 
-    public int damage = 100;
     public float distance = 20.0f;
 
     void Start()

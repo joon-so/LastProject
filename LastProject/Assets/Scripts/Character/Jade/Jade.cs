@@ -388,21 +388,10 @@ public class Jade : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Enemy1Bullet")
+        if (collision.gameObject.tag == "Enemy1Attack")
         {
-            Enemy1Bullet enemy1bullet = collision.gameObject.GetComponent<Enemy1Bullet>(); 
             if (GameManager.instance.mainPlayerHp > 0)
-            {
-                GameManager.instance.mainPlayerHp -= enemy1bullet.damage;
-            }
-        }
-        if (collision.gameObject.tag == "Enemy2Bullet")
-        {
-            Enemy2Bullet enemy2bullet = collision.gameObject.GetComponent<Enemy2Bullet>();
-            if (GameManager.instance.mainPlayerHp > 0)
-            {
-                GameManager.instance.mainPlayerHp -= enemy2bullet.damage;
-            }
+                GameManager.instance.mainPlayerHp -= Enemy1.damage; 
         }
     }
 }

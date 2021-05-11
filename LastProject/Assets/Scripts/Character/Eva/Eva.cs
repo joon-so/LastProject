@@ -407,4 +407,13 @@ public class Eva : MonoBehaviour
         canDodge = true;
         canSkill = true;
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemy1Attack")
+        {
+            if (GameManager.instance.mainPlayerHp > 0)
+                GameManager.instance.mainPlayerHp -= Enemy1.damage;
+        }
+    }
 }

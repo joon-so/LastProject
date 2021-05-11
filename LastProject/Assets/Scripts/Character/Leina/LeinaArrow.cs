@@ -19,8 +19,6 @@ public class LeinaArrow : MonoBehaviour
     private RotateToMouseScript rotateToMouse;
     private GameObject target;
 
-    public int damage = 30;
-
     void Start()
     {
         startPos = transform.position;
