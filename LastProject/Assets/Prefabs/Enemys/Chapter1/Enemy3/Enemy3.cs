@@ -23,6 +23,7 @@ public class Enemy3 : MonoBehaviour
     bool movable = true;
     bool alive = true;
     bool born = false;
+    bool drop = false;
 
     NavMeshAgent nav;
     float playerDistance;
@@ -85,9 +86,10 @@ public class Enemy3 : MonoBehaviour
             new Vector3(mainCharacter.transform.position.x, 0, mainCharacter.transform.position.z),
             new Vector3(transform.position.x, 0, transform.position.z));
 
-        if (playerDistance < spownDistance)
+        if (playerDistance < spownDistance && !drop)
         {
             StartCoroutine(DropAndExplosion());
+            drop = true;
         }
     }
 
@@ -112,7 +114,8 @@ public class Enemy3 : MonoBehaviour
                     Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
                     transform.rotation = Quaternion.Euler(0, euler.y, 0);
                 }
-                nav.SetDestination(transform.position);
+                //nav.SetDestination(transform.position);
+                nav.enabled = false;
                 //anim.SetBool("isAttack", true);
 
                 if (shootable)
@@ -122,7 +125,10 @@ public class Enemy3 : MonoBehaviour
             else if (playerDistance < detectDistance)
             {
                 if (movable)
+                {
+                    nav.enabled = true;
                     nav.SetDestination(mainCharacter.transform.position);
+                }
 
                 //anim.SetBool("isAttack", false);
                 //anim.SetBool("isDetected", true);
@@ -181,11 +187,12 @@ public class Enemy3 : MonoBehaviour
         targetMark.SetActive(true);
         targetMark.transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
         rigid.useGravity = true;
-        born = true;
         yield return new WaitForSeconds(3f);
         Instantiate(dropEffect, transform.position, transform.rotation);
         targetMark.SetActive(false);
+        this.transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
         nav.enabled = true;
+        born = true;
         movable = true;
         yield return new WaitForSeconds(1.9f);
         shootable = true;

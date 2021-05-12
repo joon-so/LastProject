@@ -74,10 +74,6 @@ public class Jade : SubAI
         }
 
         FindEnemys();
-        for (int i = 0; i < targets.Count; i++)
-        {
-            Debug.Log(targets[i]);
-        }
 
         nav = GetComponent<NavMeshAgent>();
         rigidbody = GetComponent<Rigidbody>();
@@ -133,6 +129,22 @@ public class Jade : SubAI
             else if (currentState == characterState.attack)
             {
                 SubAttack();
+
+                if (curFireDelay > fireDelay)
+                {
+                    GameObject instantBullet = Instantiate(assaultRifleBullet, assaultRifleBulletPos.position, assaultRifleBulletPos.rotation);
+                    Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
+                    bulletRigid.velocity = assaultRifleBulletPos.forward;
+
+                    moveSpeed = 0f;
+                    anim.SetBool("Run", false);
+                    vecTarget = transform.position;
+
+                    anim.SetTrigger("shootAssaultRifle");
+                    curFireDelay = 0;
+
+                    StartCoroutine(AttackDelay());
+                }
             }
             else if (currentState == characterState.idle)
             {
