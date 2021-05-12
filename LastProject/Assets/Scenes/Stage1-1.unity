@@ -7061,11 +7061,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!4 &211620435 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1905285522888397652, guid: 0f6e04ea3188d774ab046c535a2d4012, type: 3}
-  m_PrefabInstance: {fileID: 5822719947733463309}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &215359272
 GameObject:
   m_ObjectHideFlags: 0
@@ -45606,7 +45601,7 @@ Transform:
   - {fileID: 1990010797}
   - {fileID: 2090366711}
   - {fileID: 596206474}
-  - {fileID: 211620435}
+  - {fileID: 5822719947733463310}
   - {fileID: 3213321238947588603}
   - {fileID: 458782071}
   m_Father: {fileID: 0}
@@ -45628,7 +45623,7 @@ MonoBehaviour:
   clickEffect: {fileID: 458782070}
   C_Karmen: {fileID: 720894595}
   C_Jade: {fileID: 1942271182}
-  C_Leina: {fileID: 1714300109}
+  C_Leina: {fileID: 0}
   C_Eva: {fileID: 560044298}
 --- !u!1001 &1148149798
 PrefabInstance:
@@ -72214,11 +72209,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 9f3df9fe49af7224ea74377a818daa7c, type: 3}
   m_PrefabInstance: {fileID: 1713411832}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1714300109 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1640759842467369842, guid: 0f6e04ea3188d774ab046c535a2d4012, type: 3}
-  m_PrefabInstance: {fileID: 5822719947733463309}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1714458154
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -90052,6 +90042,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f6e04ea3188d774ab046c535a2d4012, type: 3}
+--- !u!4 &5822719947733463310 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3409962395894986457, guid: 0f6e04ea3188d774ab046c535a2d4012, type: 3}
+  m_PrefabInstance: {fileID: 5822719947733463309}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6038466020145407974
 Transform:
   m_ObjectHideFlags: 0
