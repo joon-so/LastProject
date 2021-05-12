@@ -178,35 +178,34 @@ public class Karmen : MonoBehaviour
     }
     void Attack()
     {
+        if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+        {
+        
+        }
+
+
+
         if (Input.GetMouseButtonDown(0))
         {
             canMove = false;
             canSkill = false;
-
             doingAttack = true;
 
+            if (!doingAttack)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+                {
+                    Vector3 nextVec = hit.point - transform.position;
+                    nextVec.y = 0;
+                    transform.LookAt(transform.position + nextVec);
+                }
+                vecTarget = transform.position;
 
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-            {
-                Vector3 nextVec = hit.point - transform.position;
-                nextVec.y = 0;
-                transform.LookAt(transform.position + nextVec);
-            }
-            vecTarget = transform.position;
-    //        anim.SetBool("Attack", true);
+                doingAttack = true;
+                anim.SetBool("Attack", true);
 
-            if (comboStep == 0)
-            {
-                anim.Play("attack2SS");
-                comboStep = 1;
-                return;
-            }
-            if (comboStep != 0)
-            {
-                canCombo = false;
-                comboStep += 1;
             }
 
 
@@ -292,11 +291,11 @@ public class Karmen : MonoBehaviour
     public void Combo()
     {
         if (comboStep == 2)
-            anim.Play("attack3SS");
+            anim.Play("Attack2");
         if (comboStep == 3)
-            anim.Play("attack4SS");
+            anim.Play("Attack3");
         if (comboStep == 4)
-            anim.Play("attack5SS");
+            anim.Play("Attack4");
     }
 
     public void ComboReset()

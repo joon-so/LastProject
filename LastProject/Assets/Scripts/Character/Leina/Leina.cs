@@ -9,10 +9,14 @@ public class Leina : MonoBehaviour
     [SerializeField] GameObject arrow = null;
     [SerializeField] Transform arrowPos = null;
 
-    [SerializeField] GameObject chargingEffect = null;
-    [SerializeField] Transform chargingShotPos = null;
     [SerializeField] GameObject posionArrow = null;
     [SerializeField] Transform posionArrowPos = null;
+
+    [SerializeField] GameObject rainArrow = null;
+    [SerializeField] GameObject effect = null;
+    [SerializeField] Transform rainArrowPos = null;
+
+
 
     public float moveSpeed = 5.0f;
     public float dodgeCoolTime = 7.0f;
@@ -186,7 +190,7 @@ public class Leina : MonoBehaviour
                 anim.SetBool("Run", false);
                 vecTarget = transform.position;
 
-                anim.SetTrigger("shotArrow");
+                anim.SetTrigger("Attack");
                 curFireDelay = 0;
 
                 StartCoroutine(AttackDelay());
@@ -251,7 +255,7 @@ public class Leina : MonoBehaviour
     }
     void W_Skill()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) && onWSkill)
         {
             onWSkill = false;
             curWSkillCoolTime = 0;
@@ -262,7 +266,7 @@ public class Leina : MonoBehaviour
             canDodge = false;
             canSkill = false;
 
-            StartCoroutine(ContinuityShot());
+            StartCoroutine(RainShot());
         }
     }
     void E_Skill()
@@ -290,7 +294,7 @@ public class Leina : MonoBehaviour
     IEnumerator ChargingShot()
     {
         vecTarget = transform.position;
-       
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit rayHit;
         if (Physics.Raycast(ray, out rayHit, Mathf.Infinity))
@@ -299,21 +303,18 @@ public class Leina : MonoBehaviour
             nextVec.y = 0;
             transform.LookAt(transform.position + nextVec);
             transform.Rotate(0, transform.rotation.y + 90, 0);
-
-            anim.SetTrigger("chargingShot");
-            // Â÷Â¡
-            yield return new WaitForSeconds(3.0f);
-            chargingEffect.SetActive(true);
-            GameObject instantArrow = Instantiate(posionArrow, posionArrowPos.position, posionArrowPos.rotation);
-            LeinaPosionArrow.speed = 0;
-            // ¼¦
-            yield return new WaitForSeconds(2.3f);
-            chargingEffect.SetActive(false);
-
-            Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
-            arrowRigid.velocity = chargingShotPos.forward;
-            LeinaPosionArrow.speed = 40;
         }
+        anim.SetTrigger("QSkill");
+        // Â÷Â¡
+        yield return new WaitForSeconds(3.0f);
+        GameObject instantArrow = Instantiate(posionArrow, posionArrowPos.position, posionArrowPos.rotation);
+        LeinaPosionArrow.speed = 0;
+        // ¼¦
+        yield return new WaitForSeconds(2.3f);
+
+        Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
+        arrowRigid.velocity = posionArrowPos.forward;
+        LeinaPosionArrow.speed = 40;
         yield return new WaitForSeconds(1.0f);
 
         canAttack = true;
@@ -322,9 +323,68 @@ public class Leina : MonoBehaviour
         canSkill = true;
     }
 
-    IEnumerator ContinuityShot()
+    IEnumerator RainShot()
     {
-        yield return new WaitForSeconds(1);
+        vecTarget = transform.position;
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit rayHit;
+        if (Physics.Raycast(ray, out rayHit, Mathf.Infinity))
+        {
+            Vector3 nextVec = rayHit.point - transform.position;
+            nextVec.y = 0;
+            transform.LookAt(transform.position + nextVec);
+            transform.Rotate(0, transform.rotation.y + 90, 0);
+        }
+        anim.SetTrigger("WSkill");
+        yield return new WaitForSeconds(1.5f);
+        effect.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+        // ¼¦
+        GameObject instantArrow = Instantiate(rainArrow, rainArrowPos.position, rainArrowPos.rotation);
+        Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
+        arrowRigid.velocity = posionArrowPos.forward;
+
+        GameObject instantArrow2 = Instantiate(rainArrow, rainArrowPos.position + new Vector3(2, 0, 0), rainArrowPos.rotation);
+        Rigidbody arrowRigid2 = instantArrow2.GetComponent<Rigidbody>();
+        arrowRigid2.velocity = posionArrowPos.forward;
+
+        GameObject instantArrow3 = Instantiate(rainArrow, rainArrowPos.position + new Vector3(-2, 0, 0), rainArrowPos.rotation);
+        Rigidbody arrowRigid3 = instantArrow3.GetComponent<Rigidbody>();
+        arrowRigid3.velocity = posionArrowPos.forward;
+
+        GameObject instantArrow4 = Instantiate(rainArrow, rainArrowPos.position + new Vector3(0, 0, 2), rainArrowPos.rotation);
+        Rigidbody arrowRigid4 = instantArrow4.GetComponent<Rigidbody>();
+        arrowRigid4.velocity = posionArrowPos.forward;
+
+        GameObject instantArrow5 = Instantiate(rainArrow, rainArrowPos.position + new Vector3(0, 0, -2), rainArrowPos.rotation);
+        Rigidbody arrowRigid5 = instantArrow5.GetComponent<Rigidbody>();
+        arrowRigid5.velocity = posionArrowPos.forward;
+
+        GameObject instantArrow6 = Instantiate(rainArrow, rainArrowPos.position + new Vector3(1, 0, 1), rainArrowPos.rotation);
+        Rigidbody arrowRigid6 = instantArrow5.GetComponent<Rigidbody>();
+        arrowRigid6.velocity = posionArrowPos.forward;
+
+        GameObject instantArrow7 = Instantiate(rainArrow, rainArrowPos.position + new Vector3(-1, 0, 1), rainArrowPos.rotation);
+        Rigidbody arrowRigid7 = instantArrow5.GetComponent<Rigidbody>();
+        arrowRigid7.velocity = posionArrowPos.forward;
+
+        GameObject instantArrow8 = Instantiate(rainArrow, rainArrowPos.position + new Vector3(1, 0, -1), rainArrowPos.rotation);
+        Rigidbody arrowRigid8 = instantArrow5.GetComponent<Rigidbody>();
+        arrowRigid8.velocity = posionArrowPos.forward;
+        GameObject instantArrow9 = Instantiate(rainArrow, rainArrowPos.position + new Vector3(-1, 0, -1), rainArrowPos.rotation);
+        Rigidbody arrowRigid9 = instantArrow5.GetComponent<Rigidbody>();
+        arrowRigid9.velocity = posionArrowPos.forward;
+
+        yield return new WaitForSeconds(1.0f);
+        effect.SetActive(false);
+
+    
+        canAttack = true;
+        canMove = true;
+        canDodge = true;
+        canSkill = true;
     }
 
     void OnCollisionEnter(Collision collision)
