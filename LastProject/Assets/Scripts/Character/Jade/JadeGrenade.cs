@@ -7,6 +7,7 @@ public class JadeGrenade : MonoBehaviour
     public GameObject msehObj;
     public GameObject effectObj;
     public Rigidbody rigid;
+    public AudioClip clip;
 
     void Start()
     {
@@ -21,6 +22,7 @@ public class JadeGrenade : MonoBehaviour
 
         effectObj.SetActive(true);
         msehObj.SetActive(false);
+        SoundManager.instance.SFXPlay("WSkillEffect", clip);
 
         yield return new WaitForSeconds(0.7f);
         Destroy(gameObject);

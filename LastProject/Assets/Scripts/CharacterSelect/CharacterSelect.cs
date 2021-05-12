@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class CharacterSelect : MonoBehaviour
@@ -21,15 +22,28 @@ public class CharacterSelect : MonoBehaviour
     [SerializeField] GameObject backAssaultRifle;
     [SerializeField] GameObject handAssaultRifle;
 
+    [SerializeField] GameObject[] characterList;
+
+
     private int mainOrsub;  // main: 1 sub: 2
+    [SerializeField] string clickSound;
+    [SerializeField] string click2Sound;
+    [SerializeField] string click3Sound;
+    [SerializeField] string click4Sound;
 
     void Start()
     {
         mainOrsub = 1;
     }
 
+    public void PointUISound()
+    {
+       // SoundManager.instance.PlaySoundEffect(click4Sound);
+    }
+
     public void OnClickSelectKarmen()
     {
+     //   SoundManager.instance.PlaySoundEffect(clickSound);
         if (mainOrsub == 1)
         {
             mainKarmen.SetActive(true);
@@ -47,6 +61,7 @@ public class CharacterSelect : MonoBehaviour
     }
     public void OnClickSelectJade()
     {
+    //    SoundManager.instance.PlaySoundEffect(clickSound);
         if (mainOrsub == 1)
         {
             mainKarmen.SetActive(false);
@@ -64,6 +79,7 @@ public class CharacterSelect : MonoBehaviour
     }
     public void OnClickSelectLeina()
     {
+        //SoundManager.instance.PlaySoundEffect(clickSound);
         if (mainOrsub == 1)
         {
             mainKarmen.SetActive(false);
@@ -81,6 +97,7 @@ public class CharacterSelect : MonoBehaviour
     }
     public void OnClickSelectEva()
     {
+      //  SoundManager.instance.PlaySoundEffect(clickSound);
         if (mainOrsub == 1)
         {
             mainKarmen.SetActive(false);
@@ -98,6 +115,8 @@ public class CharacterSelect : MonoBehaviour
     }
     public void OnClickSelectCharacter()
     {
+     //   SoundManager.instance.PlaySoundEffect(click2Sound);
+
         if (mainOrsub == 1)
         {
             if (mainKarmen.activeSelf)
@@ -150,10 +169,12 @@ public class CharacterSelect : MonoBehaviour
 
     public void OnClickStart()
     {
+      //  SoundManager.instance.PlaySoundEffect(click3Sound);
         SceneManager.LoadScene("Stage1-1");
     }
     public void OnClickExit()
     {
+      //  SoundManager.instance.PlaySoundEffect(click3Sound);
         SceneManager.LoadScene("Main");
     }
 }

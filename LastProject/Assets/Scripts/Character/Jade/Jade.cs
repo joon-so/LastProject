@@ -22,6 +22,14 @@ public class Jade : SubAI
     [SerializeField] Transform grenadePos = null;
     [SerializeField] GameObject Grenade = null;
 
+    [SerializeField] string attackSound;
+
+    public AudioClip attackClip;
+    public AudioClip qSkillChargingClip;
+    public AudioClip qSkillClip;
+    public AudioClip wSkillClip;
+
+
     public float moveSpeed = 5.0f;
     public float dodgeCoolTime = 7.0f;
     public float qSkillCoolTime = 5.0f;
@@ -232,10 +240,12 @@ public class Jade : SubAI
                     nextVec.y = 0;
                     transform.LookAt(transform.position + nextVec);
                 }
+                SoundManager.instance.SFXPlay("Attack", attackClip);
 
                 GameObject instantBullet = Instantiate(assaultRifleBullet, assaultRifleBulletPos.position, assaultRifleBulletPos.rotation);
                 Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
                 bulletRigid.velocity = assaultRifleBulletPos.forward;
+
 
                 moveSpeed = 0f;
                 anim.SetBool("Run", false);
@@ -375,11 +385,14 @@ public class Jade : SubAI
             anim.SetBool("AimMissile", true);
             yield return new WaitForSeconds(0.5f);
             missileEffect.SetActive(true);
+            SoundManager.instance.SFXPlay("Attack", qSkillChargingClip);
+
             yield return new WaitForSeconds(1.0f);
             anim.SetBool("AimMissile", false);
             missileEffect.SetActive(false);
 
             anim.SetTrigger("shootMissileLauncher");
+            SoundManager.instance.SFXPlay("Attack", qSkillClip);
             GameObject instantMissile = Instantiate(missileBullet, missileBulletPos.position, missileBulletPos.rotation);
             Rigidbody missileRigid = instantMissile.GetComponent<Rigidbody>();
             missileRigid.velocity = missileBulletPos.forward;
@@ -416,6 +429,7 @@ public class Jade : SubAI
             nextVec.y = 0;
             transform.LookAt(transform.position + nextVec);
 
+            SoundManager.instance.SFXPlay("Attack", wSkillClip);
             GameObject instantGrenade = Instantiate(Grenade, grenadePos.position, grenadePos.rotation);
             Rigidbody rigidGrenade = instantGrenade.GetComponent<Rigidbody>();
             rigidGrenade.AddForce(nextVec, ForceMode.Impulse);

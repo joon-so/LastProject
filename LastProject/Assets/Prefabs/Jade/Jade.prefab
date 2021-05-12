@@ -6040,6 +6040,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e98827871cfba804b9e005997bee43cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
+  nav: {fileID: 0}
+  rigidbody: {fileID: 0}
+  tagCharacter: {fileID: 0}
+  traceDistance: 2
+  attackDistance: 1
   attackRange: {fileID: 7966750313374224040}
   useAssaultRifle: {fileID: 7966750313053060098}
   useMissileLauncher: {fileID: 7966750313246406824}
@@ -6053,6 +6059,11 @@ MonoBehaviour:
   missileEffect: {fileID: 7966750313941819877}
   grenadePos: {fileID: 7966750313374718420}
   Grenade: {fileID: 6059190706233498653, guid: 623872e6aa0cd4b4ba7eb9ae090d5103, type: 3}
+  attackSound: JadeAttack
+  attackClip: {fileID: 8300000, guid: 7185d08da7632af4281eb74802ec3a14, type: 3}
+  qSkillChargingClip: {fileID: 0}
+  qSkillClip: {fileID: 0}
+  wSkillClip: {fileID: 8300000, guid: 63c4e5e20a4bb4e428b38520978b49c7, type: 3}
   moveSpeed: 5
   dodgeCoolTime: 7
   qSkillCoolTime: 5
