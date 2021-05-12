@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Karmen : MonoBehaviour
+public class Karmen : SubAI
 {
     [SerializeField] GameObject attackRange = null;
 
@@ -51,8 +51,6 @@ public class Karmen : MonoBehaviour
     Vector3 vecTarget;
 
     Animator anim;
-    NavMeshAgent nav;
-    GameObject tagCharacter;
 
     void Awake()
     {
@@ -62,6 +60,22 @@ public class Karmen : MonoBehaviour
 
     void Start()
     {
+        if (GameManager.instance.isMainKarmen)
+        {
+            nav.enabled = false;
+            tagCharacter = GameManager.instance.character2;
+        }
+        else if (GameManager.instance.isSubKarmen)
+        {
+            tagCharacter = GameManager.instance.character1;
+            nav.enabled = true;
+        }
+
+        FindEnemys();
+
+        nav = GetComponent<NavMeshAgent>();
+        rigidbody = GetComponent<Rigidbody>();
+
         vecTarget = transform.position;
 
         curDodgeCoolTime = 0;
@@ -105,7 +119,20 @@ public class Karmen : MonoBehaviour
         }
         else if (gameObject.transform.tag == "SubCharacter")
         {
-           // Follow();
+            distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
+
+            if (currentState == characterState.trace)
+            {
+                MainCharacterTrace();
+            }
+            else if (currentState == characterState.attack)
+            {
+                SubAttack();
+            }
+            else if (currentState == characterState.idle)
+            {
+                Idle();
+            }
         }
     }
     void Move()

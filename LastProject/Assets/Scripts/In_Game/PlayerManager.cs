@@ -111,7 +111,8 @@ public class PlayerManager : MonoBehaviour
             GameManager.instance.TagObject1();
             GameManager.instance.TagSkillSlot1();
             GameManager.instance.TagMask1();
-
+            GameManager.instance.character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
+            GameManager.instance.character2.gameObject.GetComponent<NavMeshAgent>().enabled = false;
             isChange = true;
         }
         // C1 : sub -> main
@@ -121,6 +122,9 @@ public class PlayerManager : MonoBehaviour
             GameManager.instance.TagObject2();
             GameManager.instance.TagSkillSlot2();
             GameManager.instance.TagMask2();
+            GameManager.instance.character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+            GameManager.instance.character2.gameObject.GetComponent<NavMeshAgent>().enabled = true;
+
 
             isChange = false;
         }

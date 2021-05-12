@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Jade : MonoBehaviour
+public class Jade : SubAI
 {
     [SerializeField] GameObject attackRange = null;
     [SerializeField] GameObject useAssaultRifle = null;
@@ -54,8 +54,6 @@ public class Jade : MonoBehaviour
     Vector3 vecTarget;
 
     Animator anim;
-    NavMeshAgent nav;
-    GameObject tagCharacter;
 
     void Awake()
     {
@@ -64,6 +62,26 @@ public class Jade : MonoBehaviour
     }
     void Start()
     {
+        if (GameManager.instance.isMainJade)
+        {
+            nav.enabled = false;
+            tagCharacter = GameManager.instance.character2;
+        }
+        else if (GameManager.instance.isSubJade)
+        {
+            tagCharacter = GameManager.instance.character1;
+            nav.enabled = true;
+        }
+
+        FindEnemys();
+        for (int i = 0; i < targets.Count; i++)
+        {
+            Debug.Log(targets[i]);
+        }
+
+        nav = GetComponent<NavMeshAgent>();
+        rigidbody = GetComponent<Rigidbody>();
+
         vecTarget = transform.position;
 
         curDodgeCoolTime = 0;
@@ -106,7 +124,20 @@ public class Jade : MonoBehaviour
         }
         else if (gameObject.transform.tag == "SubCharacter")
         {
+            distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
 
+            if (currentState == characterState.trace)
+            {
+                MainCharacterTrace();
+            }
+            else if (currentState == characterState.attack)
+            {
+                SubAttack();
+            }
+            else if (currentState == characterState.idle)
+            {
+                Idle();
+            }
         }
     }
     void Move()

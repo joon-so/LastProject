@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Eva : MonoBehaviour
+public class Eva : SubAI
 {
     [SerializeField] GameObject attackRange = null;
     [SerializeField] GameObject qSkill = null;
@@ -42,8 +42,6 @@ public class Eva : MonoBehaviour
     Vector3 vecTarget;
 
     Animator anim;
-    NavMeshAgent nav;
-    GameObject tagCharacter;
 
     void Awake()
     {
@@ -52,6 +50,22 @@ public class Eva : MonoBehaviour
     }
     void Start()
     {
+        if (GameManager.instance.isMainEva)
+        {
+            nav.enabled = false;
+            tagCharacter = GameManager.instance.character2;
+        }
+        else if (GameManager.instance.isSubEva)
+        {
+            tagCharacter = GameManager.instance.character1;
+            nav.enabled = true;
+        }
+
+        FindEnemys();
+
+        nav = GetComponent<NavMeshAgent>();
+        rigidbody = GetComponent<Rigidbody>();
+
         vecTarget = transform.position;
 
         curDodgeCoolTime = 0;
@@ -94,8 +108,20 @@ public class Eva : MonoBehaviour
         }
         else if (gameObject.transform.tag == "SubCharacter")
         {
-            qSkill.SetActive(false);
-            // Follow();
+            distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
+
+            if (currentState == characterState.trace)
+            {
+                MainCharacterTrace();
+            }
+            else if (currentState == characterState.attack)
+            {
+                SubAttack();
+            }
+            else if (currentState == characterState.idle)
+            {
+                Idle();
+            }
         }
     }
     void Move()

@@ -6,62 +6,88 @@ using UnityEngine.AI;
 public class SubAI : MonoBehaviour
 {
     public enum characterState { idle, trace, attack }
-    public characterState currentState;
+    public characterState currentState = characterState.idle;
 
-    NavMeshAgent navMeshAgent;
-    Rigidbody rigidbody;
-    GameObject mainCharacter;
-    private float distance;
+    public NavMeshAgent nav;
+    public Rigidbody rigidbody;
+    public GameObject tagCharacter;
+    protected List<GameObject> targets;
+    protected GameObject target = null;
+    protected float distance;
     //private Transform 
-    private float traceDistance = 10.0f;
-    private float attackDistance = 5.0f;
+    public float traceDistance = 2.0f;
+    public float attackDistance = 1.0f;
 
-    void Start()
+    public void FindEnemys()
     {
-        navMeshAgent = GetComponent<NavMeshAgent>();
-        rigidbody = GetComponent<Rigidbody>();
-
-        currentState = characterState.idle;
-        traceDistance = 10.0f;
-        attackDistance = 5.0f;
+        targets = GameObject.Find("Enemys").GetComponent<EnemyList>().Enemys;
     }
 
-    void Update()
+    public void MainCharacterTrace()
     {
-        mainCharacter = GameObject.FindGameObjectWithTag("MainCharacter");
-        distance = Vector3.Distance(mainCharacter.transform.position, transform.position);
-
-        if(currentState == characterState.trace)
+        currentState = characterState.trace;
+        if (distance > traceDistance)
         {
-            MainCharacterTrace();
-        }
-        else if (currentState == characterState.attack)
-        {
-            Attack();
+            nav.SetDestination(tagCharacter.transform.position);
         }
         else
         {
-            Idle();
+            currentState = characterState.idle;
+        }
+        target = null;
+    }
+
+    public void SubAttack()
+    {
+        if (distance <= traceDistance)
+        {
+            //주변에 적존재한다면 공격, 아니면 대기
+            //FindEnemy();
+        }
+        else
+        {
+            target = null;
+            currentState = characterState.trace;
         }
     }
 
-    void MainCharacterTrace()
+    public void Idle()
     {
-
+        if (distance <= traceDistance)
+        {
+            //주변에 적존재한다면 공격, 아니면 대기
+            if (FindEnemy())
+            {
+                currentState = characterState.attack;
+            }
+            else
+            {
+                target = null;
+            }
+        }
+        else
+        {
+            currentState = characterState.trace;
+            target = null;
+        }
+        nav.SetDestination(transform.position);
     }
 
-    void Attack()
+    bool FindEnemy()
     {
-
-    }
-
-    void Idle()
-    {
-
-    }
-
-    void CheckEnemy()
-    {
-        
+        target = null;
+        float targetDistance = attackDistance;
+        for (int i = 0; i < targets.Count; i++)
+        {
+            float distance = Vector3.Distance(transform.position, targets[i].transform.position);
+            if (targetDistance > distance)
+            {
+                targetDistance = distance;
+                target = targets[i];
+            }
+        }
+        if (target != null)
+            return true;
+        return false;
     }
 }
