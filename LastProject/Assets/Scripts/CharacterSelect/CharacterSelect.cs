@@ -26,10 +26,8 @@ public class CharacterSelect : MonoBehaviour
 
 
     private int mainOrsub;  // main: 1 sub: 2
-    [SerializeField] string clickSound;
-    [SerializeField] string click2Sound;
-    [SerializeField] string click3Sound;
-    [SerializeField] string click4Sound;
+    public AudioClip uiButtonClickSound1;
+    public AudioClip uiButtonClickSound2;
 
     void Start()
     {
@@ -115,7 +113,7 @@ public class CharacterSelect : MonoBehaviour
     }
     public void OnClickSelectCharacter()
     {
-     //   SoundManager.instance.PlaySoundEffect(click2Sound);
+        SoundManager.instance.SFXPlay("Select", uiButtonClickSound1);
 
         if (mainOrsub == 1)
         {
@@ -169,12 +167,12 @@ public class CharacterSelect : MonoBehaviour
 
     public void OnClickStart()
     {
-      //  SoundManager.instance.PlaySoundEffect(click3Sound);
+        SoundManager.instance.SFXPlay("Start", uiButtonClickSound2);
         SceneManager.LoadScene("Stage1-1");
     }
     public void OnClickExit()
     {
-      //  SoundManager.instance.PlaySoundEffect(click3Sound);
+        SoundManager.instance.SFXPlay("Exit", uiButtonClickSound2);
         SceneManager.LoadScene("Main");
     }
 }
