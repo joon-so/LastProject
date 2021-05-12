@@ -35,6 +35,7 @@ public class Jade : SubAI
     public float qSkillCoolTime = 5.0f;
     public float wSkillCoolTime = 5.0f;
     public float fireDelay = 0.5f;
+    public float subFireDelay = 1.5f;
     public float followDistance = 5.0f;
     public float grenadeDistance = 10.0f;
 
@@ -107,9 +108,9 @@ public class Jade : SubAI
     }
     void Update()
     {
+        curFireDelay += Time.deltaTime;
         if (gameObject.transform.tag == "MainCharacter")
         {
-            curFireDelay += Time.deltaTime;
             if (canMove)
                 Move();
             if (canAttack)
@@ -133,17 +134,26 @@ public class Jade : SubAI
             if (currentState == characterState.trace)
             {
                 MainCharacterTrace();
+                anim.SetBool("Run", true);
+                curFireDelay = 1f;
             }
             else if (currentState == characterState.attack)
             {
                 SubAttack();
 
-                if (curFireDelay > fireDelay)
+                if (target)
+                {
+                    Quaternion lookRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+                    Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
+                    transform.rotation = Quaternion.Euler(0, euler.y, 0);
+
+                }
+                if (curFireDelay > subFireDelay)
                 {
                     GameObject instantBullet = Instantiate(assaultRifleBullet, assaultRifleBulletPos.position, assaultRifleBulletPos.rotation);
                     Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
                     bulletRigid.velocity = assaultRifleBulletPos.forward;
-
+                    
                     moveSpeed = 0f;
                     anim.SetBool("Run", false);
                     vecTarget = transform.position;
@@ -157,6 +167,8 @@ public class Jade : SubAI
             else if (currentState == characterState.idle)
             {
                 Idle();
+                anim.SetBool("Run", false);
+                curFireDelay = 1f;
             }
         }
     }

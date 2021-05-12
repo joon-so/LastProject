@@ -15,6 +15,8 @@ public class Enemy3 : MonoBehaviour
     [SerializeField] Transform bulletLeftStartPoint;
     [SerializeField] Transform bulletRightStartPoint;
 
+    protected List<GameObject> targets;
+
     float straightTime = 0.2f;
     public float shootCooltime = 1.0f;
     public float spinSpeed = 50.0f;
@@ -42,6 +44,8 @@ public class Enemy3 : MonoBehaviour
         anim = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
         rigid = GetComponent<Rigidbody>();
+
+        targets = GameObject.Find("Enemys").GetComponent<EnemyList>().Enemys;
 
         targetMark.SetActive(false);
         transform.position = new Vector3(transform.position.x, 45f, transform.position.z);
@@ -178,6 +182,7 @@ public class Enemy3 : MonoBehaviour
         shootable = false;
         movable = false;
         Instantiate(explosion, transform.position, transform.rotation);
+        targets.Remove(gameObject);
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }

@@ -17,6 +17,7 @@ public class SubAI : MonoBehaviour
     //private Transform 
     public float traceDistance = 2.0f;
     public float attackDistance = 1.0f;
+    protected float spinSpeed = 1000f;
 
     public void FindEnemys()
     {
@@ -53,14 +54,15 @@ public class SubAI : MonoBehaviour
 
     public void Idle()
     {
+        FindEnemy();
         if (distance <= traceDistance)
         {
             //주변에 적존재한다면 공격, 아니면 대기
-            if (FindEnemy())
+            if (target != null)
             {
                 currentState = characterState.attack;
             }
-            else
+            else if(target == null)
             {
                 target = null;
             }
@@ -73,7 +75,7 @@ public class SubAI : MonoBehaviour
         nav.SetDestination(transform.position);
     }
 
-    bool FindEnemy()
+    public void FindEnemy()
     {
         target = null;
         float targetDistance = attackDistance;
@@ -86,8 +88,5 @@ public class SubAI : MonoBehaviour
                 target = targets[i];
             }
         }
-        if (target != null)
-            return true;
-        return false;
     }
 }

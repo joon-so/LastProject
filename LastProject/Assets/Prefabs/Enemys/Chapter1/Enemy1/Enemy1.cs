@@ -15,6 +15,8 @@ public class Enemy1 : MonoBehaviour
     [SerializeField] Transform bulletStartPoint;
     [SerializeField] Transform bulletEndPoint;
 
+    protected List<GameObject> targets;
+
     public float shootCooltime = 3.0f;
     float chargingTime = 1.2f;
     float spinSpeed = 200.0f;
@@ -49,6 +51,8 @@ public class Enemy1 : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
         bulletLine = GetComponent<LineRenderer>();
         rigid = GetComponent<Rigidbody>();
+
+        targets = GameObject.Find("Enemys").GetComponent<EnemyList>().Enemys;
 
         targetMark.SetActive(false);
         transform.position= new Vector3(transform.position.x, 45f, transform.position.z);
@@ -189,6 +193,7 @@ public class Enemy1 : MonoBehaviour
         shootable = false;
         Instantiate(explosion, transform.position, transform.rotation);
         bulletLine.enabled = false;
+        targets.Remove(gameObject);
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }

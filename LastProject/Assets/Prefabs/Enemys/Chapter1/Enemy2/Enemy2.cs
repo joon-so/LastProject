@@ -14,6 +14,8 @@ public class Enemy2 : MonoBehaviour
     [SerializeField] GameObject dropEffect = null;
     [SerializeField] Transform bulletStartPoint;
 
+    protected List<GameObject> targets;
+
     float straightTime = 0.2f;
     public float shootCooltime = 1.0f;
     public float spinSpeed = 50.0f;
@@ -41,6 +43,8 @@ public class Enemy2 : MonoBehaviour
         anim = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
         rigid = GetComponent<Rigidbody>();
+
+        targets = GameObject.Find("Enemys").GetComponent<EnemyList>().Enemys;
 
         targetMark.SetActive(false);
         transform.position = new Vector3(transform.position.x, 45f, transform.position.z);
@@ -171,6 +175,7 @@ public class Enemy2 : MonoBehaviour
         shootable = false;
         movable = false;
         Instantiate(explosion, transform.position, transform.rotation);
+        targets.Remove(gameObject);
         yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
