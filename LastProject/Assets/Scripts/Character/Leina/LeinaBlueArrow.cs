@@ -19,8 +19,12 @@ public class LeinaBlueArrow : MonoBehaviour
     private RotateToMouseScript rotateToMouse;
     private GameObject target;
 
+    public AudioClip arrowClip;
+
     void Start()
     {
+        SoundManager.instance.SFXPlay("Arrow", arrowClip);
+
         startPos = transform.position;
         rigid = GetComponent<Rigidbody>();
 

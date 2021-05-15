@@ -6062,13 +6062,14 @@ MonoBehaviour:
   attackSound: JadeAttack
   attackClip: {fileID: 8300000, guid: 7185d08da7632af4281eb74802ec3a14, type: 3}
   qSkillChargingClip: {fileID: 0}
-  qSkillClip: {fileID: 0}
+  qSkillClip: {fileID: 8300000, guid: 12fe5de4b1f7f1e40824c7114340c0f7, type: 3}
   wSkillClip: {fileID: 8300000, guid: 63c4e5e20a4bb4e428b38520978b49c7, type: 3}
   moveSpeed: 5
   dodgeCoolTime: 7
   qSkillCoolTime: 5
   wSkillCoolTime: 5
   fireDelay: 0.5
+  subFireDelay: 1.5
   followDistance: 5
   grenadeDistance: 10
 --- !u!54 &7966750312788935074

@@ -772,9 +772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96b76a394f9c5754a9b3e1bc3960b258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: {fileID: 1374638717}
-  password: {fileID: 879583922}
-  message: {fileID: 1136809665}
+  uiButtonSound: {fileID: 0}
 --- !u!4 &175088794
 Transform:
   m_ObjectHideFlags: 0
@@ -1415,7 +1413,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 395345896}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1924603524}
+        m_TargetAssemblyTypeName: LoginManager, Assembly-CSharp
+        m_MethodName: OnClickCreateButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &405895088
 GameObject:
   m_ObjectHideFlags: 0
@@ -3560,7 +3570,6 @@ GameObject:
   - component: {fileID: 1117804937}
   - component: {fileID: 1117804936}
   - component: {fileID: 1117804935}
-  - component: {fileID: 1117804934}
   m_Layer: 5
   m_Name: Button (Login)
   m_TagString: Untagged
@@ -3591,22 +3600,6 @@ RectTransform:
   m_AnchoredPosition: {x: -224, y: -666}
   m_SizeDelta: {x: 440, y: 156}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &1117804934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1117804932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21ffe216b5b498140bfe83b5681b7fb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Scene: 1
-  m_UseLoadingOverlay: 0
-  m_InputKey: 1
-  m_HookToButton: {fileID: 1117804941}
 --- !u!114 &1117804935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3777,13 +3770,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 175088792}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 1924603524}
+        m_TargetAssemblyTypeName: LoginManager, Assembly-CSharp
+        m_MethodName: OnClickLoginButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -6308,6 +6301,7 @@ GameObject:
   - component: {fileID: 1924603522}
   - component: {fileID: 1924603521}
   - component: {fileID: 1924603520}
+  - component: {fileID: 1924603524}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -6399,6 +6393,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1924603524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1924603519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96b76a394f9c5754a9b3e1bc3960b258, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiButtonSound: {fileID: 8300000, guid: b81909f169fd8ee4699fc01948d7f820, type: 3}
 --- !u!1 &1928480748
 GameObject:
   m_ObjectHideFlags: 0

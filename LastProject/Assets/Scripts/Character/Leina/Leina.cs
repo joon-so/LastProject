@@ -16,7 +16,7 @@ public class Leina : SubAI
     [SerializeField] GameObject effect = null;
     [SerializeField] Transform rainArrowPos = null;
 
-
+    public AudioClip attackClip;
 
     public float moveSpeed = 5.0f;
     public float dodgeCoolTime = 7.0f;
@@ -234,6 +234,7 @@ public class Leina : SubAI
                     nextVec.y = 0;
                     transform.LookAt(transform.position + nextVec);
                 }
+                SoundManager.instance.SFXPlay("Attack", attackClip);
 
                 GameObject instantArrow = Instantiate(arrow, arrowPos.position, arrowPos.rotation);
                 Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();

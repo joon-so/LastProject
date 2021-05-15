@@ -1121,6 +1121,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f1aa75eefd63d34bba70f82f130ecc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
+  nav: {fileID: 0}
+  rigidbody: {fileID: 0}
+  tagCharacter: {fileID: 0}
+  traceDistance: 2
+  attackDistance: 1
   attackRange: {fileID: 8956797210599211972}
   arrow: {fileID: 5775468925520252961, guid: 9ad73451252dea242b626f843f2c8a4e, type: 3}
   arrowPos: {fileID: 1766496332179116808}
@@ -1129,11 +1135,13 @@ MonoBehaviour:
   rainArrow: {fileID: 4090946686561165464, guid: 4c6df5da180c24b49a9b69560ebb2b3d, type: 3}
   effect: {fileID: 3909897119099557501}
   rainArrowPos: {fileID: 4385404622400843517}
+  attackClip: {fileID: 8300000, guid: 79c278c674c2e4e4388bbbfb9a7abe7d, type: 3}
   moveSpeed: 5
   dodgeCoolTime: 7
   qSkillCoolTime: 5
   wSkillCoolTime: 5
   fireDelay: 1
+  subFireDelay: 1.5
   followDistance: 5
 --- !u!195 &303485333146130485
 NavMeshAgent:

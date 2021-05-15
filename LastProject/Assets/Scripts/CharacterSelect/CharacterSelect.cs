@@ -28,6 +28,7 @@ public class CharacterSelect : MonoBehaviour
     private int mainOrsub;  // main: 1 sub: 2
     public AudioClip uiButtonClickSound1;
     public AudioClip uiButtonClickSound2;
+    public AudioClip uiCharacterClickSound;
 
     void Start()
     {
@@ -36,12 +37,12 @@ public class CharacterSelect : MonoBehaviour
 
     public void PointUISound()
     {
-       // SoundManager.instance.PlaySoundEffect(click4Sound);
+
     }
 
     public void OnClickSelectKarmen()
     {
-     //   SoundManager.instance.PlaySoundEffect(clickSound);
+        SoundManager.instance.SFXPlay("List", uiCharacterClickSound);
         if (mainOrsub == 1)
         {
             mainKarmen.SetActive(true);
@@ -59,7 +60,7 @@ public class CharacterSelect : MonoBehaviour
     }
     public void OnClickSelectJade()
     {
-    //    SoundManager.instance.PlaySoundEffect(clickSound);
+        SoundManager.instance.SFXPlay("List", uiCharacterClickSound);
         if (mainOrsub == 1)
         {
             mainKarmen.SetActive(false);
@@ -77,7 +78,7 @@ public class CharacterSelect : MonoBehaviour
     }
     public void OnClickSelectLeina()
     {
-        //SoundManager.instance.PlaySoundEffect(clickSound);
+        SoundManager.instance.SFXPlay("List", uiCharacterClickSound);
         if (mainOrsub == 1)
         {
             mainKarmen.SetActive(false);
@@ -95,7 +96,7 @@ public class CharacterSelect : MonoBehaviour
     }
     public void OnClickSelectEva()
     {
-      //  SoundManager.instance.PlaySoundEffect(clickSound);
+        SoundManager.instance.SFXPlay("List", uiCharacterClickSound);
         if (mainOrsub == 1)
         {
             mainKarmen.SetActive(false);
