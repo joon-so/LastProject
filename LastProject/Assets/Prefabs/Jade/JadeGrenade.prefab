@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1261709116669927411}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 4869679809748384211}
   - component: {fileID: 9086969048913427167}
   - component: {fileID: 7068490866349264975}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4966,7 +4966,7 @@ GameObject:
   - component: {fileID: 3698551889870220343}
   - component: {fileID: 8550852720681925096}
   - component: {fileID: 1313074450787294693}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9782,7 +9782,7 @@ GameObject:
   - component: {fileID: 3707015780065123391}
   - component: {fileID: 7589047160288208212}
   - component: {fileID: 3485482304108553440}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14683,7 +14683,7 @@ GameObject:
   - component: {fileID: 6061290871238464215}
   - component: {fileID: 6082346064088127341}
   - component: {fileID: 6072378243387910315}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Pin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14764,7 +14764,7 @@ GameObject:
   - component: {fileID: 6061653824156838353}
   - component: {fileID: 6081827196936892281}
   - component: {fileID: 6071694789423384121}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14848,7 +14848,7 @@ GameObject:
   - component: {fileID: 929300267805692343}
   - component: {fileID: 7699003047080610735}
   - component: {fileID: 1138767264185452654}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: JadeGrenade
   m_TagString: JadeWSkill
   m_Icon: {fileID: 0}
@@ -19796,8 +19796,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 6061349752340280089}
     m_Modifications:
     - target: {fileID: 1000010059211136, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000010059211136, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011085071264, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1000011085071264, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
       propertyPath: m_IsActive
@@ -19808,12 +19816,24 @@ PrefabInstance:
       value: PlasmaExplosionEffect
       objectReference: {fileID: 0}
     - target: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011128802252, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1000011730688910, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000011730688910, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000012812333644, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1000012812333644, guid: 96730f8640590934eacb6f860058e7f9, type: 3}
       propertyPath: m_IsActive
