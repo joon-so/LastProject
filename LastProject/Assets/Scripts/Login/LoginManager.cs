@@ -19,7 +19,7 @@ public class LoginManager : MonoBehaviour
 
         Invoke("LoadMain", 0.7f);
     }
-    
+
     void LoadMain()
     {
         SceneManager.LoadScene("Main");

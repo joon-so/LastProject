@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3510921534293135785}
   - component: {fileID: 3605675085372992307}
   - component: {fileID: 3635288571647736863}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Crater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4885,7 +4885,7 @@ GameObject:
   - component: {fileID: 3505910122288210405}
   - component: {fileID: 3635722690506507123}
   - component: {fileID: 3635417783425751925}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Distortion(Delete for Mobile)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9759,7 +9759,7 @@ GameObject:
   - component: {fileID: 3510726793989876665}
   - component: {fileID: 3635800176109900319}
   - component: {fileID: 3635211786077635999}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Smoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14633,7 +14633,7 @@ GameObject:
   - component: {fileID: 3505708688262686041}
   - component: {fileID: 3635595279320486905}
   - component: {fileID: 3634464375136244163}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Rock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19516,7 +19516,7 @@ GameObject:
   - component: {fileID: 3510870598338456443}
   - component: {fileID: 3635726222423210321}
   - component: {fileID: 3635877483752841689}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: UpSmoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24400,9 +24400,7 @@ GameObject:
   - component: {fileID: 6343564762782903825}
   - component: {fileID: 3635635981248806121}
   - component: {fileID: 3635397472168000885}
-  - component: {fileID: 8349918623778956556}
-  - component: {fileID: 5230426177395320401}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WSkillShockEffect
   m_TagString: EvaWSkill
   m_Icon: {fileID: 0}
@@ -24418,7 +24416,7 @@ Transform:
   m_GameObject: {fileID: 3508642095436736753}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 0.55, y: 0.55, z: 0.55}
   m_Children:
   - {fileID: 3510726793989876665}
   - {fileID: 3505799656715921977}
@@ -29305,35 +29303,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!54 &8349918623778956556
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3508642095436736753}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 94
-  m_CollisionDetection: 0
---- !u!65 &5230426177395320401
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3508642095436736753}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4, y: 4, z: 4}
-  m_Center: {x: 0, y: 2, z: 0}
 --- !u!1 &3509148512975605473
 GameObject:
   m_ObjectHideFlags: 0
@@ -29345,7 +29314,7 @@ GameObject:
   - component: {fileID: 3510942993525162531}
   - component: {fileID: 3605587280174395087}
   - component: {fileID: 3635269565714364317}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Derbis
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34228,7 +34197,7 @@ GameObject:
   - component: {fileID: 3505679854051806257}
   - component: {fileID: 3636152474063317037}
   - component: {fileID: 3635072683049222841}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Flash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39102,7 +39071,7 @@ GameObject:
   - component: {fileID: 3505799656715921977}
   - component: {fileID: 3636438839904803443}
   - component: {fileID: 3635451297676812121}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SmokeTrails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43976,7 +43945,7 @@ GameObject:
   - component: {fileID: 3505607762220975487}
   - component: {fileID: 3636620902099429455}
   - component: {fileID: 3635405336804179879}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Stone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48859,7 +48828,7 @@ GameObject:
   - component: {fileID: 3510687224436730511}
   - component: {fileID: 3635545552074590875}
   - component: {fileID: 3636004668089241379}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}

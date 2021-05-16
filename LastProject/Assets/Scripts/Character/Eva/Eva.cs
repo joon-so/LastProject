@@ -400,6 +400,16 @@ public class Eva : SubAI
     IEnumerator ShockWave()
     {
         curWSkillCoolTime = 0.0f;
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            Vector3 nextVec = hit.point - transform.position;
+            nextVec.y = 0;
+            transform.LookAt(transform.position + nextVec);
+        }
+
         anim.SetTrigger("WSkill");
         Instantiate(wSkillEffect, wSkillPos.position, wSkillPos.rotation);
         yield return new WaitForSeconds(0.5f);
