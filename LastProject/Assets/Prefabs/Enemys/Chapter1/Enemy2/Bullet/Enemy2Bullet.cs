@@ -101,7 +101,7 @@ public class Enemy2Bullet : MonoBehaviour {
 	void OnCollisionEnter (Collision co) {
         if (!bounce)
         {
-            if (co.gameObject.tag != "Bullet" && !collided)
+            if ((co.gameObject.layer != 8 || co.gameObject.tag != "SubCharacter") && !collided)
             {
                 collided = true;
 

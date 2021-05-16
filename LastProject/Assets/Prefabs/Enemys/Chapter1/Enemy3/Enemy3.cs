@@ -53,7 +53,7 @@ public class Enemy3 : MonoBehaviour
         nav.enabled = false;
 
         InvokeRepeating("Find", 0f, 0.5f);
-        startPoint = transform.position;
+        startPoint = new Vector3(transform.position.x, 0f, transform.position.z);
 
         currentHp = maxHp;
         hpBar.SetMaxHp(maxHp);
@@ -79,6 +79,10 @@ public class Enemy3 : MonoBehaviour
         if (born)
         {
             Find();
+        }
+        if (transform.position.y < 0)
+        {
+            transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
         }
     }
 
