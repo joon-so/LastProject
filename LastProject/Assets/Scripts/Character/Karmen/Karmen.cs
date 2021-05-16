@@ -134,6 +134,7 @@ public class Karmen : SubAI
                 Idle();
             }
         }
+        Tag();
     }
     void Move()
     {
@@ -404,6 +405,13 @@ public class Karmen : SubAI
     void E_Skill()
     {
 
+    }
+    void Tag()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            vecTarget = transform.position;
+        }
     }
     IEnumerator AttackDelay()
     {

@@ -144,7 +144,7 @@ public class Jade : SubAI
                     transform.rotation = Quaternion.Euler(0, euler.y, 0);
 
                 }
-                if (curFireDelay > subFireDelay)
+                if (curFireDelay > subFireDelay && target != null)
                 {
                     GameObject instantBullet = Instantiate(assaultRifleBullet, assaultRifleBulletPos.position, assaultRifleBulletPos.rotation);
                     Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
@@ -167,6 +167,7 @@ public class Jade : SubAI
                 curFireDelay = 1f;
             }
         }
+        Tag();
     }
     void Move()
     {
@@ -225,7 +226,7 @@ public class Jade : SubAI
         }
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("DodgeForward"))
         {
-            transform.Translate(Vector3.forward * Time.deltaTime);
+            transform.Translate(Vector3.forward *5* Time.deltaTime);
             vecTarget = transform.position;
             anim.SetBool("Run", false);
         }
@@ -343,6 +344,13 @@ public class Jade : SubAI
         if (Input.GetKeyDown(KeyCode.E))
         {
 
+        }
+    }
+    void Tag()
+    {
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            vecTarget = transform.position;
         }
     }
 

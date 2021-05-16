@@ -123,6 +123,7 @@ public class Eva : SubAI
                 Idle();
             }
         }
+        Tag();
     }
     void Move()
     {
@@ -354,7 +355,13 @@ public class Eva : SubAI
         //    anim.SetBool("isRun", isRun);
         //}
     }
-
+    void Tag()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            vecTarget = transform.position;
+        }
+    }
     IEnumerator DodgeDelay()
     {
         yield return new WaitForSeconds(1.0f);

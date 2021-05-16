@@ -130,7 +130,7 @@ public class Leina : SubAI
                     Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
                     transform.rotation = Quaternion.Euler(0, euler.y, 0);
                 }
-                if (curFireDelay > subFireDelay)
+                if (curFireDelay > subFireDelay && target != null)
                 {
                     GameObject instantArrow = Instantiate(arrow, arrowPos.position, arrowPos.rotation);
                     Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
@@ -153,6 +153,7 @@ public class Leina : SubAI
                 curFireDelay = 1f;
             }
         }
+        Tag();
     }
     void Move()
     {
@@ -328,6 +329,13 @@ public class Leina : SubAI
         if (Input.GetKeyDown(KeyCode.E))
         {
 
+        }
+    }
+    void Tag()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            vecTarget = transform.position;
         }
     }
     IEnumerator AttackDelay()
