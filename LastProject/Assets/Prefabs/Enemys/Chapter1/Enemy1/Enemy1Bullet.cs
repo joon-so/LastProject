@@ -91,8 +91,8 @@ public class Enemy1Bullet : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        {        if ((collision.gameObject.layer != 8 || collision.gameObject.tag != "SubCharacter") && !collided)
-
+        if ((collision.gameObject.layer != 8 || collision.gameObject.tag != "SubCharacter") && !collided)
+        {
             collided = true;
 
             if (trails.Count > 0)
