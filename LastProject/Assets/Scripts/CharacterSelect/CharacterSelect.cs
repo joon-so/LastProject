@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CharacterSelect : MonoBehaviour
 {
@@ -22,8 +23,9 @@ public class CharacterSelect : MonoBehaviour
     [SerializeField] GameObject backAssaultRifle;
     [SerializeField] GameObject handAssaultRifle;
 
-    [SerializeField] GameObject[] characterList;
+    [SerializeField] GameObject characterInfoMsg;
 
+    [SerializeField] Text characterInfoMsgText;
 
     private int mainOrsub;  // main: 1 sub: 2
     public AudioClip uiButtonClickSound1;
@@ -175,5 +177,22 @@ public class CharacterSelect : MonoBehaviour
     {
         SoundManager.instance.SFXPlay("Exit", uiButtonClickSound2);
         SceneManager.LoadScene("Main");
+    }
+
+    public void KarmenInfoMsg()
+    {
+        characterInfoMsgText.text = "카르멘은 근거리 전투 캐릭터입니다.";
+    }
+    public void JadeInfoMsg()
+    {
+        characterInfoMsgText.text = "제이드는 원거리 전투 캐릭터입니다.";
+    }
+    public void LeinaInfoMsg()
+    {
+        characterInfoMsgText.text = "레이나는 원거리 전투 캐릭터입니다.";
+    }
+    public void EvaInfoMsg()
+    {
+        characterInfoMsgText.text = "에바는 근거리 전투 캐릭터입니다.";
     }
 }

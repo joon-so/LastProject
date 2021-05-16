@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class LoginManager : MonoBehaviour
 {
-    public AudioClip uiButtonSound;
+    [SerializeField] AudioClip uiButtonSound;
 
     public void OnClickCreateButton()
     {
@@ -17,6 +17,11 @@ public class LoginManager : MonoBehaviour
     {
         SoundManager.instance.SFXPlay("Click", uiButtonSound);
 
+        Invoke("LoadMain", 0.7f);
+    }
+    
+    void LoadMain()
+    {
         SceneManager.LoadScene("Main");
     }
 }

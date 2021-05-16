@@ -1193,7 +1193,6 @@ GameObject:
   - component: {fileID: 395345898}
   - component: {fileID: 395345897}
   - component: {fileID: 395345896}
-  - component: {fileID: 395345895}
   - component: {fileID: 395345894}
   - component: {fileID: 395345893}
   - component: {fileID: 395345892}
@@ -1312,26 +1311,6 @@ MonoBehaviour:
   m_TargetGameObject: {fileID: 0}
   m_UseToggle: 0
   m_TargetToggle: {fileID: 0}
---- !u!114 &395345895
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 395345889}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a10c8b0272ac0b444b2896a780d18820, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Offset: {x: 0, y: 0}
-  m_Borders:
-    m_Left: 14
-    m_Right: 14
-    m_Top: 14
-    m_Bottom: 14
-  m_ScaleX: 1
-  m_ScaleY: 1
 --- !u!114 &395345896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3566,7 +3545,6 @@ GameObject:
   - component: {fileID: 1117804941}
   - component: {fileID: 1117804940}
   - component: {fileID: 1117804939}
-  - component: {fileID: 1117804938}
   - component: {fileID: 1117804937}
   - component: {fileID: 1117804936}
   - component: {fileID: 1117804935}
@@ -3668,26 +3646,6 @@ MonoBehaviour:
   m_TargetGameObject: {fileID: 0}
   m_UseToggle: 0
   m_TargetToggle: {fileID: 0}
---- !u!114 &1117804938
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1117804932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a10c8b0272ac0b444b2896a780d18820, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Offset: {x: 0, y: 0}
-  m_Borders:
-    m_Left: 14
-    m_Right: 14
-    m_Top: 14
-    m_Bottom: 14
-  m_ScaleX: 1
-  m_ScaleY: 1
 --- !u!114 &1117804939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3923,7 +3881,7 @@ MonoBehaviour:
     m_FontSize: 48
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 4
+    m_MinSize: 0
     m_MaxSize: 48
     m_Alignment: 1
     m_AlignByGeometry: 0

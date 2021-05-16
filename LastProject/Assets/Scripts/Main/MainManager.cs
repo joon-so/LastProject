@@ -6,22 +6,29 @@ using UnityEngine.SceneManagement;
 
 public class MainManager : MonoBehaviour
 {
+    [SerializeField] AudioClip uiButtonSound;
+
     public void OnClickPvE()
     {
+        SoundManager.instance.SFXPlay("Click", uiButtonSound);
         SceneManager.LoadScene("CharacterSelect");
     }
     public void OnClickPvP()
     {
+        SoundManager.instance.SFXPlay("Click", uiButtonSound);
 
     }
     public void OnClickExit()
     {
-        SceneManager.LoadScene("Login");
+        SoundManager.instance.SFXPlay("Click", uiButtonSound);
+        Invoke("LoadLogin", 0.7f);
 
-//#if UNITY_EDITOR
-//        UnityEditor.EditorApplication.isPlaying = false;
-//#else
-//        Application.Quit();
-//#endif
+    }
+    void LoadLogin()
+    {
+        SceneManager.LoadScene("Login");
     }
 }
+
+
+
