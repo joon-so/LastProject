@@ -18,10 +18,11 @@ public class Karmen : SubAI
 
     public float moveSpeed = 5.0f;
     public float dodgeCoolTime = 5.0f;
-    public float qSkillCoolTime = 5.0f;
-    public float wSkillCoolTime = 5.0f;
     public float followDistance = 5.0f;
 
+    public static float qSkillCoolTime = 5.0f;
+    public static float wSkillCoolTime = 5.0f;
+    public static float eSkillCoolTime = 5.0f;
     public static int attackDamage = 20;
     public static int qSkillDamage = 60;
     public static int wSkillDamage = 10;

@@ -49,6 +49,7 @@ public class PlayerManager : MonoBehaviour
             C_Karmen.gameObject.tag = "MainCharacter";
             C_Karmen.gameObject.layer = 6;
             GameManager.instance.character1 = C_Karmen;
+            GameManager.instance.c1_QSkillCoolTime = Karmen.qSkillCoolTime;
         }
         else if (GameManager.instance.isMainJade)
         {
@@ -56,6 +57,7 @@ public class PlayerManager : MonoBehaviour
             C_Jade.gameObject.tag = "MainCharacter";
             C_Jade.gameObject.layer = 6;
             GameManager.instance.character1 = C_Jade;
+            GameManager.instance.c1_QSkillCoolTime = Jade.qSkillCoolTime;
         }
         else if (GameManager.instance.isMainLeina)
         {
@@ -63,6 +65,7 @@ public class PlayerManager : MonoBehaviour
             C_Leina.gameObject.tag = "MainCharacter";
             C_Leina.gameObject.layer = 6;
             GameManager.instance.character1 = C_Leina;
+            GameManager.instance.c1_QSkillCoolTime = Leina.qSkillCoolTime;
         }
         else if (GameManager.instance.isMainEva)
         {
@@ -70,6 +73,7 @@ public class PlayerManager : MonoBehaviour
             C_Eva.gameObject.tag = "MainCharacter";
             C_Eva.gameObject.layer = 6;
             GameManager.instance.character1 = C_Eva;
+            GameManager.instance.c1_QSkillCoolTime = Eva.qSkillCoolTime;
         }
 
         if (GameManager.instance.isSubKarmen)
@@ -78,6 +82,7 @@ public class PlayerManager : MonoBehaviour
             C_Karmen.gameObject.tag = "SubCharacter";
             C_Karmen.gameObject.layer = 7;
             GameManager.instance.character2 = C_Karmen;
+            GameManager.instance.c2_QSkillCoolTime = Karmen.qSkillCoolTime;
         }
         else if (GameManager.instance.isSubJade)
         {
@@ -85,6 +90,7 @@ public class PlayerManager : MonoBehaviour
             C_Jade.gameObject.tag = "SubCharacter";
             C_Jade.gameObject.layer = 7;
             GameManager.instance.character2 = C_Jade;
+            GameManager.instance.c2_QSkillCoolTime = Jade.qSkillCoolTime;
         }
         else if (GameManager.instance.isSubLeina)
         {
@@ -92,6 +98,7 @@ public class PlayerManager : MonoBehaviour
             C_Leina.gameObject.tag = "SubCharacter";
             C_Leina.gameObject.layer = 7;
             GameManager.instance.character2 = C_Leina;
+            GameManager.instance.c2_QSkillCoolTime = Leina.qSkillCoolTime;
         }
         else if (GameManager.instance.isSubEva)
         {
@@ -99,6 +106,7 @@ public class PlayerManager : MonoBehaviour
             C_Eva.gameObject.tag = "SubCharacter";
             C_Eva.gameObject.layer = 7;
             GameManager.instance.character2 = C_Eva;
+            GameManager.instance.c2_QSkillCoolTime = Eva.qSkillCoolTime;
         }
     }
 

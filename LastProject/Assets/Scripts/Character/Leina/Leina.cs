@@ -20,12 +20,13 @@ public class Leina : SubAI
 
     public float moveSpeed = 5.0f;
     public float dodgeCoolTime = 7.0f;
-    public float qSkillCoolTime = 5.0f;
-    public float wSkillCoolTime = 5.0f;
     public float fireDelay = 1.0f;
     public float subFireDelay = 1.5f;
     public float followDistance = 5.0f;
 
+    public static float qSkillCoolTime = 5.0f;
+    public static float wSkillCoolTime = 5.0f;
+    public static float eSkillCoolTime = 5.0f;
     public static int attackDamage = 20;
     public static int qSkillDamage = 70;
     public static int wSkillDamage = 30;

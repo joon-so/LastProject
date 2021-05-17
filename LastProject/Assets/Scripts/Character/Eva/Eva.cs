@@ -13,10 +13,11 @@ public class Eva : SubAI
 
     public float moveSpeed = 5.0f;
     public float dodgeCoolTime = 5.0f;
-    public float qSkillCoolTime = 10.0f;
-    public float wSkillCoolTime = 5.0f;
     public float followDistance = 5.0f;
 
+    public static float qSkillCoolTime = 10.0f;
+    public static float wSkillCoolTime = 5.0f;
+    public static float eSkillCoolTime = 5.0f;
     public static int attackDamage = 20;
     public static int qSkillDamage = 20;
     public static int wSkillDamage = 60;
@@ -296,7 +297,7 @@ public class Eva : SubAI
 
     void W_Skill()
     {
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.W) && onWSkill)
         {
             onWSkill = false;
             curWSkillCoolTime = 0;

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -37,6 +38,14 @@ public class GameManager : MonoBehaviour
     public float subPlayerEp;
 
     public float tagCoolTime = 3.0f;
+
+    public float c1_QSkillCoolTime;
+    public float c1_WSkillCoolTime;
+    public float c1_ESkillCoolTime;
+
+    public float c2_QSkillCoolTime;
+    public float c2_WSkillCoolTime;
+    public float c2_ESkillCoolTime;
 
     public GameObject character1;
     public GameObject character2;
