@@ -33,7 +33,8 @@ public class Eva : SubAI
     bool onDodge;
     bool onQSkill;
     bool onWSkill;
-    
+
+    bool doingAttack;
     bool motionEndCheck;
     bool comboContinue;
     
@@ -81,6 +82,7 @@ public class Eva : SubAI
         onQSkill = true;
         onWSkill = true;
 
+        doingAttack = false;
         motionEndCheck = true;
         comboContinue = true;
 
@@ -200,64 +202,66 @@ public class Eva : SubAI
 
     void Attack()
     {
-        //if (doAttack)
-        //{
-        //    if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
-        //        && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f)
-        //    {
-        //        if (Input.GetMouseButtonDown(0))
-        //            if (comboContinue)
-        //                comboContinue = false;
-        //        motionEndCheck = false;
-        //    }
-        //    else if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f && !motionEndCheck)
-        //    {
-        //        if (!comboContinue)
-        //        {
-        //            anim.SetTrigger("nextCombo");
-        //            comboContinue = true;
-        //        }
-        //        else if (comboContinue)
-        //        {
-        //            doAttack = false;
-        //            anim.SetBool("doAttack", doAttack);
+        if (doingAttack)
+        {
+            if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
+                && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f)
+            {
+                if (Input.GetMouseButtonDown(0))
+                    if (comboContinue)
+                        comboContinue = false;
+                motionEndCheck = false;
+            }
+            else if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f && !motionEndCheck)
+            {
+                if (!comboContinue)
+                {
+                    anim.SetTrigger("nextCombo");
+                    comboContinue = true;
+                }
+                else if (comboContinue)
+                {
+                    doingAttack = false;
+                    anim.SetBool("Attack", doingAttack);
 
-        //        }
-        //        motionEndCheck = true;
-        //    }
-        //}
+                }
+                motionEndCheck = true;
+            }
+        }
 
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    isRun = false;
-        //    anim.SetBool("isRun", isRun);
+        if (Input.GetMouseButtonDown(0))
+        {
+            canMove = false;
+            anim.SetBool("Run", canMove);
 
-        //    if ((doAttack && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
-        //         && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8f)
-        //         || anim.GetCurrentAnimatorStateInfo(0).IsName("Idle_01")
-        //         || anim.GetCurrentAnimatorStateInfo(0).IsName("Run"))
-        //    {
-        //        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //        RaycastHit hit;
-        //        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-        //        {
-        //            Vector3 nextVec = hit.point - transform.position;
-        //            nextVec.y = 0;
-        //            transform.LookAt(transform.position + nextVec);
-        //        }
-        //        vecTarget = transform.position;
-        //    }
+            if ((doingAttack && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
+                 && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8f)
+                 || anim.GetCurrentAnimatorStateInfo(0).IsName("Idle_01")
+                 || anim.GetCurrentAnimatorStateInfo(0).IsName("Run"))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+                {
+                    Vector3 nextVec = hit.point - transform.position;
+                    nextVec.y = 0;
+                    transform.LookAt(transform.position + nextVec);
+                }
+                vecTarget = transform.position;
+            }
 
-        //    moveSpeed = 0f;
-        //    doAttack = true;
-        //    anim.SetBool("doAttack", doAttack);
-        //}
+            moveSpeed = 0f;
+            doingAttack = true;
+            anim.SetBool("Attack", doingAttack);
+        }
 
-        //if (doAttack && Input.GetMouseButtonDown(1))
-        //{
-        //    doAttack = false;
-        //    anim.SetBool("doAttack", doAttack);
-        //}
+        if (doingAttack && Input.GetMouseButtonDown(1))
+        {
+            doingAttack = false;
+            anim.SetBool("Attack", doingAttack);
+            canMove = true;
+            anim.SetBool("Run", canMove);
+        }
     }
 
     void AttackRange()
