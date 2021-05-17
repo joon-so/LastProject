@@ -239,7 +239,7 @@ Animator:
   m_GameObject: {fileID: 226157663523336483}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 5637854c9d1faac44813c947719fddfe, type: 3}
-  m_Controller: {fileID: 9100000, guid: a3e46c64edbe48940a49d237b3d45305, type: 2}
+  m_Controller: {fileID: 9100000, guid: dbf662fec5599454ca144094f2aa717c, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -260,6 +260,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2489748b86c39449f1087a1be81e06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
+  nav: {fileID: 0}
+  rigidbody: {fileID: 0}
+  tagCharacter: {fileID: 0}
+  traceDistance: 2
+  attackDistance: 1
   attackRange: {fileID: 930724535964662693}
   leftStaffEffect: {fileID: 8652797107436684209}
   rightStaffEffect: {fileID: 7475281872380490522}
