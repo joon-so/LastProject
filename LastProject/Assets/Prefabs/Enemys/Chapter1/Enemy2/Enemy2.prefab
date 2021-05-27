@@ -637,7 +637,7 @@ GameObject:
   - component: {fileID: 2015567195398496968}
   - component: {fileID: 2015567195398496969}
   m_Layer: 0
-  m_Name: Enemy2 1
+  m_Name: Enemy2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -753,6 +753,7 @@ MonoBehaviour:
   explosion: {fileID: 6249900526166971444, guid: 0b81a6be734fe1d419bf5a77d239d422, type: 3}
   dropEffect: {fileID: 1638949781681410, guid: eed1404b60deb1344abd3d5dd3189844, type: 3}
   bulletStartPoint: {fileID: 2015567194408811272}
+  deadSound: {fileID: 8300000, guid: b07999ce5271af34ea14b871dd30fc83, type: 3}
   shootCooltime: 3
   spinSpeed: 40
   maxHp: 200

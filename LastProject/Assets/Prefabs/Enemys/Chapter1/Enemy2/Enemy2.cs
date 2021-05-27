@@ -13,7 +13,7 @@ public class Enemy2 : MonoBehaviour
     [SerializeField] GameObject explosion = null;
     [SerializeField] GameObject dropEffect = null;
     [SerializeField] Transform bulletStartPoint;
-
+    [SerializeField] AudioClip deadSound;
     protected List<GameObject> targets;
 
     float straightTime = 0.2f;
@@ -32,6 +32,8 @@ public class Enemy2 : MonoBehaviour
     Animator anim;
     Vector3 startPoint;
     Rigidbody rigid;
+
+    public static int damage = 40;
 
     // Ã¼·Â
     public int maxHp = 200;
@@ -176,6 +178,7 @@ public class Enemy2 : MonoBehaviour
 
     IEnumerator ExploseAndDistroy()
     {
+        SoundManager.instance.SFXPlay("Explosion", deadSound);
         shootable = false;
         movable = false;
         Instantiate(explosion, transform.position, transform.rotation);

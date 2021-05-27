@@ -43,7 +43,6 @@ public class Enemy2Bullet : MonoBehaviour {
     private float lifeTime = 1.0f;
     private float curLifeTime = 0.0f;
 
-    public int damage = 40;
     void Start () {
         startPos = transform.position;
         rb = GetComponent <Rigidbody> ();
@@ -101,7 +100,7 @@ public class Enemy2Bullet : MonoBehaviour {
 	void OnCollisionEnter (Collision co) {
         if (!bounce)
         {
-            if ((co.gameObject.layer != 8 || co.gameObject.tag != "SubCharacter") && !collided)
+            if ((co.gameObject.layer != 8 || co.gameObject.tag != "SubCharacter" || co.gameObject.tag != "Enemy") && !collided)
             {
                 collided = true;
 

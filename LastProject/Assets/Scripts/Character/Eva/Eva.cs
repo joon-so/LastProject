@@ -463,5 +463,10 @@ public class Eva : SubAI
             if (GameManager.instance.mainPlayerHp > 0)
                 GameManager.instance.mainPlayerHp -= Enemy1.damage;
         }
+        if (collision.gameObject.tag == "Enemy2Attack")
+        {
+            if (GameManager.instance.mainPlayerHp > 0)
+                GameManager.instance.mainPlayerHp -= Enemy2.damage;
+        }
     }
 }

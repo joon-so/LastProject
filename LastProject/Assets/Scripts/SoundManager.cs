@@ -16,11 +16,11 @@ public class SoundManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(instance);
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
             Destroy(gameObject);
+        DontDestroyOnLoad(instance);
     }
 
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
@@ -62,5 +62,10 @@ public class SoundManager : MonoBehaviour
         bgSound.loop = true;
         bgSound.volume = 0.1f;
         bgSound.Play();
+    }
+
+    public void StopBgSoundPlay()
+    {
+        bgSound.Stop();
     }
 }

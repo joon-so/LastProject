@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class PlayerManager : MonoBehaviour
 {
+    public static PlayerManager instance;
     [SerializeField] Camera mainCamera = default;
     [SerializeField] GameObject clickEffect = default;
 
@@ -17,8 +18,13 @@ public class PlayerManager : MonoBehaviour
 
     private bool isChange;
 
-     void Awake()
+    void Awake()
     {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+
         DontDestroyOnLoad(gameObject);
     }
 

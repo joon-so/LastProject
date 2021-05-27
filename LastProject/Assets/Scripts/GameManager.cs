@@ -7,54 +7,43 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
     // characterselect
     public bool isMainKarmen;
     public bool isMainJade;
     public bool isMainLeina;
     public bool isMainEva;
-
     public bool isSubKarmen;
     public bool isSubJade;
     public bool isSubLeina;
     public bool isSubEva;
-
     // stage info
     public string stageInfo;
-
     // player info
     public int playerKill = 0;
     public int playerDeath = 0;
     public int playerScore = 0;
-
     public float mainPlayerMaxHp;
     public float mainPlayerMaxEp;
     public float subPlayerMaxHp;
     public float subPlayerMaxEp;
-
     public float mainPlayerHp;
     public float mainPlayerEp;
     public float subPlayerHp;
     public float subPlayerEp;
-
     public float tagCoolTime = 3.0f;
-
     public float c1_QSkillCoolTime;
     public float c1_WSkillCoolTime;
     public float c1_ESkillCoolTime;
-
     public float c2_QSkillCoolTime;
     public float c2_WSkillCoolTime;
     public float c2_ESkillCoolTime;
-
     public GameObject character1;
     public GameObject character2;
-
+    // UI
     public GameObject mainCharacter1SkillSlot;
     public GameObject subCharacter1SkillSlot;
     public GameObject mainCharacter2SkillSlot;
     public GameObject subCharacter2SkillSlot;
-
     public GameObject mainMaskCharacter1;
     public GameObject subMaskCharacter1;
     public GameObject mainMaskCharacter2;
@@ -63,13 +52,9 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         if (instance == null)
-        {
             instance = this;
-        }
         else
-        {
             Destroy(gameObject);
-        }
 
         DontDestroyOnLoad(gameObject);
     }

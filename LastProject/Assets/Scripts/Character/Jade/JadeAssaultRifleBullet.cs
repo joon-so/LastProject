@@ -74,7 +74,12 @@ public class JadeAssaultRifleBullet : MonoBehaviour
 
         // ¹üÀ§
         if (Vector3.Distance(startPos, transform.position) > distance)
-            Destroy(gameObject);
+            DestroyBullet();
+    }
+
+    private void DestroyBullet()
+    {
+        ObjectPooling.ReturnObject(this);
     }
 
     void OnCollisionEnter(Collision collision)

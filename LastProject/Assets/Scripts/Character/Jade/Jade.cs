@@ -254,10 +254,12 @@ public class Jade : SubAI
 
                 SoundManager.instance.SFXPlay("Attack", attackClip);
 
-                GameObject instantBullet = Instantiate(assaultRifleBullet, assaultRifleBulletPos.position, assaultRifleBulletPos.rotation);
-                Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
-                bulletRigid.velocity = assaultRifleBulletPos.forward;
-
+                //GameObject instantBullet = Instantiate(assaultRifleBullet, assaultRifleBulletPos.position, assaultRifleBulletPos.rotation);
+                //Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
+                //bulletRigid.velocity = assaultRifleBulletPos.forward;
+                var bullet = ObjectPooling.GetObject();
+                bullet.transform.position = assaultRifleBulletPos.position;
+                bullet.transform.rotation = assaultRifleBulletPos.rotation;
 
                 moveSpeed = 0f;
                 anim.SetBool("Run", false);
@@ -394,13 +396,11 @@ public class Jade : SubAI
             nextVec.y = 0;
             transform.LookAt(transform.position + nextVec);
 
-            // 미사일 장착
             anim.SetTrigger("drawMissileLauncher");
             yield return new WaitForSeconds(0.5f);
             useAssaultRifle.SetActive(false);
             useMissileLauncher.SetActive(true);
 
-            // 기모으기
             anim.SetBool("AimMissile", true);
             yield return new WaitForSeconds(0.5f);
             missileEffect.SetActive(true);
@@ -417,7 +417,6 @@ public class Jade : SubAI
 
             yield return new WaitForSeconds(1.0f);
 
-            // 라이플 장착
             anim.SetTrigger("drawAssaultRifle");
             yield return new WaitForSeconds(0.5f);
             useMissileLauncher.SetActive(false);
@@ -467,6 +466,11 @@ public class Jade : SubAI
         {
             if (GameManager.instance.mainPlayerHp > 0)
                 GameManager.instance.mainPlayerHp -= Enemy1.damage; 
+        }
+        if (collision.gameObject.tag == "Enemy2Attack")
+        {
+            if (GameManager.instance.mainPlayerHp > 0)
+                GameManager.instance.mainPlayerHp -= Enemy2.damage;
         }
     }
 }

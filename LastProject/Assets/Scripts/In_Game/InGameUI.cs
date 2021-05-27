@@ -22,6 +22,7 @@ public class InGameUI : MonoBehaviour
     [SerializeField] Text textOtherHp;
     [SerializeField] Text textOtherEp;
 
+    [SerializeField] GameObject gameMenu;
     //[Header("C1")]
     //public Image c1_QSkillImg;
     //public float c1_QSkillcoolDown;
@@ -77,6 +78,14 @@ public class InGameUI : MonoBehaviour
 
         //C2_QSkillCoolDownUI();
         //C2_WSkillCoolDownUI();
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (gameMenu.activeSelf)
+                gameMenu.SetActive(false);
+            else
+                gameMenu.SetActive(true);
+        }
     }
 
     void UpdateHp()
@@ -194,5 +203,10 @@ public class InGameUI : MonoBehaviour
     }
     public void OnClickTagButton()
     {
+    }
+
+    public void ClickResumButton()
+    {
+
     }
 }
