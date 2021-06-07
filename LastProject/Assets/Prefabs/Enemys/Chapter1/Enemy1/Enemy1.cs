@@ -200,8 +200,8 @@ public class Enemy1 : MonoBehaviour
         Instantiate(explosion, transform.position, transform.rotation);
         bulletLine.enabled = false;
         targets.Remove(gameObject);
+        GetComponent<TriangleExplosion>().ExplosionMesh();
         yield return new WaitForSeconds(1f);
-        Destroy(gameObject);
     }
 
     IEnumerator DropAndExplosion()
