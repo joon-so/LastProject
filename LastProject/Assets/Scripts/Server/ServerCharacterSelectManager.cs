@@ -6,22 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class ServerCharacterSelectManager : MonoBehaviour
 {
-    [SerializeField] GameObject mainKarmen;
-    [SerializeField] GameObject subKarmen;
-    [SerializeField] GameObject mainJade;
-    [SerializeField] GameObject subJade;
-    [SerializeField] GameObject mainLeina;
-    [SerializeField] GameObject subLeina;
-    [SerializeField] GameObject mainEva;
-    [SerializeField] GameObject subEva;
-    [SerializeField] GameObject selectEffectKarmen;
-    [SerializeField] GameObject selectEffectJade;
-    [SerializeField] GameObject selectEffectLeina;
-    [SerializeField] GameObject selectEffectEva;
-
     [SerializeField] Text ShowIPAdress;
     [SerializeField] Text characterInfoMsgText;
-    private int mainOrSub;
+    private bool mainOrSub;
 
     private bool isMainKarmen;
     private bool isMainJade;
@@ -42,127 +29,108 @@ public class ServerCharacterSelectManager : MonoBehaviour
         playerNum = ServerLoginManager.curPlayerNum;
         //playerNum = 0;
         ShowIPAdress.text = ServerLoginManager.playerList[playerNum].ipAdress;
-        mainOrSub = 1;
+        mainOrSub = true;
         _network = GameObject.Find("Network").GetComponent<NetworkManager>();
     }
     public void OnClickSelectKarmen()
     {
-        if (mainOrSub == 1)
+        if (mainOrSub)
         {
-            mainKarmen.SetActive(true);
-            mainJade.SetActive(false);
-            mainLeina.SetActive(false);
-            mainEva.SetActive(false);
+            isMainKarmen = true;
+            isMainJade = false;
+            isMainLeina = false;
+            isMainEva = false;
         }
-        else if (mainOrSub == 2)
+        else
         {
-            subKarmen.SetActive(true);
-            subJade.SetActive(false);
-            subLeina.SetActive(false);
-            subEva.SetActive(false);
+            isSubKarmen = true;
+            isSubJade = false;
+            isSubLeina = false;
+            isSubEva = false;
         }
     }
     public void OnClickSelectJade()
     {
-        if (mainOrSub == 1)
+        if (mainOrSub)
         {
-            mainKarmen.SetActive(false);
-            mainJade.SetActive(true);
-            mainLeina.SetActive(false);
-            mainEva.SetActive(false);
+            isMainKarmen = false;
+            isMainJade = true;
+            isMainLeina = false;
+            isMainEva = false;
         }
-        else if (mainOrSub == 2)
+        else
         {
-            subKarmen.SetActive(false);
-            subJade.SetActive(true);
-            subLeina.SetActive(false);
-            subEva.SetActive(false);
+            isSubKarmen = false;
+            isSubJade = true;
+            isSubLeina = false;
+            isSubEva = false;
         }
     }
     public void OnClickSelectLeina()
     {
-        if (mainOrSub == 1)
+        if (mainOrSub)
         {
-            mainKarmen.SetActive(false);
-            mainJade.SetActive(false);
-            mainLeina.SetActive(true);
-            mainEva.SetActive(false);
+            isMainKarmen = false;
+            isMainJade = false;
+            isMainLeina = true;
+            isMainEva = false;
         }
-        else if (mainOrSub == 2)
+        else
         {
-            subKarmen.SetActive(false);
-            subJade.SetActive(false);
-            subLeina.SetActive(true);
-            subEva.SetActive(false);
+            isSubKarmen = false;
+            isSubJade = false;
+            isSubLeina = true;
+            isSubEva = false;
         }
     }
     public void OnClickSelectEva()
     {
-        if (mainOrSub == 1)
+        if (mainOrSub)
         {
-            mainKarmen.SetActive(false);
-            mainJade.SetActive(false);
-            mainLeina.SetActive(false);
-            mainEva.SetActive(true);
+            isMainKarmen = false;
+            isMainJade = false;
+            isMainLeina = false;
+            isMainEva = true;
         }
-        else if (mainOrSub == 2)
+        else
         {
-            subKarmen.SetActive(false);
-            subJade.SetActive(false);
-            subLeina.SetActive(false);
-            subEva.SetActive(true);
+            isSubKarmen = false;
+            isSubJade = false;
+            isSubLeina = false;
+            isSubEva = true;
         }
     }
     public void OnClickSelectButton()
     {
-        if (mainOrSub == 1)
+        if (mainOrSub)
         {
-            if (mainKarmen.activeSelf)
-            {
+            if (isMainKarmen)
                 ServerLoginManager.playerList[0].selectMainCharacter = 1;
-                selectEffectKarmen.SetActive(true);
-            }
-            else if (mainJade.activeSelf)
-            {
+
+            if (isMainJade)
                 ServerLoginManager.playerList[0].selectMainCharacter = 2;
-                selectEffectJade.SetActive(true);
-            }
-            else if (mainLeina.activeSelf)
-            {
+
+            if (isMainLeina)
                 ServerLoginManager.playerList[0].selectMainCharacter = 3;
-                selectEffectLeina.SetActive(true);
-            }
-            else if (mainEva.activeSelf)
-            {
+
+            if (isMainEva)
                 ServerLoginManager.playerList[0].selectMainCharacter = 4;
-                selectEffectEva.SetActive(true);
-            }
-            mainOrSub = 2;
         }
-        else if (mainOrSub == 2) 
+        else
         {
-            if (subKarmen.activeSelf)
-            {
+            if (isSubKarmen)
                 ServerLoginManager.playerList[0].selectSubCharacter = 1;
-                selectEffectKarmen.SetActive(true);
-            }
-            else if (subJade.activeSelf)
-            {
+
+            if (isSubJade)
                 ServerLoginManager.playerList[0].selectSubCharacter = 2;
-                selectEffectJade.SetActive(true);
-            }
-            else if (subLeina.activeSelf)
-            {
+
+            if (isSubLeina)
                 ServerLoginManager.playerList[0].selectSubCharacter = 3;
-                selectEffectLeina.SetActive(true);
-            }
-            else if (subEva.activeSelf)
-            {
+
+            if (isSubEva)
                 ServerLoginManager.playerList[0].selectSubCharacter = 4;
-                selectEffectEva.SetActive(true);
-            }
-            mainOrSub = 0;
         }
+        mainOrSub = false;
     }
     void send_Login_packet()
     {

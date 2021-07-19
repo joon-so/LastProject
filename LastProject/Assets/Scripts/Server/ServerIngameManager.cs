@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ServerIngameManager : MonoBehaviour
+public class ServerInGameManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> player;
-
-    private int plist;
 
     void Start()
     {

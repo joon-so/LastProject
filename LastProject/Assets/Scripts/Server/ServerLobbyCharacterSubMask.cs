@@ -11,72 +11,26 @@ public class ServerLobbyCharacterSubMask : MonoBehaviour
 
     public int listPos;
 
+    void Start()
+    {
+        listPos -= 1;
+    }
+
     void Update()
     {
-        if (ServerLoginManager.playerList[0].selectSubCharacter == 1)
+        if (ServerLoginManager.playerList[listPos].selectSubCharacter == 1)
         {
             subKarmenMask.SetActive(true);
         }
-        else if (ServerLoginManager.playerList[0].selectSubCharacter == 2)
+        else if (ServerLoginManager.playerList[listPos].selectSubCharacter == 2)
         {
             subJadeMask.SetActive(true);
         }
-        else if (ServerLoginManager.playerList[0].selectSubCharacter == 3)
+        else if (ServerLoginManager.playerList[listPos].selectSubCharacter == 3)
         {
             subLeinaMask.SetActive(true);
         }
-        else if (ServerLoginManager.playerList[0].selectSubCharacter == 4)
-        {
-            subEvaMask.SetActive(true);
-        }
-
-        if (ServerLoginManager.playerList[1].selectSubCharacter == 1)
-        {
-            subKarmenMask.SetActive(true);
-        }
-        else if (ServerLoginManager.playerList[1].selectSubCharacter == 2)
-        {
-            subJadeMask.SetActive(true);
-        }
-        else if (ServerLoginManager.playerList[1].selectSubCharacter == 3)
-        {
-            subLeinaMask.SetActive(true);
-        }
-        else if (ServerLoginManager.playerList[1].selectSubCharacter == 4)
-        {
-            subEvaMask.SetActive(true);
-        }
-
-        if (ServerLoginManager.playerList[2].selectSubCharacter == 1)
-        {
-            subKarmenMask.SetActive(true);
-        }
-        else if (ServerLoginManager.playerList[2].selectSubCharacter == 2)
-        {
-            subJadeMask.SetActive(true);
-        }
-        else if (ServerLoginManager.playerList[2].selectSubCharacter == 3)
-        {
-            subLeinaMask.SetActive(true);
-        }
-        else if (ServerLoginManager.playerList[2].selectSubCharacter == 4)
-        {
-            subEvaMask.SetActive(true);
-        }
-
-        if (ServerLoginManager.playerList[3].selectSubCharacter == 1)
-        {
-            subKarmenMask.SetActive(true);
-        }
-        else if (ServerLoginManager.playerList[3].selectSubCharacter == 2)
-        {
-            subJadeMask.SetActive(true);
-        }
-        else if (ServerLoginManager.playerList[3].selectSubCharacter == 3)
-        {
-            subLeinaMask.SetActive(true);
-        }
-        else if (ServerLoginManager.playerList[3].selectSubCharacter == 4)
+        else if (ServerLoginManager.playerList[listPos].selectSubCharacter == 4)
         {
             subEvaMask.SetActive(true);
         }

@@ -12,20 +12,20 @@ class PacketHandler
 		sc_PlayerPosi pkt = packet as sc_PlayerPosi;
 		ServerSession serverSession = session as ServerSession;
 
-		ServerPlayerManager.Instance.sc_playerPosi_DO(pkt);
+		ServerToClientManager.Instance.sc_playerPosi_DO(pkt);
 	}
 	public static void cs_LoginGameHandler(PacketSession session, IPacket packet)
 	{
 		cs_Login pkt = packet as cs_Login;
 		ServerSession serverSession = session as ServerSession;
 
-		ServerPlayerManager.Instance.cs_Login_Process(pkt);
+		ServerToClientManager.Instance.cs_Login_Process(pkt);
 	}
 	public static void cs_PlayerMoveGameHandler(PacketSession session, IPacket packet)
 	{
 		cs_PlayerData pkt = packet as cs_PlayerData;
 		ServerSession serverSession = session as ServerSession;
 
-		ServerPlayerManager.Instance.please(pkt);
+		ServerToClientManager.Instance.please(pkt);
 	}
 }
