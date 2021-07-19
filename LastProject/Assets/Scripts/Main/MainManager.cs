@@ -16,7 +16,7 @@ public class MainManager : MonoBehaviour
     public void OnClickPvP()
     {
         SoundManager.instance.SFXPlay("Click", uiButtonSound);
-
+        SceneManager.LoadScene("ServerLogin");
     }
     public void OnClickExit()
     {

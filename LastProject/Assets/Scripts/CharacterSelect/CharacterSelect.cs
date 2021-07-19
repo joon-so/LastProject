@@ -20,9 +20,6 @@ public class CharacterSelect : MonoBehaviour
     [SerializeField] GameObject selectEffectLeina;
     [SerializeField] GameObject selectEffectEva;
 
-    [SerializeField] GameObject backAssaultRifle;
-    [SerializeField] GameObject handAssaultRifle;
-
     [SerializeField] GameObject characterInfoMsg;
 
     [SerializeField] Text characterInfoMsgText;
