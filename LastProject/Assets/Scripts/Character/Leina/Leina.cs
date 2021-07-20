@@ -117,7 +117,7 @@ public class Leina : SubAI
             distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
             if (currentState == characterState.trace)
             {
-                MainCharacterTrace();
+                MainCharacterTrace(tagCharacter.transform.position);
                 anim.SetBool("Run", true);
                 curFireDelay = 1f;
             }

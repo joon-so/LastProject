@@ -2119,7 +2119,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3957256258131173603}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6150801194860764197}
@@ -14420,15 +14420,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f68033da85f63724fb679c9a8cd248a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
+  nav: {fileID: 0}
+  rigidbody: {fileID: 0}
+  tagCharacter: {fileID: 0}
+  traceDistance: 5
+  attackDistance: 6
   attackRange: {fileID: 1039736534647247444}
   qSkill: {fileID: 5300641389367104880}
   wSkillEffect: {fileID: 1186704568076440110, guid: a1c92d07e96344349a6f775e717ce192, type: 3}
   wSkillShockEffect: {fileID: 3508642095436736753, guid: 7a413da35185f0f4798feb19aee6e927, type: 3}
+  EvaSynergeLightEffect: {fileID: 8893284844495442401, guid: 87c22c2526b7ff849b9e225fe3b59f7c, type: 3}
+  EvaJadeSkillEffect: {fileID: 8893284844495442401, guid: c2e9968516580dd4399402698315bfcd, type: 3}
+  EvaKarmenSkillEffect: {fileID: 8893284844495442401, guid: 7e90d983402bd48498df7670f88561c1, type: 3}
   wSkillPos: {fileID: 927236592309896235}
   moveSpeed: 5
   dodgeCoolTime: 5
-  qSkillCoolTime: 10
-  wSkillCoolTime: 5
   followDistance: 5
 --- !u!54 &5260118304544779270
 Rigidbody:
@@ -14470,7 +14477,7 @@ NavMeshAgent:
   m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 4.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

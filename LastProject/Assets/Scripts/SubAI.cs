@@ -15,8 +15,8 @@ public class SubAI : MonoBehaviour
     protected GameObject target = null;
     protected float distance;
     //private Transform 
-    public float traceDistance = 2.0f;
-    public float attackDistance = 1.0f;
+    public float traceDistance = 5.0f;
+    public float attackDistance = 6.0f;
     protected float spinSpeed = 1000f;
 
     public void FindEnemys()
@@ -24,12 +24,12 @@ public class SubAI : MonoBehaviour
         targets = GameObject.Find("Enemys").GetComponent<EnemyList>().Enemys;
     }
 
-    public void MainCharacterTrace()
+    public void MainCharacterTrace(Vector3 movePos)
     {
         currentState = characterState.trace;
         if (distance > traceDistance)
         {
-            nav.SetDestination(tagCharacter.transform.position);
+            nav.SetDestination(movePos);
         }
         else
         {
