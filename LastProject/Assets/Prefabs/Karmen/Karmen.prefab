@@ -264,8 +264,8 @@ MonoBehaviour:
   nav: {fileID: 0}
   rigidbody: {fileID: 0}
   tagCharacter: {fileID: 0}
-  traceDistance: 2
-  attackDistance: 1
+  traceDistance: 5
+  attackDistance: 6
   attackRange: {fileID: 930724535964662693}
   leftStaffEffect: {fileID: 8652797107436684209}
   rightStaffEffect: {fileID: 7475281872380490522}
@@ -275,8 +275,6 @@ MonoBehaviour:
   wRightEffect: {fileID: 7628219965541859316}
   moveSpeed: 5
   dodgeCoolTime: 5
-  qSkillCoolTime: 5
-  wSkillCoolTime: 5
   followDistance: 5
 --- !u!54 &3279302803575345236
 Rigidbody:
@@ -318,7 +316,7 @@ NavMeshAgent:
   m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 4.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

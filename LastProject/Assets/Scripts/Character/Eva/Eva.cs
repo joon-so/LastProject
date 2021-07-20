@@ -9,6 +9,8 @@ public class Eva : SubAI
     [SerializeField] GameObject qSkill = null;
     [SerializeField] GameObject wSkillEffect = null;
     [SerializeField] GameObject wSkillShockEffect = null;
+    [SerializeField] GameObject EvaJadeSkillEffect = null;
+    [SerializeField] GameObject EvaKarmenSkillEffect = null;
     public Transform wSkillPos = null;
 
     public float moveSpeed = 5.0f;
@@ -25,6 +27,7 @@ public class Eva : SubAI
     float curDodgeCoolTime;
     float curQSkillCoolTime;
     float curWSkillCoolTime;
+    float curESkillCoolTime;
 
     bool canMove;
     bool canDodge;
@@ -34,6 +37,7 @@ public class Eva : SubAI
     bool onDodge;
     bool onQSkill;
     bool onWSkill;
+    bool onESkill;
 
     bool doingAttack;
     bool motionEndCheck;
@@ -73,6 +77,7 @@ public class Eva : SubAI
         curDodgeCoolTime = 0;
         curQSkillCoolTime = 0;
         curWSkillCoolTime = 0;
+        curESkillCoolTime = 0;
 
         canMove = true;
         canDodge = true;
@@ -82,6 +87,7 @@ public class Eva : SubAI
         onDodge = true;
         onQSkill = true;
         onWSkill = true;
+        onESkill = true;
 
         doingAttack = false;
         motionEndCheck = true;
@@ -115,7 +121,8 @@ public class Eva : SubAI
 
             if (currentState == characterState.trace)
             {
-                MainCharacterTrace();
+                MainCharacterTrace(tagCharacter.transform.position);
+                anim.SetBool("Run", true);
             }
             else if (currentState == characterState.attack)
             {
@@ -124,7 +131,12 @@ public class Eva : SubAI
             else if (currentState == characterState.idle)
             {
                 Idle();
+                anim.SetBool("Run", false);
             }
+        }
+        if (canSkill)
+        {
+            E_Skill();
         }
         Tag();
     }
@@ -313,7 +325,64 @@ public class Eva : SubAI
     }
     void E_Skill()
     {
+        if (Input.GetKeyDown(KeyCode.E) && onESkill && gameObject.transform.tag == "MainCharacter")
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit rayHit;
+            Vector3 frontVec = transform.position;
+            if (Physics.Raycast(ray, out rayHit, Mathf.Infinity))
+            {
+                frontVec = rayHit.point - transform.position;
+                frontVec.y = 0;
+                transform.LookAt(transform.position + frontVec);
+            }
 
+            if (tagCharacter.name == "Jade")
+            {
+                moveSpeed = 0f;
+                anim.SetBool("Run", false);
+                vecTarget = transform.position;
+
+                StartCoroutine(EvaJadeSynerge());
+            }
+            else if (tagCharacter.name == "Karmen")
+            {
+                moveSpeed = 0f;
+                anim.SetBool("Run", false);
+                vecTarget = transform.position;
+
+                StartCoroutine(EvaKarmenSynerge());
+            }
+            else if (tagCharacter.name == "Leina")
+            {
+
+            }
+        }
+        else if(Input.GetKeyDown(KeyCode.E) && onESkill && gameObject.transform.tag == "SubCharacter")
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit rayHit;
+            Vector3 frontVec = transform.position;
+            if (Physics.Raycast(ray, out rayHit, Mathf.Infinity))
+            {
+                frontVec = rayHit.point - transform.position;
+                frontVec.y = 0;
+                transform.LookAt(transform.position + frontVec);
+            }
+
+            if (tagCharacter.name == "Jade")
+            {
+                StartCoroutine(EvaJadeSynerge());
+            }
+            else if (tagCharacter.name == "Karmen")
+            {
+
+            }
+            else if (tagCharacter.name == "Leina")
+            {
+
+            }
+        }
     }
     void CoolTime()
     {
@@ -341,24 +410,6 @@ public class Eva : SubAI
         {
             onWSkill = true;
         }
-    }
-
-    void Follow()
-    {
-        //distanceWithPlayer = Vector3.Distance(tagCharacter.transform.position, transform.position);
-
-        //if (distanceWithPlayer > followDistance)
-        //{
-        //    nav.SetDestination(tagCharacter.transform.position);
-        //    isRun = true;
-        //    anim.SetBool("isRun", isRun);
-        //}
-        //else
-        //{
-        //    isRun = false;
-        //    nav.SetDestination(transform.position);
-        //    anim.SetBool("isRun", isRun);
-        //}
     }
     void Tag()
     {
@@ -454,6 +505,167 @@ public class Eva : SubAI
         canMove = true;
         canDodge = true;
         canSkill = true;
+    }
+    IEnumerator SynergeCharacterMove(Vector3 frontVec, Vector3 pos)
+    {
+        canAttack = false;
+        canMove = false;
+        canDodge = false;
+        canSkill = false;
+        curESkillCoolTime = 0;
+
+        //Vector3 target = transform.position + pos * 1.5f;
+
+        //Vector3 nextTagVec = target - tagCharacter.transform.position;
+        //nextTagVec.y = 0;
+
+        //while (true)
+        //{
+        //    tagCharacter.transform.position = Vector3.MoveTowards(tagCharacter.transform.position,
+        //                target, 8f * Time.deltaTime);
+
+        //    tagCharacter.transform.LookAt(tagCharacter.transform.position + nextTagVec);
+
+        //    if(Mathf.Abs(target.x - tagCharacter.transform.position.x) < 0.0002 &&
+        //        Mathf.Abs(target.z - tagCharacter.transform.position.z) < 0.0002)
+        //    {
+        //        tagCharacter.transform.LookAt(tagCharacter.transform.position + frontVec);
+
+        //        canAttack = true;
+        //        canMove = true;
+        //        canDodge = true;
+        //        canSkill = true;
+        //        Debug.Log("finish");
+        //        yield break;
+        //    }
+
+        //    yield return null;
+        //}
+
+        NavMeshAgent subNav = tagCharacter.GetComponent<NavMeshAgent>();
+        subNav.speed = 12;
+
+        Vector3 target = transform.position + pos * 1.5f;
+
+        while (true)
+        {
+            subNav.SetDestination(target);
+
+            if (Mathf.Abs(target.x - tagCharacter.transform.position.x) < 0.0003 &&
+                Mathf.Abs(target.z - tagCharacter.transform.position.z) < 0.0003)
+            {
+                tagCharacter.transform.LookAt(tagCharacter.transform.position + frontVec);
+                subNav.speed = 3.5f;
+                canAttack = true;
+                canMove = true;
+                canDodge = true;
+                canSkill = true;
+                //StartCoroutine(JadeEvaSynergeShoot());
+                yield break;
+            }
+
+            yield return null;
+        }
+    }
+    IEnumerator EvaJadeSynerge()
+    {
+        canAttack = false;
+        canMove = false;
+        canDodge = false;
+        canSkill = false;
+        curWSkillCoolTime = 0.0f;
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            Vector3 nextVec = hit.point - transform.position;
+            nextVec.y = 0;
+            transform.LookAt(transform.position + nextVec);
+        }
+
+        anim.SetTrigger("WSkill");
+        Instantiate(wSkillEffect, wSkillPos.position, wSkillPos.rotation);
+        Quaternion rotation = Quaternion.identity;
+        rotation.eulerAngles = new Vector3(-90, 0, 0);
+        Instantiate(EvaJadeSkillEffect, wSkillPos.position, rotation);
+        yield return new WaitForSeconds(0.5f);
+        anim.SetFloat("Speed", 0.0f);
+        yield return new WaitForSeconds(0.5f);
+        anim.SetFloat("Speed", 1.0f);
+
+
+        yield return new WaitForSeconds(1f);
+        anim.SetFloat("Speed", 1.0f);
+
+
+        vecTarget = transform.position;
+
+        canAttack = true;
+        canMove = true;
+        canDodge = true;
+        canSkill = true;
+    }
+    IEnumerator EvaKarmenSynerge()
+    {
+        canAttack = false;
+        canMove = false;
+        canDodge = false;
+        canSkill = false;
+        curWSkillCoolTime = 0.0f;
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            Vector3 nextVec = hit.point - transform.position;
+            nextVec.y = 0;
+            transform.LookAt(transform.position + nextVec);
+        }
+
+        anim.SetTrigger("EvaKarmenSynerge");
+
+        List<GameObject> enemys = new List<GameObject>();
+        float ditectedDistance = 10f;
+
+        for (int i = 0; i < targets.Count; i++)
+        {
+            if (Vector3.Distance(transform.position, targets[i].transform.position) < ditectedDistance)
+            {
+                enemys.Add(targets[i]);
+            }
+        }
+
+        StartCoroutine(GatherEnemys(enemys));
+
+        Instantiate(wSkillEffect, wSkillPos.position, wSkillPos.rotation);
+        Quaternion rotation = Quaternion.identity;
+        rotation.eulerAngles = new Vector3(-90, 0, 0);
+        Instantiate(EvaKarmenSkillEffect, wSkillPos.position, rotation);
+        yield return new WaitForSeconds(0.5f);
+        anim.SetFloat("Speed", 0.0f);
+        yield return new WaitForSeconds(0.5f);
+        anim.SetFloat("Speed", 1.0f);
+
+        yield return new WaitForSeconds(1f);
+        anim.SetFloat("Speed", 1.0f);
+
+        vecTarget = transform.position;
+
+        canAttack = true;
+        canMove = true;
+        canDodge = true;
+        canSkill = true;
+    }
+
+    IEnumerator GatherEnemys(List<GameObject> enemys)
+    {
+        for(int i = 0; i<enemys.Count; i++)
+        {
+            //enemys[i].transform
+        }
+
+        yield return new WaitForSeconds(1.7f);
     }
 
     void OnCollisionEnter(Collision collision)

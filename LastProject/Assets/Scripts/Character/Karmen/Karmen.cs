@@ -30,6 +30,10 @@ public class Karmen : SubAI
     float curDodgeCoolTime;
     float curQSkillCoolTime;
     float curWSkillCoolTime;
+    float curESkillCoolTime;
+
+    float curFireDelay;
+    float subFireDelay = 1.5f;
 
     bool canMove;
     bool canDodge;
@@ -39,6 +43,7 @@ public class Karmen : SubAI
     bool onDodge;
     bool onQSkill;
     bool onWSkill;
+    bool onESkill;
 
     bool doingAttack;
     bool motionEndCheck;
@@ -82,6 +87,8 @@ public class Karmen : SubAI
         curDodgeCoolTime = 0;
         curQSkillCoolTime = 0;
         curWSkillCoolTime = 0;
+        curESkillCoolTime = 0;
+
 
         canMove = false;
         canDodge = false;
@@ -91,10 +98,13 @@ public class Karmen : SubAI
         onDodge = true;
         onQSkill = true;
         onWSkill = true;
+        onESkill = true;
 
         doingAttack = false;
         motionEndCheck = true;
         comboContinue = true;
+
+        attackDistance = 3.5f;
 
         StartCoroutine(StartMotion());
     }
@@ -120,19 +130,40 @@ public class Karmen : SubAI
         }
         else if (gameObject.transform.tag == "SubCharacter")
         {
+            curFireDelay += Time.deltaTime;
             distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
 
             if (currentState == characterState.trace)
             {
-                MainCharacterTrace();
+                MainCharacterTrace(tagCharacter.transform.position);
+                anim.SetBool("isRun", true);
+                curFireDelay = 1f;
             }
             else if (currentState == characterState.attack)
             {
                 SubAttack();
+
+                if (target)
+                {
+                    Quaternion lookRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+                    Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
+                    transform.rotation = Quaternion.Euler(0, euler.y, 0);
+                }
+                if (curFireDelay > subFireDelay && target != null)
+                {
+                    moveSpeed = 0f;
+                    anim.SetBool("isRun", false);
+                    anim.SetTrigger("Throwing");
+                    vecTarget = transform.position;
+
+                    curFireDelay = 0;
+                }
             }
             else if (currentState == characterState.idle)
             {
                 Idle();
+                anim.SetBool("isRun", false);
+                curFireDelay = 1f;
             }
         }
         Tag();
@@ -326,6 +357,14 @@ public class Karmen : SubAI
         {
             onWSkill = true;
         }
+        if (curESkillCoolTime < eSkillCoolTime)
+        {
+            curESkillCoolTime += Time.deltaTime;
+        }
+        else
+        {
+            onESkill = true;
+        }
     }
     void Q_Skill()
     {
@@ -361,7 +400,62 @@ public class Karmen : SubAI
     }
     void E_Skill()
     {
+        if (Input.GetKeyDown(KeyCode.E) && onESkill && gameObject.transform.tag == "MainCharacter")
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit rayHit;
+            Vector3 frontVec = transform.position;
+            if (Physics.Raycast(ray, out rayHit, Mathf.Infinity))
+            {
+                frontVec = rayHit.point - transform.position;
+                frontVec.y = 0;
+                transform.LookAt(transform.position + frontVec);
+            }
 
+            if (tagCharacter.name == "Jade")
+            {
+                moveSpeed = 0f;
+                anim.SetBool("Run", false);
+                vecTarget = transform.position;
+
+            }
+            else if (tagCharacter.name == "Eva")
+            {
+                moveSpeed = 0f;
+                anim.SetBool("Run", false);
+                vecTarget = transform.position;
+
+                StartCoroutine(KarmenEvaSynerge());
+            }
+            else if (tagCharacter.name == "Leina")
+            {
+
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.E) && onESkill && gameObject.transform.tag == "SubCharacter")
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit rayHit;
+            Vector3 frontVec = transform.position;
+            if (Physics.Raycast(ray, out rayHit, Mathf.Infinity))
+            {
+                frontVec = rayHit.point - transform.position;
+                frontVec.y = 0;
+                transform.LookAt(transform.position + frontVec);
+            }
+
+            if (tagCharacter.name == "Jade")
+            {
+            }
+            else if (tagCharacter.name == "Eva")
+            {
+
+            }
+            else if (tagCharacter.name == "Leina")
+            {
+
+            }
+        }
     }
     void Tag()
     {
@@ -450,20 +544,72 @@ public class Karmen : SubAI
         canDodge = true;
         canSkill = true;
     }
-    void Follow()
+    IEnumerator SynergeCharacterMove(Vector3 frontVec, Vector3 pos)
     {
-        //distanceWithPlayer = Vector3.Distance(tagCharacter.transform.position, transform.position);
+        canAttack = false;
+        canMove = false;
+        canDodge = false;
+        canSkill = false;
+        curESkillCoolTime = 0;
 
-        //if (distanceWithPlayer > followDistance)
+        //Vector3 target = transform.position + pos * 1.5f;
+
+        //Vector3 nextTagVec = target - tagCharacter.transform.position;
+        //nextTagVec.y = 0;
+
+        //while (true)
         //{
-        //    nav.SetDestination(tagCharacter.transform.position);
-        //    anim.SetBool("Run", true);
+        //    tagCharacter.transform.position = Vector3.MoveTowards(tagCharacter.transform.position,
+        //                target, 8f * Time.deltaTime);
+
+        //    tagCharacter.transform.LookAt(tagCharacter.transform.position + nextTagVec);
+
+        //    if(Mathf.Abs(target.x - tagCharacter.transform.position.x) < 0.0002 &&
+        //        Mathf.Abs(target.z - tagCharacter.transform.position.z) < 0.0002)
+        //    {
+        //        tagCharacter.transform.LookAt(tagCharacter.transform.position + frontVec);
+
+        //        canAttack = true;
+        //        canMove = true;
+        //        canDodge = true;
+        //        canSkill = true;
+        //        Debug.Log("finish");
+        //        yield break;
+        //    }
+
+        //    yield return null;
         //}
-        //else
-        //{
-        //    nav.SetDestination(transform.position);
-        //    anim.SetBool("Run", false);
-        //}
+
+        NavMeshAgent subNav = tagCharacter.GetComponent<NavMeshAgent>();
+        subNav.speed = 12;
+
+        Vector3 target = transform.position + pos * 1.5f;
+
+        while (true)
+        {
+            subNav.SetDestination(target);
+
+            if (Mathf.Abs(target.x - tagCharacter.transform.position.x) < 0.0003 &&
+                Mathf.Abs(target.z - tagCharacter.transform.position.z) < 0.0003)
+            {
+                tagCharacter.transform.LookAt(tagCharacter.transform.position + frontVec);
+                subNav.speed = 3.5f;
+                canAttack = true;
+                canMove = true;
+                canDodge = true;
+                canSkill = true;
+                //StartCoroutine(JadeEvaSynergeShoot());
+                yield break;
+            }
+
+            yield return null;
+        }
+    }
+
+    IEnumerator KarmenEvaSynerge()
+    {
+        anim.SetTrigger("KarmenEvaSynerge");
+        yield return null;
     }
     void OnCollisionEnter(Collision collision)
     {

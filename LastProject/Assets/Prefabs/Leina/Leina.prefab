@@ -1138,8 +1138,6 @@ MonoBehaviour:
   attackClip: {fileID: 8300000, guid: 79c278c674c2e4e4388bbbfb9a7abe7d, type: 3}
   moveSpeed: 5
   dodgeCoolTime: 7
-  qSkillCoolTime: 5
-  wSkillCoolTime: 5
   fireDelay: 1
   subFireDelay: 1.5
   followDistance: 5
@@ -1153,7 +1151,7 @@ NavMeshAgent:
   m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

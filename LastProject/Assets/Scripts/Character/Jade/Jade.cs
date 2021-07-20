@@ -19,6 +19,8 @@ public class Jade : SubAI
     [SerializeField] GameObject missileRange = null;
     [SerializeField] GameObject missileEffect = null;
 
+    [SerializeField] GameObject SynergeBullet = null;
+
     [SerializeField] Transform grenadePos = null;
     [SerializeField] GameObject Grenade = null;
 
@@ -40,10 +42,10 @@ public class Jade : SubAI
     public static int qSkillDamage = 70;
     public static int wSkillDamage = 50;
 
-
     float curDodgeCoolTime;
     float curQSkillCoolTime;
     float curWSkillCoolTime;
+    float curESkillCoolTime;
 
     float curFireDelay;
 
@@ -55,8 +57,11 @@ public class Jade : SubAI
     bool onDodge;
     bool onQSkill;
     bool onWSkill;
+    bool onESkill;
 
     float distanceWithPlayer;
+
+    public static GameObject enemyPos;
 
     Vector3 vecTarget;
 
@@ -99,6 +104,7 @@ public class Jade : SubAI
         onDodge = true;
         onQSkill = true;
         onWSkill = true;
+        onESkill = true;
 
         curFireDelay = fireDelay;
 
@@ -131,7 +137,7 @@ public class Jade : SubAI
 
             if (currentState == characterState.trace)
             {
-                MainCharacterTrace();
+                MainCharacterTrace(tagCharacter.transform.position);
                 anim.SetBool("Run", true);
                 curFireDelay = 1f;
             }
@@ -168,6 +174,10 @@ public class Jade : SubAI
                 anim.SetBool("Run", false);
                 curFireDelay = 1f;
             }
+        }
+        if (canSkill)
+        {
+            E_Skill();
         }
         Tag();
     }
@@ -310,6 +320,14 @@ public class Jade : SubAI
         {
             onWSkill = true;
         }
+        if (curESkillCoolTime < eSkillCoolTime)
+        {
+            curESkillCoolTime += Time.deltaTime;
+        }
+        else
+        {
+            onESkill = true;
+        }
     }
     void Q_Skill()
     {
@@ -345,9 +363,59 @@ public class Jade : SubAI
     }
     void E_Skill()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && onESkill && gameObject.transform.tag == "MainCharacter")
         {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit rayHit;
+            Vector3 frontVec = transform.position;
+            if (Physics.Raycast(ray, out rayHit, Mathf.Infinity))
+            {
+                frontVec = rayHit.point - transform.position;
+                frontVec.y = 0;
+                transform.LookAt(transform.position + frontVec);
+            }
 
+            if (tagCharacter.name == "Eva")
+            {
+                moveSpeed = 0f;
+                anim.SetBool("Run", false);
+                vecTarget = transform.position;
+
+                //StartCoroutine(SynergeCharacterMove(frontVec, gameObject.transform.right));
+                StartCoroutine(JadeEvaSynerge());
+            }
+            else if (tagCharacter.name == "Karmen")
+            {
+
+            }
+            else if (tagCharacter.name == "Leina")
+            {
+
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.E) && onESkill && gameObject.transform.tag == "SubCharacter")
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit rayHit;
+            Vector3 frontVec = transform.position;
+            if (Physics.Raycast(ray, out rayHit, Mathf.Infinity))
+            {
+                frontVec = rayHit.point - transform.position;
+                frontVec.y = 0;
+                transform.LookAt(transform.position + frontVec);
+            }
+            if (tagCharacter.name == "Eva")
+            {
+                StartCoroutine(JadeEvaSynerge());
+            }
+            else if (tagCharacter.name == "Karmen")
+            {
+
+            }
+            else if (tagCharacter.name == "Leina")
+            {
+
+            }
         }
     }
     void Tag()
@@ -458,6 +526,125 @@ public class Jade : SubAI
         canMove = true;
         canDodge = true;
         canSkill = true;
+    }
+    IEnumerator SynergeCharacterMove(Vector3 frontVec, Vector3 pos)
+    {
+        canAttack = false;
+        canMove = false;
+        canDodge = false;
+        canSkill = false;
+        curESkillCoolTime = 0;
+
+        //Vector3 target = transform.position + pos * 1.5f;
+
+        //Vector3 nextTagVec = target - tagCharacter.transform.position;
+        //nextTagVec.y = 0;
+
+        //while (true)
+        //{
+        //    tagCharacter.transform.position = Vector3.MoveTowards(tagCharacter.transform.position,
+        //                target, 8f * Time.deltaTime);
+
+        //    tagCharacter.transform.LookAt(tagCharacter.transform.position + nextTagVec);
+
+        //    if(Mathf.Abs(target.x - tagCharacter.transform.position.x) < 0.0002 &&
+        //        Mathf.Abs(target.z - tagCharacter.transform.position.z) < 0.0002)
+        //    {
+        //        tagCharacter.transform.LookAt(tagCharacter.transform.position + frontVec);
+
+        //        canAttack = true;
+        //        canMove = true;
+        //        canDodge = true;
+        //        canSkill = true;
+        //        Debug.Log("finish");
+        //        yield break;
+        //    }
+
+        //    yield return null;
+        //}
+
+        NavMeshAgent subNav = tagCharacter.GetComponent<NavMeshAgent>();
+        subNav.speed = 12;
+
+        Vector3 target = transform.position + pos * 1.5f;
+
+        while (true)
+        {
+            subNav.SetDestination(target);
+
+            if (Mathf.Abs(target.x - tagCharacter.transform.position.x) < 0.0003 &&
+                Mathf.Abs(target.z - tagCharacter.transform.position.z) < 0.0003)
+            {
+                tagCharacter.transform.LookAt(tagCharacter.transform.position + frontVec);
+                subNav.speed = 3.5f;
+                canAttack = true;
+                canMove = true;
+                canDodge = true;
+                canSkill = true;
+                StartCoroutine(JadeEvaSynerge());
+                yield break;
+            }
+
+            yield return null;
+        }
+    }
+
+    IEnumerator JadeEvaSynerge()
+    {
+        canAttack = false;
+        canMove = false;
+        canDodge = false;
+        canSkill = false;
+        anim.SetTrigger("drawMissileLauncher");
+        yield return new WaitForSeconds(0.5f);
+        useAssaultRifle.SetActive(false);
+
+        anim.SetBool("AimMissile", true);
+        useMissileLauncher.SetActive(true);
+        yield return new WaitForSeconds(0.6f);
+
+        anim.SetBool("AimMissile", false);
+
+        anim.SetTrigger("shootMissileLauncher");
+        GameObject instantBullet;
+        Rigidbody bulletRigid;
+        List<GameObject> enemys = new List<GameObject>();
+        float ditectedDistance = 10f;
+        
+        for (int i = 0; i < targets.Count; i++)
+        {
+            if (Vector3.Distance(transform.position, targets[i].transform.position) < ditectedDistance)
+            {
+                enemys.Add(targets[i]);
+            }
+        }
+        for (int i = 0; i<10; i++)
+        {
+            if (enemys.Count != 0)
+                enemyPos = enemys[(int)Random.Range(0, enemys.Count)];
+            else
+                enemyPos = gameObject;
+            instantBullet = Instantiate(SynergeBullet, missileBulletPos.position, missileBulletPos.rotation);
+            bulletRigid = instantBullet.GetComponent<Rigidbody>();
+            bulletRigid.velocity = missileBulletPos.forward;
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        yield return new WaitForSeconds(0.2f);
+
+        anim.SetTrigger("drawAssaultRifle");
+        yield return new WaitForSeconds(0.5f);
+        useMissileLauncher.SetActive(false);
+        useAssaultRifle.SetActive(true);
+
+        yield return new WaitForSeconds(0.3f);
+
+        canAttack = true;
+        canMove = true;
+        canDodge = true;
+        canSkill = true;
+
+        yield break;
     }
 
     void OnCollisionEnter(Collision collision)
