@@ -15,6 +15,8 @@ public class Karmen : SubAI
 
     [SerializeField] GameObject wLeftEffect = null;
     [SerializeField] GameObject wRightEffect = null;
+    public GameObject EvaKarmenSynergeWeapon = null;
+    [SerializeField] GameObject EvaKarmenSynergeEffect = null;
 
     public float moveSpeed = 5.0f;
     public float dodgeCoolTime = 5.0f;
@@ -103,6 +105,7 @@ public class Karmen : SubAI
         doingAttack = false;
         motionEndCheck = true;
         comboContinue = true;
+        EvaKarmenSynergeWeapon.SetActive(false);
 
         attackDistance = 3.5f;
 
@@ -122,7 +125,6 @@ public class Karmen : SubAI
             {
                 Q_Skill();
                 W_Skill();
-                E_Skill();
             }
             Stop();
             AttackRange();
@@ -165,6 +167,10 @@ public class Karmen : SubAI
                 anim.SetBool("isRun", false);
                 curFireDelay = 1f;
             }
+        }
+        if (canSkill)
+        {
+            E_Skill();
         }
         Tag();
     }
@@ -412,25 +418,31 @@ public class Karmen : SubAI
                 transform.LookAt(transform.position + frontVec);
             }
 
-            if (tagCharacter.name == "Jade")
-            {
-                moveSpeed = 0f;
-                anim.SetBool("Run", false);
-                vecTarget = transform.position;
+            moveSpeed = 0f;
+            anim.SetBool("Run", false);
+            vecTarget = transform.position;
 
-            }
-            else if (tagCharacter.name == "Eva")
-            {
-                moveSpeed = 0f;
-                anim.SetBool("Run", false);
-                vecTarget = transform.position;
+            StartCoroutine(KarmenEvaSynerge());
 
-                StartCoroutine(KarmenEvaSynerge());
-            }
-            else if (tagCharacter.name == "Leina")
-            {
+            //if (tagCharacter.name == "Jade")
+            //{
+            //    moveSpeed = 0f;
+            //    anim.SetBool("Run", false);
+            //    vecTarget = transform.position;
 
-            }
+            //}
+            //else if (tagCharacter.name == "Eva")
+            //{
+            //    moveSpeed = 0f;
+            //    anim.SetBool("Run", false);
+            //    vecTarget = transform.position;
+
+            //    StartCoroutine(KarmenEvaSynerge());
+            //}
+            //else if (tagCharacter.name == "Leina")
+            //{
+
+            //}
         }
         else if (Input.GetKeyDown(KeyCode.E) && onESkill && gameObject.transform.tag == "SubCharacter")
         {
@@ -444,17 +456,23 @@ public class Karmen : SubAI
                 transform.LookAt(transform.position + frontVec);
             }
 
-            if (tagCharacter.name == "Jade")
-            {
-            }
-            else if (tagCharacter.name == "Eva")
-            {
+            moveSpeed = 0f;
+            anim.SetBool("Run", false);
+            vecTarget = transform.position;
 
-            }
-            else if (tagCharacter.name == "Leina")
-            {
+            StartCoroutine(KarmenEvaSynerge());
 
-            }
+            //if (tagCharacter.name == "Jade")
+            //{
+            //}
+            //else if (tagCharacter.name == "Eva")
+            //{
+            //    StartCoroutine(KarmenEvaSynerge());
+            //}
+            //else if (tagCharacter.name == "Leina")
+            //{
+
+            //}
         }
     }
     void Tag()
@@ -608,8 +626,13 @@ public class Karmen : SubAI
 
     IEnumerator KarmenEvaSynerge()
     {
+        EvaKarmenSynergeWeapon.SetActive(true);
         anim.SetTrigger("KarmenEvaSynerge");
-        yield return null;
+
+        yield return new WaitForSeconds(3.45f);
+        Instantiate(EvaKarmenSynergeEffect, transform.position + transform.forward * 4.5f, transform.rotation);
+        yield return new WaitForSeconds(0.4f);
+        EvaKarmenSynergeWeapon.SetActive(false);
     }
     void OnCollisionEnter(Collision collision)
     {

@@ -1131,9 +1131,11 @@ MonoBehaviour:
   arrow: {fileID: 5775468925520252961, guid: 9ad73451252dea242b626f843f2c8a4e, type: 3}
   arrowPos: {fileID: 1766496332179116808}
   posionArrow: {fileID: 2152290969651364495, guid: bca4bf11c841fed47a9bd49091ab934b, type: 3}
+  SynergeArrow: {fileID: 2152290969651364495, guid: 862933b4b41cec94499964b7e71302b5, type: 3}
+  SynergeEffect: {fileID: 9101585811161638584, guid: cdf2d8ab564f46148b9be374d703c76b, type: 3}
+  SynergeFirstArrow: {fileID: 0}
   posionArrowPos: {fileID: 6374148070573737827}
   rainArrow: {fileID: 4090946686561165464, guid: 4c6df5da180c24b49a9b69560ebb2b3d, type: 3}
-  effect: {fileID: 3909897119099557501}
   rainArrowPos: {fileID: 4385404622400843517}
   attackClip: {fileID: 8300000, guid: 79c278c674c2e4e4388bbbfb9a7abe7d, type: 3}
   moveSpeed: 5
@@ -5199,11 +5201,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cb6021025359c24a93a76033f208121, type: 3}
---- !u!1 &3909897119099557501 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2973352362095066387, guid: 4cb6021025359c24a93a76033f208121, type: 3}
-  m_PrefabInstance: {fileID: 2234285205940480878}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3915816896652553831 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2978568439247701257, guid: 4cb6021025359c24a93a76033f208121, type: 3}

@@ -375,23 +375,28 @@ public class Jade : SubAI
                 transform.LookAt(transform.position + frontVec);
             }
 
-            if (tagCharacter.name == "Eva")
-            {
-                moveSpeed = 0f;
-                anim.SetBool("Run", false);
-                vecTarget = transform.position;
+            moveSpeed = 0f;
+            anim.SetBool("Run", false);
+            vecTarget = transform.position;
 
-                //StartCoroutine(SynergeCharacterMove(frontVec, gameObject.transform.right));
-                StartCoroutine(JadeEvaSynerge());
-            }
-            else if (tagCharacter.name == "Karmen")
-            {
+            StartCoroutine(JadeEvaSynerge());
 
-            }
-            else if (tagCharacter.name == "Leina")
-            {
+            //if (tagCharacter.name == "Eva")
+            //{
+            //    moveSpeed = 0f;
+            //    anim.SetBool("Run", false);
+            //    vecTarget = transform.position;
 
-            }
+            //    StartCoroutine(JadeEvaSynerge());
+            //}
+            //else if (tagCharacter.name == "Karmen")
+            //{
+
+            //}
+            //else if (tagCharacter.name == "Leina")
+            //{
+
+            //}
         }
         else if (Input.GetKeyDown(KeyCode.E) && onESkill && gameObject.transform.tag == "SubCharacter")
         {
@@ -404,18 +409,25 @@ public class Jade : SubAI
                 frontVec.y = 0;
                 transform.LookAt(transform.position + frontVec);
             }
-            if (tagCharacter.name == "Eva")
-            {
-                StartCoroutine(JadeEvaSynerge());
-            }
-            else if (tagCharacter.name == "Karmen")
-            {
 
-            }
-            else if (tagCharacter.name == "Leina")
-            {
+            moveSpeed = 0f;
+            anim.SetBool("Run", false);
+            vecTarget = transform.position;
 
-            }
+            StartCoroutine(JadeEvaSynerge());
+
+            //if (tagCharacter.name == "Eva")
+            //{
+            //    StartCoroutine(JadeEvaSynerge());
+            //}
+            //else if (tagCharacter.name == "Karmen")
+            //{
+
+            //}
+            //else if (tagCharacter.name == "Leina")
+            //{
+
+            //}
         }
     }
     void Tag()

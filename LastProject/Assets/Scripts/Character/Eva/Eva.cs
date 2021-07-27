@@ -45,6 +45,8 @@ public class Eva : SubAI
     
     float distanceWithPlayer;
 
+    public static List<GameObject> targetEnemys = new List<GameObject>();
+
     Vector3 vecTarget;
 
     Animator anim;
@@ -337,26 +339,33 @@ public class Eva : SubAI
                 transform.LookAt(transform.position + frontVec);
             }
 
-            if (tagCharacter.name == "Jade")
-            {
-                moveSpeed = 0f;
-                anim.SetBool("Run", false);
-                vecTarget = transform.position;
+            onESkill = false;
+            moveSpeed = 0f;
+            anim.SetBool("Run", false);
+            vecTarget = transform.position;
 
-                StartCoroutine(EvaJadeSynerge());
-            }
-            else if (tagCharacter.name == "Karmen")
-            {
-                moveSpeed = 0f;
-                anim.SetBool("Run", false);
-                vecTarget = transform.position;
+            StartCoroutine(EvaJadeSynerge());
 
-                StartCoroutine(EvaKarmenSynerge());
-            }
-            else if (tagCharacter.name == "Leina")
-            {
+            //if (tagCharacter.name == "Jade")
+            //{
+            //    moveSpeed = 0f;
+            //    anim.SetBool("Run", false);
+            //    vecTarget = transform.position;
 
-            }
+            //    StartCoroutine(EvaJadeSynerge());
+            //}
+            //else if (tagCharacter.name == "Karmen")
+            //{
+            //    moveSpeed = 0f;
+            //    anim.SetBool("Run", false);
+            //    vecTarget = transform.position;
+
+            //    StartCoroutine(EvaKarmenSynerge());
+            //}
+            //else if (tagCharacter.name == "Leina")
+            //{
+
+            //}
         }
         else if(Input.GetKeyDown(KeyCode.E) && onESkill && gameObject.transform.tag == "SubCharacter")
         {
@@ -370,18 +379,25 @@ public class Eva : SubAI
                 transform.LookAt(transform.position + frontVec);
             }
 
-            if (tagCharacter.name == "Jade")
-            {
-                StartCoroutine(EvaJadeSynerge());
-            }
-            else if (tagCharacter.name == "Karmen")
-            {
+            onESkill = false;
+            moveSpeed = 0f;
+            anim.SetBool("Run", false);
+            vecTarget = transform.position;
 
-            }
-            else if (tagCharacter.name == "Leina")
-            {
+            StartCoroutine(EvaJadeSynerge());
 
-            }
+            //if (tagCharacter.name == "Jade")
+            //{
+            //    StartCoroutine(EvaJadeSynerge());
+            //}
+            //else if (tagCharacter.name == "Karmen")
+            //{
+            //    StartCoroutine(EvaKarmenSynerge());
+            //}
+            //else if (tagCharacter.name == "Leina")
+            //{
+
+            //}
         }
     }
     void CoolTime()
@@ -625,18 +641,15 @@ public class Eva : SubAI
 
         anim.SetTrigger("EvaKarmenSynerge");
 
-        List<GameObject> enemys = new List<GameObject>();
         float ditectedDistance = 10f;
 
         for (int i = 0; i < targets.Count; i++)
         {
             if (Vector3.Distance(transform.position, targets[i].transform.position) < ditectedDistance)
             {
-                enemys.Add(targets[i]);
+                targetEnemys.Add(targets[i]);
             }
         }
-
-        StartCoroutine(GatherEnemys(enemys));
 
         Instantiate(wSkillEffect, wSkillPos.position, wSkillPos.rotation);
         Quaternion rotation = Quaternion.identity;
@@ -652,20 +665,11 @@ public class Eva : SubAI
 
         vecTarget = transform.position;
 
+        targetEnemys.Clear();
         canAttack = true;
         canMove = true;
         canDodge = true;
         canSkill = true;
-    }
-
-    IEnumerator GatherEnemys(List<GameObject> enemys)
-    {
-        for(int i = 0; i<enemys.Count; i++)
-        {
-            //enemys[i].transform
-        }
-
-        yield return new WaitForSeconds(1.7f);
     }
 
     void OnCollisionEnter(Collision collision)

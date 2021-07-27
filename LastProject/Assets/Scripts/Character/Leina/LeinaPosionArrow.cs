@@ -83,7 +83,7 @@ public class LeinaPosionArrow : MonoBehaviour
 
         if (curScale < maxScale)
         {
-            curScale += Time.deltaTime;
+            curScale += Time.deltaTime*1.8f;
             arrowObj1.transform.localScale = new Vector3(curScale, curScale, curScale);
             arrowObj2.transform.localScale = new Vector3(curScale, curScale, curScale);
             arrowObj3.transform.localScale = new Vector3(curScale, curScale, curScale);

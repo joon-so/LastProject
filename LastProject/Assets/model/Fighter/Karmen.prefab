@@ -2647,7 +2647,7 @@ Animator:
   m_GameObject: {fileID: 8416406516756022378}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 5637854c9d1faac44813c947719fddfe, type: 3}
-  m_Controller: {fileID: 9100000, guid: a3e46c64edbe48940a49d237b3d45305, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -2698,7 +2698,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d2489748b86c39449f1087a1be81e06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: 0
+  nav: {fileID: 0}
+  rigidbody: {fileID: 0}
+  tagCharacter: {fileID: 0}
+  traceDistance: 5
+  attackDistance: 6
   attackRange: {fileID: 5909637768009185907}
+  leftStaffEffect: {fileID: 0}
+  rightStaffEffect: {fileID: 0}
+  qSkill: {fileID: 0}
+  qSkillPos: {fileID: 0}
+  wLeftEffect: {fileID: 0}
+  wRightEffect: {fileID: 0}
   moveSpeed: 5
   dodgeCoolTime: 5
   followDistance: 5
