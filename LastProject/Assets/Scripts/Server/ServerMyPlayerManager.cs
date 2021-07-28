@@ -9,8 +9,8 @@ public class ServerMyPlayerManager : MonoBehaviour
     [SerializeField] GameObject LeinaObj;
     [SerializeField] GameObject EvaObj;
 
-    [SerializeField] GameObject character1;
-    [SerializeField] GameObject character2;
+    public GameObject character1;
+    public GameObject character2;
 
     public string ID;
     private bool isTag;
@@ -113,6 +113,16 @@ public class ServerMyPlayerManager : MonoBehaviour
                 movePacket.mainPlayer_Pos_Z = character1.gameObject.transform.position.z;
                 movePacket.mainPlayer_Rot_Y = character1.gameObject.transform.rotation.eulerAngles.y;
 
+                movePacket.mainPlayer_Hp = 0;
+                movePacket.mainPlayer_Mp = 0;
+
+                movePacket.subPlayer_Behavior = ServerLoginManager.playerList[0].subCharacterBehavior;
+                movePacket.subPlayer_Pos_X = 0;
+                movePacket.subPlayer_Pos_Z = 0;
+                movePacket.subPlayer_Rot_Y = 0;
+                movePacket.subPlayer_Hp = 0;
+                movePacket.subPlayer_Mp = 0;
+
                 //Debug.Log(character1.gameObject.transform.position);
 
                 //movePacket.subPlayer_Pos_X = character1.gameObject.transform.position.x;
@@ -126,6 +136,15 @@ public class ServerMyPlayerManager : MonoBehaviour
                 movePacket.mainPlayer_Pos_Z = character2.gameObject.transform.position.z;
                 movePacket.mainPlayer_Rot_Y = character1.gameObject.transform.rotation.eulerAngles.y;
 
+                movePacket.mainPlayer_Hp = 0;
+                movePacket.mainPlayer_Mp = 0;
+
+                movePacket.subPlayer_Behavior = ServerLoginManager.playerList[0].subCharacterBehavior;
+                movePacket.subPlayer_Pos_X = 0;
+                movePacket.subPlayer_Pos_Z = 0;
+                movePacket.subPlayer_Rot_Y = 0;
+                movePacket.subPlayer_Hp = 0;
+                movePacket.subPlayer_Mp = 0;
                 //movePacket.subPlayer_Pos_X = character2.gameObject.transform.position.x;
                 //movePacket.subPlayer_Pos_Z = character2.gameObject.transform.position.z;
                 //movePacket.subPlayer_Rot_Y = character2.gameObject.transform.rotation.y;

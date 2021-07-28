@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
-public class CameraController : MonoBehaviour
+public class CameraController : ServerMyPlayerManager
 {
     [SerializeField, Range(1f, 50)] float distance = 17;
     [SerializeField, Min(0f)] float focusRadius = 1f;
     [SerializeField, Range(0f, 1f)] float focusCentering = 0.5f;
 
-    public Transform focus = default;
+    public Transform focus;
 
     Vector3 focusPoint;
 
     void Start()
     {
-        focus = GameManager.instance.character1.transform;
+        focus = character1.transform;
     }
 
     void LateUpdate()

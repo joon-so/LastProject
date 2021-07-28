@@ -7348,17 +7348,17 @@ GameObject:
   m_Component:
   - component: {fileID: 8337776254084146073}
   - component: {fileID: 8337776254084146072}
-  - component: {fileID: 8337776254084146075}
   - component: {fileID: 8337776254084146074}
   - component: {fileID: 8337776254084146085}
-  - component: {fileID: 2314080706806512720}
+  - component: {fileID: 1365395996833785441}
+  - component: {fileID: 8209367193543807463}
   m_Layer: 0
   m_Name: ServerJade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8337776254084146073
 Transform:
   m_ObjectHideFlags: 0
@@ -7397,47 +7397,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &8337776254084146075
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8337776254084146084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e98827871cfba804b9e005997bee43cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentState: 0
-  nav: {fileID: 0}
-  rigidbody: {fileID: 0}
-  tagCharacter: {fileID: 0}
-  traceDistance: 2
-  attackDistance: 1
-  attackRange: {fileID: 8337776252513168528}
-  useAssaultRifle: {fileID: 8337776254574485050}
-  useMissileLauncher: {fileID: 8337776252619561616}
-  backAssaultRifle: {fileID: 8337776252495787812}
-  backMissileLauncher: {fileID: 8337776253588045782}
-  assaultRifleBulletPos: {fileID: 8337776253242360634}
-  assaultRifleBullet: {fileID: 978226826277819363, guid: d138c9bab44a2c843b6afb2d7cb8848f, type: 3}
-  missileBulletPos: {fileID: 8337776253975590306}
-  missileBullet: {fileID: 2495103459607902339, guid: 4f7ab93a92fb02a4aaa3082ebb8c125f, type: 3}
-  missileRange: {fileID: 8337776254301659014}
-  missileEffect: {fileID: 8337776253085991901}
-  SynergeBullet: {fileID: 162538, guid: 1492ff056aec57445aee9daf3ac1d7f0, type: 3}
-  grenadePos: {fileID: 8337776252512746476}
-  Grenade: {fileID: 6059190706233498653, guid: 623872e6aa0cd4b4ba7eb9ae090d5103, type: 3}
-  attackClip: {fileID: 8300000, guid: 7185d08da7632af4281eb74802ec3a14, type: 3}
-  qSkillClip: {fileID: 8300000, guid: 12fe5de4b1f7f1e40824c7114340c0f7, type: 3}
-  wSkillClip: {fileID: 8300000, guid: 63c4e5e20a4bb4e428b38520978b49c7, type: 3}
-  moveSpeed: 5
-  dodgeCoolTime: 7
-  fireDelay: 0.5
-  subFireDelay: 1.5
-  followDistance: 5
-  grenadeDistance: 10
 --- !u!54 &8337776254084146074
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7452,7 +7411,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!136 &8337776254084146085
 CapsuleCollider:
@@ -7468,28 +7427,66 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!195 &2314080706806512720
-NavMeshAgent:
+--- !u!114 &1365395996833785441
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8337776254084146084}
-  m_Enabled: 0
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3cbec85da0f2304e8cec7310ced797a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+  nav: {fileID: 0}
+  rigidbody: {fileID: 0}
+  tagCharacter: {fileID: 0}
+  traceDistance: 2
+  attackDistance: 1
+  useAssaultRifle: {fileID: 8337776254574485050}
+  backAssaultRifle: {fileID: 8337776252495787812}
+  assaultRifleBulletPos: {fileID: 8337776253242360634}
+  assaultRifleBullet: {fileID: 978226826277819363, guid: d138c9bab44a2c843b6afb2d7cb8848f, type: 3}
+  useMissileLauncher: {fileID: 8337776252619561616}
+  backMissileLauncher: {fileID: 8337776253588045782}
+  missileBulletPos: {fileID: 8337776253975590306}
+  missileBullet: {fileID: 2495103459607902339, guid: 4f7ab93a92fb02a4aaa3082ebb8c125f, type: 3}
+  missileRange: {fileID: 8337776254301659014}
+  missileEffect: {fileID: 8337776253085991901}
+  grenadePos: {fileID: 8337776252512746476}
+  Grenade: {fileID: 6059190706233498653, guid: 623872e6aa0cd4b4ba7eb9ae090d5103, type: 3}
+  moveSpeed: 5
+  dodgeCoolTime: 7
+  fireDelay: 0.5
+  subFireDelay: 1.5
+  followDistance: 5
+  grenadeDistance: 10
+--- !u!114 &8209367193543807463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8337776254084146084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a4041958eb0ce44381443f427be412d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useAssaultRifle: {fileID: 8337776254574485050}
+  backAssaultRifle: {fileID: 8337776252495787812}
+  assaultRifleBulletPos: {fileID: 8337776253242360634}
+  assaultRifleBullet: {fileID: 978226826277819363, guid: d138c9bab44a2c843b6afb2d7cb8848f, type: 3}
+  useMissileLauncher: {fileID: 8337776252619561616}
+  backMissileLauncher: {fileID: 8337776253588045782}
+  missileBulletPos: {fileID: 8337776253975590306}
+  missileBullet: {fileID: 2495103459607902339, guid: 4f7ab93a92fb02a4aaa3082ebb8c125f, type: 3}
+  missileRange: {fileID: 8337776254301659014}
+  missileEffect: {fileID: 8337776253085991901}
+  grenadePos: {fileID: 8337776252512746476}
+  Grenade: {fileID: 6059190706233498653, guid: 623872e6aa0cd4b4ba7eb9ae090d5103, type: 3}
 --- !u!1 &8337776254117771973
 GameObject:
   m_ObjectHideFlags: 0

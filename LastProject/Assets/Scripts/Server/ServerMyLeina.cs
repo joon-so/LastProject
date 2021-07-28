@@ -7,23 +7,31 @@ public class ServerMyLeina : SubAI
     [SerializeField] GameObject arrow;
     [SerializeField] Transform arrowPos;
 
+    [SerializeField] GameObject posionArrow;
+    [SerializeField] Transform posionArrowPos;
+
     public float moveSpeed = 5.0f;
     public float dodgeCoolTime = 7.0f;
     public float fireDelay = 1.0f;
     public float subFireDelay = 1.5f;
     public float followDistance = 5.0f;
 
-    public static int attackDamage = 20;
-
-    float curDodgeCoolTime;
+    public static float qSkillCoolTime = 5.0f;
+    public static float wSkillCoolTime = 5.0f;
 
     float curFireDelay;
+    float curDodgeCoolTime;
+    float curQSkillCoolTime;
+    float curWSkillCoolTime;
 
     bool canAttack;
     bool canDodge;
     bool canMove;
+    bool canSkill;
 
     bool onDodge;
+    bool onQSkill;
+    bool onWSkill;
 
     Vector3 vecTarget;
     Animator myAnimator;
@@ -38,12 +46,17 @@ public class ServerMyLeina : SubAI
 
         vecTarget = transform.position;
         curDodgeCoolTime = dodgeCoolTime;
+        curQSkillCoolTime = qSkillCoolTime;
+        curWSkillCoolTime = wSkillCoolTime;
 
         canMove = true;
         canDodge = true;
         canAttack = true;
+        canSkill = true;
 
         onDodge = true;
+        onQSkill = true;
+        onWSkill = true;
 
         curFireDelay = fireDelay;
     }
@@ -58,6 +71,11 @@ public class ServerMyLeina : SubAI
                 Attack();
             if (canDodge)
                 Dodge();
+            if (canSkill)
+            {
+                Q_Skill();
+                W_Skill();
+            }
             Stop();
             CoolTime();
         }
@@ -208,14 +226,53 @@ public class ServerMyLeina : SubAI
     void CoolTime()
     {
         if (curDodgeCoolTime < dodgeCoolTime)
-        {
             curDodgeCoolTime += Time.deltaTime;
-        }
         else
-        {
             onDodge = true;
+        if (curQSkillCoolTime < qSkillCoolTime)
+            curQSkillCoolTime += Time.deltaTime;
+        else
+            onQSkill = true;
+        if (curWSkillCoolTime < wSkillCoolTime)
+            curWSkillCoolTime += Time.deltaTime;
+        else
+            onWSkill = true;
+    }
+
+    void Q_Skill()
+    {
+        if (Input.GetKeyDown(KeyCode.Q) && onQSkill)
+        {
+            onQSkill = false;
+            curQSkillCoolTime = 0;
+            myAnimator.SetBool("Run", false);
+
+            canAttack = false;
+            canMove = false;
+            canDodge = false;
+            canSkill = false;
+
+            StartCoroutine(ChargingShot());
         }
     }
+
+    void W_Skill()
+    {
+        if (Input.GetKeyDown(KeyCode.W) && onWSkill)
+        {
+            onWSkill = false;
+            curWSkillCoolTime = 0;
+            myAnimator.SetBool("Run", false);
+
+            canAttack = false;
+            canMove = false;
+            canDodge = false;
+            canSkill = false;
+
+            StartCoroutine(WideShot());
+        }
+    }
+
     void Tag()
     {
         if (Input.GetKeyDown(KeyCode.F))
@@ -223,16 +280,106 @@ public class ServerMyLeina : SubAI
             vecTarget = transform.position;
         }
     }
+
     IEnumerator AttackDelay()
     {
         yield return new WaitForSeconds(0.5f);
         canMove = true;
         canDodge = true;
     }
+
     IEnumerator DodgeDelay()
     {
         yield return new WaitForSeconds(1.0f);
         canAttack = true;
         canMove = true;
+    }
+
+    IEnumerator ChargingShot()
+    {
+        vecTarget = transform.position;
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit rayHit;
+        if (Physics.Raycast(ray, out rayHit, Mathf.Infinity))
+        {
+            Vector3 nextVec = rayHit.point - transform.position;
+            nextVec.y = 0;
+            transform.LookAt(transform.position + nextVec);
+            transform.Rotate(0, transform.rotation.y + 90, 0);
+        }
+
+        ServerLoginManager.playerList[0].mainCharacterBehavior = 4;
+
+        myAnimator.SetTrigger("QSkill");
+        // Â÷Â¡
+        yield return new WaitForSeconds(1.4f);
+        GameObject instantArrow = Instantiate(posionArrow, posionArrowPos.position, posionArrowPos.rotation);
+        LeinaPosionArrow.speed = 0;
+        // ¼¦
+        yield return new WaitForSeconds(1f);
+
+        Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
+        arrowRigid.velocity = posionArrowPos.forward;
+        LeinaPosionArrow.speed = 40;
+        yield return new WaitForSeconds(1.0f);
+
+        canAttack = true;
+        canMove = true;
+        canDodge = true;
+        canSkill = true;
+    }
+
+    IEnumerator WideShot()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            Vector3 nextVec = hit.point - transform.position;
+            nextVec.y = 0;
+            transform.LookAt(transform.position + nextVec);
+        }
+
+        //SoundManager.instance.SFXPlay("Attack", attackClip);
+
+        myAnimator.SetBool("Run", false);
+        vecTarget = transform.position;
+
+        ServerLoginManager.playerList[0].mainCharacterBehavior = 5;
+
+        myAnimator.SetTrigger("Attack");
+        // ¼¦
+        Vector3 pos = arrowPos.position;
+        GameObject instantArrow = Instantiate(arrow, pos, arrowPos.rotation * Quaternion.Euler(0f, -25f, 0));
+        Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
+        arrowRigid.velocity = arrowPos.forward;
+
+        GameObject instantArrow2 = Instantiate(arrow, pos, arrowPos.rotation * Quaternion.Euler(0f, -15f, 0));
+        Rigidbody arrowRigid2 = instantArrow2.GetComponent<Rigidbody>();
+        arrowRigid2.velocity = arrowPos.forward;
+
+        GameObject instantArrow3 = Instantiate(arrow, pos, arrowPos.rotation * Quaternion.Euler(0f, -5f, 0));
+        Rigidbody arrowRigid3 = instantArrow3.GetComponent<Rigidbody>();
+        arrowRigid3.velocity = arrowPos.forward;
+
+        GameObject instantArrow4 = Instantiate(arrow, pos, arrowPos.rotation * Quaternion.Euler(0f, 5f, 0));
+        Rigidbody arrowRigid4 = instantArrow4.GetComponent<Rigidbody>();
+        arrowRigid4.velocity = arrowPos.forward;
+
+        GameObject instantArrow5 = Instantiate(arrow, pos, arrowPos.rotation * Quaternion.Euler(0f, 15f, 0));
+        Rigidbody arrowRigid5 = instantArrow5.GetComponent<Rigidbody>();
+        arrowRigid5.velocity = arrowPos.forward;
+
+        GameObject instantArrow6 = Instantiate(arrow, pos, arrowPos.rotation * Quaternion.Euler(0f, 25f, 0));
+        Rigidbody arrowRigid6 = instantArrow6.GetComponent<Rigidbody>();
+        arrowRigid6.velocity = arrowPos.forward;
+
+        yield return new WaitForSeconds(0.5f);
+
+        canAttack = true;
+        canMove = true;
+        canDodge = true;
+        canSkill = true;
     }
 }

@@ -444,7 +444,6 @@ public class Eva : SubAI
 
     IEnumerator FireGun()
     {
-        curQSkillCoolTime = 0.0f;
         qSkill.SetActive(true);
         anim.SetTrigger("QSkill");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -459,9 +458,10 @@ public class Eva : SubAI
         yield return new WaitForSeconds(5.0f);
         qSkill.SetActive(false);
 
-
         vecTarget = transform.position;
         anim.SetBool("Run", false);
+
+        curQSkillCoolTime = 0.0f;
 
         canAttack = true;
         canMove = true;
@@ -471,8 +471,6 @@ public class Eva : SubAI
 
     IEnumerator ShockWave()
     {
-        curWSkillCoolTime = 0.0f;
-
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -516,6 +514,8 @@ public class Eva : SubAI
 
 
         vecTarget = transform.position;
+       
+        curWSkillCoolTime = 0.0f;
 
         canAttack = true;
         canMove = true;

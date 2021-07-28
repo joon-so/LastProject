@@ -10,7 +10,7 @@ public enum PacketID
 {
 	CS_Login = 1,
 	CS_PlayerData = 2,
-	CS_GameStart =3,
+	CS_GameStart = 3,
 
 	SC_PlayerPosi = 101,
 	SC_First_PlayerPosi = 102
@@ -111,10 +111,15 @@ public class cs_PlayerData : IPacket
 	public float mainPlayer_Pos_X;
 	public float mainPlayer_Pos_Z;
 	public float mainPlayer_Rot_Y;
+	public short mainPlayer_Hp;
+	public short mainPlayer_Mp;
 
+	public int subPlayer_Behavior;
 	public float subPlayer_Pos_X;
 	public float subPlayer_Pos_Z;
 	public float subPlayer_Rot_Y;
+	public short subPlayer_Hp;
+	public short subPlayer_Mp;
 
 	public ushort Protocol { get { return (ushort)PacketID.CS_PlayerData; } }
 
@@ -133,6 +138,22 @@ public class cs_PlayerData : IPacket
 		count += sizeof(float);
 		this.mainPlayer_Rot_Y = BitConverter.ToSingle(segment.Array, segment.Offset + count);
 		count += sizeof(float);
+		this.mainPlayer_Hp = BitConverter.ToInt16(segment.Array, segment.Offset + count);
+		count += sizeof(int);
+		this.mainPlayer_Mp = BitConverter.ToInt16(segment.Array, segment.Offset + count);
+		count += sizeof(int);
+		this.subPlayer_Behavior = BitConverter.ToInt32(segment.Array, segment.Offset + count);
+		count += sizeof(int);
+		this.subPlayer_Pos_X = BitConverter.ToSingle(segment.Array, segment.Offset + count);
+		count += sizeof(float);
+		this.subPlayer_Pos_Z = BitConverter.ToSingle(segment.Array, segment.Offset + count);
+		count += sizeof(float);
+		this.subPlayer_Rot_Y = BitConverter.ToSingle(segment.Array, segment.Offset + count);
+		count += sizeof(float);
+		this.subPlayer_Hp = BitConverter.ToInt16(segment.Array, segment.Offset + count);
+		count += sizeof(int);
+		this.subPlayer_Mp = BitConverter.ToInt16(segment.Array, segment.Offset + count);
+		count += sizeof(int);
 	}
 
 	public ArraySegment<byte> Write()
@@ -154,7 +175,22 @@ public class cs_PlayerData : IPacket
 		count += sizeof(float);
 		Array.Copy(BitConverter.GetBytes(this.mainPlayer_Rot_Y), 0, segment.Array, segment.Offset + count, sizeof(float));
 		count += sizeof(float);
-
+		Array.Copy(BitConverter.GetBytes(this.mainPlayer_Hp), 0, segment.Array, segment.Offset + count, sizeof(short));
+		count += sizeof(short);
+		Array.Copy(BitConverter.GetBytes(this.mainPlayer_Mp), 0, segment.Array, segment.Offset + count, sizeof(short));
+		count += sizeof(short);
+		Array.Copy(BitConverter.GetBytes(this.subPlayer_Behavior), 0, segment.Array, segment.Offset + count, sizeof(int));
+		count += sizeof(int);
+		Array.Copy(BitConverter.GetBytes(this.subPlayer_Pos_X), 0, segment.Array, segment.Offset + count, sizeof(float));
+		count += sizeof(float);
+		Array.Copy(BitConverter.GetBytes(this.subPlayer_Pos_Z), 0, segment.Array, segment.Offset + count, sizeof(float));
+		count += sizeof(float);
+		Array.Copy(BitConverter.GetBytes(this.subPlayer_Rot_Y), 0, segment.Array, segment.Offset + count, sizeof(float));
+		count += sizeof(float);
+		Array.Copy(BitConverter.GetBytes(this.subPlayer_Hp), 0, segment.Array, segment.Offset + count, sizeof(short));
+		count += sizeof(short);
+		Array.Copy(BitConverter.GetBytes(this.subPlayer_Mp), 0, segment.Array, segment.Offset + count, sizeof(short));
+		count += sizeof(short);
 
 		Array.Copy(BitConverter.GetBytes(count), 0, segment.Array, segment.Offset, sizeof(ushort));
 

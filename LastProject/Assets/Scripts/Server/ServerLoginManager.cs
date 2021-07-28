@@ -26,6 +26,12 @@ public class ServerLoginManager : MonoBehaviour
     }
 
     public static ServerPlayer[] playerList = new ServerPlayer[4];
+    public static int curPlayerNum;
+
+    private void Start()
+    {
+        curPlayerNum = 0;
+    }
 
     public void GetIPAdress(InputField ip)
     {

@@ -6,7 +6,6 @@ public class ServerIngameManager : MonoBehaviour
 {
     public List<GameObject> player;
 
-    // KDA
     void Start()
     {
         for (int i = 0; i < 4; ++i)

@@ -7,19 +7,35 @@ public class ServerMyKarmen : SubAI
     [SerializeField] GameObject leftStaffEffect;
     [SerializeField] GameObject rightStaffEffect;
 
+    [SerializeField] GameObject qSkill;
+    public Transform qSkillPos;
+
+    [SerializeField] GameObject wLeftEffect = null;
+    [SerializeField] GameObject wRightEffect = null;
+
     public float moveSpeed = 5.0f;
     public float dodgeCoolTime = 5.0f;
     public float followDistance = 5.0f;
     public float attackDelay = 1.0f;
 
+    public static float qSkillCoolTime = 5.0f;
+    public static float wSkillCoolTime = 5.0f;
+
     float curDodgeCoolTime;
+    float curQSkillCoolTime;
+    float curWSkillCoolTime;
+
     float curAttackDelay;
+    float subAttackDelay = 1.5f;
 
     bool canMove;
     bool canDodge;
     bool canAttack;
+    bool canSkill;
 
     bool onDodge;
+    bool onQSkill;
+    bool onWSkill;
 
     Vector3 vecTarget;
     Animator myAnimator;
@@ -43,11 +59,16 @@ public class ServerMyKarmen : SubAI
 
         vecTarget = transform.position;
         curDodgeCoolTime = dodgeCoolTime;
+        curQSkillCoolTime = qSkillCoolTime;
+        curWSkillCoolTime = wSkillCoolTime;
 
         canMove = false;
         canDodge = false;
         canAttack = false;
+
         onDodge = true;
+        onQSkill = true;
+        onWSkill = true;
 
         curAttackDelay = attackDelay;
 
@@ -65,6 +86,11 @@ public class ServerMyKarmen : SubAI
                 Attack();
             if (canDodge)
                 Dodge();
+            if (canSkill)
+            {
+                Q_Skill();
+                W_Skill();
+            }
             Stop();
             CoolTime();
         }
@@ -185,13 +211,17 @@ public class ServerMyKarmen : SubAI
     void CoolTime()
     {
         if (curDodgeCoolTime < dodgeCoolTime)
-        {
             curDodgeCoolTime += Time.deltaTime;
-        }
         else
-        {
             onDodge = true;
-        }
+        if (curQSkillCoolTime < qSkillCoolTime)
+            curQSkillCoolTime += Time.deltaTime;
+        else
+            onQSkill = true;
+        if (curWSkillCoolTime < wSkillCoolTime)
+            curWSkillCoolTime += Time.deltaTime;
+        else
+            onWSkill = true;
     }
     void Tag()
     {
@@ -200,6 +230,42 @@ public class ServerMyKarmen : SubAI
             vecTarget = transform.position;
         }
     }
+    void Q_Skill()
+    {
+        if (Input.GetKeyDown(KeyCode.Q) && onQSkill)
+        {
+            onQSkill = false;
+            curQSkillCoolTime = 0;
+            myAnimator.SetBool("Run", false);
+
+            canAttack = false;
+            canMove = false;
+            canDodge = false;
+            canSkill = false;
+
+            StartCoroutine(BigAttack());
+            ServerLoginManager.playerList[0].mainCharacterBehavior = 4; // WSkill
+        }
+    }
+
+    void W_Skill()
+    {
+        if (Input.GetKeyDown(KeyCode.W) && onWSkill)
+        {
+            onWSkill = false;
+            curWSkillCoolTime = 0;
+            myAnimator.SetBool("Run", false);
+
+            canAttack = false;
+            canMove = false;
+            canDodge = false;
+            canSkill = false;
+
+            StartCoroutine(StraightAttack());
+            ServerLoginManager.playerList[0].mainCharacterBehavior = 5; // WSkill
+        }
+    }
+
     IEnumerator StartMotion()
     {
         yield return new WaitForSeconds(0.5f);
@@ -223,5 +289,63 @@ public class ServerMyKarmen : SubAI
         canAttack = true;
         canMove = true;
         ServerLoginManager.playerList[0].mainCharacterBehavior = 0; // Idle
+    }
+    IEnumerator BigAttack()
+    {
+        curQSkillCoolTime = 0.0f;
+
+        leftStaffEffect.SetActive(false);
+        rightStaffEffect.SetActive(false);
+
+        myAnimator.SetTrigger("QSkill");
+        myAnimator.SetFloat("Speed", 0.2f);
+        yield return new WaitForSeconds(0.5f);
+        Instantiate(qSkill, qSkillPos.position, qSkillPos.rotation);
+        myAnimator.SetFloat("Speed", 0.0f);
+        yield return new WaitForSeconds(1.0f);
+        myAnimator.SetFloat("Speed", 1.0f);
+        yield return new WaitForSeconds(1.0f);
+
+        leftStaffEffect.SetActive(true);
+        rightStaffEffect.SetActive(true);
+
+        vecTarget = transform.position;
+        myAnimator.SetBool("Run", false);
+
+        ServerLoginManager.playerList[0].mainCharacterBehavior = 0; // Idle
+
+        canAttack = true;
+        canMove = true;
+        canDodge = true;
+        canSkill = true;
+    }
+
+    IEnumerator StraightAttack()
+    {
+        curWSkillCoolTime = 0.0f;
+
+        leftStaffEffect.SetActive(false);
+        rightStaffEffect.SetActive(false);
+
+        myAnimator.SetTrigger("WSkill");
+        wLeftEffect.SetActive(true);
+        wRightEffect.SetActive(true);
+        yield return new WaitForSeconds(2.8f);
+
+        wLeftEffect.SetActive(false);
+        wRightEffect.SetActive(false);
+
+        leftStaffEffect.SetActive(true);
+        rightStaffEffect.SetActive(true);
+
+        vecTarget = transform.position;
+        myAnimator.SetBool("Run", false);
+
+        ServerLoginManager.playerList[0].mainCharacterBehavior = 0; // Idle
+
+        canAttack = true;
+        canMove = true;
+        canDodge = true;
+        canSkill = true;
     }
 }

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class ServerOtherEva : MonoBehaviour
 {
+    [SerializeField] GameObject qSkill;
+    [SerializeField] GameObject wSkillEffect;
+    [SerializeField] GameObject wSkillShockEffect;
+    public Transform wSkillPos = null;
+
     private Animator otherAnimator;
     private int preBehavior;
 
@@ -21,21 +26,15 @@ public class ServerOtherEva : MonoBehaviour
 
     public void AnimationControl()
     {
-        // Idle
         if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 0)
         {
             otherAnimator.SetBool("Run", false);
         }
-        // run
         else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 1)
         {
-            if (preBehavior != 1)
-            {
-                otherAnimator.SetBool("Run", true);
-                preBehavior = 1;
-            }
+            otherAnimator.SetBool("Run", true);
+            preBehavior = 1;
         }
-        // dodge
         else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 2)
         {
             if (preBehavior != 2)
@@ -44,7 +43,6 @@ public class ServerOtherEva : MonoBehaviour
                 preBehavior = 2;
             }
         }
-        // attack
         else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 3)
         {
             if (preBehavior != 3)
@@ -53,10 +51,94 @@ public class ServerOtherEva : MonoBehaviour
                 preBehavior = 3;
             }
         }
+        else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 4)
+        {
+            if (preBehavior != 4)
+            {
+                StartCoroutine(FireGun());
+                preBehavior = 4;
+            }
+        }
+        else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 5)
+        {
+            if (preBehavior != 5)
+            {
+                StartCoroutine(ShockWave());
+                preBehavior = 5;
+            }
+        }
     }
     IEnumerator StartMotion()
     {
         yield return new WaitForSeconds(0.5f);
         otherAnimator.SetTrigger("StartMotion");
+    }
+
+    IEnumerator FireGun()
+    {
+        qSkill.SetActive(true);
+
+        ServerLoginManager.playerList[0].mainCharacterBehavior = 4;
+
+        otherAnimator.SetTrigger("QSkill");
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            Vector3 nextVec = hit.point - transform.position;
+            nextVec.y = 0;
+            transform.LookAt(transform.position + nextVec);
+        }
+
+        yield return new WaitForSeconds(5.0f);
+        qSkill.SetActive(false);
+
+        otherAnimator.SetBool("Run", false);
+
+       // ServerLoginManager.playerList[0].mainCharacterBehavior = 0;
+    }
+
+    IEnumerator ShockWave()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            Vector3 nextVec = hit.point - transform.position;
+            nextVec.y = 0;
+            transform.LookAt(transform.position + nextVec);
+        }
+
+        ServerLoginManager.playerList[0].mainCharacterBehavior = 5;
+
+        otherAnimator.SetTrigger("WSkill");
+        Instantiate(wSkillEffect, wSkillPos.position, wSkillPos.rotation);
+        yield return new WaitForSeconds(0.5f);
+        otherAnimator.SetFloat("Speed", 0.0f);
+        yield return new WaitForSeconds(0.5f);
+        otherAnimator.SetFloat("Speed", 1.0f);
+
+        yield return new WaitForSeconds(0.3f);
+        // »ý¼º
+        wSkillShockEffect.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
+        Instantiate(wSkillShockEffect, transform.position + transform.forward * 1.5f, transform.rotation);
+        yield return new WaitForSeconds(0.4f);
+        wSkillShockEffect.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        Instantiate(wSkillShockEffect, transform.position + transform.forward * 3f + transform.right, transform.rotation);
+        Instantiate(wSkillShockEffect, transform.position + transform.forward * 3f + -transform.right, transform.rotation);
+        yield return new WaitForSeconds(0.4f);
+        wSkillShockEffect.transform.localScale = new Vector3(0.55f, 0.55f, 0.55f);
+        Instantiate(wSkillShockEffect, transform.position + transform.forward * 5f + transform.right * 2.0f, transform.rotation);
+        Instantiate(wSkillShockEffect, transform.position + transform.forward * 5f, transform.rotation);
+        Instantiate(wSkillShockEffect, transform.position + transform.forward * 5f + -transform.right * 2.0f, transform.rotation);
+        yield return new WaitForSeconds(0.4f);
+        wSkillShockEffect.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+        Instantiate(wSkillShockEffect, transform.position + transform.forward * 7f - transform.right * 3f, transform.rotation);
+        Instantiate(wSkillShockEffect, transform.position + transform.forward * 7f - transform.right * 1.2f, transform.rotation);
+        Instantiate(wSkillShockEffect, transform.position + transform.forward * 7f + transform.right * 1.2f, transform.rotation);
+        Instantiate(wSkillShockEffect, transform.position + transform.forward * 7f + transform.right * 3f, transform.rotation);
+
+        yield return new WaitForSeconds(0.5f);
+        otherAnimator.SetFloat("Speed", 1.0f);
     }
 }

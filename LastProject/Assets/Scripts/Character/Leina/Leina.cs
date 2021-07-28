@@ -15,7 +15,6 @@ public class Leina : SubAI
     [SerializeField] Transform posionArrowPos = null;
 
     [SerializeField] GameObject rainArrow = null;
-    //[SerializeField] GameObject effect = null;
     [SerializeField] Transform rainArrowPos = null;
 
     public AudioClip attackClip;

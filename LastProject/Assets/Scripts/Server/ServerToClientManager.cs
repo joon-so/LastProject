@@ -41,7 +41,7 @@ public class ServerToClientManager : ServerIngameManager
         //movePacket.idtemp = "dnk97";
         NetworkManager.instance.Send(movePacket.Write());
 
-//        NetworkManager.Send(movePacket.Write());
+        //        NetworkManager.Send(movePacket.Write());
     }
 
     public void cs_GameStart_Process(cs_GameStart packet)

@@ -1334,17 +1334,17 @@ GameObject:
   m_Component:
   - component: {fileID: 2610842126028664225}
   - component: {fileID: 2519688590426705085}
-  - component: {fileID: 4042775365705245157}
-  - component: {fileID: 1107674275984540493}
   - component: {fileID: 9099050945472103601}
   - component: {fileID: 3150825927275064240}
+  - component: {fileID: 6248201066994208960}
+  - component: {fileID: 2916804850457279365}
   m_Layer: 0
   m_Name: ServerLeina
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2610842126028664225
 Transform:
   m_ObjectHideFlags: 0
@@ -1393,61 +1393,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &4042775365705245157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2922372577615359367}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f1aa75eefd63d34bba70f82f130ecc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentState: 0
-  nav: {fileID: 0}
-  rigidbody: {fileID: 0}
-  tagCharacter: {fileID: 0}
-  traceDistance: 2
-  attackDistance: 1
-  attackRange: {fileID: 8585516978837067964}
-  arrow: {fileID: 5775468925520252961, guid: 9ad73451252dea242b626f843f2c8a4e, type: 3}
-  arrowPos: {fileID: 1435195421986375792}
-  posionArrow: {fileID: 2152290969651364495, guid: bca4bf11c841fed47a9bd49091ab934b, type: 3}
-  SynergeArrow: {fileID: 2152290969651364495, guid: 862933b4b41cec94499964b7e71302b5, type: 3}
-  SynergeEffect: {fileID: 9101585811161638584, guid: cdf2d8ab564f46148b9be374d703c76b, type: 3}
-  posionArrowPos: {fileID: 5988811455134751771}
-  rainArrow: {fileID: 4090946686561165464, guid: 4c6df5da180c24b49a9b69560ebb2b3d, type: 3}
-  rainArrowPos: {fileID: 4014145340022994309}
-  attackClip: {fileID: 8300000, guid: 79c278c674c2e4e4388bbbfb9a7abe7d, type: 3}
-  moveSpeed: 5
-  dodgeCoolTime: 7
-  fireDelay: 1
-  subFireDelay: 1.5
-  followDistance: 5
---- !u!195 &1107674275984540493
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2922372577615359367}
-  m_Enabled: 0
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
 --- !u!54 &9099050945472103601
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1462,7 +1407,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 0
 --- !u!136 &3150825927275064240
 CapsuleCollider:
@@ -1478,6 +1423,49 @@ CapsuleCollider:
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
+--- !u!114 &6248201066994208960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2922372577615359367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d86c1ef727f50b1418a586e1c0af24f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+  nav: {fileID: 0}
+  rigidbody: {fileID: 0}
+  tagCharacter: {fileID: 0}
+  traceDistance: 2
+  attackDistance: 1
+  arrow: {fileID: 5775468925520252961, guid: 9ad73451252dea242b626f843f2c8a4e, type: 3}
+  arrowPos: {fileID: 1435195421986375792}
+  posionArrow: {fileID: 2152290969651364495, guid: bca4bf11c841fed47a9bd49091ab934b, type: 3}
+  posionArrowPos: {fileID: 5988811455134751771}
+  moveSpeed: 5
+  dodgeCoolTime: 7
+  fireDelay: 1
+  subFireDelay: 1.5
+  followDistance: 5
+--- !u!114 &2916804850457279365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2922372577615359367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9886adc8bace46d489714e59fab6522f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arrow: {fileID: 5775468925520252961, guid: 9ad73451252dea242b626f843f2c8a4e, type: 3}
+  arrowPos: {fileID: 1435195421986375792}
+  posionArrow: {fileID: 2152290969651364495, guid: bca4bf11c841fed47a9bd49091ab934b, type: 3}
+  posionArrowPos: {fileID: 5988811455134751771}
 --- !u!1 &3095421566990918189
 GameObject:
   m_ObjectHideFlags: 0

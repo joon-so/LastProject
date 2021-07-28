@@ -10,6 +10,17 @@ public class ServerOtherJade : MonoBehaviour
     [SerializeField] Transform assaultRifleBulletPos;
     [SerializeField] GameObject assaultRifleBullet;
 
+    [SerializeField] GameObject useMissileLauncher;
+    [SerializeField] GameObject backMissileLauncher;
+
+    [SerializeField] Transform missileBulletPos;
+    [SerializeField] GameObject missileBullet;
+    [SerializeField] GameObject missileRange;
+    [SerializeField] GameObject missileEffect;
+
+    [SerializeField] Transform grenadePos;
+    [SerializeField] GameObject Grenade;
+
     private Animator otherAnimator;
     private int preBehavior;
 
@@ -27,19 +38,14 @@ public class ServerOtherJade : MonoBehaviour
 
     public void AnimationControl()
     {
-        // Idle
         if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 0)
         {
             otherAnimator.SetBool("Run", false);
         }
-        // run
         else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 1)
         {
-            if (preBehavior != 1)
-            {
-                otherAnimator.SetBool("Run", true);
-                preBehavior = 1;
-            }
+            otherAnimator.SetBool("Run", true);
+            preBehavior = 1;
         }
         else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 2)
         {
@@ -49,16 +55,29 @@ public class ServerOtherJade : MonoBehaviour
                 preBehavior = 2;
             }
         }
-        // attack
         else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 3)
         {
             if (preBehavior != 3)
             {
-                otherAnimator.SetTrigger("shootAssaultRifle");
                 StartCoroutine(ShootAssaultRifle());
                 preBehavior = 3;
             }
-
+        }
+        else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 4)
+        {
+            if (preBehavior != 4)
+            {
+                StartCoroutine(ShootMissile());
+                preBehavior = 4;
+            }
+        }
+        else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 5)
+        {
+            if (preBehavior != 5)
+            {
+                StartCoroutine(ShootGrenade());
+                preBehavior = 5;
+            }
         }
     }
 
@@ -73,9 +92,55 @@ public class ServerOtherJade : MonoBehaviour
 
     IEnumerator ShootAssaultRifle()
     {
+        otherAnimator.SetTrigger("shootAssaultRifle");
         GameObject instantBullet = Instantiate(assaultRifleBullet, assaultRifleBulletPos.position, assaultRifleBulletPos.rotation);
         Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
         bulletRigid.velocity = assaultRifleBulletPos.forward;
         yield return null;
+    }
+
+    IEnumerator ShootMissile()
+    {
+        otherAnimator.SetTrigger("drawMissileLauncher");
+        yield return new WaitForSeconds(0.5f);
+        useAssaultRifle.SetActive(false);
+        useMissileLauncher.SetActive(true);
+
+        otherAnimator.SetBool("AimMissile", true);
+        yield return new WaitForSeconds(0.5f);
+        missileEffect.SetActive(true);
+
+        //SoundManager.instance.SFXPlay("Attack", qSkillClip);
+
+        yield return new WaitForSeconds(1.0f);
+        otherAnimator.SetBool("AimMissile", false);
+        missileEffect.SetActive(false);
+
+        otherAnimator.SetTrigger("shootMissileLauncher");
+        GameObject instantMissile = Instantiate(missileBullet, missileBulletPos.position, missileBulletPos.rotation);
+        Rigidbody missileRigid = instantMissile.GetComponent<Rigidbody>();
+        missileRigid.velocity = missileBulletPos.forward;
+
+        yield return new WaitForSeconds(1.0f);
+
+        otherAnimator.SetTrigger("drawAssaultRifle");
+        yield return new WaitForSeconds(0.5f);
+        useMissileLauncher.SetActive(false);
+        useAssaultRifle.SetActive(true);
+
+        yield return new WaitForSeconds(0.3f);
+    }
+    IEnumerator ShootGrenade()
+    {
+        otherAnimator.SetTrigger("shootGrenade");
+
+        //SoundManager.instance.SFXPlay("Grenade", wSkillClip);
+
+        GameObject instantGrenade = Instantiate(Grenade, grenadePos.position, grenadePos.rotation);
+        Rigidbody rigidGrenade = instantGrenade.GetComponent<Rigidbody>();
+        rigidGrenade.AddForce(transform.position, ForceMode.Impulse);
+        rigidGrenade.AddTorque(Vector3.back * 10, ForceMode.Impulse);
+
+        yield return new WaitForSeconds(0.3f);
     }
 }
