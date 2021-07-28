@@ -11,10 +11,6 @@ public class ServerLobbyCharacterMainMask : MonoBehaviour
     [SerializeField] GameObject mainEvaMask;
 
     public int listPos;
-    void Start()
-    {
-        listPos -= 1;
-    }
 
     void Update()
     {

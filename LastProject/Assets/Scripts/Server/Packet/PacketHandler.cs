@@ -5,8 +5,11 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
+
+
 class PacketHandler
 {
+
 	public static void sc_playerPosiGameHandler(PacketSession session, IPacket packet)
 	{
 		sc_PlayerPosi pkt = packet as sc_PlayerPosi;
@@ -14,6 +17,14 @@ class PacketHandler
 
 		ServerToClientManager.Instance.sc_playerPosi_DO(pkt);
 	}
+	public static void sc_playerFirstPosiGameHandler(PacketSession session, IPacket packet)
+	{
+		sc_First_PlayerPosi pkt = packet as sc_First_PlayerPosi;
+		ServerSession serverSession = session as ServerSession;
+
+		ServerToClientManager.Instance.sc_playerFirstPosi_DO(pkt);
+	}
+
 	public static void cs_LoginGameHandler(PacketSession session, IPacket packet)
 	{
 		cs_Login pkt = packet as cs_Login;
@@ -27,5 +38,13 @@ class PacketHandler
 		ServerSession serverSession = session as ServerSession;
 
 		ServerToClientManager.Instance.please(pkt);
+	}
+
+	public static void cs_GameStartHandler(PacketSession session, IPacket packet)
+	{
+		cs_GameStart pkt = packet as cs_GameStart;
+		ServerSession serverSession = session as ServerSession;
+
+		ServerToClientManager.Instance.cs_GameStart_Process(pkt);
 	}
 }

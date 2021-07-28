@@ -6492,14 +6492,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb20db4fc498ddf4aa5346d9ec0c78b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1Obj: {fileID: 1397628563}
-  player2Obj: {fileID: 1913832703}
-  player3Obj: {fileID: 2132943820}
-  player4Obj: {fileID: 1630403501}
-  player1ID: {fileID: 7011278388589271594}
-  player2ID: {fileID: 1106597503}
-  player3ID: {fileID: 1369554576}
-  player4ID: {fileID: 1834521131}
+  playerObj:
+  - {fileID: 1397628563}
+  - {fileID: 1913832703}
+  - {fileID: 2132943820}
+  - {fileID: 1630403501}
+  playerTextID:
+  - {fileID: 7011278388589271594}
+  - {fileID: 1106597503}
+  - {fileID: 1369554576}
+  - {fileID: 1834521131}
 --- !u!4 &2040019183
 Transform:
   m_ObjectHideFlags: 0

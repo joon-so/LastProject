@@ -1,20 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class ServerToClientManager : MonoBehaviour
+public class ServerToClientManager : ServerIngameManager
 {
-    MyPlayer _myPlayer;
-    Dictionary<int, Player> _players = new Dictionary<int, Player>();
-
-    NetworkManager _network;
-
-
     public static ServerToClientManager Instance { get; } = new ServerToClientManager();
 
     void Start()
     {
-        _network = GameObject.Find("NetworkManager").GetComponent<NetworkManager>();
     }
 
     //Client -> Server
@@ -23,26 +17,13 @@ public class ServerToClientManager : MonoBehaviour
         //로그인 접속
         for (int i = 0; i < 4; ++i)
         {
-            if (ServerLoginManager.playerList[i].playerID == packet.Player_ID)
+            if (ServerLoginManager.playerList[i].playerID != packet.Player_ID)
             {
-                Debug.Log(ServerLoginManager.playerList[i].playerID);
-                Debug.Log("-----------------------------------------");
-                Debug.Log(packet.Player_ID);
-            }
-
-            //// 안되는이유 0과  이미 다른 ID도 똑같이 취급 시발
-            else if (ServerLoginManager.playerList[i].playerID != packet.Player_ID)
-            {
-                if (ServerLoginManager.playerList[i].isContainPlayerInfo == false)
+                if (ServerLoginManager.playerList[i].playerID == null)
                 {
-                    Debug.Log("새로운 배열에 추가");
-                    Debug.Log(ServerLoginManager.playerList[i].playerID);
-                    Debug.Log("-----------------------------------------");
-                    Debug.Log(packet.Player_ID);
                     ServerLoginManager.playerList[i].playerID = packet.Player_ID;
                     ServerLoginManager.playerList[i].selectMainCharacter = packet.main_charc;
                     ServerLoginManager.playerList[i].selectSubCharacter = packet.sub_charc;
-                    ServerLoginManager.playerList[i].isContainPlayerInfo = true;
                     break;
                 }
             }
@@ -58,16 +39,90 @@ public class ServerToClientManager : MonoBehaviour
         //movePacket.floatx = 1234.24f;
         //movePacket.floaty = 771234.24f;
         //movePacket.idtemp = "dnk97";
+        NetworkManager.instance.Send(movePacket.Write());
 
-        _network.Send(movePacket.Write());
+//        NetworkManager.Send(movePacket.Write());
+    }
+
+    public void cs_GameStart_Process(cs_GameStart packet)
+    {
+        SceneManager.LoadScene("Network");
     }
 
 
     //Server -> Client
     public void sc_playerPosi_DO(sc_PlayerPosi packet)
     {
-       // Debug.Log($" {packet.p1_ID} >> {packet.p2_ID} ");
-        //string p2_ID = Player2.instance.p2_ID;
+        for (int i = 1; i < 4; ++i)
+        {
+            if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p1_ID) == 0)
+            {
+                ServerLoginManager.playerList[i].mainCharacterPos = new Vector3(packet.p1_pos_x, 0, packet.p1_pos_z);
+                ServerLoginManager.playerList[i].mainCharacterRot.eulerAngles = new Vector3(0, packet.p1_rot_y, 0);
+                ServerLoginManager.playerList[i].mainCharacterBehavior = packet.p1_behavior;
+                //Debug.Log("-------------------------------" + i);
+                //Debug.Log(ServerLoginManager.playerList[i].playerID);
+                //Debug.Log(ServerLoginManager.playerList[i].mainCharacterPos);
+            }
+            else if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p2_ID) == 0)
+            {
+                ServerLoginManager.playerList[i].mainCharacterPos = new Vector3(packet.p2_pos_x, 0, packet.p2_pos_z);
+                ServerLoginManager.playerList[i].mainCharacterRot.eulerAngles = new Vector3(0, packet.p2_rot_y, 0);
+                ServerLoginManager.playerList[i].mainCharacterBehavior = packet.p2_behavior;
+                //Debug.Log("-------------------------------" + i);
+                //Debug.Log(ServerLoginManager.playerList[i].playerID);
+                //Debug.Log(ServerLoginManager.playerList[i].mainCharacterPos);
+            }
+            else if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p3_ID) == 0)
+            {
+                ServerLoginManager.playerList[i].mainCharacterPos = new Vector3(packet.p3_pos_x, 0, packet.p3_pos_z);
+                ServerLoginManager.playerList[i].mainCharacterRot.eulerAngles = new Vector3(0, packet.p3_rot_y, 0);
+                ServerLoginManager.playerList[i].mainCharacterBehavior = packet.p3_behavior;
+                //Debug.Log("-------------------------------" + i);
+                //Debug.Log(ServerLoginManager.playerList[i].playerID);
+                //Debug.Log(ServerLoginManager.playerList[i].mainCharacterPos);
+            }
+            else if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p4_ID) == 0)
+            {
+                ServerLoginManager.playerList[i].mainCharacterPos = new Vector3(packet.p4_pos_x, 0, packet.p4_pos_z);
+                ServerLoginManager.playerList[i].mainCharacterRot.eulerAngles = new Vector3(0, packet.p4_rot_y, 0);
+                ServerLoginManager.playerList[i].mainCharacterBehavior = packet.p4_behavior;
+                //Debug.Log("-------------------------------" + i);
+                //Debug.Log(ServerLoginManager.playerList[i].playerID);
+                //Debug.Log(ServerLoginManager.playerList[i].mainCharacterPos);
+            }
+        }
+
+
+        //for (int i = 0; i < 4; ++i)
+        //{
+        //    if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p1_ID) == 0)
+        //    {
+        //        ServerLoginManager.playerList[i].mainCharacterPos = new Vector3(packet.p1_pos_x, 0, packet.p1_pos_z);
+        //        ServerLoginManager.playerList[i].mainCharacterRot.eulerAngles = new Vector3(0, packet.p1_rot_y, 0);
+        //        ServerLoginManager.playerList[i].mainCharacterBehavior = packet.p1_behavior;
+        //    }
+        //    else if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p2_ID) == 0)
+        //    {
+        //        ServerLoginManager.playerList[i].mainCharacterPos = new Vector3(packet.p2_pos_x, 0, packet.p2_pos_z);
+        //        ServerLoginManager.playerList[i].mainCharacterRot.eulerAngles = new Vector3(0, packet.p2_rot_y, 0);
+        //        ServerLoginManager.playerList[i].mainCharacterBehavior = packet.p2_behavior;
+        //    }
+        //    else if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p3_ID) == 0)
+        //    {
+        //        ServerLoginManager.playerList[i].mainCharacterPos = new Vector3(packet.p3_pos_x, 0, packet.p3_pos_z);
+        //        ServerLoginManager.playerList[i].mainCharacterRot.eulerAngles = new Vector3(0, packet.p3_rot_y, 0);
+        //        ServerLoginManager.playerList[i].mainCharacterBehavior = packet.p3_behavior;
+        //    }
+        //    else if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p4_ID) == 0)
+        //    {
+        //        ServerLoginManager.playerList[i].mainCharacterPos = new Vector3(packet.p4_pos_x, 0, packet.p4_pos_z);
+        //        ServerLoginManager.playerList[i].mainCharacterRot.eulerAngles = new Vector3(0, packet.p4_rot_y, 0);
+        //        ServerLoginManager.playerList[i].mainCharacterBehavior = packet.p4_behavior;
+        //    }
+        //}
+        // Debug.Log($" {packet.p1_ID} >> {packet.p2_ID} ");
+        //string p2_ID = ServerLoginManager.playerList[1].playerID;
         //string p3_ID = Player3.instance.p3_ID;
         //string p4_ID = Player4.instance.p4_ID;
 
@@ -163,7 +218,10 @@ public class ServerToClientManager : MonoBehaviour
         //    Player4.instance.pos_z = packet.p4_pos_z;
         //    Player4.instance.rot_y = packet.p4_rot_y;
         //}
-
     }
 
+    public void sc_playerFirstPosi_DO(sc_First_PlayerPosi packet)
+    {
+
+    }
 }

@@ -19,18 +19,11 @@ public class ServerCharacterSelectManager : MonoBehaviour
     [SerializeField] GameObject selectEffectLeina;
     [SerializeField] GameObject selectEffectEva;
 
-    [SerializeField] Text ShowIPAdress;
     [SerializeField] Text characterInfoMsgText;
-   
     private int mainOrSub;
-    private int playerNum;
-
-    NetworkManager _network;
 
     void Start()
     {
-        _network = GameObject.Find("Network").GetComponent<NetworkManager>();
-        ShowIPAdress.text = ServerLoginManager.playerList[0].ipAdress;
         mainOrSub = 1;
     }
     public void OnClickSelectKarmen()
@@ -159,8 +152,7 @@ public class ServerCharacterSelectManager : MonoBehaviour
         //메인, 서브 케릭터 설정
         LoginPacket.main_charc = ServerLoginManager.playerList[0].selectMainCharacter;
         LoginPacket.sub_charc = ServerLoginManager.playerList[0].selectSubCharacter;
-
-        _network.Send(LoginPacket.Write());
+        NetworkManager.instance.Send(LoginPacket.Write());
     }
 
     public void OnClickStartButton()

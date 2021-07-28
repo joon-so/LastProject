@@ -16,15 +16,16 @@ public class ServerLoginManager : MonoBehaviour
         public int selectSubCharacter;
 
         public bool isContainPlayerInfo;
+
+        public Vector3 mainCharacterPos;
+        public Vector3 subCharacterPos;
+        public Quaternion mainCharacterRot;
+        public Quaternion subCharacterRot;
+        public int mainCharacterBehavior;
+        public int subCharacterBehavior;
     }
 
     public static ServerPlayer[] playerList = new ServerPlayer[4];
-    public static int curPlayerNum;
-
-    private void Start()
-    {
-        curPlayerNum = 0;
-    }
 
     public void GetIPAdress(InputField ip)
     {
@@ -42,9 +43,7 @@ public class ServerLoginManager : MonoBehaviour
 
     public void ClickJoin()
     {
-        playerList[0].isContainPlayerInfo = true;
         SceneManager.LoadScene("ServerCharacterSelect");
-
     }
 
     public void ClickExit()

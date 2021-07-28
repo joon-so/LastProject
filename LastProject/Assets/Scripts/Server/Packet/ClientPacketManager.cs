@@ -26,10 +26,16 @@ public class PacketManager
 		_makeFunc.Add((ushort)PacketID.CS_PlayerData, MakePacket<cs_PlayerData>);
 		_handler.Add((ushort)PacketID.CS_PlayerData, PacketHandler.cs_PlayerMoveGameHandler);
 
+		_makeFunc.Add((ushort)PacketID.CS_GameStart, MakePacket<cs_GameStart>);
+		_handler.Add((ushort)PacketID.CS_GameStart, PacketHandler.cs_GameStartHandler);
+
 
 		//Server -> Client
 		_makeFunc.Add((ushort)PacketID.SC_PlayerPosi, MakePacket<sc_PlayerPosi>);
 		_handler.Add((ushort)PacketID.SC_PlayerPosi, PacketHandler.sc_playerPosiGameHandler);
+
+		_makeFunc.Add((ushort)PacketID.SC_First_PlayerPosi, MakePacket<sc_First_PlayerPosi>);
+		_handler.Add((ushort)PacketID.SC_First_PlayerPosi, PacketHandler.sc_playerFirstPosiGameHandler);
 	}
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer, Action<PacketSession, IPacket> onRecvCallback = null)

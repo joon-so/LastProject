@@ -6,44 +6,38 @@ using UnityEngine.SceneManagement;
 
 public class ServerLobbyManager : MonoBehaviour
 {
-    [SerializeField] GameObject player1Obj;
-    [SerializeField] GameObject player2Obj;
-    [SerializeField] GameObject player3Obj;
-    [SerializeField] GameObject player4Obj;
+    public List<GameObject> playerObj;
+    public List<Text> playerTextID;
+    NetworkManager _network;
 
-    [SerializeField] Text player1ID;
-    [SerializeField] Text player2ID;
-    [SerializeField] Text player3ID;
-    [SerializeField] Text player4ID;
+    void Start()
+    {
+        _network = GameObject.Find("Network").GetComponent<NetworkManager>();
+    }
 
     void Update()
     {
-        // 플레이어 리스트에 정보가 있다면?
-        if(ServerLoginManager.playerList[0].isContainPlayerInfo)
+        for (int i = 0; i < 4; ++i)
         {
-            player1Obj.SetActive(true);
-            player1ID.text = ServerLoginManager.playerList[0].playerID;
+            if (ServerLoginManager.playerList[i].playerID != null)
+            {
+                playerObj[i].SetActive(true);
+                playerTextID[i].text = ServerLoginManager.playerList[i].playerID;
+            }
         }
-        if (ServerLoginManager.playerList[1].isContainPlayerInfo)
-        {
-            player2Obj.SetActive(true);
-            player2ID.text = ServerLoginManager.playerList[1].playerID;
-        }
-        if (ServerLoginManager.playerList[2].isContainPlayerInfo)
-        {
-            player3Obj.SetActive(true);
-            player3ID.text = ServerLoginManager.playerList[2].playerID;
-        }
-        if (ServerLoginManager.playerList[3].isContainPlayerInfo)
-        {
-            player4Obj.SetActive(true);
-            player4ID.text = ServerLoginManager.playerList[3].playerID;
-        }
+    }
+
+    void send_Game_Start_packet()
+    {
+        cs_GameStart GameStartPacket = new cs_GameStart();
+        GameStartPacket.is_Start = true;
+
+        _network.Send(GameStartPacket.Write());
     }
 
     public void OnClickStartButton()
     {
-        SceneManager.LoadScene("ServerStage");
+        send_Game_Start_packet();
     }
 
     public void OnClickExitButton()

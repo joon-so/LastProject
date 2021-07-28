@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class NetworkManager : MonoBehaviour
 {
-	NetworkManager instance;
+	public static NetworkManager instance;
 
 	ServerSession _session = new ServerSession();
 	
