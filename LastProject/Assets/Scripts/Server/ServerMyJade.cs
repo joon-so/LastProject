@@ -143,6 +143,7 @@ public class ServerMyJade : SubAI
 
             canAttack = false;
             canMove = false;
+            canSkill = false;
 
             curDodgeCoolTime = 0.0f;
 
@@ -175,6 +176,7 @@ public class ServerMyJade : SubAI
         {
             canMove = false;
             canDodge = false;
+            canSkill = false;
 
             if (curFireDelay > fireDelay)
             {
@@ -264,6 +266,7 @@ public class ServerMyJade : SubAI
         yield return new WaitForSeconds(0.2f);
         canMove = true;
         canDodge = true;
+        canSkill = true;
     }
 
     IEnumerator DodgeDelay()
@@ -271,6 +274,7 @@ public class ServerMyJade : SubAI
         yield return new WaitForSeconds(1.0f);
         canAttack = true;
         canMove = true;
+        canSkill = true;
     }
 
     IEnumerator DrawAssaultRifle()
@@ -283,6 +287,7 @@ public class ServerMyJade : SubAI
         canMove = true;
         canAttack = true;
         canDodge = true;
+        canSkill = true;
         ServerLoginManager.playerList[0].mainCharacterBehavior = 0;
     }
 

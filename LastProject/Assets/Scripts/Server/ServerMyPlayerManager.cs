@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class ServerMyPlayerManager : MonoBehaviour
 {
+    public static ServerMyPlayerManager instance;
+
+   // [SerializeField] Camera mainCamera;
+    //private CameraController mainCameraControl;
+    [SerializeField] GameObject clickEffect;
+
     [SerializeField] GameObject KarmenObj;
     [SerializeField] GameObject JadeObj;
     [SerializeField] GameObject LeinaObj;
@@ -15,8 +21,16 @@ public class ServerMyPlayerManager : MonoBehaviour
     public string ID;
     private bool isTag;
 
+    void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
+
     void Start()
     {
+        //mainCameraControl = mainCamera.GetComponent<CameraController>();
+
         if (ServerLoginManager.playerList[0].selectMainCharacter == 1)
         {
             character1 = KarmenObj;
@@ -74,11 +88,31 @@ public class ServerMyPlayerManager : MonoBehaviour
 
     void Update()
     {
+        //Zoom();
+        //Click();
         if (Input.GetKey(KeyCode.F))
         {
             ServerMainSubTag();
         }
     }
+    //void Zoom()
+    //{
+    //    var scroll = Input.mouseScrollDelta;
+    //    mainCamera.fieldOfView = Mathf.Clamp(mainCamera.fieldOfView - scroll.y, 30f, 70f);
+    //}
+
+    //void Click()
+    //{
+    //    if (Input.GetMouseButtonDown(1))
+    //    {
+    //        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+    //        RaycastHit hit;
+    //        Physics.Raycast(ray, out hit);
+
+    //        clickEffect.transform.position = hit.point;
+    //        StartCoroutine(ActiveEffect());
+    //    }
+    //}
 
     public void ServerMainSubTag()
     {
@@ -96,6 +130,14 @@ public class ServerMyPlayerManager : MonoBehaviour
         //    isTag = true;
         //}
     }
+
+    IEnumerator ActiveEffect()
+    {
+        clickEffect.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        clickEffect.SetActive(false);
+    }
+
 
     IEnumerator CoSendPacket()
     {

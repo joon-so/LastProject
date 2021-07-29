@@ -164,6 +164,7 @@ public class ServerMyLeina : SubAI
 
             canAttack = false;
             canMove = false;
+            canSkill = false;
 
             curDodgeCoolTime = 0.0f;
 
@@ -195,6 +196,8 @@ public class ServerMyLeina : SubAI
         {
             canMove = false;
             canDodge = false;
+            canSkill = false;
+
 
             if (curFireDelay > fireDelay)
             {
@@ -286,6 +289,7 @@ public class ServerMyLeina : SubAI
         yield return new WaitForSeconds(0.5f);
         canMove = true;
         canDodge = true;
+        canSkill = true;
     }
 
     IEnumerator DodgeDelay()
@@ -293,6 +297,7 @@ public class ServerMyLeina : SubAI
         yield return new WaitForSeconds(1.0f);
         canAttack = true;
         canMove = true;
+        canSkill = true;
     }
 
     IEnumerator ChargingShot()

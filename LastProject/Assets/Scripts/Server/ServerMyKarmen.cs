@@ -154,6 +154,7 @@ public class ServerMyKarmen : SubAI
             
             canAttack = false;
             canMove = false;
+            canSkill = false;
 
             curDodgeCoolTime = 0.0f;
 
@@ -187,6 +188,8 @@ public class ServerMyKarmen : SubAI
             {
                 canMove = false;
                 canDodge = false;
+                canSkill = false;
+
                 myAnimator.SetBool("Run", false);
 
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -276,18 +279,21 @@ public class ServerMyKarmen : SubAI
         canMove = true;
         canAttack = true;
         canDodge = true;
+        canSkill = true;
     }
     IEnumerator AttackDelay()
     {
         yield return new WaitForSeconds(0.8f);
         canMove = true;
         canDodge = true;
+        canSkill = true;
     }
     IEnumerator DodgeDelay()
     {
         yield return new WaitForSeconds(1.0f);
         canAttack = true;
         canMove = true;
+        canSkill = true;
         ServerLoginManager.playerList[0].mainCharacterBehavior = 0; // Idle
     }
     IEnumerator BigAttack()

@@ -46,7 +46,7 @@ public class ServerToClientManager : ServerIngameManager
 
     public void cs_GameStart_Process(cs_GameStart packet)
     {
-        SceneManager.LoadScene("Network");
+        SceneManager.LoadScene("ServerStage");
     }
 
 

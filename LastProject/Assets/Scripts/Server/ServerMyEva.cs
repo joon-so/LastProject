@@ -140,6 +140,7 @@ public class ServerMyEva : SubAI
 
             canAttack = false;
             canMove = false;
+            canSkill = false;
 
             curDodgeCoolTime = 0.0f;
             
@@ -179,6 +180,8 @@ public class ServerMyEva : SubAI
             {
                 canMove = false;
                 canDodge = false;
+                canSkill = false;
+
                 myAnimator.SetBool("Run", false);
 
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -263,6 +266,7 @@ public class ServerMyEva : SubAI
         yield return new WaitForSeconds(1.0f);
         canAttack = true;
         canMove = true;
+        canSkill = true;
     }
 
     IEnumerator AttackDelay()
@@ -270,6 +274,7 @@ public class ServerMyEva : SubAI
         yield return new WaitForSeconds(1.5f);
         canMove = true;
         canDodge = true;
+        canSkill = true;
     }
 
     IEnumerator StartMotion()
@@ -280,6 +285,7 @@ public class ServerMyEva : SubAI
         canMove = true;
         canAttack = true;
         canDodge = true;
+        canSkill = true;
     }
 
     IEnumerator FireGun()

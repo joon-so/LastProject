@@ -22,11 +22,11 @@ public class JadeGrenade : MonoBehaviour
 
         effectObj.SetActive(true);
         msehObj.SetActive(false);
-        SoundManager.instance.SFXPlay("WSkillEffect", clip);
+        //SoundManager.instance.SFXPlay("WSkillEffect", clip);
 
         yield return new WaitForSeconds(0.7f);
         Destroy(gameObject);
-        RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, 15, Vector3.up, 0f, LayerMask.GetMask("Enemy"));
+        RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, 15, Vector3.up, 0f, LayerMask.GetMask("MainCharacter"));
         foreach(RaycastHit hitObj in rayHits)
         {
             hitObj.transform.GetComponent<Enemy1>().HitJadeGrenade();
