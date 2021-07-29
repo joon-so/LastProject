@@ -37,7 +37,7 @@ class PacketHandler
 		cs_PlayerData pkt = packet as cs_PlayerData;
 		ServerSession serverSession = session as ServerSession;
 
-		ServerToClientManager.Instance.please(pkt);
+		ServerToClientManager.Instance.cs_PlayerData_Process(pkt);
 	}
 
 	public static void cs_GameStartHandler(PacketSession session, IPacket packet)
@@ -46,5 +46,13 @@ class PacketHandler
 		ServerSession serverSession = session as ServerSession;
 
 		ServerToClientManager.Instance.cs_GameStart_Process(pkt);
+	}
+
+	public static void cs_AttackHandler(PacketSession session, IPacket packet)
+	{
+		cs_Attack pkt = packet as cs_Attack;
+		ServerSession serverSession = session as ServerSession;
+
+		ServerToClientManager.Instance.cs_Attack_Process(pkt);
 	}
 }

@@ -11,6 +11,7 @@ public enum PacketID
 	CS_Login = 1,
 	CS_PlayerData = 2,
 	CS_GameStart = 3,
+	CS_Attack = 4,
 
 	SC_PlayerPosi = 101,
 	SC_First_PlayerPosi = 102
@@ -31,8 +32,6 @@ public class cs_Login : IPacket
 	public int main_charc;
 	public int sub_charc;
 
-	// ------------------------
-	public bool isCharacter;
 
 	public ushort Protocol { get { return (ushort)PacketID.CS_Login; } }
 
@@ -97,6 +96,45 @@ public class cs_GameStart : IPacket
 		count += sizeof(ushort);
 		Array.Copy(BitConverter.GetBytes(this.is_Start), 0, segment.Array, segment.Offset + count, sizeof(bool));
 		count += sizeof(bool);
+
+		Array.Copy(BitConverter.GetBytes(count), 0, segment.Array, segment.Offset, sizeof(ushort));
+
+		return SendBufferHelper.Close(count);
+	}
+}
+
+public class cs_Attack : IPacket
+{
+	public string Player_ID;
+	public short damage;
+
+	public ushort Protocol { get { return (ushort)PacketID.CS_Attack; } }
+
+	public void Read(ArraySegment<byte> segment)
+	{
+		ushort count = 0;
+		count += sizeof(ushort);
+		count += sizeof(ushort);
+		this.Player_ID = Encoding.UTF8.GetString(segment.Array, segment.Offset + count, 20);
+		count += 20;
+		this.damage = BitConverter.ToInt16(segment.Array, segment.Offset + count);
+		count += sizeof(short);
+	}
+
+	public ArraySegment<byte> Write()
+	{
+		ArraySegment<byte> segment = SendBufferHelper.Open(4096);
+		ushort count = 0;
+
+		count += sizeof(ushort);
+		Array.Copy(BitConverter.GetBytes((ushort)PacketID.CS_Attack), 0, segment.Array, segment.Offset + count, sizeof(ushort));
+		count += sizeof(ushort);
+		byte[] rawUnicode = Encoding.UTF8.GetBytes(this.Player_ID);
+		Array.Copy(rawUnicode, 0, segment.Array, segment.Offset + count, this.Player_ID.Length);
+		count += 20;
+		Array.Copy(BitConverter.GetBytes(this.damage), 0, segment.Array, segment.Offset + count, sizeof(short));
+		count += sizeof(short);
+
 
 		Array.Copy(BitConverter.GetBytes(count), 0, segment.Array, segment.Offset, sizeof(ushort));
 
@@ -542,7 +580,6 @@ public class sc_PlayerPosi : IPacket
 public class sc_First_PlayerPosi : IPacket
 {
 	public string p1_ID;
-	public short p1_is_main_ch;
 	public int p1_main_behavior;
 	public float p1_main_pos_x;
 	public float p1_main_pos_z;
@@ -557,7 +594,6 @@ public class sc_First_PlayerPosi : IPacket
 	public short p1_sub_mp;
 
 	public string p2_ID;
-	public short p2_is_main_ch;
 	public int p2_main_behavior;
 	public float p2_main_pos_x;
 	public float p2_main_pos_z;
@@ -572,7 +608,6 @@ public class sc_First_PlayerPosi : IPacket
 	public short p2_sub_mp;
 
 	public string p3_ID;
-	public short p3_is_main_ch;
 	public int p3_main_behavior;
 	public float p3_main_pos_x;
 	public float p3_main_pos_z;
@@ -587,7 +622,6 @@ public class sc_First_PlayerPosi : IPacket
 	public short p3_sub_mp;
 
 	public string p4_ID;
-	public short p4_is_main_ch;
 	public int p4_main_behavior;
 	public float p4_main_pos_x;
 	public float p4_main_pos_z;
@@ -601,6 +635,11 @@ public class sc_First_PlayerPosi : IPacket
 	public short p4_sub_hp;
 	public short p4_sub_mp;
 
+	public short p1_is_main_ch;
+	public short p2_is_main_ch;
+	public short p3_is_main_ch;
+	public short p4_is_main_ch;
+
 	public ushort Protocol { get { return (ushort)PacketID.SC_First_PlayerPosi; } }
 
 	public void Read(ArraySegment<byte> segment)
@@ -611,8 +650,6 @@ public class sc_First_PlayerPosi : IPacket
 
 		this.p1_ID = Encoding.UTF8.GetString(segment.Array, segment.Offset + count, 20);
 		count += 20;
-		this.p1_is_main_ch = BitConverter.ToInt16(segment.Array, segment.Offset + count);
-		count += sizeof(short);
 		this.p1_main_behavior = BitConverter.ToInt32(segment.Array, segment.Offset + count);
 		count += sizeof(int);
 		this.p1_main_pos_x = BitConverter.ToSingle(segment.Array, segment.Offset + count);
@@ -641,8 +678,6 @@ public class sc_First_PlayerPosi : IPacket
 
 		this.p2_ID = Encoding.UTF8.GetString(segment.Array, segment.Offset + count, 20);
 		count += 20;
-		this.p2_is_main_ch = BitConverter.ToInt16(segment.Array, segment.Offset + count);
-		count += sizeof(short);
 		this.p2_main_behavior = BitConverter.ToInt32(segment.Array, segment.Offset + count);
 		count += sizeof(int);
 		this.p2_main_pos_x = BitConverter.ToSingle(segment.Array, segment.Offset + count);
@@ -670,8 +705,6 @@ public class sc_First_PlayerPosi : IPacket
 
 		this.p3_ID = Encoding.UTF8.GetString(segment.Array, segment.Offset + count, 20);
 		count += 20;
-		this.p3_is_main_ch = BitConverter.ToInt16(segment.Array, segment.Offset + count);
-		count += sizeof(short);
 		this.p3_main_behavior = BitConverter.ToInt32(segment.Array, segment.Offset + count);
 		count += sizeof(int);
 		this.p3_main_pos_x = BitConverter.ToSingle(segment.Array, segment.Offset + count);
@@ -699,8 +732,6 @@ public class sc_First_PlayerPosi : IPacket
 
 		this.p4_ID = Encoding.UTF8.GetString(segment.Array, segment.Offset + count, 20);
 		count += 20;
-		this.p4_is_main_ch = BitConverter.ToInt16(segment.Array, segment.Offset + count);
-		count += sizeof(short);
 		this.p4_main_behavior = BitConverter.ToInt32(segment.Array, segment.Offset + count);
 		count += sizeof(int);
 		this.p4_main_pos_x = BitConverter.ToSingle(segment.Array, segment.Offset + count);
@@ -726,6 +757,15 @@ public class sc_First_PlayerPosi : IPacket
 		this.p4_sub_mp = BitConverter.ToInt16(segment.Array, segment.Offset + count);
 		count += sizeof(short);
 
+		this.p1_is_main_ch = BitConverter.ToInt16(segment.Array, segment.Offset + count);
+		count += sizeof(short);
+		this.p2_is_main_ch = BitConverter.ToInt16(segment.Array, segment.Offset + count);
+		count += sizeof(short);
+		this.p3_is_main_ch = BitConverter.ToInt16(segment.Array, segment.Offset + count);
+		count += sizeof(short);
+		this.p4_is_main_ch = BitConverter.ToInt16(segment.Array, segment.Offset + count);
+		count += sizeof(short);
+
 	}
 
 	public ArraySegment<byte> Write()
@@ -740,8 +780,6 @@ public class sc_First_PlayerPosi : IPacket
 		byte[] rawUnicode = Encoding.UTF8.GetBytes(this.p1_ID);
 		Array.Copy(rawUnicode, 0, segment.Array, segment.Offset + count, this.p1_ID.Length);
 		count += 20;
-		Array.Copy(BitConverter.GetBytes(this.p1_is_main_ch), 0, segment.Array, segment.Offset + count, sizeof(short));
-		count += sizeof(short);
 		Array.Copy(BitConverter.GetBytes(this.p1_main_behavior), 0, segment.Array, segment.Offset + count, sizeof(int));
 		count += sizeof(int);
 		Array.Copy(BitConverter.GetBytes(this.p1_main_pos_x), 0, segment.Array, segment.Offset + count, sizeof(float));
@@ -770,8 +808,6 @@ public class sc_First_PlayerPosi : IPacket
 		byte[] rawUnicode1 = Encoding.UTF8.GetBytes(this.p2_ID);
 		Array.Copy(rawUnicode1, 0, segment.Array, segment.Offset + count, this.p2_ID.Length);
 		count += 20;
-		Array.Copy(BitConverter.GetBytes(this.p2_is_main_ch), 0, segment.Array, segment.Offset + count, sizeof(short));
-		count += sizeof(short);
 		Array.Copy(BitConverter.GetBytes(this.p2_main_behavior), 0, segment.Array, segment.Offset + count, sizeof(int));
 		count += sizeof(int);
 		Array.Copy(BitConverter.GetBytes(this.p2_main_pos_x), 0, segment.Array, segment.Offset + count, sizeof(float));
@@ -800,8 +836,6 @@ public class sc_First_PlayerPosi : IPacket
 		byte[] rawUnicode2 = Encoding.UTF8.GetBytes(this.p3_ID);
 		Array.Copy(rawUnicode1, 0, segment.Array, segment.Offset + count, this.p3_ID.Length);
 		count += 20;
-		Array.Copy(BitConverter.GetBytes(this.p3_is_main_ch), 0, segment.Array, segment.Offset + count, sizeof(short));
-		count += sizeof(short);
 		Array.Copy(BitConverter.GetBytes(this.p3_main_behavior), 0, segment.Array, segment.Offset + count, sizeof(int));
 		count += sizeof(int);
 		Array.Copy(BitConverter.GetBytes(this.p3_main_pos_x), 0, segment.Array, segment.Offset + count, sizeof(float));
@@ -830,8 +864,6 @@ public class sc_First_PlayerPosi : IPacket
 		byte[] rawUnicode3 = Encoding.UTF8.GetBytes(this.p4_ID);
 		Array.Copy(rawUnicode1, 0, segment.Array, segment.Offset + count, this.p4_ID.Length);
 		count += 20;
-		Array.Copy(BitConverter.GetBytes(this.p4_is_main_ch), 0, segment.Array, segment.Offset + count, sizeof(short));
-		count += sizeof(short);
 		Array.Copy(BitConverter.GetBytes(this.p4_main_behavior), 0, segment.Array, segment.Offset + count, sizeof(int));
 		count += sizeof(int);
 		Array.Copy(BitConverter.GetBytes(this.p4_main_pos_x), 0, segment.Array, segment.Offset + count, sizeof(float));
@@ -855,6 +887,15 @@ public class sc_First_PlayerPosi : IPacket
 		Array.Copy(BitConverter.GetBytes(this.p4_sub_hp), 0, segment.Array, segment.Offset + count, sizeof(short));
 		count += sizeof(short);
 		Array.Copy(BitConverter.GetBytes(this.p4_sub_mp), 0, segment.Array, segment.Offset + count, sizeof(short));
+		count += sizeof(short);
+
+		Array.Copy(BitConverter.GetBytes(this.p1_is_main_ch), 0, segment.Array, segment.Offset + count, sizeof(short));
+		count += sizeof(short);
+		Array.Copy(BitConverter.GetBytes(this.p2_is_main_ch), 0, segment.Array, segment.Offset + count, sizeof(short));
+		count += sizeof(short);
+		Array.Copy(BitConverter.GetBytes(this.p3_is_main_ch), 0, segment.Array, segment.Offset + count, sizeof(short));
+		count += sizeof(short);
+		Array.Copy(BitConverter.GetBytes(this.p4_is_main_ch), 0, segment.Array, segment.Offset + count, sizeof(short));
 		count += sizeof(short);
 
 		Array.Copy(BitConverter.GetBytes(count), 0, segment.Array, segment.Offset, sizeof(ushort));

@@ -69,17 +69,10 @@ public class ServerOtherPlayerManager : MonoBehaviour
             character2 = serverEvaObj;
             serverEvaObj.SetActive(true);
         }
-
-        character1.transform.position = ServerLoginManager.playerList[index].mainCharacterPos;
-        character1.transform.rotation = ServerLoginManager.playerList[index].mainCharacterRot;
-        character2.transform.position = ServerLoginManager.playerList[index].subCharacterPos;
-        character2.transform.rotation = ServerLoginManager.playerList[index].subCharacterRot;
     }
     void Update()
     {
         UpdatePos();
-        Debug.Log("--------------" + index);
-        Debug.Log(ServerLoginManager.playerList[index].is_Main_Character);
     }
 
     public void UpdatePos()

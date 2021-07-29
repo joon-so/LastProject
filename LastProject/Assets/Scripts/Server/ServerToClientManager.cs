@@ -29,19 +29,15 @@ public class ServerToClientManager : MonoBehaviour
             }
         }
     }
-    public void please(cs_PlayerData packet)
+
+    public void cs_PlayerData_Process(cs_PlayerData packet)
     {
         //Debug.Log($"[From Server]Please type: {packet.GetType()} ID : {packet.ID}  floatx: {packet.player_pos_x} floaty: {packet.player_pos_z} Behavior :{packet.behavior_var}");
 
 
         cs_PlayerData movePacket = new cs_PlayerData();
-        //movePacket.inta = 012;
-        //movePacket.floatx = 1234.24f;
-        //movePacket.floaty = 771234.24f;
-        //movePacket.idtemp = "dnk97";
         NetworkManager.instance.Send(movePacket.Write());
 
-        //        NetworkManager.Send(movePacket.Write());
     }
 
     public void cs_GameStart_Process(cs_GameStart packet)
@@ -49,6 +45,11 @@ public class ServerToClientManager : MonoBehaviour
         SceneManager.LoadScene("ServerStage");
     }
 
+    public void cs_Attack_Process(cs_Attack packet)
+    {
+        //공격 받았을 때 처리
+        //쓸일 없음 서버에서만 처리
+    }
 
     //Server -> Client
     public void sc_playerPosi_DO(sc_PlayerPosi packet)
@@ -107,28 +108,40 @@ public class ServerToClientManager : MonoBehaviour
 
     public void sc_playerFirstPosi_DO(sc_First_PlayerPosi packet)
     {
-        //ServerLoginManager.playerList[0].mainCharacterBehavior = packet.p1_main_behavior;
-        //ServerLoginManager.playerList[0].mainCharacterPos = new Vector3(packet.p1_main_pos_x, 0, packet.p1_main_pos_z);
-        //ServerLoginManager.playerList[0].mainCharacterRot.eulerAngles = new Vector3(0, packet.p1_main_rot_y, 0);
-        //ServerLoginManager.playerList[0].subCharacterPos = new Vector3(packet.p1_sub_pos_x, 0, packet.p1_sub_pos_z);
-        //ServerLoginManager.playerList[0].subCharacterRot.eulerAngles = new Vector3(0, packet.p1_sub_rot_y, 0);
-
-        //ServerLoginManager.playerList[1].mainCharacterBehavior = packet.p2_main_behavior;
-        //ServerLoginManager.playerList[1].mainCharacterPos = new Vector3(packet.p2_main_pos_x, 0, packet.p2_main_pos_z);
-        //ServerLoginManager.playerList[1].mainCharacterRot.eulerAngles = new Vector3(0, packet.p2_main_rot_y, 0);
-        //ServerLoginManager.playerList[1].subCharacterPos = new Vector3(packet.p2_sub_pos_x, 0, packet.p2_sub_pos_z);
-        //ServerLoginManager.playerList[1].subCharacterRot.eulerAngles = new Vector3(0, packet.p2_sub_rot_y, 0);
-
-        //ServerLoginManager.playerList[2].mainCharacterBehavior = packet.p3_main_behavior;
-        //ServerLoginManager.playerList[2].mainCharacterPos = new Vector3(packet.p3_main_pos_x, 0, packet.p3_main_pos_z);
-        //ServerLoginManager.playerList[2].mainCharacterRot.eulerAngles = new Vector3(0, packet.p3_main_rot_y, 0);
-        //ServerLoginManager.playerList[2].subCharacterPos = new Vector3(packet.p3_sub_pos_x, 0, packet.p3_sub_pos_z);
-        //ServerLoginManager.playerList[2].subCharacterRot.eulerAngles = new Vector3(0, packet.p3_sub_rot_y, 0);
-
-        //ServerLoginManager.playerList[3].mainCharacterBehavior = packet.p4_main_behavior;
-        //ServerLoginManager.playerList[3].mainCharacterPos = new Vector3(packet.p4_main_pos_x, 0, packet.p4_main_pos_z);
-        //ServerLoginManager.playerList[3].mainCharacterRot.eulerAngles = new Vector3(0, packet.p4_main_rot_y, 0);
-        //ServerLoginManager.playerList[3].subCharacterPos = new Vector3(packet.p4_sub_pos_x, 0, packet.p4_sub_pos_z);
-        //ServerLoginManager.playerList[3].subCharacterRot.eulerAngles = new Vector3(0, packet.p4_sub_rot_y, 0);
+        for (int i = 0; i < 4; ++i)
+        {
+            if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p1_ID) == 0)
+            {
+                ServerLoginManager.playerList[i].mainCharacterBehavior = packet.p1_main_behavior;
+                ServerLoginManager.playerList[i].mainCharacterPos = new Vector3(packet.p1_main_pos_x, 0, packet.p1_main_pos_z);
+                ServerLoginManager.playerList[i].mainCharacterRot.eulerAngles = new Vector3(0, packet.p1_main_rot_y, 0);
+                ServerLoginManager.playerList[i].subCharacterPos = new Vector3(packet.p1_sub_pos_x, 0, packet.p1_sub_pos_z);
+                ServerLoginManager.playerList[i].subCharacterRot.eulerAngles = new Vector3(0, packet.p1_sub_rot_y, 0);
+            }
+            else if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p2_ID) == 0)
+            {
+                ServerLoginManager.playerList[i].mainCharacterBehavior = packet.p2_main_behavior;
+                ServerLoginManager.playerList[i].mainCharacterPos = new Vector3(packet.p2_main_pos_x, 0, packet.p2_main_pos_z);
+                ServerLoginManager.playerList[i].mainCharacterRot.eulerAngles = new Vector3(0, packet.p2_main_rot_y, 0);
+                ServerLoginManager.playerList[i].subCharacterPos = new Vector3(packet.p2_sub_pos_x, 0, packet.p2_sub_pos_z);
+                ServerLoginManager.playerList[i].subCharacterRot.eulerAngles = new Vector3(0, packet.p2_sub_rot_y, 0);
+            }
+            else if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p3_ID) == 0)
+            {
+                ServerLoginManager.playerList[i].mainCharacterBehavior = packet.p3_main_behavior;
+                ServerLoginManager.playerList[i].mainCharacterPos = new Vector3(packet.p3_main_pos_x, 0, packet.p3_main_pos_z);
+                ServerLoginManager.playerList[i].mainCharacterRot.eulerAngles = new Vector3(0, packet.p3_main_rot_y, 0);
+                ServerLoginManager.playerList[i].subCharacterPos = new Vector3(packet.p3_sub_pos_x, 0, packet.p3_sub_pos_z);
+                ServerLoginManager.playerList[i].subCharacterRot.eulerAngles = new Vector3(0, packet.p3_sub_rot_y, 0);
+            }
+            else if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p4_ID) == 0)
+            {
+                ServerLoginManager.playerList[i].mainCharacterBehavior = packet.p4_main_behavior;
+                ServerLoginManager.playerList[i].mainCharacterPos = new Vector3(packet.p4_main_pos_x, 0, packet.p4_main_pos_z);
+                ServerLoginManager.playerList[i].mainCharacterRot.eulerAngles = new Vector3(0, packet.p4_main_rot_y, 0);
+                ServerLoginManager.playerList[i].subCharacterPos = new Vector3(packet.p4_sub_pos_x, 0, packet.p4_sub_pos_z);
+                ServerLoginManager.playerList[i].subCharacterRot.eulerAngles = new Vector3(0, packet.p4_sub_rot_y, 0);
+            }
+        }
     }
 }

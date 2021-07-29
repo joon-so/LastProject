@@ -230,12 +230,12 @@ public class Leina : SubAI
     {
         if (Input.GetMouseButtonDown(0))
         {
-            canMove = false;
-            canDodge = false;
-            canSkill = false;
-
             if (curFireDelay > fireDelay)
             {
+                canMove = false;
+                canDodge = false;
+                canSkill = false;
+
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity))
