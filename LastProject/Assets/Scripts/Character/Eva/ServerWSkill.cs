@@ -22,7 +22,7 @@ public class ServerWSkill : MonoBehaviour
 
     void Update()
     {
-        gameObject.transform.position = GameObject.Find("ServerEva").GetComponent<Eva>().wSkillPos.position;
+        gameObject.transform.position = GameObject.Find("ServerEva").GetComponent<ServerMyEva>().wSkillPos.position;
 
         if (curScale < maxScale)
         {

@@ -77,22 +77,22 @@ public class ServerOtherPlayerManager : MonoBehaviour
 
     public void UpdatePos()
     {
-        //Debug.Log("----------------" + 0);
-        //Debug.Log(ServerLoginManager.playerList[0].playerID);
-        //Debug.Log(ServerLoginManager.playerList[0].mainCharacterPos);
+        Debug.Log("Other----------------" + 0);
+        Debug.Log("----------------" + 0);
+        Debug.Log(ServerLoginManager.playerList[0].playerID);
+        Debug.Log(ServerLoginManager.playerList[0].mainCharacterPos);
 
-        //Debug.Log("----------------" + 1);
-        //Debug.Log(ServerLoginManager.playerList[1].playerID);
-        //Debug.Log(ServerLoginManager.playerList[1].mainCharacterPos);
+        Debug.Log("----------------" + 1);
+        Debug.Log(ServerLoginManager.playerList[1].playerID);
+        Debug.Log(ServerLoginManager.playerList[1].mainCharacterPos);
 
-        //Debug.Log("----------------" + 2);
-        //Debug.Log(ServerLoginManager.playerList[2].playerID);
-        //Debug.Log(ServerLoginManager.playerList[2].mainCharacterPos);
+        Debug.Log("----------------" + 2);
+        Debug.Log(ServerLoginManager.playerList[2].playerID);
+        Debug.Log(ServerLoginManager.playerList[2].mainCharacterPos);
 
-        //Debug.Log("----------------" + 3);
-        //Debug.Log(ServerLoginManager.playerList[3].playerID);
-        //Debug.Log(ServerLoginManager.playerList[3].mainCharacterPos);
-        //Debug.Log(ServerLoginManager.playerList[index].mainCharacterRot);
+        Debug.Log("----------------" + 3);
+        Debug.Log(ServerLoginManager.playerList[3].playerID);
+        Debug.Log(ServerLoginManager.playerList[3].mainCharacterPos);
 
         character1.transform.position = ServerLoginManager.playerList[index].mainCharacterPos;
         character1.transform.rotation = ServerLoginManager.playerList[index].mainCharacterRot;

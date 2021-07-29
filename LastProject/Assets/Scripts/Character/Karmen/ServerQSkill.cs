@@ -19,7 +19,7 @@ public class ServerQSkill : MonoBehaviour
 
     void Update()
     {
-        gameObject.transform.position = GameObject.Find("ServerKarmen").GetComponent<Karmen>().qSkillPos.position;
+        gameObject.transform.position = GameObject.Find("ServerKarmen").GetComponent<ServerMyKarmen>().qSkillPos.position;
 
         if (curScale < maxScale)
         {

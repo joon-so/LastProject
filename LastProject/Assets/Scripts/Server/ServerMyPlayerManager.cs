@@ -192,7 +192,7 @@ public class ServerMyPlayerManager : MonoBehaviour
                 //movePacket.subPlayer_Rot_Y = character2.gameObject.transform.rotation.y;
             }
 
-            //Debug.Log("Send Packet"+ movePacket.ID+ " " + movePacket.mainPlayer_Pos_X + " " + movePacket.mainPlayer_Pos_Z);
+            Debug.Log("Send Packet"+ movePacket.ID+ " " + movePacket.mainPlayer_Pos_X + " " + movePacket.mainPlayer_Pos_Z);
 
             NetworkManager.instance.Send(movePacket.Write());
         }
