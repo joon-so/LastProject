@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class ServerMyJade : SubAI
+public class ServerMyJade : ServerSubAIManager
 {
     [SerializeField] GameObject useAssaultRifle;
     [SerializeField] GameObject backAssaultRifle;
@@ -51,11 +52,12 @@ public class ServerMyJade : SubAI
     void Awake()
     {
         myAnimator = GetComponent<Animator>();
+        nav = GetComponent<NavMeshAgent>();
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
 
         vecTarget = transform.position;
         curDodgeCoolTime = dodgeCoolTime;

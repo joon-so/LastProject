@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class ServerMyLeina : SubAI
+public class ServerMyLeina : ServerSubAIManager
 {
     [SerializeField] GameObject arrow;
     [SerializeField] Transform arrowPos;
@@ -39,10 +40,11 @@ public class ServerMyLeina : SubAI
     void Awake()
     {
         myAnimator = GetComponent<Animator>();
+        nav = GetComponent<NavMeshAgent>();
+        rigidbody = GetComponent<Rigidbody>();
     }
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
 
         vecTarget = transform.position;
         curDodgeCoolTime = dodgeCoolTime;

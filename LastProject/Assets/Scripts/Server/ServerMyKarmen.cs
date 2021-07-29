@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class ServerMyKarmen : SubAI
+public class ServerMyKarmen : ServerSubAIManager
 {
     [SerializeField] GameObject leftStaffEffect;
     [SerializeField] GameObject rightStaffEffect;
@@ -43,11 +44,12 @@ public class ServerMyKarmen : SubAI
     void Awake()
     {
         myAnimator = GetComponent<Animator>();
+        nav = GetComponent<NavMeshAgent>();
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
 
         vecTarget = transform.position;
         curDodgeCoolTime = dodgeCoolTime;

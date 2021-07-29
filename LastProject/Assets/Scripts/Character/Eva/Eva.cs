@@ -43,8 +43,6 @@ public class Eva : SubAI
     bool motionEndCheck;
     bool comboContinue;
     
-    float distanceWithPlayer;
-
     public static List<GameObject> targetEnemys = new List<GameObject>();
 
     Vector3 vecTarget;

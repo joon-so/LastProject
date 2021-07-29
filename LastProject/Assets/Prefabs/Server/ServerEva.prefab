@@ -11161,6 +11161,7 @@ GameObject:
   - component: {fileID: 47049595448451502}
   - component: {fileID: 8330996397814036486}
   - component: {fileID: 6917685977379946870}
+  - component: {fileID: 1770997135922982110}
   m_Layer: 0
   m_Name: ServerEva
   m_TagString: Untagged
@@ -11309,6 +11310,28 @@ MonoBehaviour:
   wSkillEffect: {fileID: 7530758066453383403, guid: e990ddc2a9e76f84faa78e31eb970a39, type: 3}
   wSkillShockEffect: {fileID: 3508642095436736753, guid: 7a413da35185f0f4798feb19aee6e927, type: 3}
   wSkillPos: {fileID: 2679458709588312067}
+--- !u!195 &1770997135922982110
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8983947479889205260}
+  m_Enabled: 0
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &9051508873188012586
 GameObject:
   m_ObjectHideFlags: 0

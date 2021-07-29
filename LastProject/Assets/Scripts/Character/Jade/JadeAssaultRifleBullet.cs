@@ -19,7 +19,7 @@ public class JadeAssaultRifleBullet : MonoBehaviour
     private RotateToMouseScript rotateToMouse;
     private GameObject target;
 
-    public float distance = 10.0f;
+    public float distance = 15.0f;
     void Start()
     {
         startPos = transform.position;

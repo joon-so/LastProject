@@ -19,6 +19,7 @@ public class LeinaArrow : MonoBehaviour
     private RotateToMouseScript rotateToMouse;
     private GameObject target;
 
+    public float distance =  20.0f;
     void Start()
     {
         startPos = transform.position;
@@ -73,7 +74,7 @@ public class LeinaArrow : MonoBehaviour
 
 
         // ¹üÀ§
-        if (Vector3.Distance(startPos, transform.position) > 80.0f)
+        if (Vector3.Distance(startPos, transform.position) > distance)
             Destroy(gameObject);
     }
 

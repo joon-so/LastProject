@@ -21,7 +21,8 @@ public class ServerOtherEva : MonoBehaviour
 
     void Update()
     {
-        AnimationControl();
+        if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].is_Main_Character == 1)
+            AnimationControl();
     }
 
     public void AnimationControl()

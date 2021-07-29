@@ -11,18 +11,18 @@ public class ServerLoginManager : MonoBehaviour
         public string ipAdress;
         public string playerID;
 
+        public short is_Main_Character;
+
         // Karmen : 1 Eva : 4
         public int selectMainCharacter;
         public int selectSubCharacter;
-
-        public bool isContainPlayerInfo;
+        public int mainCharacterBehavior;
+        public int subCharacterBehavior;
 
         public Vector3 mainCharacterPos;
         public Vector3 subCharacterPos;
         public Quaternion mainCharacterRot;
         public Quaternion subCharacterRot;
-        public int mainCharacterBehavior;
-        public int subCharacterBehavior;
     }
 
     public static ServerPlayer[] playerList = new ServerPlayer[4];

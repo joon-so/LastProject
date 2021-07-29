@@ -10,10 +10,10 @@ public class ServerMyPlayerManager : MonoBehaviour
     //private CameraController mainCameraControl;
     [SerializeField] GameObject clickEffect;
 
-    [SerializeField] GameObject KarmenObj;
-    [SerializeField] GameObject JadeObj;
-    [SerializeField] GameObject LeinaObj;
-    [SerializeField] GameObject EvaObj;
+    [SerializeField] GameObject serverKarmenObj;
+    [SerializeField] GameObject serverJadeObj;
+    [SerializeField] GameObject serverLeinaObj;
+    [SerializeField] GameObject serverEvaObj;
 
     public GameObject character1;
     public GameObject character2;
@@ -33,57 +33,65 @@ public class ServerMyPlayerManager : MonoBehaviour
 
         if (ServerLoginManager.playerList[0].selectMainCharacter == 1)
         {
-            character1 = KarmenObj;
-            KarmenObj.tag = "MainCharacter";
-            KarmenObj.SetActive(true);
+            serverKarmenObj.SetActive(true);
+            character1 = serverKarmenObj;
+            serverKarmenObj.tag = "MainCharacter";
         }
         else if (ServerLoginManager.playerList[0].selectMainCharacter == 2)
         {
-            character1 = JadeObj;
-            JadeObj.tag = "MainCharacter";
-            JadeObj.SetActive(true);
+            serverJadeObj.SetActive(true);
+            character1 = serverJadeObj;
+            serverJadeObj.tag = "MainCharacter";
         }
         else if (ServerLoginManager.playerList[0].selectMainCharacter == 3)
         {
-            character1 = LeinaObj;
-            LeinaObj.tag = "MainCharacter";
-            LeinaObj.SetActive(true);
+            serverLeinaObj.SetActive(true);
+            character1 = serverLeinaObj;
+            serverLeinaObj.tag = "MainCharacter";
         }
         else if (ServerLoginManager.playerList[0].selectMainCharacter == 4)
         {
-            character1 = EvaObj;
-            EvaObj.tag = "MainCharacter";
-            EvaObj.SetActive(true);
+            serverEvaObj.SetActive(true);
+            character1 = serverEvaObj;
+            serverEvaObj.tag = "MainCharacter";
         }
 
         if (ServerLoginManager.playerList[0].selectSubCharacter == 1)
         {
-            character2 = KarmenObj;
-            KarmenObj.tag = "SubCharacter";
-            KarmenObj.SetActive(true);
+            serverKarmenObj.SetActive(true);
+            character2 = serverKarmenObj;
+            serverKarmenObj.tag = "SubCharacter";
         }
         else if (ServerLoginManager.playerList[0].selectSubCharacter == 2)
         {
-            character2 = JadeObj;
-            JadeObj.tag = "SubCharacter";
-            JadeObj.SetActive(true);
+            serverJadeObj.SetActive(true);
+            character2 = serverJadeObj;
+            serverJadeObj.tag = "SubCharacter";
         }
         else if (ServerLoginManager.playerList[0].selectSubCharacter == 3)
         {
-            character2 = LeinaObj;
-            LeinaObj.tag = "SubCharacter";
-            LeinaObj.SetActive(true);
+            serverLeinaObj.SetActive(true);
+            character2 = serverLeinaObj;
+            serverLeinaObj.tag = "SubCharacter";
         }
         else if (ServerLoginManager.playerList[0].selectSubCharacter == 4)
         {
-            character2 = EvaObj;
-            EvaObj.tag = "SubCharacter";
-            EvaObj.SetActive(true);
+            serverEvaObj.SetActive(true);
+            character2 = serverEvaObj;
+            serverEvaObj.tag = "SubCharacter";
         }
+
         ID = ServerLoginManager.playerList[0].playerID;
-        StartCoroutine("CoSendPacket");
+        ServerLoginManager.playerList[0].is_Main_Character = 1;
+
+        character1.transform.position = ServerLoginManager.playerList[0].mainCharacterPos;
+        character1.transform.rotation = ServerLoginManager.playerList[0].mainCharacterRot;
+        character2.transform.position = ServerLoginManager.playerList[0].subCharacterPos;
+        character2.transform.rotation = ServerLoginManager.playerList[0].subCharacterRot;
 
         isTag = true;
+
+        StartCoroutine("CoSendPacket");
     }
 
     void Update()
@@ -117,18 +125,20 @@ public class ServerMyPlayerManager : MonoBehaviour
     public void ServerMainSubTag()
     {
         // main->sub
-        //if (isTag)
-        //{
-        //    character1.gameObject.tag = "SubCharacter";
-        //    character2.gameObject.tag = "MainCharacter";
-        //    isTag = false;
-        //}
-        //else
-        //{
-        //    character1.gameObject.tag = "MainCharacter";
-        //    character2.gameObject.tag = "SubCharacter";
-        //    isTag = true;
-        //}
+        if (isTag == true)
+        {
+            character1.gameObject.tag = "SubCharacter";
+            character2.gameObject.tag = "MainCharacter";
+            ServerLoginManager.playerList[0].is_Main_Character = 2;
+            isTag = false;
+        }
+        else if (isTag == false)
+        {
+            character1.gameObject.tag = "MainCharacter";
+            character2.gameObject.tag = "SubCharacter";
+            ServerLoginManager.playerList[0].is_Main_Character = 1;
+            isTag = true;
+        }
     }
 
     IEnumerator ActiveEffect()
@@ -150,6 +160,7 @@ public class ServerMyPlayerManager : MonoBehaviour
 
             if (character1.gameObject.tag == "MainCharacter")
             {
+                movePacket.is_Main_Ch = 1;
                 movePacket.mainPlayer_Behavior = ServerLoginManager.playerList[0].mainCharacterBehavior;
                 movePacket.mainPlayer_Pos_X = character1.gameObject.transform.position.x;
                 movePacket.mainPlayer_Pos_Z = character1.gameObject.transform.position.z;
@@ -159,20 +170,15 @@ public class ServerMyPlayerManager : MonoBehaviour
                 movePacket.mainPlayer_Mp = 0;
 
                 movePacket.subPlayer_Behavior = ServerLoginManager.playerList[0].subCharacterBehavior;
-                movePacket.subPlayer_Pos_X = 0;
-                movePacket.subPlayer_Pos_Z = 0;
-                movePacket.subPlayer_Rot_Y =0 ;
+                movePacket.subPlayer_Pos_X = character2.gameObject.transform.position.x;
+                movePacket.subPlayer_Pos_Z = character2.gameObject.transform.position.z;
+                movePacket.subPlayer_Rot_Y = character2.gameObject.transform.rotation.eulerAngles.y;
                 movePacket.subPlayer_Hp = 0;
                 movePacket.subPlayer_Mp = 0;
-
-                //Debug.Log(character1.gameObject.transform.position);
-
-                //movePacket.subPlayer_Pos_X = character1.gameObject.transform.position.x;
-                //movePacket.subPlayer_Pos_Z = character1.gameObject.transform.position.z;
-                //movePacket.subPlayer_Rot_Y = character1.gameObject.transform.rotation.y;
             }
             else if (character2.gameObject.tag == "MainCharacter")
             {
+                movePacket.is_Main_Ch = 2;
                 movePacket.mainPlayer_Behavior = ServerLoginManager.playerList[0].mainCharacterBehavior;
                 movePacket.mainPlayer_Pos_X = character2.gameObject.transform.position.x;
                 movePacket.mainPlayer_Pos_Z = character2.gameObject.transform.position.z;
@@ -182,17 +188,13 @@ public class ServerMyPlayerManager : MonoBehaviour
                 movePacket.mainPlayer_Mp = 0;
 
                 movePacket.subPlayer_Behavior = ServerLoginManager.playerList[0].subCharacterBehavior;
-                movePacket.subPlayer_Pos_X = 0;
-                movePacket.subPlayer_Pos_Z = 0;
-                movePacket.subPlayer_Rot_Y = 0;
+                movePacket.subPlayer_Pos_X = character1.gameObject.transform.position.x;
+                movePacket.subPlayer_Pos_Z = character1.gameObject.transform.position.z;
+                movePacket.subPlayer_Rot_Y = character1.gameObject.transform.rotation.eulerAngles.y;
+
                 movePacket.subPlayer_Hp = 0;
                 movePacket.subPlayer_Mp = 0;
-                //movePacket.subPlayer_Pos_X = character2.gameObject.transform.position.x;
-                //movePacket.subPlayer_Pos_Z = character2.gameObject.transform.position.z;
-                //movePacket.subPlayer_Rot_Y = character2.gameObject.transform.rotation.y;
             }
-
-            Debug.Log("Send Packet"+ movePacket.ID+ " " + movePacket.mainPlayer_Pos_X + " " + movePacket.mainPlayer_Pos_Z);
 
             NetworkManager.instance.Send(movePacket.Write());
         }

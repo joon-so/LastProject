@@ -7352,6 +7352,7 @@ GameObject:
   - component: {fileID: 8337776254084146085}
   - component: {fileID: 1365395996833785441}
   - component: {fileID: 8209367193543807463}
+  - component: {fileID: -4231184979892639640}
   m_Layer: 0
   m_Name: ServerJade
   m_TagString: Untagged
@@ -7409,7 +7410,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
@@ -7487,6 +7488,28 @@ MonoBehaviour:
   missileEffect: {fileID: 8337776253085991901}
   grenadePos: {fileID: 8337776252512746476}
   Grenade: {fileID: 6059190706233498653, guid: 623872e6aa0cd4b4ba7eb9ae090d5103, type: 3}
+--- !u!195 &-4231184979892639640
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8337776254084146084}
+  m_Enabled: 0
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &8337776254117771973
 GameObject:
   m_ObjectHideFlags: 0

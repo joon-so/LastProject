@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class ServerMyEva : SubAI
+public class ServerMyEva : ServerSubAIManager
 {
     [SerializeField] GameObject qSkill;
     [SerializeField] GameObject wSkillEffect;
@@ -37,10 +38,11 @@ public class ServerMyEva : SubAI
     void Awake()
     {
         myAnimator = GetComponent<Animator>();
+        nav = GetComponent<NavMeshAgent>();
+        rigidbody = GetComponent<Rigidbody>();
     }
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
 
         vecTarget = transform.position;
         curDodgeCoolTime = dodgeCoolTime;

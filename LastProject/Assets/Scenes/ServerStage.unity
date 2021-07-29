@@ -319,10 +319,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2b78e2040af6934da6a78f9d64fc9b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  KarmenObj: {fileID: 1573739840}
-  JadeObj: {fileID: 1212364792}
-  LeinaObj: {fileID: 86826354}
-  EvaObj: {fileID: 1153018695}
+  serverKarmenObj: {fileID: 1573739840}
+  serverJadeObj: {fileID: 1212364792}
+  serverLeinaObj: {fileID: 86826354}
+  serverEvaObj: {fileID: 1153018695}
   character1: {fileID: 0}
   character2: {fileID: 0}
   ID: 
@@ -918,6 +918,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8337776254084146074, guid: 678c78eb57f6bbb4ba69853bb4cdbca7, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8337776254084146084, guid: 678c78eb57f6bbb4ba69853bb4cdbca7, type: 3}
       propertyPath: m_Name
       value: ServerJade
@@ -1289,10 +1293,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2b78e2040af6934da6a78f9d64fc9b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  KarmenObj: {fileID: 1370427813}
-  JadeObj: {fileID: 2058128718}
-  LeinaObj: {fileID: 1077336489}
-  EvaObj: {fileID: 129663303}
+  serverKarmenObj: {fileID: 1370427813}
+  serverJadeObj: {fileID: 2058128718}
+  serverLeinaObj: {fileID: 1077336489}
+  serverEvaObj: {fileID: 129663303}
   character1: {fileID: 0}
   character2: {fileID: 0}
   ID: 
@@ -4583,10 +4587,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clickEffect: {fileID: 21015856}
-  KarmenObj: {fileID: 1498671575}
-  JadeObj: {fileID: 225935897}
-  LeinaObj: {fileID: 965385228}
-  EvaObj: {fileID: 1383270102}
+  serverKarmenObj: {fileID: 1498671575}
+  serverJadeObj: {fileID: 225935897}
+  serverLeinaObj: {fileID: 965385228}
+  serverEvaObj: {fileID: 1383270102}
   character1: {fileID: 0}
   character2: {fileID: 0}
   ID: 
@@ -6899,10 +6903,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2b78e2040af6934da6a78f9d64fc9b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  KarmenObj: {fileID: 1417858881}
-  JadeObj: {fileID: 834877963}
-  LeinaObj: {fileID: 1111551499}
-  EvaObj: {fileID: 1602851752}
+  serverKarmenObj: {fileID: 1417858881}
+  serverJadeObj: {fileID: 834877963}
+  serverLeinaObj: {fileID: 1111551499}
+  serverEvaObj: {fileID: 1602851752}
   character1: {fileID: 0}
   character2: {fileID: 0}
   ID: 
