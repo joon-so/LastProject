@@ -6,8 +6,9 @@ public class ServerMyPlayerManager : MonoBehaviour
 {
     public static ServerMyPlayerManager instance;
 
-   // [SerializeField] Camera mainCamera;
-    //private CameraController mainCameraControl;
+    [SerializeField] Camera mainCamera;
+    private ServerCameraController mainCameraControl;
+
     [SerializeField] GameObject clickEffect;
 
     [SerializeField] GameObject serverKarmenObj;
@@ -25,11 +26,12 @@ public class ServerMyPlayerManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
+
+        mainCameraControl = mainCamera.GetComponent<ServerCameraController>();
     }
 
     void Start()
     {
-        //mainCameraControl = mainCamera.GetComponent<CameraController>();
 
         if (ServerLoginManager.playerList[0].selectMainCharacter == 1)
         {
@@ -91,49 +93,53 @@ public class ServerMyPlayerManager : MonoBehaviour
 
         isTag = true;
 
+        mainCameraControl.focus = character1.transform;
+
         StartCoroutine("CoSendPacket");
     }
 
     void Update()
     {
-        //Zoom();
-        //Click();
+        Zoom();
+        Click();
         if (Input.GetKeyDown(KeyCode.F))
         {
             ServerMainSubTag();
         }
     }
-    //void Zoom()
-    //{
-    //    var scroll = Input.mouseScrollDelta;
-    //    mainCamera.fieldOfView = Mathf.Clamp(mainCamera.fieldOfView - scroll.y, 30f, 70f);
-    //}
+    void Zoom()
+    {
+        var scroll = Input.mouseScrollDelta;
+        mainCamera.fieldOfView = Mathf.Clamp(mainCamera.fieldOfView - scroll.y, 30f, 70f);
+    }
 
-    //void Click()
-    //{
-    //    if (Input.GetMouseButtonDown(1))
-    //    {
-    //        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-    //        RaycastHit hit;
-    //        Physics.Raycast(ray, out hit);
+    void Click()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            Physics.Raycast(ray, out hit);
 
-    //        clickEffect.transform.position = hit.point;
-    //        StartCoroutine(ActiveEffect());
-    //    }
-    //}
+            clickEffect.transform.position = hit.point;
+            StartCoroutine(ActiveEffect());
+        }
+    }
 
     public void ServerMainSubTag()
     {
         // main->sub
-        if (isTag == true)
+        if (isTag)
         {
+            mainCameraControl.focus = character2.transform;
             character1.gameObject.tag = "SubCharacter";
             character2.gameObject.tag = "MainCharacter";
             ServerLoginManager.playerList[0].is_Main_Character = 2;
             isTag = false;
         }
-        else if (isTag == false)
+        else
         {
+            mainCameraControl.focus = character1.transform;
             character1.gameObject.tag = "MainCharacter";
             character2.gameObject.tag = "SubCharacter";
             ServerLoginManager.playerList[0].is_Main_Character = 1;
