@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2464545044404209322}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -0.454}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 2464545044724677615}
   m_RootOrder: 0
@@ -4846,7 +4846,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2464545044724677615}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!199 &2464545044525760078
 ParticleSystemRenderer:
@@ -9588,7 +9588,7 @@ Transform:
   m_GameObject: {fileID: 2464545044695236463}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 2464545044724677615}
   m_RootOrder: 1
@@ -14426,11 +14426,10 @@ Transform:
   m_GameObject: {fileID: 2464545044724677614}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.099999994, y: 0.09999997, z: 0.09999997}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 2464545044404209323}
   - {fileID: 2464545044695236368}
-  - {fileID: 2464545045969474337}
   - {fileID: 2464545044525760076}
   m_Father: {fileID: 2464545046072781319}
   m_RootOrder: 0
@@ -19274,12 +19273,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2464545045969474336}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.51}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0.051000006, z: 0}
+  m_LocalScale: {x: 0.01, y: 0.009999997, z: 0.009999997}
   m_Children: []
-  m_Father: {fileID: 2464545044724677615}
-  m_RootOrder: 2
+  m_Father: {fileID: 2464545046072781319}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!96 &2464545045969474338
 TrailRenderer:
@@ -19399,8 +19398,9 @@ GameObject:
   - component: {fileID: 2464545046072781319}
   - component: {fileID: 2464545046072781318}
   - component: {fileID: 2464545046072781317}
+  - component: {fileID: 7498317218691863363}
   m_Layer: 0
-  m_Name: BossGroundLightingEffect
+  m_Name: BossGroundLightingArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19418,6 +19418,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2464545044724677615}
+  - {fileID: 2464545045969474337}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -24193,3 +24194,25 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &7498317218691863363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2464545046072781316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cbf6459b08466b448d6ae7fe8dc49b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  accuracy: 100
+  fireRate: 1
+  muzzlePrefab: {fileID: 6145928160732916297, guid: 5fa7f5233dc93094ba5436fc56c3fbb1, type: 3}
+  hitPrefab: {fileID: 1000011128802252, guid: 1d0b0aad313130f47bf72435d4d55ddf, type: 3}
+  trails:
+  - {fileID: 2464545045969474336}
+  - {fileID: 2464545044404209322}
+  arrowObj1: {fileID: 2464545044724677614}
+  arrowObj2: {fileID: 2464545044404209322}
+  arrowObj3: {fileID: 2464545044695236463}
