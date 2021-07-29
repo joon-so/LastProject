@@ -88,20 +88,11 @@ public class ServerOtherEva : MonoBehaviour
     }
     IEnumerator FireGun()
     {
-        qSkill.SetActive(true);
-
         preBehavior = 4;
 
+        qSkill.SetActive(true);
         otherAnimator.SetTrigger("QSkill");
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-        {
-            Vector3 nextVec = hit.point - transform.position;
-            nextVec.y = 0;
-            transform.LookAt(transform.position + nextVec);
-        }
-
+  
         yield return new WaitForSeconds(5.0f);
         qSkill.SetActive(false);
 
@@ -111,15 +102,6 @@ public class ServerOtherEva : MonoBehaviour
 
     IEnumerator ShockWave()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-        {
-            Vector3 nextVec = hit.point - transform.position;
-            nextVec.y = 0;
-            transform.LookAt(transform.position + nextVec);
-        }
-
         preBehavior = 5;
 
         otherAnimator.SetTrigger("WSkill");

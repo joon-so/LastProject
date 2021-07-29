@@ -48,12 +48,14 @@ public class ServerMyJade : ServerSubAIManager
 
     Vector3 vecTarget;
     Animator myAnimator;
+    ServerOtherJade vec;
 
     void Awake()
     {
         myAnimator = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
         rigidbody = GetComponent<Rigidbody>();
+        //vec = GetComponent<ServerOtherJade>();
     }
 
     void Start()
@@ -368,6 +370,8 @@ public class ServerMyJade : ServerSubAIManager
             Rigidbody rigidGrenade = instantGrenade.GetComponent<Rigidbody>();
             rigidGrenade.AddForce(nextVec, ForceMode.Impulse);
             rigidGrenade.AddTorque(Vector3.back * 10, ForceMode.Impulse);
+
+            //vec.vec = nextVec;
         }
 
         yield return new WaitForSeconds(0.3f);

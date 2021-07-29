@@ -86,6 +86,7 @@ public class ServerOtherLeina : MonoBehaviour
     }
     IEnumerator ChargingShot()
     {
+        preBehavior = 4;
         otherAnimator.SetTrigger("QSkill");
         // ย๗ยก
         yield return new WaitForSeconds(1.4f);
@@ -98,10 +99,12 @@ public class ServerOtherLeina : MonoBehaviour
         arrowRigid.velocity = posionArrowPos.forward;
         LeinaPosionArrow.speed = 40;
         yield return new WaitForSeconds(1.0f);
+        preBehavior = 0;
     }
 
     IEnumerator WideShot()
     {
+        preBehavior = 5;
         //SoundManager.instance.SFXPlay("Attack", attackClip);
 
         otherAnimator.SetBool("Run", false);
@@ -134,5 +137,6 @@ public class ServerOtherLeina : MonoBehaviour
         arrowRigid6.velocity = arrowPos.forward;
 
         yield return new WaitForSeconds(0.5f);
+        preBehavior = 0;
     }
 }

@@ -122,7 +122,7 @@ public class ServerMyPlayerManager : MonoBehaviour
             Physics.Raycast(ray, out hit);
 
             clickEffect.transform.position = hit.point;
-            StartCoroutine(ActiveEffect());
+            StartCoroutine(ActiveEffect()); 
         }
     }
 

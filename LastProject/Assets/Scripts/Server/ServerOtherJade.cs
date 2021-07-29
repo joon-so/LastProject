@@ -26,6 +26,8 @@ public class ServerOtherJade : MonoBehaviour
 
     public int isMainCharacter;
 
+    //public Vector3 vec;
+
     void Start()
     {
         otherAnimator = GetComponent<Animator>();
@@ -106,11 +108,13 @@ public class ServerOtherJade : MonoBehaviour
     }
     IEnumerator ShootMissile()
     {
+        preBehavior = 4;
         otherAnimator.SetTrigger("drawMissileLauncher");
         yield return new WaitForSeconds(0.5f);
         useAssaultRifle.SetActive(false);
         useMissileLauncher.SetActive(true);
 
+        otherAnimator.SetBool("Run", false);
         otherAnimator.SetBool("AimMissile", true);
         yield return new WaitForSeconds(0.5f);
         missileEffect.SetActive(true);
@@ -134,18 +138,19 @@ public class ServerOtherJade : MonoBehaviour
         useAssaultRifle.SetActive(true);
 
         yield return new WaitForSeconds(0.3f);
+        preBehavior = 0;
     }
     IEnumerator ShootGrenade()
     {
+        preBehavior = 5;
         otherAnimator.SetTrigger("shootGrenade");
 
         //SoundManager.instance.SFXPlay("Grenade", wSkillClip);
-
         GameObject instantGrenade = Instantiate(Grenade, grenadePos.position, grenadePos.rotation);
         Rigidbody rigidGrenade = instantGrenade.GetComponent<Rigidbody>();
         rigidGrenade.AddForce(transform.position, ForceMode.Impulse);
         rigidGrenade.AddTorque(Vector3.back * 10, ForceMode.Impulse);
-
         yield return new WaitForSeconds(0.3f);
+        preBehavior = 0;
     }
 }

@@ -101,6 +101,7 @@ public class ServerOtherKarmen : MonoBehaviour
     }
     IEnumerator BigAttack()
     {
+        preBehavior = 4;
         leftStaffEffect.SetActive(false);
         rightStaffEffect.SetActive(false);
 
@@ -117,9 +118,11 @@ public class ServerOtherKarmen : MonoBehaviour
         rightStaffEffect.SetActive(true);
 
         otherAnimator.SetBool("Run", false);
+        preBehavior = 0;
     }
     IEnumerator StraightAttack()
     {
+        preBehavior = 5;
         leftStaffEffect.SetActive(false);
         rightStaffEffect.SetActive(false);
 
@@ -135,5 +138,6 @@ public class ServerOtherKarmen : MonoBehaviour
         rightStaffEffect.SetActive(true);
 
         otherAnimator.SetBool("Run", false);
+        preBehavior = 0;
     }
 }
