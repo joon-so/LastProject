@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WSkill : MonoBehaviour
+public class ServerWSkill : MonoBehaviour
 {
     [SerializeField] GameObject obj1 = null;
     [SerializeField] GameObject obj2 = null;
@@ -12,7 +12,7 @@ public class WSkill : MonoBehaviour
 
     float curScale;
     float maxScale;
-    // Start is called before the first frame update
+
     void Start()
     {
         curScale = 0.1f;
@@ -20,10 +20,9 @@ public class WSkill : MonoBehaviour
         StartCoroutine(DestroyObject());
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //gameObject.transform.position = GameObject.Find("Eva").GetComponent<Eva>().wSkillPos.position;
+        gameObject.transform.position = GameObject.Find("ServerEva").GetComponent<Eva>().wSkillPos.position;
 
         if (curScale < maxScale)
         {

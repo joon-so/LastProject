@@ -14,7 +14,7 @@ public class ServerOtherPlayerManager : MonoBehaviour
     [SerializeField] GameObject character1;
     [SerializeField] GameObject character2;
 
-    public string ID = null;
+    public string ID;
 
     public int index;
 
@@ -31,50 +31,42 @@ public class ServerOtherPlayerManager : MonoBehaviour
         if (ServerLoginManager.playerList[index].selectMainCharacter == 1)
         {
             character1 = KarmenObj;
-            //KarmenObj.tag = "MainCharacter";
             KarmenObj.SetActive(true);
         }
         else if (ServerLoginManager.playerList[index].selectMainCharacter == 2)
         {
             character1 = JadeObj;
-            //JadeObj.tag = "MainCharacter";
             JadeObj.SetActive(true);
         }
         else if (ServerLoginManager.playerList[index].selectMainCharacter == 3)
         {
             character1 = LeinaObj;
-            //LeinaObj.tag = "MainCharacter";
             LeinaObj.SetActive(true);
         }
         else if (ServerLoginManager.playerList[index].selectMainCharacter == 4)
         {
             character1 = EvaObj;
-            //EvaObj.tag = "MainCharacter";
             EvaObj.SetActive(true);
         }
 
         if (ServerLoginManager.playerList[index].selectSubCharacter == 1)
         {
             character2 = KarmenObj;
-            //KarmenObj.tag = "SubCharacter";
             KarmenObj.SetActive(true);
         }
         else if (ServerLoginManager.playerList[index].selectSubCharacter == 2)
         {
             character2 = JadeObj;
-            //JadeObj.tag = "SubCharacter";
             JadeObj.SetActive(true);
         }
         else if (ServerLoginManager.playerList[index].selectSubCharacter == 3)
         {
             character2 = LeinaObj;
-            //LeinaObj.tag = "SubCharacter";
             LeinaObj.SetActive(true);
         }
         else if (ServerLoginManager.playerList[index].selectSubCharacter == 4)
         {
             character2 = EvaObj;
-            //EvaObj.tag = "SubCharacter";
             EvaObj.SetActive(true);
         }
     }

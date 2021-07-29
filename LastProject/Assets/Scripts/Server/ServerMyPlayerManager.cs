@@ -161,7 +161,7 @@ public class ServerMyPlayerManager : MonoBehaviour
                 movePacket.subPlayer_Behavior = ServerLoginManager.playerList[0].subCharacterBehavior;
                 movePacket.subPlayer_Pos_X = 0;
                 movePacket.subPlayer_Pos_Z = 0;
-                movePacket.subPlayer_Rot_Y = 0;
+                movePacket.subPlayer_Rot_Y =0 ;
                 movePacket.subPlayer_Hp = 0;
                 movePacket.subPlayer_Mp = 0;
 
@@ -176,7 +176,7 @@ public class ServerMyPlayerManager : MonoBehaviour
                 movePacket.mainPlayer_Behavior = ServerLoginManager.playerList[0].mainCharacterBehavior;
                 movePacket.mainPlayer_Pos_X = character2.gameObject.transform.position.x;
                 movePacket.mainPlayer_Pos_Z = character2.gameObject.transform.position.z;
-                movePacket.mainPlayer_Rot_Y = character1.gameObject.transform.rotation.eulerAngles.y;
+                movePacket.mainPlayer_Rot_Y = character2.gameObject.transform.rotation.eulerAngles.y;
 
                 movePacket.mainPlayer_Hp = 0;
                 movePacket.mainPlayer_Mp = 0;

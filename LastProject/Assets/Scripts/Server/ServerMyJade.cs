@@ -353,7 +353,6 @@ public class ServerMyJade : SubAI
             if (Vector3.Distance(nextVec, transform.position) > 10.0f)
                 nextVec = nextVec.normalized * 10.0f;
 
-            Debug.Log(nextVec);
             nextVec.y = 0;
             transform.LookAt(transform.position + nextVec);
 
