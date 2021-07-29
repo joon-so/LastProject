@@ -12,6 +12,8 @@ public class ServerOtherEva : MonoBehaviour
     private Animator otherAnimator;
     private int preBehavior;
 
+    public int isMainCharacter;
+
     void Start()
     {
         otherAnimator = GetComponent<Animator>();
@@ -21,7 +23,7 @@ public class ServerOtherEva : MonoBehaviour
 
     void Update()
     {
-        if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].is_Main_Character == 1)
+        if (isMainCharacter == 1)
             AnimationControl();
     }
 
@@ -30,6 +32,7 @@ public class ServerOtherEva : MonoBehaviour
         if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 0)
         {
             otherAnimator.SetBool("Run", false);
+            preBehavior = 0;
         }
         else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 1)
         {
@@ -87,7 +90,7 @@ public class ServerOtherEva : MonoBehaviour
     {
         qSkill.SetActive(true);
 
-        ServerLoginManager.playerList[0].mainCharacterBehavior = 4;
+        preBehavior = 4;
 
         otherAnimator.SetTrigger("QSkill");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -103,8 +106,7 @@ public class ServerOtherEva : MonoBehaviour
         qSkill.SetActive(false);
 
         otherAnimator.SetBool("Run", false);
-
-       // ServerLoginManager.playerList[0].mainCharacterBehavior = 0;
+        preBehavior = 0;
     }
 
     IEnumerator ShockWave()
@@ -118,7 +120,7 @@ public class ServerOtherEva : MonoBehaviour
             transform.LookAt(transform.position + nextVec);
         }
 
-        ServerLoginManager.playerList[0].mainCharacterBehavior = 5;
+        preBehavior = 5;
 
         otherAnimator.SetTrigger("WSkill");
         Instantiate(wSkillEffect, wSkillPos.position, wSkillPos.rotation);
@@ -149,5 +151,6 @@ public class ServerOtherEva : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
         otherAnimator.SetFloat("Speed", 1.0f);
+        preBehavior = 0;
     }
 }

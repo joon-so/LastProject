@@ -24,6 +24,8 @@ public class ServerOtherJade : MonoBehaviour
     private Animator otherAnimator;
     private int preBehavior;
 
+    public int isMainCharacter;
+
     void Start()
     {
         otherAnimator = GetComponent<Animator>();
@@ -33,7 +35,7 @@ public class ServerOtherJade : MonoBehaviour
 
     void Update()
     {
-        if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].is_Main_Character == 1)
+        if (isMainCharacter == 1)
             AnimationControl();
     }
 
@@ -42,6 +44,7 @@ public class ServerOtherJade : MonoBehaviour
         if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 0)
         {
             otherAnimator.SetBool("Run", false);
+            preBehavior = 0;
         }
         else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 1)
         {

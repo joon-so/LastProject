@@ -98,7 +98,7 @@ public class ServerMyPlayerManager : MonoBehaviour
     {
         //Zoom();
         //Click();
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             ServerMainSubTag();
         }
