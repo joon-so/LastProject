@@ -25,6 +25,9 @@ public class ServerOtherLeina : MonoBehaviour
     {
         if(isMainCharacter == 1)
             AnimationControl();
+
+        //Debug.Log("OtherLeina");
+        //Debug.Log(ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior);
     }
 
     public void AnimationControl()

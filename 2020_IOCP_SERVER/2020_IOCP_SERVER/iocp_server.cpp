@@ -42,11 +42,13 @@ struct OVER_EX {
 struct Player_Attribute {
     bool Set_Name = false;
     char ID[20] = "";
-    
+
+    short is_Main_CH = 0;
+
     //메인 캐릭터
     int Main_CH = 0;    //캐릭터 종류
-    int Main_HP = 0;
-    int Main_MP = 0;
+    short Main_HP = 0;
+    short Main_MP = 0;
     int Main_Behavior = 0;  //캐릭터 애니메이션
     float Main_X = 0;
     float Main_Z = 0;
@@ -54,8 +56,8 @@ struct Player_Attribute {
 
     //서브 캐릭터
     int Sub_CH = 0;    //캐릭터 종류
-    int Sub_HP = 0;
-    int Sub_MP = 0;
+    short Sub_HP = 0;
+    short Sub_MP = 0;
     int Sub_Behavior = 0;  //캐릭터 애니메이션
     float Sub_X = 0;
     float Sub_Z = 0;
@@ -229,36 +231,75 @@ void send_packet(int id, void* p)
     g_clients[id].c_lock.unlock();
 }
 
-
 void send_data(int id)
 {
     sc_player_posi p;
     p.size = sizeof(p);
     p.type = SC_PlayerPosi;
     strncpy_s(p.p1_ID, playerdata.player1.ID, sizeof(playerdata.player1.ID));
-    p.p1_behavior = playerdata.player1.Main_Behavior;
-    p.p1_pos_x = playerdata.player1.Main_X;
-    p.p1_pos_z = playerdata.player1.Main_Z;
-    p.p1_rot_y = playerdata.player1.Main_Rot_Y;
+    p.p1_is_main_ch = playerdata.player1.is_Main_CH;
+    p.p1_main_behavior = playerdata.player1.Main_Behavior;
+    p.p1_main_pos_x = playerdata.player1.Main_X;
+    p.p1_main_pos_z = playerdata.player1.Main_Z;
+    p.p1_main_rot_y = playerdata.player1.Main_Rot_Y;
+    p.p1_main_hp = playerdata.player1.Main_HP;
+    p.p1_main_mp = playerdata.player1.Main_MP;
+    p.p1_sub_behavior = playerdata.player1.Sub_Behavior;
+    p.p1_sub_pos_x = playerdata.player1.Sub_X;
+    p.p1_sub_pos_z = playerdata.player1.Sub_Z;
+    p.p1_sub_rot_y = playerdata.player1.Sub_Rot_Y;
+    p.p1_sub_hp = playerdata.player1.Sub_HP;
+    p.p1_sub_mp = playerdata.player1.Sub_MP;
 
     strncpy_s(p.p2_ID, playerdata.player2.ID, sizeof(playerdata.player2.ID));
-    p.p2_behavior = playerdata.player2.Main_Behavior;
-    p.p2_pos_x = playerdata.player2.Main_X;
-    p.p2_pos_z = playerdata.player2.Main_Z;
-    p.p2_rot_y = playerdata.player2.Main_Rot_Y;
+    p.p2_is_main_ch = playerdata.player2.is_Main_CH;
+    p.p2_main_behavior = playerdata.player2.Main_Behavior;
+    p.p2_main_pos_x = playerdata.player2.Main_X;
+    p.p2_main_pos_z = playerdata.player2.Main_Z;
+    p.p2_main_rot_y = playerdata.player2.Main_Rot_Y;
+    p.p2_main_hp = playerdata.player2.Main_HP;
+    p.p2_main_mp = playerdata.player2.Main_MP;
+    p.p2_sub_behavior = playerdata.player2.Sub_Behavior;
+    p.p2_sub_pos_x = playerdata.player2.Sub_X;
+    p.p2_sub_pos_z = playerdata.player2.Sub_Z;
+    p.p2_sub_rot_y = playerdata.player2.Sub_Rot_Y;
+    p.p2_sub_hp = playerdata.player2.Sub_HP;
+    p.p2_sub_mp = playerdata.player2.Sub_MP;
 
     strncpy_s(p.p3_ID, playerdata.player3.ID, sizeof(playerdata.player3.ID));
-    p.p3_behavior = playerdata.player3.Main_Behavior;
-    p.p3_pos_x = playerdata.player3.Main_X;
-    p.p3_pos_z = playerdata.player3.Main_Z;
-    p.p3_rot_y = playerdata.player3.Main_Rot_Y;
+    p.p3_is_main_ch = playerdata.player3.is_Main_CH;
+    p.p3_main_behavior = playerdata.player3.Main_Behavior;
+    p.p3_main_pos_x = playerdata.player3.Main_X;
+    p.p3_main_pos_z = playerdata.player3.Main_Z;
+    p.p3_main_rot_y = playerdata.player3.Main_Rot_Y;
+    p.p3_main_hp = playerdata.player3.Main_HP;
+    p.p3_main_mp = playerdata.player3.Main_MP;
+    p.p3_sub_behavior = playerdata.player3.Sub_Behavior;
+    p.p3_sub_pos_x = playerdata.player3.Sub_X;
+    p.p3_sub_pos_z = playerdata.player3.Sub_Z;
+    p.p3_sub_rot_y = playerdata.player3.Sub_Rot_Y;
+    p.p3_sub_hp = playerdata.player3.Sub_HP;
+    p.p3_sub_mp = playerdata.player3.Sub_MP;
 
     strncpy_s(p.p4_ID, playerdata.player4.ID, sizeof(playerdata.player4.ID));
-    p.p4_behavior = playerdata.player4.Main_Behavior;
-    p.p4_pos_x = playerdata.player4.Main_X;
-    p.p4_pos_z = playerdata.player4.Main_Z;
-    p.p4_rot_y = playerdata.player4.Main_Rot_Y;
+    p.p4_is_main_ch = playerdata.player4.is_Main_CH;
+    p.p4_main_behavior = playerdata.player4.Main_Behavior;
+    p.p4_main_pos_x = playerdata.player4.Main_X;
+    p.p4_main_pos_z = playerdata.player4.Main_Z;
+    p.p4_main_rot_y = playerdata.player4.Main_Rot_Y;
+    p.p4_main_hp = playerdata.player4.Main_HP;
+    p.p4_main_mp = playerdata.player4.Main_MP;
+    p.p4_sub_behavior = playerdata.player4.Sub_Behavior;
+    p.p4_sub_pos_x = playerdata.player4.Sub_X;
+    p.p4_sub_pos_z = playerdata.player4.Sub_Z;
+    p.p4_sub_rot_y = playerdata.player4.Sub_Rot_Y;
+    p.p4_sub_hp = playerdata.player4.Sub_HP;
+    p.p4_sub_mp = playerdata.player4.Sub_MP;
 
+    //cout << p.p1_ID << p.p1_pos_x << endl;
+    //cout << p.p2_ID << p.p2_pos_x << endl;
+    //cout << p.p3_ID << p.p3_pos_x << endl;
+    //cout << p.p4_ID << p.p4_pos_x << endl;
 
     for (int i = 0; i < MAX_USER; i++) {
         if (g_clients[i].in_use == true) {
@@ -270,10 +311,8 @@ void send_data(int id)
 //클라이언트 연결
 void add_new_client(SOCKET ns)
 {
-
     cout << "New Player Login" << endl;
 
-    playerdata.playerNum += 1;
     int i;
     id_lock.lock();
     for (i = 0; i < MAX_USER; ++i)
@@ -336,7 +375,6 @@ void disconnect_client(int id)
     g_clients[id].c_lock.unlock();
 }
 
-
 //패킷 처리 함수 
 void process_packet(int id)
 {
@@ -345,8 +383,9 @@ void process_packet(int id)
     switch (p_type) {
     case CS_LOGIN:
     {
+        playerdata.playerNum += 1;
         cs_Login* p = reinterpret_cast<cs_Login*>(g_clients[id].m_packet_start);
-        cout << "로그인 패킷 수신 ID:" << p->ID << "Main 케릭터: "<< p->main_charc << "Sub 케릭터: "<< p->sub_charc << endl;
+        cout << "로그인 패킷 수신 ID:" << p->ID << "Main 케릭터: " << p->main_charc << "Sub 케릭터: " << p->sub_charc << endl;
         if (playerdata.playerNum == 1 && playerdata.player1.Set_Name == false)
         {
             strncpy_s(playerdata.player1.ID, p->ID, sizeof(p->ID));
@@ -388,7 +427,7 @@ void process_packet(int id)
 
 
         //맥스 유저 사용자로 바꾸자 for 문 부하 줄이기
-        
+
         //기존 애한테 새로운 애가 왔다는걸 알려주고
         for (int i = 0; i < MAX_USER; i++) {
             if (g_clients[i].login_set == true) {
@@ -416,84 +455,145 @@ void process_packet(int id)
     }
     case CS_PlayerData: {
         cs_PlayerMove* p = reinterpret_cast<cs_PlayerMove*>(g_clients[id].m_packet_start);
-        //if (playerdata.playerNum == 1)
-        //{
-        //    if (strcmp(playerdata.player1_ID, p->ID) == 0) {
-        //        playerdata.player1_behavior = p->behavior_var;
-        //        playerdata.player1_x = p->player_pos_x;
-        //        playerdata.player1_z = p->player_pos_z;
-        //        playerdata.player1_rot_y = p->player_rot_y;
-        //    }
-        //}
-        //else if (playerdata.playerNum == 2)
-        //{
-        //    if (strcmp(playerdata.player1_ID, p->ID) == 0) {
-        //        playerdata.player1_behavior = p->behavior_var;
-        //        playerdata.player1_x = p->player_pos_x;
-        //        playerdata.player1_z = p->player_pos_z;
-        //        playerdata.player1_rot_y = p->player_rot_y;
-        //    }
-        //    else if (strcmp(playerdata.player2_ID, p->ID) == 0) {
-        //        playerdata.player2_behavior = p->behavior_var;
-        //        playerdata.player2_x = p->player_pos_x;
-        //        playerdata.player2_z = p->player_pos_z;
-        //        playerdata.player2_rot_y = p->player_rot_y;
-        //    }
-        //}
-        //else if (playerdata.playerNum == 3)
-        //{
-        //    if (strcmp(playerdata.player1_ID, p->ID) == 0) {
-        //        playerdata.player1_behavior = p->behavior_var;
-        //        playerdata.player1_x = p->player_pos_x;
-        //        playerdata.player1_z = p->player_pos_z;
-        //        playerdata.player1_rot_y = p->player_rot_y;
-        //    }
-        //    else if (strcmp(playerdata.player2_ID, p->ID) == 0) {
-        //        playerdata.player2_behavior = p->behavior_var;
-        //        playerdata.player2_x = p->player_pos_x;
-        //        playerdata.player2_z = p->player_pos_z;
-        //        playerdata.player2_rot_y = p->player_rot_y;
-        //    }
-        //    else if (strcmp(playerdata.player3_ID, p->ID) == 0) {
-        //        playerdata.player3_behavior = p->behavior_var;
-        //        playerdata.player3_x = p->player_pos_x;
-        //        playerdata.player3_z = p->player_pos_z;
-        //        playerdata.player3_rot_y = p->player_rot_y;
-        //    }
-        //}
-        //else if (playerdata.playerNum == 4)
-        //{
         //스위치 문으로 변경 가능한지 확인하기
+        //cout << p->ID << " " << p->player_pos_x << " " << p->player_pos_z << endl;
         if (strcmp(playerdata.player1.ID, p->ID) == 0) {
-            playerdata.player1.Main_Behavior = p->behavior_var;
-            playerdata.player1.Main_X = p->player_pos_x;
-            playerdata.player1.Main_Z = p->player_pos_z;
-            playerdata.player1.Main_Rot_Y = p->player_rot_y;
+            playerdata.player1.is_Main_CH = p->is_main_ch;
+            playerdata.player1.Main_Behavior = p->main_behavior_var;
+            playerdata.player1.Main_X = p->main_pos_x;
+            playerdata.player1.Main_Z = p->main_pos_z;
+            playerdata.player1.Main_Rot_Y = p->main_rot_y;
+            playerdata.player1.Main_HP = p->main_hp;
+            playerdata.player1.Main_MP = p->main_mp;
+            playerdata.player1.Sub_Behavior = p->sub_behavior_var;
+            playerdata.player1.Sub_X = p->sub_pos_x;
+            playerdata.player1.Sub_Z = p->sub_pos_z;
+            playerdata.player1.Sub_Rot_Y = p->sub_rot_y;
+            playerdata.player1.Sub_HP = p->sub_hp;
+            playerdata.player1.Sub_MP = p->sub_mp;
+
         }
         else if (strcmp(playerdata.player2.ID, p->ID) == 0) {
-            playerdata.player2.Main_Behavior = p->behavior_var;
-            playerdata.player2.Main_X = p->player_pos_x;
-            playerdata.player2.Main_Z = p->player_pos_z;
-            playerdata.player2.Main_Rot_Y = p->player_rot_y;
+            playerdata.player2.is_Main_CH = p->is_main_ch;
+            playerdata.player2.Main_Behavior = p->main_behavior_var;
+            playerdata.player2.Main_X = p->main_pos_x;
+            playerdata.player2.Main_Z = p->main_pos_z;
+            playerdata.player2.Main_Rot_Y = p->main_rot_y;
+            playerdata.player2.Main_HP = p->main_hp;
+            playerdata.player2.Main_MP = p->main_mp;
+            playerdata.player2.Sub_Behavior = p->sub_behavior_var;
+            playerdata.player2.Sub_X = p->sub_pos_x;
+            playerdata.player2.Sub_Z = p->sub_pos_z;
+            playerdata.player2.Sub_Rot_Y = p->sub_rot_y;
+            playerdata.player2.Sub_HP = p->sub_hp;
+            playerdata.player2.Sub_MP = p->sub_mp;
         }
         else if (strcmp(playerdata.player3.ID, p->ID) == 0) {
-            playerdata.player3.Main_Behavior = p->behavior_var;
-            playerdata.player3.Main_X = p->player_pos_x;
-            playerdata.player3.Main_Z = p->player_pos_z;
-            playerdata.player3.Main_Rot_Y = p->player_rot_y;
+            playerdata.player3.is_Main_CH = p->is_main_ch;
+            playerdata.player3.Main_Behavior = p->main_behavior_var;
+            playerdata.player3.Main_X = p->main_pos_x;
+            playerdata.player3.Main_Z = p->main_pos_z;
+            playerdata.player3.Main_Rot_Y = p->main_rot_y;
+            playerdata.player3.Main_HP = p->main_hp;
+            playerdata.player3.Main_MP = p->main_mp;
+            playerdata.player3.Sub_Behavior = p->sub_behavior_var;
+            playerdata.player3.Sub_X = p->sub_pos_x;
+            playerdata.player3.Sub_Z = p->sub_pos_z;
+            playerdata.player3.Sub_Rot_Y = p->sub_rot_y;
+            playerdata.player3.Sub_HP = p->sub_hp;
+            playerdata.player3.Sub_MP = p->sub_mp;
         }
         else if (strcmp(playerdata.player4.ID, p->ID) == 0) {
-            playerdata.player4.Main_Behavior = p->behavior_var;
-            playerdata.player4.Main_X = p->player_pos_x;
-            playerdata.player4.Main_Z = p->player_pos_z;
-            playerdata.player4.Main_Rot_Y = p->player_rot_y;
+            playerdata.player4.is_Main_CH = p->is_main_ch;
+            playerdata.player4.Main_Behavior = p->main_behavior_var;
+            playerdata.player4.Main_X = p->main_pos_x;
+            playerdata.player4.Main_Z = p->main_pos_z;
+            playerdata.player4.Main_Rot_Y = p->main_rot_y;
+            playerdata.player4.Main_HP = p->main_hp;
+            playerdata.player4.Main_MP = p->main_mp;
+            playerdata.player4.Sub_Behavior = p->sub_behavior_var;
+            playerdata.player4.Sub_X = p->sub_pos_x;
+            playerdata.player4.Sub_Z = p->sub_pos_z;
+            playerdata.player4.Sub_Rot_Y = p->sub_rot_y;
+            playerdata.player4.Sub_HP = p->sub_hp;
+            playerdata.player4.Sub_MP = p->sub_mp;
         }
 
         if (first_operate == false) {
             add_timer(1000, OP_SEND_MOVE, system_clock::now() + 10ms, 0);
             first_operate = true;
         }
+        break;
+    }
+    case CS_GameStart:
+    {
+        cs_GameStart* p = reinterpret_cast<cs_GameStart*>(g_clients[id].m_packet_start);
 
+        cs_GameStart gs;
+        gs.size = sizeof(gs);
+        gs.type = p->type;
+        gs.is_Start = true;
+
+        for (int i = 0; i < MAX_USER; i++) {
+            if (g_clients[i].in_use == true) {
+                send_packet(i, &gs);
+            }
+        }
+
+        //초기 좌표값 전송
+        sc_player_posi fp;
+        fp.size = sizeof(fp);
+        fp.type = SC_First_PlayerPosi;
+        strncpy_s(fp.p1_ID, playerdata.player1.ID, sizeof(playerdata.player1.ID));
+        fp.p1_main_behavior = 0;
+        fp.p1_main_pos_x = 6;
+        fp.p1_main_pos_z = 6;
+        fp.p1_main_rot_y = 0;
+        fp.p1_sub_behavior = 0;
+        fp.p1_sub_pos_x = 5;
+        fp.p1_sub_pos_z = 5;
+        fp.p1_sub_rot_y = 0;
+
+        strncpy_s(fp.p2_ID, playerdata.player2.ID, sizeof(playerdata.player2.ID));
+        fp.p2_main_behavior = 0;
+        fp.p2_main_pos_x = -6;
+        fp.p2_main_pos_z = 6;
+        fp.p2_main_rot_y = 0;
+        fp.p2_sub_behavior = 0;
+        fp.p2_sub_pos_x = -5;
+        fp.p2_sub_pos_z = 5;
+        fp.p2_sub_rot_y = 0;
+
+        strncpy_s(fp.p3_ID, playerdata.player3.ID, sizeof(playerdata.player3.ID));
+        fp.p3_main_behavior = 0;
+        fp.p3_main_pos_x = -6;
+        fp.p3_main_pos_z = -6;
+        fp.p3_main_rot_y = 0;
+        fp.p3_sub_behavior = 0;
+        fp.p3_sub_pos_x = -5;
+        fp.p3_sub_pos_z = -5;
+        fp.p3_sub_rot_y = 0;
+
+        strncpy_s(fp.p4_ID, playerdata.player4.ID, sizeof(playerdata.player4.ID));
+        fp.p4_main_behavior = 0;
+        fp.p4_main_pos_x = 6;
+        fp.p4_main_pos_z = -6;
+        fp.p4_main_rot_y = 0;
+        fp.p4_sub_behavior = 0;
+        fp.p4_sub_pos_x = 5;
+        fp.p4_sub_pos_z = -5;
+        fp.p4_sub_rot_y = 0;
+
+        for (int i = 0; i < MAX_USER; i++) {
+            if (g_clients[i].in_use == true) {
+                send_packet(i, &fp);
+            }
+        }
+
+        break;
+    }
+    case CS_Attack: {
+        cs_Attack* p = reinterpret_cast<cs_Attack*>(g_clients[id].m_packet_start);
         break;
     }
     default: cout << "Unknown Packet type [" << p_type << "] from Client [" << id << "]\n";
@@ -618,8 +718,6 @@ void worker_thread()
         }
     }
 }
-
-
 
 
 int main()

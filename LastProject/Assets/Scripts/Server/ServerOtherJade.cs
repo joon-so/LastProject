@@ -39,6 +39,10 @@ public class ServerOtherJade : MonoBehaviour
     {
         if (isMainCharacter == 1)
             AnimationControl();
+
+
+        //Debug.Log("OtherJade");
+        //Debug.Log(ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior);
     }
 
     public void AnimationControl()

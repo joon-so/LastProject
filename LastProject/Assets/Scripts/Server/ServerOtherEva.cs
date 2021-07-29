@@ -25,6 +25,9 @@ public class ServerOtherEva : MonoBehaviour
     {
         if (isMainCharacter == 1)
             AnimationControl();
+
+        //Debug.Log("OtherEva");
+        //Debug.Log(ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior);
     }
 
     public void AnimationControl()

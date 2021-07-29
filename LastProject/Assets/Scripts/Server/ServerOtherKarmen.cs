@@ -29,6 +29,9 @@ public class ServerOtherKarmen : MonoBehaviour
     {
         if (isMainCharacter == 1)
             AnimationControl();
+
+        //Debug.Log("OtherKarmen");
+        //Debug.Log(ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior);
     }
 
     public void AnimationControl()
