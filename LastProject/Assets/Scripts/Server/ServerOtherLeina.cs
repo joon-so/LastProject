@@ -38,18 +38,12 @@ public class ServerOtherLeina : MonoBehaviour
         else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 2)
         {
             if (preBehavior != 2)
-            {
-                otherAnimator.SetTrigger("Dodge");
-                preBehavior = 2;
-            }
+                StartCoroutine(DodgeDelay());
         }
         else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 3)
         {
             if (preBehavior != 3)
-            {
                 StartCoroutine(ShootArrow());
-                preBehavior = 3;
-            }
         }
         else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 4)
         {
@@ -69,13 +63,22 @@ public class ServerOtherLeina : MonoBehaviour
         }
     }
 
+    IEnumerator DodgeDelay()
+    {
+        preBehavior = 2;
+        otherAnimator.SetTrigger("Dodge");
+        yield return new WaitForSeconds(1.0f);
+        preBehavior = 0;
+    }
     IEnumerator ShootArrow()
     {
+        preBehavior = 3; 
         otherAnimator.SetTrigger("Attack");
         GameObject instantArrow = Instantiate(arrow, arrowPos.position, arrowPos.rotation);
         Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
         arrowRigid.velocity = arrowPos.forward;
-        yield return null;
+        yield return new WaitForSeconds(0.5f);
+        preBehavior = 0;
     }
     IEnumerator ChargingShot()
     {

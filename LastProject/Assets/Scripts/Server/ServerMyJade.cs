@@ -23,7 +23,7 @@ public class ServerMyJade : SubAI
 
     public float moveSpeed = 5.0f;
     public float dodgeCoolTime = 7.0f;
-    public float fireDelay = 0.5f;
+    public float fireDelay = 0.8f;
     public float subFireDelay = 1.5f;
     public float followDistance = 5.0f;
     public float grenadeDistance = 10.0f;
@@ -174,12 +174,12 @@ public class ServerMyJade : SubAI
     {
         if (Input.GetMouseButtonDown(0))
         {
-            canMove = false;
-            canDodge = false;
-            canSkill = false;
-
             if (curFireDelay > fireDelay)
             {
+                canMove = false;
+                canDodge = false;
+                canSkill = false;
+
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -203,6 +203,8 @@ public class ServerMyJade : SubAI
                 StartCoroutine(AttackDelay());
             }
         }
+        if (Input.GetMouseButtonUp(0))
+            ServerLoginManager.playerList[0].mainCharacterBehavior = 0;
     }
     void CoolTime()
     {
@@ -263,10 +265,11 @@ public class ServerMyJade : SubAI
 
     IEnumerator AttackDelay()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.3f);
         canMove = true;
         canDodge = true;
         canSkill = true;
+        ServerLoginManager.playerList[0].mainCharacterBehavior = 0;
     }
 
     IEnumerator DodgeDelay()
@@ -275,6 +278,7 @@ public class ServerMyJade : SubAI
         canAttack = true;
         canMove = true;
         canSkill = true;
+        ServerLoginManager.playerList[0].mainCharacterBehavior = 0;
     }
 
     IEnumerator DrawAssaultRifle()

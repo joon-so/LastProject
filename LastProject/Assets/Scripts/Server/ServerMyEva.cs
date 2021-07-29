@@ -12,7 +12,7 @@ public class ServerMyEva : SubAI
     public float moveSpeed = 5.0f;
     public float dodgeCoolTime = 5.0f;
     public float followDistance = 5.0f;
-    public float attackDelay = 1.0f;
+    public float attackDelay = 1.1f;
 
     public static float qSkillCoolTime = 10.0f;
     public static float wSkillCoolTime = 5.0f;
@@ -202,6 +202,8 @@ public class ServerMyEva : SubAI
                 StartCoroutine(AttackDelay());
             }
         }
+        if (Input.GetMouseButtonUp(0))
+            ServerLoginManager.playerList[0].mainCharacterBehavior = 0;
     }
 
     void CoolTime()
@@ -267,14 +269,16 @@ public class ServerMyEva : SubAI
         canAttack = true;
         canMove = true;
         canSkill = true;
+        ServerLoginManager.playerList[0].mainCharacterBehavior = 0;
     }
 
     IEnumerator AttackDelay()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.1f);
         canMove = true;
         canDodge = true;
         canSkill = true;
+        ServerLoginManager.playerList[0].mainCharacterBehavior = 0;
     }
 
     IEnumerator StartMotion()

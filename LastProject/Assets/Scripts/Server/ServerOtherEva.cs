@@ -38,18 +38,12 @@ public class ServerOtherEva : MonoBehaviour
         else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 2)
         {
             if (preBehavior != 2)
-            {
-                otherAnimator.SetTrigger("Dodge");
-                preBehavior = 2;
-            }
+                StartCoroutine(DodgeDelay());
         }
         else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 3)
         {
             if (preBehavior != 3)
-            {
-                otherAnimator.SetTrigger("Attack");
-                preBehavior = 3;
-            }
+                StartCoroutine(AttackDelay());
         }
         else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 4)
         {
@@ -72,8 +66,22 @@ public class ServerOtherEva : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         otherAnimator.SetTrigger("StartMotion");
+        preBehavior = 0;
     }
-
+    IEnumerator DodgeDelay()
+    {
+        preBehavior = 2; 
+        otherAnimator.SetTrigger("Dodge");
+        yield return new WaitForSeconds(1.0f);
+        preBehavior = 0;
+    }
+    IEnumerator AttackDelay()
+    {
+        preBehavior = 3;
+        otherAnimator.SetTrigger("Attack"); 
+        yield return new WaitForSeconds(1.0f);
+        preBehavior = 0;
+    }
     IEnumerator FireGun()
     {
         qSkill.SetActive(true);

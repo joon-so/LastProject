@@ -12,7 +12,7 @@ public class ServerMyLeina : SubAI
 
     public float moveSpeed = 5.0f;
     public float dodgeCoolTime = 7.0f;
-    public float fireDelay = 1.0f;
+    public float fireDelay = 1.1f;
     public float subFireDelay = 1.5f;
     public float followDistance = 5.0f;
 
@@ -194,13 +194,12 @@ public class ServerMyLeina : SubAI
     {
         if (Input.GetMouseButtonDown(0))
         {
-            canMove = false;
-            canDodge = false;
-            canSkill = false;
-
-
             if (curFireDelay > fireDelay)
             {
+                canMove = false;
+                canDodge = false;
+                canSkill = false;
+
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -224,6 +223,8 @@ public class ServerMyLeina : SubAI
                 StartCoroutine(AttackDelay());
             }
         }
+        if (Input.GetMouseButtonUp(0))
+            ServerLoginManager.playerList[0].mainCharacterBehavior = 0;
     }
 
     void CoolTime()
@@ -290,6 +291,7 @@ public class ServerMyLeina : SubAI
         canMove = true;
         canDodge = true;
         canSkill = true;
+        ServerLoginManager.playerList[0].mainCharacterBehavior = 0;
     }
 
     IEnumerator DodgeDelay()
@@ -298,6 +300,7 @@ public class ServerMyLeina : SubAI
         canAttack = true;
         canMove = true;
         canSkill = true;
+        ServerLoginManager.playerList[0].mainCharacterBehavior = 0;
     }
 
     IEnumerator ChargingShot()

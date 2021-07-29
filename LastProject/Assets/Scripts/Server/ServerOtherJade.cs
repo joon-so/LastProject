@@ -50,18 +50,12 @@ public class ServerOtherJade : MonoBehaviour
         else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 2)
         {
             if (preBehavior != 2)
-            {
-                otherAnimator.SetTrigger("Dodge");
-                preBehavior = 2;
-            }
+                StartCoroutine(DodgeDelay());
         }
         else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 3)
         {
             if (preBehavior != 3)
-            {
                 StartCoroutine(ShootAssaultRifle());
-                preBehavior = 3;
-            }
         }
         else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 4)
         {
@@ -89,16 +83,23 @@ public class ServerOtherJade : MonoBehaviour
         backAssaultRifle.SetActive(false);
         useAssaultRifle.SetActive(true);
     }
-
+    IEnumerator DodgeDelay()
+    {
+        preBehavior = 2;
+        otherAnimator.SetTrigger("Dodge");
+        yield return new WaitForSeconds(1.0f);
+        preBehavior = 0;
+    }
     IEnumerator ShootAssaultRifle()
     {
+        preBehavior = 3;
         otherAnimator.SetTrigger("shootAssaultRifle");
         GameObject instantBullet = Instantiate(assaultRifleBullet, assaultRifleBulletPos.position, assaultRifleBulletPos.rotation);
         Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
         bulletRigid.velocity = assaultRifleBulletPos.forward;
-        yield return null;
+        yield return new WaitForSeconds(0.3f);
+        preBehavior = 0;
     }
-
     IEnumerator ShootMissile()
     {
         otherAnimator.SetTrigger("drawMissileLauncher");

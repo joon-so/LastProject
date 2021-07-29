@@ -16,7 +16,7 @@ public class ServerMyKarmen : SubAI
     public float moveSpeed = 5.0f;
     public float dodgeCoolTime = 5.0f;
     public float followDistance = 5.0f;
-    public float attackDelay = 1.0f;
+    public float attackDelay = 0.5f;
 
     public static float qSkillCoolTime = 5.0f;
     public static float wSkillCoolTime = 5.0f;
@@ -47,14 +47,6 @@ public class ServerMyKarmen : SubAI
 
     void Start()
     {
-        //if (gameObject.transform.tag == "MainCharacter")
-        //{
-        //    tagCharacter = ServerIngamePlayerManager.instance.character2;
-        //}
-        //else if (gameObject.transform.tag == "SubCharacter")
-        //{
-        //    tagCharacter = ServerIngamePlayerManager.instance.character1;
-        //}
         rigidbody = GetComponent<Rigidbody>();
 
         vecTarget = transform.position;
@@ -210,6 +202,8 @@ public class ServerMyKarmen : SubAI
                 StartCoroutine(AttackDelay());
             }
         }
+        if (Input.GetMouseButtonUp(0))
+            ServerLoginManager.playerList[0].mainCharacterBehavior = 0;
     }
     void CoolTime()
     {
@@ -283,10 +277,11 @@ public class ServerMyKarmen : SubAI
     }
     IEnumerator AttackDelay()
     {
-        yield return new WaitForSeconds(0.8f);
+        yield return new WaitForSeconds(0.6f);
         canMove = true;
         canDodge = true;
         canSkill = true;
+        ServerLoginManager.playerList[0].mainCharacterBehavior = 0; // Idle
     }
     IEnumerator DodgeDelay()
     {

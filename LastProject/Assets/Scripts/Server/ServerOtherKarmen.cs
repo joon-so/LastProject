@@ -45,19 +45,13 @@ public class ServerOtherKarmen : MonoBehaviour
         else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 2)
         {
             if (preBehavior != 2)
-            {
-                otherAnimator.SetTrigger("Dodge");
-                preBehavior = 2;
-            }
+                StartCoroutine(DodgeDelay());
         }
         // Attack
         else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 3)
         {
             if (preBehavior != 3)
-            {
-                otherAnimator.SetTrigger("Attack");
-                preBehavior = 3;
-            }
+                StartCoroutine(AttackDelay());
         }
         // QSkill
         else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 4)
@@ -78,6 +72,21 @@ public class ServerOtherKarmen : MonoBehaviour
             }
         }
     }
+
+    IEnumerator AttackDelay()
+    {
+        preBehavior = 3;
+        otherAnimator.SetTrigger("Attack");
+        yield return new WaitForSeconds(0.6f);
+        preBehavior = 0;
+    }
+    IEnumerator DodgeDelay()
+    {
+        preBehavior = 2;
+        otherAnimator.SetTrigger("Dodge");
+        yield return new WaitForSeconds(1.0f);
+        preBehavior = 0;
+    }
     IEnumerator StartMotion()
     {
         yield return new WaitForSeconds(0.5f);
@@ -86,7 +95,6 @@ public class ServerOtherKarmen : MonoBehaviour
         leftStaffEffect.SetActive(true);
         rightStaffEffect.SetActive(true);
     }
-
     IEnumerator BigAttack()
     {
         leftStaffEffect.SetActive(false);
@@ -106,7 +114,6 @@ public class ServerOtherKarmen : MonoBehaviour
 
         otherAnimator.SetBool("Run", false);
     }
-
     IEnumerator StraightAttack()
     {
         leftStaffEffect.SetActive(false);
