@@ -13,15 +13,21 @@ public class ServerOtherKarmen : MonoBehaviour
     [SerializeField] GameObject wLeftEffect = null;
     [SerializeField] GameObject wRightEffect = null;
 
-    private Animator otherAnimator;
-    private int preBehavior;
+    [SerializeField] GameObject parentObject;
 
     public int isMainCharacter;
 
+    private Animator otherAnimator;
+    
+    private int preBehavior;
+    private int index;
+
+    
     void Start()
     {
         otherAnimator = GetComponent<Animator>();
         preBehavior = 0;
+        index = parentObject.GetComponent<ServerOtherPlayerManager>().index;
         StartCoroutine(StartMotion());
     }
 
@@ -30,38 +36,39 @@ public class ServerOtherKarmen : MonoBehaviour
         if (isMainCharacter == 1)
             AnimationControl();
 
-        //Debug.Log("OtherKarmen");
-        //Debug.Log(ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior);
+        Debug.Log("A" + index);
     }
+
+    public int getIndex() { return index; }
 
     public void AnimationControl()
     {
         // Idle
-        if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 0)
+        if (ServerLoginManager.playerList[index].mainCharacterBehavior == 0)
         {
             otherAnimator.SetBool("Run", false);
             preBehavior = 0;
         }
         // Run
-        else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 1)
+        else if (ServerLoginManager.playerList[index].mainCharacterBehavior == 1)
         {
             otherAnimator.SetBool("Run", true);
             preBehavior = 1;
         }
         // Dodge
-        else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 2)
+        else if (ServerLoginManager.playerList[index].mainCharacterBehavior == 2)
         {
             if (preBehavior != 2)
                 StartCoroutine(DodgeDelay());
         }
         // Attack
-        else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 3)
+        else if (ServerLoginManager.playerList[index].mainCharacterBehavior == 3)
         {
             if (preBehavior != 3)
                 StartCoroutine(AttackDelay());
         }
         // QSkill
-        else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 4)
+        else if (ServerLoginManager.playerList[index].mainCharacterBehavior == 4)
         {
             if (preBehavior != 4)
             {
@@ -70,7 +77,7 @@ public class ServerOtherKarmen : MonoBehaviour
             }
         }
         // WSkill
-        else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 5)
+        else if (ServerLoginManager.playerList[index].mainCharacterBehavior == 5)
         {
             if (preBehavior != 5)
             {
@@ -111,7 +118,10 @@ public class ServerOtherKarmen : MonoBehaviour
         otherAnimator.SetTrigger("QSkill");
         otherAnimator.SetFloat("Speed", 0.2f);
         yield return new WaitForSeconds(0.5f);
+        //GameObject go = Instantiate(qSkill, qSkillPos.position, qSkillPos.rotation);
+        //go.GetComponent<ServerOtherKarmenQSkill>().transform.position = qSkillPos.position;
         Instantiate(qSkill, qSkillPos.position, qSkillPos.rotation);
+
         otherAnimator.SetFloat("Speed", 0.0f);
         yield return new WaitForSeconds(1.0f);
         otherAnimator.SetFloat("Speed", 1.0f);

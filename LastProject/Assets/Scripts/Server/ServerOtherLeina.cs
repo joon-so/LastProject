@@ -10,14 +10,19 @@ public class ServerOtherLeina : MonoBehaviour
     [SerializeField] GameObject posionArrow;
     [SerializeField] Transform posionArrowPos;
 
-    private Animator otherAnimator;
-    private int preBehavior;
+    [SerializeField] GameObject parentObject;
 
     public int isMainCharacter;
+
+    private Animator otherAnimator;
+
+    private int preBehavior;
+    private int index;
 
     void Start()
     {
         otherAnimator = GetComponent<Animator>();
+        index = parentObject.GetComponent<ServerOtherPlayerManager>().index;
         preBehavior = 0;
     }
 
@@ -25,34 +30,31 @@ public class ServerOtherLeina : MonoBehaviour
     {
         if(isMainCharacter == 1)
             AnimationControl();
-
-        //Debug.Log("OtherLeina");
-        //Debug.Log(ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior);
     }
 
     public void AnimationControl()
     {
-        if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 0)
+        if (ServerLoginManager.playerList[index].mainCharacterBehavior == 0)
         {
             otherAnimator.SetBool("Run", false);
             preBehavior = 0;
         }
-        else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 1)
+        else if (ServerLoginManager.playerList[index].mainCharacterBehavior == 1)
         {
             otherAnimator.SetBool("Run", true);
             preBehavior = 1;
         }
-        else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 2)
+        else if (ServerLoginManager.playerList[index].mainCharacterBehavior == 2)
         {
             if (preBehavior != 2)
                 StartCoroutine(DodgeDelay());
         }
-        else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 3)
+        else if (ServerLoginManager.playerList[index].mainCharacterBehavior == 3)
         {
             if (preBehavior != 3)
                 StartCoroutine(ShootArrow());
         }
-        else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 4)
+        else if (ServerLoginManager.playerList[index].mainCharacterBehavior == 4)
         {
             if (preBehavior != 4)
             {
@@ -60,7 +62,7 @@ public class ServerOtherLeina : MonoBehaviour
                 preBehavior = 4;
             }
         }
-        else if (ServerLoginManager.playerList[ServerOtherPlayerManager.instance.index].mainCharacterBehavior == 5)
+        else if (ServerLoginManager.playerList[index].mainCharacterBehavior == 5)
         {
             if (preBehavior != 5)
             {

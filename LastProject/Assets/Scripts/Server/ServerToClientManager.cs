@@ -116,13 +116,6 @@ public class ServerToClientManager : MonoBehaviour
                 ServerLoginManager.playerList[i].subCharacterRot.eulerAngles = new Vector3(0, packet.p4_sub_rot_y, 0);
             }
         }
-
-        Debug.Log("------ServerToClient------");
-        Debug.Log(ServerLoginManager.playerList[0].mainCharacterBehavior);
-        Debug.Log(ServerLoginManager.playerList[1].mainCharacterBehavior);
-        Debug.Log(ServerLoginManager.playerList[2].mainCharacterBehavior);
-        Debug.Log(ServerLoginManager.playerList[3].mainCharacterBehavior);
-        Debug.Log("--------------------------");
     }
 
     public void sc_playerFirstPosi_DO(sc_First_PlayerPosi packet)
