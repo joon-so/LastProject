@@ -30,6 +30,8 @@ public class ServerOtherLeina : MonoBehaviour
     {
         if(isMainCharacter == 1)
             AnimationControl();
+        else if (isMainCharacter == 2)
+            otherAnimator.SetBool("Run", false);
     }
 
     public void AnimationControl()
@@ -57,18 +59,12 @@ public class ServerOtherLeina : MonoBehaviour
         else if (ServerLoginManager.playerList[index].mainCharacterBehavior == 4)
         {
             if (preBehavior != 4)
-            {
                 StartCoroutine(ChargingShot());
-                preBehavior = 4;
-            }
         }
         else if (ServerLoginManager.playerList[index].mainCharacterBehavior == 5)
         {
             if (preBehavior != 5)
-            {
                 StartCoroutine(WideShot());
-                preBehavior = 5;
-            }
         }
     }
 

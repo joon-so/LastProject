@@ -303,12 +303,13 @@ public class ServerMyKarmen : ServerSubAIManager
         myAnimator.SetTrigger("QSkill");
         myAnimator.SetFloat("Speed", 0.2f);
         yield return new WaitForSeconds(0.5f);
-        Instantiate(qSkill, qSkillPos.position, qSkillPos.rotation);
+        qSkill.SetActive(true);
+        //Instantiate(qSkill, qSkillPos.position, qSkillPos.rotation);
         myAnimator.SetFloat("Speed", 0.0f);
         yield return new WaitForSeconds(1.0f);
         myAnimator.SetFloat("Speed", 1.0f);
         yield return new WaitForSeconds(1.0f);
-
+        qSkill.SetActive(false);
         leftStaffEffect.SetActive(true);
         rightStaffEffect.SetActive(true);
 

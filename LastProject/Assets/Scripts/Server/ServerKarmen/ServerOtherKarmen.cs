@@ -21,7 +21,6 @@ public class ServerOtherKarmen : MonoBehaviour
     
     private int preBehavior;
     private int index;
-
     
     void Start()
     {
@@ -35,8 +34,8 @@ public class ServerOtherKarmen : MonoBehaviour
     {
         if (isMainCharacter == 1)
             AnimationControl();
-
-        Debug.Log("A" + index);
+        else if (isMainCharacter == 2)
+            otherAnimator.SetBool("Run", false);
     }
 
     public int getIndex() { return index; }
@@ -71,19 +70,13 @@ public class ServerOtherKarmen : MonoBehaviour
         else if (ServerLoginManager.playerList[index].mainCharacterBehavior == 4)
         {
             if (preBehavior != 4)
-            {
                 StartCoroutine(BigAttack());
-                preBehavior = 4;
-            }
         }
         // WSkill
         else if (ServerLoginManager.playerList[index].mainCharacterBehavior == 5)
         {
             if (preBehavior != 5)
-            {
                 StartCoroutine(StraightAttack());
-                preBehavior = 5;
-            }
         }
     }
 
@@ -118,20 +111,17 @@ public class ServerOtherKarmen : MonoBehaviour
         otherAnimator.SetTrigger("QSkill");
         otherAnimator.SetFloat("Speed", 0.2f);
         yield return new WaitForSeconds(0.5f);
-        //GameObject go = Instantiate(qSkill, qSkillPos.position, qSkillPos.rotation);
-        //go.GetComponent<ServerOtherKarmenQSkill>().transform.position = qSkillPos.position;
-        Instantiate(qSkill, qSkillPos.position, qSkillPos.rotation);
-
+        qSkill.SetActive(true);
         otherAnimator.SetFloat("Speed", 0.0f);
         yield return new WaitForSeconds(1.0f);
         otherAnimator.SetFloat("Speed", 1.0f);
         yield return new WaitForSeconds(1.0f);
-
+        preBehavior = 0;
+        qSkill.SetActive(false);
         leftStaffEffect.SetActive(true);
         rightStaffEffect.SetActive(true);
 
         otherAnimator.SetBool("Run", false);
-        preBehavior = 0;
     }
     IEnumerator StraightAttack()
     {

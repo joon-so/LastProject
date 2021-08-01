@@ -339,11 +339,12 @@ public class ServerMyEva : ServerSubAIManager
         ServerLoginManager.playerList[0].mainCharacterBehavior = 5;
 
         myAnimator.SetTrigger("WSkill");
-        Instantiate(wSkillEffect, wSkillPos.position, wSkillPos.rotation);
+        wSkillEffect.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         myAnimator.SetFloat("Speed", 0.0f);
         yield return new WaitForSeconds(0.5f);
         myAnimator.SetFloat("Speed", 1.0f);
+        wSkillEffect.SetActive(false);
 
 
         yield return new WaitForSeconds(0.3f);

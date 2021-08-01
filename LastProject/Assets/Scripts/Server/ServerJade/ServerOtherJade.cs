@@ -30,8 +30,6 @@ public class ServerOtherJade : MonoBehaviour
     private int preBehavior;
     private int index;
 
-    //public Vector3 vec;
-
     void Start()
     {
         otherAnimator = GetComponent<Animator>();
@@ -44,6 +42,8 @@ public class ServerOtherJade : MonoBehaviour
     {
         if (isMainCharacter == 1)
             AnimationControl();
+        else if (isMainCharacter == 2)
+            otherAnimator.SetBool("Run", false);
     }
 
     public void AnimationControl()
@@ -71,18 +71,12 @@ public class ServerOtherJade : MonoBehaviour
         else if (ServerLoginManager.playerList[index].mainCharacterBehavior == 4)
         {
             if (preBehavior != 4)
-            {
                 StartCoroutine(ShootMissile());
-                preBehavior = 4;
-            }
         }
         else if (ServerLoginManager.playerList[index].mainCharacterBehavior == 5)
         {
             if (preBehavior != 5)
-            {
                 StartCoroutine(ShootGrenade());
-                preBehavior = 5;
-            }
         }
     }
 

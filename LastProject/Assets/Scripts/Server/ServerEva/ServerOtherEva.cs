@@ -21,8 +21,8 @@ public class ServerOtherEva : MonoBehaviour
     void Start()
     {
         otherAnimator = GetComponent<Animator>();
-        index = parentObject.GetComponent<ServerOtherPlayerManager>().index;
         preBehavior = 0;
+        index = parentObject.GetComponent<ServerOtherPlayerManager>().index;
         StartCoroutine(StartMotion());
     }
 
@@ -30,6 +30,8 @@ public class ServerOtherEva : MonoBehaviour
     {
         if (isMainCharacter == 1)
             AnimationControl();
+        else if (isMainCharacter == 2)
+            otherAnimator.SetBool("Run", false);
     }
 
     public void AnimationControl()
@@ -59,18 +61,12 @@ public class ServerOtherEva : MonoBehaviour
         else if (ServerLoginManager.playerList[index].mainCharacterBehavior == 4)
         {
             if (preBehavior != 4)
-            {
                 StartCoroutine(FireGun());
-                preBehavior = 4;
-            }
         }
         else if (ServerLoginManager.playerList[index].mainCharacterBehavior == 5)
         {
             if (preBehavior != 5)
-            {
                 StartCoroutine(ShockWave());
-                preBehavior = 5;
-            }
         }
     }
     IEnumerator StartMotion()
@@ -112,13 +108,15 @@ public class ServerOtherEva : MonoBehaviour
         preBehavior = 5;
 
         otherAnimator.SetTrigger("WSkill");
-        Instantiate(wSkillEffect, wSkillPos.position, wSkillPos.rotation);
+        wSkillEffect.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         otherAnimator.SetFloat("Speed", 0.0f);
         yield return new WaitForSeconds(0.5f);
         otherAnimator.SetFloat("Speed", 1.0f);
 
         yield return new WaitForSeconds(0.3f);
+        wSkillEffect.SetActive(false);
+
         // »ý¼º
         wSkillShockEffect.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
         Instantiate(wSkillShockEffect, transform.position + transform.forward * 1.5f, transform.rotation);

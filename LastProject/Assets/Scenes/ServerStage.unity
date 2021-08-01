@@ -1191,7 +1191,7 @@ PrefabInstance:
     - target: {fileID: 6917685977379946870, guid: 2f1ccf3e7e06a064f8054b912982d828, type: 3}
       propertyPath: wSkillEffect
       value: 
-      objectReference: {fileID: 1186704568076440110, guid: 9939b4c116cbe744b814b07614d6c6dc, type: 3}
+      objectReference: {fileID: 360708695}
     - target: {fileID: 8330996397814036486, guid: 2f1ccf3e7e06a064f8054b912982d828, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1254,6 +1254,11 @@ GameObject:
 --- !u!4 &360708694 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8983947479889205261, guid: 2f1ccf3e7e06a064f8054b912982d828, type: 3}
+  m_PrefabInstance: {fileID: 360708692}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &360708695 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 206203419915522905, guid: 2f1ccf3e7e06a064f8054b912982d828, type: 3}
   m_PrefabInstance: {fileID: 360708692}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &362242267
@@ -1951,7 +1956,7 @@ PrefabInstance:
     - target: {fileID: 4611524230467621552, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
       propertyPath: qSkill
       value: 
-      objectReference: {fileID: 8426777838863968483, guid: 6d379ede5cebc0e45bd7d74fd2bd6f4b, type: 3}
+      objectReference: {fileID: 546549433}
     - target: {fileID: 4611524230467621552, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -2002,7 +2007,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5297813344913426101, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
       propertyPath: m_Name
-      value: Server3Karmen
+      value: ServerKarmen
+      objectReference: {fileID: 0}
+    - target: {fileID: 8220680802948175905, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
+      propertyPath: m_Constraints
+      value: 126
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
@@ -2014,6 +2023,11 @@ GameObject:
 --- !u!4 &546549432 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5297813344913426091, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
+  m_PrefabInstance: {fileID: 546549430}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &546549433 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6585666894294099056, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
   m_PrefabInstance: {fileID: 546549430}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &568861034
@@ -2968,7 +2982,7 @@ PrefabInstance:
     - target: {fileID: 4611524230467621552, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
       propertyPath: qSkill
       value: 
-      objectReference: {fileID: 8426777838863968483, guid: 6d379ede5cebc0e45bd7d74fd2bd6f4b, type: 3}
+      objectReference: {fileID: 788332136}
     - target: {fileID: 4611524230467621552, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -3021,6 +3035,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ServerKarmen
       objectReference: {fileID: 0}
+    - target: {fileID: 8220680802948175905, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
+      propertyPath: m_Constraints
+      value: 126
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
 --- !u!1 &788332134 stripped
@@ -3031,6 +3049,11 @@ GameObject:
 --- !u!4 &788332135 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5297813344913426091, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
+  m_PrefabInstance: {fileID: 788332133}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &788332136 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6585666894294099056, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
   m_PrefabInstance: {fileID: 788332133}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &804393412
@@ -3352,7 +3375,7 @@ PrefabInstance:
     - target: {fileID: 6917685977379946870, guid: 2f1ccf3e7e06a064f8054b912982d828, type: 3}
       propertyPath: wSkillEffect
       value: 
-      objectReference: {fileID: 1186704568076440110, guid: 9939b4c116cbe744b814b07614d6c6dc, type: 3}
+      objectReference: {fileID: 847967878}
     - target: {fileID: 8330996397814036486, guid: 2f1ccf3e7e06a064f8054b912982d828, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -3417,6 +3440,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8983947479889205261, guid: 2f1ccf3e7e06a064f8054b912982d828, type: 3}
   m_PrefabInstance: {fileID: 847967875}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &847967878 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 206203419915522905, guid: 2f1ccf3e7e06a064f8054b912982d828, type: 3}
+  m_PrefabInstance: {fileID: 847967875}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &860011211
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3431,7 +3459,7 @@ PrefabInstance:
     - target: {fileID: 6917685977379946870, guid: 2f1ccf3e7e06a064f8054b912982d828, type: 3}
       propertyPath: wSkillEffect
       value: 
-      objectReference: {fileID: 1186704568076440110, guid: 9939b4c116cbe744b814b07614d6c6dc, type: 3}
+      objectReference: {fileID: 860011214}
     - target: {fileID: 8983947479889205260, guid: 2f1ccf3e7e06a064f8054b912982d828, type: 3}
       propertyPath: m_Name
       value: ServerEva
@@ -3490,6 +3518,11 @@ GameObject:
 --- !u!4 &860011213 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8983947479889205261, guid: 2f1ccf3e7e06a064f8054b912982d828, type: 3}
+  m_PrefabInstance: {fileID: 860011211}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &860011214 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 206203419915522905, guid: 2f1ccf3e7e06a064f8054b912982d828, type: 3}
   m_PrefabInstance: {fileID: 860011211}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &872303026
@@ -6438,7 +6471,7 @@ PrefabInstance:
     - target: {fileID: 4611524230467621552, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
       propertyPath: qSkill
       value: 
-      objectReference: {fileID: 8426777838863968483, guid: 6d379ede5cebc0e45bd7d74fd2bd6f4b, type: 3}
+      objectReference: {fileID: 1418239756}
     - target: {fileID: 4611524230467621552, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -6489,7 +6522,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5297813344913426101, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
       propertyPath: m_Name
-      value: Server2Karmen
+      value: ServerKarmen
+      objectReference: {fileID: 0}
+    - target: {fileID: 8220680802948175905, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
+      propertyPath: m_Constraints
+      value: 126
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
@@ -6501,6 +6538,11 @@ GameObject:
 --- !u!4 &1418239755 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5297813344913426091, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
+  m_PrefabInstance: {fileID: 1418239753}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1418239756 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6585666894294099056, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
   m_PrefabInstance: {fileID: 1418239753}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1450636832
@@ -8489,7 +8531,7 @@ PrefabInstance:
     - target: {fileID: 4611524230467621552, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
       propertyPath: qSkill
       value: 
-      objectReference: {fileID: 8426777838863968483, guid: 6d379ede5cebc0e45bd7d74fd2bd6f4b, type: 3}
+      objectReference: {fileID: 1878525912}
     - target: {fileID: 5297813344913426091, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -8538,6 +8580,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: ServerKarmen
       objectReference: {fileID: 0}
+    - target: {fileID: 5297813344913426101, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6585666894294099056, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8220680802948175905, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
+      propertyPath: m_Constraints
+      value: 126
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
 --- !u!1 &1878525910 stripped
@@ -8548,6 +8602,11 @@ GameObject:
 --- !u!4 &1878525911 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5297813344913426091, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
+  m_PrefabInstance: {fileID: 1878525909}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1878525912 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6585666894294099056, guid: c36b15cee08e1714da49a18780cb28a7, type: 3}
   m_PrefabInstance: {fileID: 1878525909}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1889714851
@@ -9226,7 +9285,7 @@ PrefabInstance:
     - target: {fileID: 6917685977379946870, guid: 2f1ccf3e7e06a064f8054b912982d828, type: 3}
       propertyPath: wSkillEffect
       value: 
-      objectReference: {fileID: 1186704568076440110, guid: 9939b4c116cbe744b814b07614d6c6dc, type: 3}
+      objectReference: {fileID: 1972117726}
     - target: {fileID: 8330996397814036486, guid: 2f1ccf3e7e06a064f8054b912982d828, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -9289,6 +9348,11 @@ GameObject:
 --- !u!4 &1972117725 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8983947479889205261, guid: 2f1ccf3e7e06a064f8054b912982d828, type: 3}
+  m_PrefabInstance: {fileID: 1972117723}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1972117726 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 206203419915522905, guid: 2f1ccf3e7e06a064f8054b912982d828, type: 3}
   m_PrefabInstance: {fileID: 1972117723}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1974880626
