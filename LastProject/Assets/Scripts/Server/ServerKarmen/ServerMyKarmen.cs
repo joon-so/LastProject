@@ -14,6 +14,10 @@ public class ServerMyKarmen : ServerSubAIManager
     [SerializeField] GameObject wLeftEffect = null;
     [SerializeField] GameObject wRightEffect = null;
 
+    [SerializeField] CapsuleCollider leftStaff;
+    [SerializeField] CapsuleCollider rightStaff;
+    [SerializeField] GameObject leftfoot;
+
     public float moveSpeed = 5.0f;
     public float dodgeCoolTime = 5.0f;
     public float followDistance = 5.0f;
@@ -40,12 +44,14 @@ public class ServerMyKarmen : ServerSubAIManager
 
     Vector3 vecTarget;
     Animator myAnimator;
+    ServerCollisionManager collisionManager;
 
     void Awake()
     {
         myAnimator = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
         rigidbody = GetComponent<Rigidbody>();
+        collisionManager = GameObject.Find("ServerIngameManager").GetComponent<ServerCollisionManager>();
     }
 
     void Start()
@@ -197,6 +203,8 @@ public class ServerMyKarmen : ServerSubAIManager
 
                 vecTarget = transform.position;
                 myAnimator.SetTrigger("Attack");
+                leftStaff.enabled = true;
+                rightStaff.enabled = true;
                 ServerLoginManager.playerList[0].mainCharacterBehavior = 3; // Attack
 
                 curAttackDelay = 0;
@@ -283,6 +291,8 @@ public class ServerMyKarmen : ServerSubAIManager
         canMove = true;
         canDodge = true;
         canSkill = true;
+        leftStaff.enabled = false;
+        rightStaff.enabled = false;
         ServerLoginManager.playerList[0].mainCharacterBehavior = 0; // Idle
     }
     IEnumerator DodgeDelay()
@@ -334,10 +344,13 @@ public class ServerMyKarmen : ServerSubAIManager
         myAnimator.SetTrigger("WSkill");
         wLeftEffect.SetActive(true);
         wRightEffect.SetActive(true);
-        yield return new WaitForSeconds(2.8f);
+        yield return new WaitForSeconds(2.0f);
+        leftfoot.SetActive(true);
+        yield return new WaitForSeconds(0.8f);
 
         wLeftEffect.SetActive(false);
         wRightEffect.SetActive(false);
+        leftfoot.SetActive(false);
 
         leftStaffEffect.SetActive(true);
         rightStaffEffect.SetActive(true);
@@ -352,4 +365,55 @@ public class ServerMyKarmen : ServerSubAIManager
         canDodge = true;
         canSkill = true;
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (gameObject.CompareTag("MainCharacter"))
+        {
+            if (collision.gameObject.CompareTag("KarmenAttack"))
+                collisionManager.KarmenBasicAttack();
+            if (collision.gameObject.CompareTag("KarmenQSkill"))
+                collisionManager.KarmenQSkillAttack();
+            if (collision.gameObject.CompareTag("KarmenWSkill"))
+                collisionManager.KarmenWSkillAttack();
+            if (collision.gameObject.CompareTag("JadeAttack"))
+                collisionManager.JadeBasicAttack();
+            if (collision.gameObject.CompareTag("JadeQSkill"))
+                collisionManager.JadeQSkillAttack();
+            if (collision.gameObject.CompareTag("JadeWSkill"))
+                collisionManager.JadeWSkillAttack();
+            if (collision.gameObject.CompareTag("LeinaAttack"))
+                collisionManager.LeinaBasicAttack();
+            if (collision.gameObject.CompareTag("LeinaQSkill"))
+                collisionManager.LeinaQSkillAttack();
+            if (collision.gameObject.CompareTag("LeinaWSkill"))
+                collisionManager.LeinaWSkillAttack();
+            if (collision.gameObject.CompareTag("EvaAttack"))
+                collisionManager.EvaBasicAttack();
+            if (collision.gameObject.CompareTag("EvaWSkill"))
+                collisionManager.EvaWSkillAttack();
+        }
+    }
+
+    //private void OnParticleCollision(GameObject other)
+    //{
+    //    if (other.gameObject.tag == "EvaQSkill")
+    //        collisionManager.EvaQSkillAttack();
+    //}
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (gameObject.CompareTag("MainCharacter"))
+    //    {
+    //        if (other.gameObject.CompareTag("KarmenAttack"))
+    //            collisionManager.KarmenBasicAttack();
+    //        if (other.gameObject.CompareTag("KarmenQSkill"))
+    //            collisionManager.KarmenQSkillAttack();
+    //        if (other.gameObject.CompareTag("KarmenWSkill"))
+    //            collisionManager.KarmenWSkillAttack();
+    //        if (other.gameObject.CompareTag("EvaAttack"))
+    //            collisionManager.EvaBasicAttack();
+    //        if (other.gameObject.CompareTag("EvaWSkill"))
+    //            collisionManager.EvaWSkillAttack();
+    //    }
+    //}
 }

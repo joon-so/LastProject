@@ -8,7 +8,6 @@ public class ServerEvaWSkill : MonoBehaviour
     [SerializeField] GameObject obj2;
     [SerializeField] GameObject obj3;
     [SerializeField] GameObject obj4;
-    [SerializeField] GameObject obj5;
 
     float curScale;
     float maxScale;
@@ -31,10 +30,10 @@ public class ServerEvaWSkill : MonoBehaviour
                 obj2.transform.localScale = new Vector3(curScale, curScale, curScale);
                 obj3.transform.localScale = new Vector3(curScale, curScale, curScale);
                 obj4.transform.localScale = new Vector3(curScale, curScale, curScale);
-                obj5.transform.localScale = new Vector3(curScale, curScale, curScale);
             }
         }
     }
+
     void OnDisable()
     {
         curScale = 0.1f;

@@ -57,7 +57,8 @@ Transform:
   m_LocalRotation: {x: 2.2365468e-32, y: -0, z: -1.2246469e-16, w: 1}
   m_LocalPosition: {x: -0.028012991, y: -0.06182393, z: 0.10184102}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 8382568724963829273}
   m_Father: {fileID: 8074064805839365264}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12013,6 +12014,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2553559260762118752}
+  - component: {fileID: 2723327378453900920}
+  - component: {fileID: 3865715034455320585}
   - component: {fileID: 2430479865351037804}
   - component: {fileID: 2514948358599061238}
   - component: {fileID: 2432314019535762790}
@@ -12041,6 +12044,36 @@ Transform:
   m_Father: {fileID: 9114048630880253711}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &2723327378453900920
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2556362051329181794}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.2
+  m_Height: 2
+  m_Direction: 0
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &3865715034455320585
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2556362051329181794}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!199 &2430479865351037804
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -37418,6 +37451,7 @@ GameObject:
   - component: {fileID: 3448045574668700694}
   - component: {fileID: 3449076655229188554}
   - component: {fileID: 8021923631075058853}
+  - component: {fileID: 6579914836817882161}
   m_Layer: 0
   m_Name: StaffEffect
   m_TagString: KarmenAttack
@@ -42297,12 +42331,28 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3250311783072531596}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 1
-  m_Height: 3
+  m_IsTrigger: 0
+  m_Enabled: 0
+  m_Radius: 0.5
+  m_Height: 5
   m_Direction: 0
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: -0.5, y: 0, z: 0}
+--- !u!54 &6579914836817882161
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3250311783072531596}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &3305557377661788673
 GameObject:
   m_ObjectHideFlags: 0
@@ -52348,6 +52398,7 @@ GameObject:
   - component: {fileID: 3652996570361852986}
   - component: {fileID: 3652996570361852987}
   - component: {fileID: 7016992976238613926}
+  - component: {fileID: 7099361282975511093}
   m_Layer: 0
   m_Name: StaffEffect
   m_TagString: KarmenAttack
@@ -57227,12 +57278,28 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3652996570361852967}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 1
-  m_Height: 3
+  m_IsTrigger: 0
+  m_Enabled: 0
+  m_Radius: 0.5
+  m_Height: 5
   m_Direction: 0
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: -0.5, y: 0, z: 0}
+--- !u!54 &7099361282975511093
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3652996570361852967}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &3652996570707769194
 GameObject:
   m_ObjectHideFlags: 0
@@ -57242,6 +57309,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3652996570707769193}
+  - component: {fileID: 7043884825664867843}
+  - component: {fileID: 1793057859280647417}
   - component: {fileID: 3652996570707769196}
   - component: {fileID: 3652996570707769197}
   - component: {fileID: 3652996570707769198}
@@ -57270,6 +57339,36 @@ Transform:
   m_Father: {fileID: 6541399832104980748}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &7043884825664867843
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3652996570707769194}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.2
+  m_Height: 2
+  m_Direction: 0
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &1793057859280647417
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3652996570707769194}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!199 &3652996570707769196
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -83611,7 +83710,7 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
@@ -83639,6 +83738,9 @@ MonoBehaviour:
   qSkillPos: {fileID: 3652996570243556483}
   wLeftEffect: {fileID: 3652996570707769194}
   wRightEffect: {fileID: 2556362051329181794}
+  leftStaff: {fileID: 7016992976238613926}
+  rightStaff: {fileID: 8021923631075058853}
+  leftfoot: {fileID: 5533512422103121299}
   moveSpeed: 5
   dodgeCoolTime: 5
   followDistance: 5
@@ -83657,6 +83759,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftStaffEffect: {fileID: 3652996570361852967}
   rightStaffEffect: {fileID: 3250311783072531596}
+  leftStaff: {fileID: 7016992976238613926}
+  rightStaff: {fileID: 8021923631075058853}
   qSkill: {fileID: 6585666894294099056}
   qSkillPos: {fileID: 3652996570243556483}
   wLeftEffect: {fileID: 3652996570707769194}
@@ -83961,6 +84065,68 @@ Transform:
   m_Father: {fileID: 3082004965604095048}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5533512422103121299
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8382568724963829273}
+  - component: {fileID: 2165265678891647352}
+  - component: {fileID: 3583572850391720899}
+  m_Layer: 0
+  m_Name: WSkillLeft
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8382568724963829273
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5533512422103121299}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7790494039806996482}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &2165265678891647352
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5533512422103121299}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.2
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &3583572850391720899
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5533512422103121299}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &5548813179891906367
 GameObject:
   m_ObjectHideFlags: 0
@@ -88188,6 +88354,14 @@ PrefabInstance:
       propertyPath: otherPlayer
       value: 
       objectReference: {fileID: 5297813344913426101}
+    - target: {fileID: 6587240979526638961, guid: 2b454c05cc0928644a86ed1d07916ea0, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6737571183651493042, guid: 2b454c05cc0928644a86ed1d07916ea0, type: 3}
+      propertyPath: m_Constraints
+      value: 126
+      objectReference: {fileID: 0}
     - target: {fileID: 8426777838863968483, guid: 2b454c05cc0928644a86ed1d07916ea0, type: 3}
       propertyPath: m_Name
       value: ServerKarmenQSkillEffect

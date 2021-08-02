@@ -7,6 +7,9 @@ public class ServerOtherKarmen : MonoBehaviour
     [SerializeField] GameObject leftStaffEffect;
     [SerializeField] GameObject rightStaffEffect;
 
+    [SerializeField] CapsuleCollider leftStaff;
+    [SerializeField] CapsuleCollider rightStaff;
+
     [SerializeField] GameObject qSkill;
     public Transform qSkillPos;
 
@@ -84,7 +87,11 @@ public class ServerOtherKarmen : MonoBehaviour
     {
         preBehavior = 3;
         otherAnimator.SetTrigger("Attack");
+        leftStaff.enabled = true;
+        rightStaff.enabled = true;
         yield return new WaitForSeconds(0.6f);
+        leftStaff.enabled = false;
+        rightStaff.enabled = false;
         preBehavior = 0;
     }
     IEnumerator DodgeDelay()

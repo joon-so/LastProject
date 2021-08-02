@@ -595,6 +595,8 @@ void process_packet(int id)
     }
     case CS_Attack: {
         cs_Attack* p = reinterpret_cast<cs_Attack*>(g_clients[id].m_packet_start);
+        cout << "Attack Packet ¼ö½Å" << endl;
+        cout << p->target_id << " " << p->damage << endl;
         break;
     }
     case CS_InGame:

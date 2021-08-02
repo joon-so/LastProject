@@ -49,6 +49,7 @@ public class ServerMyJade : ServerSubAIManager
     Vector3 vecTarget;
     Animator myAnimator;
     ServerOtherJade vec;
+    ServerCollisionManager collisionManager;
 
     void Awake()
     {
@@ -56,6 +57,7 @@ public class ServerMyJade : ServerSubAIManager
         nav = GetComponent<NavMeshAgent>();
         rigidbody = GetComponent<Rigidbody>();
         //vec = GetComponent<ServerOtherJade>();
+        collisionManager = GameObject.Find("ServerIngameManager").GetComponent<ServerCollisionManager>();
     }
 
     void Start()
@@ -82,7 +84,7 @@ public class ServerMyJade : ServerSubAIManager
     void Update()
     {
         curFireDelay += Time.deltaTime;
-        if (gameObject.transform.tag == "MainCharacter")
+        if (gameObject.transform.CompareTag("MainCharacter"))
         {
             if (canMove)
                 Move();
@@ -98,7 +100,7 @@ public class ServerMyJade : ServerSubAIManager
             Stop();
             CoolTime();
         }
-        else if (gameObject.transform.tag == "SubCharacter")
+        else if (gameObject.transform.CompareTag("SubCharacter"))
         {
 
         }
@@ -380,4 +382,56 @@ public class ServerMyJade : ServerSubAIManager
         canDodge = true;
         canSkill = true;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (gameObject.CompareTag("MainCharacter"))
+        {
+            if (collision.gameObject.CompareTag("KarmenAttack"))
+                collisionManager.KarmenBasicAttack();
+            if (collision.gameObject.CompareTag("KarmenQSkill"))
+                collisionManager.KarmenQSkillAttack();
+            if (collision.gameObject.CompareTag("KarmenWSkill"))
+                collisionManager.KarmenWSkillAttack();
+            if (collision.gameObject.CompareTag("JadeAttack"))
+                collisionManager.JadeBasicAttack();
+            if (collision.gameObject.CompareTag("JadeQSkill"))
+                collisionManager.JadeQSkillAttack();
+            if (collision.gameObject.CompareTag("JadeWSkill"))
+                collisionManager.JadeWSkillAttack();
+            if (collision.gameObject.CompareTag("LeinaAttack"))
+                collisionManager.LeinaBasicAttack();
+            if (collision.gameObject.CompareTag("LeinaQSkill"))
+                collisionManager.LeinaQSkillAttack();
+            if (collision.gameObject.CompareTag("LeinaWSkill"))
+                collisionManager.LeinaWSkillAttack();
+            if (collision.gameObject.CompareTag("EvaAttack"))
+                collisionManager.EvaBasicAttack();
+            if (collision.gameObject.CompareTag("EvaWSkill"))
+                collisionManager.EvaWSkillAttack();
+        }
+    }
+
+    //private void OnParticleCollision(GameObject other)
+    //{
+    //    if (other.gameObject.tag == "EvaQSkill")
+    //        collisionManager.EvaQSkillAttack();
+    //}
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (gameObject.CompareTag("MainCharacter"))
+    //    {
+    //        if (other.gameObject.CompareTag("KarmenAttack"))
+    //            collisionManager.KarmenBasicAttack();
+    //        if (other.gameObject.CompareTag("KarmenQSkill"))
+    //            collisionManager.KarmenQSkillAttack();
+    //        if (other.gameObject.CompareTag("KarmenWSkill"))
+    //            collisionManager.KarmenWSkillAttack();
+    //        if (other.gameObject.CompareTag("EvaAttack"))
+    //            collisionManager.EvaBasicAttack();
+    //        if (other.gameObject.CompareTag("EvaWSkill"))
+    //            collisionManager.EvaWSkillAttack();
+    //    }
+    //}
 }

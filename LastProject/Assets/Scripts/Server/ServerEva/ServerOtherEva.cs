@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ServerOtherEva : MonoBehaviour
 {
+    [SerializeField] BoxCollider basicAttack1Collider;
+    [SerializeField] BoxCollider basicAttack2Collider;
+
     [SerializeField] GameObject qSkill;
     [SerializeField] GameObject wSkillEffect;
     [SerializeField] GameObject wSkillShockEffect;
@@ -38,13 +41,11 @@ public class ServerOtherEva : MonoBehaviour
     {
         if (ServerLoginManager.playerList[index].mainCharacterBehavior == 0)
         {
-            Debug.Log("OtherEvaIdle");
             otherAnimator.SetBool("Run", false);
             preBehavior = 0;
         }
         else if (ServerLoginManager.playerList[index].mainCharacterBehavior == 1)
         {
-            Debug.Log("OtherEvaRun");
             otherAnimator.SetBool("Run", true);
             preBehavior = 1;
         }
@@ -85,8 +86,12 @@ public class ServerOtherEva : MonoBehaviour
     IEnumerator AttackDelay()
     {
         preBehavior = 3;
-        otherAnimator.SetTrigger("Attack"); 
+        otherAnimator.SetTrigger("Attack");
+        basicAttack1Collider.enabled = true;
+        basicAttack2Collider.enabled = true;
         yield return new WaitForSeconds(1.0f);
+        basicAttack1Collider.enabled = false;
+        basicAttack2Collider.enabled = false;
         preBehavior = 0;
     }
     IEnumerator FireGun()

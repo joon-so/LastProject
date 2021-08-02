@@ -11,6 +11,8 @@ public class ServerMyLeina : ServerSubAIManager
     [SerializeField] GameObject posionArrow;
     [SerializeField] Transform posionArrowPos;
 
+    [SerializeField] GameObject wSkillArrow;
+
     public float moveSpeed = 5.0f;
     public float dodgeCoolTime = 7.0f;
     public float fireDelay = 1.1f;
@@ -36,12 +38,14 @@ public class ServerMyLeina : ServerSubAIManager
 
     Vector3 vecTarget;
     Animator myAnimator;
+    ServerCollisionManager collisionManager;
 
     void Awake()
     {
         myAnimator = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
         rigidbody = GetComponent<Rigidbody>();
+        collisionManager = GameObject.Find("ServerIngameManager").GetComponent<ServerCollisionManager>();
     }
     void Start()
     {
@@ -361,27 +365,27 @@ public class ServerMyLeina : ServerSubAIManager
         myAnimator.SetTrigger("Attack");
         // ¼¦
         Vector3 pos = arrowPos.position;
-        GameObject instantArrow = Instantiate(arrow, pos, arrowPos.rotation * Quaternion.Euler(0f, -25f, 0));
+        GameObject instantArrow = Instantiate(wSkillArrow, pos, arrowPos.rotation * Quaternion.Euler(0f, -25f, 0));
         Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
         arrowRigid.velocity = arrowPos.forward;
 
-        GameObject instantArrow2 = Instantiate(arrow, pos, arrowPos.rotation * Quaternion.Euler(0f, -15f, 0));
+        GameObject instantArrow2 = Instantiate(wSkillArrow, pos, arrowPos.rotation * Quaternion.Euler(0f, -15f, 0));
         Rigidbody arrowRigid2 = instantArrow2.GetComponent<Rigidbody>();
         arrowRigid2.velocity = arrowPos.forward;
 
-        GameObject instantArrow3 = Instantiate(arrow, pos, arrowPos.rotation * Quaternion.Euler(0f, -5f, 0));
+        GameObject instantArrow3 = Instantiate(wSkillArrow, pos, arrowPos.rotation * Quaternion.Euler(0f, -5f, 0));
         Rigidbody arrowRigid3 = instantArrow3.GetComponent<Rigidbody>();
         arrowRigid3.velocity = arrowPos.forward;
 
-        GameObject instantArrow4 = Instantiate(arrow, pos, arrowPos.rotation * Quaternion.Euler(0f, 5f, 0));
+        GameObject instantArrow4 = Instantiate(wSkillArrow, pos, arrowPos.rotation * Quaternion.Euler(0f, 5f, 0));
         Rigidbody arrowRigid4 = instantArrow4.GetComponent<Rigidbody>();
         arrowRigid4.velocity = arrowPos.forward;
 
-        GameObject instantArrow5 = Instantiate(arrow, pos, arrowPos.rotation * Quaternion.Euler(0f, 15f, 0));
+        GameObject instantArrow5 = Instantiate(wSkillArrow, pos, arrowPos.rotation * Quaternion.Euler(0f, 15f, 0));
         Rigidbody arrowRigid5 = instantArrow5.GetComponent<Rigidbody>();
         arrowRigid5.velocity = arrowPos.forward;
 
-        GameObject instantArrow6 = Instantiate(arrow, pos, arrowPos.rotation * Quaternion.Euler(0f, 25f, 0));
+        GameObject instantArrow6 = Instantiate(wSkillArrow, pos, arrowPos.rotation * Quaternion.Euler(0f, 25f, 0));
         Rigidbody arrowRigid6 = instantArrow6.GetComponent<Rigidbody>();
         arrowRigid6.velocity = arrowPos.forward;
 
@@ -392,4 +396,55 @@ public class ServerMyLeina : ServerSubAIManager
         canDodge = true;
         canSkill = true;
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (gameObject.CompareTag("MainCharacter"))
+        {
+            if (collision.gameObject.CompareTag("KarmenAttack"))
+                collisionManager.KarmenBasicAttack();
+            if (collision.gameObject.CompareTag("KarmenQSkill"))
+                collisionManager.KarmenQSkillAttack();
+            if (collision.gameObject.CompareTag("KarmenWSkill"))
+                collisionManager.KarmenWSkillAttack();
+            if (collision.gameObject.CompareTag("JadeAttack"))
+                collisionManager.JadeBasicAttack();
+            if (collision.gameObject.CompareTag("JadeQSkill"))
+                collisionManager.JadeQSkillAttack();
+            if (collision.gameObject.CompareTag("JadeWSkill"))
+                collisionManager.JadeWSkillAttack();
+            if (collision.gameObject.CompareTag("LeinaAttack"))
+                collisionManager.LeinaBasicAttack();
+            if (collision.gameObject.CompareTag("LeinaQSkill"))
+                collisionManager.LeinaQSkillAttack();
+            if (collision.gameObject.CompareTag("LeinaWSkill"))
+                collisionManager.LeinaWSkillAttack();
+            if (collision.gameObject.CompareTag("EvaAttack"))
+                collisionManager.EvaBasicAttack();
+            if (collision.gameObject.CompareTag("EvaWSkill"))
+                collisionManager.EvaWSkillAttack();
+        }
+    }
+
+    //private void OnParticleCollision(GameObject other)
+    //{
+    //    if (other.gameObject.tag == "EvaQSkill")
+    //        collisionManager.EvaQSkillAttack();
+    //}
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (gameObject.CompareTag("MainCharacter"))
+    //    {
+    //        if (other.gameObject.CompareTag("KarmenAttack"))
+    //            collisionManager.KarmenBasicAttack();
+    //        if (other.gameObject.CompareTag("KarmenQSkill"))
+    //            collisionManager.KarmenQSkillAttack();
+    //        if (other.gameObject.CompareTag("KarmenWSkill"))
+    //            collisionManager.KarmenWSkillAttack();
+    //        if (other.gameObject.CompareTag("EvaAttack"))
+    //            collisionManager.EvaBasicAttack();
+    //        if (other.gameObject.CompareTag("EvaWSkill"))
+    //            collisionManager.EvaWSkillAttack();
+    //    }
+    //}
 }

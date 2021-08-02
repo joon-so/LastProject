@@ -10,6 +10,8 @@ public class ServerOtherLeina : MonoBehaviour
     [SerializeField] GameObject posionArrow;
     [SerializeField] Transform posionArrowPos;
 
+    [SerializeField] GameObject wSkillArrow;
+
     [SerializeField] GameObject parentObject;
 
     public int isMainCharacter;
@@ -113,27 +115,27 @@ public class ServerOtherLeina : MonoBehaviour
         otherAnimator.SetTrigger("Attack");
         // ¼¦
         Vector3 pos = arrowPos.position;
-        GameObject instantArrow = Instantiate(arrow, pos, arrowPos.rotation * Quaternion.Euler(0f, -25f, 0));
+        GameObject instantArrow = Instantiate(wSkillArrow, pos, arrowPos.rotation * Quaternion.Euler(0f, -25f, 0));
         Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
         arrowRigid.velocity = arrowPos.forward;
 
-        GameObject instantArrow2 = Instantiate(arrow, pos, arrowPos.rotation * Quaternion.Euler(0f, -15f, 0));
+        GameObject instantArrow2 = Instantiate(wSkillArrow, pos, arrowPos.rotation * Quaternion.Euler(0f, -15f, 0));
         Rigidbody arrowRigid2 = instantArrow2.GetComponent<Rigidbody>();
         arrowRigid2.velocity = arrowPos.forward;
 
-        GameObject instantArrow3 = Instantiate(arrow, pos, arrowPos.rotation * Quaternion.Euler(0f, -5f, 0));
+        GameObject instantArrow3 = Instantiate(wSkillArrow, pos, arrowPos.rotation * Quaternion.Euler(0f, -5f, 0));
         Rigidbody arrowRigid3 = instantArrow3.GetComponent<Rigidbody>();
         arrowRigid3.velocity = arrowPos.forward;
 
-        GameObject instantArrow4 = Instantiate(arrow, pos, arrowPos.rotation * Quaternion.Euler(0f, 5f, 0));
+        GameObject instantArrow4 = Instantiate(wSkillArrow, pos, arrowPos.rotation * Quaternion.Euler(0f, 5f, 0));
         Rigidbody arrowRigid4 = instantArrow4.GetComponent<Rigidbody>();
         arrowRigid4.velocity = arrowPos.forward;
 
-        GameObject instantArrow5 = Instantiate(arrow, pos, arrowPos.rotation * Quaternion.Euler(0f, 15f, 0));
+        GameObject instantArrow5 = Instantiate(wSkillArrow, pos, arrowPos.rotation * Quaternion.Euler(0f, 15f, 0));
         Rigidbody arrowRigid5 = instantArrow5.GetComponent<Rigidbody>();
         arrowRigid5.velocity = arrowPos.forward;
 
-        GameObject instantArrow6 = Instantiate(arrow, pos, arrowPos.rotation * Quaternion.Euler(0f, 25f, 0));
+        GameObject instantArrow6 = Instantiate(wSkillArrow, pos, arrowPos.rotation * Quaternion.Euler(0f, 25f, 0));
         Rigidbody arrowRigid6 = instantArrow6.GetComponent<Rigidbody>();
         arrowRigid6.velocity = arrowPos.forward;
 
