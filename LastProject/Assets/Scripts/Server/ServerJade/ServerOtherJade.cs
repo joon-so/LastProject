@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ServerOtherJade : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class ServerOtherJade : MonoBehaviour
 
     [SerializeField] GameObject parentObject;
 
+    [SerializeField] HpBar hpBar;
+    [SerializeField] Text otherPlayerID;
+
     public int isMainCharacter;
 
     private Animator otherAnimator;
@@ -36,6 +40,9 @@ public class ServerOtherJade : MonoBehaviour
         index = parentObject.GetComponent<ServerOtherPlayerManager>().index; 
         preBehavior = 0;
         StartCoroutine(DrawAssaultRifle());
+
+        otherPlayerID.text = ServerLoginManager.playerList[index].playerID;
+        // hpBar.SetMaxHp(ServerLoginManager.playerList[index].;
     }
 
     void Update()

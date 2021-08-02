@@ -367,6 +367,9 @@ public class ServerMyKarmen : ServerSubAIManager
     }
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.layer == 10)
+            return;
+
         if (gameObject.CompareTag("MainCharacter"))
         {
             if (collision.gameObject.CompareTag("KarmenAttack"))

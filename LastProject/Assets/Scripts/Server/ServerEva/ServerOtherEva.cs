@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ServerOtherEva : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class ServerOtherEva : MonoBehaviour
 
     [SerializeField] GameObject parentObject;
 
+    [SerializeField] HpBar hpBar;
+    [SerializeField] Text otherPlayerID;
+
     public int isMainCharacter;
 
     private Animator otherAnimator;
@@ -21,12 +25,16 @@ public class ServerOtherEva : MonoBehaviour
     private int preBehavior;
     private int index;
 
+
     void Start()
     {
         otherAnimator = GetComponent<Animator>();
         preBehavior = 0;
         index = parentObject.GetComponent<ServerOtherPlayerManager>().index;
         StartCoroutine(StartMotion());
+
+        otherPlayerID.text = ServerLoginManager.playerList[index].playerID;
+        // hpBar.SetMaxHp(ServerLoginManager.playerList[index].;
     }
 
     void Update()
