@@ -51,6 +51,12 @@ public class ServerToClientManager : MonoBehaviour
         //쓸일 없음 서버에서만 처리
     }
 
+    public void cs_InGameStart_Process(cs_InGameStart packet)
+    {
+        //Ingame에 들어왔음을 서버에게 알려줌
+    }
+
+
     //Server -> Client
     public void sc_playerPosi_DO(sc_PlayerPosi packet)
     {

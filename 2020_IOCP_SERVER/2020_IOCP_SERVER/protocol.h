@@ -13,6 +13,7 @@ constexpr USHORT CS_LOGIN = 1;
 constexpr USHORT CS_PlayerData = 2;
 constexpr USHORT CS_GameStart = 3;
 constexpr USHORT CS_Attack = 4;
+constexpr USHORT CS_InGame = 5;
 
 constexpr USHORT SC_PlayerPosi = 101;
 constexpr USHORT SC_First_PlayerPosi = 102;		//플레이어들 초기좌표값

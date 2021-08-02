@@ -12,6 +12,7 @@ public enum PacketID
 	CS_PlayerData = 2,
 	CS_GameStart = 3,
 	CS_Attack = 4,
+	CS_InGame = 5,
 
 	SC_PlayerPosi = 101,
 	SC_First_PlayerPosi = 102
@@ -93,6 +94,39 @@ public class cs_GameStart : IPacket
 
 		count += sizeof(ushort);
 		Array.Copy(BitConverter.GetBytes((ushort)PacketID.CS_GameStart), 0, segment.Array, segment.Offset + count, sizeof(ushort));
+		count += sizeof(ushort);
+		Array.Copy(BitConverter.GetBytes(this.is_Start), 0, segment.Array, segment.Offset + count, sizeof(bool));
+		count += sizeof(bool);
+
+		Array.Copy(BitConverter.GetBytes(count), 0, segment.Array, segment.Offset, sizeof(ushort));
+
+		return SendBufferHelper.Close(count);
+	}
+}
+
+public class cs_InGameStart : IPacket
+{
+	public bool is_Start;
+
+	public ushort Protocol { get { return (ushort)PacketID.CS_InGame; } }
+
+	public void Read(ArraySegment<byte> segment)
+	{
+		ushort count = 0;
+		count += sizeof(ushort);
+		count += sizeof(ushort);
+		this.is_Start = BitConverter.ToBoolean(segment.Array, segment.Offset + count);
+		count += sizeof(bool);
+
+	}
+
+	public ArraySegment<byte> Write()
+	{
+		ArraySegment<byte> segment = SendBufferHelper.Open(4096);
+		ushort count = 0;
+
+		count += sizeof(ushort);
+		Array.Copy(BitConverter.GetBytes((ushort)PacketID.CS_InGame), 0, segment.Array, segment.Offset + count, sizeof(ushort));
 		count += sizeof(ushort);
 		Array.Copy(BitConverter.GetBytes(this.is_Start), 0, segment.Array, segment.Offset + count, sizeof(bool));
 		count += sizeof(bool);

@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class ServerCollisionManager : MonoBehaviour
 {
+    void send_Attack_packet(short damage)
+    {
+        cs_Attack AttackPacket = new cs_Attack();
+        AttackPacket.Player_ID = "";
+        AttackPacket.damage = damage;
+
+        NetworkManager.instance.Send(AttackPacket.Write());
+    }
     public void KarmenBasicAttack(Collision collision)
     {
         if (collision.gameObject.tag == "KarmenAttack")

@@ -55,4 +55,12 @@ class PacketHandler
 
 		ServerToClientManager.Instance.cs_Attack_Process(pkt);
 	}
+
+	public static void cs_InGameStartHandler(PacketSession session, IPacket packet)
+	{
+		cs_InGameStart pkt = packet as cs_InGameStart;
+		ServerSession serverSession = session as ServerSession;
+
+		ServerToClientManager.Instance.cs_InGameStart_Process(pkt);
+	}
 }

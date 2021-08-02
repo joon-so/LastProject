@@ -32,6 +32,9 @@ public class PacketManager
 		_makeFunc.Add((ushort)PacketID.CS_Attack, MakePacket<cs_Attack>);
 		_handler.Add((ushort)PacketID.CS_Attack, PacketHandler.cs_AttackHandler);
 
+		_makeFunc.Add((ushort)PacketID.CS_InGame, MakePacket<cs_InGameStart>);
+		_handler.Add((ushort)PacketID.CS_InGame, PacketHandler.cs_InGameStartHandler);
+
 
 		//Server -> Client
 		_makeFunc.Add((ushort)PacketID.SC_PlayerPosi, MakePacket<sc_PlayerPosi>);

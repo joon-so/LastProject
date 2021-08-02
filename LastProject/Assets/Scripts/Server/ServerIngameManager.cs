@@ -6,8 +6,10 @@ public class ServerIngameManager : MonoBehaviour
 {
     public List<GameObject> player;
 
+
     void Start()
     {
+        send_InGame_Start_packet();
         for (int i = 0; i < 4; ++i)
         {
             if (ServerLoginManager.playerList[i].playerID != null)
@@ -20,4 +22,13 @@ public class ServerIngameManager : MonoBehaviour
             }
         }
     }
+
+    void send_InGame_Start_packet()
+    {
+        cs_InGameStart InGameStartPacket = new cs_InGameStart();
+        InGameStartPacket.is_Start = true;
+
+        NetworkManager.instance.Send(InGameStartPacket.Write());
+    }
+
 }
