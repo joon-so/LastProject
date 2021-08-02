@@ -9562,8 +9562,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 84289138743115070}
   m_AABB:
-    m_Center: {x: 0.18364015, y: 0.019043893, z: -0.0009303093}
-    m_Extent: {x: 0.27733853, y: 0.19480379, z: 0.28430676}
+    m_Center: {x: -0.000082075596, y: 0.028786376, z: 0.8069805}
+    m_Extent: {x: 0.29135627, y: 0.19679433, z: 0.2841338}
   m_DirtyAABB: 0
 --- !u!183 &4240174539974691287
 Cloth:
@@ -11158,8 +11158,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8983947479889205261}
   - component: {fileID: 6583861574678887236}
-  - component: {fileID: 6993769172213524526}
   - component: {fileID: 47049595448451502}
+  - component: {fileID: 6993769172213524526}
   - component: {fileID: 8330996397814036486}
   - component: {fileID: 6917685977379946870}
   - component: {fileID: 1770997135922982110}
@@ -11239,6 +11239,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!136 &47049595448451502
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8983947479889205260}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!54 &6993769172213524526
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11251,24 +11265,10 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 126
   m_CollisionDetection: 0
---- !u!136 &47049595448451502
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8983947479889205260}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &8330996397814036486
 MonoBehaviour:
   m_ObjectHideFlags: 0

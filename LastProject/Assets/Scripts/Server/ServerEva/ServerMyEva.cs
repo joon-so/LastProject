@@ -34,12 +34,13 @@ public class ServerMyEva : ServerSubAIManager
 
     Vector3 vecTarget;
     Animator myAnimator;
-
+    ServerCollisionManager collisionManager;
     void Awake()
     {
         myAnimator = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
         rigidbody = GetComponent<Rigidbody>();
+        collisionManager = GameObject.Find("ServerIngameManager").GetComponent<ServerCollisionManager>();
     }
     void Start()
     {
@@ -379,5 +380,21 @@ public class ServerMyEva : ServerSubAIManager
         canMove = true;
         canDodge = true;
         canSkill = true;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        collisionManager.KarmenBasicAttack(collision);
+        collisionManager.KarmenQSkillAttack(collision);
+        collisionManager.KarmenWSkillAttack(collision);
+        collisionManager.JadeBasicAttack(collision);
+        collisionManager.JadeQSkillAttack(collision);
+        collisionManager.JadeWSkillAttack(collision);
+        collisionManager.LeinaBasicAttack(collision);
+        collisionManager.LeinaQSkillAttack(collision);
+        collisionManager.LeinaWSkillAttack(collision);
+        collisionManager.EvaBasicAttack(collision);
+        collisionManager.EvaQSkillAttack(collision);
+        collisionManager.EvaWSkillAttack(collision);
     }
 }
