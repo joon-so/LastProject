@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ServerOtherLeina : MonoBehaviour
 {
@@ -15,10 +14,6 @@ public class ServerOtherLeina : MonoBehaviour
 
     [SerializeField] GameObject parentObject;
 
-    [SerializeField] ServerHpBar hpBar;
-    [SerializeField] ServerEpBar epBar;
-    [SerializeField] Text otherPlayerID;
-
     public int isMainCharacter;
 
     private Animator otherAnimator;
@@ -31,10 +26,6 @@ public class ServerOtherLeina : MonoBehaviour
         otherAnimator = GetComponent<Animator>();
         index = parentObject.GetComponent<ServerOtherPlayerManager>().index;
         preBehavior = 0;
-
-        otherPlayerID.text = ServerLoginManager.playerList[index].playerID;
-        //hpBar.SetMaxHp(ServerLoginManager.playerList[index].character1Hp);
-        //epBar.SetMaxEp(ServerLoginManager.playerList[index].character1Ep);
     }
 
     void Update()

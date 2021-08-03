@@ -80,6 +80,7 @@ struct sc_player_posi {
 	int p1_sub_behavior;
 	float p1_sub_pos_x;
 	float p1_sub_pos_z;
+	float p1_sub_rot_y;
 	short p1_sub_hp;
 	short p1_sub_mp;
 

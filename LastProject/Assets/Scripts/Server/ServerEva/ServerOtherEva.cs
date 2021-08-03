@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ServerOtherEva : MonoBehaviour
 {
@@ -14,10 +13,6 @@ public class ServerOtherEva : MonoBehaviour
     public Transform wSkillPos = null;
 
     [SerializeField] GameObject parentObject;
-
-    [SerializeField] ServerHpBar hpBar;
-    [SerializeField] ServerEpBar epBar;
-    [SerializeField] Text otherPlayerID;
 
     public int isMainCharacter;
 
@@ -33,9 +28,6 @@ public class ServerOtherEva : MonoBehaviour
         preBehavior = 0;
         index = parentObject.GetComponent<ServerOtherPlayerManager>().index;
         StartCoroutine(StartMotion());
-
-        otherPlayerID.text = ServerLoginManager.playerList[index].playerID;
-        // hpBar.SetMaxHp(ServerLoginManager.playerList[index].;
     }
 
     void Update()
