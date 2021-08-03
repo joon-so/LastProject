@@ -597,6 +597,19 @@ void process_packet(int id)
         cs_Attack* p = reinterpret_cast<cs_Attack*>(g_clients[id].m_packet_start);
         cout << "Attack Packet ¼ö½Å" << endl;
         cout << p->target_id << " " << p->damage << endl;
+
+        if (strcmp(playerdata.player1.ID, p->target_id) == 0) {
+            playerdata.player1.Main_HP -= p->damage;
+        }
+        else if (strcmp(playerdata.player2.ID, p->target_id) == 0) {
+            playerdata.player2.Main_HP -= p->damage;
+        }
+        else if (strcmp(playerdata.player3.ID, p->target_id) == 0) {
+            playerdata.player3.Main_HP -= p->damage;
+        }
+        else if (strcmp(playerdata.player4.ID, p->target_id) == 0) {
+            playerdata.player4.Main_HP -= p->damage;
+        }
         break;
     }
     case CS_InGame:
