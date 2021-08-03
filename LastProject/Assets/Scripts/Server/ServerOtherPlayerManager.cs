@@ -114,6 +114,7 @@ public class ServerOtherPlayerManager : MonoBehaviour
             playerInfoCanvas.transform.position = new Vector3(character1.transform.position.x, 1.0f, character1.transform.position.z + 2.0f);
 
             //-------------------------------------------------------------------------------------
+            Debug.Log(ServerLoginManager.playerList[index].character1Hp);
             hpBar.SetHp(ServerLoginManager.playerList[index].character1Hp);
             epBar.SetEp(ServerLoginManager.playerList[index].character1Ep);
 
