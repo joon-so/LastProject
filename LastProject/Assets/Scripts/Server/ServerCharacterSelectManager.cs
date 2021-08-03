@@ -22,6 +22,8 @@ public class ServerCharacterSelectManager : MonoBehaviour
     [SerializeField] Text characterInfoMsgText;
     private int mainOrSub;
 
+    private int checkOverLap;
+
     void Start()
     {
         mainOrSub = 1;
@@ -37,6 +39,8 @@ public class ServerCharacterSelectManager : MonoBehaviour
         }
         else if (mainOrSub == 2)
         {
+            if (ServerLoginManager.playerList[0].selectMainCharacter == 1)
+                return;
             subKarmen.SetActive(true);
             subJade.SetActive(false);
             subLeina.SetActive(false);
@@ -54,6 +58,8 @@ public class ServerCharacterSelectManager : MonoBehaviour
         }
         else if (mainOrSub == 2)
         {
+            if (ServerLoginManager.playerList[0].selectMainCharacter == 2)
+                return;
             subKarmen.SetActive(false);
             subJade.SetActive(true);
             subLeina.SetActive(false);
@@ -71,6 +77,8 @@ public class ServerCharacterSelectManager : MonoBehaviour
         }
         else if (mainOrSub == 2)
         {
+            if (ServerLoginManager.playerList[0].selectMainCharacter == 3)
+                return;
             subKarmen.SetActive(false);
             subJade.SetActive(false);
             subLeina.SetActive(true);
@@ -88,6 +96,8 @@ public class ServerCharacterSelectManager : MonoBehaviour
         }
         else if (mainOrSub == 2)
         {
+            if (ServerLoginManager.playerList[0].selectMainCharacter == 4)
+                return;
             subKarmen.SetActive(false);
             subJade.SetActive(false);
             subLeina.SetActive(false);
@@ -101,21 +111,29 @@ public class ServerCharacterSelectManager : MonoBehaviour
             if (mainKarmen.activeSelf)
             {
                 ServerLoginManager.playerList[0].selectMainCharacter = 1;
+                ServerLoginManager.playerList[0].character1Hp = 500;
+                ServerLoginManager.playerList[0].character1Ep = 100;
                 selectEffectKarmen.SetActive(true);
             }
             else if (mainJade.activeSelf)
             {
                 ServerLoginManager.playerList[0].selectMainCharacter = 2;
+                ServerLoginManager.playerList[0].character1Hp = 400;
+                ServerLoginManager.playerList[0].character1Ep = 200;
                 selectEffectJade.SetActive(true);
             }
             else if (mainLeina.activeSelf)
             {
                 ServerLoginManager.playerList[0].selectMainCharacter = 3;
+                ServerLoginManager.playerList[0].character1Hp = 400;
+                ServerLoginManager.playerList[0].character1Ep = 200;
                 selectEffectLeina.SetActive(true);
             }
             else if (mainEva.activeSelf)
             {
                 ServerLoginManager.playerList[0].selectMainCharacter = 4;
+                ServerLoginManager.playerList[0].character1Hp = 500;
+                ServerLoginManager.playerList[0].character1Ep = 100;
                 selectEffectEva.SetActive(true);
             }
             mainOrSub = 2;
@@ -125,21 +143,29 @@ public class ServerCharacterSelectManager : MonoBehaviour
             if (subKarmen.activeSelf)
             {
                 ServerLoginManager.playerList[0].selectSubCharacter = 1;
+                ServerLoginManager.playerList[0].character2Hp = 500;
+                ServerLoginManager.playerList[0].character2Ep = 100;
                 selectEffectKarmen.SetActive(true);
             }
             else if (subJade.activeSelf)
             {
                 ServerLoginManager.playerList[0].selectSubCharacter = 2;
+                ServerLoginManager.playerList[0].character2Hp = 400;
+                ServerLoginManager.playerList[0].character2Ep = 200;
                 selectEffectJade.SetActive(true);
             }
             else if (subLeina.activeSelf)
             {
                 ServerLoginManager.playerList[0].selectSubCharacter = 3;
+                ServerLoginManager.playerList[0].character2Hp = 400;
+                ServerLoginManager.playerList[0].character2Ep = 200;
                 selectEffectLeina.SetActive(true);
             }
             else if (subEva.activeSelf)
             {
                 ServerLoginManager.playerList[0].selectSubCharacter = 4;
+                ServerLoginManager.playerList[0].character2Hp = 500;
+                ServerLoginManager.playerList[0].character2Ep = 100;
                 selectEffectEva.SetActive(true);
             }
             mainOrSub = 0;

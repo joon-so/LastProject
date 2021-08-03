@@ -13,6 +13,12 @@ public class ServerLoginManager : MonoBehaviour
 
         public short is_Main_Character;
 
+        public short character1Hp;
+        public short character2Hp;
+
+        public short character1Ep;
+        public short character2Ep;
+
         // Karmen : 1 Eva : 4
         public int selectMainCharacter;
         public int selectSubCharacter;
@@ -23,6 +29,7 @@ public class ServerLoginManager : MonoBehaviour
         public Vector3 subCharacterPos;
         public Quaternion mainCharacterRot;
         public Quaternion subCharacterRot;
+
     }
 
     public static ServerPlayer[] playerList = new ServerPlayer[4];

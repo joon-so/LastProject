@@ -20,6 +20,7 @@ public class ServerOtherKarmen : MonoBehaviour
     [SerializeField] GameObject parentObject;
 
     [SerializeField] HpBar hpBar;
+    [SerializeField] EpBar epBar;
     [SerializeField] Text otherPlayerID;
 
     public int isMainCharacter;
@@ -37,7 +38,8 @@ public class ServerOtherKarmen : MonoBehaviour
         StartCoroutine(StartMotion());
 
         otherPlayerID.text = ServerLoginManager.playerList[index].playerID;
-        // hpBar.SetMaxHp(ServerLoginManager.playerList[index].;
+        //hpBar.SetMaxHp(ServerLoginManager.playerList[index].character1Hp;
+        //epBar.SetMaxEp
     }
 
     void Update()
@@ -49,8 +51,6 @@ public class ServerOtherKarmen : MonoBehaviour
 
         //hpBar.SetHp(ServerLoginManager.playerList[index].;
     }
-
-    public int getIndex() { return index; }
 
     public void AnimationControl()
     {
