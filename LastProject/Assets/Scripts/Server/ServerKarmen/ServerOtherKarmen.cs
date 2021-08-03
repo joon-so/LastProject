@@ -19,8 +19,8 @@ public class ServerOtherKarmen : MonoBehaviour
 
     [SerializeField] GameObject parentObject;
 
-    [SerializeField] HpBar hpBar;
-    [SerializeField] EpBar epBar;
+    [SerializeField] ServerHpBar hpBar;
+    [SerializeField] ServerEpBar epBar;
     [SerializeField] Text otherPlayerID;
 
     public int isMainCharacter;

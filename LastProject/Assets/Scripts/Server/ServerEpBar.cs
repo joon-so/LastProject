@@ -7,13 +7,13 @@ public class ServerEpBar : MonoBehaviour
 {
     public Slider slider;
 
-    public void SetMaxEp(int Ep)
+    public void SetMaxEp(short Ep)
     {
         slider.maxValue = Ep;
         slider.value = Ep;
     }
 
-    public void SetEp(int Ep)
+    public void SetEp(short Ep)
     {
         slider.value = Ep;
     }

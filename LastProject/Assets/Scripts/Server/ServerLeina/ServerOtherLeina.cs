@@ -15,7 +15,8 @@ public class ServerOtherLeina : MonoBehaviour
 
     [SerializeField] GameObject parentObject;
 
-    [SerializeField] HpBar hpBar;
+    [SerializeField] ServerHpBar hpBar;
+    [SerializeField] ServerEpBar epBar;
     [SerializeField] Text otherPlayerID;
 
     public int isMainCharacter;
@@ -32,7 +33,8 @@ public class ServerOtherLeina : MonoBehaviour
         preBehavior = 0;
 
         otherPlayerID.text = ServerLoginManager.playerList[index].playerID;
-        // hpBar.SetMaxHp(ServerLoginManager.playerList[index].;
+        //hpBar.SetMaxHp(ServerLoginManager.playerList[index].character1Hp);
+        //epBar.SetMaxEp(ServerLoginManager.playerList[index].character1Ep);
     }
 
     void Update()

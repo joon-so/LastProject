@@ -7,13 +7,13 @@ public class ServerHpBar : MonoBehaviour
 {
     public Slider slider;
 
-    public void SetMaxHp(int hp)
+    public void SetMaxHp(short hp)
     {
         slider.maxValue = hp;
         slider.value = hp;
     }
 
-    public void SetHp(int hp)
+    public void SetHp(short hp)
     {
         slider.value = hp;
     }

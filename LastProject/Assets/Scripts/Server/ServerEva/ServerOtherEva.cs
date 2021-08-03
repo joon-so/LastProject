@@ -15,7 +15,8 @@ public class ServerOtherEva : MonoBehaviour
 
     [SerializeField] GameObject parentObject;
 
-    [SerializeField] HpBar hpBar;
+    [SerializeField] ServerHpBar hpBar;
+    [SerializeField] ServerEpBar epBar;
     [SerializeField] Text otherPlayerID;
 
     public int isMainCharacter;
