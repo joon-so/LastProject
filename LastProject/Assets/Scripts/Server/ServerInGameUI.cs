@@ -27,10 +27,16 @@ public class ServerInGameUI : MonoBehaviour
 
     [SerializeField] GameObject gameMenu;
 
-    private short c1MaxHp;
-    private short c1MaxEp;
-    private short c2MaxHp;
-    private short c2MaxEp;
+    private GameObject mainC1;
+    private GameObject subC1;
+    private GameObject mainC2;
+    private GameObject subC2;
+
+
+    private float c1MaxHp;
+    private float c1MaxEp;
+    private float c2MaxHp;
+    private float c2MaxEp;
 
     //[Header("C1")]
     //public Image c1_QSkillImg;
@@ -69,51 +75,67 @@ public class ServerInGameUI : MonoBehaviour
         if (ServerLoginManager.playerList[0].selectMainCharacter == 1)
         {
             mainKarmenMask.SetActive(true);
-            c1MaxHp = 500;
-            c1MaxEp = 100;
+            c1MaxHp = ServerLoginManager.playerList[0].character1Hp;
+            c1MaxEp = ServerLoginManager.playerList[0].character1Ep;
+            mainC1 = mainKarmenMask;
+            subC1 = subKarmenMask;
         }
         else if (ServerLoginManager.playerList[0].selectMainCharacter == 2)
         {
             mainJadeMask.SetActive(true);
-            c1MaxHp = 400;
-            c1MaxEp = 200;
+            c1MaxHp = ServerLoginManager.playerList[0].character1Hp;
+            c1MaxEp = ServerLoginManager.playerList[0].character1Ep;
+            mainC1 = mainJadeMask;
+            subC1 = subJadeMask;
         }
         else if (ServerLoginManager.playerList[0].selectMainCharacter == 3)
         {
             mainLeinaMask.SetActive(true);
-            c1MaxHp = 400;
-            c1MaxEp = 200;
+            c1MaxHp = ServerLoginManager.playerList[0].character1Hp;
+            c1MaxEp = ServerLoginManager.playerList[0].character1Ep;
+            mainC1 = mainLeinaMask;
+            subC1 = subLeinaMask;
         }
         else if (ServerLoginManager.playerList[0].selectMainCharacter == 4)
         {
             mainEvaMask.SetActive(true);
-            c1MaxHp = 500;
-            c1MaxEp = 100;
+            c1MaxHp = ServerLoginManager.playerList[0].character1Hp;
+            c1MaxEp = ServerLoginManager.playerList[0].character1Ep;
+            mainC1 = mainEvaMask;
+            subC1 = subEvaMask;
         }
 
         if (ServerLoginManager.playerList[0].selectSubCharacter == 1)
         {
             subKarmenMask.SetActive(true);
-            c2MaxHp = 500;
-            c2MaxEp = 100;
+            c2MaxHp = ServerLoginManager.playerList[0].character2Hp;
+            c2MaxEp = ServerLoginManager.playerList[0].character2Ep;
+            mainC2 = mainKarmenMask;
+            subC2 = subKarmenMask;
         }
         else if (ServerLoginManager.playerList[0].selectSubCharacter == 2)
         {
             subJadeMask.SetActive(true);
-            c2MaxHp = 400;
-            c2MaxEp = 200;
+            c2MaxHp = ServerLoginManager.playerList[0].character2Hp;
+            c2MaxEp = ServerLoginManager.playerList[0].character2Ep;
+            mainC2 = mainJadeMask;
+            subC2 = subJadeMask;
         }
         else if (ServerLoginManager.playerList[0].selectSubCharacter == 3)
         {
             subLeinaMask.SetActive(true);
-            c2MaxHp = 400;
-            c2MaxEp = 200;
+            c2MaxHp = ServerLoginManager.playerList[0].character2Hp;
+            c2MaxEp = ServerLoginManager.playerList[0].character2Ep;
+            mainC2 = mainLeinaMask;
+            subC2 = subLeinaMask;
         }
         else if (ServerLoginManager.playerList[0].selectSubCharacter == 4)
         {
             subEvaMask.SetActive(true);
-            c2MaxHp = 500;
-            c2MaxEp = 100;
+            c2MaxHp = ServerLoginManager.playerList[0].character2Hp;
+            c2MaxEp = ServerLoginManager.playerList[0].character2Ep;
+            mainC2 = mainEvaMask;
+            subC2 = subEvaMask;
         }
 
         //c1_QSkillImg.fillAmount = 0;
@@ -126,132 +148,74 @@ public class ServerInGameUI : MonoBehaviour
     }
     void Update()
     {
-        UpdateHp();
         //C1_QSkillCoolDownUI();
         //C1_WSkillCoolDownUI();
 
         //C2_QSkillCoolDownUI();
         //C2_WSkillCoolDownUI();
 
-        if(Input.GetKeyDown(KeyCode.Escape))
+        UpdateHp();
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (gameMenu.activeSelf)
                 gameMenu.SetActive(false);
             else
                 gameMenu.SetActive(true);
         }
-
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            SetCharacterMask();
-        }
+        if (Input.GetKeyDown(KeyCode.F))
+            TagCharacterMask();
     }
 
-    void SetCharacterMask()
+    void TagCharacterMask()
     {
         if (ServerLoginManager.playerList[0].is_Main_Character == 1)
         {
-            if (ServerLoginManager.playerList[0].selectMainCharacter == 1)
-            {
-                mainKarmenMask.SetActive(true);
-                subKarmenMask.SetActive(false);
-            }
-            else if (ServerLoginManager.playerList[0].selectMainCharacter == 2)
-            {
-                mainJadeMask.SetActive(true);
-                subJadeMask.SetActive(false);
-            }
-            else if (ServerLoginManager.playerList[0].selectMainCharacter == 3)
-            {
-                mainLeinaMask.SetActive(true);
-                subLeinaMask.SetActive(false);
-            }
-            else if (ServerLoginManager.playerList[0].selectMainCharacter == 4)
-            {
-                mainEvaMask.SetActive(true);
-                subEvaMask.SetActive(false);
-            }
-            if (ServerLoginManager.playerList[0].selectSubCharacter == 1)
-            {
-                mainKarmenMask.SetActive(false);
-                subKarmenMask.SetActive(true);
-            }
-            else if (ServerLoginManager.playerList[0].selectSubCharacter == 2)
-            {
-                mainJadeMask.SetActive(false);
-                subJadeMask.SetActive(true);
-            }
-            else if (ServerLoginManager.playerList[0].selectSubCharacter == 3)
-            {
-                mainLeinaMask.SetActive(false);
-                subLeinaMask.SetActive(true);
-            }
-            else if (ServerLoginManager.playerList[0].selectSubCharacter == 4)
-            {
-                mainEvaMask.SetActive(false);
-                subEvaMask.SetActive(true);
-            }        }
+            mainC1.SetActive(false);
+            subC1.SetActive(true);
+
+            mainC2.SetActive(true);
+            subC2.SetActive(false);
+        }
         else if (ServerLoginManager.playerList[0].is_Main_Character == 2)
         {
-            if (ServerLoginManager.playerList[0].selectMainCharacter == 1)
-            {
-                mainKarmenMask.SetActive(false);
-                subKarmenMask.SetActive(true);
-            }
-            else if (ServerLoginManager.playerList[0].selectMainCharacter == 2)
-            {
-                mainJadeMask.SetActive(false);
-                subJadeMask.SetActive(true);
-            }
-            else if (ServerLoginManager.playerList[0].selectMainCharacter == 3)
-            {
-                mainLeinaMask.SetActive(false);
-                subLeinaMask.SetActive(true);
-            }
-            else if (ServerLoginManager.playerList[0].selectMainCharacter == 4)
-            {
-                mainEvaMask.SetActive(false);
-                subEvaMask.SetActive(true);
-            }
+            mainC1.SetActive(true);
+            subC1.SetActive(false);
 
-            if (ServerLoginManager.playerList[0].selectSubCharacter == 1)
-            {
-                mainKarmenMask.SetActive(true);
-                subKarmenMask.SetActive(false);
-            }
-            else if (ServerLoginManager.playerList[0].selectSubCharacter == 2)
-            {
-                mainJadeMask.SetActive(true);
-                subJadeMask.SetActive(false);
-            }
-            else if (ServerLoginManager.playerList[0].selectSubCharacter == 3)
-            {
-                mainLeinaMask.SetActive(true);
-                subLeinaMask.SetActive(false);
-            }
-            else if (ServerLoginManager.playerList[0].selectSubCharacter == 4)
-            {
-                mainEvaMask.SetActive(true);
-                subEvaMask.SetActive(false);
-            }        }
+            mainC2.SetActive(false);
+            subC2.SetActive(true);
+        }
     }
 
     void UpdateHp()
     {
-        Debug.Log(ServerLoginManager.playerList[0].character1Hp);
-        Debug.Log(ServerLoginManager.playerList[0].character1Ep);
-        Debug.Log(ServerLoginManager.playerList[0].character2Hp);
-        Debug.Log(ServerLoginManager.playerList[0].character2Ep);
+        if (ServerLoginManager.playerList[0].is_Main_Character == 1)
+        {
+            //Debug.Log(ServerLoginManager.playerList[0].character1Hp + " / " + c1MaxHp);
+            //Debug.Log(ServerLoginManager.playerList[0].character1Ep + " / " + c1MaxEp);
+            imageMainHpFill.fillAmount = ServerLoginManager.playerList[0].character1Hp / c1MaxHp;
+            imageMainEpFill.fillAmount = ServerLoginManager.playerList[0].character1Ep / c1MaxEp;
+            imageSubHpFill.fillAmount = ServerLoginManager.playerList[0].character2Hp / c2MaxHp;
+            imageSubEpFill.fillAmount = ServerLoginManager.playerList[0].character2Ep / c2MaxEp;
 
-        imageMainHpFill.fillAmount = ServerLoginManager.playerList[0].character1Hp / c1MaxHp;
-        imageMainEpFill.fillAmount = ServerLoginManager.playerList[0].character1Ep / c1MaxEp;
-        imageSubHpFill.fillAmount = ServerLoginManager.playerList[0].character2Hp / c2MaxHp;
-        imageSubEpFill.fillAmount = ServerLoginManager.playerList[0].character2Ep / c2MaxEp;
+            textMainHp.text = string.Format("{0} / {1}", ServerLoginManager.playerList[0].character1Hp, c1MaxHp);
+            textMainEp.text = string.Format("{0} / {1}", ServerLoginManager.playerList[0].character1Ep, c1MaxEp);
+            textSubHp.text = string.Format("{0} / {1}", ServerLoginManager.playerList[0].character2Hp, c2MaxHp);
+            textSubEp.text = string.Format("{0} / {1}", ServerLoginManager.playerList[0].character2Ep, c2MaxEp);
+        }
+        else if (ServerLoginManager.playerList[0].is_Main_Character == 2)
+        {
+            //Debug.Log(ServerLoginManager.playerList[0].character2Hp + " / " + c2MaxHp);
+            //Debug.Log(ServerLoginManager.playerList[0].character2Ep + " / " + c2MaxEp);
+            imageMainHpFill.fillAmount = ServerLoginManager.playerList[0].character2Hp / c2MaxHp;
+            imageMainEpFill.fillAmount = ServerLoginManager.playerList[0].character2Ep / c2MaxEp;
+            imageSubHpFill.fillAmount = ServerLoginManager.playerList[0].character1Hp / c1MaxHp;
+            imageSubEpFill.fillAmount = ServerLoginManager.playerList[0].character1Ep / c1MaxEp;
 
-        textMainHp.text = string.Format("{0} / {1}", ServerLoginManager.playerList[0].character1Hp, c1MaxHp);
-        textMainEp.text = string.Format("{0} / {1}", ServerLoginManager.playerList[0].character1Ep, c1MaxEp);
-        textSubHp.text = string.Format("{0} / {1}", ServerLoginManager.playerList[0].character2Hp, c2MaxHp);
-        textSubEp.text = string.Format("{0} / {1}", ServerLoginManager.playerList[0].character2Ep, c2MaxEp);
+            textMainHp.text = string.Format("{0} / {1}", ServerLoginManager.playerList[0].character2Hp, c2MaxHp);
+            textMainEp.text = string.Format("{0} / {1}", ServerLoginManager.playerList[0].character2Ep, c2MaxEp);
+            textSubHp.text = string.Format("{0} / {1}", ServerLoginManager.playerList[0].character1Hp, c1MaxHp);
+            textSubEp.text = string.Format("{0} / {1}", ServerLoginManager.playerList[0].character1Ep, c1MaxEp);
+        }
     }
 
     //void ResetHp()

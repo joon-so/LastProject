@@ -73,10 +73,6 @@ public class ServerOtherPlayerManager : MonoBehaviour
 
         playerInfoCanvas.transform.position = character1.transform.position;
         otherPlayerID.text = ServerLoginManager.playerList[index].playerID;
-        //hpBar.SetMaxHp(ServerLoginManager.playerList[index].character1Hp);
-        //epBar.SetMaxEp(ServerLoginManager.playerList[index].character1Ep);
-        //hpBar.SetMaxHp(ServerLoginManager.playerList[index].character2Hp);
-        //epBar.SetMaxEp(ServerLoginManager.playerList[index].character2Ep);
     }
     void Update()
     {
@@ -114,7 +110,10 @@ public class ServerOtherPlayerManager : MonoBehaviour
             playerInfoCanvas.transform.position = new Vector3(character1.transform.position.x, 1.0f, character1.transform.position.z + 2.0f);
 
             //-------------------------------------------------------------------------------------
+
+            Debug.Log(index + " / C1------------------------------");
             Debug.Log(ServerLoginManager.playerList[index].character1Hp);
+            Debug.Log(ServerLoginManager.playerList[index].character1Ep);
             hpBar.SetHp(ServerLoginManager.playerList[index].character1Hp);
             epBar.SetEp(ServerLoginManager.playerList[index].character1Ep);
 
@@ -154,6 +153,9 @@ public class ServerOtherPlayerManager : MonoBehaviour
             playerInfoCanvas.transform.position = new Vector3(character2.transform.position.x, 1.0f, character2.transform.position.z + 2.0f);
 
             //-------------------------------------------------------------------------------------
+            Debug.Log(index + " / C2------------------------------");
+            Debug.Log(ServerLoginManager.playerList[index].character1Hp);
+            Debug.Log(ServerLoginManager.playerList[index].character1Ep);
             hpBar.SetHp(ServerLoginManager.playerList[index].character2Hp);
             epBar.SetEp(ServerLoginManager.playerList[index].character2Ep);
 
