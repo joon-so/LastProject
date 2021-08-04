@@ -16,6 +16,9 @@ public class ServerMyPlayerManager : MonoBehaviour
     [SerializeField] GameObject serverLeinaObj;
     [SerializeField] GameObject serverEvaObj;
 
+    [SerializeField] GameObject mainCharacterEffect;
+    [SerializeField] GameObject subCharacterEffect;
+
     public GameObject character1;
     public GameObject character2;
 
@@ -95,6 +98,7 @@ public class ServerMyPlayerManager : MonoBehaviour
 
         mainCameraControl.focus = character1.transform;
 
+
         StartCoroutine("CoSendPacket");
     }
 
@@ -102,6 +106,7 @@ public class ServerMyPlayerManager : MonoBehaviour
     {
         Zoom();
         Click();
+        MainSubEffect();
         if (Input.GetKeyDown(KeyCode.F))
         {
             ServerMainSubTag();
@@ -147,6 +152,21 @@ public class ServerMyPlayerManager : MonoBehaviour
         }
     }
 
+    public void MainSubEffect()
+    {
+        if (isTag)
+        {
+            mainCharacterEffect.transform.position = new Vector3(character1.transform.position.x, 0.2f, character1.transform.position.z);
+            subCharacterEffect.transform.position = new Vector3(character2.transform.position.x, 0.2f, character2.transform.position.z);
+        }
+        else
+        {
+            mainCharacterEffect.transform.position = new Vector3(character2.transform.position.x, 0.2f, character2.transform.position.z);
+            subCharacterEffect.transform.position = new Vector3(character1.transform.position.x, 0.2f, character1.transform.position.z);
+        }
+
+    }
+
     IEnumerator ActiveEffect()
     {
         clickEffect.SetActive(true);
@@ -172,15 +192,18 @@ public class ServerMyPlayerManager : MonoBehaviour
                 movePacket.mainPlayer_Pos_Z = character1.gameObject.transform.position.z;
                 movePacket.mainPlayer_Rot_Y = character1.gameObject.transform.rotation.eulerAngles.y;
 
-                movePacket.mainPlayer_Hp = 0;
-                movePacket.mainPlayer_Mp = 0;
+                movePacket.mainPlayer_Hp = ServerLoginManager.playerList[0].character1Hp;
+                movePacket.mainPlayer_Mp = ServerLoginManager.playerList[0].character1Ep;
 
                 movePacket.subPlayer_Behavior = ServerLoginManager.playerList[0].subCharacterBehavior;
                 movePacket.subPlayer_Pos_X = character2.gameObject.transform.position.x;
                 movePacket.subPlayer_Pos_Z = character2.gameObject.transform.position.z;
                 movePacket.subPlayer_Rot_Y = character2.gameObject.transform.rotation.eulerAngles.y;
-                movePacket.subPlayer_Hp = 0;
-                movePacket.subPlayer_Mp = 0;
+                movePacket.subPlayer_Hp = ServerLoginManager.playerList[0].character2Hp;
+                movePacket.subPlayer_Mp = ServerLoginManager.playerList[0].character2Ep;
+
+                Debug.Log("c1 hp--------------------------");
+                Debug.Log(movePacket.mainPlayer_Hp);
             }
             else if (character2.gameObject.tag == "MainCharacter")
             {
@@ -190,16 +213,16 @@ public class ServerMyPlayerManager : MonoBehaviour
                 movePacket.mainPlayer_Pos_Z = character2.gameObject.transform.position.z;
                 movePacket.mainPlayer_Rot_Y = character2.gameObject.transform.rotation.eulerAngles.y;
 
-                movePacket.mainPlayer_Hp = 0;
-                movePacket.mainPlayer_Mp = 0;
+                movePacket.mainPlayer_Hp = ServerLoginManager.playerList[0].character2Hp;
+                movePacket.mainPlayer_Mp = ServerLoginManager.playerList[0].character2Ep;
 
                 movePacket.subPlayer_Behavior = ServerLoginManager.playerList[0].subCharacterBehavior;
                 movePacket.subPlayer_Pos_X = character1.gameObject.transform.position.x;
                 movePacket.subPlayer_Pos_Z = character1.gameObject.transform.position.z;
                 movePacket.subPlayer_Rot_Y = character1.gameObject.transform.rotation.eulerAngles.y;
 
-                movePacket.subPlayer_Hp = 0;
-                movePacket.subPlayer_Mp = 0;
+                movePacket.subPlayer_Hp = ServerLoginManager.playerList[0].character1Hp;
+                movePacket.subPlayer_Mp = ServerLoginManager.playerList[0].character1Ep;
             }
 
             NetworkManager.instance.Send(movePacket.Write());

@@ -114,6 +114,7 @@ public class ServerCharacterSelectManager : MonoBehaviour
                 ServerLoginManager.playerList[0].character1Hp = 500;
                 ServerLoginManager.playerList[0].character1Ep = 100;
                 selectEffectKarmen.SetActive(true);
+                mainOrSub = 2;
             }
             else if (mainJade.activeSelf)
             {
@@ -121,6 +122,7 @@ public class ServerCharacterSelectManager : MonoBehaviour
                 ServerLoginManager.playerList[0].character1Hp = 400;
                 ServerLoginManager.playerList[0].character1Ep = 200;
                 selectEffectJade.SetActive(true);
+                mainOrSub = 2;
             }
             else if (mainLeina.activeSelf)
             {
@@ -128,6 +130,7 @@ public class ServerCharacterSelectManager : MonoBehaviour
                 ServerLoginManager.playerList[0].character1Hp = 400;
                 ServerLoginManager.playerList[0].character1Ep = 200;
                 selectEffectLeina.SetActive(true);
+                mainOrSub = 2;
             }
             else if (mainEva.activeSelf)
             {
@@ -135,8 +138,8 @@ public class ServerCharacterSelectManager : MonoBehaviour
                 ServerLoginManager.playerList[0].character1Hp = 500;
                 ServerLoginManager.playerList[0].character1Ep = 100;
                 selectEffectEva.SetActive(true);
+                mainOrSub = 2;
             }
-            mainOrSub = 2;
         }
         else if (mainOrSub == 2)
         {
@@ -146,6 +149,7 @@ public class ServerCharacterSelectManager : MonoBehaviour
                 ServerLoginManager.playerList[0].character2Hp = 500;
                 ServerLoginManager.playerList[0].character2Ep = 100;
                 selectEffectKarmen.SetActive(true);
+                mainOrSub = 0;
             }
             else if (subJade.activeSelf)
             {
@@ -153,6 +157,7 @@ public class ServerCharacterSelectManager : MonoBehaviour
                 ServerLoginManager.playerList[0].character2Hp = 400;
                 ServerLoginManager.playerList[0].character2Ep = 200;
                 selectEffectJade.SetActive(true);
+                mainOrSub = 0;
             }
             else if (subLeina.activeSelf)
             {
@@ -160,6 +165,7 @@ public class ServerCharacterSelectManager : MonoBehaviour
                 ServerLoginManager.playerList[0].character2Hp = 400;
                 ServerLoginManager.playerList[0].character2Ep = 200;
                 selectEffectLeina.SetActive(true);
+                mainOrSub = 0;
             }
             else if (subEva.activeSelf)
             {
@@ -167,8 +173,8 @@ public class ServerCharacterSelectManager : MonoBehaviour
                 ServerLoginManager.playerList[0].character2Hp = 500;
                 ServerLoginManager.playerList[0].character2Ep = 100;
                 selectEffectEva.SetActive(true);
+                mainOrSub = 0;
             }
-            mainOrSub = 0;
         }
     }
     void send_Login_packet()

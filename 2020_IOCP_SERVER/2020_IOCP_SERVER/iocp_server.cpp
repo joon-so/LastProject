@@ -472,6 +472,7 @@ void process_packet(int id)
             playerdata.player1.Sub_HP = p->sub_hp;
             playerdata.player1.Sub_MP = p->sub_mp;
 
+            cout << "p1 " << playerdata.player1.Main_HP << endl;
         }
         else if (strcmp(playerdata.player2.ID, p->ID) == 0) {
             playerdata.player2.is_Main_CH = p->is_main_ch;
@@ -487,6 +488,8 @@ void process_packet(int id)
             playerdata.player2.Sub_Rot_Y = p->sub_rot_y;
             playerdata.player2.Sub_HP = p->sub_hp;
             playerdata.player2.Sub_MP = p->sub_mp;
+        
+            cout << "p2 " << playerdata.player1.Main_HP << endl;
         }
         else if (strcmp(playerdata.player3.ID, p->ID) == 0) {
             playerdata.player3.is_Main_CH = p->is_main_ch;
@@ -502,6 +505,8 @@ void process_packet(int id)
             playerdata.player3.Sub_Rot_Y = p->sub_rot_y;
             playerdata.player3.Sub_HP = p->sub_hp;
             playerdata.player3.Sub_MP = p->sub_mp;
+        
+            cout << "p3 " << playerdata.player1.Main_HP << endl;
         }
         else if (strcmp(playerdata.player4.ID, p->ID) == 0) {
             playerdata.player4.is_Main_CH = p->is_main_ch;
@@ -517,6 +522,8 @@ void process_packet(int id)
             playerdata.player4.Sub_Rot_Y = p->sub_rot_y;
             playerdata.player4.Sub_HP = p->sub_hp;
             playerdata.player4.Sub_MP = p->sub_mp;
+        
+            cout << "p4 " << playerdata.player1.Main_HP << endl;
         }
 
         if (first_operate == false) {
@@ -596,19 +603,23 @@ void process_packet(int id)
     case CS_Attack: {
         cs_Attack* p = reinterpret_cast<cs_Attack*>(g_clients[id].m_packet_start);
         cout << "Attack Packet ¼ö½Å" << endl;
-        cout << p->target_id << " " << p->damage << endl;
+        //cout << p->target_id << " " << p->damage << endl;
 
         if (strcmp(playerdata.player1.ID, p->target_id) == 0) {
             playerdata.player1.Main_HP -= p->damage;
+            cout << p->target_id << ": " << playerdata.player1.Main_HP << endl;
         }
         else if (strcmp(playerdata.player2.ID, p->target_id) == 0) {
             playerdata.player2.Main_HP -= p->damage;
+            cout << p->target_id << ": " << playerdata.player2.Main_HP << endl;
         }
         else if (strcmp(playerdata.player3.ID, p->target_id) == 0) {
             playerdata.player3.Main_HP -= p->damage;
+            cout << p->target_id << ": " << playerdata.player3.Main_HP << endl;
         }
         else if (strcmp(playerdata.player4.ID, p->target_id) == 0) {
             playerdata.player4.Main_HP -= p->damage;
+            cout << p->target_id << ": " << playerdata.player4.Main_HP << endl;
         }
         break;
     }

@@ -60,6 +60,37 @@ public class ServerToClientManager : MonoBehaviour
     //Server -> Client
     public void sc_playerPosi_DO(sc_PlayerPosi packet)
     {
+        // 여기문제---------------------------------------------------------------------
+        if (string.Compare(ServerLoginManager.playerList[0].playerID, packet.p1_ID) == 0)
+        {
+            ServerLoginManager.playerList[0].character1Hp = packet.p1_main_hp;
+            ServerLoginManager.playerList[0].character1Ep = packet.p1_main_mp;
+            ServerLoginManager.playerList[0].character2Hp = packet.p1_sub_hp;
+            ServerLoginManager.playerList[0].character2Ep = packet.p1_sub_mp;
+        }
+        else if (string.Compare(ServerLoginManager.playerList[0].playerID, packet.p2_ID) == 0)
+        {
+            ServerLoginManager.playerList[0].character1Hp = packet.p2_main_hp;
+            ServerLoginManager.playerList[0].character1Ep = packet.p2_main_mp;
+            ServerLoginManager.playerList[0].character2Hp = packet.p2_sub_hp;
+            ServerLoginManager.playerList[0].character2Ep = packet.p2_sub_mp;
+        }
+        else if (string.Compare(ServerLoginManager.playerList[0].playerID, packet.p3_ID) == 0)
+        {
+            ServerLoginManager.playerList[0].character1Hp = packet.p3_main_hp;
+            ServerLoginManager.playerList[0].character1Ep = packet.p3_main_mp;
+            ServerLoginManager.playerList[0].character2Hp = packet.p3_sub_hp;
+            ServerLoginManager.playerList[0].character2Ep = packet.p3_sub_mp;
+        }
+        else if (string.Compare(ServerLoginManager.playerList[0].playerID, packet.p4_ID) == 0)
+        {
+            ServerLoginManager.playerList[0].character1Hp = packet.p4_main_hp;
+            ServerLoginManager.playerList[0].character1Ep = packet.p4_main_mp;
+            ServerLoginManager.playerList[0].character2Hp = packet.p4_sub_hp;
+            ServerLoginManager.playerList[0].character2Ep = packet.p4_sub_mp;
+        }
+        //-------------------------------------------------------------------------------
+
         for (int i = 1; i < 4; ++i)
         {
             if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p1_ID) == 0)
@@ -74,11 +105,6 @@ public class ServerToClientManager : MonoBehaviour
 
                 ServerLoginManager.playerList[i].subCharacterPos = new Vector3(packet.p1_sub_pos_x, 0, packet.p1_sub_pos_z);
                 ServerLoginManager.playerList[i].subCharacterRot.eulerAngles = new Vector3(0, packet.p1_sub_rot_y, 0);
-
-                ServerLoginManager.playerList[i].character1Hp = packet.p1_main_hp;
-                ServerLoginManager.playerList[i].character1Ep = packet.p1_main_mp;
-                ServerLoginManager.playerList[i].character2Hp = packet.p1_sub_hp;
-                ServerLoginManager.playerList[i].character2Ep = packet.p1_sub_mp;
             }
             else if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p2_ID) == 0)
             {
@@ -92,11 +118,6 @@ public class ServerToClientManager : MonoBehaviour
 
                 ServerLoginManager.playerList[i].subCharacterPos = new Vector3(packet.p2_sub_pos_x, 0, packet.p2_sub_pos_z);
                 ServerLoginManager.playerList[i].subCharacterRot.eulerAngles = new Vector3(0, packet.p2_sub_rot_y, 0);
-
-                ServerLoginManager.playerList[i].character1Hp = packet.p2_main_hp;
-                ServerLoginManager.playerList[i].character1Ep = packet.p2_main_mp;
-                ServerLoginManager.playerList[i].character2Hp = packet.p2_sub_hp;
-                ServerLoginManager.playerList[i].character2Ep = packet.p2_sub_mp;
             }
             else if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p3_ID) == 0)
             {
@@ -110,11 +131,6 @@ public class ServerToClientManager : MonoBehaviour
 
                 ServerLoginManager.playerList[i].subCharacterPos = new Vector3(packet.p3_sub_pos_x, 0, packet.p3_sub_pos_z);
                 ServerLoginManager.playerList[i].subCharacterRot.eulerAngles = new Vector3(0, packet.p3_sub_rot_y, 0);
-
-                ServerLoginManager.playerList[i].character1Hp = packet.p3_main_hp;
-                ServerLoginManager.playerList[i].character1Ep = packet.p3_main_mp;
-                ServerLoginManager.playerList[i].character2Hp = packet.p3_sub_hp;
-                ServerLoginManager.playerList[i].character2Ep = packet.p3_sub_mp;
             }
             else if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p4_ID) == 0)
             {
@@ -128,11 +144,6 @@ public class ServerToClientManager : MonoBehaviour
                 
                 ServerLoginManager.playerList[i].subCharacterPos = new Vector3(packet.p4_sub_pos_x, 0, packet.p4_sub_pos_z);
                 ServerLoginManager.playerList[i].subCharacterRot.eulerAngles = new Vector3(0, packet.p4_sub_rot_y, 0);
-
-                ServerLoginManager.playerList[i].character1Hp = packet.p4_main_hp;
-                ServerLoginManager.playerList[i].character1Ep = packet.p4_main_mp;
-                ServerLoginManager.playerList[i].character2Hp = packet.p4_sub_hp;
-                ServerLoginManager.playerList[i].character2Ep = packet.p4_sub_mp;
             }
         }
     }

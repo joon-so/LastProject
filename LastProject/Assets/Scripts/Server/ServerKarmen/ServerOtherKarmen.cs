@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ServerOtherKarmen : MonoBehaviour
 {
@@ -19,10 +18,6 @@ public class ServerOtherKarmen : MonoBehaviour
 
     [SerializeField] GameObject parentObject;
 
-    [SerializeField] ServerHpBar hpBar;
-    [SerializeField] ServerEpBar epBar;
-    [SerializeField] Text otherPlayerID;
-
     public int isMainCharacter;
 
     private Animator otherAnimator;
@@ -36,10 +31,6 @@ public class ServerOtherKarmen : MonoBehaviour
         preBehavior = 0;
         index = parentObject.GetComponent<ServerOtherPlayerManager>().index;
         StartCoroutine(StartMotion());
-
-        otherPlayerID.text = ServerLoginManager.playerList[index].playerID;
-        //hpBar.SetMaxHp(ServerLoginManager.playerList[index].character1Hp;
-        //epBar.SetMaxEp
     }
 
     void Update()
@@ -48,8 +39,6 @@ public class ServerOtherKarmen : MonoBehaviour
             AnimationControl();
         else if (isMainCharacter == 2)
             otherAnimator.SetBool("Run", false);
-
-        //hpBar.SetHp(ServerLoginManager.playerList[index].;
     }
 
     public void AnimationControl()

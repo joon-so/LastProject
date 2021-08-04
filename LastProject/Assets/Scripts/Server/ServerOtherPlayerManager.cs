@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ServerOtherPlayerManager : MonoBehaviour
 {
@@ -9,8 +10,16 @@ public class ServerOtherPlayerManager : MonoBehaviour
     [SerializeField] GameObject serverLeinaObj;
     [SerializeField] GameObject serverEvaObj;
 
+    [SerializeField] GameObject mainCharacterEffect;
+    [SerializeField] GameObject subCharacterEffect;
+
     [SerializeField] GameObject character1;
     [SerializeField] GameObject character2;
+
+    [SerializeField] Canvas playerInfoCanvas;
+    [SerializeField] ServerHpBar hpBar;
+    [SerializeField] ServerEpBar epBar;
+    [SerializeField] Text otherPlayerID;
 
     public string ID;
 
@@ -61,16 +70,24 @@ public class ServerOtherPlayerManager : MonoBehaviour
             character2 = serverEvaObj;
             serverEvaObj.SetActive(true);
         }
+
+        playerInfoCanvas.transform.position = character1.transform.position;
+        otherPlayerID.text = ServerLoginManager.playerList[index].playerID;
+        //hpBar.SetMaxHp(ServerLoginManager.playerList[index].character1Hp);
+        //epBar.SetMaxEp(ServerLoginManager.playerList[index].character1Ep);
+        //hpBar.SetMaxHp(ServerLoginManager.playerList[index].character2Hp);
+        //epBar.SetMaxEp(ServerLoginManager.playerList[index].character2Ep);
     }
     void Update()
     {
-        UpdatePos();
+        UpdateOtherPlayerInfo();
     }
 
-    public void UpdatePos()
+    public void UpdateOtherPlayerInfo()
     {
         if (ServerLoginManager.playerList[index].is_Main_Character == 1)
         {
+            //-------------------------------------------------------------------------------------
             if (ServerLoginManager.playerList[index].selectMainCharacter == 1)
                 character1.GetComponent<ServerOtherKarmen>().isMainCharacter = 1;
             else if (ServerLoginManager.playerList[index].selectMainCharacter == 2)
@@ -89,6 +106,19 @@ public class ServerOtherPlayerManager : MonoBehaviour
             else if (ServerLoginManager.playerList[index].selectSubCharacter == 4)
                 character2.GetComponent<ServerOtherEva>().isMainCharacter = 2;
 
+            //-------------------------------------------------------------------------------------
+            mainCharacterEffect.transform.position = new Vector3(character1.transform.position.x, 0.2f, character1.transform.position.z);
+            subCharacterEffect.transform.position = new Vector3(character2.transform.position.x, 0.2f, character2.transform.position.z);
+
+            //-------------------------------------------------------------------------------------
+            playerInfoCanvas.transform.position = new Vector3(character1.transform.position.x, 1.0f, character1.transform.position.z + 2.0f);
+
+            //-------------------------------------------------------------------------------------
+            Debug.Log(ServerLoginManager.playerList[index].character1Hp);
+            hpBar.SetHp(ServerLoginManager.playerList[index].character1Hp);
+            epBar.SetEp(ServerLoginManager.playerList[index].character1Ep);
+
+            //-------------------------------------------------------------------------------------
             character1.transform.position = ServerLoginManager.playerList[index].mainCharacterPos;
             character1.transform.rotation = ServerLoginManager.playerList[index].mainCharacterRot;
 
@@ -97,6 +127,7 @@ public class ServerOtherPlayerManager : MonoBehaviour
         }
         else if (ServerLoginManager.playerList[index].is_Main_Character == 2)
         {
+            //-------------------------------------------------------------------------------------
             if (ServerLoginManager.playerList[index].selectMainCharacter == 1)
                 character1.GetComponent<ServerOtherKarmen>().isMainCharacter = 2;
             else if (ServerLoginManager.playerList[index].selectMainCharacter == 2)
@@ -115,6 +146,18 @@ public class ServerOtherPlayerManager : MonoBehaviour
             else if (ServerLoginManager.playerList[index].selectSubCharacter == 4)
                 character2.GetComponent<ServerOtherEva>().isMainCharacter = 1;
 
+            //-------------------------------------------------------------------------------------
+            mainCharacterEffect.transform.position = new Vector3(character2.transform.position.x, 0.2f, character2.transform.position.z);
+            subCharacterEffect.transform.position = new Vector3(character1.transform.position.x, 0.2f, character1.transform.position.z);
+
+            //-------------------------------------------------------------------------------------
+            playerInfoCanvas.transform.position = new Vector3(character2.transform.position.x, 1.0f, character2.transform.position.z + 2.0f);
+
+            //-------------------------------------------------------------------------------------
+            hpBar.SetHp(ServerLoginManager.playerList[index].character2Hp);
+            epBar.SetEp(ServerLoginManager.playerList[index].character2Ep);
+
+            //-------------------------------------------------------------------------------------
             character2.transform.position = ServerLoginManager.playerList[index].mainCharacterPos;
             character2.transform.rotation = ServerLoginManager.playerList[index].mainCharacterRot;
 
