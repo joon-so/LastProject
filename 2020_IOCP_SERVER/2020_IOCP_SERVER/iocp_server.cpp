@@ -392,6 +392,30 @@ void process_packet(int id)
             playerdata.player1.Set_Name = true;
             playerdata.player1.Main_CH = p->main_charc;
             playerdata.player1.Sub_CH = p->sub_charc;
+            if (p->main_charc == 1) {
+                playerdata.player1.Main_HP = 500;
+            }
+            else if (p->main_charc == 2) {
+                playerdata.player1.Main_HP = 400;
+            }
+            else if (p->main_charc == 3) {
+                playerdata.player1.Main_HP = 400;
+            }
+            else if (p->main_charc == 4) {
+                playerdata.player1.Main_HP = 500;
+            }
+            if (p->sub_charc == 1) {
+                playerdata.player1.Sub_HP = 500;
+            }
+            else if (p->sub_charc == 2) {
+                playerdata.player1.Sub_HP = 400;
+            }
+            else if (p->sub_charc == 3) {
+                playerdata.player1.Sub_HP = 400;
+            }
+            else if (p->sub_charc == 4) {
+                playerdata.player1.Sub_HP = 500;
+            }
         }
         else if (playerdata.playerNum == 2 && playerdata.player2.Set_Name == false)
         {
@@ -399,6 +423,30 @@ void process_packet(int id)
             playerdata.player2.Set_Name = true;
             playerdata.player2.Main_CH = p->main_charc;
             playerdata.player2.Sub_CH = p->sub_charc;
+            if (p->main_charc == 1) {
+                playerdata.player2.Main_HP = 500;
+            }
+            else if (p->main_charc == 2) {
+                playerdata.player2.Main_HP = 400;
+            }
+            else if (p->main_charc == 3) {
+                playerdata.player2.Main_HP = 400;
+            }
+            else if (p->main_charc == 4) {
+                playerdata.player2.Main_HP = 500;
+            }
+            if (p->sub_charc == 1) {
+                playerdata.player2.Sub_HP = 500;
+            }
+            else if (p->sub_charc == 2) {
+                playerdata.player2.Sub_HP = 400;
+            }
+            else if (p->sub_charc == 3) {
+                playerdata.player2.Sub_HP = 400;
+            }
+            else if (p->sub_charc == 4) {
+                playerdata.player2.Sub_HP = 500;
+            }
         }
         else if (playerdata.playerNum == 3 && playerdata.player3.Set_Name == false)
         {
@@ -406,6 +454,30 @@ void process_packet(int id)
             playerdata.player3.Set_Name = true;
             playerdata.player3.Main_CH = p->main_charc;
             playerdata.player3.Sub_CH = p->sub_charc;
+            if (p->main_charc == 1) {
+                playerdata.player3.Main_HP = 500;
+            }
+            else if (p->main_charc == 2) {
+                playerdata.player3.Main_HP = 400;
+            }
+            else if (p->main_charc == 3) {
+                playerdata.player3.Main_HP = 400;
+            }
+            else if (p->main_charc == 4) {
+                playerdata.player3.Main_HP = 500;
+            }
+            if (p->sub_charc == 1) {
+                playerdata.player3.Sub_HP = 500;
+            }
+            else if (p->sub_charc == 2) {
+                playerdata.player3.Sub_HP = 400;
+            }
+            else if (p->sub_charc == 3) {
+                playerdata.player3.Sub_HP = 400;
+            }
+            else if (p->sub_charc == 4) {
+                playerdata.player3.Sub_HP = 500;
+            }
         }
         else if (playerdata.playerNum == 4 && playerdata.player4.Set_Name == false)
         {
@@ -413,6 +485,30 @@ void process_packet(int id)
             playerdata.player4.Set_Name = true;
             playerdata.player4.Main_CH = p->main_charc;
             playerdata.player4.Sub_CH = p->sub_charc;
+            if (p->main_charc == 1) {
+                playerdata.player4.Main_HP = 500;
+            }
+            else if (p->main_charc == 2) {
+                playerdata.player4.Main_HP = 400;
+            }
+            else if (p->main_charc == 3) {
+                playerdata.player4.Main_HP = 400;
+            }
+            else if (p->main_charc == 4) {
+                playerdata.player4.Main_HP = 500;
+            }
+            if (p->sub_charc == 1) {
+                playerdata.player4.Sub_HP = 500;
+            }
+            else if (p->sub_charc == 2) {
+                playerdata.player4.Sub_HP = 400;
+            }
+            else if (p->sub_charc == 3) {
+                playerdata.player4.Sub_HP = 400;
+            }
+            else if (p->sub_charc == 4) {
+                playerdata.player4.Sub_HP = 500;
+            }
         }
 
         cs_Login sp;
@@ -463,13 +559,13 @@ void process_packet(int id)
             playerdata.player1.Main_X = p->main_pos_x;
             playerdata.player1.Main_Z = p->main_pos_z;
             playerdata.player1.Main_Rot_Y = p->main_rot_y;
-            playerdata.player1.Main_HP = p->main_hp;
+           // playerdata.player1.Main_HP = p->main_hp;
             playerdata.player1.Main_MP = p->main_mp;
             playerdata.player1.Sub_Behavior = p->sub_behavior_var;
             playerdata.player1.Sub_X = p->sub_pos_x;
             playerdata.player1.Sub_Z = p->sub_pos_z;
             playerdata.player1.Sub_Rot_Y = p->sub_rot_y;
-            playerdata.player1.Sub_HP = p->sub_hp;
+            //playerdata.player1.Sub_HP = p->sub_hp;
             playerdata.player1.Sub_MP = p->sub_mp;
 
             cout << "p1 " << playerdata.player1.Main_HP << endl;
@@ -480,13 +576,13 @@ void process_packet(int id)
             playerdata.player2.Main_X = p->main_pos_x;
             playerdata.player2.Main_Z = p->main_pos_z;
             playerdata.player2.Main_Rot_Y = p->main_rot_y;
-            playerdata.player2.Main_HP = p->main_hp;
+            //playerdata.player2.Main_HP = p->main_hp;
             playerdata.player2.Main_MP = p->main_mp;
             playerdata.player2.Sub_Behavior = p->sub_behavior_var;
             playerdata.player2.Sub_X = p->sub_pos_x;
             playerdata.player2.Sub_Z = p->sub_pos_z;
             playerdata.player2.Sub_Rot_Y = p->sub_rot_y;
-            playerdata.player2.Sub_HP = p->sub_hp;
+           // playerdata.player2.Sub_HP = p->sub_hp;
             playerdata.player2.Sub_MP = p->sub_mp;
         
             cout << "p2 " << playerdata.player1.Main_HP << endl;
@@ -497,13 +593,13 @@ void process_packet(int id)
             playerdata.player3.Main_X = p->main_pos_x;
             playerdata.player3.Main_Z = p->main_pos_z;
             playerdata.player3.Main_Rot_Y = p->main_rot_y;
-            playerdata.player3.Main_HP = p->main_hp;
+            //playerdata.player3.Main_HP = p->main_hp;
             playerdata.player3.Main_MP = p->main_mp;
             playerdata.player3.Sub_Behavior = p->sub_behavior_var;
             playerdata.player3.Sub_X = p->sub_pos_x;
             playerdata.player3.Sub_Z = p->sub_pos_z;
             playerdata.player3.Sub_Rot_Y = p->sub_rot_y;
-            playerdata.player3.Sub_HP = p->sub_hp;
+            //playerdata.player3.Sub_HP = p->sub_hp;
             playerdata.player3.Sub_MP = p->sub_mp;
         
             cout << "p3 " << playerdata.player1.Main_HP << endl;
@@ -514,13 +610,13 @@ void process_packet(int id)
             playerdata.player4.Main_X = p->main_pos_x;
             playerdata.player4.Main_Z = p->main_pos_z;
             playerdata.player4.Main_Rot_Y = p->main_rot_y;
-            playerdata.player4.Main_HP = p->main_hp;
+            //playerdata.player4.Main_HP = p->main_hp;
             playerdata.player4.Main_MP = p->main_mp;
             playerdata.player4.Sub_Behavior = p->sub_behavior_var;
             playerdata.player4.Sub_X = p->sub_pos_x;
             playerdata.player4.Sub_Z = p->sub_pos_z;
             playerdata.player4.Sub_Rot_Y = p->sub_rot_y;
-            playerdata.player4.Sub_HP = p->sub_hp;
+            //playerdata.player4.Sub_HP = p->sub_hp;
             playerdata.player4.Sub_MP = p->sub_mp;
         
             cout << "p4 " << playerdata.player1.Main_HP << endl;
