@@ -60,6 +60,7 @@ public class ServerToClientManager : MonoBehaviour
     //Server -> Client
     public void sc_playerPosi_DO(sc_PlayerPosi packet)
     {
+
         for (int i = 0; i < 4; ++i)
         {
             // 여기문제---------------------------------------------------------------------
@@ -148,9 +149,14 @@ public class ServerToClientManager : MonoBehaviour
                 ServerLoginManager.playerList[i].character2Ep = packet.p4_sub_mp;
             }
         }
-        //-------------------------------------------------------------------------------
+        for (int i = 0; i < 4; ++i)
+        {
+            Debug.Log("MP-----");
+            Debug.Log(ServerLoginManager.playerList[i].character1Ep);
+        }
+            //-------------------------------------------------------------------------------
 
-        for (int i = 1; i < 4; ++i)
+            for (int i = 1; i < 4; ++i)
         {
             if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p1_ID) == 0)
             {

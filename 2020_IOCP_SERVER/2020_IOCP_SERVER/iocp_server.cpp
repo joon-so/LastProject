@@ -552,7 +552,7 @@ void process_packet(int id)
     case CS_PlayerData: {
         cs_PlayerMove* p = reinterpret_cast<cs_PlayerMove*>(g_clients[id].m_packet_start);
         //스위치 문으로 변경 가능한지 확인하기
-        //cout << p->ID << " " << p->player_pos_x << " " << p->player_pos_z << endl;
+
         if (strcmp(playerdata.player1.ID, p->ID) == 0) {
             playerdata.player1.is_Main_CH = p->is_main_ch;
             playerdata.player1.Main_Behavior = p->main_behavior_var;
@@ -568,7 +568,6 @@ void process_packet(int id)
             //playerdata.player1.Sub_HP = p->sub_hp;
             playerdata.player1.Sub_MP = p->sub_mp;
 
-            cout << "p1 " << playerdata.player1.Main_HP << endl;
         }
         else if (strcmp(playerdata.player2.ID, p->ID) == 0) {
             playerdata.player2.is_Main_CH = p->is_main_ch;
@@ -584,8 +583,7 @@ void process_packet(int id)
             playerdata.player2.Sub_Rot_Y = p->sub_rot_y;
            // playerdata.player2.Sub_HP = p->sub_hp;
             playerdata.player2.Sub_MP = p->sub_mp;
-        
-            cout << "p2 " << playerdata.player1.Main_HP << endl;
+
         }
         else if (strcmp(playerdata.player3.ID, p->ID) == 0) {
             playerdata.player3.is_Main_CH = p->is_main_ch;
@@ -602,7 +600,6 @@ void process_packet(int id)
             //playerdata.player3.Sub_HP = p->sub_hp;
             playerdata.player3.Sub_MP = p->sub_mp;
         
-            cout << "p3 " << playerdata.player1.Main_HP << endl;
         }
         else if (strcmp(playerdata.player4.ID, p->ID) == 0) {
             playerdata.player4.is_Main_CH = p->is_main_ch;
@@ -619,7 +616,6 @@ void process_packet(int id)
             //playerdata.player4.Sub_HP = p->sub_hp;
             playerdata.player4.Sub_MP = p->sub_mp;
         
-            cout << "p4 " << playerdata.player1.Main_HP << endl;
         }
 
         if (first_operate == false) {
@@ -657,7 +653,6 @@ void process_packet(int id)
         //fp.p1_sub_pos_x = 5;
         //fp.p1_sub_pos_z = 5;
         //fp.p1_sub_rot_y = 0;
-
         //strncpy_s(fp.p2_ID, playerdata.player2.ID, sizeof(playerdata.player2.ID));
         //fp.p2_main_behavior = 0;
         //fp.p2_main_pos_x = -6;
@@ -667,7 +662,6 @@ void process_packet(int id)
         //fp.p2_sub_pos_x = -5;
         //fp.p2_sub_pos_z = 5;
         //fp.p2_sub_rot_y = 0;
-
         //strncpy_s(fp.p3_ID, playerdata.player3.ID, sizeof(playerdata.player3.ID));
         //fp.p3_main_behavior = 0;
         //fp.p3_main_pos_x = -6;
@@ -677,7 +671,6 @@ void process_packet(int id)
         //fp.p3_sub_pos_x = -5;
         //fp.p3_sub_pos_z = -5;
         //fp.p3_sub_rot_y = 0;
-
         //strncpy_s(fp.p4_ID, playerdata.player4.ID, sizeof(playerdata.player4.ID));
         //fp.p4_main_behavior = 0;
         //fp.p4_main_pos_x = 6;
