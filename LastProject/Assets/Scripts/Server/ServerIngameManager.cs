@@ -5,22 +5,22 @@ using UnityEngine;
 public class ServerIngameManager : MonoBehaviour
 {
     public List<GameObject> player;
+    public List<GameObject> otherPlayerList;
 
     void Start()
     {
         send_InGame_Start_packet();
-        for (int i = 0; i < player.Count; ++i)
+        for (int i = 0; i < 4; ++i)
         {
             if (ServerLoginManager.playerList[i].playerID != null)
             {
                 player[i].SetActive(true);
-                //childPlayers.Add(player[i]);
+                if (i >= 1)
+                    otherPlayerList.Add(player[i]);
             }
             else
             {
                 Destroy(player[i]);
-                player.RemoveAt(i);
-                i--;
             }
         }
     }

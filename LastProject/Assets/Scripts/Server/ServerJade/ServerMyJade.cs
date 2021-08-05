@@ -67,6 +67,7 @@ public class ServerMyJade : ServerSubAIManager
         FindPlayers();
 
         vecTarget = transform.position;
+
         curDodgeCoolTime = dodgeCoolTime;
         curQSkillCoolTime = qSkillCoolTime;
         curWSkillCoolTime = wSkillCoolTime;
@@ -128,7 +129,6 @@ public class ServerMyJade : ServerSubAIManager
             else if (currentState == characterState.attack)
             {
                 SubAttack();
-                Debug.Log(target);
                 if (target)
                 {
                     Quaternion lookRotation = Quaternion.LookRotation(target.transform.position - transform.position);
