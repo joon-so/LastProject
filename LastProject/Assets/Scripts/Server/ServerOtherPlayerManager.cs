@@ -24,6 +24,7 @@ public class ServerOtherPlayerManager : MonoBehaviour
     public string ID;
 
     public int index;
+    public GameObject mainObj;
 
     void Start()
     {
@@ -111,9 +112,9 @@ public class ServerOtherPlayerManager : MonoBehaviour
 
             //-------------------------------------------------------------------------------------
 
-            Debug.Log(index + " / C1------------------------------");
-            Debug.Log(ServerLoginManager.playerList[index].character1Hp);
-            Debug.Log(ServerLoginManager.playerList[index].character1Ep);
+            //Debug.Log(index + " / C1------------------------------");
+            //Debug.Log(ServerLoginManager.playerList[index].character1Hp);
+            //Debug.Log(ServerLoginManager.playerList[index].character1Ep);
             hpBar.SetHp(ServerLoginManager.playerList[index].character1Hp);
             epBar.SetEp(ServerLoginManager.playerList[index].character1Ep);
 
@@ -123,6 +124,9 @@ public class ServerOtherPlayerManager : MonoBehaviour
 
             character2.transform.position = ServerLoginManager.playerList[index].subCharacterPos;
             character2.transform.rotation = ServerLoginManager.playerList[index].subCharacterRot;
+
+            //-------------------------------------------------------------------------------------
+            mainObj = character1;
         }
         else if (ServerLoginManager.playerList[index].is_Main_Character == 2)
         {
@@ -153,9 +157,9 @@ public class ServerOtherPlayerManager : MonoBehaviour
             playerInfoCanvas.transform.position = new Vector3(character2.transform.position.x, 1.0f, character2.transform.position.z + 2.0f);
 
             //-------------------------------------------------------------------------------------
-            Debug.Log(index + " / C2------------------------------");
-            Debug.Log(ServerLoginManager.playerList[index].character1Hp);
-            Debug.Log(ServerLoginManager.playerList[index].character1Ep);
+            //Debug.Log(index + " / C2------------------------------");
+            //Debug.Log(ServerLoginManager.playerList[index].character1Hp);
+            //Debug.Log(ServerLoginManager.playerList[index].character1Ep);
             hpBar.SetHp(ServerLoginManager.playerList[index].character2Hp);
             epBar.SetEp(ServerLoginManager.playerList[index].character2Ep);
 
@@ -165,6 +169,9 @@ public class ServerOtherPlayerManager : MonoBehaviour
 
             character1.transform.position = ServerLoginManager.playerList[index].subCharacterPos;
             character1.transform.rotation = ServerLoginManager.playerList[index].subCharacterRot;
+
+            //-------------------------------------------------------------------------------------
+            mainObj = character2;
         }
     }
 }

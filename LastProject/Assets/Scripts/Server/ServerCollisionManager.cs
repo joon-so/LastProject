@@ -21,7 +21,10 @@ public class ServerCollisionManager : MonoBehaviour
     {
         cs_Attack AttackPacket = new cs_Attack();
         AttackPacket.Player_ID = ServerLoginManager.playerList[0].playerID;
-        AttackPacket.damage = damage;
+        if (ServerLoginManager.playerList[0].is_Main_Character == 1)
+            AttackPacket.damage = ServerLoginManager.playerList[0].character1Hp;
+        else if (ServerLoginManager.playerList[0].is_Main_Character == 2)
+            AttackPacket.damage = ServerLoginManager.playerList[0].character2Hp;
 
         NetworkManager.instance.Send(AttackPacket.Write());
     }

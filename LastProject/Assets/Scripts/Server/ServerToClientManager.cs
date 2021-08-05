@@ -26,7 +26,7 @@ public class ServerToClientManager : MonoBehaviour
                     ServerLoginManager.playerList[i].selectSubCharacter = packet.sub_charc;
                     break;
                 }
-            }   
+            }
         }
     }
 
@@ -60,12 +60,19 @@ public class ServerToClientManager : MonoBehaviour
     //Server -> Client
     public void sc_playerPosi_DO(sc_PlayerPosi packet)
     {
+        //Debug.Log("c1-----------------------------------------");
+        //Debug.Log(ServerLoginManager.playerList[0].character1Hp);
+        //Debug.Log(ServerLoginManager.playerList[0].character1Ep);
+        //Debug.Log("c2-----------------------------------------");
+        //Debug.Log(ServerLoginManager.playerList[0].character2Hp);
+        //Debug.Log(ServerLoginManager.playerList[0].character2Ep);
 
-        for (int i = 0; i < 4; ++i)
+        for (int i = 1; i < 4; ++i)
         {
             // 여기문제---------------------------------------------------------------------
             if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p1_ID) == 0)
             {
+
                 //if(ServerLoginManager.playerList[i].is_Main_Character == 1)
                 //{
                 //    ServerLoginManager.playerList[i].character1Hp = packet.p1_main_hp;
@@ -149,14 +156,9 @@ public class ServerToClientManager : MonoBehaviour
                 ServerLoginManager.playerList[i].character2Ep = packet.p4_sub_mp;
             }
         }
-        for (int i = 0; i < 4; ++i)
-        {
-            Debug.Log("MP-----");
-            Debug.Log(ServerLoginManager.playerList[i].character1Ep);
-        }
-            //-------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------
 
-            for (int i = 1; i < 4; ++i)
+        for (int i = 1; i < 4; ++i)
         {
             if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p1_ID) == 0)
             {
@@ -203,10 +205,10 @@ public class ServerToClientManager : MonoBehaviour
 
                 ServerLoginManager.playerList[i].mainCharacterBehavior = packet.p4_main_behavior;
                 ServerLoginManager.playerList[i].subCharacterBehavior = packet.p4_sub_behavior;
-                
+
                 ServerLoginManager.playerList[i].mainCharacterPos = new Vector3(packet.p4_main_pos_x, 0, packet.p4_main_pos_z);
                 ServerLoginManager.playerList[i].mainCharacterRot.eulerAngles = new Vector3(0, packet.p4_main_rot_y, 0);
-                
+
                 ServerLoginManager.playerList[i].subCharacterPos = new Vector3(packet.p4_sub_pos_x, 0, packet.p4_sub_pos_z);
                 ServerLoginManager.playerList[i].subCharacterRot.eulerAngles = new Vector3(0, packet.p4_sub_rot_y, 0);
             }
