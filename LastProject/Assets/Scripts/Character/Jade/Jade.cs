@@ -264,12 +264,9 @@ public class Jade : SubAI
 
                 SoundManager.instance.SFXPlay("Attack", attackClip);
 
-                //GameObject instantBullet = Instantiate(assaultRifleBullet, assaultRifleBulletPos.position, assaultRifleBulletPos.rotation);
-                //Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
-                //bulletRigid.velocity = assaultRifleBulletPos.forward;
-                var bullet = ObjectPooling.GetObject();
-                bullet.transform.position = assaultRifleBulletPos.position;
-                bullet.transform.rotation = assaultRifleBulletPos.rotation;
+                GameObject instantBullet = Instantiate(assaultRifleBullet, assaultRifleBulletPos.position, assaultRifleBulletPos.rotation);
+                Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
+                bulletRigid.velocity = assaultRifleBulletPos.forward;
 
                 moveSpeed = 0f;
                 anim.SetBool("Run", false);
@@ -440,10 +437,12 @@ public class Jade : SubAI
 
     IEnumerator AttackDelay()
     {
+        CharacterState.attackCheck = true;
         yield return new WaitForSeconds(0.2f);
         canMove = true;
         canDodge = true;
         canSkill = true;
+        CharacterState.attackCheck = false;
     }
     IEnumerator DodgeDelay()
     {

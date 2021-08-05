@@ -92,9 +92,10 @@ public class ServerOtherPlayerManager : MonoBehaviour
     {
         UpdatePos();
         Debug.Log("------ServerOtherClient------");
-        Debug.Log(index);
-        Debug.Log(ServerLoginManager.playerList[index].mainCharacterBehavior);
-        Debug.Log("-----------------------------");
+        Debug.Log("INDEX" + index);
+        Debug.Log("BeHav" + ServerLoginManager.playerList[index].mainCharacterBehavior);
+        Debug.Log("main" + ServerLoginManager.playerList[index].is_Main_Character);
+
     }
 
     public void UpdatePos()

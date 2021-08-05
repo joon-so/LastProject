@@ -265,7 +265,7 @@ public class Karmen : SubAI
                 {
                     doingAttack = false;
                     anim.SetBool("doAttack", doingAttack);
-
+                    CharacterState.attackCheck = false;
                 }
                 motionEndCheck = true;
             }
@@ -291,7 +291,7 @@ public class Karmen : SubAI
                 }
                 vecTarget = transform.position;
             }
-
+            CharacterState.attackCheck = true;
             moveSpeed = 0f;
             doingAttack = true;
             anim.SetBool("doAttack", doingAttack);

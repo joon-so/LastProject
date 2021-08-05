@@ -236,6 +236,7 @@ public class Eva : SubAI
                 {
                     doingAttack = false;
                     anim.SetBool("Attack", doingAttack);
+                    CharacterState.attackCheck = false;
 
                 }
                 motionEndCheck = true;
@@ -262,7 +263,7 @@ public class Eva : SubAI
                 }
                 vecTarget = transform.position;
             }
-
+            CharacterState.attackCheck = true;
             moveSpeed = 0f;
             doingAttack = true;
             anim.SetBool("Attack", doingAttack);

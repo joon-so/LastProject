@@ -414,10 +414,12 @@ public class Leina : SubAI
     }
     IEnumerator AttackDelay()
     {
+        CharacterState.attackCheck = true;
         yield return new WaitForSeconds(0.5f);
         canMove = true;
         canDodge = true;
         canSkill = true;
+        CharacterState.attackCheck = false;
     }
     IEnumerator DodgeDelay()
     {
