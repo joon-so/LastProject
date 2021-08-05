@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class ServerMyPlayerManager : MonoBehaviour
 {
@@ -35,29 +36,32 @@ public class ServerMyPlayerManager : MonoBehaviour
 
     void Start()
     {
-
         if (ServerLoginManager.playerList[0].selectMainCharacter == 1)
         {
             serverKarmenObj.SetActive(true);
             character1 = serverKarmenObj;
+            character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
             serverKarmenObj.tag = "MainCharacter";
         }
         else if (ServerLoginManager.playerList[0].selectMainCharacter == 2)
         {
             serverJadeObj.SetActive(true);
             character1 = serverJadeObj;
+            character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
             serverJadeObj.tag = "MainCharacter";
         }
         else if (ServerLoginManager.playerList[0].selectMainCharacter == 3)
         {
             serverLeinaObj.SetActive(true);
             character1 = serverLeinaObj;
+            character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
             serverLeinaObj.tag = "MainCharacter";
         }
         else if (ServerLoginManager.playerList[0].selectMainCharacter == 4)
         {
             serverEvaObj.SetActive(true);
             character1 = serverEvaObj;
+            character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
             serverEvaObj.tag = "MainCharacter";
         }
 
@@ -65,24 +69,28 @@ public class ServerMyPlayerManager : MonoBehaviour
         {
             serverKarmenObj.SetActive(true);
             character2 = serverKarmenObj;
+            character2.gameObject.GetComponent<NavMeshAgent>().enabled = true;
             serverKarmenObj.tag = "SubCharacter";
         }
         else if (ServerLoginManager.playerList[0].selectSubCharacter == 2)
         {
             serverJadeObj.SetActive(true);
             character2 = serverJadeObj;
+            character2.gameObject.GetComponent<NavMeshAgent>().enabled = true;
             serverJadeObj.tag = "SubCharacter";
         }
         else if (ServerLoginManager.playerList[0].selectSubCharacter == 3)
         {
             serverLeinaObj.SetActive(true);
             character2 = serverLeinaObj;
+            character2.gameObject.GetComponent<NavMeshAgent>().enabled = true;
             serverLeinaObj.tag = "SubCharacter";
         }
         else if (ServerLoginManager.playerList[0].selectSubCharacter == 4)
         {
             serverEvaObj.SetActive(true);
             character2 = serverEvaObj;
+            character2.gameObject.GetComponent<NavMeshAgent>().enabled = true;
             serverEvaObj.tag = "SubCharacter";
         }
 
@@ -139,6 +147,8 @@ public class ServerMyPlayerManager : MonoBehaviour
             mainCameraControl.focus = character2.transform;
             character1.gameObject.tag = "SubCharacter";
             character2.gameObject.tag = "MainCharacter";
+            character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+            character2.gameObject.GetComponent<NavMeshAgent>().enabled = true;
             ServerLoginManager.playerList[0].is_Main_Character = 2;
             isTag = false;
         }
@@ -147,6 +157,8 @@ public class ServerMyPlayerManager : MonoBehaviour
             mainCameraControl.focus = character1.transform;
             character1.gameObject.tag = "MainCharacter";
             character2.gameObject.tag = "SubCharacter";
+            character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
+            character2.gameObject.GetComponent<NavMeshAgent>().enabled = false;
             ServerLoginManager.playerList[0].is_Main_Character = 1;
             isTag = true;
         }
@@ -203,6 +215,10 @@ public class ServerMyPlayerManager : MonoBehaviour
 
                 movePacket.subPlayer_Hp = ServerLoginManager.playerList[0].character2Hp;
                 movePacket.subPlayer_Mp = ServerLoginManager.playerList[0].character2Ep;
+
+                //Debug.Log("현재 main c1-----");
+                //Debug.Log("Hp: " + movePacket.subPlayer_Hp);
+                //Debug.Log("Ep: " + movePacket.subPlayer_Mp);
             }
             else if (character2.CompareTag("MainCharacter"))
             {
@@ -223,6 +239,10 @@ public class ServerMyPlayerManager : MonoBehaviour
 
                 movePacket.subPlayer_Hp = ServerLoginManager.playerList[0].character1Hp;
                 movePacket.subPlayer_Mp = ServerLoginManager.playerList[0].character1Ep;
+
+                //Debug.Log("현재 main c2-----");
+                //Debug.Log("Hp: " + movePacket.subPlayer_Hp);
+                //Debug.Log("Ep: " + movePacket.subPlayer_Mp);
             }
 
             NetworkManager.instance.Send(movePacket.Write());

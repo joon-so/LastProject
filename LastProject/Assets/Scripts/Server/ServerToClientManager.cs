@@ -60,12 +60,24 @@ public class ServerToClientManager : MonoBehaviour
     //Server -> Client
     public void sc_playerPosi_DO(sc_PlayerPosi packet)
     {
+<<<<<<< Updated upstream
 
         for (int i = 0; i < 4; ++i)
+=======
+        //Debug.Log("c1-----------------------------------------");
+        //Debug.Log(ServerLoginManager.playerList[0].character1Hp);
+        //Debug.Log(ServerLoginManager.playerList[0].character1Ep);
+        //Debug.Log("c2-----------------------------------------");
+        //Debug.Log(ServerLoginManager.playerList[0].character2Hp);
+        //Debug.Log(ServerLoginManager.playerList[0].character2Ep);
+
+        for (int i = 1; i < 4; ++i)
+>>>>>>> Stashed changes
         {
             // 여기문제---------------------------------------------------------------------
             if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p1_ID) == 0)
             {
+           
                 //if(ServerLoginManager.playerList[i].is_Main_Character == 1)
                 //{
                 //    ServerLoginManager.playerList[i].character1Hp = packet.p1_main_hp;

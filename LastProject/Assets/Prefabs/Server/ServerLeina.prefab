@@ -1440,8 +1440,8 @@ MonoBehaviour:
   nav: {fileID: 0}
   rigidbody: {fileID: 0}
   tagCharacter: {fileID: 0}
-  traceDistance: 2
-  attackDistance: 1
+  traceDistance: 5
+  attackDistance: 6
   arrow: {fileID: 5775468925520252961, guid: 9ad73451252dea242b626f843f2c8a4e, type: 3}
   arrowPos: {fileID: 1435195421986375792}
   posionArrow: {fileID: 2152290969651364495, guid: bca4bf11c841fed47a9bd49091ab934b, type: 3}
@@ -1470,9 +1470,6 @@ MonoBehaviour:
   posionArrowPos: {fileID: 5988811455134751771}
   wSkillArrow: {fileID: 5775468925520252961, guid: 1f2198e39ed401749baa85ecf1b86f64, type: 3}
   parentObject: {fileID: 0}
-  hpBar: {fileID: 0}
-  epBar: {fileID: 0}
-  otherPlayerID: {fileID: 0}
   isMainCharacter: 0
 --- !u!195 &5716881524624420709
 NavMeshAgent:

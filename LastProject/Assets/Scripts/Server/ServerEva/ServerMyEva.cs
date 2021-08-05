@@ -50,6 +50,7 @@ public class ServerMyEva : ServerSubAIManager
     }
     void Start()
     {
+        FindPlayers();
 
         vecTarget = transform.position;
         curDodgeCoolTime = dodgeCoolTime;
@@ -65,6 +66,17 @@ public class ServerMyEva : ServerSubAIManager
         onWSkill = true;
 
         curAttackDelay = attackDelay;
+
+        if (gameObject.transform.CompareTag("MainCharacter"))
+        {
+            nav.enabled = false;
+            tagCharacter = ServerMyPlayerManager.instance.character2;
+        }
+        else if (gameObject.transform.CompareTag("SubCharacter"))
+        {
+            nav.enabled = true;
+            tagCharacter = ServerMyPlayerManager.instance.character1;
+        }
 
         StartCoroutine(StartMotion());
 
@@ -91,20 +103,22 @@ public class ServerMyEva : ServerSubAIManager
         }
         else if (gameObject.transform.tag == "SubCharacter")
         {
-            //distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
+            distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
 
-            //if (currentState == characterState.trace)
-            //{
-            //    MainCharacterTrace();
-            //}
-            //else if (currentState == characterState.attack)
-            //{
-            //    SubAttack();
-            //}
-            //else if (currentState == characterState.idle)
-            //{
-            //    Idle();
-            //}
+            if (currentState == characterState.trace)
+            {
+                MainCharacterTrace(tagCharacter.transform.position);
+                myAnimator.SetBool("Run", true);
+            }
+            else if (currentState == characterState.attack)
+            {
+                SubAttack();
+            }
+            else if (currentState == characterState.idle)
+            {
+                Idle();
+                myAnimator.SetBool("Run", false);
+            }
         }
         Tag();
     }

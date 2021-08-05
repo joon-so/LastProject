@@ -20,9 +20,9 @@ public class ServerSubAIManager : MonoBehaviour
     public float attackDistance = 6.0f;
     protected float spinSpeed = 1000f;
 
-    public void FindEnemys()
+    public void FindPlayers()
     {
-        //targets = GameObject.Find("Enemys").GetComponent<EnemyList>().Enemys;
+        targets = GameObject.Find("OtherPlayers").GetComponent<ServerOtherPlayersList>().OtherPlayers;
     }
 
     public void MainCharacterTrace(Vector3 movePos)
@@ -55,7 +55,7 @@ public class ServerSubAIManager : MonoBehaviour
 
     public void Idle()
     {
-        FindEnemy();
+        FindPlayer();
         if (distance <= traceDistance)
         {
             //주변에 적존재한다면 공격, 아니면 대기
@@ -76,7 +76,7 @@ public class ServerSubAIManager : MonoBehaviour
         nav.SetDestination(transform.position);
     }
 
-    public void FindEnemy()
+    public void FindPlayer()
     {
         target = null;
         float targetDistance = attackDistance;

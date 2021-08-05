@@ -7444,8 +7444,8 @@ MonoBehaviour:
   nav: {fileID: 0}
   rigidbody: {fileID: 0}
   tagCharacter: {fileID: 0}
-  traceDistance: 2
-  attackDistance: 1
+  traceDistance: 5
+  attackDistance: 6
   useAssaultRifle: {fileID: 8337776254574485050}
   backAssaultRifle: {fileID: 8337776252495787812}
   assaultRifleBulletPos: {fileID: 8337776253242360634}
@@ -7489,9 +7489,6 @@ MonoBehaviour:
   grenadePos: {fileID: 8337776252512746476}
   Grenade: {fileID: 6059190706233498653, guid: 623872e6aa0cd4b4ba7eb9ae090d5103, type: 3}
   parentObject: {fileID: 0}
-  hpBar: {fileID: 0}
-  epBar: {fileID: 0}
-  otherPlayerID: {fileID: 0}
   isMainCharacter: 0
 --- !u!195 &-4231184979892639640
 NavMeshAgent:
