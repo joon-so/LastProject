@@ -17374,7 +17374,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 967613e47fd233f4d807f835fb2a5f05, type: 3}
-    m_FontSize: 40
+    m_FontSize: 38
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -21427,7 +21427,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 967613e47fd233f4d807f835fb2a5f05, type: 3}
-    m_FontSize: 40
+    m_FontSize: 38
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -25573,6 +25573,7 @@ GameObject:
   - component: {fileID: 1819326255}
   - component: {fileID: 1819326254}
   - component: {fileID: 1819326256}
+  - component: {fileID: 1819326257}
   m_Layer: 0
   m_Name: ServerIngameManager
   m_TagString: Untagged
@@ -25635,6 +25636,26 @@ MonoBehaviour:
   EvaAttackDamage: 10
   EvaQSkillDamage: 0
   EvaWSkillDamage: 60
+--- !u!114 &1819326257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1819326253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ed7ce1e4e935a94eb981faf9a1db22c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  karmenQEp: 10
+  karmenWEp: 20
+  jadeQEp: 20
+  jadeWEp: 15
+  leinaQEp: 15
+  leinaWEp: 20
+  evaQEp: 15
+  evaWEp: 30
 --- !u!1 &1829751295
 GameObject:
   m_ObjectHideFlags: 0

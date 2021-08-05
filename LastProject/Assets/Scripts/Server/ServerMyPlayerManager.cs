@@ -184,9 +184,10 @@ public class ServerMyPlayerManager : MonoBehaviour
 
             movePacket.ID = ID;
 
-            if (character1.gameObject.tag == "MainCharacter")
+            if(character1.CompareTag("MainCharacter"))
             {
                 movePacket.is_Main_Ch = 1;
+
                 movePacket.mainPlayer_Behavior = ServerLoginManager.playerList[0].mainCharacterBehavior;
                 movePacket.mainPlayer_Pos_X = character1.gameObject.transform.position.x;
                 movePacket.mainPlayer_Pos_Z = character1.gameObject.transform.position.z;
@@ -199,15 +200,14 @@ public class ServerMyPlayerManager : MonoBehaviour
                 movePacket.subPlayer_Pos_X = character2.gameObject.transform.position.x;
                 movePacket.subPlayer_Pos_Z = character2.gameObject.transform.position.z;
                 movePacket.subPlayer_Rot_Y = character2.gameObject.transform.rotation.eulerAngles.y;
+
                 movePacket.subPlayer_Hp = ServerLoginManager.playerList[0].character2Hp;
                 movePacket.subPlayer_Mp = ServerLoginManager.playerList[0].character2Ep;
-
-                Debug.Log("c1 hp--------------------------");
-                Debug.Log(movePacket.mainPlayer_Hp);
             }
-            else if (character2.gameObject.tag == "MainCharacter")
+            else if (character2.CompareTag("MainCharacter"))
             {
                 movePacket.is_Main_Ch = 2;
+
                 movePacket.mainPlayer_Behavior = ServerLoginManager.playerList[0].mainCharacterBehavior;
                 movePacket.mainPlayer_Pos_X = character2.gameObject.transform.position.x;
                 movePacket.mainPlayer_Pos_Z = character2.gameObject.transform.position.z;

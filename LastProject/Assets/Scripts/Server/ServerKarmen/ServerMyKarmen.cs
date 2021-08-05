@@ -45,6 +45,7 @@ public class ServerMyKarmen : ServerSubAIManager
     Vector3 vecTarget;
     Animator myAnimator;
     ServerCollisionManager collisionManager;
+    ServerSkillEpManager skillEpManager;
 
     void Awake()
     {
@@ -52,6 +53,7 @@ public class ServerMyKarmen : ServerSubAIManager
         nav = GetComponent<NavMeshAgent>();
         rigidbody = GetComponent<Rigidbody>();
         collisionManager = GameObject.Find("ServerIngameManager").GetComponent<ServerCollisionManager>();
+        skillEpManager = GameObject.Find("ServerIngameManager").GetComponent<ServerSkillEpManager>();
     }
 
     void Start()
@@ -250,8 +252,8 @@ public class ServerMyKarmen : ServerSubAIManager
             canDodge = false;
             canSkill = false;
 
+            ServerLoginManager.playerList[0].character1Ep -= skillEpManager.KarmenQSkill();
             StartCoroutine(BigAttack());
-            ServerLoginManager.playerList[0].mainCharacterBehavior = 4; // WSkill
         }
     }
 
@@ -268,8 +270,8 @@ public class ServerMyKarmen : ServerSubAIManager
             canDodge = false;
             canSkill = false;
 
+            ServerLoginManager.playerList[0].character1Ep -= skillEpManager.KarmenWSkill();
             StartCoroutine(StraightAttack());
-            ServerLoginManager.playerList[0].mainCharacterBehavior = 5; // WSkill
         }
     }
 
@@ -310,11 +312,12 @@ public class ServerMyKarmen : ServerSubAIManager
         leftStaffEffect.SetActive(false);
         rightStaffEffect.SetActive(false);
 
+        ServerLoginManager.playerList[0].mainCharacterBehavior = 4; // WSkill
         myAnimator.SetTrigger("QSkill");
+
         myAnimator.SetFloat("Speed", 0.2f);
         yield return new WaitForSeconds(0.5f);
         qSkill.SetActive(true);
-        //Instantiate(qSkill, qSkillPos.position, qSkillPos.rotation);
         myAnimator.SetFloat("Speed", 0.0f);
         yield return new WaitForSeconds(1.0f);
         myAnimator.SetFloat("Speed", 1.0f);
@@ -341,6 +344,7 @@ public class ServerMyKarmen : ServerSubAIManager
         leftStaffEffect.SetActive(false);
         rightStaffEffect.SetActive(false);
 
+        ServerLoginManager.playerList[0].mainCharacterBehavior = 5; // WSkill
         myAnimator.SetTrigger("WSkill");
         wLeftEffect.SetActive(true);
         wRightEffect.SetActive(true);
@@ -365,6 +369,7 @@ public class ServerMyKarmen : ServerSubAIManager
         canDodge = true;
         canSkill = true;
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer == 10)
@@ -396,27 +401,4 @@ public class ServerMyKarmen : ServerSubAIManager
                 collisionManager.EvaWSkillAttack();
         }
     }
-
-    //private void OnParticleCollision(GameObject other)
-    //{
-    //    if (other.gameObject.tag == "EvaQSkill")
-    //        collisionManager.EvaQSkillAttack();
-    //}
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (gameObject.CompareTag("MainCharacter"))
-    //    {
-    //        if (other.gameObject.CompareTag("KarmenAttack"))
-    //            collisionManager.KarmenBasicAttack();
-    //        if (other.gameObject.CompareTag("KarmenQSkill"))
-    //            collisionManager.KarmenQSkillAttack();
-    //        if (other.gameObject.CompareTag("KarmenWSkill"))
-    //            collisionManager.KarmenWSkillAttack();
-    //        if (other.gameObject.CompareTag("EvaAttack"))
-    //            collisionManager.EvaBasicAttack();
-    //        if (other.gameObject.CompareTag("EvaWSkill"))
-    //            collisionManager.EvaWSkillAttack();
-    //    }
-    //}
 }

@@ -50,6 +50,7 @@ public class ServerMyJade : ServerSubAIManager
     Animator myAnimator;
     ServerOtherJade vec;
     ServerCollisionManager collisionManager;
+    ServerSkillEpManager skillEpManager;
 
     void Awake()
     {
@@ -58,6 +59,7 @@ public class ServerMyJade : ServerSubAIManager
         rigidbody = GetComponent<Rigidbody>();
         //vec = GetComponent<ServerOtherJade>();
         collisionManager = GameObject.Find("ServerIngameManager").GetComponent<ServerCollisionManager>();
+        skillEpManager = GameObject.Find("ServerIngameManager").GetComponent<ServerSkillEpManager>();
     }
 
     void Start()
@@ -240,6 +242,7 @@ public class ServerMyJade : ServerSubAIManager
             canDodge = false;
             canSkill = false;
 
+            ServerLoginManager.playerList[0].character1Ep -= skillEpManager.JadeQSkill();
             StartCoroutine(ShootMissile());
         }
     }
@@ -257,6 +260,7 @@ public class ServerMyJade : ServerSubAIManager
             canDodge = false;
             canSkill = false;
 
+            ServerLoginManager.playerList[0].character1Ep -= skillEpManager.JadeWSkill();
             StartCoroutine(ShootGrenade());
         }
     }
@@ -337,6 +341,7 @@ public class ServerMyJade : ServerSubAIManager
             yield return new WaitForSeconds(1.0f);
 
             myAnimator.SetTrigger("drawAssaultRifle");
+            ServerLoginManager.playerList[0].mainCharacterBehavior = 0;
             yield return new WaitForSeconds(0.5f);
             useMissileLauncher.SetActive(false);
             useAssaultRifle.SetActive(true);
@@ -376,6 +381,7 @@ public class ServerMyJade : ServerSubAIManager
             //vec.vec = nextVec;
         }
 
+        ServerLoginManager.playerList[0].mainCharacterBehavior = 0;
         yield return new WaitForSeconds(0.3f);
         canAttack = true;
         canMove = true;
@@ -414,27 +420,4 @@ public class ServerMyJade : ServerSubAIManager
                 collisionManager.EvaWSkillAttack();
         }
     }
-
-    //private void OnParticleCollision(GameObject other)
-    //{
-    //    if (other.gameObject.tag == "EvaQSkill")
-    //        collisionManager.EvaQSkillAttack();
-    //}
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (gameObject.CompareTag("MainCharacter"))
-    //    {
-    //        if (other.gameObject.CompareTag("KarmenAttack"))
-    //            collisionManager.KarmenBasicAttack();
-    //        if (other.gameObject.CompareTag("KarmenQSkill"))
-    //            collisionManager.KarmenQSkillAttack();
-    //        if (other.gameObject.CompareTag("KarmenWSkill"))
-    //            collisionManager.KarmenWSkillAttack();
-    //        if (other.gameObject.CompareTag("EvaAttack"))
-    //            collisionManager.EvaBasicAttack();
-    //        if (other.gameObject.CompareTag("EvaWSkill"))
-    //            collisionManager.EvaWSkillAttack();
-    //    }
-    //}
 }

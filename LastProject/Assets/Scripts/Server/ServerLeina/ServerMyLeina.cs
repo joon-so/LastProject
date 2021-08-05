@@ -39,6 +39,7 @@ public class ServerMyLeina : ServerSubAIManager
     Vector3 vecTarget;
     Animator myAnimator;
     ServerCollisionManager collisionManager;
+    ServerSkillEpManager skillEpManager;
 
     void Awake()
     {
@@ -46,6 +47,7 @@ public class ServerMyLeina : ServerSubAIManager
         nav = GetComponent<NavMeshAgent>();
         rigidbody = GetComponent<Rigidbody>();
         collisionManager = GameObject.Find("ServerIngameManager").GetComponent<ServerCollisionManager>();
+        skillEpManager = GameObject.Find("ServerIngameManager").GetComponent<ServerSkillEpManager>();
     }
     void Start()
     {
@@ -262,6 +264,7 @@ public class ServerMyLeina : ServerSubAIManager
             canDodge = false;
             canSkill = false;
 
+            ServerLoginManager.playerList[0].character1Ep -= skillEpManager.LeinaQSkill();
             StartCoroutine(ChargingShot());
         }
     }
@@ -279,6 +282,7 @@ public class ServerMyLeina : ServerSubAIManager
             canDodge = false;
             canSkill = false;
 
+            ServerLoginManager.playerList[0].character1Ep -= skillEpManager.LeinaWSkill();
             StartCoroutine(WideShot());
         }
     }
@@ -336,6 +340,8 @@ public class ServerMyLeina : ServerSubAIManager
         Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
         arrowRigid.velocity = posionArrowPos.forward;
         LeinaPosionArrow.speed = 40;
+
+        ServerLoginManager.playerList[0].mainCharacterBehavior = 0;
         yield return new WaitForSeconds(1.0f);
 
         canAttack = true;
@@ -389,6 +395,7 @@ public class ServerMyLeina : ServerSubAIManager
         Rigidbody arrowRigid6 = instantArrow6.GetComponent<Rigidbody>();
         arrowRigid6.velocity = arrowPos.forward;
 
+        ServerLoginManager.playerList[0].mainCharacterBehavior = 0;
         yield return new WaitForSeconds(0.5f);
 
         canAttack = true;
@@ -427,27 +434,4 @@ public class ServerMyLeina : ServerSubAIManager
                 collisionManager.EvaWSkillAttack();
         }
     }
-
-    //private void OnParticleCollision(GameObject other)
-    //{
-    //    if (other.gameObject.tag == "EvaQSkill")
-    //        collisionManager.EvaQSkillAttack();
-    //}
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (gameObject.CompareTag("MainCharacter"))
-    //    {
-    //        if (other.gameObject.CompareTag("KarmenAttack"))
-    //            collisionManager.KarmenBasicAttack();
-    //        if (other.gameObject.CompareTag("KarmenQSkill"))
-    //            collisionManager.KarmenQSkillAttack();
-    //        if (other.gameObject.CompareTag("KarmenWSkill"))
-    //            collisionManager.KarmenWSkillAttack();
-    //        if (other.gameObject.CompareTag("EvaAttack"))
-    //            collisionManager.EvaBasicAttack();
-    //        if (other.gameObject.CompareTag("EvaWSkill"))
-    //            collisionManager.EvaWSkillAttack();
-    //    }
-    //}
 }
