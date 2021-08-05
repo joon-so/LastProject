@@ -61,9 +61,12 @@ public class ServerToClientManager : MonoBehaviour
     public void sc_playerPosi_DO(sc_PlayerPosi packet)
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
         for (int i = 0; i < 4; ++i)
 =======
+=======
+>>>>>>> Stashed changes
         //Debug.Log("c1-----------------------------------------");
         //Debug.Log(ServerLoginManager.playerList[0].character1Hp);
         //Debug.Log(ServerLoginManager.playerList[0].character1Ep);
@@ -72,6 +75,9 @@ public class ServerToClientManager : MonoBehaviour
         //Debug.Log(ServerLoginManager.playerList[0].character2Ep);
 
         for (int i = 1; i < 4; ++i)
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         {
             // 여기문제---------------------------------------------------------------------
