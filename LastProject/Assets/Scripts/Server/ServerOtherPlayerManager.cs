@@ -17,14 +17,20 @@ public class ServerOtherPlayerManager : MonoBehaviour
     [SerializeField] GameObject character2;
 
     [SerializeField] Canvas playerInfoCanvas;
-    [SerializeField] ServerHpBar hpBar;
-    [SerializeField] ServerEpBar epBar;
     [SerializeField] Text otherPlayerID;
+
+    [SerializeField] Slider hpBar;
+    [SerializeField] Slider epBar;
 
     public string ID;
 
     public int index;
     public GameObject mainObj;
+
+    private float c1MaxHp;
+    private float c1MaxEp;
+    private float c2MaxHp;
+    private float c2MaxEp;
 
     void Start()
     {
@@ -34,42 +40,58 @@ public class ServerOtherPlayerManager : MonoBehaviour
         {
             character1 = serverKarmenObj;
             serverKarmenObj.SetActive(true);
+            c1MaxHp = ServerLoginManager.playerList[index].character1Hp;
+            c1MaxEp = ServerLoginManager.playerList[index].character1Ep;
         }
         else if (ServerLoginManager.playerList[index].selectMainCharacter == 2)
         {
             character1 = serverJadeObj;
             serverJadeObj.SetActive(true);
+            c1MaxHp = ServerLoginManager.playerList[index].character1Hp;
+            c1MaxEp = ServerLoginManager.playerList[index].character1Ep;
         }
         else if (ServerLoginManager.playerList[index].selectMainCharacter == 3)
         {
             character1 = serverLeinaObj;
             serverLeinaObj.SetActive(true);
+            c1MaxHp = ServerLoginManager.playerList[index].character1Hp;
+            c1MaxEp = ServerLoginManager.playerList[index].character1Ep;
         }
         else if (ServerLoginManager.playerList[index].selectMainCharacter == 4)
         {
             character1 = serverEvaObj;
             serverEvaObj.SetActive(true);
+            c1MaxHp = ServerLoginManager.playerList[index].character1Hp;
+            c1MaxEp = ServerLoginManager.playerList[index].character1Ep;
         }
 
         if (ServerLoginManager.playerList[index].selectSubCharacter == 1)
         {
             character2 = serverKarmenObj;
             serverKarmenObj.SetActive(true);
+            c2MaxHp = ServerLoginManager.playerList[index].character2Hp;
+            c2MaxEp = ServerLoginManager.playerList[index].character2Ep;
         }
         else if (ServerLoginManager.playerList[index].selectSubCharacter == 2)
         {
             character2 = serverJadeObj;
             serverJadeObj.SetActive(true);
+            c2MaxHp = ServerLoginManager.playerList[index].character2Hp;
+            c2MaxEp = ServerLoginManager.playerList[index].character2Ep;
         }
         else if (ServerLoginManager.playerList[index].selectSubCharacter == 3)
         {
             character2 = serverLeinaObj;
             serverLeinaObj.SetActive(true);
+            c2MaxHp = ServerLoginManager.playerList[index].character2Hp;
+            c2MaxEp = ServerLoginManager.playerList[index].character2Ep;
         }
         else if (ServerLoginManager.playerList[index].selectSubCharacter == 4)
         {
             character2 = serverEvaObj;
             serverEvaObj.SetActive(true);
+            c2MaxHp = ServerLoginManager.playerList[index].character2Hp;
+            c2MaxEp = ServerLoginManager.playerList[index].character2Ep;
         }
 
         playerInfoCanvas.transform.position = character1.transform.position;
@@ -111,12 +133,11 @@ public class ServerOtherPlayerManager : MonoBehaviour
             playerInfoCanvas.transform.position = new Vector3(character1.transform.position.x, 1.0f, character1.transform.position.z + 2.0f);
 
             //-------------------------------------------------------------------------------------
-
-            Debug.Log(index + " / C1------------------------------");
-            Debug.Log(ServerLoginManager.playerList[index].character1Hp);
-            Debug.Log(ServerLoginManager.playerList[index].character1Ep);
-            hpBar.SetHp(ServerLoginManager.playerList[index].character1Hp);
-            epBar.SetEp(ServerLoginManager.playerList[index].character1Ep);
+            //Debug.Log(index + " : C1");
+            //Debug.Log(ServerLoginManager.playerList[index].character1Hp);
+            //Debug.Log(ServerLoginManager.playerList[index].character1Ep);
+            hpBar.value = ServerLoginManager.playerList[index].character1Hp / c1MaxHp;
+            epBar.value = ServerLoginManager.playerList[index].character1Ep / c1MaxEp;
 
             //-------------------------------------------------------------------------------------
             character1.transform.position = ServerLoginManager.playerList[index].mainCharacterPos;
@@ -157,11 +178,11 @@ public class ServerOtherPlayerManager : MonoBehaviour
             playerInfoCanvas.transform.position = new Vector3(character2.transform.position.x, 1.0f, character2.transform.position.z + 2.0f);
 
             //-------------------------------------------------------------------------------------
-            Debug.Log(index + " / C2------------------------------");
-            Debug.Log(ServerLoginManager.playerList[index].character2Hp);
-            Debug.Log(ServerLoginManager.playerList[index].character2Ep);
-            hpBar.SetHp(ServerLoginManager.playerList[index].character2Hp);
-            epBar.SetEp(ServerLoginManager.playerList[index].character2Ep);
+            //Debug.Log(index + " : C2");
+            //Debug.Log(ServerLoginManager.playerList[index].character1Hp);
+            //Debug.Log(ServerLoginManager.playerList[index].character1Ep);
+            hpBar.value = ServerLoginManager.playerList[index].character2Hp / c2MaxHp;
+            epBar.value = ServerLoginManager.playerList[index].character2Ep / c2MaxEp;
 
             //-------------------------------------------------------------------------------------
             character2.transform.position = ServerLoginManager.playerList[index].mainCharacterPos;

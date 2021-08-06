@@ -91,6 +91,7 @@ public class ServerMyKarmen : ServerSubAIManager
 
     void Update()
     {
+        Tag();
         if (gameObject.transform.tag == "MainCharacter")
         {
             curAttackDelay += Time.deltaTime;
@@ -110,43 +111,43 @@ public class ServerMyKarmen : ServerSubAIManager
         }
         else if (gameObject.transform.tag == "SubCharacter")
         {
-            attackDelay += Time.deltaTime;
-            distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
+            //attackDelay += Time.deltaTime;
+            //distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
 
-            if (currentState == characterState.trace)
-            {
-                MainCharacterTrace(tagCharacter.transform.position);
-                myAnimator.SetBool("Run", true);
-                attackDelay = 1f;
-            }
-            else if (currentState == characterState.attack)
-            {
-                SubAttack();
+            //if (currentState == characterState.trace)
+            //{
+            //    MainCharacterTrace(tagCharacter.transform.position);
+            //    myAnimator.SetBool("Run", true);
+            //    attackDelay = 1f;
+            //}
+            //else if (currentState == characterState.attack)
+            //{
+            //    SubAttack();
 
-                if (target)
-                {
-                    Quaternion lookRotation = Quaternion.LookRotation(target.transform.position - transform.position);
-                    Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
-                    transform.rotation = Quaternion.Euler(0, euler.y, 0);
-                }
-                if (attackDelay > subAttackDelay && target != null)
-                {
-                    moveSpeed = 0f;
-                    myAnimator.SetBool("Run", false);
-                    myAnimator.SetTrigger("Throwing");
-                    vecTarget = transform.position;
+            //    if (target)
+            //    {
+            //        Quaternion lookRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+            //        Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
+            //        transform.rotation = Quaternion.Euler(0, euler.y, 0);
+            //    }
+            //    if (attackDelay > subAttackDelay && target != null)
+            //    {
+            //        moveSpeed = 0f;
+            //        myAnimator.SetBool("Run", false);
+            //        myAnimator.SetTrigger("Throwing");
+            //        vecTarget = transform.position;
 
-                    attackDelay = 0;
-                }
-            }
-            else if (currentState == characterState.idle)
-            {
-                Idle();
-                myAnimator.SetBool("Run", false);
-                attackDelay = 1f;
-            }
+            //        attackDelay = 0;
+            //    }
+            //}
+            //else if (currentState == characterState.idle)
+            //{
+            //    Idle();
+            //    myAnimator.SetBool("Run", false);
+            //    attackDelay = 1f;
+            //}
         }
-        Tag();
+
     }
     void Move()
     {
@@ -285,7 +286,11 @@ public class ServerMyKarmen : ServerSubAIManager
             canDodge = false;
             canSkill = false;
 
-            ServerLoginManager.playerList[0].character1Ep -= skillEpManager.KarmenQSkill();
+            if (ServerLoginManager.playerList[0].is_Main_Character == 1)
+                ServerLoginManager.playerList[0].character1Ep -= skillEpManager.KarmenQSkill();
+            else if (ServerLoginManager.playerList[0].is_Main_Character == 2)
+                ServerLoginManager.playerList[0].character2Ep -= skillEpManager.KarmenQSkill();
+
             StartCoroutine(BigAttack());
         }
     }
@@ -303,7 +308,11 @@ public class ServerMyKarmen : ServerSubAIManager
             canDodge = false;
             canSkill = false;
 
-            ServerLoginManager.playerList[0].character1Ep -= skillEpManager.KarmenWSkill();
+            if (ServerLoginManager.playerList[0].is_Main_Character == 1)
+                ServerLoginManager.playerList[0].character1Ep -= skillEpManager.KarmenWSkill();
+            else if (ServerLoginManager.playerList[0].is_Main_Character == 2)
+                ServerLoginManager.playerList[0].character2Ep -= skillEpManager.KarmenWSkill();
+
             StartCoroutine(StraightAttack());
         }
     }
