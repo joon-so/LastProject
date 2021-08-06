@@ -112,12 +112,18 @@ public class ServerMyPlayerManager : MonoBehaviour
 
     void Update()
     {
-        Zoom();
-        Click();
-        MainSubEffect();
-        if (Input.GetKeyDown(KeyCode.F))
+        if (ServerLoginManager.playerList[0].character1Hp <= 0 || ServerLoginManager.playerList[0].character2Hp <= 0)
         {
-            ServerMainSubTag();
+            // 플레이어 사망
+        }
+        else
+        {
+            Click();
+            MainSubEffect();
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                ServerMainSubTag();
+            }
         }
     }
     void Zoom()
@@ -216,10 +222,6 @@ public class ServerMyPlayerManager : MonoBehaviour
 
                 movePacket.subPlayer_Hp = ServerLoginManager.playerList[0].character2Hp;
                 movePacket.subPlayer_Mp = ServerLoginManager.playerList[0].character2Ep;
-
-                //Debug.Log("현재 main c1-----");
-                //Debug.Log("Hp: " + movePacket.subPlayer_Hp);
-                //Debug.Log("Ep: " + movePacket.subPlayer_Mp);
             }
             else if (character2.CompareTag("MainCharacter"))
             {
@@ -240,10 +242,6 @@ public class ServerMyPlayerManager : MonoBehaviour
 
                 movePacket.subPlayer_Hp = ServerLoginManager.playerList[0].character1Hp;
                 movePacket.subPlayer_Mp = ServerLoginManager.playerList[0].character1Ep;
-
-                //Debug.Log("현재 main c2-----");
-                //Debug.Log("Hp: " + movePacket.subPlayer_Hp);
-                //Debug.Log("Ep: " + movePacket.subPlayer_Mp);
             }
 
             NetworkManager.instance.Send(movePacket.Write());

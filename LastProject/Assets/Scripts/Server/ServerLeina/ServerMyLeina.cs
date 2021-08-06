@@ -415,8 +415,8 @@ public class ServerMyLeina : ServerSubAIManager
         Rigidbody arrowRigid6 = instantArrow6.GetComponent<Rigidbody>();
         arrowRigid6.velocity = arrowPos.forward;
 
-        ServerLoginManager.playerList[0].mainCharacterBehavior = 0;
         yield return new WaitForSeconds(0.5f);
+        ServerLoginManager.playerList[0].mainCharacterBehavior = 0;
 
         canAttack = true;
         canMove = true;

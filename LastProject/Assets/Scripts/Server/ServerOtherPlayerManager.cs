@@ -142,7 +142,7 @@ public class ServerOtherPlayerManager : MonoBehaviour
             character1.transform.position = ServerLoginManager.playerList[index].mainCharacterPos;
             character1.transform.rotation = ServerLoginManager.playerList[index].mainCharacterRot;
 
-            character2.transform.position = ServerLoginManager.playerList[index].subCharacterPos;
+            character2.transform.position = ServerLoginManager.playerList[index].subCharacterPos; 
             character2.transform.rotation = ServerLoginManager.playerList[index].subCharacterRot;
 
             //-------------------------------------------------------------------------------------
