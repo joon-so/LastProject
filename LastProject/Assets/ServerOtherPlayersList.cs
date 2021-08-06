@@ -12,7 +12,7 @@ public class ServerOtherPlayersList : MonoBehaviour
     {
         addObj = false;
         OtherPlayers = GameObject.Find("ServerIngameManager").GetComponent<ServerIngameManager>().otherPlayerList;
-        Debug.Log("--------------------------------");
+        
         //Debug.Log(OtherPlayers[0]);
 
         //for (int i=0; i< OtherPlayers.Count;++i)

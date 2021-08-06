@@ -103,22 +103,22 @@ public class ServerMyEva : ServerSubAIManager
         }
         else if (gameObject.transform.tag == "SubCharacter")
         {
-            distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
+            //distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
 
-            if (currentState == characterState.trace)
-            {
-                MainCharacterTrace(tagCharacter.transform.position);
-                myAnimator.SetBool("Run", true);
-            }
-            else if (currentState == characterState.attack)
-            {
-                SubAttack();
-            }
-            else if (currentState == characterState.idle)
-            {
-                Idle();
-                myAnimator.SetBool("Run", false);
-            }
+            //if (currentState == characterState.trace)
+            //{
+            //    MainCharacterTrace(tagCharacter.transform.position);
+            //    myAnimator.SetBool("Run", true);
+            //}
+            //else if (currentState == characterState.attack)
+            //{
+            //    SubAttack();
+            //}
+            //else if (currentState == characterState.idle)
+            //{
+            //    Idle();
+            //    myAnimator.SetBool("Run", false);
+            //}
         }
         Tag();
     }
@@ -259,7 +259,10 @@ public class ServerMyEva : ServerSubAIManager
             canDodge = false;
             canSkill = false;
 
-            ServerLoginManager.playerList[0].character1Ep -= skillEpManager.EvaQSkill();
+            if (ServerLoginManager.playerList[0].is_Main_Character == 1)
+                ServerLoginManager.playerList[0].character1Ep -= skillEpManager.EvaQSkill();
+            else if (ServerLoginManager.playerList[0].is_Main_Character == 2)
+                ServerLoginManager.playerList[0].character2Ep -= skillEpManager.EvaQSkill();
             StartCoroutine(FireGun());
         }
     }
@@ -277,7 +280,10 @@ public class ServerMyEva : ServerSubAIManager
             canDodge = false;
             canSkill = false;
 
-            ServerLoginManager.playerList[0].character1Ep -= skillEpManager.EvaWSkill();
+            if(ServerLoginManager.playerList[0].is_Main_Character == 1)
+                ServerLoginManager.playerList[0].character1Ep -= skillEpManager.EvaWSkill();
+            else if (ServerLoginManager.playerList[0].is_Main_Character == 2)
+                ServerLoginManager.playerList[0].character2Ep -= skillEpManager.EvaWSkill();
             StartCoroutine(ShockWave());
         }
     }

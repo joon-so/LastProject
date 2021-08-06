@@ -149,7 +149,6 @@ public class ServerMyPlayerManager : MonoBehaviour
             character2.gameObject.tag = "MainCharacter";
             character2.gameObject.GetComponent<NavMeshAgent>().enabled = true;
             character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
-            
             ServerLoginManager.playerList[0].is_Main_Character = 2;
             isTag = false;
         }
@@ -158,9 +157,9 @@ public class ServerMyPlayerManager : MonoBehaviour
             mainCameraControl.focus = character1.transform;
             character1.gameObject.tag = "MainCharacter";
             character2.gameObject.tag = "SubCharacter";
+
             character2.gameObject.GetComponent<NavMeshAgent>().enabled = false;
             character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
-
             ServerLoginManager.playerList[0].is_Main_Character = 1;
             isTag = true;
         }
