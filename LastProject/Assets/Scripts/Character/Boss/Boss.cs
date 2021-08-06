@@ -144,7 +144,11 @@ public class Boss : MonoBehaviour
     }
     IEnumerator GroundPattern1()
     {
-        yield return null;
+        anim.SetInteger("Pattern", pattern);
+        yield return new WaitForSeconds(1f);
+        pattern = 0;
+        anim.SetInteger("Pattern", pattern);
+        canAttack = true;
     }
     IEnumerator GroundPattern2()
     {
