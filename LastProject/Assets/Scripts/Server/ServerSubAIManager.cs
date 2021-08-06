@@ -30,7 +30,8 @@ public class ServerSubAIManager : MonoBehaviour
         currentState = characterState.trace;
         if (distance > traceDistance)
         {
-            nav.SetDestination(movePos);
+            //nav.SetDestination(movePos);
+            StartCoroutine(SetDes(movePos));
         }
         else
         {
@@ -73,7 +74,8 @@ public class ServerSubAIManager : MonoBehaviour
             currentState = characterState.trace;
             target = null;
         }
-        nav.SetDestination(transform.position);
+        StartCoroutine(SetDes(transform.position));
+//        nav.SetDestination(transform.position);
     }
 
     public void FindPlayer()
@@ -89,5 +91,11 @@ public class ServerSubAIManager : MonoBehaviour
                 target = targets[i];
             }
         }
+    }
+
+    IEnumerator SetDes(Vector3 target)
+    {
+        nav.SetDestination(target);
+        yield return null;
     }
 }

@@ -40,28 +40,28 @@ public class ServerMyPlayerManager : MonoBehaviour
         {
             serverKarmenObj.SetActive(true);
             character1 = serverKarmenObj;
-            character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+            character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
             serverKarmenObj.tag = "MainCharacter";
         }
         else if (ServerLoginManager.playerList[0].selectMainCharacter == 2)
         {
             serverJadeObj.SetActive(true);
             character1 = serverJadeObj;
-            character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+            character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
             serverJadeObj.tag = "MainCharacter";
         }
         else if (ServerLoginManager.playerList[0].selectMainCharacter == 3)
         {
             serverLeinaObj.SetActive(true);
             character1 = serverLeinaObj;
-            character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+            character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
             serverLeinaObj.tag = "MainCharacter";
         }
         else if (ServerLoginManager.playerList[0].selectMainCharacter == 4)
         {
             serverEvaObj.SetActive(true);
             character1 = serverEvaObj;
-            character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+            character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
             serverEvaObj.tag = "MainCharacter";
         }
 

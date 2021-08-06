@@ -103,22 +103,22 @@ public class ServerMyEva : ServerSubAIManager
         }
         else if (gameObject.transform.tag == "SubCharacter")
         {
-            distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
+            //distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
 
-            if (currentState == characterState.trace)
-            {
-                MainCharacterTrace(tagCharacter.transform.position);
-                myAnimator.SetBool("Run", true);
-            }
-            else if (currentState == characterState.attack)
-            {
-                SubAttack();
-            }
-            else if (currentState == characterState.idle)
-            {
-                Idle();
-                myAnimator.SetBool("Run", false);
-            }
+            //if (currentState == characterState.trace)
+            //{
+            //    MainCharacterTrace(tagCharacter.transform.position);
+            //    myAnimator.SetBool("Run", true);
+            //}
+            //else if (currentState == characterState.attack)
+            //{
+            //    SubAttack();
+            //}
+            //else if (currentState == characterState.idle)
+            //{
+            //    Idle();
+            //    myAnimator.SetBool("Run", false);
+            //}
         }
         Tag();
     }
