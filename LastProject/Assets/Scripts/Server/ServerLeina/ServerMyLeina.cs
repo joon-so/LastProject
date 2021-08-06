@@ -101,45 +101,45 @@ public class ServerMyLeina : ServerSubAIManager
         }
         else if (gameObject.transform.tag == "SubCharacter")
         {
-            //distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
-            //if (currentState == characterState.trace)
-            //{
-            //    MainCharacterTrace(tagCharacter.transform.position);
-            //    myAnimator.SetBool("Run", true);
-            //    curFireDelay = 1f;
-            //}
-            //else if (currentState == characterState.attack)
-            //{
-            //    SubAttack();
+            distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
+            if (currentState == characterState.trace)
+            {
+                MainCharacterTrace(tagCharacter.transform.position);
+                myAnimator.SetBool("Run", true);
+                curFireDelay = 1f;
+            }
+            else if (currentState == characterState.attack)
+            {
+                SubAttack();
 
-            //    if (target)
-            //    {
-            //        Quaternion lookRotation = Quaternion.LookRotation(target.transform.position - transform.position);
-            //        Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
-            //        transform.rotation = Quaternion.Euler(0, euler.y, 0);
-            //    }
-            //    if (curFireDelay > subFireDelay && target != null)
-            //    {
-            //        GameObject instantArrow = Instantiate(arrow, arrowPos.position, arrowPos.rotation);
-            //        Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
-            //        arrowRigid.velocity = arrowPos.forward;
+                if (target)
+                {
+                    Quaternion lookRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+                    Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
+                    transform.rotation = Quaternion.Euler(0, euler.y, 0);
+                }
+                if (curFireDelay > subFireDelay && target != null)
+                {
+                    GameObject instantArrow = Instantiate(arrow, arrowPos.position, arrowPos.rotation);
+                    Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
+                    arrowRigid.velocity = arrowPos.forward;
 
-            //        moveSpeed = 0f;
-            //        myAnimator.SetBool("Run", false);
-            //        vecTarget = transform.position;
+                    moveSpeed = 0f;
+                    myAnimator.SetBool("Run", false);
+                    vecTarget = transform.position;
 
-            //        myAnimator.SetTrigger("Attack");
-            //        curFireDelay = 0;
+                    myAnimator.SetTrigger("Attack");
+                    curFireDelay = 0;
 
-            //        StartCoroutine(AttackDelay());
-            //    }
-            //}
-            //else if (currentState == characterState.idle)
-            //{
-            //    Idle();
-            //    myAnimator.SetBool("Run", false);
-            //    curFireDelay = 1f;
-            //}
+                    StartCoroutine(AttackDelay());
+                }
+            }
+            else if (currentState == characterState.idle)
+            {
+                Idle();
+                myAnimator.SetBool("Run", false);
+                curFireDelay = 1f;
+            }
         }
         Tag();
     }
