@@ -560,13 +560,13 @@ void process_packet(int id)
             playerdata.player1.Main_X = p->main_pos_x;
             playerdata.player1.Main_Z = p->main_pos_z;
             playerdata.player1.Main_Rot_Y = p->main_rot_y;
-            //playerdata.player1.Main_HP = p->main_hp;
+            playerdata.player1.Main_HP = p->main_hp;
             playerdata.player1.Main_MP = p->main_mp;
             playerdata.player1.Sub_Behavior = p->sub_behavior_var;
             playerdata.player1.Sub_X = p->sub_pos_x;
             playerdata.player1.Sub_Z = p->sub_pos_z;
             playerdata.player1.Sub_Rot_Y = p->sub_rot_y;
-            //playerdata.player1.Sub_HP = p->sub_hp;
+            playerdata.player1.Sub_HP = p->sub_hp;
             playerdata.player1.Sub_MP = p->sub_mp;
 
         }
@@ -576,13 +576,13 @@ void process_packet(int id)
             playerdata.player2.Main_X = p->main_pos_x;
             playerdata.player2.Main_Z = p->main_pos_z;
             playerdata.player2.Main_Rot_Y = p->main_rot_y;
-            //playerdata.player2.Main_HP = p->main_hp;
+            playerdata.player2.Main_HP = p->main_hp;
             playerdata.player2.Main_MP = p->main_mp;
             playerdata.player2.Sub_Behavior = p->sub_behavior_var;
             playerdata.player2.Sub_X = p->sub_pos_x;
             playerdata.player2.Sub_Z = p->sub_pos_z;
             playerdata.player2.Sub_Rot_Y = p->sub_rot_y;
-            //playerdata.player2.Sub_HP = p->sub_hp;
+            playerdata.player2.Sub_HP = p->sub_hp;
             playerdata.player2.Sub_MP = p->sub_mp;
 
         }
@@ -592,13 +592,13 @@ void process_packet(int id)
             playerdata.player3.Main_X = p->main_pos_x;
             playerdata.player3.Main_Z = p->main_pos_z;
             playerdata.player3.Main_Rot_Y = p->main_rot_y;
-            //playerdata.player3.Main_HP = p->main_hp;
+            playerdata.player3.Main_HP = p->main_hp;
             playerdata.player3.Main_MP = p->main_mp;
             playerdata.player3.Sub_Behavior = p->sub_behavior_var;
             playerdata.player3.Sub_X = p->sub_pos_x;
             playerdata.player3.Sub_Z = p->sub_pos_z;
             playerdata.player3.Sub_Rot_Y = p->sub_rot_y;
-            //playerdata.player3.Sub_HP = p->sub_hp;
+            playerdata.player3.Sub_HP = p->sub_hp;
             playerdata.player3.Sub_MP = p->sub_mp;
         
         }
@@ -608,13 +608,13 @@ void process_packet(int id)
             playerdata.player4.Main_X = p->main_pos_x;
             playerdata.player4.Main_Z = p->main_pos_z;
             playerdata.player4.Main_Rot_Y = p->main_rot_y;
-            //playerdata.player4.Main_HP = p->main_hp;
+            playerdata.player4.Main_HP = p->main_hp;
             playerdata.player4.Main_MP = p->main_mp;
             playerdata.player4.Sub_Behavior = p->sub_behavior_var;
             playerdata.player4.Sub_X = p->sub_pos_x;
             playerdata.player4.Sub_Z = p->sub_pos_z;
             playerdata.player4.Sub_Rot_Y = p->sub_rot_y;
-            //playerdata.player4.Sub_HP = p->sub_hp;
+            playerdata.player4.Sub_HP = p->sub_hp;
             playerdata.player4.Sub_MP = p->sub_mp;
         
         }
@@ -640,54 +640,6 @@ void process_packet(int id)
                 send_packet(i, &gs);
             }
         }
-
-        ////초기 좌표값 전송
-        //sc_player_posi fp;
-        //fp.size = sizeof(fp);
-        //fp.type = SC_First_PlayerPosi;
-        //strncpy_s(fp.p1_ID, playerdata.player1.ID, sizeof(playerdata.player1.ID));
-        //fp.p1_main_behavior = 0;
-        //fp.p1_main_pos_x = 6;
-        //fp.p1_main_pos_z = 6;
-        //fp.p1_main_rot_y = 0;
-        //fp.p1_sub_behavior = 0;
-        //fp.p1_sub_pos_x = 5;
-        //fp.p1_sub_pos_z = 5;
-        //fp.p1_sub_rot_y = 0;
-        //strncpy_s(fp.p2_ID, playerdata.player2.ID, sizeof(playerdata.player2.ID));
-        //fp.p2_main_behavior = 0;
-        //fp.p2_main_pos_x = -6;
-        //fp.p2_main_pos_z = 6;
-        //fp.p2_main_rot_y = 0;
-        //fp.p2_sub_behavior = 0;
-        //fp.p2_sub_pos_x = -5;
-        //fp.p2_sub_pos_z = 5;
-        //fp.p2_sub_rot_y = 0;
-        //strncpy_s(fp.p3_ID, playerdata.player3.ID, sizeof(playerdata.player3.ID));
-        //fp.p3_main_behavior = 0;
-        //fp.p3_main_pos_x = -6;
-        //fp.p3_main_pos_z = -6;
-        //fp.p3_main_rot_y = 0;
-        //fp.p3_sub_behavior = 0;
-        //fp.p3_sub_pos_x = -5;
-        //fp.p3_sub_pos_z = -5;
-        //fp.p3_sub_rot_y = 0;
-        //strncpy_s(fp.p4_ID, playerdata.player4.ID, sizeof(playerdata.player4.ID));
-        //fp.p4_main_behavior = 0;
-        //fp.p4_main_pos_x = 6;
-        //fp.p4_main_pos_z = -6;
-        //fp.p4_main_rot_y = 0;
-        //fp.p4_sub_behavior = 0;
-        //fp.p4_sub_pos_x = 5;
-        //fp.p4_sub_pos_z = -5;
-        //fp.p4_sub_rot_y = 0;
-
-        //for (int i = 0; i < MAX_USER; i++) {
-        //    if (g_clients[i].in_use == true) {
-        //        send_packet(i, &fp);
-        //    }
-        //}
-
         break;
     }
     case CS_Attack: {
@@ -695,22 +647,22 @@ void process_packet(int id)
         cout << "Attack Packet 수신" << endl;
         //cout << p->target_id << " " << p->damage << endl;
 
-        if (strcmp(playerdata.player1.ID, p->target_id) == 0) {
-            playerdata.player1.Main_HP = p->damage;
-            cout << p->target_id << ": " << playerdata.player1.Main_HP << endl;
-        }
-        else if (strcmp(playerdata.player2.ID, p->target_id) == 0) {
-            playerdata.player2.Main_HP = p->damage;
-            cout << p->target_id << ": " << playerdata.player2.Main_HP << endl;
-        }
-        else if (strcmp(playerdata.player3.ID, p->target_id) == 0) {
-            playerdata.player3.Main_HP = p->damage;
-            cout << p->target_id << ": " << playerdata.player3.Main_HP << endl;
-        }
-        else if (strcmp(playerdata.player4.ID, p->target_id) == 0) {
-            playerdata.player4.Main_HP = p->damage;
-            cout << p->target_id << ": " << playerdata.player4.Main_HP << endl;
-        }
+        //if (strcmp(playerdata.player1.ID, p->target_id) == 0) {
+        //    playerdata.player1.Main_HP = p->damage;
+        //    cout << p->target_id << ": " << playerdata.player1.Main_HP << endl;
+        //}
+        //else if (strcmp(playerdata.player2.ID, p->target_id) == 0) {
+        //    playerdata.player2.Main_HP = p->damage;
+        //    cout << p->target_id << ": " << playerdata.player2.Main_HP << endl;
+        //}
+        //else if (strcmp(playerdata.player3.ID, p->target_id) == 0) {
+        //    playerdata.player3.Main_HP = p->damage;
+        //    cout << p->target_id << ": " << playerdata.player3.Main_HP << endl;
+        //}
+        //else if (strcmp(playerdata.player4.ID, p->target_id) == 0) {
+        //    playerdata.player4.Main_HP = p->damage;
+        //    cout << p->target_id << ": " << playerdata.player4.Main_HP << endl;
+        //}
         break;
     }
     case CS_InGame:
