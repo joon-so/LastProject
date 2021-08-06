@@ -69,12 +69,12 @@ public class ServerToClientManager : MonoBehaviour
 
         for (int i = 1; i < 4; ++i)
         {
-            Debug.Log("c1-----------------------------------------");
-            Debug.Log(ServerLoginManager.playerList[i].character1Hp);
-            Debug.Log(ServerLoginManager.playerList[i].character1Ep);
-            Debug.Log("c2-----------------------------------------");
-            Debug.Log(ServerLoginManager.playerList[i].character2Hp);
-            Debug.Log(ServerLoginManager.playerList[i].character2Ep);
+            //Debug.Log("c1-----------------------------------------");
+            //Debug.Log(ServerLoginManager.playerList[i].character1Hp);
+            //Debug.Log(ServerLoginManager.playerList[i].character1Ep);
+            //Debug.Log("c2-----------------------------------------");
+            //Debug.Log(ServerLoginManager.playerList[i].character2Hp);
+            //Debug.Log(ServerLoginManager.playerList[i].character2Ep);
             // 여기문제---------------------------------------------------------------------
             if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p1_ID) == 0)
             {

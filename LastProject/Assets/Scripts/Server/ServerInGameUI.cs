@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class ServerInGameUI : MonoBehaviour
 {
@@ -75,32 +76,32 @@ public class ServerInGameUI : MonoBehaviour
         if (ServerLoginManager.playerList[0].selectMainCharacter == 1)
         {
             mainKarmenMask.SetActive(true);
-            c1MaxHp = ServerLoginManager.playerList[0].character1Hp;
-            c1MaxEp = ServerLoginManager.playerList[0].character1Ep;
+            c1MaxHp = 500.0f;
+            c1MaxEp = 100.0f;
             mainC1 = mainKarmenMask;
             subC1 = subKarmenMask;
         }
         else if (ServerLoginManager.playerList[0].selectMainCharacter == 2)
         {
             mainJadeMask.SetActive(true);
-            c1MaxHp = ServerLoginManager.playerList[0].character1Hp;
-            c1MaxEp = ServerLoginManager.playerList[0].character1Ep;
+            c1MaxHp = 400.0f;
+            c1MaxEp = 200.0f;
             mainC1 = mainJadeMask;
             subC1 = subJadeMask;
         }
         else if (ServerLoginManager.playerList[0].selectMainCharacter == 3)
         {
             mainLeinaMask.SetActive(true);
-            c1MaxHp = ServerLoginManager.playerList[0].character1Hp;
-            c1MaxEp = ServerLoginManager.playerList[0].character1Ep;
+            c1MaxHp = 400.0f;
+            c1MaxEp = 200.0f;
             mainC1 = mainLeinaMask;
             subC1 = subLeinaMask;
         }
         else if (ServerLoginManager.playerList[0].selectMainCharacter == 4)
         {
             mainEvaMask.SetActive(true);
-            c1MaxHp = ServerLoginManager.playerList[0].character1Hp;
-            c1MaxEp = ServerLoginManager.playerList[0].character1Ep;
+            c1MaxHp = 500.0f;
+            c1MaxEp = 100.0f;
             mainC1 = mainEvaMask;
             subC1 = subEvaMask;
         }
@@ -108,32 +109,32 @@ public class ServerInGameUI : MonoBehaviour
         if (ServerLoginManager.playerList[0].selectSubCharacter == 1)
         {
             subKarmenMask.SetActive(true);
-            c2MaxHp = ServerLoginManager.playerList[0].character2Hp;
-            c2MaxEp = ServerLoginManager.playerList[0].character2Ep;
+            c2MaxHp = 500.0f;
+            c2MaxEp = 100.0f;
             mainC2 = mainKarmenMask;
             subC2 = subKarmenMask;
         }
         else if (ServerLoginManager.playerList[0].selectSubCharacter == 2)
         {
             subJadeMask.SetActive(true);
-            c2MaxHp = ServerLoginManager.playerList[0].character2Hp;
-            c2MaxEp = ServerLoginManager.playerList[0].character2Ep;
+            c2MaxHp = 400.0f;
+            c2MaxEp = 200.0f;
             mainC2 = mainJadeMask;
             subC2 = subJadeMask;
         }
         else if (ServerLoginManager.playerList[0].selectSubCharacter == 3)
         {
             subLeinaMask.SetActive(true);
-            c2MaxHp = ServerLoginManager.playerList[0].character2Hp;
-            c2MaxEp = ServerLoginManager.playerList[0].character2Ep;
+            c2MaxHp = 400.0f;
+            c2MaxEp = 200.0f;
             mainC2 = mainLeinaMask;
             subC2 = subLeinaMask;
         }
         else if (ServerLoginManager.playerList[0].selectSubCharacter == 4)
         {
             subEvaMask.SetActive(true);
-            c2MaxHp = ServerLoginManager.playerList[0].character2Hp;
-            c2MaxEp = ServerLoginManager.playerList[0].character2Ep;
+            c2MaxHp = 500.0f;
+            c2MaxEp = 100.0f;
             mainC2 = mainEvaMask;
             subC2 = subEvaMask;
         }
@@ -190,12 +191,10 @@ public class ServerInGameUI : MonoBehaviour
     {
         if (ServerLoginManager.playerList[0].is_Main_Character == 1)
         {
-            //Debug.Log(ServerLoginManager.playerList[0].character1Hp + " / " + c1MaxHp);
-            //Debug.Log(ServerLoginManager.playerList[0].character1Ep + " / " + c1MaxEp);
-            imageMainHpFill.fillAmount = ServerLoginManager.playerList[0].character1Hp / c1MaxHp;
-            imageMainEpFill.fillAmount = ServerLoginManager.playerList[0].character1Ep / c1MaxEp;
-            imageSubHpFill.fillAmount = ServerLoginManager.playerList[0].character2Hp / c2MaxHp;
-            imageSubEpFill.fillAmount = ServerLoginManager.playerList[0].character2Ep / c2MaxEp;
+            imageMainHpFill.fillAmount = Convert.ToSingle(ServerLoginManager.playerList[0].character1Hp) / c1MaxHp;
+            imageMainEpFill.fillAmount = Convert.ToSingle(ServerLoginManager.playerList[0].character1Ep) / c1MaxEp;
+            imageSubHpFill.fillAmount = Convert.ToSingle(ServerLoginManager.playerList[0].character2Hp) / c2MaxHp;
+            imageSubEpFill.fillAmount = Convert.ToSingle(ServerLoginManager.playerList[0].character2Ep) / c2MaxEp;
 
             textMainHp.text = string.Format("{0} / {1}", ServerLoginManager.playerList[0].character1Hp, c1MaxHp);
             textMainEp.text = string.Format("{0} / {1}", ServerLoginManager.playerList[0].character1Ep, c1MaxEp);
@@ -204,12 +203,10 @@ public class ServerInGameUI : MonoBehaviour
         }
         else if (ServerLoginManager.playerList[0].is_Main_Character == 2)
         {
-            //Debug.Log(ServerLoginManager.playerList[0].character2Hp + " / " + c2MaxHp);
-            //Debug.Log(ServerLoginManager.playerList[0].character2Ep + " / " + c2MaxEp);
-            imageMainHpFill.fillAmount = ServerLoginManager.playerList[0].character2Hp / c2MaxHp;
-            imageMainEpFill.fillAmount = ServerLoginManager.playerList[0].character2Ep / c2MaxEp;
-            imageSubHpFill.fillAmount = ServerLoginManager.playerList[0].character1Hp / c1MaxHp;
-            imageSubEpFill.fillAmount = ServerLoginManager.playerList[0].character1Ep / c1MaxEp;
+            imageMainHpFill.fillAmount = Convert.ToSingle(ServerLoginManager.playerList[0].character2Hp) / c2MaxHp;
+            imageMainEpFill.fillAmount = Convert.ToSingle(ServerLoginManager.playerList[0].character2Ep) / c2MaxEp;
+            imageSubHpFill.fillAmount = Convert.ToSingle(ServerLoginManager.playerList[0].character1Hp) / c1MaxHp;
+            imageSubEpFill.fillAmount = Convert.ToSingle(ServerLoginManager.playerList[0].character1Ep) / c1MaxEp;
 
             textMainHp.text = string.Format("{0} / {1}", ServerLoginManager.playerList[0].character2Hp, c2MaxHp);
             textMainEp.text = string.Format("{0} / {1}", ServerLoginManager.playerList[0].character2Ep, c2MaxEp);
@@ -305,6 +302,7 @@ public class ServerInGameUI : MonoBehaviour
     //        }
     //    }
     //}
+    
     public void OnClickOptionButton()
     {
     }
