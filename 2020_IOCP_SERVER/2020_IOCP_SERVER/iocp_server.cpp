@@ -27,6 +27,8 @@ constexpr char OP_MODE_RECV = 0;
 constexpr char OP_MODE_SEND = 1;
 constexpr char OP_MODE_ACCEPT = 2;
 constexpr char OP_SEND_MOVE = 3;
+constexpr char OP_HP_ACTIVATE = 4;
+constexpr char OP_MP_ACTIVATE = 5;
 
 constexpr int  KEY_SERVER = 1000000;
 
@@ -308,6 +310,36 @@ void send_data(int id)
         }
     }
     add_timer(1000, OP_SEND_MOVE, system_clock::now() + 10ms, 0);
+}
+
+void send_hp_activate(int id)
+{
+    All_Item p;
+    p.size = sizeof(p);
+    p.type = SC_Item_Activate;
+    p.item = 1;
+    p.activate = true;
+
+    for (int i = 0; i < MAX_USER; i++) {
+        if (g_clients[i].in_use == true) {
+            send_packet(i, &p);
+        }
+    }
+}
+
+void send_mp_activate(int id)
+{
+    All_Item p;
+    p.size = sizeof(p);
+    p.type = SC_Item_Activate;
+    p.item = 2;
+    p.activate = true;
+
+    for (int i = 0; i < MAX_USER; i++) {
+        if (g_clients[i].in_use == true) {
+            send_packet(i, &p);
+        }
+    }
 }
 //클라이언트 연결
 void add_new_client(SOCKET ns)
@@ -722,7 +754,25 @@ void process_packet(int id)
     }
     case CS_Item_Activate: {
         cout << "Item Packet 수신" << endl;
+        All_Item* p = reinterpret_cast<All_Item*>(g_clients[id].m_packet_start);
 
+        All_Item ip;
+        ip.size = sizeof(ip);
+        ip.type = p->type;
+        ip.item = p->item;
+        ip.activate = p->activate;
+
+        for (int i = 0; i < MAX_USER; i++) {
+            if (g_clients[i].in_use == true) {
+                send_packet(i, &ip);
+            }
+        }
+        if (p->item == 1) {     //HP
+            add_timer(1000, OP_HP_ACTIVATE, system_clock::now() + 10s, 0);
+        }
+        else if (p->item == 2) {     //MP
+            add_timer(1000, OP_MP_ACTIVATE, system_clock::now() + 10s, 0);
+        }
         break;
     }
     default: cout << "Unknown Packet type [" << p_type << "] from Client [" << id << "]\n";
@@ -809,6 +859,18 @@ void worker_thread()
         case OP_SEND_MOVE:
         {
             send_data(key);
+            delete over_ex;
+            break;
+        }
+        case OP_HP_ACTIVATE:
+        {
+            send_hp_activate(key);
+            delete over_ex;
+            break;
+        }
+        case OP_MP_ACTIVATE:
+        {
+            send_mp_activate(key);
             delete over_ex;
             break;
         }

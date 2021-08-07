@@ -68,14 +68,6 @@ struct cs_Attack {
 	short damage;
 };
 
-struct All_Item {
-	unsigned short size;
-	unsigned short type;
-
-	short item;
-	bool activate;
-};
-
 struct sc_player_posi {
 	unsigned short size;
 	unsigned short type;
@@ -142,5 +134,12 @@ struct sc_player_posi {
 	short p4_is_main_ch;
 };
 
+struct All_Item {
+	unsigned short size;
+	unsigned short type;
+
+	short item;
+	bool activate;
+};
 
 //#pragma pack (pop)
