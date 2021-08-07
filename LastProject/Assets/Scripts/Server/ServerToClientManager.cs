@@ -267,12 +267,12 @@ public class ServerToClientManager : MonoBehaviour
 
     public void sc_ItemActivate_Process(sc_Item packet)
     {
-        Debug.Log("Item");
-        Debug.Log(packet.item);
+        //Debug.Log("Item");
+        //Debug.Log(packet.item);
 
-        Debug.Log(packet.activate);
+        //Debug.Log(packet.activate);
 
-        ServerItemManager.instance.is_Item_Active = packet.activate;
-        ServerItemManager.instance.kindOfItem = packet.item;
+        //ServerItemManager.instance.is_Item_Active = packet.activate;
+        //ServerItemManager.instance.kindOfItem = packet.item;
     }
 }

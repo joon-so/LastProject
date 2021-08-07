@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ServerIngameManager : MonoBehaviour
 {
     public List<GameObject> player;
     public List<GameObject> otherPlayerList;
+
+    public float playTime;
+    public Text curPlayTime;
 
     void Start()
     {
@@ -23,7 +27,16 @@ public class ServerIngameManager : MonoBehaviour
                 Destroy(player[i]);
             }
         }
+
+        playTime = 180.0f;
     }
+
+    void Update()
+    {
+        playTime -= Time.deltaTime;
+        curPlayTime.text = string.Format("{0:D2}:{1:D2}", ((int)playTime / 60).ToString(), ((int)playTime % 60).ToString());
+    }
+
 
     void send_InGame_Start_packet()
     {

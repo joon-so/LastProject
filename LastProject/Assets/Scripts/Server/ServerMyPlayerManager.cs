@@ -281,7 +281,7 @@ public class ServerMyPlayerManager : MonoBehaviour
                         myHpPotionCount -= 1;
                         curHpCoolTime = 0;
                         onHpPotion = false;
-                        ServerLoginManager.playerList[0].character1Hp += 50;
+                        ServerLoginManager.playerList[0].character1Hp += ServerItemManager.instance.hpValue;
                         if (ServerLoginManager.playerList[0].character1Hp > c1MaxHp)
                             ServerLoginManager.playerList[0].character1Hp = c1MaxHp;
                     }
@@ -296,7 +296,7 @@ public class ServerMyPlayerManager : MonoBehaviour
                         myHpPotionCount -= 1;
                         curHpCoolTime = 0;
                         onHpPotion = false;
-                        ServerLoginManager.playerList[0].character2Hp += 50;
+                        ServerLoginManager.playerList[0].character2Hp += ServerItemManager.instance.hpValue;
                         if (ServerLoginManager.playerList[0].character2Hp > c2MaxHp)
                             ServerLoginManager.playerList[0].character2Hp = c2MaxHp;
                     }
@@ -317,7 +317,7 @@ public class ServerMyPlayerManager : MonoBehaviour
                         myEpPotionCount -= 1;
                         curEpCoolTime = 0;
                         onEpPotion = false;
-                        ServerLoginManager.playerList[0].character1Ep += 50;
+                        ServerLoginManager.playerList[0].character1Ep += ServerItemManager.instance.epValue;
                         if (ServerLoginManager.playerList[0].character1Ep > c1MaxEp)
                             ServerLoginManager.playerList[0].character1Ep = c1MaxEp;
                     }
@@ -332,7 +332,7 @@ public class ServerMyPlayerManager : MonoBehaviour
                         myEpPotionCount -= 1;
                         curEpCoolTime = 0;
                         onEpPotion = false;
-                        ServerLoginManager.playerList[0].character2Ep += 50;
+                        ServerLoginManager.playerList[0].character2Ep += ServerItemManager.instance.epValue;
                         if (ServerLoginManager.playerList[0].character2Ep > c2MaxEp)
                             ServerLoginManager.playerList[0].character2Ep = c2MaxEp;
                     }
