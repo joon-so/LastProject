@@ -78,6 +78,11 @@ public class ServerOtherJade : MonoBehaviour
             if (preBehavior != 5)
                 StartCoroutine(ShootGrenade());
         }
+        else if (ServerLoginManager.playerList[index].mainCharacterBehavior == 6)
+        {
+            if (preBehavior != 6)
+                StartCoroutine(Death());
+        }
     }
 
     IEnumerator DrawAssaultRifle()
@@ -151,5 +156,11 @@ public class ServerOtherJade : MonoBehaviour
         rigidGrenade.AddTorque(Vector3.back * 10, ForceMode.Impulse);
         yield return new WaitForSeconds(0.3f);
         preBehavior = 0;
+    }
+
+    IEnumerator Death()
+    {
+        otherAnimator.SetTrigger("Dead");
+        yield return null;
     }
 }

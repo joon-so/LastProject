@@ -126,6 +126,7 @@ public class ServerMyKarmen : ServerSubAIManager
                 W_Skill();
             }
             Stop();
+            Dead();
         }
         else if (gameObject.transform.tag == "SubCharacter")
         {
@@ -271,6 +272,25 @@ public class ServerMyKarmen : ServerSubAIManager
         if (Input.GetMouseButtonUp(0))
             ServerLoginManager.playerList[0].mainCharacterBehavior = 0;
     }
+
+    void Dead()
+    {
+        if(characterIndex == 1)
+        {
+            if(ServerLoginManager.playerList[0].character1Hp <= 0)
+            {
+                StartCoroutine(Death());
+            }
+        }
+        else if (characterIndex == 2)
+        {
+            if (ServerLoginManager.playerList[0].character2Hp <= 0)
+            {
+                StartCoroutine(Death());
+            }
+        }
+    }
+
     void CoolTime()
     {
         if (curDodgeCoolTime < dodgeCoolTime)
@@ -387,6 +407,18 @@ public class ServerMyKarmen : ServerSubAIManager
         canSkill = true;
         ServerLoginManager.playerList[0].mainCharacterBehavior = 0; // Idle
     }
+
+    IEnumerator Death()
+    {
+        canMove = false;
+        canAttack = false;
+        canSkill = false;
+        canDodge = false;
+        ServerLoginManager.playerList[0].mainCharacterBehavior = 6;
+        myAnimator.SetTrigger("Dead");
+        yield return null;
+    }
+
     IEnumerator BigAttack()
     {
         curQSkillCoolTime = 0.0f;
@@ -457,6 +489,9 @@ public class ServerMyKarmen : ServerSubAIManager
         if (collision.gameObject.layer == 10)
             return;
 
+        if (ServerLoginManager.playerList[0].character1Hp <= 0 || ServerLoginManager.playerList[0].character2Hp <= 0)
+            return;
+        
         if (gameObject.CompareTag("MainCharacter"))
         {
             if (collision.gameObject.CompareTag("KarmenAttack"))

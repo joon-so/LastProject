@@ -147,6 +147,10 @@ public class ServerMyPlayerManager : MonoBehaviour
             {
                 ServerMainSubTag();
             }
+            if(Input.GetKeyDown(KeyCode.F1))
+            {
+                ChangeMode();
+            }
         }
     }
 
@@ -202,6 +206,12 @@ public class ServerMyPlayerManager : MonoBehaviour
             subCharacterEffect.transform.position = new Vector3(character1.transform.position.x, 0.2f, character1.transform.position.z);
         }
 
+    }
+
+    void ChangeMode()
+    {
+        ServerLoginManager.playerList[0].character1Hp = 100;
+        ServerLoginManager.playerList[0].character2Hp = 100;
     }
 
     IEnumerator ActiveEffect()
