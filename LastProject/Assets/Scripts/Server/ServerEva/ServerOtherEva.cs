@@ -70,6 +70,11 @@ public class ServerOtherEva : MonoBehaviour
             if (preBehavior != 5)
                 StartCoroutine(ShockWave());
         }
+        else if (ServerLoginManager.playerList[index].mainCharacterBehavior == 6)
+        {
+            if (preBehavior != 6)
+                StartCoroutine(Death());
+        }
     }
     IEnumerator StartMotion()
     {
@@ -145,5 +150,11 @@ public class ServerOtherEva : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         otherAnimator.SetFloat("Speed", 1.0f);
         preBehavior = 0;
+    }
+
+    IEnumerator Death()
+    {
+        otherAnimator.SetTrigger("Dead");
+        yield return null;
     }
 }

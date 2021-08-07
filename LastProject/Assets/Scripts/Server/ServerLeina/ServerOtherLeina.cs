@@ -68,6 +68,11 @@ public class ServerOtherLeina : MonoBehaviour
             if (preBehavior != 5)
                 StartCoroutine(WideShot());
         }
+        else if (ServerLoginManager.playerList[index].mainCharacterBehavior == 6)
+        {
+            if (preBehavior != 6)
+                StartCoroutine(Death());
+        }
     }
 
     IEnumerator DodgeDelay()
@@ -141,5 +146,11 @@ public class ServerOtherLeina : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
         preBehavior = 0;
+    }
+
+    IEnumerator Death()
+    {
+        otherAnimator.SetTrigger("Dead");
+        yield return null;
     }
 }

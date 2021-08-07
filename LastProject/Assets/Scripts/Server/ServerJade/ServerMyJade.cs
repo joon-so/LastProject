@@ -134,6 +134,7 @@ public class ServerMyJade : ServerSubAIManager
                 W_Skill();
             }
             Stop();
+            Dead();
         }
         else if (gameObject.transform.CompareTag("SubCharacter"))
         {
@@ -287,6 +288,25 @@ public class ServerMyJade : ServerSubAIManager
         if (Input.GetMouseButtonUp(0))
             ServerLoginManager.playerList[0].mainCharacterBehavior = 0;
     }
+
+    void Dead()
+    {
+        if (characterIndex == 1)
+        {
+            if (ServerLoginManager.playerList[0].character1Hp <= 0)
+            {
+                StartCoroutine(Death());
+            }
+        }
+        else if (characterIndex == 2)
+        {
+            if (ServerLoginManager.playerList[0].character2Hp <= 0)
+            {
+                StartCoroutine(Death());
+            }
+        }
+    }
+
     void CoolTime()
     {
         if (curDodgeCoolTime < dodgeCoolTime)
@@ -392,6 +412,17 @@ public class ServerMyJade : ServerSubAIManager
         ServerLoginManager.playerList[0].mainCharacterBehavior = 0;
     }
 
+    IEnumerator Death()
+    {
+        canMove = false;
+        canAttack = false;
+        canSkill = false;
+        canDodge = false;
+        ServerLoginManager.playerList[0].mainCharacterBehavior = 6;
+        myAnimator.SetTrigger("Dead");
+        yield return null;
+    }
+
     IEnumerator DrawAssaultRifle()
     {
         yield return new WaitForSeconds(0.5f);
@@ -493,6 +524,9 @@ public class ServerMyJade : ServerSubAIManager
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.layer == 10)
+            return;
+
+        if (ServerLoginManager.playerList[0].character1Hp <= 0 || ServerLoginManager.playerList[0].character2Hp <= 0)
             return;
 
         if (gameObject.CompareTag("MainCharacter"))
