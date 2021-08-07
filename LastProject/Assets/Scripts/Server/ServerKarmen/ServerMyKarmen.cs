@@ -79,7 +79,6 @@ public class ServerMyKarmen : ServerSubAIManager
 
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
-            nav.enabled = false;
             tagCharacter = ServerMyPlayerManager.instance.character2;
 
             characterIndex = 1;
@@ -94,7 +93,6 @@ public class ServerMyKarmen : ServerSubAIManager
         }
         else if (gameObject.transform.CompareTag("SubCharacter"))
         {
-            nav.enabled = true;
             tagCharacter = ServerMyPlayerManager.instance.character1;
 
             characterIndex = 2;
@@ -113,7 +111,6 @@ public class ServerMyKarmen : ServerSubAIManager
 
     void Update()
     {
-        Tag();
         if (gameObject.transform.tag == "MainCharacter")
         {
             curAttackDelay += Time.deltaTime;
@@ -129,7 +126,6 @@ public class ServerMyKarmen : ServerSubAIManager
                 W_Skill();
             }
             Stop();
-            CoolTime();
         }
         else if (gameObject.transform.tag == "SubCharacter")
         {
@@ -169,6 +165,8 @@ public class ServerMyKarmen : ServerSubAIManager
             //    attackDelay = 1f;
             //}
         }
+        CoolTime();
+        Tag();
 
     }
     void Move()
