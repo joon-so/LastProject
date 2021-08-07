@@ -52,6 +52,8 @@ public class ServerMyJade : ServerSubAIManager
     ServerCollisionManager collisionManager;
     ServerSkillEpManager skillEpManager;
 
+    int characterIndex;
+
     void Awake()
     {
         myAnimator = GetComponent<Animator>();
@@ -85,13 +87,33 @@ public class ServerMyJade : ServerSubAIManager
         
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
-            //nav.enabled = false;
+            nav.enabled = false;
             tagCharacter = ServerMyPlayerManager.instance.character2;
+
+            characterIndex = 1;
+
+            ServerMyPlayerManager.instance.c1DodgeCoolTime = dodgeCoolTime;
+            ServerMyPlayerManager.instance.c1QSkillCoolTime = qSkillCoolTime;
+            ServerMyPlayerManager.instance.c1WSkillCoolTime = wSkillCoolTime;
+
+            ServerMyPlayerManager.instance.curC1DodgeCoolTime = curDodgeCoolTime;
+            ServerMyPlayerManager.instance.curC1QSkillCoolTime = curQSkillCoolTime;
+            ServerMyPlayerManager.instance.curC1WSkillCoolTime = curWSkillCoolTime;
         }
         else if (gameObject.transform.CompareTag("SubCharacter"))
         {
-            //nav.enabled = true;
+            nav.enabled = true;
             tagCharacter = ServerMyPlayerManager.instance.character1;
+
+            characterIndex = 2;
+
+            ServerMyPlayerManager.instance.c2DodgeCoolTime = dodgeCoolTime;
+            ServerMyPlayerManager.instance.c2QSkillCoolTime = qSkillCoolTime;
+            ServerMyPlayerManager.instance.c2WSkillCoolTime = wSkillCoolTime;
+
+            ServerMyPlayerManager.instance.curC2DodgeCoolTime = curDodgeCoolTime;
+            ServerMyPlayerManager.instance.curC2QSkillCoolTime = curQSkillCoolTime;
+            ServerMyPlayerManager.instance.curC2WSkillCoolTime = curWSkillCoolTime;
         }
 
         StartCoroutine(DrawAssaultRifle());
@@ -270,15 +292,35 @@ public class ServerMyJade : ServerSubAIManager
     void CoolTime()
     {
         if (curDodgeCoolTime < dodgeCoolTime)
+        {
             curDodgeCoolTime += Time.deltaTime;
+            if (characterIndex == 1)
+                ServerMyPlayerManager.instance.curC1DodgeCoolTime = curDodgeCoolTime;
+            else if (characterIndex == 2)
+                ServerMyPlayerManager.instance.curC2DodgeCoolTime = curDodgeCoolTime;
+        }
         else
             onDodge = true;
+
         if (curQSkillCoolTime < qSkillCoolTime)
+        {
             curQSkillCoolTime += Time.deltaTime;
+            if (characterIndex == 1)
+                ServerMyPlayerManager.instance.curC1QSkillCoolTime = curQSkillCoolTime;
+            else if (characterIndex == 2)
+                ServerMyPlayerManager.instance.curC2QSkillCoolTime = curQSkillCoolTime;
+        }
         else
             onQSkill = true;
+
         if (curWSkillCoolTime < wSkillCoolTime)
+        {
             curWSkillCoolTime += Time.deltaTime;
+            if (characterIndex == 1)
+                ServerMyPlayerManager.instance.curC1WSkillCoolTime = curWSkillCoolTime;
+            else if (characterIndex == 2)
+                ServerMyPlayerManager.instance.curC2WSkillCoolTime = curWSkillCoolTime;
+        }
         else
             onWSkill = true;
     }

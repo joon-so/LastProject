@@ -28,6 +28,11 @@ public class ServerInGameUI : MonoBehaviour
 
     [SerializeField] GameObject gameMenu;
 
+    [SerializeField] GameObject hpPotionSlot;
+    [SerializeField] GameObject epPotionSlot;
+
+    [SerializeField] GameObject dodgeSlot;
+
     private GameObject mainC1;
     private GameObject subC1;
     private GameObject mainC2;
@@ -39,37 +44,18 @@ public class ServerInGameUI : MonoBehaviour
     private float c2MaxHp;
     private float c2MaxEp;
 
-    //[Header("C1")]
-    //public Image c1_QSkillImg;
-    //public float c1_QSkillcoolDown;
-    //bool c1_QSkillCoolDown = false;
-    //public KeyCode c1_QSkillkey;
+    [SerializeField] GameObject karmenSlot;
+    [SerializeField] GameObject jadeSlot;
+    [SerializeField] GameObject leinaSlot;
+    [SerializeField] GameObject evaSlot;
 
-    //public Image c1_WSkillImg;
-    //public float c1_WSkillcoolDown;
-    //bool c1_WSkillCoolDown = false;
-    //public KeyCode c1_WSkillkey;
+    private GameObject c1Slot;
+    private GameObject c2Slot;
 
-    //public Image c1_ESkillImg;
-    //public float c1_ESkillcoolDown;
-    //bool c1_ESkillCoolDown = false;
-    //public KeyCode c1_ESkillkey;
+    [SerializeField] Image dodgeCoolFill;
 
-    //[Header("C2")]
-    //public Image c2_QSkillImg;
-    //public float c2_QSkillcoolDown;
-    //bool c2_QSkillCoolDown = false;
-    //public KeyCode c2_QSkillkey;
-
-    //public Image c2_WSkillImg;
-    //public float c2_WSkillcoolDown;
-    //bool c2_WSkillCoolDown = false;
-    //public KeyCode c2_WSkillkey;
-
-    //public Image c2_ESkillImg;
-    //public float c2_ESkillcoolDown;
-    //bool c2_ESkillCoolDown = false;
-    //public KeyCode c2_ESkillkey;
+    [SerializeField] Image qSkillCoolFill;
+    [SerializeField] Image wSkillCoolFill;
 
     void Start()
     {
@@ -80,6 +66,8 @@ public class ServerInGameUI : MonoBehaviour
             c1MaxEp = 100.0f;
             mainC1 = mainKarmenMask;
             subC1 = subKarmenMask;
+            c1Slot = karmenSlot;
+            c1Slot.SetActive(true);
         }
         else if (ServerLoginManager.playerList[0].selectMainCharacter == 2)
         {
@@ -88,6 +76,8 @@ public class ServerInGameUI : MonoBehaviour
             c1MaxEp = 200.0f;
             mainC1 = mainJadeMask;
             subC1 = subJadeMask;
+            c1Slot = jadeSlot;
+            c1Slot.SetActive(true);
         }
         else if (ServerLoginManager.playerList[0].selectMainCharacter == 3)
         {
@@ -96,6 +86,8 @@ public class ServerInGameUI : MonoBehaviour
             c1MaxEp = 200.0f;
             mainC1 = mainLeinaMask;
             subC1 = subLeinaMask;
+            c1Slot = leinaSlot;
+            c1Slot.SetActive(true);
         }
         else if (ServerLoginManager.playerList[0].selectMainCharacter == 4)
         {
@@ -104,6 +96,8 @@ public class ServerInGameUI : MonoBehaviour
             c1MaxEp = 100.0f;
             mainC1 = mainEvaMask;
             subC1 = subEvaMask;
+            c1Slot = evaSlot;
+            c1Slot.SetActive(true);
         }
 
         if (ServerLoginManager.playerList[0].selectSubCharacter == 1)
@@ -113,6 +107,7 @@ public class ServerInGameUI : MonoBehaviour
             c2MaxEp = 100.0f;
             mainC2 = mainKarmenMask;
             subC2 = subKarmenMask;
+            c2Slot = karmenSlot;
         }
         else if (ServerLoginManager.playerList[0].selectSubCharacter == 2)
         {
@@ -121,6 +116,7 @@ public class ServerInGameUI : MonoBehaviour
             c2MaxEp = 200.0f;
             mainC2 = mainJadeMask;
             subC2 = subJadeMask;
+            c2Slot = jadeSlot;
         }
         else if (ServerLoginManager.playerList[0].selectSubCharacter == 3)
         {
@@ -129,6 +125,7 @@ public class ServerInGameUI : MonoBehaviour
             c2MaxEp = 200.0f;
             mainC2 = mainLeinaMask;
             subC2 = subLeinaMask;
+            c2Slot = leinaSlot;
         }
         else if (ServerLoginManager.playerList[0].selectSubCharacter == 4)
         {
@@ -137,25 +134,14 @@ public class ServerInGameUI : MonoBehaviour
             c2MaxEp = 100.0f;
             mainC2 = mainEvaMask;
             subC2 = subEvaMask;
+            c2Slot = evaSlot;
         }
-
-        //c1_QSkillImg.fillAmount = 0;
-        //c1_WSkillImg.fillAmount = 0;
-        //c1_ESkillImg.fillAmount = 0;
-
-        //c2_QSkillImg.fillAmount = 0;
-        //c2_WSkillImg.fillAmount = 0;
-        //c2_ESkillImg.fillAmount = 0;
     }
+
     void Update()
     {
-        //C1_QSkillCoolDownUI();
-        //C1_WSkillCoolDownUI();
-
-        //C2_QSkillCoolDownUI();
-        //C2_WSkillCoolDownUI();
-
         UpdateHp();
+        UpdateCoolTimeUI();
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (gameMenu.activeSelf)
@@ -164,7 +150,10 @@ public class ServerInGameUI : MonoBehaviour
                 gameMenu.SetActive(true);
         }
         if (Input.GetKeyDown(KeyCode.F))
+        {
             TagCharacterMask();
+            TagCharacterSlot();
+        }
     }
 
     void TagCharacterMask()
@@ -184,6 +173,19 @@ public class ServerInGameUI : MonoBehaviour
 
             mainC2.SetActive(false);
             subC2.SetActive(true);
+        }
+    }
+    void TagCharacterSlot()
+    {
+        if (ServerLoginManager.playerList[0].is_Main_Character == 1)
+        {
+            c1Slot.SetActive(false);
+            c2Slot.SetActive(true);
+        }
+        else if (ServerLoginManager.playerList[0].is_Main_Character == 2)
+        {
+            c1Slot.SetActive(true);
+            c2Slot.SetActive(false);
         }
     }
 
@@ -215,103 +217,19 @@ public class ServerInGameUI : MonoBehaviour
         }
     }
 
-    //void ResetHp()
-    //{
-    //    GameManager.instance.mainPlayerHp = GameManager.instance.mainPlayerMaxHp;
-    //    GameManager.instance.subPlayerHp = GameManager.instance.subPlayerMaxHp;
-    //}
-    //void ResetEp()
-    //{
-    //    GameManager.instance.mainPlayerEp = GameManager.instance.mainPlayerMaxEp;
-    //    GameManager.instance.subPlayerEp = GameManager.instance.subPlayerMaxEp;
-    //}
-
-    //void C1_QSkillCoolDownUI()
-    //{
-    //    if (Input.GetKey(c1_QSkillkey) && c1_QSkillCoolDown == false)
-    //    {
-    //        c1_QSkillCoolDown = true;
-    //        c1_QSkillImg.fillAmount = 1;
-    //    }
-
-    //    if (c1_QSkillCoolDown)
-    //    {
-    //        c1_QSkillImg.fillAmount -= 1 / c1_QSkillcoolDown * Time.deltaTime;
-
-    //        if (c1_QSkillImg.fillAmount <= 0)
-    //        {
-    //            c1_QSkillImg.fillAmount = 0;
-    //            c1_QSkillCoolDown = false;
-    //        }
-    //    }
-    //}
-    //void C1_WSkillCoolDownUI()
-    //{
-    //    if (Input.GetKey(c1_WSkillkey) && c1_WSkillCoolDown == false)
-    //    {
-    //        c1_WSkillCoolDown = true;
-    //        c1_WSkillImg.fillAmount = 1;
-    //    }
-
-    //    if (c1_WSkillCoolDown)
-    //    {
-    //        c1_WSkillImg.fillAmount -= 1 / c1_WSkillcoolDown * Time.deltaTime;
-
-    //        if (c1_WSkillImg.fillAmount <= 0)
-    //        {
-    //            c1_WSkillImg.fillAmount = 0;
-    //            c1_WSkillCoolDown = false;
-    //        }
-    //    }
-    //}
-    //void C2_QSkillCoolDownUI()
-    //{
-    //    if (Input.GetKey(c2_QSkillkey) && c2_QSkillCoolDown == false)
-    //    {
-    //        c2_QSkillCoolDown = true;
-    //        c2_QSkillImg.fillAmount = 1;
-    //    }
-
-    //    if (c2_QSkillCoolDown)
-    //    {
-    //        c2_QSkillImg.fillAmount -= 1 / c2_QSkillcoolDown * Time.deltaTime;
-
-    //        if (c2_QSkillImg.fillAmount <= 0)
-    //        {
-    //            c2_QSkillImg.fillAmount = 0;
-    //            c2_QSkillCoolDown = false;
-    //        }
-    //    }
-    //}
-    //void C2_WSkillCoolDownUI()
-    //{
-    //    if (Input.GetKey(c2_WSkillkey) && c2_WSkillCoolDown == false)
-    //    {
-    //        c2_WSkillCoolDown = true;
-    //        c2_WSkillImg.fillAmount = 1;
-    //    }
-
-    //    if (c2_WSkillCoolDown)
-    //    {
-    //        c2_WSkillImg.fillAmount -= 1 / c2_WSkillcoolDown * Time.deltaTime;
-
-    //        if (c2_WSkillImg.fillAmount <= 0)
-    //        {
-    //            c2_WSkillImg.fillAmount = 0;
-    //            c2_WSkillCoolDown = false;
-    //        }
-    //    }
-    //}
-    
-    public void OnClickOptionButton()
+    void UpdateCoolTimeUI()
     {
-    }
-    public void OnClickTagButton()
-    {
-    }
-
-    public void ClickResumButton()
-    {
-
+        if (ServerLoginManager.playerList[0].is_Main_Character == 1)
+        {
+            dodgeCoolFill.fillAmount = 1 - ServerMyPlayerManager.instance.curC1DodgeCoolTime / ServerMyPlayerManager.instance.c1DodgeCoolTime;
+            qSkillCoolFill.fillAmount = 1 - ServerMyPlayerManager.instance.curC1QSkillCoolTime / ServerMyPlayerManager.instance.c1QSkillCoolTime;
+            wSkillCoolFill.fillAmount = 1 - ServerMyPlayerManager.instance.curC1WSkillCoolTime / ServerMyPlayerManager.instance.c1WSkillCoolTime;
+        }
+        else if (ServerLoginManager.playerList[0].is_Main_Character == 2)
+        {
+            dodgeCoolFill.fillAmount = 1 - ServerMyPlayerManager.instance.curC2DodgeCoolTime / ServerMyPlayerManager.instance.c2DodgeCoolTime;
+            qSkillCoolFill.fillAmount = 1 - ServerMyPlayerManager.instance.curC2QSkillCoolTime / ServerMyPlayerManager.instance.c2QSkillCoolTime;
+            wSkillCoolFill.fillAmount = 1 - ServerMyPlayerManager.instance.curC2WSkillCoolTime / ServerMyPlayerManager.instance.c2WSkillCoolTime;
+        }
     }
 }

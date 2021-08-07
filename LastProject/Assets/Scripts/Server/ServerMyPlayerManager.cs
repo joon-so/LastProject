@@ -26,6 +26,29 @@ public class ServerMyPlayerManager : MonoBehaviour
     public string ID;
     private bool isTag;
 
+    // item
+    public int myHpPotionCount;
+    public int myEpPotionCount;
+
+    // skill coolTime
+
+    public float c1DodgeCoolTime;
+    public float c1QSkillCoolTime;
+    public float c1WSkillCoolTime;
+                 
+    public float c2DodgeCoolTime;
+    public float c2QSkillCoolTime;
+    public float c2WSkillCoolTime;
+
+    public float curC1DodgeCoolTime;
+    public float curC1QSkillCoolTime;
+    public float curC1WSkillCoolTime;
+
+    public float curC2DodgeCoolTime;
+    public float curC2QSkillCoolTime;
+    public float curC2WSkillCoolTime;
+
+
     void Awake()
     {
         if (instance == null)
