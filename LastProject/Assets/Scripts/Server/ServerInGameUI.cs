@@ -140,8 +140,7 @@ public class ServerInGameUI : MonoBehaviour
 
     void Update()
     {
-        UpdateHp();
-        UpdateCoolTimeUI();
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (gameMenu.activeSelf)
@@ -149,10 +148,17 @@ public class ServerInGameUI : MonoBehaviour
             else
                 gameMenu.SetActive(true);
         }
-        if (Input.GetKeyDown(KeyCode.F))
+
+        if (ServerLoginManager.playerList[0].character1Hp > 0 || ServerLoginManager.playerList[0].character2Hp > 0)
         {
-            TagCharacterMask();
-            TagCharacterSlot();
+            UpdateHp();
+            UpdateCoolTimeUI();
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                TagCharacterMask();
+                TagCharacterSlot();
+            }
+
         }
     }
 

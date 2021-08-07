@@ -79,6 +79,11 @@ public class ServerOtherKarmen : MonoBehaviour
             if (preBehavior != 5)
                 StartCoroutine(StraightAttack());
         }
+        else if (ServerLoginManager.playerList[index].mainCharacterBehavior == 6)
+        {
+            if (preBehavior != 6)
+                StartCoroutine(Death());
+        }
     }
 
     IEnumerator AttackDelay()
@@ -147,5 +152,11 @@ public class ServerOtherKarmen : MonoBehaviour
 
         otherAnimator.SetBool("Run", false);
         preBehavior = 0;
+    }
+
+    IEnumerator Death()
+    {
+        otherAnimator.SetTrigger("Dead");
+        yield return null;
     }
 }
