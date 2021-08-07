@@ -84,13 +84,11 @@ public class ServerCollisionManager : MonoBehaviour
         send_Attack_packet(EvaAttackDamage);
         Debug.Log("Hit: 에바 기본공격");
     }
-
     public void EvaQSkillAttack()
     {
         send_Attack_packet(EvaQSkillDamage);
         Debug.Log("Hit: 에바 Q스킬");
     }
-
     public void EvaWSkillAttack()
     {
         send_Attack_packet(EvaWSkillDamage);

@@ -4,36 +4,47 @@ using UnityEngine;
 
 public class ServerItemManager : MonoBehaviour
 {
+    public static ServerItemManager instance;
+
+    public bool is_Item_Active;
+    public short kindOfItem;
+
+    public short hpValue;
+    public short epValue;
+
     [SerializeField] GameObject hpPotion;
-    [SerializeField] Transform createHpPotionPosition;
-    
     [SerializeField] GameObject epPotion;
-    [SerializeField] Transform createEpPotionPosition;
+    [SerializeField] Transform itemCreatePos;
+
+    void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
 
     void Start()
     {
-        
+        CreateHpPotion();
     }
 
     void Update()
     {
-        // if (아이템 생성시간)
+        if(is_Item_Active)
         {
-            CreateHpPotion();
-        }
-        // if (아이템 생성시간)
-        {
-            CreateEpPotion();
+            if(kindOfItem == 1)
+                CreateHpPotion();
+            else if (kindOfItem == 2)
+                CreateEpPotion();
         }
     }
 
     void CreateHpPotion()
     {
-        Instantiate(hpPotion, createHpPotionPosition.position, createHpPotionPosition.rotation);
+        Instantiate(hpPotion, itemCreatePos.position, itemCreatePos.rotation);
     }
 
     void CreateEpPotion()
     {
-        Instantiate(epPotion, createEpPotionPosition.position, createEpPotionPosition.rotation);
+        Instantiate(epPotion, itemCreatePos.position, itemCreatePos.rotation);
     }
 }

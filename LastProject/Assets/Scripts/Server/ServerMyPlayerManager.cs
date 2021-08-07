@@ -48,6 +48,19 @@ public class ServerMyPlayerManager : MonoBehaviour
     public float curC2QSkillCoolTime;
     public float curC2WSkillCoolTime;
 
+    private short c1MaxHp;
+    private short c1MaxEp;
+    private short c2MaxHp;
+    private short c2MaxEp;
+
+    public float hpCoolTime;
+    public float epCoolTime;
+
+    public float curHpCoolTime;
+    public float curEpCoolTime;
+
+    private bool onHpPotion;
+    private bool onEpPotion;
 
     void Awake()
     {
@@ -65,6 +78,8 @@ public class ServerMyPlayerManager : MonoBehaviour
             character1 = serverKarmenObj;
             character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
             serverKarmenObj.tag = "MainCharacter";
+            c1MaxHp = 500;
+            c1MaxEp = 100;
         }
         else if (ServerLoginManager.playerList[0].selectMainCharacter == 2)
         {
@@ -72,6 +87,8 @@ public class ServerMyPlayerManager : MonoBehaviour
             character1 = serverJadeObj;
             character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
             serverJadeObj.tag = "MainCharacter";
+            c1MaxHp = 400;
+            c1MaxEp = 200;
         }
         else if (ServerLoginManager.playerList[0].selectMainCharacter == 3)
         {
@@ -79,6 +96,8 @@ public class ServerMyPlayerManager : MonoBehaviour
             character1 = serverLeinaObj;
             character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
             serverLeinaObj.tag = "MainCharacter";
+            c1MaxHp = 400;
+            c1MaxEp = 200;
         }
         else if (ServerLoginManager.playerList[0].selectMainCharacter == 4)
         {
@@ -86,6 +105,8 @@ public class ServerMyPlayerManager : MonoBehaviour
             character1 = serverEvaObj;
             character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
             serverEvaObj.tag = "MainCharacter";
+            c1MaxHp = 500;
+            c1MaxEp = 100;
         }
 
         if (ServerLoginManager.playerList[0].selectSubCharacter == 1)
@@ -94,6 +115,8 @@ public class ServerMyPlayerManager : MonoBehaviour
             character2 = serverKarmenObj;
             character2.gameObject.GetComponent<NavMeshAgent>().enabled = true;
             serverKarmenObj.tag = "SubCharacter";
+            c2MaxHp = 500;
+            c2MaxEp = 100;
         }
         else if (ServerLoginManager.playerList[0].selectSubCharacter == 2)
         {
@@ -101,6 +124,8 @@ public class ServerMyPlayerManager : MonoBehaviour
             character2 = serverJadeObj;
             character2.gameObject.GetComponent<NavMeshAgent>().enabled = true;
             serverJadeObj.tag = "SubCharacter";
+            c2MaxHp = 400;
+            c2MaxEp = 200;
         }
         else if (ServerLoginManager.playerList[0].selectSubCharacter == 3)
         {
@@ -108,6 +133,8 @@ public class ServerMyPlayerManager : MonoBehaviour
             character2 = serverLeinaObj;
             character2.gameObject.GetComponent<NavMeshAgent>().enabled = true;
             serverLeinaObj.tag = "SubCharacter";
+            c2MaxHp = 400;
+            c2MaxEp = 200;
         }
         else if (ServerLoginManager.playerList[0].selectSubCharacter == 4)
         {
@@ -115,6 +142,8 @@ public class ServerMyPlayerManager : MonoBehaviour
             character2 = serverEvaObj;
             character2.gameObject.GetComponent<NavMeshAgent>().enabled = true;
             serverEvaObj.tag = "SubCharacter";
+            c2MaxHp = 500;
+            c2MaxEp = 100;
         }
 
         ID = ServerLoginManager.playerList[0].playerID;
@@ -129,6 +158,17 @@ public class ServerMyPlayerManager : MonoBehaviour
 
         mainCameraControl.focus = character1.transform;
 
+        myHpPotionCount = 2;
+        myEpPotionCount = 2;
+
+        hpCoolTime = 3;
+        epCoolTime = 3;
+
+        curHpCoolTime = hpCoolTime;
+        curEpCoolTime = epCoolTime;
+
+        onHpPotion = true;
+        onEpPotion = true;
 
         StartCoroutine("CoSendPacket");
     }
@@ -143,6 +183,7 @@ public class ServerMyPlayerManager : MonoBehaviour
         {
             Click();
             MainSubEffect();
+            PotionCount();
             if (Input.GetKeyDown(KeyCode.F))
             {
                 ServerMainSubTag();
@@ -205,13 +246,99 @@ public class ServerMyPlayerManager : MonoBehaviour
             mainCharacterEffect.transform.position = new Vector3(character2.transform.position.x, 0.2f, character2.transform.position.z);
             subCharacterEffect.transform.position = new Vector3(character1.transform.position.x, 0.2f, character1.transform.position.z);
         }
-
     }
 
     void ChangeMode()
     {
         ServerLoginManager.playerList[0].character1Hp = 100;
         ServerLoginManager.playerList[0].character2Hp = 100;
+        ServerLoginManager.playerList[0].character1Ep = 50;
+        ServerLoginManager.playerList[0].character2Ep = 50;
+    }
+
+    void PotionCount()
+    {
+        if (curHpCoolTime < hpCoolTime)
+            curHpCoolTime += Time.deltaTime;
+        else
+            onHpPotion = true;
+        if (curEpCoolTime < epCoolTime)
+            curEpCoolTime += Time.deltaTime;
+        else
+            onEpPotion = true;
+
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if(onHpPotion)
+            {
+                if (ServerLoginManager.playerList[0].is_Main_Character == 1)
+                {
+                    if (ServerLoginManager.playerList[0].character1Hp >= c1MaxHp)
+                        return;
+
+                    if (myHpPotionCount > 0)
+                    {
+                        myHpPotionCount -= 1;
+                        curHpCoolTime = 0;
+                        onHpPotion = false;
+                        ServerLoginManager.playerList[0].character1Hp += 50;
+                        if (ServerLoginManager.playerList[0].character1Hp > c1MaxHp)
+                            ServerLoginManager.playerList[0].character1Hp = c1MaxHp;
+                    }
+                }
+                else if (ServerLoginManager.playerList[0].is_Main_Character == 2)
+                {
+                    if (ServerLoginManager.playerList[0].character2Hp >= c2MaxHp)
+                        return;
+
+                    if (myHpPotionCount > 0)
+                    {
+                        myHpPotionCount -= 1;
+                        curHpCoolTime = 0;
+                        onHpPotion = false;
+                        ServerLoginManager.playerList[0].character2Hp += 50;
+                        if (ServerLoginManager.playerList[0].character2Hp > c2MaxHp)
+                            ServerLoginManager.playerList[0].character2Hp = c2MaxHp;
+                    }
+                }
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if(onEpPotion)
+            {
+                if (ServerLoginManager.playerList[0].is_Main_Character == 1)
+                {
+                    if (ServerLoginManager.playerList[0].character1Ep >= c1MaxEp)
+                        return;
+
+                    if (myEpPotionCount > 0)
+                    {
+                        myEpPotionCount -= 1;
+                        curEpCoolTime = 0;
+                        onEpPotion = false;
+                        ServerLoginManager.playerList[0].character1Ep += 50;
+                        if (ServerLoginManager.playerList[0].character1Ep > c1MaxEp)
+                            ServerLoginManager.playerList[0].character1Ep = c1MaxEp;
+                    }
+                }
+                else if (ServerLoginManager.playerList[0].is_Main_Character == 2)
+                {
+                    if (ServerLoginManager.playerList[0].character2Ep >= c2MaxEp)
+                        return;
+
+                    if (myEpPotionCount > 0)
+                    {
+                        myEpPotionCount -= 1;
+                        curEpCoolTime = 0;
+                        onEpPotion = false;
+                        ServerLoginManager.playerList[0].character2Ep += 50;
+                        if (ServerLoginManager.playerList[0].character2Ep > c2MaxEp)
+                            ServerLoginManager.playerList[0].character2Ep = c2MaxEp;
+                    }
+                }
+            }
+        }
     }
 
     IEnumerator ActiveEffect()
@@ -220,7 +347,6 @@ public class ServerMyPlayerManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         clickEffect.SetActive(false);
     }
-
 
     IEnumerator CoSendPacket()
     {

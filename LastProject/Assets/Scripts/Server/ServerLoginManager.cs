@@ -29,7 +29,6 @@ public class ServerLoginManager : MonoBehaviour
         public Vector3 subCharacterPos;
         public Quaternion mainCharacterRot;
         public Quaternion subCharacterRot;
-
     }
 
     public static ServerPlayer[] playerList = new ServerPlayer[4];

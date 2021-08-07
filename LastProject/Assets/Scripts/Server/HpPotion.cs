@@ -16,6 +16,16 @@ public class HpPotion : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // hp ¡ı∞°
+        send_Item_packet();
+        Destroy(gameObject);
+    }
+
+    void send_Item_packet()
+    {
+        cs_Item ItemPacket = new cs_Item();
+        ItemPacket.item = 2; 
+        ItemPacket.activate = false;
+
+        NetworkManager.instance.Send(ItemPacket.Write());
     }
 }

@@ -760,7 +760,7 @@ void process_packet(int id)
         ip.size = sizeof(ip);
         ip.type = p->type;
         ip.item = p->item;
-        ip.activate = p->activate;
+        ip.activate = false;
 
         for (int i = 0; i < MAX_USER; i++) {
             if (g_clients[i].in_use == true) {

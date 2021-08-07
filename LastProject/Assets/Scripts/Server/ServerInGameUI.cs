@@ -31,13 +31,16 @@ public class ServerInGameUI : MonoBehaviour
     [SerializeField] GameObject hpPotionSlot;
     [SerializeField] GameObject epPotionSlot;
 
-    [SerializeField] GameObject dodgeSlot;
+    [SerializeField] Text hpCount;
+    [SerializeField] Text epCount;
+
+    [SerializeField] Image hpCoolFill;
+    [SerializeField] Image epCoolFill;
 
     private GameObject mainC1;
     private GameObject subC1;
     private GameObject mainC2;
     private GameObject subC2;
-
 
     private float c1MaxHp;
     private float c1MaxEp;
@@ -158,7 +161,6 @@ public class ServerInGameUI : MonoBehaviour
                 TagCharacterMask();
                 TagCharacterSlot();
             }
-
         }
     }
 
@@ -237,5 +239,11 @@ public class ServerInGameUI : MonoBehaviour
             qSkillCoolFill.fillAmount = 1 - ServerMyPlayerManager.instance.curC2QSkillCoolTime / ServerMyPlayerManager.instance.c2QSkillCoolTime;
             wSkillCoolFill.fillAmount = 1 - ServerMyPlayerManager.instance.curC2WSkillCoolTime / ServerMyPlayerManager.instance.c2WSkillCoolTime;
         }
+
+        hpCoolFill.fillAmount = 1 - ServerMyPlayerManager.instance.curHpCoolTime / ServerMyPlayerManager.instance.hpCoolTime;
+        epCoolFill.fillAmount = 1 - ServerMyPlayerManager.instance.curEpCoolTime / ServerMyPlayerManager.instance.epCoolTime;
+
+        hpCount.text = string.Format("{0}", ServerMyPlayerManager.instance.myHpPotionCount);
+        epCount.text = string.Format("{0}", ServerMyPlayerManager.instance.myEpPotionCount);
     }
 }

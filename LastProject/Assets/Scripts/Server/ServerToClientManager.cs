@@ -267,6 +267,12 @@ public class ServerToClientManager : MonoBehaviour
 
     public void sc_ItemActivate_Process(sc_Item packet)
     {
-        //Ingame에 들어왔음을 서버에게 알려줌
+        Debug.Log("Item");
+        Debug.Log(packet.item);
+
+        Debug.Log(packet.activate);
+
+        ServerItemManager.instance.is_Item_Active = packet.activate;
+        ServerItemManager.instance.kindOfItem = packet.item;
     }
 }
