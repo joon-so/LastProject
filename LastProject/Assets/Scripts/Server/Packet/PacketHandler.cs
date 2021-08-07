@@ -24,6 +24,13 @@ class PacketHandler
 
 		ServerToClientManager.Instance.sc_playerFirstPosi_DO(pkt);
 	}
+	public static void sc_ItemActivateHandler(PacketSession session, IPacket packet)
+	{
+		sc_Item pkt = packet as sc_Item;
+		ServerSession serverSession = session as ServerSession;
+
+		ServerToClientManager.Instance.sc_ItemActivate_Process(pkt);
+	}
 
 	public static void cs_LoginGameHandler(PacketSession session, IPacket packet)
 	{
@@ -62,5 +69,13 @@ class PacketHandler
 		ServerSession serverSession = session as ServerSession;
 
 		ServerToClientManager.Instance.cs_InGameStart_Process(pkt);
+	}
+
+	public static void cs_ItemActivateHandler(PacketSession session, IPacket packet)
+	{
+		cs_Item pkt = packet as cs_Item;
+		ServerSession serverSession = session as ServerSession;
+
+		ServerToClientManager.Instance.cs_ItemActivate_Process(pkt);
 	}
 }

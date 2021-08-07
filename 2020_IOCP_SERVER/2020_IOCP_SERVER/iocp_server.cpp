@@ -720,6 +720,11 @@ void process_packet(int id)
 
         break;
     }
+    case CS_Item_Activate: {
+        cout << "Item Packet ¼ö½Å" << endl;
+
+        break;
+    }
     default: cout << "Unknown Packet type [" << p_type << "] from Client [" << id << "]\n";
         while (true);
     }

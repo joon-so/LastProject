@@ -56,6 +56,11 @@ public class ServerToClientManager : MonoBehaviour
         //Ingame에 들어왔음을 서버에게 알려줌
     }
 
+    public void cs_ItemActivate_Process(cs_Item packet)
+    {
+        //Ingame에 들어왔음을 서버에게 알려줌
+    }
+
 
     //Server -> Client
     public void sc_playerPosi_DO(sc_PlayerPosi packet)
@@ -258,5 +263,10 @@ public class ServerToClientManager : MonoBehaviour
                 ServerLoginManager.playerList[i].subCharacterRot.eulerAngles = new Vector3(0, packet.p4_sub_rot_y, 0);
             }
         }
+    }
+
+    public void sc_ItemActivate_Process(sc_Item packet)
+    {
+        //Ingame에 들어왔음을 서버에게 알려줌
     }
 }

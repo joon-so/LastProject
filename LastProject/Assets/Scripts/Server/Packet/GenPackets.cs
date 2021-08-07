@@ -13,9 +13,11 @@ public enum PacketID
 	CS_GameStart = 3,
 	CS_Attack = 4,
 	CS_InGame = 5,
+	CS_Item_Activate =6,
 
 	SC_PlayerPosi = 101,
-	SC_First_PlayerPosi = 102
+	SC_First_PlayerPosi = 102,
+	SC_Item_Activate = 103
 }
 
 public interface IPacket
@@ -284,6 +286,45 @@ public class cs_PlayerData : IPacket
 	}
 }
 
+public class cs_Item : IPacket
+{
+	public short item;
+	public bool activate;
+
+	public ushort Protocol { get { return (ushort)PacketID.CS_Item_Activate; } }
+
+	public void Read(ArraySegment<byte> segment)
+	{
+		ushort count = 0;
+		count += sizeof(ushort);
+		count += sizeof(ushort);
+		this.item = BitConverter.ToInt16(segment.Array, segment.Offset + count);
+		count += sizeof(short);
+		this.activate = BitConverter.ToBoolean(segment.Array, segment.Offset + count);
+		count += sizeof(bool);
+
+	}
+
+	public ArraySegment<byte> Write()
+	{
+		ArraySegment<byte> segment = SendBufferHelper.Open(4096);
+		ushort count = 0;
+
+		count += sizeof(ushort);
+		Array.Copy(BitConverter.GetBytes((ushort)PacketID.CS_Item_Activate), 0, segment.Array, segment.Offset + count, sizeof(ushort));
+		count += sizeof(ushort);
+		Array.Copy(BitConverter.GetBytes(this.item), 0, segment.Array, segment.Offset + count, sizeof(short));
+		count += sizeof(short);
+		Array.Copy(BitConverter.GetBytes(this.activate), 0, segment.Array, segment.Offset + count, sizeof(bool));
+		count += sizeof(bool);
+
+		Array.Copy(BitConverter.GetBytes(count), 0, segment.Array, segment.Offset, sizeof(ushort));
+
+		return SendBufferHelper.Close(count);
+	}
+}
+
+//Server -> Client
 public class sc_PlayerPosi : IPacket
 {
 	public string p1_ID;
@@ -931,6 +972,44 @@ public class sc_First_PlayerPosi : IPacket
 		count += sizeof(short);
 		Array.Copy(BitConverter.GetBytes(this.p4_is_main_ch), 0, segment.Array, segment.Offset + count, sizeof(short));
 		count += sizeof(short);
+
+		Array.Copy(BitConverter.GetBytes(count), 0, segment.Array, segment.Offset, sizeof(ushort));
+
+		return SendBufferHelper.Close(count);
+	}
+}
+
+public class sc_Item : IPacket
+{
+	public short item;
+	public bool activate;
+
+	public ushort Protocol { get { return (ushort)PacketID.SC_Item_Activate; } }
+
+	public void Read(ArraySegment<byte> segment)
+	{
+		ushort count = 0;
+		count += sizeof(ushort);
+		count += sizeof(ushort);
+		this.item = BitConverter.ToInt16(segment.Array, segment.Offset + count);
+		count += sizeof(short);
+		this.activate = BitConverter.ToBoolean(segment.Array, segment.Offset + count);
+		count += sizeof(bool);
+
+	}
+
+	public ArraySegment<byte> Write()
+	{
+		ArraySegment<byte> segment = SendBufferHelper.Open(4096);
+		ushort count = 0;
+
+		count += sizeof(ushort);
+		Array.Copy(BitConverter.GetBytes((ushort)PacketID.SC_Item_Activate), 0, segment.Array, segment.Offset + count, sizeof(ushort));
+		count += sizeof(ushort);
+		Array.Copy(BitConverter.GetBytes(this.item), 0, segment.Array, segment.Offset + count, sizeof(short));
+		count += sizeof(short);
+		Array.Copy(BitConverter.GetBytes(this.activate), 0, segment.Array, segment.Offset + count, sizeof(bool));
+		count += sizeof(bool);
 
 		Array.Copy(BitConverter.GetBytes(count), 0, segment.Array, segment.Offset, sizeof(ushort));
 
