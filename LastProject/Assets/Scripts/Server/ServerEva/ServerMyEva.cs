@@ -71,7 +71,6 @@ public class ServerMyEva : ServerSubAIManager
 
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
-            nav.enabled = false;
             tagCharacter = ServerMyPlayerManager.instance.character2;
 
             characterIndex = 1;
@@ -86,7 +85,6 @@ public class ServerMyEva : ServerSubAIManager
         }
         else if (gameObject.transform.CompareTag("SubCharacter"))
         {
-            nav.enabled = true;
             tagCharacter = ServerMyPlayerManager.instance.character1;
 
             characterIndex = 2;
@@ -121,7 +119,6 @@ public class ServerMyEva : ServerSubAIManager
                 W_Skill();
             }
             Stop();
-            CoolTime();
         }
         else if (gameObject.transform.tag == "SubCharacter")
         {
@@ -143,6 +140,7 @@ public class ServerMyEva : ServerSubAIManager
             //}
         }
         Tag();
+        CoolTime();
     }
     void Move()
     {

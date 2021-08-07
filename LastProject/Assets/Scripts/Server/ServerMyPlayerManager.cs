@@ -149,11 +149,6 @@ public class ServerMyPlayerManager : MonoBehaviour
             }
         }
     }
-    void Zoom()
-    {
-        var scroll = Input.mouseScrollDelta;
-        mainCamera.fieldOfView = Mathf.Clamp(mainCamera.fieldOfView - scroll.y, 30f, 70f);
-    }
 
     void Click()
     {

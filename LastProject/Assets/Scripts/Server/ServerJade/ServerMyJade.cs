@@ -87,7 +87,6 @@ public class ServerMyJade : ServerSubAIManager
         
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
-            nav.enabled = false;
             tagCharacter = ServerMyPlayerManager.instance.character2;
 
             characterIndex = 1;
@@ -102,7 +101,6 @@ public class ServerMyJade : ServerSubAIManager
         }
         else if (gameObject.transform.CompareTag("SubCharacter"))
         {
-            nav.enabled = true;
             tagCharacter = ServerMyPlayerManager.instance.character1;
 
             characterIndex = 2;
@@ -121,7 +119,6 @@ public class ServerMyJade : ServerSubAIManager
 
     void Update()
     {
-        Tag();
         curFireDelay += Time.deltaTime;
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
@@ -137,7 +134,6 @@ public class ServerMyJade : ServerSubAIManager
                 W_Skill();
             }
             Stop();
-            CoolTime();
         }
         else if (gameObject.transform.CompareTag("SubCharacter"))
         {
@@ -182,6 +178,8 @@ public class ServerMyJade : ServerSubAIManager
             //    curFireDelay = 1f;
             //}
         }
+        CoolTime();
+        Tag();
     }
 
     void Move()

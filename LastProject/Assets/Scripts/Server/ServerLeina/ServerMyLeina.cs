@@ -73,7 +73,6 @@ public class ServerMyLeina : ServerSubAIManager
 
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
-            nav.enabled = false;
             tagCharacter = ServerMyPlayerManager.instance.character2;
 
             characterIndex = 1;
@@ -88,7 +87,6 @@ public class ServerMyLeina : ServerSubAIManager
         }
         else if (gameObject.transform.CompareTag("SubCharacter"))
         {
-            nav.enabled = true;
             tagCharacter = ServerMyPlayerManager.instance.character1;
 
             characterIndex = 2;
