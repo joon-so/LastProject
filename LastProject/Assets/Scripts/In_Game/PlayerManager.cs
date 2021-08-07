@@ -164,6 +164,10 @@ public class PlayerManager : MonoBehaviour
             Physics.Raycast(ray, out hit);
 
             clickEffect.transform.position = hit.point;
+            if (clickEffect.transform.position.y > 0.0f)
+            {
+                clickEffect.transform.position = new Vector3(clickEffect.transform.position.x, 0.0f, clickEffect.transform.position.z);
+            }
             StartCoroutine(ActiveEffect());
         }
     }

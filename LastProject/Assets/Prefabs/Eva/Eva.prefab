@@ -71,6 +71,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8118653697868928971}
   - component: {fileID: 1899777142750061239}
+  - component: {fileID: 4539676594070207430}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Mini_Bags_Mesh
   m_TagString: Untagged
@@ -148,6 +149,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.020160232, y: -0.05413712, z: 0.17665757}
     m_Extent: {x: 0.11998463, y: 0.08308048, z: 0.08684276}
   m_DirtyAABB: 0
+--- !u!114 &4539676594070207430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807702237071198122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &829575028490811495
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,6 +173,7 @@ GameObject:
   m_Component:
   - component: {fileID: 102073532576250008}
   - component: {fileID: 8550029546038625630}
+  - component: {fileID: 1926026660365656259}
   m_Layer: 0
   m_Name: Firegun_Hose_Mesh
   m_TagString: Untagged
@@ -233,6 +249,20 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.21553068, y: 0.34560665, z: 0.60366035}
     m_Extent: {x: 0.40414155, y: 0.2586123, z: 0.29409102}
   m_DirtyAABB: 0
+--- !u!114 &1926026660365656259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829575028490811495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &835618796479190693
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,6 +273,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5637982330208899742}
   - component: {fileID: 4218935623549764525}
+  - component: {fileID: 4518872729113732433}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Body_Mesh
   m_TagString: Untagged
@@ -363,6 +394,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.30388117, y: 0.103055544, z: 0.00000017881393}
     m_Extent: {x: 0.36557424, y: 0.26933837, z: 0.9777376}
   m_DirtyAABB: 0
+--- !u!114 &4518872729113732433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835618796479190693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &916464429983760097
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,6 +510,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6784369564967622909}
   - component: {fileID: 6262010521312535688}
+  - component: {fileID: 8788133177881148427}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Mask_01_Mesh
   m_TagString: Untagged
@@ -542,6 +588,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.07943739, y: 0.01759763, z: -0.16091806}
     m_Extent: {x: 0.1552687, y: 0.15052998, z: 0.12406731}
   m_DirtyAABB: 0
+--- !u!114 &8788133177881148427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008165908117769984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &1019783164416176369
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,6 +612,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3233964298136730431}
   - component: {fileID: 86414723007308075}
+  - component: {fileID: 2695862499806912652}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Mask_Detail_01_Mesh
   m_TagString: Untagged
@@ -628,6 +689,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.029032491, y: 0.14970727, z: -0.109074295}
     m_Extent: {x: 0.074261874, y: 0.06883654, z: 0.059558988}
   m_DirtyAABB: 0
+--- !u!114 &2695862499806912652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019783164416176369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &1039736534647247444
 GameObject:
   m_ObjectHideFlags: 0
@@ -700,6 +775,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2927661916326431399}
   - component: {fileID: 2571321529698357490}
+  - component: {fileID: 5142133584635350338}
   m_Layer: 0
   m_Name: Firegun_Backpack_Mesh
   m_TagString: Untagged
@@ -774,6 +850,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.10289031, y: 0.35248244, z: 0.060979873}
     m_Extent: {x: 0.36761862, y: 0.21014631, z: 0.27991363}
   m_DirtyAABB: 0
+--- !u!114 &5142133584635350338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1342024902349665261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &1429622081300147481
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,6 +986,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7004875570407300162}
   - component: {fileID: 8500248701983992337}
+  - component: {fileID: 2387446309550803191}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Armors_04_Mesh
   m_TagString: Untagged
@@ -976,6 +1067,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.36174053, y: -0.05718995, z: 0.0032385886}
     m_Extent: {x: 0.18435675, y: 0.114300646, z: 0.2916002}
   m_DirtyAABB: 0
+--- !u!114 &2387446309550803191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549640986222059359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &1562790567066287779
 GameObject:
   m_ObjectHideFlags: 0
@@ -1077,6 +1182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5498270432077881995}
   - component: {fileID: 4793106980672936234}
+  - component: {fileID: 562573786342704437}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Armors_08_Mesh
   m_TagString: Untagged
@@ -1156,6 +1262,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.43511727, y: 0.09284848, z: -0.19032206}
     m_Extent: {x: 0.15491685, y: 0.22484326, z: 0.29607567}
   m_DirtyAABB: 0
+--- !u!114 &562573786342704437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1993689192963789689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &2076619468223884286
 GameObject:
   m_ObjectHideFlags: 0
@@ -1166,6 +1286,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6839221150226283222}
   - component: {fileID: 4659861150512952008}
+  - component: {fileID: 6419992629870254489}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Mask_Detail_02_Mesh
   m_TagString: Untagged
@@ -1242,6 +1363,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.29747197, y: 0.19006541, z: -0.1109862}
     m_Extent: {x: 0.05698368, y: 0.054708004, z: 0.05406535}
   m_DirtyAABB: 0
+--- !u!114 &6419992629870254489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2076619468223884286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &2093667576056415474
 GameObject:
   m_ObjectHideFlags: 0
@@ -1283,6 +1418,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2860544855586372094}
   - component: {fileID: 5814550579973731637}
+  - component: {fileID: 3975381414202854973}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Belts_Mesh
   m_TagString: Untagged
@@ -1367,6 +1503,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.14725858, y: 0.057701148, z: -0.000038310885}
     m_Extent: {x: 0.21358958, y: 0.22600767, z: 0.3896147}
   m_DirtyAABB: 0
+--- !u!114 &3975381414202854973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2148721118705063729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &2175764560715021653
 GameObject:
   m_ObjectHideFlags: 0
@@ -1410,6 +1560,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7510403529446342202}
   - component: {fileID: 836889691857863181}
+  - component: {fileID: 8299790899756015156}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Mask_Hose_02_Mesh
   m_TagString: Untagged
@@ -1490,6 +1641,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.2956249, y: -0.1263534, z: -0.14555205}
     m_Extent: {x: 0.3284735, y: 0.14451484, z: 0.12036927}
   m_DirtyAABB: 0
+--- !u!114 &8299790899756015156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2489205479378300875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &2562981877179588753
 GameObject:
   m_ObjectHideFlags: 0
@@ -1500,6 +1665,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3717546138806603914}
   - component: {fileID: 5636144812875226968}
+  - component: {fileID: 6939893428024660609}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Bag_01_Mesh
   m_TagString: Untagged
@@ -1579,6 +1745,20 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.014603764, y: 0.033799186, z: -0.25547072}
     m_Extent: {x: 0.16824348, y: 0.15093401, z: 0.098715276}
   m_DirtyAABB: 0
+--- !u!114 &6939893428024660609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2562981877179588753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &2579560432477547149
 GameObject:
   m_ObjectHideFlags: 0
@@ -1624,6 +1804,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6879448509560294395}
   - component: {fileID: 4650423544927244385}
+  - component: {fileID: 8206698207054002394}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Mask_03_Mesh
   m_TagString: Untagged
@@ -1699,6 +1880,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.20877096, y: 0.11769906, z: -0.27106392}
     m_Extent: {x: 0.15303168, y: 0.16046306, z: 0.10191781}
   m_DirtyAABB: 0
+--- !u!114 &8206698207054002394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2591676928292584544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &2622878392666573817
 GameObject:
   m_ObjectHideFlags: 0
@@ -1709,6 +1904,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4575938533364889554}
   - component: {fileID: 3717717357695597258}
+  - component: {fileID: 812503869112860393}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Bag_02_Mesh
   m_TagString: Untagged
@@ -1789,6 +1985,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.107553855, y: 0.24400263, z: -0.00000029802322}
     m_Extent: {x: 0.13761555, y: 0.11232816, z: 0.16519065}
   m_DirtyAABB: 0
+--- !u!114 &812503869112860393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2622878392666573817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &2825571270839502967
 GameObject:
   m_ObjectHideFlags: 0
@@ -1830,6 +2040,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2711885096554786836}
   - component: {fileID: 1361404968090561564}
+  - component: {fileID: 5520066036561136542}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Head_Mesh
   m_TagString: Untagged
@@ -1908,6 +2119,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.30104476, y: -0.08505818, z: 0.000000074505806}
     m_Extent: {x: 0.16775632, y: 0.1398978, z: 0.10456057}
   m_DirtyAABB: 0
+--- !u!114 &5520066036561136542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2833334833952828872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &2910261341366490653
 GameObject:
   m_ObjectHideFlags: 0
@@ -2104,6 +2329,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6371842021304588087}
   - component: {fileID: 6582150352639029008}
+  - component: {fileID: 1048468342946228298}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Grenades_Mesh
   m_TagString: Untagged
@@ -2181,6 +2407,20 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.033490155, y: 0.09748842, z: 0.20194793}
     m_Extent: {x: 0.14333665, y: 0.062448043, z: 0.06709892}
   m_DirtyAABB: 0
+--- !u!114 &1048468342946228298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3957256258131173603}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &4014715401840492541
 GameObject:
   m_ObjectHideFlags: 0
@@ -2344,6 +2584,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7861270817238182478}
   - component: {fileID: 3868595415617253549}
+  - component: {fileID: 3174568629845286292}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Mask_Hose_01_Mesh
   m_TagString: Untagged
@@ -2424,6 +2665,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.34153506, y: -0.17998514, z: -0.06381291}
     m_Extent: {x: 0.364576, y: 0.10724199, z: 0.21505144}
   m_DirtyAABB: 0
+--- !u!114 &3174568629845286292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4377201788646409633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &4426991776861748781
 GameObject:
   m_ObjectHideFlags: 0
@@ -2496,6 +2751,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5199085040534229701}
   - component: {fileID: 8503297818915653443}
+  - component: {fileID: 8771516887444974051}
   m_Layer: 0
   m_Name: Firegun_Base_Mesh
   m_TagString: Untagged
@@ -2583,6 +2839,20 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.42976016, y: -0.09925319, z: -0.14010862}
     m_Extent: {x: 0.5325877, y: 0.17371489, z: 0.27320328}
   m_DirtyAABB: 0
+--- !u!114 &8771516887444974051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4881813580885950219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &4928484360820215841
 GameObject:
   m_ObjectHideFlags: 0
@@ -2689,6 +2959,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1049206265566161348}
   - component: {fileID: 6798801092880553298}
+  - component: {fileID: 5398924917765601309}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Bag_Detail_01_Mesh
   m_TagString: Untagged
@@ -2767,6 +3038,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.07595123, y: -0.10228709, z: -0.23335889}
     m_Extent: {x: 0.05176224, y: 0.03524577, z: 0.050554834}
   m_DirtyAABB: 0
+--- !u!114 &5398924917765601309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5049287208173763326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &5289599231373886639
 GameObject:
   m_ObjectHideFlags: 0
@@ -2808,6 +3093,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2016084405797617744}
   - component: {fileID: 4960739896229597317}
+  - component: {fileID: 4960288609015514152}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Armors_06_Mesh
   m_TagString: Untagged
@@ -2886,6 +3172,20 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.43289924, y: 0.00085298717, z: -0.00000008940697}
     m_Extent: {x: 0.12028158, y: 0.13752674, z: 0.25933698}
   m_DirtyAABB: 0
+--- !u!114 &4960288609015514152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5296224325652470858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &5300641389367104880
 GameObject:
   m_ObjectHideFlags: 0
@@ -7595,6 +7895,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7178059357495286406}
   - component: {fileID: 3171195678636350503}
+  - component: {fileID: 2414722293607495369}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Armors_10_Mesh
   m_TagString: Untagged
@@ -7673,6 +7974,20 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.16944697, y: 0.014521867, z: -0.18765593}
     m_Extent: {x: 0.34095868, y: 0.16046113, z: 0.09174383}
   m_DirtyAABB: 0
+--- !u!114 &2414722293607495369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5698503582417632136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &5704758191241071457
 GameObject:
   m_ObjectHideFlags: 0
@@ -7775,6 +8090,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2997146303589611596}
   - component: {fileID: 8898727398189470471}
+  - component: {fileID: 8877989024201149542}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Armors_03_Mesh
   m_TagString: Untagged
@@ -7858,6 +8174,20 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.48267978, y: -0.105799414, z: 0.1258626}
     m_Extent: {x: 0.80630547, y: 0.19056877, z: 0.1920929}
   m_DirtyAABB: 0
+--- !u!114 &8877989024201149542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5804890295423151184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &5819051029493082976
 GameObject:
   m_ObjectHideFlags: 0
@@ -7899,6 +8229,7 @@ GameObject:
   - component: {fileID: 5038266840554011323}
   - component: {fileID: 7721980461539914547}
   - component: {fileID: 1380720506515115519}
+  - component: {fileID: 8134595252529949391}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Cloth_Mesh
   m_TagString: Untagged
@@ -9561,6 +9892,20 @@ Cloth:
   - {x: 0.6666667, y: 0.16666667, z: 0.16666667}
   - {x: 0.5, y: 0.5, z: 0}
   m_VirtualParticleIndices: 
+--- !u!114 &8134595252529949391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5917347637674062675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &5983215078826873485
 GameObject:
   m_ObjectHideFlags: 0
@@ -14560,6 +14905,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2335619917954068501}
   - component: {fileID: 230376390853305520}
+  - component: {fileID: 1957572980754557627}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Bag_Detail_02_Mesh
   m_TagString: Untagged
@@ -14635,6 +14981,20 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.03322611, y: -0.11168045, z: -0.24979529}
     m_Extent: {x: 0.0517622, y: 0.035245772, z: 0.050554834}
   m_DirtyAABB: 0
+--- !u!114 &1957572980754557627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6558555128488244278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &6586961620729198201
 GameObject:
   m_ObjectHideFlags: 0
@@ -14645,6 +15005,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4218235001323695972}
   - component: {fileID: 5198395546870440073}
+  - component: {fileID: 8382200458251980765}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Armors_01_Mesh
   m_TagString: Untagged
@@ -14724,6 +15085,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.21322627, y: -0.007027723, z: 0.00000008940697}
     m_Extent: {x: 0.09637503, y: 0.14918423, z: 0.28968343}
   m_DirtyAABB: 0
+--- !u!114 &8382200458251980765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6586961620729198201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &6716524965275323224
 GameObject:
   m_ObjectHideFlags: 0
@@ -14734,6 +15109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5639303361871675402}
   - component: {fileID: 6716312050416255923}
+  - component: {fileID: 1376386990043165630}
   m_Layer: 0
   m_Name: Blade_Mesh
   m_TagString: Untagged
@@ -14814,6 +15190,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.18594179, y: -0.038695842, z: 0.016646031}
     m_Extent: {x: 0.17564735, y: 0.04786115, z: 0.04469882}
   m_DirtyAABB: 0
+--- !u!114 &1376386990043165630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6716524965275323224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &6722082027044076488
 GameObject:
   m_ObjectHideFlags: 0
@@ -14886,6 +15276,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8356087543525406841}
   - component: {fileID: 6106939558801026066}
+  - component: {fileID: 3654959436280652756}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Armors_02_Mesh
   m_TagString: Untagged
@@ -14963,6 +15354,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.19768113, y: -0.0132685825, z: -0.00535921}
     m_Extent: {x: 0.45680302, y: 0.16987392, z: 0.16083798}
   m_DirtyAABB: 0
+--- !u!114 &3654959436280652756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6941922441335368112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &7042609509640117181
 GameObject:
   m_ObjectHideFlags: 0
@@ -15004,6 +15409,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7388409057539147610}
   - component: {fileID: 6853472747264723488}
+  - component: {fileID: 2615146163192278639}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Helmet_Mesh
   m_TagString: Untagged
@@ -15079,6 +15485,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.20684499, y: 0.091354474, z: -0.27166134}
     m_Extent: {x: 0.1367243, y: 0.15858398, z: 0.10973793}
   m_DirtyAABB: 0
+--- !u!114 &2615146163192278639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7056084674753596710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &7299968128481752561
 GameObject:
   m_ObjectHideFlags: 0
@@ -15089,6 +15509,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5301160913167433965}
   - component: {fileID: 4044237652166459072}
+  - component: {fileID: 5899033717261857542}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Armors_09_Mesh
   m_TagString: Untagged
@@ -15167,6 +15588,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.16944565, y: -0.014522001, z: 0.18765682}
     m_Extent: {x: 0.34095883, y: 0.16046114, z: 0.09174389}
   m_DirtyAABB: 0
+--- !u!114 &5899033717261857542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7299968128481752561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &7372564431713649578
 GameObject:
   m_ObjectHideFlags: 0
@@ -15210,6 +15645,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3477456201955589687}
   - component: {fileID: 1138518884054133677}
+  - component: {fileID: 2627423099637613584}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Armors_07_Mesh
   m_TagString: Untagged
@@ -15289,6 +15725,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.32844296, y: -0.01185032, z: -0.17814755}
     m_Extent: {x: 0.20320246, y: 0.13556811, z: 0.29316354}
   m_DirtyAABB: 0
+--- !u!114 &2627423099637613584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7535027192179207666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &7731001023553733954
 GameObject:
   m_ObjectHideFlags: 0
@@ -15390,6 +15840,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2548962744347217791}
   - component: {fileID: 6174555377780465989}
+  - component: {fileID: 7672451680421346085}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Shoes_Mesh
   m_TagString: Untagged
@@ -15469,6 +15920,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.3424701, y: 0.058020607, z: -0.18577543}
     m_Extent: {x: 0.2160241, y: 0.21406086, z: 0.275965}
   m_DirtyAABB: 0
+--- !u!114 &7672451680421346085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8204435357997055206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &8432903928704488656
 GameObject:
   m_ObjectHideFlags: 0
@@ -15571,6 +16036,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2734623750120400035}
   - component: {fileID: 8879344999155987547}
+  - component: {fileID: 7323037741386174776}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Pants_Mesh
   m_TagString: Untagged
@@ -15650,6 +16116,20 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.21679491, y: 0.01758065, z: 0}
     m_Extent: {x: 0.4182635, y: 0.1745581, z: 0.30649924}
   m_DirtyAABB: 0
+--- !u!114 &7323037741386174776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8532326642257517033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &8557244404049557831
 GameObject:
   m_ObjectHideFlags: 0
@@ -15755,6 +16235,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5526089556394700585}
   - component: {fileID: 694800283721390785}
+  - component: {fileID: 2358458691377758593}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Mask_02_Mesh
   m_TagString: Untagged
@@ -15830,6 +16311,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.20840506, y: 0.21088304, z: -0.17999668}
     m_Extent: {x: 0.09000905, y: 0.033253774, z: 0.081990615}
   m_DirtyAABB: 0
+--- !u!114 &2358458691377758593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8778186532836633388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &8793847448608134551
 GameObject:
   m_ObjectHideFlags: 0
@@ -15963,6 +16458,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6109654082628957649}
   - component: {fileID: 4568044462694404468}
+  - component: {fileID: 3305745536058378090}
   m_Layer: 0
   m_Name: Dystopia_Soldier_2_Armors_05_Mesh
   m_TagString: Untagged
@@ -16043,3 +16539,17 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.37185, y: 0.2525812, z: 0.00000028312206}
     m_Extent: {x: 0.19289434, y: 0.14564142, z: 0.27414232}
   m_DirtyAABB: 0
+--- !u!114 &3305745536058378090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9024200001106942784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
