@@ -5,7 +5,8 @@ using UnityEngine.AI;
 
 public class Boss : MonoBehaviour
 {
-    [SerializeField] GameObject GroundPattern1Effect;
+    [SerializeField] GameObject GroundPattern1Bullet;
+    public GameObject BulletPos;
     [SerializeField] GameObject GroundPattern2Effect;
     [SerializeField] GameObject GroundPattern2Gage;
     [SerializeField] GameObject GroundPattern3Effect;
@@ -145,7 +146,12 @@ public class Boss : MonoBehaviour
     IEnumerator GroundPattern1()
     {
         anim.SetInteger("Pattern", pattern);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
+        for(int i = 0; i< 20; i++)
+        {
+            Instantiate(GroundPattern1Bullet, BulletPos.transform.position, transform.rotation);
+            yield return new WaitForSeconds(0.16f);
+        }
         pattern = 0;
         anim.SetInteger("Pattern", pattern);
         canAttack = true;
