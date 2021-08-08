@@ -16,6 +16,8 @@ public class ServerItemManager : MonoBehaviour
     [SerializeField] GameObject epPotion;
     [SerializeField] Transform itemCreatePos;
 
+    public bool onItem;
+
     void Awake()
     {
         if (instance == null)
@@ -24,27 +26,39 @@ public class ServerItemManager : MonoBehaviour
 
     void Start()
     {
-        CreateHpPotion();
+        is_Item_Active = true;
+        kindOfItem = 1;
+        onItem = false;
     }
 
     void Update()
     {
-        if(is_Item_Active)
+        if (is_Item_Active)
         {
-            if(kindOfItem == 1)
-                CreateHpPotion();
+            if (kindOfItem == 1)
+            {
+                if (!onItem)
+                    CreateHpPotion();
+            }
             else if (kindOfItem == 2)
-                CreateEpPotion();
+            {
+                if (!onItem)
+                    CreateEpPotion();
+            }
         }
     }
 
     void CreateHpPotion()
     {
+        onItem = true;
+        Debug.Log("HP 持失");
         Instantiate(hpPotion, itemCreatePos.position, itemCreatePos.rotation);
     }
 
     void CreateEpPotion()
     {
+        onItem = true;
+        Debug.Log("MP 持失");
         Instantiate(epPotion, itemCreatePos.position, itemCreatePos.rotation);
     }
 }

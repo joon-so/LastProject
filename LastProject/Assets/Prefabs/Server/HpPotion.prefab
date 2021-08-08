@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5540723387925953062}
-  - component: {fileID: 1909879276426960228}
   - component: {fileID: 8091731988704509812}
   - component: {fileID: 5796696676091707847}
+  - component: {fileID: 1909879276426960228}
   m_Layer: 0
   m_Name: HpPotion
   m_TagString: HpPotion
@@ -35,18 +35,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1909879276426960228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5541999213491806702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 128e66717b89bd8458e517bd740090e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &8091731988704509812
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -76,6 +64,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &1909879276426960228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5541999213491806702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 128e66717b89bd8458e517bd740090e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5541999214106377236
 GameObject:
   m_ObjectHideFlags: 0

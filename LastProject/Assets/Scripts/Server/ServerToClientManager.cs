@@ -7,10 +7,6 @@ public class ServerToClientManager : MonoBehaviour
 {
     public static ServerToClientManager Instance { get; } = new ServerToClientManager();
 
-    void Start()
-    {
-    }
-
     //Client -> Server
     public void cs_Login_Process(cs_Login packet)
     {
@@ -228,6 +224,8 @@ public class ServerToClientManager : MonoBehaviour
 
     public void sc_playerFirstPosi_DO(sc_First_PlayerPosi packet)
     {
+        ServerIngameManager.instance.timeStart = true;
+
         for (int i = 0; i < 4; ++i)
         {
             if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p1_ID) == 0)
@@ -267,12 +265,11 @@ public class ServerToClientManager : MonoBehaviour
 
     public void sc_ItemActivate_Process(sc_Item packet)
     {
-        //Debug.Log("Item");
-        //Debug.Log(packet.item);
+        Debug.Log("Item");
+        Debug.Log(packet.item);
+        Debug.Log(packet.activate);
 
-        //Debug.Log(packet.activate);
-
-        //ServerItemManager.instance.is_Item_Active = packet.activate;
-        //ServerItemManager.instance.kindOfItem = packet.item;
+        ServerItemManager.instance.is_Item_Active = packet.activate;
+        ServerItemManager.instance.kindOfItem = packet.item;
     }
 }

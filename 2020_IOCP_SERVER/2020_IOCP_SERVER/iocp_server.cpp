@@ -320,6 +320,8 @@ void send_hp_activate(int id)
     p.item = 1;
     p.activate = true;
 
+    cout << "hp활성화 패킷전송" << endl;
+
     for (int i = 0; i < MAX_USER; i++) {
         if (g_clients[i].in_use == true) {
             send_packet(i, &p);
@@ -335,6 +337,7 @@ void send_mp_activate(int id)
     p.item = 2;
     p.activate = true;
 
+    cout << "mp활성화 패킷전송" << endl;
     for (int i = 0; i < MAX_USER; i++) {
         if (g_clients[i].in_use == true) {
             send_packet(i, &p);
@@ -758,9 +761,10 @@ void process_packet(int id)
 
         All_Item ip;
         ip.size = sizeof(ip);
-        ip.type = p->type;
+        ip.type = SC_Item_Activate;
         ip.item = p->item;
-        ip.activate = false;
+        ip.activate = p->activate;
+        cout << ip.item << ", " << ip.activate << endl;
 
         for (int i = 0; i < MAX_USER; i++) {
             if (g_clients[i].in_use == true) {
@@ -768,10 +772,12 @@ void process_packet(int id)
             }
         }
         if (p->item == 1) {     //HP
-            add_timer(1000, OP_HP_ACTIVATE, system_clock::now() + 10s, 0);
+            cout << "hp시간" << endl;
+            add_timer(1000, OP_HP_ACTIVATE, system_clock::now() + 5000ms, 0);
         }
         else if (p->item == 2) {     //MP
-            add_timer(1000, OP_MP_ACTIVATE, system_clock::now() + 10s, 0);
+            cout << "mp시간" << endl;
+            add_timer(1000, OP_MP_ACTIVATE, system_clock::now() + 5000ms, 0);
         }
         break;
     }

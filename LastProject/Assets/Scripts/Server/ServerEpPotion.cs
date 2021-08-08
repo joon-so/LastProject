@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HpPotion : MonoBehaviour
+public class EpPotion : MonoBehaviour
 {
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -18,12 +18,13 @@ public class HpPotion : MonoBehaviour
     {
         send_Item_packet();
         Destroy(gameObject);
+        ServerItemManager.instance.onItem = false;
     }
 
     void send_Item_packet()
     {
         cs_Item ItemPacket = new cs_Item();
-        ItemPacket.item = 2; 
+        ItemPacket.item = 1;
         ItemPacket.activate = false;
 
         NetworkManager.instance.Send(ItemPacket.Write());
