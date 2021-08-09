@@ -11,19 +11,19 @@ public class ServerRankUISubCharacter : ServerRankPlayerInfo
 
     void Start()
     {
-        if (ServerLoginManager.playerList[playerIndex].selectSubCharacter == 1)
+        if (ServerIngameManager.instance.resultPlayerInfo[playerIndex].character2 == 1)
         {
             subKarmenMask.SetActive(true);
         }
-        else if (ServerLoginManager.playerList[playerIndex].selectSubCharacter == 2)
+        else if (ServerIngameManager.instance.resultPlayerInfo[playerIndex].character2 == 2)
         {
             subJadeMask.SetActive(true);
         }
-        else if (ServerLoginManager.playerList[playerIndex].selectSubCharacter == 3)
+        else if (ServerIngameManager.instance.resultPlayerInfo[playerIndex].character2 == 3)
         {
             subLeinaMask.SetActive(true);
         }
-        else if (ServerLoginManager.playerList[playerIndex].selectSubCharacter == 4)
+        else if (ServerIngameManager.instance.resultPlayerInfo[playerIndex].character2 == 4)
         {
             subEvaMask.SetActive(true);
         }

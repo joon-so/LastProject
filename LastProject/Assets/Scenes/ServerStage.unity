@@ -2826,7 +2826,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &58434952
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2990,7 +2990,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e924f21c83af8245920cc565b51870f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIndex: 0
+  playerIndex: 2
+  nameText: {fileID: 1427697064}
 --- !u!1 &62672078
 GameObject:
   m_ObjectHideFlags: 0
@@ -3751,7 +3752,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 730ae726d4822c145a3ac02da7ebc289, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIndex: 0
+  playerIndex: 3
+  nameText: {fileID: 489592017}
   subKarmenMask: {fileID: 1504492736}
   subJadeMask: {fileID: 425535294}
   subLeinaMask: {fileID: 787059002}
@@ -16607,7 +16609,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 730ae726d4822c145a3ac02da7ebc289, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIndex: 0
+  playerIndex: 2
+  nameText: {fileID: 1427697064}
   subKarmenMask: {fileID: 1988097258}
   subJadeMask: {fileID: 928673206}
   subLeinaMask: {fileID: 553689007}
@@ -19259,7 +19262,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &568335048
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19423,7 +19426,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e924f21c83af8245920cc565b51870f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIndex: 0
+  playerIndex: 1
+  nameText: {fileID: 1678285701}
 --- !u!1 &569053848
 GameObject:
   m_ObjectHideFlags: 0
@@ -20910,7 +20914,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a029a5d8eb32008498d5aba15ea8cd80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIndex: 0
+  playerIndex: 1
+  nameText: {fileID: 1678285701}
   mainKarmenMask: {fileID: 20116793}
   mainJadeMask: {fileID: 202406043}
   mainLeinaMask: {fileID: 353395458}
@@ -21902,7 +21907,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 730ae726d4822c145a3ac02da7ebc289, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIndex: 0
+  playerIndex: 1
+  nameText: {fileID: 1678285701}
   subKarmenMask: {fileID: 1666781742}
   subJadeMask: {fileID: 26409128}
   subLeinaMask: {fileID: 664039545}
@@ -25651,7 +25657,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a029a5d8eb32008498d5aba15ea8cd80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIndex: 0
+  playerIndex: 2
+  nameText: {fileID: 1427697064}
   mainKarmenMask: {fileID: 73111860}
   mainJadeMask: {fileID: 1588602188}
   mainLeinaMask: {fileID: 993402639}
@@ -26241,6 +26248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
+  nameText: {fileID: 311816521}
   subKarmenMask: {fileID: 962458011}
   subJadeMask: {fileID: 1778834543}
   subLeinaMask: {fileID: 262491215}
@@ -29705,7 +29713,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a029a5d8eb32008498d5aba15ea8cd80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIndex: 0
+  playerIndex: 3
+  nameText: {fileID: 489592017}
   mainKarmenMask: {fileID: 1181076991}
   mainJadeMask: {fileID: 259231603}
   mainLeinaMask: {fileID: 2091127525}
@@ -41647,6 +41656,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   is_Item_Active: 0
+  createItem: 0
   kindOfItem: 0
   hpValue: 50
   epValue: 50
@@ -50213,7 +50223,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1357166407
 RectTransform:
   m_ObjectHideFlags: 0
@@ -50377,7 +50387,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e924f21c83af8245920cc565b51870f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIndex: 0
+  playerIndex: 3
+  nameText: {fileID: 489592017}
 --- !u!1 &1359561758
 GameObject:
   m_ObjectHideFlags: 0
@@ -53192,7 +53203,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1418628982
 RectTransform:
   m_ObjectHideFlags: 0
@@ -53357,6 +53368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
+  nameText: {fileID: 311816521}
 --- !u!1001 &1420033328
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67516,6 +67528,7 @@ MonoBehaviour:
   timeStart: 0
   playerRankingIndex: 
   playerCount: 0
+  resultUI: {fileID: 1123887123442892}
 --- !u!4 &1819326255
 Transform:
   m_ObjectHideFlags: 0
@@ -74389,7 +74402,6 @@ GameObject:
   - component: {fileID: 1985631219}
   - component: {fileID: 1985631218}
   - component: {fileID: 1985631217}
-  - component: {fileID: 1985631222}
   m_Layer: 5
   m_Name: Canvas (UI)
   m_TagString: Untagged
@@ -74524,24 +74536,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1985631222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985631216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cb84355a64a495408993391f7b8ac9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resultUI: {fileID: 1123887123442892}
-  player:
-  - {fileID: 1418628981}
-  - {fileID: 568335047}
-  - {fileID: 58434951}
-  - {fileID: 1357166406}
 --- !u!1 &1988097258
 GameObject:
   m_ObjectHideFlags: 0
@@ -81018,6 +81012,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerIndex: 0
+  nameText: {fileID: 311816521}
   mainKarmenMask: {fileID: 1488682649}
   mainJadeMask: {fileID: 1637725023}
   mainLeinaMask: {fileID: 1405990993}
@@ -81089,6 +81084,7 @@ GameObject:
   - component: {fileID: 114328742018715792}
   - component: {fileID: 114634522086989474}
   - component: {fileID: 225493116585715204}
+  - component: {fileID: 1123887123442893}
   m_Layer: 5
   m_Name: Result UI
   m_TagString: Untagged
@@ -81096,6 +81092,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &1123887123442893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123887123442892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cb84355a64a495408993391f7b8ac9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInfo:
+  - {fileID: 1418628981}
+  - {fileID: 568335047}
+  - {fileID: 58434951}
+  - {fileID: 1357166406}
 --- !u!1 &1161769764417350
 GameObject:
   m_ObjectHideFlags: 0
@@ -82027,7 +82040,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1985631222}
+      - m_Target: {fileID: 1123887123442893}
         m_TargetAssemblyTypeName: ServerIngameResultManager, Assembly-CSharp
         m_MethodName: ResultExitButton
         m_Mode: 1

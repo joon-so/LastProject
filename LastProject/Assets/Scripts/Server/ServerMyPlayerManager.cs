@@ -190,7 +190,11 @@ public class ServerMyPlayerManager : MonoBehaviour
             }
             if(Input.GetKeyDown(KeyCode.F1))
             {
-                ChangeMode();
+                ChangeHpEp();
+            }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                ChangeTime();
             }
         }
     }
@@ -248,12 +252,17 @@ public class ServerMyPlayerManager : MonoBehaviour
         }
     }
 
-    void ChangeMode()
+    void ChangeHpEp()
     {
         ServerLoginManager.playerList[0].character1Hp = 100;
         ServerLoginManager.playerList[0].character2Hp = 100;
         ServerLoginManager.playerList[0].character1Ep = 50;
         ServerLoginManager.playerList[0].character2Ep = 50;
+    }
+
+    void ChangeTime()
+    {
+        ServerIngameManager.instance.playTime = 10.0f;
     }
 
     void PotionCount()

@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class ServerIngameResultManager : MonoBehaviour
 {
-    [SerializeField] GameObject resultUI;
-    [SerializeField] List<GameObject> player;
+    [SerializeField] List<GameObject> playerInfo;
 
     void Start()
     {
-        
-        
+                
     }
 
     void Update()
@@ -18,8 +16,17 @@ public class ServerIngameResultManager : MonoBehaviour
         
     }
 
+    private void OnEnable()
+    {
+        for (int i = 0; i < ServerIngameManager.instance.playerCount; ++i)
+        {
+            playerInfo[i].SetActive(true);
+        }
+    }
+
+
     public void ResultExitButton()
     {
-
+        gameObject.SetActive(false);
     }
 }
