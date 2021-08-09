@@ -26,23 +26,21 @@ public class ServerItemManager : MonoBehaviour
 
     void Start()
     {
-        is_Item_Active = true;
-        kindOfItem = 1;
-        onItem = false;
+        CreateHpPotion();
     }
 
     void Update()
     {
-        if (is_Item_Active)
+        if (is_Item_Active == true)
         {
             if (kindOfItem == 1)
             {
-                if (!onItem)
+                if (onItem == false)
                     CreateHpPotion();
             }
             else if (kindOfItem == 2)
             {
-                if (!onItem)
+                if (onItem == false)
                     CreateEpPotion();
             }
         }

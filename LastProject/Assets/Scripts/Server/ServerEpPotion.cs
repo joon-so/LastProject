@@ -2,12 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EpPotion : MonoBehaviour
+public class ServerEpPotion : MonoBehaviour
 {
-    void Start()
-    {
-
-    }
+    private bool check = false;
 
     void Update()
     {
@@ -16,9 +13,19 @@ public class EpPotion : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        send_Item_packet();
-        Destroy(gameObject);
-        ServerItemManager.instance.onItem = false;
+        if (collision.gameObject.CompareTag("MainCharacter"))
+        {
+            if (!check)
+            {
+                Destroy(gameObject);
+                Debug.Log("¸Ô¾ú´Ù.");
+                send_Item_packet();
+                ServerItemManager.instance.onItem = false;
+                ServerMyPlayerManager.instance.myEpPotionCount += 1;
+                check = true;
+            }
+
+        }
     }
 
     void send_Item_packet()

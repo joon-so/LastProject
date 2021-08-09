@@ -516,11 +516,6 @@ public class ServerMyKarmen : ServerSubAIManager
                 collisionManager.EvaBasicAttack();
             if (collision.gameObject.CompareTag("EvaWSkill"))
                 collisionManager.EvaWSkillAttack();
-
-            if(collision.gameObject.CompareTag("HpPotion"))
-                ServerMyPlayerManager.instance.myHpPotionCount += 1;
-            if (collision.gameObject.CompareTag("EpPotion"))
-                ServerMyPlayerManager.instance.myEpPotionCount += 1;
         }
     }
 }
