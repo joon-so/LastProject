@@ -788,6 +788,12 @@ void process_packet(int id)
         }
         break;
     }
+    case CS_Set_Time: {
+        All_SetTime* p = reinterpret_cast<All_SetTime*>(g_clients[id].m_packet_start);
+        cout << "Set Time Packet ¼ö½Å" << endl;
+
+        break;
+    }
     default: cout << "Unknown Packet type [" << p_type << "] from Client [" << id << "]\n";
         while (true);
     }

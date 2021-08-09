@@ -57,6 +57,10 @@ public class ServerToClientManager : MonoBehaviour
         //Ingame에 들어왔음을 서버에게 알려줌
     }
 
+    public void cs_SetTime_Process(cs_SetTime packet)
+    {
+        //여기
+    }
 
     //Server -> Client
     public void sc_playerPosi_DO(sc_PlayerPosi packet)
@@ -273,5 +277,10 @@ public class ServerToClientManager : MonoBehaviour
         ServerItemManager.instance.kindOfItem = packet.item;
         if (packet.activate)
             ServerItemManager.instance.onItem = true;
+    }
+
+    public void sc_SetTime_Process(sc_SetTime packet)
+    {
+        //여기
     }
 }

@@ -32,6 +32,14 @@ class PacketHandler
 		ServerToClientManager.Instance.sc_ItemActivate_Process(pkt);
 	}
 
+	public static void sc_SetTimeHandler(PacketSession session, IPacket packet)
+	{
+		sc_SetTime pkt = packet as sc_SetTime;
+		ServerSession serverSession = session as ServerSession;
+
+		ServerToClientManager.Instance.sc_SetTime_Process(pkt);
+	}
+
 	public static void cs_LoginGameHandler(PacketSession session, IPacket packet)
 	{
 		cs_Login pkt = packet as cs_Login;
@@ -77,5 +85,13 @@ class PacketHandler
 		ServerSession serverSession = session as ServerSession;
 
 		ServerToClientManager.Instance.cs_ItemActivate_Process(pkt);
+	}
+
+	public static void cs_SetTimeHandler(PacketSession session, IPacket packet)
+	{
+		cs_SetTime pkt = packet as cs_SetTime;
+		ServerSession serverSession = session as ServerSession;
+
+		ServerToClientManager.Instance.cs_SetTime_Process(pkt);
 	}
 }

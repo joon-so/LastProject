@@ -36,7 +36,10 @@ public class PacketManager
 		_handler.Add((ushort)PacketID.CS_InGame, PacketHandler.cs_InGameStartHandler);
 
 		_makeFunc.Add((ushort)PacketID.CS_Item_Activate, MakePacket<cs_Item>);
-		_handler.Add((ushort)PacketID.CS_Item_Activate, PacketHandler.sc_ItemActivateHandler);
+		_handler.Add((ushort)PacketID.CS_Item_Activate, PacketHandler.cs_ItemActivateHandler);
+
+		_makeFunc.Add((ushort)PacketID.CS_Set_Time, MakePacket<cs_SetTime>);
+		_handler.Add((ushort)PacketID.CS_Set_Time, PacketHandler.cs_SetTimeHandler);
 
 
 		//Server -> Client
@@ -48,6 +51,9 @@ public class PacketManager
 
 		_makeFunc.Add((ushort)PacketID.SC_Item_Activate, MakePacket<sc_Item>);
 		_handler.Add((ushort)PacketID.SC_Item_Activate, PacketHandler.sc_ItemActivateHandler);
+
+		_makeFunc.Add((ushort)PacketID.SC_Set_Time, MakePacket<sc_SetTime>);
+		_handler.Add((ushort)PacketID.SC_Set_Time, PacketHandler.sc_SetTimeHandler);
 	}
 
 	public void OnRecvPacket(PacketSession session, ArraySegment<byte> buffer, Action<PacketSession, IPacket> onRecvCallback = null)

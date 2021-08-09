@@ -15,10 +15,12 @@ constexpr USHORT CS_GameStart = 3;
 constexpr USHORT CS_Attack = 4;
 constexpr USHORT CS_InGame = 5;
 constexpr USHORT CS_Item_Activate = 6;
+constexpr USHORT CS_Set_Time = 7;
 
 constexpr USHORT SC_PlayerPosi = 101;
 constexpr USHORT SC_First_PlayerPosi = 102;		//플레이어들 초기좌표값
 constexpr USHORT SC_Item_Activate = 103;
+constexpr USHORT SC_Set_Time = 104;
 
 struct cs_Login {
 	unsigned short size;
@@ -140,6 +142,14 @@ struct All_Item {
 
 	short item;
 	bool activate;
+};
+
+struct All_SetTime
+{
+	unsigned short size;
+	unsigned short type;
+
+	float time;
 };
 
 //#pragma pack (pop)

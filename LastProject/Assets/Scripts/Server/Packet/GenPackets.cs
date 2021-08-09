@@ -14,10 +14,12 @@ public enum PacketID
 	CS_Attack = 4,
 	CS_InGame = 5,
 	CS_Item_Activate =6,
+	CS_Set_Time = 7,
 
 	SC_PlayerPosi = 101,
 	SC_First_PlayerPosi = 102,
-	SC_Item_Activate = 103
+	SC_Item_Activate = 103,
+	SC_Set_Time = 104
 }
 
 public interface IPacket
@@ -317,6 +319,39 @@ public class cs_Item : IPacket
 		count += sizeof(short);
 		Array.Copy(BitConverter.GetBytes(this.activate), 0, segment.Array, segment.Offset + count, sizeof(bool));
 		count += sizeof(bool);
+
+		Array.Copy(BitConverter.GetBytes(count), 0, segment.Array, segment.Offset, sizeof(ushort));
+
+		return SendBufferHelper.Close(count);
+	}
+}
+
+public class cs_SetTime : IPacket
+{
+	public float time;
+
+	public ushort Protocol { get { return (ushort)PacketID.CS_Set_Time; } }
+
+	public void Read(ArraySegment<byte> segment)
+	{
+		ushort count = 0;
+		count += sizeof(ushort);
+		count += sizeof(ushort);
+		this.time = BitConverter.ToSingle(segment.Array, segment.Offset + count);
+		count += sizeof(float);
+
+	}
+
+	public ArraySegment<byte> Write()
+	{
+		ArraySegment<byte> segment = SendBufferHelper.Open(4096);
+		ushort count = 0;
+
+		count += sizeof(ushort);
+		Array.Copy(BitConverter.GetBytes((ushort)PacketID.CS_Set_Time), 0, segment.Array, segment.Offset + count, sizeof(ushort));
+		count += sizeof(ushort);
+		Array.Copy(BitConverter.GetBytes(this.time), 0, segment.Array, segment.Offset + count, sizeof(float));
+		count += sizeof(float);
 
 		Array.Copy(BitConverter.GetBytes(count), 0, segment.Array, segment.Offset, sizeof(ushort));
 
@@ -1010,6 +1045,39 @@ public class sc_Item : IPacket
 		count += sizeof(short);
 		Array.Copy(BitConverter.GetBytes(this.activate), 0, segment.Array, segment.Offset + count, sizeof(bool));
 		count += sizeof(bool);
+
+		Array.Copy(BitConverter.GetBytes(count), 0, segment.Array, segment.Offset, sizeof(ushort));
+
+		return SendBufferHelper.Close(count);
+	}
+}
+
+public class sc_SetTime : IPacket
+{
+	public float time;
+
+	public ushort Protocol { get { return (ushort)PacketID.SC_Set_Time; } }
+
+	public void Read(ArraySegment<byte> segment)
+	{
+		ushort count = 0;
+		count += sizeof(ushort);
+		count += sizeof(ushort);
+		this.time = BitConverter.ToSingle(segment.Array, segment.Offset + count);
+		count += sizeof(float);
+
+	}
+
+	public ArraySegment<byte> Write()
+	{
+		ArraySegment<byte> segment = SendBufferHelper.Open(4096);
+		ushort count = 0;
+
+		count += sizeof(ushort);
+		Array.Copy(BitConverter.GetBytes((ushort)PacketID.SC_Set_Time), 0, segment.Array, segment.Offset + count, sizeof(ushort));
+		count += sizeof(ushort);
+		Array.Copy(BitConverter.GetBytes(this.time), 0, segment.Array, segment.Offset + count, sizeof(float));
+		count += sizeof(float);
 
 		Array.Copy(BitConverter.GetBytes(count), 0, segment.Array, segment.Offset, sizeof(ushort));
 
