@@ -8,7 +8,9 @@ public class ServerEpPotion : MonoBehaviour
 
     void Update()
     {
-        // È¸Àü
+        Debug.Log("MP: " + ServerItemManager.instance.is_Item_Active);
+        if (ServerItemManager.instance.is_Item_Active == false)
+            Destroy(gameObject);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -18,13 +20,11 @@ public class ServerEpPotion : MonoBehaviour
             if (!check)
             {
                 Destroy(gameObject);
-                Debug.Log("¸Ô¾ú´Ù.");
                 send_Item_packet();
                 ServerItemManager.instance.onItem = false;
                 ServerMyPlayerManager.instance.myEpPotionCount += 1;
                 check = true;
             }
-
         }
     }
 

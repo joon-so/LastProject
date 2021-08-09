@@ -271,5 +271,7 @@ public class ServerToClientManager : MonoBehaviour
 
         ServerItemManager.instance.is_Item_Active = packet.activate;
         ServerItemManager.instance.kindOfItem = packet.item;
+        if (packet.activate)
+            ServerItemManager.instance.onItem = true;
     }
 }

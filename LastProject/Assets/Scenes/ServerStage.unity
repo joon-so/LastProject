@@ -81066,7 +81066,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224957799499446374}
-  - component: {fileID: 114599532755497404}
   - component: {fileID: 222430897515519672}
   - component: {fileID: 114510832075037822}
   - component: {fileID: 114399967030956814}
@@ -81984,36 +81983,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Shade: 4
---- !u!114 &114599532755497404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1038759992126570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99530436f04921f49a75e939dc2cb027, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Target: {fileID: 224282032123078770}
-  m_Horizontal: 1
-  m_Vertical: 1
-  m_Inertia: 1
-  m_InertiaRounding: 1
-  m_DampeningRate: 9
-  m_ConstrainWithinCanvas: 0
-  m_ConstrainDrag: 1
-  m_ConstrainInertia: 1
-  onBeginDrag:
-    m_PersistentCalls:
-      m_Calls: []
-  onEndDrag:
-    m_PersistentCalls:
-      m_Calls: []
-  onDrag:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &114609619153749176
 MonoBehaviour:
   m_ObjectHideFlags: 0
