@@ -7,6 +7,7 @@ public class BossBullet : MonoBehaviour
     [Tooltip("From 0% to 100%")]
     public GameObject muzzlePrefab;
     public GameObject hitPrefab;
+    public List<GameObject> trails;
 
     private Vector3 offset;
     private bool collided;
@@ -64,6 +65,20 @@ public class BossBullet : MonoBehaviour
         if ((collision.gameObject.layer != 8 || collision.gameObject.tag == "MainCharacter") && !collided)
         {
             collided = true;
+
+            if (trails.Count > 0)
+            {
+                for (int i = 0; i < trails.Count; i++)
+                {
+                    trails[i].transform.parent = null;
+                    var ps = trails[i].GetComponent<ParticleSystem>();
+                    if (ps != null)
+                    {
+                        ps.Stop();
+                        Destroy(ps.gameObject, ps.main.duration + ps.main.startLifetime.constantMax);
+                    }
+                }
+            }
 
             GetComponent<Rigidbody>().isKinematic = true;
 

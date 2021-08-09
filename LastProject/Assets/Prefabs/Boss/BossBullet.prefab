@@ -24254,7 +24254,7 @@ GameObject:
   - component: {fileID: 2656080319360207525}
   - component: {fileID: 2597796193807221043}
   - component: {fileID: 2678794197416208117}
-  - component: {fileID: 2651997151898605134}
+  - component: {fileID: 2567477003715861120}
   m_Layer: 8
   m_Name: BossBullet
   m_TagString: Enemy2Attack
@@ -24306,7 +24306,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0.8}
---- !u!114 &2651997151898605134
+--- !u!114 &2567477003715861120
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -24315,18 +24315,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2651289959636192797}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 778939c5a9b8b2e4fa9b0aab38cb53ee, type: 3}
+  m_Script: {fileID: 11500000, guid: ed9258a185b57a44d9170e20e58b1b86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotate: 0
-  rotateAmount: 45
-  bounce: 0
-  bounceForce: 10
-  speed: 15
-  accuracy: 95
-  fireRate: 1
   muzzlePrefab: {fileID: 1243684425261820531, guid: 819d53c90dedd7143ab80f7d03dcde09, type: 3}
-  hitPrefab: {fileID: 2501669235541717850, guid: 916cffec6c364874bae93d25ab93cd84, type: 3}
+  hitPrefab: {fileID: 1576947433937734, guid: a4fd27963ba944e429c95b735ceca3e4, type: 3}
   trails:
   - {fileID: 2652073768546919355}
   - {fileID: 2650565678281336719}
