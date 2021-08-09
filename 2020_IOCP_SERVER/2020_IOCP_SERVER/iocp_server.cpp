@@ -176,12 +176,19 @@ void time_worker()
                     PostQueuedCompletionStatus(h_iocp, 1, ev.obj_id, &send_over->wsa_over);
                     break;
                 }
-                //else if (ev.event_id == OP_NPC_RESPAWN) {
-                //    OVER_EX* send_over = new OVER_EX();
-                //    send_over->op_mode = ev.event_id;
-                //    PostQueuedCompletionStatus(h_iocp, 1, ev.obj_id, &send_over->wsa_over);
-                //    break;
-                //}
+                else if (ev.event_id == OP_HP_ACTIVATE) {
+                    OVER_EX* send_over = new OVER_EX();
+                    send_over->op_mode = ev.event_id;
+                    PostQueuedCompletionStatus(h_iocp, 1, ev.obj_id, &send_over->wsa_over);
+                    break;
+                }
+                else if (ev.event_id == OP_MP_ACTIVATE) {
+                    OVER_EX* send_over = new OVER_EX();
+                    send_over->op_mode = ev.event_id;
+                    PostQueuedCompletionStatus(h_iocp, 1, ev.obj_id, &send_over->wsa_over);
+                    break;
+                }
+                // 
                 //else if (ev.event_id == OP_PLAYER_MOVE_1s) {
                 //    OVER_EX* send_over = new OVER_EX();
                 //    send_over->op_mode = ev.event_id;
@@ -870,12 +877,14 @@ void worker_thread()
         }
         case OP_HP_ACTIVATE:
         {
+            cout << "OP_HP_ACTIVATE" << endl;
             send_hp_activate(key);
             delete over_ex;
             break;
         }
         case OP_MP_ACTIVATE:
         {
+            cout << "OP_MP_ACTIVATE" << endl;
             send_mp_activate(key);
             delete over_ex;
             break;
