@@ -61,8 +61,7 @@ public class ServerIngameManager : MonoBehaviour
             }
         }
 
-       // playTime = 180.0f;
-        playTime = 20.0f;
+        playTime = 180.0f;
     }
 
     void Update()

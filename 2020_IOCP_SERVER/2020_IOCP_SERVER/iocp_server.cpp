@@ -763,7 +763,6 @@ void process_packet(int id)
         break;
     }
     case CS_Item_Activate: {
-        cout << "Item Packet 수신" << endl;
         All_Item* p = reinterpret_cast<All_Item*>(g_clients[id].m_packet_start);
 
         All_Item ip;
@@ -771,7 +770,6 @@ void process_packet(int id)
         ip.type = SC_Item_Activate;
         ip.item = p->item;
         ip.activate = p->activate;
-        cout << ip.item << ", " << ip.activate << endl;
 
         for (int i = 0; i < MAX_USER; i++) {
             if (g_clients[i].in_use == true) {
@@ -779,18 +777,28 @@ void process_packet(int id)
             }
         }
         if (p->item == 1) {     //HP
-            cout << "hp시간" << endl;
             add_timer(1000, OP_HP_ACTIVATE, system_clock::now() + 5000ms, 0);
         }
         else if (p->item == 2) {     //MP
-            cout << "mp시간" << endl;
             add_timer(1000, OP_MP_ACTIVATE, system_clock::now() + 5000ms, 0);
         }
         break;
     }
     case CS_Set_Time: {
         All_SetTime* p = reinterpret_cast<All_SetTime*>(g_clients[id].m_packet_start);
-        cout << "Set Time Packet 수신" << endl;
+
+        All_SetTime sp;
+        sp.size = sizeof(sp);
+        sp.type = SC_Set_Time;
+        sp.time = p->time;
+
+        cout << sp.time << endl;
+
+        for (int i = 0; i < MAX_USER; i++) {
+            if (g_clients[i].in_use == true) {
+                send_packet(i, &sp);
+            }
+        }
 
         break;
     }

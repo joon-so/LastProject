@@ -281,6 +281,6 @@ public class ServerToClientManager : MonoBehaviour
 
     public void sc_SetTime_Process(sc_SetTime packet)
     {
-        //여기
+        ServerIngameManager.instance.playTime = packet.time;
     }
 }
