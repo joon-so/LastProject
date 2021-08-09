@@ -4820,11 +4820,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4676096670326763510}
-  - component: {fileID: 3633295312904274771}
   - component: {fileID: 2301022422515568654}
   - component: {fileID: -3092677770758679062}
+  - component: {fileID: 5287404785707780869}
   m_Layer: 0
-  m_Name: EpPotion
+  m_Name: ServerEpPotion
   m_TagString: EpPotion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4846,18 +4846,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3633295312904274771
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4677389919120259504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87d502ff49cfd1a41b54aa9c6cf5e089, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!65 &2301022422515568654
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4887,6 +4875,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &5287404785707780869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4677389919120259504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87d502ff49cfd1a41b54aa9c6cf5e089, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4677389920182206570
 GameObject:
   m_ObjectHideFlags: 0

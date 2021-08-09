@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ServerIngameRankManager : MonoBehaviour
+public class ServerRankPlayerInfo : MonoBehaviour
 {
+    public int playerIndex;
+
     void Start()
     {
         
@@ -12,7 +14,5 @@ public class ServerIngameRankManager : MonoBehaviour
     void Update()
     {
         
-        
-
     }
 }

@@ -24,11 +24,15 @@ public class ServerCollisionManager : MonoBehaviour
         if (ServerLoginManager.playerList[0].is_Main_Character == 1)
         {
             ServerLoginManager.playerList[0].character1Hp -= damage;
+            if (ServerLoginManager.playerList[0].character1Hp <= 0)
+                ServerLoginManager.playerList[0].character1Hp = 0;
             AttackPacket.damage = ServerLoginManager.playerList[0].character1Hp;
         }
         else if (ServerLoginManager.playerList[0].is_Main_Character == 2)
         {
             ServerLoginManager.playerList[0].character2Hp -= damage;
+            if (ServerLoginManager.playerList[0].character2Hp <= 0)
+                ServerLoginManager.playerList[0].character2Hp = 0;
             AttackPacket.damage = ServerLoginManager.playerList[0].character2Hp;
         }
 

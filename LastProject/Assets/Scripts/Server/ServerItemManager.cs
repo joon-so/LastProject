@@ -7,6 +7,7 @@ public class ServerItemManager : MonoBehaviour
     public static ServerItemManager instance;
 
     public bool is_Item_Active;
+    public bool createItem;
     public short kindOfItem;
 
     public short hpValue;
@@ -27,38 +28,30 @@ public class ServerItemManager : MonoBehaviour
     void Start()
     {
         is_Item_Active = true;
-        kindOfItem = 1;
-        onItem = false;
-    }
-
-    void Update()
-    {
-        if (is_Item_Active)
-        {
-            if (kindOfItem == 1)
-            {
-                if (!onItem)
-                    CreateHpPotion();
-            }
-            else if (kindOfItem == 2)
-            {
-                if (!onItem)
-                    CreateEpPotion();
-            }
-        }
-    }
-
-    void CreateHpPotion()
-    {
-        onItem = true;
-        Debug.Log("HP 持失");
         Instantiate(hpPotion, itemCreatePos.position, itemCreatePos.rotation);
     }
 
-    void CreateEpPotion()
+    void LateUpdate()
     {
-        onItem = true;
-        Debug.Log("MP 持失");
-        Instantiate(epPotion, itemCreatePos.position, itemCreatePos.rotation);
+        if (onItem)
+            StartCoroutine(CreatePotion());
+    }
+
+
+    IEnumerator CreatePotion()
+    {
+        if (kindOfItem == 1)
+        {
+            is_Item_Active = true;
+            onItem = false;
+            Instantiate(hpPotion, itemCreatePos.position, itemCreatePos.rotation);
+        }
+        else if (kindOfItem == 2)
+        {
+            is_Item_Active = true;
+            onItem = false;
+            Instantiate(epPotion, itemCreatePos.position, itemCreatePos.rotation);
+        }
+        yield return null;
     }
 }

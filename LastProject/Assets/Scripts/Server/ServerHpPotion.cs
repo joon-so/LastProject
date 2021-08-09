@@ -4,24 +4,28 @@ using UnityEngine;
 
 public class ServerHpPotion : MonoBehaviour
 {
-    void Start()
-    {
-        
-    }
+    private bool check = false;
 
     void Update()
     {
-        Debug.Log(transform.position);
+        Debug.Log("HP: " + ServerItemManager.instance.is_Item_Active);
+        if (ServerItemManager.instance.is_Item_Active == false)
+            Destroy(gameObject);
     }
+
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("MainCharacter"))
+        if (collision.gameObject.CompareTag("MainCharacter"))
         {
-            Debug.Log("¸Ô¾ú´Ù");
-            send_Item_packet();
-            Destroy(gameObject);
-            ServerItemManager.instance.onItem = false;
+            if (!check)
+            {
+                check = true;
+                Destroy(gameObject);
+                send_Item_packet();
+                ServerItemManager.instance.onItem = false;
+                ServerMyPlayerManager.instance.myHpPotionCount += 1;
+            }
         }
     }
 

@@ -15,6 +15,9 @@ public class ServerIngameManager : MonoBehaviour
 
     public bool timeStart;
 
+    public List<int> playerRankingIndex;
+    public int playerCount;
+
     void Awake()
     {
         if (instance == null)
@@ -23,12 +26,14 @@ public class ServerIngameManager : MonoBehaviour
 
     void Start()
     {
+        playerCount = 0;
         send_InGame_Start_packet();
         for (int i = 0; i < 4; ++i)
         {
             if (ServerLoginManager.playerList[i].playerID != null)
             {
                 player[i].SetActive(true);
+                playerCount++;
                 if (i >= 1)
                     otherPlayerList.Add(player[i]);
             }
@@ -43,11 +48,41 @@ public class ServerIngameManager : MonoBehaviour
 
     void Update()
     {
-        if(timeStart)
+        if (timeStart)
         {
             playTime -= Time.deltaTime;
             curPlayTime.text = string.Format("{0:D2}:{1:D2}", ((int)playTime / 60).ToString(), ((int)playTime % 60).ToString());
         }
+        if(playTime > 0)
+        {
+            CheckRanking();
+        }
+        else
+        {
+            Time.timeScale = 0;
+            InGameResult();
+        }
+    }
+
+    void CheckRanking()
+    {
+        for (int i = 0; i < playerCount; ++i)
+        {
+ 
+            if(ServerLoginManager.playerList[i].character1Hp <=0 || ServerLoginManager.playerList[i].character2Hp <= 0)
+            {
+                // playerListIndex에 차례대로 넣기
+                playerRankingIndex.Add(i);
+
+                Debug.Log(playerRankingIndex[0]);
+            }
+        }
+
+    }
+
+    void InGameResult()
+    {
+        
     }
 
 
