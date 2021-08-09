@@ -3,6 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public class PlayerRankInfo
+{ 
+    public string playerID { get; set; }
+    public short hp { get; set; }
+    public int character1 { get; set; }
+    public int character2 { get; set; }
+
+}
+
+
+
 public class ServerIngameManager : MonoBehaviour
 {
     public static ServerIngameManager instance;
@@ -17,6 +28,13 @@ public class ServerIngameManager : MonoBehaviour
 
     public List<int> playerRankingIndex;
     public int playerCount;
+
+    [SerializeField] GameObject resultUI;
+
+    List<PlayerRankInfo> diePlayerInfo = new List<PlayerRankInfo>();
+    List<PlayerRankInfo> endPlayerInfo = new List<PlayerRankInfo>();
+
+    public List<PlayerRankInfo> resultPlayerInfo = new List<PlayerRankInfo>();
 
     void Awake()
     {
@@ -43,7 +61,8 @@ public class ServerIngameManager : MonoBehaviour
             }
         }
 
-        playTime = 180.0f;
+       // playTime = 180.0f;
+        playTime = 20.0f;
     }
 
     void Update()
@@ -59,8 +78,8 @@ public class ServerIngameManager : MonoBehaviour
         }
         else
         {
-            Time.timeScale = 0;
             InGameResult();
+            Time.timeScale = 0;
         }
     }
 
@@ -68,21 +87,43 @@ public class ServerIngameManager : MonoBehaviour
     {
         for (int i = 0; i < playerCount; ++i)
         {
- 
-            if(ServerLoginManager.playerList[i].character1Hp <=0 || ServerLoginManager.playerList[i].character2Hp <= 0)
+            if (ServerLoginManager.playerList[i].character1Hp <= 0 || ServerLoginManager.playerList[i].character2Hp <= 0)
             {
-                // playerListIndex에 차례대로 넣기
+                // 플레이 타임 때 playerListIndex에 차례대로 넣기
                 playerRankingIndex.Add(i);
-
-                Debug.Log(playerRankingIndex[0]);
+                diePlayerInfo.Add(new PlayerRankInfo() { playerID = ServerLoginManager.playerList[i].playerID, hp = 0, 
+                    character1 = ServerLoginManager.playerList[i].selectMainCharacter, character2 = ServerLoginManager.playerList[i].selectSubCharacter });
             }
         }
-
     }
 
     void InGameResult()
     {
-        
+        for (int i = 0; i < playerCount; ++i)
+        {
+            if (ServerLoginManager.playerList[i].character1Hp > 0 && ServerLoginManager.playerList[i].character2Hp > 0)
+            {
+                if (ServerLoginManager.playerList[i].is_Main_Character == 1)
+                {
+                    endPlayerInfo.Add(new PlayerRankInfo() { playerID = ServerLoginManager.playerList[i].playerID, hp = ServerLoginManager.playerList[i].character1Hp,
+                        character1 = ServerLoginManager.playerList[i].selectMainCharacter, character2 = ServerLoginManager.playerList[i].selectSubCharacter });
+                }
+                else if (ServerLoginManager.playerList[i].is_Main_Character == 2)
+                {
+                    endPlayerInfo.Add(new PlayerRankInfo() { playerID = ServerLoginManager.playerList[i].playerID, hp = ServerLoginManager.playerList[i].character2Hp,
+                        character1 = ServerLoginManager.playerList[i].selectMainCharacter, character2 = ServerLoginManager.playerList[i].selectSubCharacter });
+                }
+            }
+        }
+        endPlayerInfo.Sort((player1, player2) => player1.hp.CompareTo(player2.hp));
+
+        diePlayerInfo.Reverse();
+        endPlayerInfo.Reverse();
+
+        resultPlayerInfo.AddRange(endPlayerInfo);
+        resultPlayerInfo.AddRange(diePlayerInfo);
+
+        resultUI.SetActive(true);
     }
 
 
