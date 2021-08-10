@@ -686,7 +686,6 @@ void process_packet(int id)
     }
     case CS_Attack: {
         cs_Attack* p = reinterpret_cast<cs_Attack*>(g_clients[id].m_packet_start);
-        cout << "Attack Packet ¼ö½Å" << endl;
         //cout << p->target_id << " " << p->damage << endl;
 
         //if (strcmp(playerdata.player1.ID, p->target_id) == 0) {
@@ -716,43 +715,43 @@ void process_packet(int id)
         fp.type = SC_First_PlayerPosi;
         strncpy_s(fp.p1_ID, playerdata.player1.ID, sizeof(playerdata.player1.ID));
         fp.p1_main_behavior = 0;
-        fp.p1_main_pos_x = 6;
-        fp.p1_main_pos_z = 6;
-        fp.p1_main_rot_y = 0;
+        fp.p1_main_pos_x = -21.0f;
+        fp.p1_main_pos_z = 25.0f;
+        fp.p1_main_rot_y = 0.f;
         fp.p1_sub_behavior = 0;
-        fp.p1_sub_pos_x = 5;
-        fp.p1_sub_pos_z = 5;
-        fp.p1_sub_rot_y = 0;
+        fp.p1_sub_pos_x = -22.0f;
+        fp.p1_sub_pos_z = 27.0f;
+        fp.p1_sub_rot_y = 0.f;
 
         strncpy_s(fp.p2_ID, playerdata.player2.ID, sizeof(playerdata.player2.ID));
         fp.p2_main_behavior = 0;
-        fp.p2_main_pos_x = -6;
-        fp.p2_main_pos_z = 6;
-        fp.p2_main_rot_y = 0;
+        fp.p2_main_pos_x = -25.0f;
+        fp.p2_main_pos_z = -41.0f;
+        fp.p2_main_rot_y = 0.0f;
         fp.p2_sub_behavior = 0;
-        fp.p2_sub_pos_x = -5;
-        fp.p2_sub_pos_z = 5;
-        fp.p2_sub_rot_y = 0;
+        fp.p2_sub_pos_x = -25.0f;
+        fp.p2_sub_pos_z = -38.0f;
+        fp.p2_sub_rot_y = 0.0f;
 
         strncpy_s(fp.p3_ID, playerdata.player3.ID, sizeof(playerdata.player3.ID));
         fp.p3_main_behavior = 0;
-        fp.p3_main_pos_x = -6;
-        fp.p3_main_pos_z = -6;
-        fp.p3_main_rot_y = 0;
+        fp.p3_main_pos_x = 25.0f;
+        fp.p3_main_pos_z = -41.0f;
+        fp.p3_main_rot_y = 0.0f;
         fp.p3_sub_behavior = 0;
-        fp.p3_sub_pos_x = -5;
-        fp.p3_sub_pos_z = -5;
-        fp.p3_sub_rot_y = 0;
+        fp.p3_sub_pos_x = 25.0f;
+        fp.p3_sub_pos_z = -38.0f;
+        fp.p3_sub_rot_y = 0.0f;
 
         strncpy_s(fp.p4_ID, playerdata.player4.ID, sizeof(playerdata.player4.ID));
         fp.p4_main_behavior = 0;
-        fp.p4_main_pos_x = 6;
-        fp.p4_main_pos_z = -6;
+        fp.p4_main_pos_x = 35.0f;
+        fp.p4_main_pos_z = 19.0f;
         fp.p4_main_rot_y = 0;
         fp.p4_sub_behavior = 0;
-        fp.p4_sub_pos_x = 5;
-        fp.p4_sub_pos_z = -5;
-        fp.p4_sub_rot_y = 0;
+        fp.p4_sub_pos_x = 34.0f;
+        fp.p4_sub_pos_z = 21.0f;
+        fp.p4_sub_rot_y = 0.0f;
 
         for (int i = 0; i < MAX_USER; i++) {
             if (g_clients[i].in_use == true) {
