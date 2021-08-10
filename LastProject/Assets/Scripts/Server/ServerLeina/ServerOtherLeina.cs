@@ -150,7 +150,9 @@ public class ServerOtherLeina : MonoBehaviour
 
     IEnumerator Death()
     {
+        Debug.Log("other leina Á×À½");
+        preBehavior = 6;
         otherAnimator.SetTrigger("Dead");
-        yield return null;
+        yield return new WaitForSeconds(1.9f);
     }
 }

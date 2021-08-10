@@ -86,6 +86,13 @@ public class ServerIngameManager : MonoBehaviour
         }
     }
 
+    public void TimeSclaeSetZero()
+    {
+
+        Time.timeScale = 0;
+    }
+
+
     void CheckRanking()
     {
         for (int i = 0; i < playerCount; ++i)

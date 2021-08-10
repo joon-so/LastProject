@@ -412,13 +412,14 @@ public class ServerMyJade : ServerSubAIManager
 
     IEnumerator Death()
     {
+        Debug.Log("my jade Á×À½");
         canMove = false;
         canAttack = false;
         canSkill = false;
         canDodge = false;
         ServerLoginManager.playerList[0].mainCharacterBehavior = 6;
         myAnimator.SetTrigger("Dead");
-        yield return null;
+        yield return new WaitForSeconds(1.9f);
     }
 
     IEnumerator DrawAssaultRifle()
