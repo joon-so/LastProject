@@ -36,6 +36,9 @@ public class ServerIngameManager : MonoBehaviour
 
     public List<PlayerRankInfo> resultPlayerInfo = new List<PlayerRankInfo>();
 
+    public GameObject startNotification;
+    public Text startText;
+    public bool isGo;
     void Awake()
     {
         if (instance == null)
@@ -61,6 +64,7 @@ public class ServerIngameManager : MonoBehaviour
             }
         }
 
+        StartCoroutine(Setting());
         playTime = 180.0f;
     }
 
@@ -125,12 +129,21 @@ public class ServerIngameManager : MonoBehaviour
         resultUI.SetActive(true);
     }
 
-
     void send_InGame_Start_packet()
     {
         cs_InGameStart InGameStartPacket = new cs_InGameStart();
         InGameStartPacket.is_Start = true;
 
         NetworkManager.instance.Send(InGameStartPacket.Write());
+    }
+
+    IEnumerator Setting()
+    {
+        startNotification.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+        startText.text = "GO!";
+        yield return new WaitForSeconds(1.0f);
+        startNotification.SetActive(false);
+        isGo = true;
     }
 }

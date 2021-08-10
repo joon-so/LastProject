@@ -28,9 +28,6 @@ public class ServerToClientManager : MonoBehaviour
 
     public void cs_PlayerData_Process(cs_PlayerData packet)
     {
-        //Debug.Log($"[From Server]Please type: {packet.GetType()} ID : {packet.ID}  floatx: {packet.player_pos_x} floaty: {packet.player_pos_z} Behavior :{packet.behavior_var}");
-
-
         cs_PlayerData movePacket = new cs_PlayerData();
         NetworkManager.instance.Send(movePacket.Write());
 
@@ -65,22 +62,8 @@ public class ServerToClientManager : MonoBehaviour
     //Server -> Client
     public void sc_playerPosi_DO(sc_PlayerPosi packet)
     {
-        //Debug.Log("c1-----------------------------------------");
-        //Debug.Log(ServerLoginManager.playerList[0].character1Hp);
-        //Debug.Log(ServerLoginManager.playerList[0].character1Ep);
-        //Debug.Log("c2-----------------------------------------");
-        //Debug.Log(ServerLoginManager.playerList[0].character2Hp);
-        //Debug.Log(ServerLoginManager.playerList[0].character2Ep);
-
         for (int i = 1; i < 4; ++i)
         {
-            //Debug.Log("c1-----------------------------------------");
-            //Debug.Log(ServerLoginManager.playerList[i].character1Hp);
-            //Debug.Log(ServerLoginManager.playerList[i].character1Ep);
-            //Debug.Log("c2-----------------------------------------");
-            //Debug.Log(ServerLoginManager.playerList[i].character2Hp);
-            //Debug.Log(ServerLoginManager.playerList[i].character2Ep);
-            // 여기문제---------------------------------------------------------------------
             if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p1_ID) == 0)
             {
 
@@ -98,10 +81,6 @@ public class ServerToClientManager : MonoBehaviour
                     ServerLoginManager.playerList[i].character1Hp = packet.p1_sub_hp;
                     ServerLoginManager.playerList[i].character1Ep = packet.p1_sub_mp;
                 }
-                //ServerLoginManager.playerList[i].character1Hp = packet.p1_main_hp;
-                //ServerLoginManager.playerList[i].character1Ep = packet.p1_main_mp;
-                //ServerLoginManager.playerList[i].character2Hp = packet.p1_sub_hp;
-                //ServerLoginManager.playerList[i].character2Ep = packet.p1_sub_mp;
             }
             else if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p2_ID) == 0)
             {
@@ -119,10 +98,6 @@ public class ServerToClientManager : MonoBehaviour
                     ServerLoginManager.playerList[i].character1Hp = packet.p2_sub_hp;
                     ServerLoginManager.playerList[i].character1Ep = packet.p2_sub_mp;
                 }
-                //ServerLoginManager.playerList[i].character1Hp = packet.p2_main_hp;
-                //ServerLoginManager.playerList[i].character1Ep = packet.p2_main_mp;
-                //ServerLoginManager.playerList[i].character2Hp = packet.p2_sub_hp;
-                //ServerLoginManager.playerList[i].character2Ep = packet.p2_sub_mp;
             }
             else if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p3_ID) == 0)
             {
@@ -140,10 +115,6 @@ public class ServerToClientManager : MonoBehaviour
                     ServerLoginManager.playerList[i].character1Hp = packet.p3_sub_hp;
                     ServerLoginManager.playerList[i].character1Ep = packet.p3_sub_mp;
                 }
-                //ServerLoginManager.playerList[i].character1Hp = packet.p3_main_hp;
-                //ServerLoginManager.playerList[i].character1Ep = packet.p3_main_mp;
-                //ServerLoginManager.playerList[i].character2Hp = packet.p3_sub_hp;
-                //ServerLoginManager.playerList[i].character2Ep = packet.p3_sub_mp;
             }
             else if (string.Compare(ServerLoginManager.playerList[i].playerID, packet.p4_ID) == 0)
             {
@@ -161,13 +132,8 @@ public class ServerToClientManager : MonoBehaviour
                     ServerLoginManager.playerList[i].character1Hp = packet.p4_sub_hp;
                     ServerLoginManager.playerList[i].character1Ep = packet.p4_sub_mp;
                 }
-                //ServerLoginManager.playerList[i].character1Hp = packet.p4_main_hp;
-                //ServerLoginManager.playerList[i].character1Ep = packet.p4_main_mp;
-                //ServerLoginManager.playerList[i].character2Hp = packet.p4_sub_hp;
-                //ServerLoginManager.playerList[i].character2Ep = packet.p4_sub_mp;
             }
         }
-        //-------------------------------------------------------------------------------
 
         for (int i = 1; i < 4; ++i)
         {

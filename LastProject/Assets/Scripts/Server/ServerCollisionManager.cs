@@ -41,27 +41,22 @@ public class ServerCollisionManager : MonoBehaviour
     public void KarmenBasicAttack()
     {
         send_Attack_packet(karmenAttackDamage);
-        Debug.Log("Hit: 카르멘 기본공격");
     }
     public void KarmenQSkillAttack()
     {
         send_Attack_packet(karmenQSkillDamage);
-        Debug.Log("Hit: 카르멘 Q스킬");
     }
     public void KarmenWSkillAttack()
     {
         send_Attack_packet(karmenWSkillDamage);
-        Debug.Log("Hit: 카르멘 W스킬");
     }
     public void JadeBasicAttack()
     {
         send_Attack_packet(JadeAttackDamage);
-        Debug.Log("Hit: 제이드 기본공격");
     }
     public void JadeQSkillAttack()
     {
         send_Attack_packet(JadeQSkillDamage);
-        Debug.Log("Hit: 제이드 Q스킬");
     }
     public void JadeWSkillAttack()
     {
@@ -71,22 +66,18 @@ public class ServerCollisionManager : MonoBehaviour
     public void LeinaBasicAttack()
     {
         send_Attack_packet(LeinaAttackDamage);
-        Debug.Log("Hit: 레이나 기본공격");
     }
     public void LeinaQSkillAttack()
     {
         send_Attack_packet(LeinaQSkillDamage);
-        Debug.Log("Hit: 레이나 Q스킬");
     }
     public void LeinaWSkillAttack()
     {
         send_Attack_packet(LeinaWSkillDamage);
-        Debug.Log("Hit: 레이나 W스킬");
     }
     public void EvaBasicAttack()
     {
         send_Attack_packet(EvaAttackDamage);
-        Debug.Log("Hit: 에바 기본공격");
     }
     public void EvaQSkillAttack()
     {
@@ -96,6 +87,5 @@ public class ServerCollisionManager : MonoBehaviour
     public void EvaWSkillAttack()
     {
         send_Attack_packet(EvaWSkillDamage);
-        Debug.Log("Hit: 에바 W스킬");
     }
 }
