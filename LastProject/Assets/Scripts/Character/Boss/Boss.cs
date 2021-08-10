@@ -10,10 +10,10 @@ public class Boss : MonoBehaviour
     [SerializeField] GameObject GroundPattern2Effect;
     [SerializeField] GameObject GroundPattern2Gage;
     [SerializeField] GameObject GroundPattern3Effect;
-
-    [SerializeField] GameObject PageChangeEffect;
+    [SerializeField] GameObject GroundPattern3Gage;
 
     [SerializeField] GameObject FlyPattern1Effect;
+    public GameObject Frame;
     [SerializeField] GameObject FlyPattern2Effect;
     //[SerializeField] GameObject FlyPattern3Effect;
 
@@ -28,7 +28,6 @@ public class Boss : MonoBehaviour
 
     bool canMove;
     bool canAttack;
-    bool canDodge;
     bool canSkill;
 
     float playerDistance;
@@ -36,6 +35,7 @@ public class Boss : MonoBehaviour
     float detectDistance;
     float moveSpeed;
     float GroundPattern2Distance;
+    float spinSpeed;
 
     int page;
     int pattern;
@@ -49,10 +49,9 @@ public class Boss : MonoBehaviour
 
         targetCharacter = GameObject.FindGameObjectWithTag("SubCharacter");
         FlyEffect.SetActive(false);
-
+        Frame.SetActive(false);
         canMove = true;
         canAttack = true;
-        canDodge = true;
         canSkill = true;
 
         shootDistance = 2f;
@@ -61,6 +60,7 @@ public class Boss : MonoBehaviour
         pattern = 0;
 
         moveSpeed = 10f;
+        spinSpeed = 300f;
         GroundPattern2Distance = 20f;
         //StartCoroutine(StartEffect());
     }
@@ -112,7 +112,12 @@ public class Boss : MonoBehaviour
             pattern = 6;
             canAttack = true;
         }
-
+        if (canMove)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(targetCharacter.transform.position - transform.position);
+            Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
+            transform.rotation = Quaternion.Euler(0, euler.y, 0);
+        }
         if (canAttack)
         {
             canAttack = false;
@@ -143,14 +148,15 @@ public class Boss : MonoBehaviour
     IEnumerator StartEffect()
     {
         yield return new WaitForSeconds(22.8f);
-        Instantiate(PageChangeEffect, transform.position + transform.up * 0.5f, Quaternion.Euler(90f, 0f, 0));
+        Instantiate(GroundPattern3Effect, transform.position + transform.up * 0.5f, Quaternion.Euler(90f, 0f, 0));
         yield return new WaitForSeconds(27f);
         canAttack = true;
     }
     IEnumerator Pattern1()
     {
+        canMove = false;
         anim.SetInteger("Pattern", pattern);
-        transform.LookAt(targetCharacter.transform);
+        //transform.LookAt(targetCharacter.transform);
         yield return new WaitForSeconds(0.5f);
         for(int i = 0; i< 20; i++)
         {
@@ -160,14 +166,16 @@ public class Boss : MonoBehaviour
         pattern = 0;
         anim.SetInteger("Pattern", pattern);
         canAttack = true;
+        canMove = true;
     }
     IEnumerator Pattern2()
     {
-        //transform.LookAt(targetCharacter.transform);
+        canMove = false;
+        //transform.LookAt(targetCharacter.transform.position);
         anim.SetInteger("Pattern", pattern);
         Instantiate(GroundPattern2Gage, transform.position, transform.rotation * Quaternion.Euler(0f, 90f, 0));
 
-        yield return new WaitForSeconds(1.8f);
+        yield return new WaitForSeconds(1.2f);
 
         Instantiate(GroundPattern2Effect, transform.position + transform.up * 3f + transform.forward * 2.5f, transform.rotation);
         float skillTime = 0f;
@@ -178,38 +186,45 @@ public class Boss : MonoBehaviour
         }
 
         anim.SetTrigger("SprintEnd");
+        yield return new WaitForSeconds(0.2f);
         pattern = 0;
         anim.SetInteger("Pattern", pattern);
         canAttack = true;
+        canMove = true;
     }
     IEnumerator Pattern3()
     {
+        canMove = false;
         anim.SetInteger("Pattern", pattern);
         Vector3 pos = transform.position + transform.forward * 2.2f - transform.right * 0.9f + transform.up * 0.5f;
+        Instantiate(GroundPattern3Gage, pos, Quaternion.Euler(0f, 90f, 0));
         yield return new WaitForSeconds(0.6f);
-        Instantiate(PageChangeEffect, pos, Quaternion.Euler(90f, 0f, 0));
+        Instantiate(GroundPattern3Effect, pos, Quaternion.Euler(90f, 0f, 0));
         yield return new WaitForSeconds(0.72f);
-        Instantiate(PageChangeEffect, pos, Quaternion.Euler(90f, 0f, 0));
+        Instantiate(GroundPattern3Effect, pos, Quaternion.Euler(90f, 0f, 0));
         yield return new WaitForSeconds(0.72f);
-        Instantiate(PageChangeEffect, pos, Quaternion.Euler(90f, 0f, 0));
+        Instantiate(GroundPattern3Effect, pos, Quaternion.Euler(90f, 0f, 0));
         yield return new WaitForSeconds(1f);
         pattern = 0;
         anim.SetInteger("Pattern", pattern);
         canAttack = true;
+        canMove = true;
     }
     IEnumerator Pattern4()
     {
+        canMove = false;
         FlyEffect.SetActive(true);
         anim.SetInteger("Pattern", pattern);
-        transform.LookAt(targetCharacter.transform);
+        Instantiate(GroundPattern2Gage, transform.position, transform.rotation * Quaternion.Euler(0f, 90f, 0));
+        //transform.LookAt(targetCharacter.transform);
         yield return new WaitForSeconds(1.6f);
         rigidbody.useGravity = false;
         float bezierValue = 0f;
         float shootTime = 0.8f;
         boxCollider.size = new Vector3(boxCollider.size.x, boxCollider.size.y/4, boxCollider.size.z);
         Vector3 P1 = transform.position;
-        Vector3 P2 = targetCharacter.transform.position + new Vector3(0, -2f, 0);
-        Vector3 P3 = transform.position + transform.forward * Vector3.Distance(transform.position, targetCharacter.transform.position)*2;
+        Vector3 P2 = targetCharacter.transform.position + new Vector3(0, -5f, 0);
+        Vector3 P3 = targetCharacter.transform.position + transform.forward * 9f;
         Vector3 bezier;
         while (bezierValue < shootTime)
         {
@@ -222,18 +237,34 @@ public class Boss : MonoBehaviour
         }
         rigidbody.useGravity = true;
         boxCollider.size = new Vector3(boxCollider.size.x, boxCollider.size.y * 4, boxCollider.size.z);
-        yield return new WaitForSeconds(0.4f);
-        transform.LookAt(targetCharacter.transform);
-        yield return new WaitForSeconds(4f);
+        //yield return new WaitForSeconds(0.1f);
+        float rotateTime = 0;
+        while(rotateTime < 0.8f)
+        {
+            rotateTime += Time.deltaTime;
+            Quaternion lookRotation = Quaternion.LookRotation(targetCharacter.transform.position - transform.position);
+            Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
+            transform.rotation = Quaternion.Euler(0, euler.y, 0);
+
+            yield return null;
+        }
+        //transform.LookAt(targetCharacter.transform);
+        Frame.SetActive(true);
+        canMove = true;
+        yield return new WaitForSeconds(2.7f);
+        Frame.SetActive(false);
+        //yield return new WaitForSeconds(f);
         pattern = 5;
         anim.SetInteger("Pattern", pattern);
         canAttack = true;
+        //canMove = true;
     }
     IEnumerator Pattern6()
     {
+        canMove = false;
         anim.SetInteger("Pattern", pattern);
-        transform.LookAt(targetCharacter.transform);
-
+        //transform.LookAt(targetCharacter.transform);
+        Instantiate(GroundPattern2Gage, transform.position, transform.rotation * Quaternion.Euler(0f, 90f, 0));
         yield return new WaitForSeconds(1f);
 
         rigidbody.useGravity = false;
@@ -241,8 +272,8 @@ public class Boss : MonoBehaviour
         float shootTime = 0.8f;
         boxCollider.size = new Vector3(boxCollider.size.x, boxCollider.size.y / 4, boxCollider.size.z);
         Vector3 P1 = transform.position;
-        Vector3 P2 = targetCharacter.transform.position + new Vector3(0, -2f, 0);
-        Vector3 P3 = transform.position + transform.forward * Vector3.Distance(transform.position, targetCharacter.transform.position) * 2;
+        Vector3 P2 = targetCharacter.transform.position + new Vector3(0, -5f, 0);
+        Vector3 P3 = targetCharacter.transform.position + transform.forward * 9f;
         Vector3 bezier;
         while (bezierValue < shootTime)
         {
@@ -256,10 +287,13 @@ public class Boss : MonoBehaviour
         rigidbody.useGravity = true;
         boxCollider.size = new Vector3(boxCollider.size.x, boxCollider.size.y * 4, boxCollider.size.z);
 
+        yield return new WaitForSeconds(0.4f);
+        Instantiate(GroundPattern3Effect, transform.position, Quaternion.Euler(90f, 0f, 0));
         FlyEffect.SetActive(false);
         pattern = 0;
         anim.SetInteger("Pattern", pattern);
         canAttack = true;
+        canMove = true;
     }
     Vector3 Bezier(Vector3 P_1, Vector3 P_2, Vector3 P_3, float value)
     {
