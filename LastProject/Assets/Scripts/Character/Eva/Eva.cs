@@ -201,7 +201,6 @@ public class Eva : SubAI
                 && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.4f)
             {
                 moveSpeed = 100f;
-                Debug.Log(moveSpeed);
             }
             //{
             //    moveSpeed = 1.0f;

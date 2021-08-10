@@ -400,10 +400,10 @@ public class ServerMyEva : ServerSubAIManager
 
     IEnumerator FireGun()
     {
-        ServerLoginManager.playerList[0].mainCharacterBehavior = 4;
         qSkill.SetActive(true);
         
         myAnimator.SetTrigger("QSkill");
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -412,6 +412,7 @@ public class ServerMyEva : ServerSubAIManager
             nextVec.y = 0;
             transform.LookAt(transform.position + nextVec);
         }
+        ServerLoginManager.playerList[0].mainCharacterBehavior = 4;
 
         yield return new WaitForSeconds(5.0f);
         qSkill.SetActive(false);
@@ -515,9 +516,18 @@ public class ServerMyEva : ServerSubAIManager
         }
     }
 
-    //private void OnParticleCollision(GameObject other)
-    //{
-    //    if (other.gameObject.tag == "EvaQSkill")
-    //        collisionManager.EvaQSkillAttack();
-    //}
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.gameObject.layer == 10)
+            return;
+
+        if (ServerLoginManager.playerList[0].character1Hp <= 0 || ServerLoginManager.playerList[0].character2Hp <= 0)
+            return;
+
+        if (gameObject.CompareTag("MainCharacter"))
+        {
+            if (other.gameObject.CompareTag("EvaQSkill"))
+                collisionManager.EvaQSkillAttack();
+        }
+    }
 }

@@ -12,14 +12,6 @@ public class ServerOtherPlayersList : MonoBehaviour
     {
         addObj = false;
         OtherPlayers = GameObject.Find("ServerIngameManager").GetComponent<ServerIngameManager>().otherPlayerList;
-        
-        //Debug.Log(OtherPlayers[0]);
-
-        //for (int i=0; i< OtherPlayers.Count;++i)
-        //{
-        //mainPlayers[0] = OtherPlayers[0].GetComponent<ServerOtherPlayerManager>().mainObj;
-        //}
-    
     }
 
     void FixedUpdate()
@@ -39,9 +31,5 @@ public class ServerOtherPlayersList : MonoBehaviour
                 mainPlayers[i] = OtherPlayers[i].GetComponent<ServerOtherPlayerManager>().mainObj;
             }
         }
-        //for (int i = 0; i < mainPlayers.Count; ++i)
-        //{
-        //    mainPlayers[i] = OtherPlayers[i].GetComponent<ServerOtherPlayerManager>().mainObj;
-        //}
     }
 }

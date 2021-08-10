@@ -36,6 +36,7 @@ public class ServerOtherEva : MonoBehaviour
             AnimationControl();
         else if (isMainCharacter == 2)
             otherAnimator.SetBool("Run", false);
+        Debug.Log(ServerLoginManager.playerList[index].mainCharacterBehavior);
     }
 
     public void AnimationControl()
@@ -106,10 +107,9 @@ public class ServerOtherEva : MonoBehaviour
 
         qSkill.SetActive(true);
         otherAnimator.SetTrigger("QSkill");
-  
+
         yield return new WaitForSeconds(5.0f);
         qSkill.SetActive(false);
-
         otherAnimator.SetBool("Run", false);
         preBehavior = 0;
     }

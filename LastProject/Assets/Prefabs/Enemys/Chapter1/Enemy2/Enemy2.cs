@@ -216,7 +216,6 @@ public class Enemy2 : MonoBehaviour
         {
             currentHp -= Karmen.attackDamage;
             hpBar.SetHp(currentHp);
-            Debug.Log(currentHp);
         }
 
 

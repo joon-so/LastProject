@@ -547,4 +547,19 @@ public class ServerMyJade : ServerSubAIManager
                 collisionManager.EvaWSkillAttack();
         }
     }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.gameObject.layer == 10)
+            return;
+
+        if (ServerLoginManager.playerList[0].character1Hp <= 0 || ServerLoginManager.playerList[0].character2Hp <= 0)
+            return;
+
+        if (gameObject.CompareTag("MainCharacter"))
+        {
+            if (other.gameObject.CompareTag("EvaQSkill"))
+                collisionManager.EvaQSkillAttack();
+        }
+    }
 }
