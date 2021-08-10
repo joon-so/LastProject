@@ -62,12 +62,12 @@ public class Leina : SubAI
     }
     void Start()
     {
-        if (GameManager.instance.isMainLeina)
+        if (GameManager.instance.clientPlayer.curMainCharacter == 1)
         {
             nav.enabled = false;
             tagCharacter = GameManager.instance.character2;
         }
-        else if (GameManager.instance.isSubLeina)
+        else if (GameManager.instance.clientPlayer.curMainCharacter == 2)
         {
             tagCharacter = GameManager.instance.character1;
             nav.enabled = true;
@@ -539,15 +539,15 @@ public class Leina : SubAI
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Enemy1Attack")
-        {
-            if (GameManager.instance.mainPlayerHp > 0)
-                GameManager.instance.mainPlayerHp -= Enemy1.damage;
-        }
-        if (collision.gameObject.tag == "Enemy2Attack")
-        {
-            if (GameManager.instance.mainPlayerHp > 0)
-                GameManager.instance.mainPlayerHp -= Enemy2.damage;
-        }
+        //if (collision.gameObject.tag == "Enemy1Attack")
+        //{
+        //    if (GameManager.instance.mainPlayerHp > 0)
+        //        GameManager.instance.mainPlayerHp -= Enemy1.damage;
+        //}
+        //if (collision.gameObject.tag == "Enemy2Attack")
+        //{
+        //    if (GameManager.instance.mainPlayerHp > 0)
+        //        GameManager.instance.mainPlayerHp -= Enemy2.damage;
+        //}
     }
 }
