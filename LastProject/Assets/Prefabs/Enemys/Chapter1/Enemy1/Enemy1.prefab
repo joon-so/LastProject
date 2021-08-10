@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 7200685716642761422}
   - component: {fileID: 8076870125961341301}
   - component: {fileID: 6013740855989818472}
+  - component: {fileID: 7743363775224655931}
   m_Layer: 10
   m_Name: Backpack_gun_body_Geom
   m_TagString: Untagged
@@ -184,6 +185,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7743363775224655931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262655033757595494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &732123269992055271
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,6 +271,7 @@ GameObject:
   - component: {fileID: 7818328796965431093}
   - component: {fileID: 4722460653610211011}
   - component: {fileID: 1126820555707626909}
+  - component: {fileID: 248538222211985861}
   m_Layer: 10
   m_Name: Side_R_Geom
   m_TagString: Untagged
@@ -326,6 +342,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &248538222211985861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077863240585141614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &1348426749444102999
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,6 +813,7 @@ GameObject:
   - component: {fileID: 6910951388092776935}
   - component: {fileID: 7227249577917813757}
   - component: {fileID: 8477518063921387945}
+  - component: {fileID: 3064716758654129971}
   m_Layer: 10
   m_Name: Shoulder_Med_Bot_Geom
   m_TagString: Untagged
@@ -853,6 +884,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3064716758654129971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2556114845596927808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &2612653658400614321
 GameObject:
   m_ObjectHideFlags: 0
@@ -973,6 +1018,7 @@ GameObject:
   - component: {fileID: 2564200294182820333}
   - component: {fileID: 2351831260607540660}
   - component: {fileID: 6664425759245206968}
+  - component: {fileID: 1985880429718096193}
   m_Layer: 10
   m_Name: Cockpit_Flybot_Geom
   m_TagString: Untagged
@@ -1043,6 +1089,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1985880429718096193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2842105543512815140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &3295988245280610685
 GameObject:
   m_ObjectHideFlags: 0
@@ -1117,6 +1177,7 @@ GameObject:
   - component: {fileID: 4905476521533671784}
   - component: {fileID: 3535507798385435832}
   - component: {fileID: 8076922788924864920}
+  - component: {fileID: 4282783146982229941}
   m_Layer: 10
   m_Name: Armor_Plate_Lvl1_Geom
   m_TagString: Untagged
@@ -1187,6 +1248,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4282783146982229941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3571831506442068749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &3807630524430759134
 GameObject:
   m_ObjectHideFlags: 0
@@ -1198,6 +1273,7 @@ GameObject:
   - component: {fileID: 2631867948287065316}
   - component: {fileID: 2008437288704631859}
   - component: {fileID: 4712736972997821210}
+  - component: {fileID: 1666710782528463847}
   m_Layer: 10
   m_Name: Tracks_R_Geom
   m_TagString: Untagged
@@ -1268,6 +1344,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1666710782528463847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3807630524430759134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &3913999390012587467
 GameObject:
   m_ObjectHideFlags: 0
@@ -1309,6 +1399,7 @@ GameObject:
   - component: {fileID: 993959074107781411}
   - component: {fileID: 3990763948728556004}
   - component: {fileID: 8125937707507803224}
+  - component: {fileID: 6482841164980532554}
   m_Layer: 10
   m_Name: FX_Laser_Ray_Geom
   m_TagString: Untagged
@@ -1379,6 +1470,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6482841164980532554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4026234391856254423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &4066244938915670507
 GameObject:
   m_ObjectHideFlags: 0
@@ -1498,6 +1603,7 @@ GameObject:
   - component: {fileID: 6099558935179560430}
   - component: {fileID: 5410691814540058729}
   - component: {fileID: 5496634778239604838}
+  - component: {fileID: 2315042096093116370}
   m_Layer: 10
   m_Name: Backpack_gun_platform_geom
   m_TagString: Untagged
@@ -1568,6 +1674,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2315042096093116370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4192188134781948496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &4371881511516962807
 GameObject:
   m_ObjectHideFlags: 0
@@ -2140,6 +2260,7 @@ GameObject:
   - component: {fileID: 6794630598766545650}
   - component: {fileID: 6309889947795589094}
   - component: {fileID: 1646964841101756415}
+  - component: {fileID: 109914470899202}
   m_Layer: 10
   m_Name: Shock_Rifle_lvl3_Geom
   m_TagString: Untagged
@@ -2210,6 +2331,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &109914470899202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6980336183299993024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &7085558375106191193
 GameObject:
   m_ObjectHideFlags: 0
@@ -2289,6 +2424,7 @@ GameObject:
   - component: {fileID: 6203318146603767217}
   - component: {fileID: 4903408061020362615}
   - component: {fileID: 7948704887530248990}
+  - component: {fileID: 1153184329643545510}
   m_Layer: 10
   m_Name: Armor_Plate_Lvl1_Geom
   m_TagString: Untagged
@@ -2359,6 +2495,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1153184329643545510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7295870760444053295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &7497134063515043653
 GameObject:
   m_ObjectHideFlags: 0
@@ -2401,6 +2551,7 @@ GameObject:
   - component: {fileID: 5448443602036385190}
   - component: {fileID: 5605826963628106027}
   - component: {fileID: 8593680715129874127}
+  - component: {fileID: 2656168060072062817}
   m_Layer: 10
   m_Name: Pelvis_Geom
   m_TagString: Untagged
@@ -2471,6 +2622,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2656168060072062817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7580651898978255175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &7793182336145838221
 GameObject:
   m_ObjectHideFlags: 0
@@ -2482,6 +2647,7 @@ GameObject:
   - component: {fileID: 7385148782915698990}
   - component: {fileID: 4453904846593640592}
   - component: {fileID: 4998383512217336230}
+  - component: {fileID: 2787212215164062935}
   m_Layer: 10
   m_Name: Tracks_L_Geom
   m_TagString: Untagged
@@ -2552,6 +2718,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &2787212215164062935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7793182336145838221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &7924136603769555807
 GameObject:
   m_ObjectHideFlags: 0
@@ -2563,6 +2743,7 @@ GameObject:
   - component: {fileID: 7269289350518086923}
   - component: {fileID: 3658171014035507539}
   - component: {fileID: 6856001076360983629}
+  - component: {fileID: 5757937470175044024}
   m_Layer: 10
   m_Name: Side_L_Geom
   m_TagString: Untagged
@@ -2633,6 +2814,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5757937470175044024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7924136603769555807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &8352795421687487695
 GameObject:
   m_ObjectHideFlags: 0
@@ -2735,6 +2930,7 @@ GameObject:
   - component: {fileID: 356708973592929890}
   - component: {fileID: 6440224595002301398}
   - component: {fileID: 6469724632139672107}
+  - component: {fileID: 3861743833548265788}
   m_Layer: 10
   m_Name: Backpack_gun_joint_geom
   m_TagString: Untagged
@@ -2805,6 +3001,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3861743833548265788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8923493673681226955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
+  eraseRenderer: 0
 --- !u!1 &8932506101022217019
 GameObject:
   m_ObjectHideFlags: 0

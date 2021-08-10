@@ -256,6 +256,7 @@ GameObject:
   - component: {fileID: 7966750312295194093}
   - component: {fileID: 7966750312295194092}
   - component: {fileID: 7966750312295194095}
+  - component: {fileID: 391953623292380487}
   m_Layer: 0
   m_Name: SM_SciFiMissileLauncher
   m_TagString: Untagged
@@ -327,6 +328,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &391953623292380487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7966750312295194094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &7966750312309800374
 GameObject:
   m_ObjectHideFlags: 0
@@ -11074,6 +11089,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7966750312912171473}
   - component: {fileID: 7966750312912171478}
+  - component: {fileID: 9129756918318933031}
   m_Layer: 0
   m_Name: SK_PirateLieutenant_Thrusters
   m_TagString: Untagged
@@ -11149,6 +11165,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.09532231, y: -0.2706449, z: -0.03789357}
     m_Extent: {x: 0.30374926, y: 0.3347671, z: 0.23004451}
   m_DirtyAABB: 0
+--- !u!114 &9129756918318933031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7966750312912171472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &7966750312937921824
 GameObject:
   m_ObjectHideFlags: 0
@@ -16038,6 +16068,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7966750312942182279}
   - component: {fileID: 7966750312942182276}
+  - component: {fileID: 8161745357688566973}
   m_Layer: 0
   m_Name: Sk_PirateLieutenant
   m_TagString: Untagged
@@ -16168,6 +16199,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.007098347, y: 0.00013709068, z: -0.07239509}
     m_Extent: {x: 0.35840216, y: 0.6957201, z: 0.99301493}
   m_DirtyAABB: 0
+--- !u!114 &8161745357688566973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7966750312942182278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &7966750312963968748
 GameObject:
   m_ObjectHideFlags: 0
@@ -16271,6 +16316,7 @@ GameObject:
   - component: {fileID: 7966750313053060099}
   - component: {fileID: 7966750313053060097}
   - component: {fileID: 7966750313053060096}
+  - component: {fileID: 207279797570970627}
   m_Layer: 0
   m_Name: SM_SciFiAssaultRifleGrenadeLauncher
   m_TagString: Untagged
@@ -16341,6 +16387,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &207279797570970627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7966750313053060098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &7966750313061764656
 GameObject:
   m_ObjectHideFlags: 0
@@ -16552,6 +16612,7 @@ GameObject:
   - component: {fileID: 7966750313246406825}
   - component: {fileID: 7966750313246406831}
   - component: {fileID: 7966750313246406830}
+  - component: {fileID: 1398756348151690857}
   m_Layer: 0
   m_Name: SM_SciFiMissileLauncher
   m_TagString: Untagged
@@ -16623,6 +16684,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1398756348151690857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7966750313246406824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &7966750313290728688
 GameObject:
   m_ObjectHideFlags: 0
@@ -16874,6 +16949,7 @@ GameObject:
   - component: {fileID: 7966750313391183133}
   - component: {fileID: 7966750313391183139}
   - component: {fileID: 7966750313391183138}
+  - component: {fileID: 6609548890197366778}
   m_Layer: 0
   m_Name: SM_SciFiAssaultRifleGrenadeLauncher
   m_TagString: Untagged
@@ -16944,6 +17020,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6609548890197366778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7966750313391183132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbf3575480402db40813e763382412fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 1
+  eraseRenderer: 0
 --- !u!1 &7966750313397763248
 GameObject:
   m_ObjectHideFlags: 0

@@ -168,7 +168,7 @@ public class CharacterSelect : MonoBehaviour
     public void OnClickStart()
     {
         SoundManager.instance.SFXPlay("Start", uiButtonClickSound2);
-        SceneManager.LoadScene("Stage1-1");
+        SceneManager.LoadScene("Stage1-51");
     }
     public void OnClickExit()
     {

@@ -4,20 +4,12 @@ using UnityEngine;
 
 public class JadeEvaSynergeBullet : MonoBehaviour
 {
-    public float speed;
     [Tooltip("From 0% to 100%")]
-    public float accuracy;
-    public float fireRate;
     public GameObject muzzlePrefab;
     public GameObject hitPrefab;
-    public List<GameObject> trails;
 
-    private Vector3 startPos;
     private Vector3 offset;
     private bool collided;
-    private Rigidbody rigid;
-    private RotateToMouseScript rotateToMouse;
-    private Transform vel;
 
     float bezierValue;
     Vector3 P1;
@@ -27,12 +19,9 @@ public class JadeEvaSynergeBullet : MonoBehaviour
     GameObject target;
     bool enemyCheck = true;
 
-    public float distance = 10.0f;
     void Start()
     {
-        startPos = transform.position;
         bezierValue = 0;
-        rigid = GetComponent<Rigidbody>();
         P1 = transform.position;
         P2 = transform.position + transform.forward * Random.Range(0f, 4f) + transform.right * Random.Range(-7f, 7f) + transform.up * Random.Range(3f, 5f);
         //P3 = Jade.enemyPos.transform.position;
@@ -86,21 +75,6 @@ public class JadeEvaSynergeBullet : MonoBehaviour
         {
             collided = true;
 
-            if (trails.Count > 0)
-            {
-                for (int i = 0; i < trails.Count; i++)
-                {
-                    trails[i].transform.parent = null;
-                    var ps = trails[i].GetComponent<ParticleSystem>();
-                    if (ps != null)
-                    {
-                        ps.Stop();
-                        Destroy(ps.gameObject, ps.main.duration + ps.main.startLifetime.constantMax);
-                    }
-                }
-            }
-
-            speed = 0;
             GetComponent<Rigidbody>().isKinematic = true;
 
             ContactPoint contact = collision.contacts[0];

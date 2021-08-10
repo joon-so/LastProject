@@ -414,10 +414,12 @@ public class Leina : SubAI
     }
     IEnumerator AttackDelay()
     {
+        CharacterState.attackCheck = true;
         yield return new WaitForSeconds(0.5f);
         canMove = true;
         canDodge = true;
         canSkill = true;
+        CharacterState.attackCheck = false;
     }
     IEnumerator DodgeDelay()
     {
@@ -526,7 +528,7 @@ public class Leina : SubAI
         LeinaSynergeSkill.speed = 0;
         //SynergeFirstArrow.SetActive(true);
 
-        yield return new WaitForSeconds(1.4f);
+        yield return new WaitForSeconds(0.1f);
         GameObject instantArrow = Instantiate(SynergeArrow, posionArrowPos.position, posionArrowPos.rotation);
         // ¼¦
         yield return new WaitForSeconds(1f);
