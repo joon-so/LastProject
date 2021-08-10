@@ -27,12 +27,18 @@ public class ServerItemManager : MonoBehaviour
 
     void Start()
     {
-        is_Item_Active = true;
-        Instantiate(hpPotion, itemCreatePos.position, itemCreatePos.rotation);
+
     }
 
     void LateUpdate()
     {
+        if(ServerIngameManager.instance.isGo)
+        {
+            ServerIngameManager.instance.isGo = false;
+            is_Item_Active = true;
+            Instantiate(hpPotion, itemCreatePos.position, itemCreatePos.rotation);
+        }
+
         if (onItem)
             StartCoroutine(CreatePotion());
     }

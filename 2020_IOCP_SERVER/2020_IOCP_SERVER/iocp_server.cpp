@@ -686,7 +686,6 @@ void process_packet(int id)
     }
     case CS_Attack: {
         cs_Attack* p = reinterpret_cast<cs_Attack*>(g_clients[id].m_packet_start);
-        cout << "Attack Packet 수신" << endl;
         //cout << p->target_id << " " << p->damage << endl;
 
         //if (strcmp(playerdata.player1.ID, p->target_id) == 0) {
@@ -716,43 +715,43 @@ void process_packet(int id)
         fp.type = SC_First_PlayerPosi;
         strncpy_s(fp.p1_ID, playerdata.player1.ID, sizeof(playerdata.player1.ID));
         fp.p1_main_behavior = 0;
-        fp.p1_main_pos_x = 6;
-        fp.p1_main_pos_z = 6;
-        fp.p1_main_rot_y = 0;
+        fp.p1_main_pos_x = -21.0f;
+        fp.p1_main_pos_z = 25.0f;
+        fp.p1_main_rot_y = 0.f;
         fp.p1_sub_behavior = 0;
-        fp.p1_sub_pos_x = 5;
-        fp.p1_sub_pos_z = 5;
-        fp.p1_sub_rot_y = 0;
+        fp.p1_sub_pos_x = -22.0f;
+        fp.p1_sub_pos_z = 27.0f;
+        fp.p1_sub_rot_y = 0.f;
 
         strncpy_s(fp.p2_ID, playerdata.player2.ID, sizeof(playerdata.player2.ID));
         fp.p2_main_behavior = 0;
-        fp.p2_main_pos_x = -6;
-        fp.p2_main_pos_z = 6;
-        fp.p2_main_rot_y = 0;
+        fp.p2_main_pos_x = -25.0f;
+        fp.p2_main_pos_z = -41.0f;
+        fp.p2_main_rot_y = 0.0f;
         fp.p2_sub_behavior = 0;
-        fp.p2_sub_pos_x = -5;
-        fp.p2_sub_pos_z = 5;
-        fp.p2_sub_rot_y = 0;
+        fp.p2_sub_pos_x = -25.0f;
+        fp.p2_sub_pos_z = -38.0f;
+        fp.p2_sub_rot_y = 0.0f;
 
         strncpy_s(fp.p3_ID, playerdata.player3.ID, sizeof(playerdata.player3.ID));
         fp.p3_main_behavior = 0;
-        fp.p3_main_pos_x = -6;
-        fp.p3_main_pos_z = -6;
-        fp.p3_main_rot_y = 0;
+        fp.p3_main_pos_x = 25.0f;
+        fp.p3_main_pos_z = -41.0f;
+        fp.p3_main_rot_y = 0.0f;
         fp.p3_sub_behavior = 0;
-        fp.p3_sub_pos_x = -5;
-        fp.p3_sub_pos_z = -5;
-        fp.p3_sub_rot_y = 0;
+        fp.p3_sub_pos_x = 25.0f;
+        fp.p3_sub_pos_z = -38.0f;
+        fp.p3_sub_rot_y = 0.0f;
 
         strncpy_s(fp.p4_ID, playerdata.player4.ID, sizeof(playerdata.player4.ID));
         fp.p4_main_behavior = 0;
-        fp.p4_main_pos_x = 6;
-        fp.p4_main_pos_z = -6;
+        fp.p4_main_pos_x = 35.0f;
+        fp.p4_main_pos_z = 19.0f;
         fp.p4_main_rot_y = 0;
         fp.p4_sub_behavior = 0;
-        fp.p4_sub_pos_x = 5;
-        fp.p4_sub_pos_z = -5;
-        fp.p4_sub_rot_y = 0;
+        fp.p4_sub_pos_x = 34.0f;
+        fp.p4_sub_pos_z = 21.0f;
+        fp.p4_sub_rot_y = 0.0f;
 
         for (int i = 0; i < MAX_USER; i++) {
             if (g_clients[i].in_use == true) {
@@ -763,7 +762,6 @@ void process_packet(int id)
         break;
     }
     case CS_Item_Activate: {
-        cout << "Item Packet 수신" << endl;
         All_Item* p = reinterpret_cast<All_Item*>(g_clients[id].m_packet_start);
 
         All_Item ip;
@@ -771,7 +769,6 @@ void process_packet(int id)
         ip.type = SC_Item_Activate;
         ip.item = p->item;
         ip.activate = p->activate;
-        cout << ip.item << ", " << ip.activate << endl;
 
         for (int i = 0; i < MAX_USER; i++) {
             if (g_clients[i].in_use == true) {
@@ -779,18 +776,28 @@ void process_packet(int id)
             }
         }
         if (p->item == 1) {     //HP
-            cout << "hp시간" << endl;
             add_timer(1000, OP_HP_ACTIVATE, system_clock::now() + 5000ms, 0);
         }
         else if (p->item == 2) {     //MP
-            cout << "mp시간" << endl;
             add_timer(1000, OP_MP_ACTIVATE, system_clock::now() + 5000ms, 0);
         }
         break;
     }
     case CS_Set_Time: {
         All_SetTime* p = reinterpret_cast<All_SetTime*>(g_clients[id].m_packet_start);
-        cout << "Set Time Packet 수신" << endl;
+
+        All_SetTime sp;
+        sp.size = sizeof(sp);
+        sp.type = SC_Set_Time;
+        sp.time = p->time;
+
+        cout << sp.time << endl;
+
+        for (int i = 0; i < MAX_USER; i++) {
+            if (g_clients[i].in_use == true) {
+                send_packet(i, &sp);
+            }
+        }
 
         break;
     }

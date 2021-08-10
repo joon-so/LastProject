@@ -6,16 +6,6 @@ public class ServerIngameResultManager : MonoBehaviour
 {
     [SerializeField] List<GameObject> playerInfo;
 
-    void Start()
-    {
-                
-    }
-
-    void Update()
-    {
-        
-    }
-
     private void OnEnable()
     {
         for (int i = 0; i < ServerIngameManager.instance.playerCount; ++i)

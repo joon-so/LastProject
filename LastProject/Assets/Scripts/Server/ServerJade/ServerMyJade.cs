@@ -48,7 +48,6 @@ public class ServerMyJade : ServerSubAIManager
 
     Vector3 vecTarget;
     Animator myAnimator;
-    ServerOtherJade vec;
     ServerCollisionManager collisionManager;
     ServerSkillEpManager skillEpManager;
 
@@ -59,7 +58,6 @@ public class ServerMyJade : ServerSubAIManager
         myAnimator = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
         rigidbody = GetComponent<Rigidbody>();
-        //vec = GetComponent<ServerOtherJade>();
         collisionManager = GameObject.Find("ServerIngameManager").GetComponent<ServerCollisionManager>();
         skillEpManager = GameObject.Find("ServerIngameManager").GetComponent<ServerSkillEpManager>();
     }
@@ -497,24 +495,18 @@ public class ServerMyJade : ServerSubAIManager
         if (Physics.Raycast(ray, out rayHit))
         {
             Vector3 nextVec = rayHit.point - transform.position;
-            if (Vector3.Distance(nextVec, transform.position) > 10.0f)
-                nextVec = nextVec.normalized * 10.0f;
-
             nextVec.y = 0;
             transform.LookAt(transform.position + nextVec);
 
             //SoundManager.instance.SFXPlay("Grenade", wSkillClip);
-            
+
             GameObject instantGrenade = Instantiate(Grenade, grenadePos.position, grenadePos.rotation);
             Rigidbody rigidGrenade = instantGrenade.GetComponent<Rigidbody>();
-            rigidGrenade.AddForce(nextVec, ForceMode.Impulse);
-            rigidGrenade.AddTorque(Vector3.back * 10, ForceMode.Impulse);
-
-            //vec.vec = nextVec;
+            rigidGrenade.AddForce(transform.localRotation * Vector3.forward * 10.0f, ForceMode.Impulse);
         }
 
-        ServerLoginManager.playerList[0].mainCharacterBehavior = 0;
         yield return new WaitForSeconds(0.3f);
+        ServerLoginManager.playerList[0].mainCharacterBehavior = 0;
         canAttack = true;
         canMove = true;
         canDodge = true;

@@ -513,8 +513,6 @@ public class ServerMyLeina : ServerSubAIManager
                 collisionManager.JadeBasicAttack();
             if (collision.gameObject.CompareTag("JadeQSkill"))
                 collisionManager.JadeQSkillAttack();
-            if (collision.gameObject.CompareTag("JadeWSkill"))
-                collisionManager.JadeWSkillAttack();
             if (collision.gameObject.CompareTag("LeinaAttack"))
                 collisionManager.LeinaBasicAttack();
             if (collision.gameObject.CompareTag("LeinaQSkill"))

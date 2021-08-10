@@ -262,7 +262,10 @@ public class ServerMyPlayerManager : MonoBehaviour
 
     void ChangeTime()
     {
-        ServerIngameManager.instance.playTime = 10.0f;
+        cs_SetTime settimePacket = new cs_SetTime();
+        settimePacket.time = 10.0f;
+
+        NetworkManager.instance.Send(settimePacket.Write());
     }
 
     void PotionCount()

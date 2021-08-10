@@ -146,14 +146,16 @@ public class ServerOtherJade : MonoBehaviour
     }
     IEnumerator ShootGrenade()
     {
+        Debug.Log("¿¿");
         preBehavior = 5;
         otherAnimator.SetTrigger("shootGrenade");
-
         //SoundManager.instance.SFXPlay("Grenade", wSkillClip);
+
         GameObject instantGrenade = Instantiate(Grenade, grenadePos.position, grenadePos.rotation);
         Rigidbody rigidGrenade = instantGrenade.GetComponent<Rigidbody>();
-        rigidGrenade.AddForce(transform.position, ForceMode.Impulse);
-        rigidGrenade.AddTorque(Vector3.back * 10, ForceMode.Impulse);
+        Debug.Log("otherjade: " + transform.localRotation);
+        rigidGrenade.AddForce(transform.localRotation * Vector3.forward * 10.0f, ForceMode.Impulse);
+
         yield return new WaitForSeconds(0.3f);
         preBehavior = 0;
     }
