@@ -216,15 +216,18 @@ public class Boss : MonoBehaviour
         FlyEffect.SetActive(true);
         anim.SetInteger("Pattern", pattern);
         Instantiate(GroundPattern2Gage, transform.position, transform.rotation * Quaternion.Euler(0f, 90f, 0));
+        Vector3 P1 = transform.position;
+        Vector3 P2 = targetCharacter.transform.position + new Vector3(0, -5f, 0);
+        Vector3 P3 = targetCharacter.transform.position + transform.forward * 9f;
         //transform.LookAt(targetCharacter.transform);
         yield return new WaitForSeconds(1.6f);
         rigidbody.useGravity = false;
         float bezierValue = 0f;
         float shootTime = 0.8f;
         boxCollider.size = new Vector3(boxCollider.size.x, boxCollider.size.y/4, boxCollider.size.z);
-        Vector3 P1 = transform.position;
-        Vector3 P2 = targetCharacter.transform.position + new Vector3(0, -5f, 0);
-        Vector3 P3 = targetCharacter.transform.position + transform.forward * 9f;
+        //Vector3 P1 = transform.position;
+        //Vector3 P2 = targetCharacter.transform.position + new Vector3(0, -5f, 0);
+        //Vector3 P3 = targetCharacter.transform.position + transform.forward * 9f;
         Vector3 bezier;
         while (bezierValue < shootTime)
         {
