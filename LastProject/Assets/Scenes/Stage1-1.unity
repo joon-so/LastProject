@@ -46941,8 +46941,8 @@ GameObject:
   - component: {fileID: 1413724300}
   - component: {fileID: 1417148588}
   - component: {fileID: 1416018540}
-  - component: {fileID: 1413849615}
   - component: {fileID: 1413849614}
+  - component: {fileID: 1413751981}
   m_Layer: 0
   m_Name: EndingPoint
   m_TagString: Untagged
@@ -46950,6 +46950,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967287
   m_IsActive: 1
+--- !u!135 &1413751981
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413751980}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 42, z: 0}
 --- !u!114 &1413849614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46963,19 +46976,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainClip: {fileID: 8300000, guid: f389cb20a6e71de458abd4836e58a6cd, type: 3}
---- !u!65 &1413849615
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1413751980}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 3, z: 1}
-  m_Center: {x: 0, y: 42, z: 0}
 --- !u!1001 &1415576528
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -39,6 +39,9 @@ public class Boss : MonoBehaviour
     float GroundPattern2Distance;
     float spinSpeed;
 
+    public int maxHp = 2000;
+    public int currentHp;
+
     int page;
     int pattern;
 
@@ -62,6 +65,8 @@ public class Boss : MonoBehaviour
 
         shootDistance = 15f;
         detectDistance = 30f;
+
+        currentHp = maxHp;
 
         page = 1;
         pattern = 0;
@@ -364,6 +369,79 @@ public class Boss : MonoBehaviour
         yield return new WaitForSeconds(skillCooltime);
         canAttack = true;
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        // Karmen
+        if (collision.gameObject.tag == "MainCharacter")
+        {
+            collisionManager.BossAttack2();
+        }
+        if (collision.gameObject.tag == "KarmenAttack")
+        {
+            currentHp -= Karmen.attackDamage;
+            //hpBar.SetHp(currentHp);
+        }
+        if (collision.gameObject.tag == "KarmenQSkill")
+        {
+            currentHp -= Karmen.qSkillDamage;
+            //hpBar.SetHp(currentHp);
+        }
+        if (collision.gameObject.tag == "KarmenWSkill")
+        {
+            currentHp -= Karmen.wSkillDamage;
+            //hpBar.SetHp(currentHp);
+        }
+        // Jade
+        if (collision.gameObject.tag == "JadeAttack")
+        {
+            currentHp -= Jade.attackDamage;
+            //hpBar.SetHp(currentHp);
+        }
+        if (collision.gameObject.tag == "JadeQSkill")
+        {
+            currentHp -= Jade.qSkillDamage;
+            //hpBar.SetHp(currentHp);
+        }
+        if (collision.gameObject.tag == "JadeWSkill")
+        {
+            currentHp -= Jade.wSkillDamage;
+            //hpBar.SetHp(currentHp);
+        }
+        // Leina
+        if (collision.gameObject.tag == "LeinaAttack")
+        {
+            currentHp -= Leina.attackDamage;
+            //hpBar.SetHp(currentHp);
+        }
+        if (collision.gameObject.tag == "LeinaQSkill")
+        {
+            currentHp -= Leina.qSkillDamage;
+            //hpBar.SetHp(currentHp);
+        }
+        if (collision.gameObject.tag == "LeinaWSkill")
+        {
+            currentHp -= Leina.wSkillDamage;
+            //hpBar.SetHp(currentHp);
+        }
+        // Eva
+        if (collision.gameObject.tag == "EvaAttack")
+        {
+            currentHp -= Eva.attackDamage;
+            //hpBar.SetHp(currentHp);
+        }
+        if (collision.gameObject.tag == "EvaQSkill")
+        {
+            currentHp -= Eva.qSkillDamage;
+            //hpBar.SetHp(currentHp);
+        }
+        if (collision.gameObject.tag == "EvaWSkill")
+        {
+            currentHp -= Eva.wSkillDamage;
+            //hpBar.SetHp(currentHp);
+        }
+    }
+
     Vector3 Bezier(Vector3 P_1, Vector3 P_2, Vector3 P_3, float value)
     {
         Vector3 A = Vector3.Lerp(P_1, P_2, value);
