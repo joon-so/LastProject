@@ -515,7 +515,8 @@ public class Karmen : SubAI
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            vecTarget = transform.position;
+            if (PlayerManager.instance.onTag)
+                vecTarget = transform.position;
         }
     }
     IEnumerator AttackDelay()

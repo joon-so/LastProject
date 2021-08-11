@@ -53,23 +53,9 @@ public class ServerMyLeina : ServerSubAIManager
     }
     void Start()
     {
-        FindPlayers();
-
-        vecTarget = transform.position;
         curDodgeCoolTime = dodgeCoolTime;
         curQSkillCoolTime = qSkillCoolTime;
         curWSkillCoolTime = wSkillCoolTime;
-
-        canMove = true;
-        canDodge = true;
-        canAttack = true;
-        canSkill = true;
-
-        onDodge = true;
-        onQSkill = true;
-        onWSkill = true;
-
-        curFireDelay = fireDelay;
 
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
@@ -84,6 +70,7 @@ public class ServerMyLeina : ServerSubAIManager
             ServerMyPlayerManager.instance.curC1DodgeCoolTime = curDodgeCoolTime;
             ServerMyPlayerManager.instance.curC1QSkillCoolTime = curQSkillCoolTime;
             ServerMyPlayerManager.instance.curC1WSkillCoolTime = curWSkillCoolTime;
+            nav.enabled = false;
         }
         else if (gameObject.transform.CompareTag("SubCharacter"))
         {
@@ -98,7 +85,23 @@ public class ServerMyLeina : ServerSubAIManager
             ServerMyPlayerManager.instance.curC2DodgeCoolTime = curDodgeCoolTime;
             ServerMyPlayerManager.instance.curC2QSkillCoolTime = curQSkillCoolTime;
             ServerMyPlayerManager.instance.curC2WSkillCoolTime = curWSkillCoolTime;
+            nav.enabled = true;
         }
+
+        FindPlayers();
+
+        vecTarget = transform.position;
+
+        canMove = true;
+        canDodge = true;
+        canAttack = true;
+        canSkill = true;
+
+        onDodge = true;
+        onQSkill = true;
+        onWSkill = true;
+
+        curFireDelay = fireDelay;
     }
     void Update()
     {
@@ -121,45 +124,45 @@ public class ServerMyLeina : ServerSubAIManager
         }
         else if (gameObject.transform.CompareTag("SubCharacter"))
         {
-            //distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
-            //if (currentState == characterState.trace)
-            //{
-            //    MainCharacterTrace(tagCharacter.transform.position);
-            //    myAnimator.SetBool("Run", true);
-            //    curFireDelay = 1f;
-            //}
-            //else if (currentState == characterState.attack)
-            //{
-            //    SubAttack();
+            distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
+            if (currentState == characterState.trace)
+            {
+                MainCharacterTrace(tagCharacter.transform.position);
+                myAnimator.SetBool("Run", true);
+                curFireDelay = 1f;
+            }
+            else if (currentState == characterState.attack)
+            {
+                SubAttack();
 
-            //    if (target)
-            //    {
-            //        Quaternion lookRotation = Quaternion.LookRotation(target.transform.position - transform.position);
-            //        Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
-            //        transform.rotation = Quaternion.Euler(0, euler.y, 0);
-            //    }
-            //    if (curFireDelay > subFireDelay && target != null)
-            //    {
-            //        GameObject instantArrow = Instantiate(arrow, arrowPos.position, arrowPos.rotation);
-            //        Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
-            //        arrowRigid.velocity = arrowPos.forward;
+                if (target)
+                {
+                    Quaternion lookRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+                    Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
+                    transform.rotation = Quaternion.Euler(0, euler.y, 0);
+                }
+                if (curFireDelay > subFireDelay && target != null)
+                {
+                    GameObject instantArrow = Instantiate(arrow, arrowPos.position, arrowPos.rotation);
+                    Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
+                    arrowRigid.velocity = arrowPos.forward;
 
-            //        moveSpeed = 0f;
-            //        myAnimator.SetBool("Run", false);
-            //        vecTarget = transform.position;
+                    moveSpeed = 0f;
+                    myAnimator.SetBool("Run", false);
+                    vecTarget = transform.position;
 
-            //        myAnimator.SetTrigger("Attack");
-            //        curFireDelay = 0;
+                    myAnimator.SetTrigger("Attack");
+                    curFireDelay = 0;
 
-            //        StartCoroutine(AttackDelay());
-            //    }
-            //}
-            //else if (currentState == characterState.idle)
-            //{
-            //    Idle();
-            //    myAnimator.SetBool("Run", false);
-            //    curFireDelay = 1f;
-            //}
+                    StartCoroutine(AttackDelay());
+                }
+            }
+            else if (currentState == characterState.idle)
+            {
+                Idle();
+                myAnimator.SetBool("Run", false);
+                curFireDelay = 1f;
+            }
         }
         CoolTime();
         Tag();
@@ -370,7 +373,8 @@ public class ServerMyLeina : ServerSubAIManager
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            vecTarget = transform.position;
+            if (ServerMyPlayerManager.instance.onTag)
+                vecTarget = transform.position;
         }
     }
 

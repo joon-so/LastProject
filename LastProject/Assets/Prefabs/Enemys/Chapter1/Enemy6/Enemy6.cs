@@ -74,7 +74,8 @@ public class Enemy6 : MonoBehaviour
         //Change Target
         if (Input.GetKeyDown(KeyCode.F))
         {
-            mainCharacter = GameObject.FindGameObjectWithTag("SubCharacter");
+            if (PlayerManager.instance.onTag)
+                mainCharacter = GameObject.FindGameObjectWithTag("SubCharacter");
         }
     }
 

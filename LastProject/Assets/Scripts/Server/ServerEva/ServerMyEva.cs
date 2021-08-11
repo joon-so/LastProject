@@ -52,22 +52,9 @@ public class ServerMyEva : ServerSubAIManager
     }
     void Start()
     {
-        FindPlayers();
-
-        vecTarget = transform.position;
         curDodgeCoolTime = dodgeCoolTime;
         curQSkillCoolTime = qSkillCoolTime;
         curWSkillCoolTime = wSkillCoolTime;
-
-        canMove = false;
-        canDodge = false;
-        canAttack = false;
-
-        onDodge = true;
-        onQSkill = true;
-        onWSkill = true;
-
-        curAttackDelay = attackDelay;
 
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
@@ -82,6 +69,7 @@ public class ServerMyEva : ServerSubAIManager
             ServerMyPlayerManager.instance.curC1DodgeCoolTime = curDodgeCoolTime;
             ServerMyPlayerManager.instance.curC1QSkillCoolTime = curQSkillCoolTime;
             ServerMyPlayerManager.instance.curC1WSkillCoolTime = curWSkillCoolTime;
+            nav.enabled = false;
         }
         else if (gameObject.transform.CompareTag("SubCharacter"))
         {
@@ -96,7 +84,22 @@ public class ServerMyEva : ServerSubAIManager
             ServerMyPlayerManager.instance.curC2DodgeCoolTime = curDodgeCoolTime;
             ServerMyPlayerManager.instance.curC2QSkillCoolTime = curQSkillCoolTime;
             ServerMyPlayerManager.instance.curC2WSkillCoolTime = curWSkillCoolTime;
+            nav.enabled = true;
         }
+
+        FindPlayers();
+
+        vecTarget = transform.position;
+        
+        canMove = false;
+        canDodge = false;
+        canAttack = false;
+
+        onDodge = true;
+        onQSkill = true;
+        onWSkill = true;
+
+        curAttackDelay = attackDelay;
 
         StartCoroutine(StartMotion());
 
@@ -123,22 +126,22 @@ public class ServerMyEva : ServerSubAIManager
         }
         else if (gameObject.transform.CompareTag("SubCharacter"))
         {
-            //distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
+            distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
 
-            //if (currentState == characterState.trace)
-            //{
-            //    MainCharacterTrace(tagCharacter.transform.position);
-            //    myAnimator.SetBool("Run", true);
-            //}
-            //else if (currentState == characterState.attack)
-            //{
-            //    SubAttack();
-            //}
-            //else if (currentState == characterState.idle)
-            //{
-            //    Idle();
-            //    myAnimator.SetBool("Run", false);
-            //}
+            if (currentState == characterState.trace)
+            {
+                MainCharacterTrace(tagCharacter.transform.position);
+                myAnimator.SetBool("Run", true);
+            }
+            else if (currentState == characterState.attack)
+            {
+                SubAttack();
+            }
+            else if (currentState == characterState.idle)
+            {
+                Idle();
+                myAnimator.SetBool("Run", false);
+            }
         }
         Tag();
         CoolTime();
@@ -351,7 +354,8 @@ public class ServerMyEva : ServerSubAIManager
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            vecTarget = transform.position;
+            if (ServerMyPlayerManager.instance.onTag)
+                vecTarget = transform.position;
         }
     }
 

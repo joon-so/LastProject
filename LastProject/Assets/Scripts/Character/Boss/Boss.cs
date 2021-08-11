@@ -77,7 +77,8 @@ public class Boss : MonoBehaviour
         //Change Target
         if (Input.GetKeyDown(KeyCode.F))
         {
-            targetCharacter = GameObject.FindGameObjectWithTag("SubCharacter");
+            if (PlayerManager.instance.onTag)
+                targetCharacter = GameObject.FindGameObjectWithTag("SubCharacter");
         }
 
         if (Input.GetKeyDown(KeyCode.Keypad0))
