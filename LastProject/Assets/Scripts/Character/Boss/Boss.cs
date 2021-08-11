@@ -16,6 +16,7 @@ public class Boss : MonoBehaviour
     public GameObject Frame;
     [SerializeField] GameObject FlyPattern2Effect;
     //[SerializeField] GameObject FlyPattern3Effect;
+    ClientCollisionManager collisionManager;
 
     public GameObject FlyEffect;
 
@@ -46,6 +47,8 @@ public class Boss : MonoBehaviour
         anim = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
         boxCollider = GetComponent<BoxCollider>();
+
+        collisionManager = GameObject.Find("GameManager").GetComponent<ClientCollisionManager>();
 
         targetCharacter = GameObject.FindGameObjectWithTag("SubCharacter");
         FlyEffect.SetActive(false);
@@ -200,10 +203,22 @@ public class Boss : MonoBehaviour
         Instantiate(GroundPattern3Gage, pos, Quaternion.Euler(0f, 90f, 0));
         yield return new WaitForSeconds(0.6f);
         Instantiate(GroundPattern3Effect, pos, Quaternion.Euler(90f, 0f, 0));
+        if (Vector3.Distance(transform.position, targetCharacter.transform.position) < 11f)
+        {
+            collisionManager.BossAttack3();
+        }
         yield return new WaitForSeconds(0.72f);
         Instantiate(GroundPattern3Effect, pos, Quaternion.Euler(90f, 0f, 0));
+        if (Vector3.Distance(transform.position, targetCharacter.transform.position) < 11f)
+        {
+            collisionManager.BossAttack3();
+        }
         yield return new WaitForSeconds(0.72f);
         Instantiate(GroundPattern3Effect, pos, Quaternion.Euler(90f, 0f, 0));
+        if (Vector3.Distance(transform.position, targetCharacter.transform.position) < 11f)
+        {
+            collisionManager.BossAttack3();
+        }
         yield return new WaitForSeconds(1f);
         pattern = 0;
         anim.SetInteger("Pattern", pattern);
@@ -292,6 +307,10 @@ public class Boss : MonoBehaviour
 
         yield return new WaitForSeconds(0.4f);
         Instantiate(GroundPattern3Effect, transform.position, Quaternion.Euler(90f, 0f, 0));
+        if (Vector3.Distance(transform.position, targetCharacter.transform.position) < 11f)
+        {
+            collisionManager.BossAttack3();
+        }
         FlyEffect.SetActive(false);
         pattern = 0;
         anim.SetInteger("Pattern", pattern);

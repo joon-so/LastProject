@@ -104,6 +104,7 @@ public class Enemy7 : MonoBehaviour
             if (alive)
             {
                 alive = false;
+                gameObject.tag = "Enmey7Attack";
                 StartCoroutine(ExploseAndDistroy());
             }
         }

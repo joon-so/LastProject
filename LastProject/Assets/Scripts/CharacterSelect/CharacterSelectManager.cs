@@ -247,7 +247,7 @@ public class CharacterSelectManager : MonoBehaviour
         GameManager.instance.clientPlayer.curMainCharacter = 1;
 
         SoundManager.instance.SFXPlay("Start", uiButtonClickSound2);
-        SceneManager.LoadScene("Stage1-1");
+        SceneManager.LoadScene("Stage1-5");
     }
     public void OnClickExit()
     {
