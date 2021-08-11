@@ -24,18 +24,22 @@ public class PlayerManager : MonoBehaviour
     public float c1DodgeCoolTime;
     public float c1QSkillCoolTime;
     public float c1WSkillCoolTime;
+    public float c1ESkillCoolTime;
 
     public float c2DodgeCoolTime;
     public float c2QSkillCoolTime;
     public float c2WSkillCoolTime;
+    public float c2ESkillCoolTime;
 
     public float curC1DodgeCoolTime;
     public float curC1QSkillCoolTime;
     public float curC1WSkillCoolTime;
+    public float curC1ESkillCoolTime;
 
     public float curC2DodgeCoolTime;
     public float curC2QSkillCoolTime;
     public float curC2WSkillCoolTime;
+    public float curC2ESkillCoolTime;
 
     // Item CoolTime
     public float hpCoolTime;
@@ -48,9 +52,9 @@ public class PlayerManager : MonoBehaviour
     private bool onEpPotion;
 
     // tag
-    private bool canTag;
+    private bool onTag;
     private bool isTag;
-    private float curTagCoolTime;
+    public float curTagCoolTime;
 
     void Awake()
     {
@@ -67,7 +71,7 @@ public class PlayerManager : MonoBehaviour
         mainCameraControl = mainCamera.GetComponent<CameraController>();
         Initialize();
         isTag = true;
-        canTag = true;
+        onTag = true;
 
         hpCoolTime = 3;
         epCoolTime = 3;
@@ -87,13 +91,17 @@ public class PlayerManager : MonoBehaviour
         else
         {
             if (curTagCoolTime < GameManager.instance.tagCoolTime)
-                curHpCoolTime += Time.deltaTime;
+                curTagCoolTime += Time.deltaTime;
             else
-                canTag = true;
+                onTag = true;
 
             if (Input.GetKeyDown(KeyCode.F))
             {
                 MainSubTag();
+            }
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                GameManager.instance.ChangeHpEp();
             }
             Zoom();
             Click();
@@ -167,9 +175,10 @@ public class PlayerManager : MonoBehaviour
 
     void MainSubTag()
     {
-        if (canTag)
+        if (onTag)
         {
             curTagCoolTime = 0.0f;
+            onTag = false;
 
             // C1 : main -> sub
             if (isTag)
@@ -179,6 +188,7 @@ public class PlayerManager : MonoBehaviour
                 GameManager.instance.character2.gameObject.tag = "MainCharacter";
                 GameManager.instance.character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
                 GameManager.instance.character2.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+                GameManager.instance.clientPlayer.curMainCharacter = 2;
                 isTag = false;
             }
             // C1 : sub -> main
@@ -189,9 +199,9 @@ public class PlayerManager : MonoBehaviour
                 GameManager.instance.character2.gameObject.tag = "SubCharacter";
                 GameManager.instance.character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
                 GameManager.instance.character2.gameObject.GetComponent<NavMeshAgent>().enabled = true;
+                GameManager.instance.clientPlayer.curMainCharacter = 1;
                 isTag = true;
             }
-            canTag = false;
         }
     }
 

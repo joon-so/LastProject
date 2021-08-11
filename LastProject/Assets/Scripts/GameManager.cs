@@ -27,16 +27,14 @@ public class GameManager : MonoBehaviour
     public ClientPlayer clientPlayer = new ClientPlayer();
 
     // player Info
-    public int playerKill = 0;
-    public int playerDeath = 0;
-    public int playerScore = 0;
+    public int playerScore;
 
     public int character1MaxHp;
     public int character1MaxEp;
     public int character2MaxHp;
     public int character2MaxEp;
 
-    public float tagCoolTime = 5.0f;
+    public float tagCoolTime;
 
     // Item Info
     public int curHpPotionCount;
@@ -63,14 +61,24 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        // 초기 Hp Ep Max값, 개수 설정
-        character1MaxEp = clientPlayer.character1Hp;
-        character1MaxEp = clientPlayer.character1Ep;
-
-        character2MaxEp = clientPlayer.character2Hp;
-        character2MaxEp = clientPlayer.character2Ep;
+        playerScore = 0;
+             
+        tagCoolTime = 5.0f;
 
         curHpPotionCount = 3;
         curEpPotionCount = 3;
+        
+        hpPotionValue = 50;
+        epPotionValue = 50;
+    }
+
+
+    // Mode Change
+    public void ChangeHpEp()
+    {
+        clientPlayer.character1Hp = 100;
+        clientPlayer.character2Hp = 100;
+        clientPlayer.character1Ep = 50;
+        clientPlayer.character2Ep = 50;
     }
 }

@@ -79,7 +79,6 @@ public class CharacterSelectManager : MonoBehaviour
             subEvaObj.SetActive(false);
         }
     }
-
     public void OnClickSelectJade()
     {
         SoundManager.instance.SFXPlay("List", uiCharacterClickSound);
@@ -156,33 +155,41 @@ public class CharacterSelectManager : MonoBehaviour
                 GameManager.instance.clientPlayer.selectCharacter1 = 1;
                 GameManager.instance.clientPlayer.character1Hp = karmenHp;
                 GameManager.instance.clientPlayer.character1Ep = karmenEp;
+                GameManager.instance.character1MaxHp = karmenHp;
+                GameManager.instance.character1MaxEp = karmenEp;
                 mainOrsub = 2;
             }
-            if (mainJadeObj.activeSelf)
+            else if (mainJadeObj.activeSelf)
             {
                 mainCharacterIndex = 2;
                 selectEffectJade.SetActive(true);
                 GameManager.instance.clientPlayer.selectCharacter1 = 2;
                 GameManager.instance.clientPlayer.character1Hp = jadeHp;
                 GameManager.instance.clientPlayer.character1Ep = jadeEp;
+                GameManager.instance.character1MaxHp = jadeHp;
+                GameManager.instance.character1MaxEp = jadeEp;
                 mainOrsub = 2;
             }
-            if (mainLeinaObj.activeSelf)
+            else if (mainLeinaObj.activeSelf)
             {
                 mainCharacterIndex = 3;
                 selectEffectLeina.SetActive(true);
                 GameManager.instance.clientPlayer.selectCharacter1 = 3;
                 GameManager.instance.clientPlayer.character1Hp = leinaHp;
                 GameManager.instance.clientPlayer.character1Ep = leinaEp;
+                GameManager.instance.character1MaxHp = leinaHp;
+                GameManager.instance.character1MaxEp = leinaEp;
                 mainOrsub = 2;
             }
-            if (mainEvaObj.activeSelf)
+            else if (mainEvaObj.activeSelf)
             {
                 mainCharacterIndex = 4;
                 selectEffectEva.SetActive(true);
                 GameManager.instance.clientPlayer.selectCharacter1 = 4;
                 GameManager.instance.clientPlayer.character1Hp = evaHp;
                 GameManager.instance.clientPlayer.character1Ep = evaEp;
+                GameManager.instance.character1MaxHp = evaHp;
+                GameManager.instance.character1MaxEp = evaEp;
                 mainOrsub = 2;
             }
         }
@@ -195,33 +202,41 @@ public class CharacterSelectManager : MonoBehaviour
                 GameManager.instance.clientPlayer.selectCharacter2 = 1;
                 GameManager.instance.clientPlayer.character2Hp = karmenHp;
                 GameManager.instance.clientPlayer.character2Ep = karmenEp;
+                GameManager.instance.character2MaxHp = karmenHp;
+                GameManager.instance.character2MaxEp = karmenEp;
                 mainOrsub = 0;
             }
-            if (subJadeObj.activeSelf)
+            else if (subJadeObj.activeSelf)
             {
                 subCharacterIndex = 2;
                 selectEffectJade.SetActive(true);
                 GameManager.instance.clientPlayer.selectCharacter2 = 2;
                 GameManager.instance.clientPlayer.character2Hp = jadeHp;
                 GameManager.instance.clientPlayer.character2Ep = jadeEp;
+                GameManager.instance.character2MaxHp = jadeHp;
+                GameManager.instance.character2MaxEp = jadeEp;
                 mainOrsub = 0;
             }
-            if (subLeinaObj.activeSelf)
+            else if (subLeinaObj.activeSelf)
             {
                 subCharacterIndex = 3;
                 selectEffectLeina.SetActive(true);
                 GameManager.instance.clientPlayer.selectCharacter2 = 3;
                 GameManager.instance.clientPlayer.character2Hp = leinaHp;
-                GameManager.instance.clientPlayer.character2Ep = leinaEp; 
+                GameManager.instance.clientPlayer.character2Ep = leinaEp;
+                GameManager.instance.character2MaxHp = leinaHp;
+                GameManager.instance.character2MaxEp = leinaEp;
                 mainOrsub = 0;
             }
-            if (subEvaObj.activeSelf)
+            else if (subEvaObj.activeSelf)
             {
                 subCharacterIndex = 4;
                 selectEffectEva.SetActive(true);
                 GameManager.instance.clientPlayer.selectCharacter2 = 4;
                 GameManager.instance.clientPlayer.character2Hp = evaHp;
-                GameManager.instance.clientPlayer.character2Ep = evaEp; 
+                GameManager.instance.clientPlayer.character2Ep = evaEp;
+                GameManager.instance.character2MaxHp = evaHp;
+                GameManager.instance.character2MaxEp = evaEp;
                 mainOrsub = 0;
             }
         }
@@ -242,7 +257,7 @@ public class CharacterSelectManager : MonoBehaviour
 
     public void KarmenInfoMsg()
     {
-        characterInfoMsgText.text = "카르멘은 근거리 전투 캐릭터입니다.\n" +
+        characterInfoMsgText.text = "카르멘은 근거리 전투 캐릭터입니다." + "\n" +
                                     "Hp : " + karmenHp + "\n" +
                                     "Ep : " + karmenEp + "\n" +
                                     "기본 공격력 : " + clientCollisionManager.karmenAttackDamage + "\n" +
@@ -253,7 +268,7 @@ public class CharacterSelectManager : MonoBehaviour
     }
     public void JadeInfoMsg()
     {
-        characterInfoMsgText.text = "제이드는 원거리 전투 캐릭터입니다." +
+        characterInfoMsgText.text = "제이드는 원거리 전투 캐릭터입니다." + "\n" +
                                     "Hp : " + jadeHp + "\n" +
                                     "Ep : " + jadeEp + "\n" +
                                     "기본 공격력 : " + clientCollisionManager.jadeAttackDamage + "\n" +
@@ -264,7 +279,7 @@ public class CharacterSelectManager : MonoBehaviour
     }
     public void LeinaInfoMsg()
     {
-        characterInfoMsgText.text = "레이나는 원거리 전투 캐릭터입니다." +
+        characterInfoMsgText.text = "레이나는 원거리 전투 캐릭터입니다." + "\n" +
                                     "Hp : " + leinaHp + "\n" +
                                     "Ep : " + leinaEp + "\n" +
                                     "기본 공격력 : " + clientCollisionManager.leinaAttackDamage + "\n" +
@@ -275,7 +290,7 @@ public class CharacterSelectManager : MonoBehaviour
     }
     public void EvaInfoMsg()
     {
-        characterInfoMsgText.text = "에바는 근거리 전투 캐릭터입니다." +
+        characterInfoMsgText.text = "에바는 근거리 전투 캐릭터입니다." + "\n" +
                                     "Hp : " + evaHp + "\n" +
                                     "Ep : " + evaEp + "\n" +
                                     "기본 공격력 : " + clientCollisionManager.evaAttackDamage + "\n" +

@@ -54,7 +54,7 @@ public class Leina : SubAI
     Vector3 vecTarget;
 
     Animator anim;
-
+    int characterIndex;
     void Awake()
     {
         anim = GetComponent<Animator>();
@@ -62,14 +62,42 @@ public class Leina : SubAI
     }
     void Start()
     {
-        if (GameManager.instance.clientPlayer.curMainCharacter == 1)
+        curDodgeCoolTime = dodgeCoolTime;
+        curQSkillCoolTime = qSkillCoolTime;
+        curWSkillCoolTime = wSkillCoolTime;
+        curESkillCoolTime = eSkillCoolTime;
+
+        if (gameObject.transform.CompareTag("MainCharacter"))
         {
-            nav.enabled = false;
             tagCharacter = GameManager.instance.character2;
+
+            characterIndex = 1;
+            PlayerManager.instance.c1DodgeCoolTime = dodgeCoolTime;
+            PlayerManager.instance.c1QSkillCoolTime = qSkillCoolTime;
+            PlayerManager.instance.c1WSkillCoolTime = wSkillCoolTime;
+            PlayerManager.instance.c1ESkillCoolTime = eSkillCoolTime;
+
+            PlayerManager.instance.curC1DodgeCoolTime = curDodgeCoolTime;
+            PlayerManager.instance.curC1QSkillCoolTime = curQSkillCoolTime;
+            PlayerManager.instance.curC1WSkillCoolTime = curWSkillCoolTime;
+            PlayerManager.instance.curC1ESkillCoolTime = curESkillCoolTime;
+            nav.enabled = false;
         }
-        else if (GameManager.instance.clientPlayer.curMainCharacter == 2)
+        else if (gameObject.transform.CompareTag("SubCharacter"))
         {
             tagCharacter = GameManager.instance.character1;
+
+            characterIndex = 2;
+
+            PlayerManager.instance.c2DodgeCoolTime = dodgeCoolTime;
+            PlayerManager.instance.c2QSkillCoolTime = qSkillCoolTime;
+            PlayerManager.instance.c2WSkillCoolTime = wSkillCoolTime;
+            PlayerManager.instance.c2ESkillCoolTime = eSkillCoolTime;
+
+            PlayerManager.instance.curC2DodgeCoolTime = curDodgeCoolTime;
+            PlayerManager.instance.curC2QSkillCoolTime = curQSkillCoolTime;
+            PlayerManager.instance.curC2WSkillCoolTime = curWSkillCoolTime;
+            PlayerManager.instance.curC2ESkillCoolTime = curESkillCoolTime;
             nav.enabled = true;
         }
 
@@ -79,9 +107,6 @@ public class Leina : SubAI
         rigidbody = GetComponent<Rigidbody>();
 
         vecTarget = transform.position;
-        curDodgeCoolTime = 0;
-        curQSkillCoolTime = 0;
-        curWSkillCoolTime = 0;
 
         canMove = true;
         canDodge = true;
@@ -278,34 +303,43 @@ public class Leina : SubAI
         if (curDodgeCoolTime < dodgeCoolTime)
         {
             curDodgeCoolTime += Time.deltaTime;
+            if (characterIndex == 1)
+                PlayerManager.instance.curC1DodgeCoolTime = curDodgeCoolTime;
+            else if (characterIndex == 2)
+                PlayerManager.instance.curC2DodgeCoolTime = curDodgeCoolTime;
         }
         else
-        {
             onDodge = true;
-        }
+
         if (curQSkillCoolTime < qSkillCoolTime)
         {
             curQSkillCoolTime += Time.deltaTime;
+            if (characterIndex == 1)
+                PlayerManager.instance.curC1QSkillCoolTime = curQSkillCoolTime;
+            else if (characterIndex == 2)
+                PlayerManager.instance.curC2QSkillCoolTime = curQSkillCoolTime;
         }
         else
-        {
             onQSkill = true;
-        }
+
         if (curWSkillCoolTime < wSkillCoolTime)
         {
             curWSkillCoolTime += Time.deltaTime;
+            if (characterIndex == 1)
+                PlayerManager.instance.curC1WSkillCoolTime = curWSkillCoolTime;
+            else if (characterIndex == 2)
+                PlayerManager.instance.curC2WSkillCoolTime = curWSkillCoolTime;
         }
         else
-        {
             onWSkill = true;
-        }
+
         if (curESkillCoolTime < eSkillCoolTime)
         {
             curESkillCoolTime += Time.deltaTime;
-        }
-        else
-        {
-            onESkill = true;
+            if (characterIndex == 1)
+                PlayerManager.instance.curC1ESkillCoolTime = curESkillCoolTime;
+            else if (characterIndex == 2)
+                PlayerManager.instance.curC2ESkillCoolTime = curESkillCoolTime;
         }
     }
     void Q_Skill()
@@ -344,6 +378,8 @@ public class Leina : SubAI
     {
         if (Input.GetKeyDown(KeyCode.E) && onESkill && gameObject.transform.tag == "MainCharacter")
         {
+            curESkillCoolTime = 0.0f;
+            
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit rayHit;
             Vector3 frontVec = transform.position;
@@ -375,6 +411,8 @@ public class Leina : SubAI
         }
         else if (Input.GetKeyDown(KeyCode.E) && onESkill && gameObject.transform.tag == "SubCharacter")
         {
+            curESkillCoolTime = 0.0f; 
+            
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit rayHit;
             Vector3 frontVec = transform.position;

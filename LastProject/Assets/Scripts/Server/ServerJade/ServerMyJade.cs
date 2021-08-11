@@ -64,25 +64,6 @@ public class ServerMyJade : ServerSubAIManager
 
     void Start()
     {
-        FindPlayers();
-
-        vecTarget = transform.position;
-
-        curDodgeCoolTime = dodgeCoolTime;
-        curQSkillCoolTime = qSkillCoolTime;
-        curWSkillCoolTime = wSkillCoolTime;
-
-        canMove = false;
-        canDodge = false;
-        canAttack = false;
-        canSkill = false;
-
-        onDodge = true;
-        onQSkill = true;
-        onWSkill = true;
-
-        curFireDelay = fireDelay;
-        
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
             tagCharacter = ServerMyPlayerManager.instance.character2;
@@ -112,6 +93,25 @@ public class ServerMyJade : ServerSubAIManager
             ServerMyPlayerManager.instance.curC2WSkillCoolTime = curWSkillCoolTime;
         }
 
+        FindPlayers();
+
+        vecTarget = transform.position;
+
+        curDodgeCoolTime = dodgeCoolTime;
+        curQSkillCoolTime = qSkillCoolTime;
+        curWSkillCoolTime = wSkillCoolTime;
+
+        canMove = false;
+        canDodge = false;
+        canAttack = false;
+        canSkill = false;
+
+        onDodge = true;
+        onQSkill = true;
+        onWSkill = true;
+
+        curFireDelay = fireDelay;
+        
         StartCoroutine(DrawAssaultRifle());
     }
 
