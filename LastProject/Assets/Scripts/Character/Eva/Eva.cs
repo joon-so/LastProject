@@ -490,7 +490,8 @@ public class Eva : SubAI
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            vecTarget = transform.position;
+            if(PlayerManager.instance.onTag)
+                vecTarget = transform.position;
         }
     }
     IEnumerator DodgeDelay()

@@ -76,8 +76,11 @@ public class InGameUI : MonoBehaviour
             UpdatePlayerScore();
             if (Input.GetKeyDown(KeyCode.F))
             {
-                TagCharacterMask();
-                TagCharacterSlot();
+                if(PlayerManager.instance.onTag)
+                {
+                    TagCharacterMask();
+                    TagCharacterSlot();
+                }
             }
         }
         if (Input.GetKeyDown(KeyCode.Escape))

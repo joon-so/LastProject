@@ -52,7 +52,7 @@ public class PlayerManager : MonoBehaviour
     private bool onEpPotion;
 
     // tag
-    private bool onTag;
+    public bool onTag;
     private bool isTag;
     public float curTagCoolTime;
 

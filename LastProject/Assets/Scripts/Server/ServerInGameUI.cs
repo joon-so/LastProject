@@ -37,6 +37,8 @@ public class ServerInGameUI : MonoBehaviour
     [SerializeField] Image hpCoolFill;
     [SerializeField] Image epCoolFill;
 
+    [SerializeField] Image tagCoolFill;
+
     private GameObject mainC1;
     private GameObject subC1;
     private GameObject mainC2;
@@ -158,8 +160,11 @@ public class ServerInGameUI : MonoBehaviour
             UpdateCoolTimeUI();
             if (Input.GetKeyDown(KeyCode.F))
             {
-                TagCharacterMask();
-                TagCharacterSlot();
+                if (ServerMyPlayerManager.instance.onTag)
+                {
+                    TagCharacterMask();
+                    TagCharacterSlot();
+                }
             }
         }
     }
@@ -245,5 +250,7 @@ public class ServerInGameUI : MonoBehaviour
 
         hpCount.text = string.Format("{0}", ServerMyPlayerManager.instance.myHpPotionCount);
         epCount.text = string.Format("{0}", ServerMyPlayerManager.instance.myEpPotionCount);
+
+        tagCoolFill.fillAmount = 1 - ServerMyPlayerManager.instance.curTagCoolTime / ServerMyPlayerManager.instance.tagCoolTime;
     }
 }
