@@ -62,7 +62,7 @@ public class BossBullet : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if ((collision.gameObject.layer != 8 || collision.gameObject.tag == "MainCharacter") && !collided)
+        if ((collision.gameObject.layer != 8 || collision.gameObject.tag == "MainCharacter") && !collided && collision.gameObject.tag != "Enemy")
         {
             collided = true;
 
