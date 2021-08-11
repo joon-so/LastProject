@@ -61,7 +61,6 @@ public class ServerCollisionManager : MonoBehaviour
     public void JadeWSkillAttack()
     {
         send_Attack_packet(JadeWSkillDamage);
-        Debug.Log("Hit: 제이드 W스킬");
     }
     public void LeinaBasicAttack()
     {
@@ -82,7 +81,6 @@ public class ServerCollisionManager : MonoBehaviour
     public void EvaQSkillAttack()
     {
         send_Attack_packet(EvaQSkillDamage);
-        Debug.Log("Hit: 에바 Q스킬");
     }
     public void EvaWSkillAttack()
     {

@@ -78,6 +78,10 @@ public class Enemy1 : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (mainCharacter == null)
+        {
+            mainCharacter = GameObject.FindGameObjectWithTag("MainCharacter");
+        }
         if (currentHp <= 0 && alive)
         {
             alive = false;
@@ -94,6 +98,10 @@ public class Enemy1 : MonoBehaviour
         if (transform.position.y < 0)
         {
             transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            mainCharacter = GameObject.FindGameObjectWithTag("SubCharacter");
         }
     }
 
@@ -232,7 +240,6 @@ public class Enemy1 : MonoBehaviour
         {
             currentHp -= Karmen.attackDamage;
             hpBar.SetHp(currentHp);
-            Debug.Log(currentHp);
         }
 
 

@@ -8,7 +8,6 @@ public class ServerEpPotion : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("MP: " + ServerItemManager.instance.is_Item_Active);
         if (ServerItemManager.instance.is_Item_Active == false)
             Destroy(gameObject);
     }

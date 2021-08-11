@@ -772,7 +772,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96b76a394f9c5754a9b3e1bc3960b258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiButtonSound: {fileID: 0}
+  uiButtonSound: {fileID: 8300000, guid: b81909f169fd8ee4699fc01948d7f820, type: 3}
+  inputID: {fileID: 1374638717}
+  inputPW: {fileID: 879583922}
 --- !u!4 &175088794
 Transform:
   m_ObjectHideFlags: 0
@@ -1393,7 +1395,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1924603524}
+      - m_Target: {fileID: 175088793}
         m_TargetAssemblyTypeName: LoginManager, Assembly-CSharp
         m_MethodName: OnClickCreateButton
         m_Mode: 1
@@ -2882,7 +2884,19 @@ MonoBehaviour:
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 175088793}
+        m_TargetAssemblyTypeName: LoginManager, Assembly-CSharp
+        m_MethodName: OnEndEditPlayerPassWord
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 879583922}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.InputField, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3728,7 +3742,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1924603524}
+      - m_Target: {fileID: 175088793}
         m_TargetAssemblyTypeName: LoginManager, Assembly-CSharp
         m_MethodName: OnClickLoginButton
         m_Mode: 1
@@ -4564,10 +4578,22 @@ MonoBehaviour:
   m_LineType: 0
   m_HideMobileInput: 0
   m_CharacterValidation: 0
-  m_CharacterLimit: 0
+  m_CharacterLimit: 10
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 175088793}
+        m_TargetAssemblyTypeName: LoginManager, Assembly-CSharp
+        m_MethodName: OnEndEditPlayerID
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1374638717}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.InputField, UnityEngine.UI
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4945,7 +4971,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: USERNAME
+  m_Text: ID
 --- !u!222 &1441495857
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6364,6 +6390,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiButtonSound: {fileID: 8300000, guid: b81909f169fd8ee4699fc01948d7f820, type: 3}
+  inputID: {fileID: 1374638717}
+  inputPW: {fileID: 0}
 --- !u!1 &1928480748
 GameObject:
   m_ObjectHideFlags: 0

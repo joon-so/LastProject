@@ -68,6 +68,10 @@ public class Enemy2 : MonoBehaviour
                                                                                                    
     void FixedUpdate()
     {
+        if (mainCharacter == null)
+        {
+            mainCharacter = GameObject.FindGameObjectWithTag("MainCharacter");
+        }
         if (currentHp <= 0 && alive)
         {
             alive = false;
@@ -85,11 +89,16 @@ public class Enemy2 : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
         }
+        //Change Target
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            mainCharacter = GameObject.FindGameObjectWithTag("SubCharacter");
+        }
     }
 
     void Waiting()
     {
-        mainCharacter = GameObject.FindGameObjectWithTag("MainCharacter");
+        //mainCharacter = GameObject.FindGameObjectWithTag("MainCharacter");
 
         playerDistance = Vector3.Distance(
             new Vector3(mainCharacter.transform.position.x, 0, mainCharacter.transform.position.z),
@@ -104,7 +113,7 @@ public class Enemy2 : MonoBehaviour
 
     void Find()
     {
-        mainCharacter = GameObject.FindGameObjectWithTag("MainCharacter");
+        //mainCharacter = GameObject.FindGameObjectWithTag("MainCharacter");
 
         if (mainCharacter == null)
         {
@@ -216,7 +225,6 @@ public class Enemy2 : MonoBehaviour
         {
             currentHp -= Karmen.attackDamage;
             hpBar.SetHp(currentHp);
-            Debug.Log(currentHp);
         }
 
 

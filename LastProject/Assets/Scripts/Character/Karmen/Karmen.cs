@@ -265,7 +265,7 @@ public class Karmen : SubAI
                 {
                     doingAttack = false;
                     anim.SetBool("doAttack", doingAttack);
-
+                    CharacterState.attackCheck = false;
                 }
                 motionEndCheck = true;
             }
@@ -291,7 +291,7 @@ public class Karmen : SubAI
                 }
                 vecTarget = transform.position;
             }
-
+            CharacterState.attackCheck = true;
             moveSpeed = 0f;
             doingAttack = true;
             anim.SetBool("doAttack", doingAttack);
@@ -639,13 +639,17 @@ public class Karmen : SubAI
         if (collision.gameObject.tag == "Enemy1Attack")
         {
             if (GameManager.instance.mainPlayerHp > 0)
+            {
                 GameManager.instance.mainPlayerHp -= Enemy1.damage;
+            }
         }
 
         if (collision.gameObject.tag == "Enemy2Attack")
         {
             if (GameManager.instance.mainPlayerHp > 0)
+            {
                 GameManager.instance.mainPlayerHp -= Enemy2.damage;
+            }
         }
     }
 }

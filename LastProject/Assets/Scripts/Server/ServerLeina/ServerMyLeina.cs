@@ -394,13 +394,14 @@ public class ServerMyLeina : ServerSubAIManager
 
     IEnumerator Death()
     {
+        Debug.Log("my jade Á×À½");
         canMove = false;
         canAttack = false;
         canSkill = false;
         canDodge = false;
         ServerLoginManager.playerList[0].mainCharacterBehavior = 6;
         myAnimator.SetTrigger("Dead");
-        yield return null;
+        yield return new WaitForSeconds(1.9f);
     }
 
     IEnumerator ChargingShot()
@@ -523,6 +524,21 @@ public class ServerMyLeina : ServerSubAIManager
                 collisionManager.EvaBasicAttack();
             if (collision.gameObject.CompareTag("EvaWSkill"))
                 collisionManager.EvaWSkillAttack();
+        }
+    }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        if (other.gameObject.layer == 10)
+            return;
+
+        if (ServerLoginManager.playerList[0].character1Hp <= 0 || ServerLoginManager.playerList[0].character2Hp <= 0)
+            return;
+
+        if (gameObject.CompareTag("MainCharacter"))
+        {
+            if (other.gameObject.CompareTag("EvaQSkill"))
+                collisionManager.EvaQSkillAttack();
         }
     }
 }
