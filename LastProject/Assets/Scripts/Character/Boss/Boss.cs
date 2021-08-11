@@ -30,6 +30,7 @@ public class Boss : MonoBehaviour
     bool canMove;
     bool canAttack;
     bool canFollow;
+    bool canDash;
 
     float skillCooltime;
     float playerDistance;
@@ -62,7 +63,7 @@ public class Boss : MonoBehaviour
         canMove = true;
         canAttack = true;
         canFollow = false;
-
+        canDash = false;
         shootDistance = 15f;
         detectDistance = 30f;
 
@@ -233,7 +234,7 @@ public class Boss : MonoBehaviour
         Instantiate(GroundPattern2Gage, transform.position + transform.up  * 0.5f, transform.rotation * Quaternion.Euler(0f, 90f, 0));
 
         yield return new WaitForSeconds(1.2f);
-
+        canDash = true;
         Instantiate(GroundPattern2Effect, transform.position + transform.up * 3f + transform.forward * 2.5f, transform.rotation);
         float skillTime = 0f;
         while(skillTime < 1.5f) {
@@ -244,6 +245,7 @@ public class Boss : MonoBehaviour
 
         anim.SetTrigger("SprintEnd");
         yield return new WaitForSeconds(0.2f);
+        canDash = false;
         pattern = 0;
         anim.SetInteger("Pattern", pattern);
         canMove = true;
@@ -293,6 +295,7 @@ public class Boss : MonoBehaviour
         Vector3 bezier;
 
         yield return new WaitForSeconds(1f);
+        canDash = true;
         rigidbody.useGravity = false;
         float bezierValue = 0f;
         float shootTime = 0.8f;
@@ -320,6 +323,7 @@ public class Boss : MonoBehaviour
         }
         Frame.SetActive(true);
         canMove = true;
+        canDash = false;
         yield return new WaitForSeconds(2.7f);
         Frame.SetActive(false);
         //yield return new WaitForSeconds(f);
@@ -339,7 +343,7 @@ public class Boss : MonoBehaviour
         Vector3 P3 = targetCharacter.transform.position + transform.forward * 9f;
         Vector3 bezier;
         yield return new WaitForSeconds(0.7f);
-
+        canDash = true;
         rigidbody.useGravity = false;
         float bezierValue = 0f;
         float shootTime = 0.7f;
@@ -353,6 +357,7 @@ public class Boss : MonoBehaviour
             transform.position = bezier;
             yield return null;
         }
+        canDash = false;
         rigidbody.useGravity = true;
         boxCollider.size = new Vector3(boxCollider.size.x, boxCollider.size.y * 4, boxCollider.size.z);
 
@@ -375,7 +380,8 @@ public class Boss : MonoBehaviour
         // Karmen
         if (collision.gameObject.tag == "MainCharacter")
         {
-            collisionManager.BossAttack2();
+            if (canDash)
+                collisionManager.BossAttack2();
         }
         if (collision.gameObject.tag == "KarmenAttack")
         {
