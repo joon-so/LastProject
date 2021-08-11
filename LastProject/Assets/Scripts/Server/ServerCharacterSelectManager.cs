@@ -22,8 +22,6 @@ public class ServerCharacterSelectManager : MonoBehaviour
     [SerializeField] Text characterInfoMsgText;
     private int mainOrSub;
 
-    private int checkOverLap;
-
     void Start()
     {
         mainOrSub = 1;
@@ -201,18 +199,42 @@ public class ServerCharacterSelectManager : MonoBehaviour
 
     public void KarmenInfoMsg()
     {
-        characterInfoMsgText.text = "카르멘은 근거리 전투 캐릭터입니다.";
+        characterInfoMsgText.text = "카르멘은 근거리 전투 캐릭터입니다.\n" +
+                                    "Hp : 500\n" +
+                                    "Ep : 100\n" +
+                                    "기본 공격력 : 10\n" +
+                                    "Q스킬 공격력 : 50\n" +
+                                    "W스킬 공격력 : 10\n" +
+                                    "곤봉으로 상대방과 싸우고 싶은가요? 선택해주세요.\n";
     }
     public void JadeInfoMsg()
     {
-        characterInfoMsgText.text = "제이드는 원거리 전투 캐릭터입니다.";
+        characterInfoMsgText.text = "제이드는 원거리 전투 캐릭터입니다." +
+                                    "Hp : 400\n" +
+                                    "Ep : 200\n" +
+                                    "기본 공격력 : 15\n" +
+                                    "Q스킬 공격력 : 70\n" +
+                                    "W스킬 공격력 : 40\n" +
+                                    "총으로 상대방과 싸우고 싶은가요? 선택해주세요.\n";
     }
     public void LeinaInfoMsg()
     {
-        characterInfoMsgText.text = "레이나는 원거리 전투 캐릭터입니다.";
+        characterInfoMsgText.text = "레이나는 원거리 전투 캐릭터입니다." +
+                                    "Hp : 400\n" +
+                                    "Ep : 200\n" +
+                                    "기본 공격력 : 15\n" +
+                                    "Q스킬 공격력 : 80\n" +
+                                    "W스킬 공격력 : 30\n" +
+                                    "화살로 상대방과 싸우고 싶은가요? 선택해주세요.\n";
     }
     public void EvaInfoMsg()
     {
-        characterInfoMsgText.text = "에바는 근거리 전투 캐릭터입니다.";
+        characterInfoMsgText.text = "에바는 근거리 전투 캐릭터입니다." +
+                                    "Hp : 500\n" +
+                                    "Ep : 100\n" +
+                                    "기본 공격력 : 15\n" +
+                                    "Q스킬 공격력 : 불 붙으면 3\n" +
+                                    "W스킬 공격력 : 50\n" +
+                                    "무식하게 상대방과 싸우고 싶은가요? 선택해주세요.\n";
     }
 }

@@ -22,7 +22,6 @@ public class LoginManager : MonoBehaviour
     public void OnEndEditPlayerPassWord(InputField inputField)
     {
         playerPW = inputField.text;
-        Debug.Log(playerPW);
     }
 
     public void OnClickCreateButton()

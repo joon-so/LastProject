@@ -2,58 +2,62 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class InGameUI : MonoBehaviour
 {
+    [SerializeField] GameObject mainKarmenMask;
+    [SerializeField] GameObject mainJadeMask;
+    [SerializeField] GameObject mainLeinaMask;
+    [SerializeField] GameObject mainEvaMask;
+
+    [SerializeField] GameObject subKarmenMask;
+    [SerializeField] GameObject subJadeMask;
+    [SerializeField] GameObject subLeinaMask;
+    [SerializeField] GameObject subEvaMask;
+
+    [SerializeField] GameObject karmenSlot;
+    [SerializeField] GameObject jadeSlot;
+    [SerializeField] GameObject leinaSlot;
+    [SerializeField] GameObject evaSlot;
+
     [SerializeField] Image imageMainHpFill;
     [SerializeField] Image imageMainEpFill;
     [SerializeField] Image imageSubHpFill;
     [SerializeField] Image imageSubEpFill;
-    
+
     [SerializeField] Text textMainHp;
     [SerializeField] Text textMainEp;
     [SerializeField] Text textSubHp;
     [SerializeField] Text textSubEp;
 
-    [SerializeField] Text playerKill;
-    [SerializeField] Text playerDeath;
+    [SerializeField] GameObject hpPotionSlot;
+    [SerializeField] GameObject epPotionSlot;
+
+    [SerializeField] Text hpCount;
+    [SerializeField] Text epCount;
+
+    [SerializeField] Image hpCoolFill;
+    [SerializeField] Image epCoolFill;
+
+    [SerializeField] Image dodgeCoolFill;
+    [SerializeField] Image tagCoolFill;
+
+    [SerializeField] Image qSkillCoolFill;
+    [SerializeField] Image wSkillCoolFill;
+    [SerializeField] Image eSkillCoolFill;
+
     [SerializeField] Text playerScore;
 
-    [SerializeField] Text textOtherHp;
-    [SerializeField] Text textOtherEp;
-
     [SerializeField] GameObject gameMenu;
-    //[Header("C1")]
-    //public Image c1_QSkillImg;
-    //public float c1_QSkillcoolDown;
-    //bool c1_QSkillCoolDown = false;
-    //public KeyCode c1_QSkillkey;
 
-    //public Image c1_WSkillImg;
-    //public float c1_WSkillcoolDown;
-    //bool c1_WSkillCoolDown = false;
-    //public KeyCode c1_WSkillkey;
+    private GameObject mainC1;
+    private GameObject subC1;
+    private GameObject mainC2;
+    private GameObject subC2;
 
-    //public Image c1_ESkillImg;
-    //public float c1_ESkillcoolDown;
-    //bool c1_ESkillCoolDown = false;
-    //public KeyCode c1_ESkillkey;
-
-    //[Header("C2")]
-    //public Image c2_QSkillImg;
-    //public float c2_QSkillcoolDown;
-    //bool c2_QSkillCoolDown = false;
-    //public KeyCode c2_QSkillkey;
-
-    //public Image c2_WSkillImg;
-    //public float c2_WSkillcoolDown;
-    //bool c2_WSkillCoolDown = false;
-    //public KeyCode c2_WSkillkey;
-
-    //public Image c2_ESkillImg;
-    //public float c2_ESkillcoolDown;
-    //bool c2_ESkillCoolDown = false;
-    //public KeyCode c2_ESkillkey;
+    private GameObject c1Slot;
+    private GameObject c2Slot;
 
     void Awake()
     {
@@ -61,25 +65,23 @@ public class InGameUI : MonoBehaviour
     }
     void Start()
     {
-        //c1_QSkillImg.fillAmount = 0;
-        //c1_WSkillImg.fillAmount = 0;
-        //c1_ESkillImg.fillAmount = 0;
-
-        //c2_QSkillImg.fillAmount = 0;
-        //c2_WSkillImg.fillAmount = 0;
-        //c2_ESkillImg.fillAmount = 0;
+        InitializeUI();
     }
     void Update()
     {
-        UpdateHp();
-        UpdatePlayerScore();
-        //C1_QSkillCoolDownUI();
-        //C1_WSkillCoolDownUI();
-
-        //C2_QSkillCoolDownUI();
-        //C2_WSkillCoolDownUI();
-
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (GameManager.instance.clientPlayer.character1Hp > 0 || GameManager.instance.clientPlayer.character2Hp > 0)
+        {
+            Debug.Log("¾ÈµÅ?");
+            UpdateHp();
+            UpdateCoolTimeUI();
+            UpdatePlayerScore();
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                TagCharacterMask();
+                TagCharacterSlot();
+            }
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (gameMenu.activeSelf)
                 gameMenu.SetActive(false);
@@ -88,125 +90,161 @@ public class InGameUI : MonoBehaviour
         }
     }
 
-    void UpdateHp()
+    void InitializeUI()
     {
-        imageMainHpFill.fillAmount = GameManager.instance.mainPlayerHp / GameManager.instance.mainPlayerMaxHp;
-        imageMainEpFill.fillAmount = GameManager.instance.mainPlayerEp / GameManager.instance.mainPlayerMaxEp;
-        imageSubHpFill.fillAmount = GameManager.instance.subPlayerHp / GameManager.instance.subPlayerMaxHp;
-        imageSubEpFill.fillAmount = GameManager.instance.subPlayerEp / GameManager.instance.subPlayerMaxEp;
+        if (GameManager.instance.clientPlayer.selectCharacter1 == 1)
+        {
+            mainKarmenMask.SetActive(true);
+            mainC1 = mainKarmenMask;
+            subC1 = subKarmenMask;
+            c1Slot = karmenSlot;
+            c1Slot.SetActive(true);
+        }
+        else if (GameManager.instance.clientPlayer.selectCharacter1 == 2)
+        {
+            mainJadeMask.SetActive(true);
+            mainC1 = mainJadeMask;
+            subC1 = subJadeMask;
+            c1Slot = jadeSlot;
+            c1Slot.SetActive(true);
+        }
+        else if (GameManager.instance.clientPlayer.selectCharacter1 == 3)
+        {
+            mainLeinaMask.SetActive(true);
+            mainC1 = mainLeinaMask;
+            subC1 = subLeinaMask;
+            c1Slot = leinaSlot;
+            c1Slot.SetActive(true);
+        }
+        else if (GameManager.instance.clientPlayer.selectCharacter1 == 4)
+        {
+            mainEvaMask.SetActive(true);
+            mainC1 = mainEvaMask;
+            subC1 = subEvaMask;
+            c1Slot = evaSlot;
+            c1Slot.SetActive(true);
+        }
 
-        textMainHp.text = string.Format("{0}/{1}", GameManager.instance.mainPlayerHp, GameManager.instance.mainPlayerMaxHp);
-        textMainEp.text = string.Format("{0}/{1}", GameManager.instance.mainPlayerEp, GameManager.instance.mainPlayerMaxEp);
-        textSubHp.text = string.Format("{0}/{1}", GameManager.instance.subPlayerHp, GameManager.instance.subPlayerMaxHp);
-        textSubEp.text = string.Format("{0}/{1}", GameManager.instance.subPlayerEp, GameManager.instance.subPlayerMaxEp);
+        if (GameManager.instance.clientPlayer.selectCharacter2 == 1)
+        {
+            subKarmenMask.SetActive(true);
+            mainC2 = mainKarmenMask;
+            subC2 = subKarmenMask;
+            c2Slot = karmenSlot;
+        }
+        else if (GameManager.instance.clientPlayer.selectCharacter2 == 2)
+        {
+            subJadeMask.SetActive(true);
+            mainC2 = mainJadeMask;
+            subC2 = subJadeMask;
+            c2Slot = jadeSlot;
+        }
+        else if (GameManager.instance.clientPlayer.selectCharacter2 == 3)
+        {
+            subLeinaMask.SetActive(true);
+            mainC2 = mainLeinaMask;
+            subC2 = subLeinaMask;
+            c2Slot = leinaSlot;
+        }
+        else if (GameManager.instance.clientPlayer.selectCharacter2 == 4)
+        {
+            subEvaMask.SetActive(true);
+            mainC2 = mainEvaMask;
+            subC2 = subEvaMask;
+            c2Slot = evaSlot;
+        }
     }
 
-    void UpdatePlayerKD()
+    void UpdateHp()
     {
-        playerKill.text = string.Format("{0}", GameManager.instance.playerKill);
-        playerDeath.text = string.Format("{0}", GameManager.instance.playerDeath);
+        if (GameManager.instance.clientPlayer.curMainCharacter == 1)
+        {
+            imageMainHpFill.fillAmount = Convert.ToSingle(GameManager.instance.clientPlayer.character1Hp) / Convert.ToSingle(GameManager.instance.character1MaxHp);
+            imageMainEpFill.fillAmount = Convert.ToSingle(GameManager.instance.clientPlayer.character1Ep) / Convert.ToSingle(GameManager.instance.character1MaxEp);
+            imageSubHpFill.fillAmount = Convert.ToSingle(GameManager.instance.clientPlayer.character2Hp) / Convert.ToSingle(GameManager.instance.character2MaxHp);
+            imageSubEpFill.fillAmount = Convert.ToSingle(GameManager.instance.clientPlayer.character2Ep) / Convert.ToSingle(GameManager.instance.character2MaxEp);
+
+            textMainHp.text = string.Format("{0} / {1}", GameManager.instance.clientPlayer.character1Hp, GameManager.instance.character1MaxHp);
+            textMainEp.text = string.Format("{0} / {1}", GameManager.instance.clientPlayer.character1Ep, GameManager.instance.character1MaxEp);
+            textSubHp.text = string.Format("{0} / {1}", GameManager.instance.clientPlayer.character2Hp, GameManager.instance.character2MaxHp);
+            textSubEp.text = string.Format("{0} / {1}", GameManager.instance.clientPlayer.character2Ep, GameManager.instance.character2MaxEp);
+        }
+        else if (GameManager.instance.clientPlayer.curMainCharacter == 2)
+        {
+            imageMainHpFill.fillAmount = Convert.ToSingle(GameManager.instance.clientPlayer.character2Hp) / Convert.ToSingle(GameManager.instance.character2MaxHp);
+            imageMainEpFill.fillAmount = Convert.ToSingle(GameManager.instance.clientPlayer.character2Ep) / Convert.ToSingle(GameManager.instance.character2MaxEp);
+            imageSubHpFill.fillAmount = Convert.ToSingle(GameManager.instance.clientPlayer.character1Hp) / Convert.ToSingle(GameManager.instance.character1MaxHp);
+            imageSubEpFill.fillAmount = Convert.ToSingle(GameManager.instance.clientPlayer.character1Ep) / Convert.ToSingle(GameManager.instance.character1MaxEp);
+
+            textMainHp.text = string.Format("{0} / {1}", GameManager.instance.clientPlayer.character2Hp, GameManager.instance.character2MaxHp);
+            textMainEp.text = string.Format("{0} / {1}", GameManager.instance.clientPlayer.character2Ep, GameManager.instance.character2MaxEp);
+            textSubHp.text = string.Format("{0} / {1}", GameManager.instance.clientPlayer.character1Hp, GameManager.instance.character1MaxHp);
+            textSubEp.text = string.Format("{0} / {1}", GameManager.instance.clientPlayer.character1Ep, GameManager.instance.character1MaxEp);
+        }
+    }
+
+    void UpdateCoolTimeUI()
+    {
+        if (GameManager.instance.clientPlayer.curMainCharacter == 1)
+        {
+            dodgeCoolFill.fillAmount = 1 - PlayerManager.instance.curC1DodgeCoolTime / PlayerManager.instance.c1DodgeCoolTime;
+            qSkillCoolFill.fillAmount = 1 - PlayerManager.instance.curC1QSkillCoolTime / PlayerManager.instance.c1QSkillCoolTime;
+            wSkillCoolFill.fillAmount = 1 - PlayerManager.instance.curC1WSkillCoolTime / PlayerManager.instance.c1WSkillCoolTime;
+            eSkillCoolFill.fillAmount = 1 - PlayerManager.instance.curC1ESkillCoolTime / PlayerManager.instance.c1ESkillCoolTime;
+        }
+        else if (GameManager.instance.clientPlayer.curMainCharacter == 2)
+        {
+            dodgeCoolFill.fillAmount = 1 - PlayerManager.instance.curC2DodgeCoolTime / PlayerManager.instance.c2DodgeCoolTime;
+            qSkillCoolFill.fillAmount = 1 - PlayerManager.instance.curC2QSkillCoolTime / PlayerManager.instance.c2QSkillCoolTime;
+            wSkillCoolFill.fillAmount = 1 - PlayerManager.instance.curC2WSkillCoolTime / PlayerManager.instance.c2WSkillCoolTime;
+            eSkillCoolFill.fillAmount = 1 - PlayerManager.instance.curC2ESkillCoolTime / PlayerManager.instance.c2ESkillCoolTime;
+        }
+
+        hpCoolFill.fillAmount = 1 - PlayerManager.instance.curHpCoolTime / PlayerManager.instance.hpCoolTime;
+        epCoolFill.fillAmount = 1 - PlayerManager.instance.curEpCoolTime / PlayerManager.instance.epCoolTime;
+
+        hpCount.text = string.Format("{0}", GameManager.instance.curHpPotionCount);
+        epCount.text = string.Format("{0}", GameManager.instance.curEpPotionCount);
+
+        tagCoolFill.fillAmount = 1 - PlayerManager.instance.curTagCoolTime / GameManager.instance.tagCoolTime;
+    }
+
+    void TagCharacterMask()
+    {
+        if (GameManager.instance.clientPlayer.curMainCharacter == 1)
+        {
+            mainC1.SetActive(false);
+            subC1.SetActive(true);
+
+            mainC2.SetActive(true);
+            subC2.SetActive(false);
+        }
+        else if (GameManager.instance.clientPlayer.curMainCharacter == 2)
+        {
+            mainC1.SetActive(true);
+            subC1.SetActive(false);
+
+            mainC2.SetActive(false);
+            subC2.SetActive(true);
+        }
+    }
+
+    void TagCharacterSlot()
+    {
+        if (GameManager.instance.clientPlayer.curMainCharacter == 1)
+        {
+            c1Slot.SetActive(false);
+            c2Slot.SetActive(true);
+        }
+        else if (GameManager.instance.clientPlayer.curMainCharacter == 2)
+        {
+            c1Slot.SetActive(true);
+            c2Slot.SetActive(false);
+        }
     }
 
     void UpdatePlayerScore()
     {
         playerScore.text = string.Format("{0}", GameManager.instance.playerScore);
-    }
-
-    void ResetHp()
-    {
-        GameManager.instance.mainPlayerHp = GameManager.instance.mainPlayerMaxHp;
-        GameManager.instance.subPlayerHp = GameManager.instance.subPlayerMaxHp;
-    }
-    void ResetEp()
-    {
-        GameManager.instance.mainPlayerEp = GameManager.instance.mainPlayerMaxEp;
-        GameManager.instance.subPlayerEp = GameManager.instance.subPlayerMaxEp;
-    }
-    //void C1_QSkillCoolDownUI()
-    //{
-    //    if (Input.GetKey(c1_QSkillkey) && c1_QSkillCoolDown == false)
-    //    {
-    //        c1_QSkillCoolDown = true;
-    //        c1_QSkillImg.fillAmount = 1;
-    //    }
-
-    //    if (c1_QSkillCoolDown)
-    //    {
-    //        c1_QSkillImg.fillAmount -= 1 / c1_QSkillcoolDown * Time.deltaTime;
-
-    //        if (c1_QSkillImg.fillAmount <= 0)
-    //        {
-    //            c1_QSkillImg.fillAmount = 0;
-    //            c1_QSkillCoolDown = false;
-    //        }
-    //    }
-    //}
-    //void C1_WSkillCoolDownUI()
-    //{
-    //    if (Input.GetKey(c1_WSkillkey) && c1_WSkillCoolDown == false)
-    //    {
-    //        c1_WSkillCoolDown = true;
-    //        c1_WSkillImg.fillAmount = 1;
-    //    }
-
-    //    if (c1_WSkillCoolDown)
-    //    {
-    //        c1_WSkillImg.fillAmount -= 1 / c1_WSkillcoolDown * Time.deltaTime;
-
-    //        if (c1_WSkillImg.fillAmount <= 0)
-    //        {
-    //            c1_WSkillImg.fillAmount = 0;
-    //            c1_WSkillCoolDown = false;
-    //        }
-    //    }
-    //}
-    //void C2_QSkillCoolDownUI()
-    //{
-    //    if (Input.GetKey(c2_QSkillkey) && c2_QSkillCoolDown == false)
-    //    {
-    //        c2_QSkillCoolDown = true;
-    //        c2_QSkillImg.fillAmount = 1;
-    //    }
-
-    //    if (c2_QSkillCoolDown)
-    //    {
-    //        c2_QSkillImg.fillAmount -= 1 / c2_QSkillcoolDown * Time.deltaTime;
-
-    //        if (c2_QSkillImg.fillAmount <= 0)
-    //        {
-    //            c2_QSkillImg.fillAmount = 0;
-    //            c2_QSkillCoolDown = false;
-    //        }
-    //    }
-    //}
-    //void C2_WSkillCoolDownUI()
-    //{
-    //    if (Input.GetKey(c2_WSkillkey) && c2_WSkillCoolDown == false)
-    //    {
-    //        c2_WSkillCoolDown = true;
-    //        c2_WSkillImg.fillAmount = 1;
-    //    }
-
-    //    if (c2_WSkillCoolDown)
-    //    {
-    //        c2_WSkillImg.fillAmount -= 1 / c2_WSkillcoolDown * Time.deltaTime;
-
-    //        if (c2_WSkillImg.fillAmount <= 0)
-    //        {
-    //            c2_WSkillImg.fillAmount = 0;
-    //            c2_WSkillCoolDown = false;
-    //        }
-    //    }
-    //}
-    public void OnClickOptionButton()
-    {
-    }
-    public void OnClickTagButton()
-    {
-    }
-
-    public void ClickResumButton()
-    {
-
     }
 }

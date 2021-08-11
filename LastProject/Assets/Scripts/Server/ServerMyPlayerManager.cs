@@ -31,7 +31,6 @@ public class ServerMyPlayerManager : MonoBehaviour
     public int myEpPotionCount;
 
     // skill coolTime
-
     public float c1DodgeCoolTime;
     public float c1QSkillCoolTime;
     public float c1WSkillCoolTime;
