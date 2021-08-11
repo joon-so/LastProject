@@ -8,29 +8,29 @@ public class ClientCollisionManager : MonoBehaviour
     public int karmenQSkillDamage;
     public int karmenWSkillDamage;
     public int karmenESkillDamage;
-
+    
     public int jadeAttackDamage;
     public int jadeQSkillDamage;
     public int jadeWSkillDamage;
     public int jadeESkillDamage;
-
+    
     public int leinaAttackDamage;
     public int leinaQSkillDamage;
     public int leinaWSkillDamage;
     public int leinaESkillDamage;
-
+    
     public int evaAttackDamage;
     public int evaQSkillDamage;
     public int evaWSkillDamage;
     public int evaESkillDamage;
-
+    
     public int enemy1Attack;
     public int enemy2Attack;
     public int enemy3Attack;
     public int enemy4Attack;
     public int enemy5Attack;
     public int enemy6Attack;
-
+    
     public int miniBossAttack;
     public int bossAttack1;
     public int bossAttack2;

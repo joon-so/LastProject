@@ -71,7 +71,6 @@ public class InGameUI : MonoBehaviour
     {
         if (GameManager.instance.clientPlayer.character1Hp > 0 || GameManager.instance.clientPlayer.character2Hp > 0)
         {
-            Debug.Log("¾ÈµÅ?");
             UpdateHp();
             UpdateCoolTimeUI();
             UpdatePlayerScore();

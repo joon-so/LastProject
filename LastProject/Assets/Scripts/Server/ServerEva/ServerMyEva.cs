@@ -104,7 +104,7 @@ public class ServerMyEva : ServerSubAIManager
     }
     void Update()
     {
-        if (gameObject.transform.tag == "MainCharacter")
+        if (gameObject.transform.CompareTag("MainCharacter"))
         {
             curAttackDelay += Time.deltaTime;
             if (canMove)
@@ -121,7 +121,7 @@ public class ServerMyEva : ServerSubAIManager
             Stop();
             Dead();
         }
-        else if (gameObject.transform.tag == "SubCharacter")
+        else if (gameObject.transform.CompareTag("SubCharacter"))
         {
             //distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
 

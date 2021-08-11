@@ -103,7 +103,7 @@ public class ServerMyLeina : ServerSubAIManager
     void Update()
     {
         curFireDelay += Time.deltaTime;
-        if (gameObject.transform.tag == "MainCharacter")
+        if (gameObject.transform.CompareTag("MainCharacter"))
         {
             if (canMove)
                 Move();
@@ -119,7 +119,7 @@ public class ServerMyLeina : ServerSubAIManager
             Stop();
             Dead();
         }
-        else if (gameObject.transform.tag == "SubCharacter")
+        else if (gameObject.transform.CompareTag("SubCharacter"))
         {
             //distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
             //if (currentState == characterState.trace)

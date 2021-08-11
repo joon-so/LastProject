@@ -111,7 +111,7 @@ public class ServerMyKarmen : ServerSubAIManager
 
     void Update()
     {
-        if (gameObject.transform.tag == "MainCharacter")
+        if (gameObject.transform.CompareTag("MainCharacter"))
         {
             curAttackDelay += Time.deltaTime;
             if (canMove)
@@ -128,7 +128,7 @@ public class ServerMyKarmen : ServerSubAIManager
             Stop();
             Dead();
         }
-        else if (gameObject.transform.tag == "SubCharacter")
+        else if (gameObject.transform.CompareTag("SubCharacter"))
         {
             //attackDelay += Time.deltaTime;
             //distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
@@ -168,7 +168,6 @@ public class ServerMyKarmen : ServerSubAIManager
         }
         CoolTime();
         Tag();
-
     }
     void Move()
     {

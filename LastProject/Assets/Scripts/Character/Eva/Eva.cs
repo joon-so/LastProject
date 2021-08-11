@@ -29,6 +29,9 @@ public class Eva : SubAI
     float curWSkillCoolTime;
     float curESkillCoolTime;
 
+    float curFireDelay;
+    float subFireDelay = 1.5f;
+
     bool canMove;
     bool canDodge;
     bool canAttack;
@@ -43,16 +46,24 @@ public class Eva : SubAI
     bool motionEndCheck;
     bool comboContinue;
     
-    public static List<GameObject> targetEnemys = new List<GameObject>();
+    int characterIndex;
 
     Vector3 vecTarget;
 
-    Animator anim;
-    int characterIndex;
+    Animator animator;
+    Rigidbody rigidbody;
+    ClientCollisionManager collisionManager;
+    ClientSkillEpManager skillEpManager;
+
+    public static List<GameObject> targetEnemys = new List<GameObject>();
+    
     void Awake()
     {
-        anim = GetComponent<Animator>();
-        nav = GetComponent<NavMeshAgent>();
+        animator = GetComponentInChildren<Animator>();
+        navMesh = GetComponent<NavMeshAgent>();
+        rigidbody = GetComponent<Rigidbody>();
+        collisionManager = GameObject.Find("GameManager").GetComponent<ClientCollisionManager>();
+        skillEpManager = GameObject.Find("GameManager").GetComponent<ClientSkillEpManager>();
     }
     void Start()
     {
@@ -75,7 +86,7 @@ public class Eva : SubAI
             PlayerManager.instance.curC1QSkillCoolTime = curQSkillCoolTime;
             PlayerManager.instance.curC1WSkillCoolTime = curWSkillCoolTime;
             PlayerManager.instance.curC1ESkillCoolTime = curESkillCoolTime;
-            nav.enabled = false;
+            navMesh.enabled = false;
         }
         else if (gameObject.transform.CompareTag("SubCharacter"))
         {
@@ -92,13 +103,10 @@ public class Eva : SubAI
             PlayerManager.instance.curC2QSkillCoolTime = curQSkillCoolTime;
             PlayerManager.instance.curC2WSkillCoolTime = curWSkillCoolTime;
             PlayerManager.instance.curC2ESkillCoolTime = curESkillCoolTime;
-            nav.enabled = true;
+            navMesh.enabled = true;
         }
 
         FindEnemys();
-
-        nav = GetComponent<NavMeshAgent>();
-        rigidbody = GetComponent<Rigidbody>();
 
         vecTarget = transform.position;
 
@@ -116,11 +124,13 @@ public class Eva : SubAI
         motionEndCheck = true;
         comboContinue = true;
 
+        attackDistance = 3.5f;
+
         qSkill.SetActive(false);
     }
     void Update()
     {
-        if (gameObject.transform.tag == "MainCharacter")
+        if (gameObject.transform.CompareTag("MainCharacter"))
         {
             if (canMove)
                 Move();
@@ -138,14 +148,14 @@ public class Eva : SubAI
             AttackRange();
             CoolTime();
         }
-        else if (gameObject.transform.tag == "SubCharacter")
+        else if (gameObject.transform.CompareTag("SubCharacter"))
         {
             distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
 
             if (currentState == characterState.trace)
             {
                 MainCharacterTrace(tagCharacter.transform.position);
-                anim.SetBool("Run", true);
+                animator.SetBool("Run", true);
             }
             else if (currentState == characterState.attack)
             {
@@ -154,7 +164,7 @@ public class Eva : SubAI
             else if (currentState == characterState.idle)
             {
                 Idle();
-                anim.SetBool("Run", false);
+                animator.SetBool("Run", false);
             }
         }
         if (canSkill)
@@ -181,14 +191,14 @@ public class Eva : SubAI
             }
         }
         transform.position = Vector3.MoveTowards(transform.position, vecTarget, moveSpeed * Time.deltaTime);
-        anim.SetBool("Run", vecTarget != transform.position);
+        animator.SetBool("Run", vecTarget != transform.position);
     }
     void Stop()
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
             moveSpeed = 0f;
-            anim.SetBool("Run", false);
+            animator.SetBool("Run", false);
             vecTarget = transform.position;
         }
     }
@@ -210,56 +220,50 @@ public class Eva : SubAI
                 nextVec.y = 0;
                 transform.LookAt(transform.position + nextVec);
             }
-           // moveSpeed *= 2;
-            anim.SetTrigger("Dodge");
+            moveSpeed *= 2;
+            animator.SetTrigger("Dodge");
+
             StartCoroutine(DodgeDelay());
         }
-
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("02_Jump"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("02_Jump"))
         {
-            transform.Translate(Vector3.forward * 2 * Time.deltaTime);
+            //transform.Translate(Vector3.forward * 2 * Time.deltaTime);
+            //vecTarget = transform.position;
+            //animator.SetBool("Run", false);
+            //if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
+            //    && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.4f)
+            //{
+            //    moveSpeed = 100f;
+            //}
+            transform.Translate(Vector3.forward * 5 * Time.deltaTime);
             vecTarget = transform.position;
-            anim.SetBool("Run", false);
-            if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
-                && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.4f)
-            {
-                moveSpeed = 100f;
-            }
-            //{
-            //    moveSpeed = 1.0f;
-            //}
-            //else
-            //{
-            //    moveSpeed = 2.0f;
-            //}
+            animator.SetBool("Run", false);
         }
     }
-
     void Attack()
     {
         if (doingAttack)
         {
-            if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
-                && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f)
+            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
+                && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f)
             {
                 if (Input.GetMouseButtonDown(0))
                     if (comboContinue)
                         comboContinue = false;
                 motionEndCheck = false;
             }
-            else if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f && !motionEndCheck)
+            else if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f && !motionEndCheck)
             {
                 if (!comboContinue)
                 {
-                    anim.SetTrigger("nextCombo");
+                    animator.SetTrigger("nextCombo");
                     comboContinue = true;
                 }
                 else if (comboContinue)
                 {
                     doingAttack = false;
-                    anim.SetBool("Attack", doingAttack);
-                    CharacterState.attackCheck = false;
-
+                    animator.SetBool("Attack", doingAttack);
+                    //CharacterState.attackCheck = false;
                 }
                 motionEndCheck = true;
             }
@@ -268,12 +272,12 @@ public class Eva : SubAI
         if (Input.GetMouseButtonDown(0))
         {
             canMove = false;
-            anim.SetBool("Run", canMove);
+            animator.SetBool("Run", canMove);
 
-            if ((doingAttack && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
-                 && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8f)
-                 || anim.GetCurrentAnimatorStateInfo(0).IsName("Idle_01")
-                 || anim.GetCurrentAnimatorStateInfo(0).IsName("Run"))
+            if ((doingAttack && animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
+                 && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8f)
+                 || animator.GetCurrentAnimatorStateInfo(0).IsName("Idle_01")
+                 || animator.GetCurrentAnimatorStateInfo(0).IsName("Run"))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
@@ -285,21 +289,20 @@ public class Eva : SubAI
                 }
                 vecTarget = transform.position;
             }
-            CharacterState.attackCheck = true;
+            //CharacterState.attackCheck = true;
             moveSpeed = 0f;
             doingAttack = true;
-            anim.SetBool("Attack", doingAttack);
+            animator.SetBool("Attack", doingAttack);
         }
 
         if (doingAttack && Input.GetMouseButtonDown(1))
         {
             doingAttack = false;
-            anim.SetBool("Attack", doingAttack);
+            animator.SetBool("Attack", doingAttack);
             canMove = true;
-            anim.SetBool("Run", canMove);
+            animator.SetBool("Run", canMove);
         }
     }
-
     void AttackRange()
     {
         attackRange.transform.position = transform.position;
@@ -312,7 +315,6 @@ public class Eva : SubAI
             attackRange.SetActive(false);
         }
     }
-
     void CoolTime()
     {
         if (curDodgeCoolTime < dodgeCoolTime)
@@ -356,6 +358,8 @@ public class Eva : SubAI
             else if (characterIndex == 2)
                 PlayerManager.instance.curC2ESkillCoolTime = curESkillCoolTime;
         }
+        else
+            onESkill = true;
     }
     void Q_Skill()
     {
@@ -363,36 +367,44 @@ public class Eva : SubAI
         {
             onQSkill = false;
             curQSkillCoolTime = 0;
-            anim.SetBool("Run", false);
+            animator.SetBool("Run", false);
 
             canAttack = false;
-            //canMove = false;
             canDodge = false;
             canSkill = false;
+
+            if (GameManager.instance.clientPlayer.curMainCharacter == 1)
+                GameManager.instance.clientPlayer.character1Ep -= skillEpManager.EvaQSkill();
+            else if (GameManager.instance.clientPlayer.curMainCharacter == 2)
+                GameManager.instance.clientPlayer.character2Ep -= skillEpManager.EvaQSkill();
 
             StartCoroutine(FireGun());
         }
     }
-
     void W_Skill()
     {
         if (Input.GetKeyDown(KeyCode.W) && onWSkill)
         {
             onWSkill = false;
             curWSkillCoolTime = 0;
-            anim.SetBool("Run", false);
+            animator.SetBool("Run", false);
 
             canAttack = false;
             canMove = false;
             canDodge = false;
             canSkill = false;
 
+            if (GameManager.instance.clientPlayer.curMainCharacter == 1)
+                GameManager.instance.clientPlayer.character1Ep -= skillEpManager.EvaWSkill();
+            else if (GameManager.instance.clientPlayer.curMainCharacter == 2)
+                GameManager.instance.clientPlayer.character2Ep -= skillEpManager.EvaWSkill();
+
             StartCoroutine(ShockWave());
         }
     }
     void E_Skill()
     {
-        if (Input.GetKeyDown(KeyCode.E) && onESkill && gameObject.transform.tag == "MainCharacter")
+        if (Input.GetKeyDown(KeyCode.E) && onESkill && gameObject.transform.CompareTag("MainCharacter"))
         {
             curESkillCoolTime = 0.0f; 
             
@@ -408,8 +420,13 @@ public class Eva : SubAI
 
             onESkill = false;
             moveSpeed = 0f;
-            anim.SetBool("Run", false);
+            animator.SetBool("Run", false);
             vecTarget = transform.position;
+
+            if (GameManager.instance.clientPlayer.curMainCharacter == 1)
+                GameManager.instance.clientPlayer.character1Ep -= skillEpManager.EvaESkill();
+            else if (GameManager.instance.clientPlayer.curMainCharacter == 2)
+                GameManager.instance.clientPlayer.character2Ep -= skillEpManager.EvaESkill();
 
             StartCoroutine(EvaJadeSynerge());
 
@@ -434,7 +451,7 @@ public class Eva : SubAI
 
             //}
         }
-        else if(Input.GetKeyDown(KeyCode.E) && onESkill && gameObject.transform.tag == "SubCharacter")
+        else if(Input.GetKeyDown(KeyCode.E) && onESkill && gameObject.transform.CompareTag("SubCharacter"))
         {
             curESkillCoolTime = 0.0f; 
             
@@ -450,7 +467,7 @@ public class Eva : SubAI
 
             onESkill = false;
             moveSpeed = 0f;
-            anim.SetBool("Run", false);
+            animator.SetBool("Run", false);
             vecTarget = transform.position;
 
             StartCoroutine(EvaJadeSynerge());
@@ -469,7 +486,6 @@ public class Eva : SubAI
             //}
         }
     }
-
     void Tag()
     {
         if (Input.GetKeyDown(KeyCode.F))
@@ -484,11 +500,10 @@ public class Eva : SubAI
         canMove = true;
         canSkill = true;
     }
-
     IEnumerator FireGun()
     {
         qSkill.SetActive(true);
-        anim.SetTrigger("QSkill");
+        animator.SetTrigger("QSkill");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -502,7 +517,7 @@ public class Eva : SubAI
         qSkill.SetActive(false);
 
         vecTarget = transform.position;
-        anim.SetBool("Run", false);
+        animator.SetBool("Run", false);
 
         curQSkillCoolTime = 0.0f;
 
@@ -523,12 +538,12 @@ public class Eva : SubAI
             transform.LookAt(transform.position + nextVec);
         }
 
-        anim.SetTrigger("WSkill");
+        animator.SetTrigger("WSkill");
         Instantiate(wSkillEffect, wSkillPos.position, wSkillPos.rotation);
         yield return new WaitForSeconds(0.5f);
-        anim.SetFloat("Speed", 0.0f);
+        animator.SetFloat("Speed", 0.0f);
         yield return new WaitForSeconds(0.5f);
-        anim.SetFloat("Speed", 1.0f);
+        animator.SetFloat("Speed", 1.0f);
 
 
         yield return new WaitForSeconds(0.3f);
@@ -553,7 +568,7 @@ public class Eva : SubAI
 
 
         yield return new WaitForSeconds(0.5f);
-        anim.SetFloat("Speed", 1.0f);
+        animator.SetFloat("Speed", 1.0f);
 
 
         vecTarget = transform.position;
@@ -643,19 +658,19 @@ public class Eva : SubAI
             transform.LookAt(transform.position + nextVec);
         }
 
-        anim.SetTrigger("WSkill");
+        animator.SetTrigger("WSkill");
         Instantiate(wSkillEffect, wSkillPos.position, wSkillPos.rotation);
         Quaternion rotation = Quaternion.identity;
         rotation.eulerAngles = new Vector3(-90, 0, 0);
         Instantiate(EvaJadeSkillEffect, wSkillPos.position, rotation);
         yield return new WaitForSeconds(0.5f);
-        anim.SetFloat("Speed", 0.0f);
+        animator.SetFloat("Speed", 0.0f);
         yield return new WaitForSeconds(0.5f);
-        anim.SetFloat("Speed", 1.0f);
+        animator.SetFloat("Speed", 1.0f);
 
 
         yield return new WaitForSeconds(1f);
-        anim.SetFloat("Speed", 1.0f);
+        animator.SetFloat("Speed", 1.0f);
 
 
         vecTarget = transform.position;
@@ -682,7 +697,7 @@ public class Eva : SubAI
             transform.LookAt(transform.position + nextVec);
         }
 
-        anim.SetTrigger("EvaKarmenSynerge");
+        animator.SetTrigger("EvaKarmenSynerge");
 
         float ditectedDistance = 10f;
 
@@ -699,12 +714,12 @@ public class Eva : SubAI
         rotation.eulerAngles = new Vector3(-90, 0, 0);
         Instantiate(EvaKarmenSkillEffect, wSkillPos.position, rotation);
         yield return new WaitForSeconds(0.5f);
-        anim.SetFloat("Speed", 0.0f);
+        animator.SetFloat("Speed", 0.0f);
         yield return new WaitForSeconds(0.5f);
-        anim.SetFloat("Speed", 1.0f);
+        animator.SetFloat("Speed", 1.0f);
 
         yield return new WaitForSeconds(1f);
-        anim.SetFloat("Speed", 1.0f);
+        animator.SetFloat("Speed", 1.0f);
 
         vecTarget = transform.position;
 
@@ -717,15 +732,35 @@ public class Eva : SubAI
 
     void OnCollisionEnter(Collision collision)
     {
-        //if (collision.gameObject.tag == "Enemy1Attack")
+        if (GameManager.instance.clientPlayer.character1Hp <= 0 || GameManager.instance.clientPlayer.character2Hp <= 0)
+            return;
+
+        //if (gameObject.CompareTag("MainCharacter"))
         //{
-        //    if (GameManager.instance.mainPlayerHp > 0)
-        //        GameManager.instance.mainPlayerHp -= Enemy1.damage;
-        //}
-        //if (collision.gameObject.tag == "Enemy2Attack")
-        //{
-        //    if (GameManager.instance.mainPlayerHp > 0)
-        //        GameManager.instance.mainPlayerHp -= Enemy2.damage;
+        //    if (collision.gameObject.CompareTag("Enemy1Attack"))
+        //        collisionManager.Enemy1Attack();
+        //    if (collision.gameObject.CompareTag("Enemy2Attack"))
+        //        collisionManager.Enemy2Attack();
+        //    if (collision.gameObject.CompareTag("Enemy3Attack"))
+        //        collisionManager.Enemy3Attack();
+        //    if (collision.gameObject.CompareTag("Enemy4Attack"))
+        //        collisionManager.Enemy4Attack();
+        //    if (collision.gameObject.CompareTag("Enemy5Attack"))
+        //        collisionManager.Enemy5Attack();
+        //    if (collision.gameObject.CompareTag("Enemy6Attack"))
+        //        collisionManager.Enemy6Attack();
+        //    if (collision.gameObject.CompareTag("MiniBossAttack"))
+        //        collisionManager.MiniBossAttack();
+        //    if (collision.gameObject.CompareTag("BossAttack1"))
+        //        collisionManager.BossAttack1();
+        //    if (collision.gameObject.CompareTag("BossAttack2"))
+        //        collisionManager.BossAttack2();
+        //    if (collision.gameObject.CompareTag("BossAttack3"))
+        //        collisionManager.BossAttack3();
+        //    if (collision.gameObject.CompareTag("BossAttack4"))
+        //        collisionManager.BossAttack4();
+        //    if (collision.gameObject.CompareTag("BossAttack5"))
+        //        collisionManager.BossAttack5();
         //}
     }
 }
