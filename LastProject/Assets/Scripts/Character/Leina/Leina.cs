@@ -582,7 +582,7 @@ public class Leina : SubAI
         LeinaSynergeSkill.speed = 0;
         //SynergeFirstArrow.SetActive(true);
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(1.3f);
         GameObject instantArrow = Instantiate(SynergeArrow, posionArrowPos.position, posionArrowPos.rotation);
         // ¼¦
         yield return new WaitForSeconds(1f);

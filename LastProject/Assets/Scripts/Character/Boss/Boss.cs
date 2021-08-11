@@ -29,8 +29,9 @@ public class Boss : MonoBehaviour
 
     bool canMove;
     bool canAttack;
-    bool canSkill;
+    bool canFollow;
 
+    float skillCooltime;
     float playerDistance;
     float shootDistance;
     float detectDistance;
@@ -53,15 +54,18 @@ public class Boss : MonoBehaviour
         targetCharacter = GameObject.FindGameObjectWithTag("SubCharacter");
         FlyEffect.SetActive(false);
         Frame.SetActive(false);
+
+        nav.enabled = true;
         canMove = true;
         canAttack = true;
-        canSkill = true;
+        canFollow = false;
 
-        shootDistance = 2f;
+        shootDistance = 15f;
+        detectDistance = 30f;
 
         page = 1;
         pattern = 0;
-
+        skillCooltime = 2f;
         moveSpeed = 10f;
         spinSpeed = 300f;
         GroundPattern2Distance = 20f;
@@ -116,39 +120,60 @@ public class Boss : MonoBehaviour
             pattern = 6;
             canAttack = true;
         }
-        if (canMove)
-        {
-            Quaternion lookRotation = Quaternion.LookRotation(targetCharacter.transform.position - transform.position);
-            Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
-            transform.rotation = Quaternion.Euler(0, euler.y, 0);
-        }
-        if (canAttack)
-        {
-            canAttack = false;
 
-            if(pattern == 1)
+        Movement();
+    }
+    void Movement()
+    {
+        if (targetCharacter == null)
+        {
+            return;
+        }
+        else
+        {
+            playerDistance = Vector3.Distance(targetCharacter.transform.position, transform.position);
+
+            if (canMove)
             {
-                StartCoroutine(Pattern1());
+                Quaternion lookRotation = Quaternion.LookRotation(targetCharacter.transform.position - transform.position);
+                Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
+                transform.rotation = Quaternion.Euler(0, euler.y, 0);
             }
-            else if (pattern == 2)
+
+            //Attack
+            if (playerDistance < shootDistance)
             {
-                StartCoroutine(Pattern2());
+                nav.enabled = false;
+                if (canAttack)
+                {
+                    canAttack = false;
+                    if(pattern == 5)
+                    {
+                        pattern = 6;
+                    }
+                    else
+                    {
+                        pattern = (int)Random.Range(1, 7);
+                        if (pattern > 4)
+                            pattern = 4;
+                    }
+                    Pattern(pattern);
+                }
             }
-            else if (pattern == 3)
+            //Detect
+            else if (playerDistance < detectDistance)
             {
-                StartCoroutine(Pattern3());
-            }
-            else if (pattern == 4)
-            {
-                StartCoroutine(Pattern4());
-            }
-            // pattern 5 : Fly idle
-            else if (pattern == 6)
-            {
-                StartCoroutine(Pattern6());
+                if (canMove)
+                {
+                    if (pattern != 5)
+                        anim.SetBool("Run", true);
+                    nav.enabled = true;
+                    nav.SetDestination(targetCharacter.transform.position);
+                }
             }
         }
     }
+
     IEnumerator StartEffect()
     {
         yield return new WaitForSeconds(22.8f);
@@ -156,11 +181,34 @@ public class Boss : MonoBehaviour
         yield return new WaitForSeconds(27f);
         canAttack = true;
     }
+    void Pattern(int BossPattern)
+    {
+        anim.SetBool("Run", false);
+        if (BossPattern == 1)
+        {
+            StartCoroutine(Pattern1());
+        }
+        else if(BossPattern == 2)
+        {
+            StartCoroutine(Pattern2());
+        }
+        else if (BossPattern == 3)
+        {
+            StartCoroutine(Pattern3());
+        }
+        else if (BossPattern == 4)
+        {
+            StartCoroutine(Pattern4());
+        }
+        else if (BossPattern == 6)
+        {
+            StartCoroutine(Pattern6());
+        }
+    }
     IEnumerator Pattern1()
     {
         canMove = false;
         anim.SetInteger("Pattern", pattern);
-        //transform.LookAt(targetCharacter.transform);
         yield return new WaitForSeconds(0.5f);
         for(int i = 0; i< 20; i++)
         {
@@ -169,15 +217,15 @@ public class Boss : MonoBehaviour
         }
         pattern = 0;
         anim.SetInteger("Pattern", pattern);
-        canAttack = true;
         canMove = true;
+        yield return new WaitForSeconds(skillCooltime);
+        canAttack = true;
     }
     IEnumerator Pattern2()
     {
         canMove = false;
-        //transform.LookAt(targetCharacter.transform.position);
         anim.SetInteger("Pattern", pattern);
-        Instantiate(GroundPattern2Gage, transform.position, transform.rotation * Quaternion.Euler(0f, 90f, 0));
+        Instantiate(GroundPattern2Gage, transform.position + transform.up  * 0.5f, transform.rotation * Quaternion.Euler(0f, 90f, 0));
 
         yield return new WaitForSeconds(1.2f);
 
@@ -193,8 +241,9 @@ public class Boss : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         pattern = 0;
         anim.SetInteger("Pattern", pattern);
-        canAttack = true;
         canMove = true;
+        yield return new WaitForSeconds(skillCooltime);
+        canAttack = true;
     }
     IEnumerator Pattern3()
     {
@@ -223,34 +272,31 @@ public class Boss : MonoBehaviour
         yield return new WaitForSeconds(1f);
         pattern = 0;
         anim.SetInteger("Pattern", pattern);
-        canAttack = true;
         canMove = true;
+        yield return new WaitForSeconds(skillCooltime);
+        canAttack = true;
     }
     IEnumerator Pattern4()
     {
         canMove = false;
         FlyEffect.SetActive(true);
         anim.SetInteger("Pattern", pattern);
-        Instantiate(GroundPattern2Gage, transform.position, transform.rotation * Quaternion.Euler(0f, 90f, 0));
+        Instantiate(GroundPattern2Gage, transform.position + transform.up * 0.5f, transform.rotation * Quaternion.Euler(0f, 90f, 0));
         Vector3 P1 = transform.position;
         Vector3 P2 = targetCharacter.transform.position + new Vector3(0, -5f, 0);
         Vector3 P3 = targetCharacter.transform.position + transform.forward * 9f;
-        //transform.LookAt(targetCharacter.transform);
-        yield return new WaitForSeconds(1.6f);
+        Vector3 bezier;
+
+        yield return new WaitForSeconds(1f);
         rigidbody.useGravity = false;
         float bezierValue = 0f;
         float shootTime = 0.8f;
         boxCollider.size = new Vector3(boxCollider.size.x, boxCollider.size.y/4, boxCollider.size.z);
-        //Vector3 P1 = transform.position;
-        //Vector3 P2 = targetCharacter.transform.position + new Vector3(0, -5f, 0);
-        //Vector3 P3 = targetCharacter.transform.position + transform.forward * 9f;
-        Vector3 bezier;
         while (bezierValue < shootTime)
         {
             bezierValue += Time.deltaTime;
 
             bezier = Bezier(P1, P2, P3, bezierValue * 1 / shootTime);
-            //transform.LookAt(bezier);
             transform.position = bezier;
             yield return null;
         }
@@ -258,7 +304,7 @@ public class Boss : MonoBehaviour
         boxCollider.size = new Vector3(boxCollider.size.x, boxCollider.size.y * 4, boxCollider.size.z);
         //yield return new WaitForSeconds(0.1f);
         float rotateTime = 0;
-        while(rotateTime < 0.8f)
+        while(rotateTime < 0.7f)
         {
             rotateTime += Time.deltaTime;
             Quaternion lookRotation = Quaternion.LookRotation(targetCharacter.transform.position - transform.position);
@@ -267,7 +313,6 @@ public class Boss : MonoBehaviour
 
             yield return null;
         }
-        //transform.LookAt(targetCharacter.transform);
         Frame.SetActive(true);
         canMove = true;
         yield return new WaitForSeconds(2.7f);
@@ -275,25 +320,25 @@ public class Boss : MonoBehaviour
         //yield return new WaitForSeconds(f);
         pattern = 5;
         anim.SetInteger("Pattern", pattern);
+        yield return new WaitForSeconds(skillCooltime);
         canAttack = true;
-        //canMove = true;
     }
     IEnumerator Pattern6()
     {
         canMove = false;
         anim.SetInteger("Pattern", pattern);
         //transform.LookAt(targetCharacter.transform);
-        Instantiate(GroundPattern2Gage, transform.position, transform.rotation * Quaternion.Euler(0f, 90f, 0));
-        yield return new WaitForSeconds(1f);
-
-        rigidbody.useGravity = false;
-        float bezierValue = 0f;
-        float shootTime = 0.8f;
-        boxCollider.size = new Vector3(boxCollider.size.x, boxCollider.size.y / 4, boxCollider.size.z);
+        Instantiate(GroundPattern2Gage, transform.position + transform.up * 0.5f, transform.rotation * Quaternion.Euler(0f, 90f, 0));
         Vector3 P1 = transform.position;
         Vector3 P2 = targetCharacter.transform.position + new Vector3(0, -5f, 0);
         Vector3 P3 = targetCharacter.transform.position + transform.forward * 9f;
         Vector3 bezier;
+        yield return new WaitForSeconds(0.7f);
+
+        rigidbody.useGravity = false;
+        float bezierValue = 0f;
+        float shootTime = 0.7f;
+        boxCollider.size = new Vector3(boxCollider.size.x, boxCollider.size.y / 4, boxCollider.size.z);
         while (bezierValue < shootTime)
         {
             bezierValue += Time.deltaTime;
@@ -306,8 +351,8 @@ public class Boss : MonoBehaviour
         rigidbody.useGravity = true;
         boxCollider.size = new Vector3(boxCollider.size.x, boxCollider.size.y * 4, boxCollider.size.z);
 
-        yield return new WaitForSeconds(0.4f);
-        Instantiate(GroundPattern3Effect, transform.position, Quaternion.Euler(90f, 0f, 0));
+        yield return new WaitForSeconds(0.7f);
+        Instantiate(GroundPattern3Effect, transform.position + transform.up * 0.5f, Quaternion.Euler(90f, 0f, 0));
         if (Vector3.Distance(transform.position, targetCharacter.transform.position) < 11f)
         {
             collisionManager.BossAttack3();
@@ -315,8 +360,9 @@ public class Boss : MonoBehaviour
         FlyEffect.SetActive(false);
         pattern = 0;
         anim.SetInteger("Pattern", pattern);
-        canAttack = true;
         canMove = true;
+        yield return new WaitForSeconds(skillCooltime);
+        canAttack = true;
     }
     Vector3 Bezier(Vector3 P_1, Vector3 P_2, Vector3 P_3, float value)
     {
