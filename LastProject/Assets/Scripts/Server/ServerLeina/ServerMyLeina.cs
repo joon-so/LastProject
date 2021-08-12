@@ -88,8 +88,6 @@ public class ServerMyLeina : ServerSubAIManager
             nav.enabled = true;
         }
 
-        FindPlayers();
-
         vecTarget = transform.position;
 
         canMove = true;
@@ -105,6 +103,9 @@ public class ServerMyLeina : ServerSubAIManager
     }
     void Update()
     {
+        Tag();
+        CoolTime();
+        FindPlayers();
         curFireDelay += Time.deltaTime;
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
@@ -130,6 +131,7 @@ public class ServerMyLeina : ServerSubAIManager
                 MainCharacterTrace(tagCharacter.transform.position);
                 myAnimator.SetBool("Run", true);
                 curFireDelay = 1f;
+                ServerLoginManager.playerList[0].subCharacterBehavior = 1;
             }
             else if (currentState == characterState.attack)
             {
@@ -154,6 +156,8 @@ public class ServerMyLeina : ServerSubAIManager
                     myAnimator.SetTrigger("Attack");
                     curFireDelay = 0;
 
+                    ServerLoginManager.playerList[0].subCharacterBehavior = 3;
+
                     StartCoroutine(AttackDelay());
                 }
             }
@@ -161,11 +165,10 @@ public class ServerMyLeina : ServerSubAIManager
             {
                 Idle();
                 myAnimator.SetBool("Run", false);
+                ServerLoginManager.playerList[0].subCharacterBehavior = 0;
                 curFireDelay = 1f;
             }
         }
-        CoolTime();
-        Tag();
     }
     void Move()
     {
@@ -373,8 +376,8 @@ public class ServerMyLeina : ServerSubAIManager
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (ServerMyPlayerManager.instance.onTag)
                 vecTarget = transform.position;
+                Debug.Log("еб╠в!!");
         }
     }
 

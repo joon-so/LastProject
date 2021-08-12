@@ -33,13 +33,12 @@ public class ServerOtherEva : MonoBehaviour
     void Update()
     {
         if (isMainCharacter == 1)
-            AnimationControl();
+            MainAnimationControl();
         else if (isMainCharacter == 2)
-            otherAnimator.SetBool("Run", false);
-        Debug.Log(ServerLoginManager.playerList[index].mainCharacterBehavior);
+            SubAnimationControl();
     }
 
-    public void AnimationControl()
+    public void MainAnimationControl()
     {
         if (ServerLoginManager.playerList[index].mainCharacterBehavior == 0)
         {
@@ -72,6 +71,30 @@ public class ServerOtherEva : MonoBehaviour
                 StartCoroutine(ShockWave());
         }
         else if (ServerLoginManager.playerList[index].mainCharacterBehavior == 6)
+        {
+            if (preBehavior != 6)
+                StartCoroutine(Death());
+        }
+    }
+
+    public void SubAnimationControl()
+    {
+        if (ServerLoginManager.playerList[index].subCharacterBehavior == 0)
+        {
+            otherAnimator.SetBool("Run", false);
+            preBehavior = 0;
+        }
+        else if (ServerLoginManager.playerList[index].subCharacterBehavior == 1)
+        {
+            otherAnimator.SetBool("Run", true);
+            preBehavior = 1;
+        }
+        else if (ServerLoginManager.playerList[index].subCharacterBehavior == 3)
+        {
+            if (preBehavior != 3)
+                StartCoroutine(AttackDelay());
+        }
+        else if (ServerLoginManager.playerList[index].subCharacterBehavior == 6)
         {
             if (preBehavior != 6)
                 StartCoroutine(Death());
