@@ -725,6 +725,14 @@ public class Jade : SubAI
             transform.position = Vector3.MoveTowards(transform.position, transform.position - transform.forward * 2f, 5.0f * Time.deltaTime);
             yield return null;
         }
+        if(gameObject.tag == "MainCharacter")
+        {
+            vecTarget = transform.position;
+        }
+        else
+        {
+            navMesh.SetDestination(transform.position);
+        }
         vecTarget = transform.position;
         yield return new WaitForSeconds(2.6f);
         falling = false;
@@ -738,7 +746,7 @@ public class Jade : SubAI
         {
             GameObject boss = collision.gameObject;
             Vector3 pos = boss.transform.position - boss.transform.forward * 2f;
-            pos.y = 0;
+            pos.y = transform.position.y;
             transform.LookAt(pos);
             StartCoroutine(FallDown());
         }
