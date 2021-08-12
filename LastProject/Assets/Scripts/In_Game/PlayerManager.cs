@@ -84,7 +84,7 @@ public class PlayerManager : MonoBehaviour
 
     void Update()
     {
-        if(GameManager.instance.clientPlayer.character1Hp <= 0 || GameManager.instance.clientPlayer.character2Hp <= 0)
+        if (GameManager.instance.clientPlayer.character1Hp <= 0 || GameManager.instance.clientPlayer.character2Hp <= 0)
         {
             // 플레이어 사망 
         }
@@ -99,9 +99,29 @@ public class PlayerManager : MonoBehaviour
             {
                 MainSubTag();
             }
-            if (Input.GetKeyDown(KeyCode.F1))
+            if (Input.GetKeyDown(KeyCode.Alpha5))
             {
                 GameManager.instance.ChangeHpEp();
+            }
+            if (Input.GetKeyDown(KeyCode.F1))
+            {
+                GameManager.instance.ChangeSceneStage1();
+            }
+            if (Input.GetKeyDown(KeyCode.F2))
+            {
+                GameManager.instance.ChangeSceneStage2();
+            }
+            if (Input.GetKeyDown(KeyCode.F3))
+            {
+                GameManager.instance.ChangeSceneStage3();
+            }
+            if (Input.GetKeyDown(KeyCode.F4))
+            {
+                GameManager.instance.ChangeSceneStage4();
+            }
+            if (Input.GetKeyDown(KeyCode.F5))
+            {
+                GameManager.instance.ChangeSceneStage5();
             }
             Zoom();
             Click();
@@ -119,6 +139,7 @@ public class PlayerManager : MonoBehaviour
             C_Karmen.gameObject.layer = 6;
 
             GameManager.instance.character1 = C_Karmen;
+
         }
         else if (GameManager.instance.clientPlayer.selectCharacter1 == 2)
         {
@@ -149,6 +170,7 @@ public class PlayerManager : MonoBehaviour
             C_Karmen.gameObject.tag = "SubCharacter";
             C_Karmen.gameObject.layer = 7;
             GameManager.instance.character2 = C_Karmen;
+            GameManager.instance.character2.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         }
         else if (GameManager.instance.clientPlayer.selectCharacter2 == 2)
         {
@@ -156,6 +178,7 @@ public class PlayerManager : MonoBehaviour
             C_Jade.gameObject.tag = "SubCharacter";
             C_Jade.gameObject.layer = 7;
             GameManager.instance.character2 = C_Jade;
+            GameManager.instance.character2.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         }
         else if (GameManager.instance.clientPlayer.selectCharacter2 == 3)
         {
@@ -163,6 +186,7 @@ public class PlayerManager : MonoBehaviour
             C_Leina.gameObject.tag = "SubCharacter";
             C_Leina.gameObject.layer = 7;
             GameManager.instance.character2 = C_Leina;
+            GameManager.instance.character2.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         }
         else if (GameManager.instance.clientPlayer.selectCharacter2 == 4)
         {
@@ -170,6 +194,7 @@ public class PlayerManager : MonoBehaviour
             C_Eva.gameObject.tag = "SubCharacter";
             C_Eva.gameObject.layer = 7;
             GameManager.instance.character2 = C_Eva;
+            GameManager.instance.character2.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         }
     }
 
@@ -186,8 +211,13 @@ public class PlayerManager : MonoBehaviour
                 mainCameraControl.focus = GameManager.instance.character2.transform;
                 GameManager.instance.character1.gameObject.tag = "SubCharacter";
                 GameManager.instance.character2.gameObject.tag = "MainCharacter";
+                
                 GameManager.instance.character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
                 GameManager.instance.character2.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+                
+                GameManager.instance.character1.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+                GameManager.instance.character2.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                
                 GameManager.instance.clientPlayer.curMainCharacter = 2;
                 isTag = false;
             }
@@ -197,8 +227,13 @@ public class PlayerManager : MonoBehaviour
                 mainCameraControl.focus = GameManager.instance.character1.transform;
                 GameManager.instance.character1.gameObject.tag = "MainCharacter";
                 GameManager.instance.character2.gameObject.tag = "SubCharacter";
+
                 GameManager.instance.character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
                 GameManager.instance.character2.gameObject.GetComponent<NavMeshAgent>().enabled = true;
+
+                GameManager.instance.character1.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                GameManager.instance.character2.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+
                 GameManager.instance.clientPlayer.curMainCharacter = 1;
                 isTag = true;
             }

@@ -81,4 +81,24 @@ public class GameManager : MonoBehaviour
         clientPlayer.character1Ep = 50;
         clientPlayer.character2Ep = 50;
     }
+    public void ChangeSceneStage1()
+    {
+        SceneManager.LoadScene("Stage1-1");
+    }
+    public void ChangeSceneStage2()
+    {
+        SceneManager.LoadScene("Stage1-2");
+    }
+    public void ChangeSceneStage3()
+    {
+        SceneManager.LoadScene("Stage1-3");
+    }
+    public void ChangeSceneStage4()
+    {
+        SceneManager.LoadScene("Stage1-4");
+    }
+    public void ChangeSceneStage5()
+    {
+        SceneManager.LoadScene("Stage1-5");
+    }
 }

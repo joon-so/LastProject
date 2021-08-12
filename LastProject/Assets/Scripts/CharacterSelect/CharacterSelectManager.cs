@@ -47,13 +47,9 @@ public class CharacterSelectManager : MonoBehaviour
     [SerializeField] int evaEp;
 
     ClientCollisionManager clientCollisionManager;
-    ClientSkillEpManager clientSkillEpManager;
-
     void Start()
     {
         clientCollisionManager = GameObject.Find("GameManager").GetComponent<ClientCollisionManager>();
-        clientSkillEpManager = GameObject.Find("GameManager").GetComponent<ClientSkillEpManager>();
-
         mainOrsub = 1;
     }
 
@@ -244,17 +240,19 @@ public class CharacterSelectManager : MonoBehaviour
 
     public void OnClickStart()
     {
-        GameManager.instance.clientPlayer.curMainCharacter = 1;
-
         SoundManager.instance.SFXPlay("Start", uiButtonClickSound2);
-        SceneManager.LoadScene("Stage1-5");
+
+        if (GameManager.instance.clientPlayer.selectCharacter1 == 0 || GameManager.instance.clientPlayer.selectCharacter2 == 0)
+            return;
+
+        GameManager.instance.clientPlayer.curMainCharacter = 1;
+        SceneManager.LoadScene("Stage1-1");
     }
     public void OnClickExit()
     {
         SoundManager.instance.SFXPlay("Exit", uiButtonClickSound2);
         SceneManager.LoadScene("Main");
     }
-
     public void KarmenInfoMsg()
     {
         characterInfoMsgText.text = "카르멘은 근거리 전투 캐릭터입니다." + "\n" +
