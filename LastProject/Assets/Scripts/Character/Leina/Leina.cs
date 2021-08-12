@@ -108,6 +108,7 @@ public class Leina : SubAI
         }
 
         FindEnemys();
+
         rigidbody.freezeRotation = true;
         vecTarget = transform.position;
 
@@ -126,6 +127,8 @@ public class Leina : SubAI
     }
     void Update()
     {
+        CoolTime();
+        Tag();
         curFireDelay += Time.deltaTime;
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
@@ -193,8 +196,10 @@ public class Leina : SubAI
         {
             E_Skill();
         }
-        CoolTime();
-        Tag();
+    }
+    void FixedUpdate()
+    {
+        FindEnemys();
     }
     void Move()
     {
@@ -467,8 +472,7 @@ public class Leina : SubAI
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (PlayerManager.instance.onTag)
-                vecTarget = transform.position;
+            vecTarget = transform.position;
         }
     }
     IEnumerator AttackDelay()

@@ -134,6 +134,8 @@ public class Eva : SubAI
     }
     void Update()
     {
+        CoolTime();
+        Tag();
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
             if (!falling)
@@ -153,7 +155,6 @@ public class Eva : SubAI
                 Stop();
                 AttackRange();
             }
-            CoolTime();
         }
         else if (gameObject.transform.CompareTag("SubCharacter") && !falling)
         {
@@ -178,7 +179,10 @@ public class Eva : SubAI
         {
             E_Skill();
         }
-        Tag();
+    }
+    void FixedUpdate()
+    {
+        FindEnemys();
     }
     void Move()
     {
@@ -497,8 +501,7 @@ public class Eva : SubAI
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if(PlayerManager.instance.onTag)
-                vecTarget = transform.position;
+            vecTarget = transform.position;
         }
     }
     IEnumerator DodgeDelay()
