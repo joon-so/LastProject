@@ -25,10 +25,14 @@ public class ServerOtherKarmen : MonoBehaviour
     private int preBehavior;
     private int index;
 
+    private float curAttackDelay;
+    private float subAttackDelay;
+
     void Start()
     {
         otherAnimator = GetComponent<Animator>();
         preBehavior = 0;
+        subAttackDelay = 1.5f;
         index = parentObject.GetComponent<ServerOtherPlayerManager>().index;
         StartCoroutine(StartMotion());
     }
@@ -36,12 +40,12 @@ public class ServerOtherKarmen : MonoBehaviour
     void Update()
     {
         if (isMainCharacter == 1)
-            AnimationControl();
+            MainAnimationControl();
         else if (isMainCharacter == 2)
-            otherAnimator.SetBool("Run", false);
+            SubAnimationControl();
     }
 
-    public void AnimationControl()
+    public void MainAnimationControl()
     {
         // Idle
         if (ServerLoginManager.playerList[index].mainCharacterBehavior == 0)
@@ -85,7 +89,29 @@ public class ServerOtherKarmen : MonoBehaviour
                 StartCoroutine(Death());
         }
     }
-
+    public void SubAnimationControl()
+    {
+        if (ServerLoginManager.playerList[index].subCharacterBehavior == 0)
+        {
+            otherAnimator.SetBool("Run", false);
+            preBehavior = 0;
+        }
+        else if (ServerLoginManager.playerList[index].subCharacterBehavior == 1)
+        {
+            otherAnimator.SetBool("Run", true);
+            preBehavior = 1;
+        }
+        else if (ServerLoginManager.playerList[index].subCharacterBehavior == 3)
+        {
+            if (preBehavior != 3)
+                StartCoroutine(AttackDelay());
+        }
+        else if (ServerLoginManager.playerList[index].subCharacterBehavior == 6)
+        {
+            if (preBehavior != 6)
+                StartCoroutine(Death());
+        }
+    }
     IEnumerator AttackDelay()
     {
         preBehavior = 3;

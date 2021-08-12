@@ -41,12 +41,12 @@ public class ServerOtherJade : MonoBehaviour
     void Update()
     {
         if (isMainCharacter == 1)
-            AnimationControl();
+            MainAnimationControl();
         else if (isMainCharacter == 2)
-            otherAnimator.SetBool("Run", false);
+            SubAnimationControl();
     }
 
-    public void AnimationControl()
+    public void MainAnimationControl()
     {
         if (ServerLoginManager.playerList[index].mainCharacterBehavior == 0)
         {
@@ -84,7 +84,29 @@ public class ServerOtherJade : MonoBehaviour
                 StartCoroutine(Death());
         }
     }
-
+    public void SubAnimationControl()
+    {
+        if (ServerLoginManager.playerList[index].subCharacterBehavior == 0)
+        {
+            otherAnimator.SetBool("Run", false);
+            preBehavior = 0;
+        }
+        else if (ServerLoginManager.playerList[index].subCharacterBehavior == 1)
+        {
+            otherAnimator.SetBool("Run", true);
+            preBehavior = 1;
+        }
+        else if (ServerLoginManager.playerList[index].subCharacterBehavior == 3)
+        {
+            if (preBehavior != 3)
+                StartCoroutine(SubShootAssaultRifle());
+        }
+        else if (ServerLoginManager.playerList[index].subCharacterBehavior == 6)
+        {
+            if (preBehavior != 6)
+                StartCoroutine(Death());
+        }
+    }
     IEnumerator DrawAssaultRifle()
     {
         yield return new WaitForSeconds(0.5f);
@@ -108,6 +130,16 @@ public class ServerOtherJade : MonoBehaviour
         Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
         bulletRigid.velocity = assaultRifleBulletPos.forward;
         yield return new WaitForSeconds(0.3f);
+        preBehavior = 0;
+    }
+    IEnumerator SubShootAssaultRifle()
+    {
+        preBehavior = 3;
+        otherAnimator.SetTrigger("shootAssaultRifle");
+        GameObject instantBullet = Instantiate(assaultRifleBullet, assaultRifleBulletPos.position, assaultRifleBulletPos.rotation);
+        Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
+        bulletRigid.velocity = assaultRifleBulletPos.forward;
+        yield return new WaitForSeconds(1.3f);
         preBehavior = 0;
     }
     IEnumerator ShootMissile()

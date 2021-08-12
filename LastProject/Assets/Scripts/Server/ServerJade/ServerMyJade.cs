@@ -99,8 +99,6 @@ public class ServerMyJade : ServerSubAIManager
             nav.enabled = true;
         }
 
-        FindPlayers();
-
         vecTarget = transform.position;
 
         canMove = false;
@@ -119,6 +117,9 @@ public class ServerMyJade : ServerSubAIManager
 
     void Update()
     {
+        Tag();
+        CoolTime();
+        FindPlayers();
         curFireDelay += Time.deltaTime;
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
@@ -144,6 +145,7 @@ public class ServerMyJade : ServerSubAIManager
             {
                 MainCharacterTrace(tagCharacter.transform.position);
                 myAnimator.SetBool("Run", true);
+                ServerLoginManager.playerList[0].subCharacterBehavior = 1;
                 curFireDelay = 1f;
             }
             else if (currentState == characterState.attack)
@@ -154,7 +156,6 @@ public class ServerMyJade : ServerSubAIManager
                     Quaternion lookRotation = Quaternion.LookRotation(target.transform.position - transform.position);
                     Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
                     transform.rotation = Quaternion.Euler(0, euler.y, 0);
-
                 }
                 if (curFireDelay > subFireDelay && target != null)
                 {
@@ -169,18 +170,18 @@ public class ServerMyJade : ServerSubAIManager
                     myAnimator.SetTrigger("shootAssaultRifle");
                     curFireDelay = 0;
 
+                    ServerLoginManager.playerList[0].subCharacterBehavior = 3;
                     StartCoroutine(AttackDelay());
                 }
             }
             else if (currentState == characterState.idle)
             {
                 Idle();
+                ServerLoginManager.playerList[0].subCharacterBehavior = 0;
                 myAnimator.SetBool("Run", false);
                 curFireDelay = 1f;
             }
         }
-        CoolTime();
-        Tag();
     }
 
     void Move()
@@ -390,8 +391,8 @@ public class ServerMyJade : ServerSubAIManager
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (ServerMyPlayerManager.instance.onTag)
                 vecTarget = transform.position;
+                Debug.Log("еб╠в!!");
         }
     }
 

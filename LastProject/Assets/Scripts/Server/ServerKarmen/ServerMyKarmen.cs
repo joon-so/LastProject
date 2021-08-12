@@ -95,8 +95,6 @@ public class ServerMyKarmen : ServerSubAIManager
             nav.enabled = true;
         }
 
-        FindPlayers();
-
         vecTarget = transform.position;
 
         canMove = false;
@@ -115,6 +113,9 @@ public class ServerMyKarmen : ServerSubAIManager
 
     void Update()
     {
+        Tag(); 
+        CoolTime();
+        FindPlayers();
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
             curAttackDelay += Time.deltaTime;
@@ -139,6 +140,7 @@ public class ServerMyKarmen : ServerSubAIManager
 
             if (currentState == characterState.trace)
             {
+                ServerLoginManager.playerList[0].subCharacterBehavior = 1;
                 MainCharacterTrace(tagCharacter.transform.position);
                 myAnimator.SetBool("Run", true);
                 attackDelay = 1f;
@@ -155,6 +157,7 @@ public class ServerMyKarmen : ServerSubAIManager
                 }
                 if (attackDelay > subAttackDelay && target != null)
                 {
+                    ServerLoginManager.playerList[0].subCharacterBehavior = 3;
                     moveSpeed = 0f;
                     myAnimator.SetBool("Run", false);
                     myAnimator.SetTrigger("Throwing");
@@ -166,12 +169,11 @@ public class ServerMyKarmen : ServerSubAIManager
             else if (currentState == characterState.idle)
             {
                 Idle();
+                ServerLoginManager.playerList[0].subCharacterBehavior = 0;
                 myAnimator.SetBool("Run", false);
                 attackDelay = 1f;
             }
         }
-        CoolTime();
-        Tag();
     }
     void Move()
     {
@@ -333,8 +335,8 @@ public class ServerMyKarmen : ServerSubAIManager
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (ServerMyPlayerManager.instance.onTag)
-                vecTarget = transform.position;
+            vecTarget = transform.position;
+            Debug.Log("еб╠в!!");
         }
     }
     void Q_Skill()

@@ -87,8 +87,6 @@ public class ServerMyEva : ServerSubAIManager
             nav.enabled = true;
         }
 
-        FindPlayers();
-
         vecTarget = transform.position;
         
         canMove = false;
@@ -107,6 +105,9 @@ public class ServerMyEva : ServerSubAIManager
     }
     void Update()
     {
+        Tag();
+        CoolTime();
+        FindPlayers();
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
             curAttackDelay += Time.deltaTime;
@@ -132,19 +133,20 @@ public class ServerMyEva : ServerSubAIManager
             {
                 MainCharacterTrace(tagCharacter.transform.position);
                 myAnimator.SetBool("Run", true);
+                ServerLoginManager.playerList[0].subCharacterBehavior = 1;
             }
             else if (currentState == characterState.attack)
             {
+                ServerLoginManager.playerList[0].subCharacterBehavior = 3;
                 SubAttack();
             }
             else if (currentState == characterState.idle)
             {
+                ServerLoginManager.playerList[0].subCharacterBehavior = 0;
                 Idle();
                 myAnimator.SetBool("Run", false);
             }
         }
-        Tag();
-        CoolTime();
     }
     void Move()
     {
@@ -325,6 +327,8 @@ public class ServerMyEva : ServerSubAIManager
                 ServerLoginManager.playerList[0].character1Ep -= skillEpManager.EvaQSkill();
             else if (ServerLoginManager.playerList[0].is_Main_Character == 2)
                 ServerLoginManager.playerList[0].character2Ep -= skillEpManager.EvaQSkill();
+
+            ServerLoginManager.playerList[0].mainCharacterBehavior = 4;
             StartCoroutine(FireGun());
         }
     }
@@ -354,8 +358,8 @@ public class ServerMyEva : ServerSubAIManager
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (ServerMyPlayerManager.instance.onTag)
                 vecTarget = transform.position;
+                Debug.Log("еб╠в!!");
         }
     }
 
@@ -417,7 +421,6 @@ public class ServerMyEva : ServerSubAIManager
             nextVec.y = 0;
             transform.LookAt(transform.position + nextVec);
         }
-        ServerLoginManager.playerList[0].mainCharacterBehavior = 4;
 
         yield return new WaitForSeconds(5.0f);
         qSkill.SetActive(false);
