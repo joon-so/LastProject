@@ -60,22 +60,9 @@ public class ServerMyKarmen : ServerSubAIManager
 
     void Start()
     {
-        FindPlayers();
-
-        vecTarget = transform.position;
         curDodgeCoolTime = dodgeCoolTime;
         curQSkillCoolTime = qSkillCoolTime;
         curWSkillCoolTime = wSkillCoolTime;
-
-        canMove = false;
-        canDodge = false;
-        canAttack = false;
-
-        onDodge = true;
-        onQSkill = true;
-        onWSkill = true;
-
-        curAttackDelay = attackDelay;
 
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
@@ -90,6 +77,7 @@ public class ServerMyKarmen : ServerSubAIManager
             ServerMyPlayerManager.instance.curC1DodgeCoolTime = curDodgeCoolTime;
             ServerMyPlayerManager.instance.curC1QSkillCoolTime = curQSkillCoolTime;
             ServerMyPlayerManager.instance.curC1WSkillCoolTime = curWSkillCoolTime;
+            nav.enabled = false;
         }
         else if (gameObject.transform.CompareTag("SubCharacter"))
         {
@@ -104,14 +92,31 @@ public class ServerMyKarmen : ServerSubAIManager
             ServerMyPlayerManager.instance.curC2DodgeCoolTime = curDodgeCoolTime;
             ServerMyPlayerManager.instance.curC2QSkillCoolTime = curQSkillCoolTime;
             ServerMyPlayerManager.instance.curC2WSkillCoolTime = curWSkillCoolTime;
+            nav.enabled = true;
         }
+
+        vecTarget = transform.position;
+
+        canMove = false;
+        canDodge = false;
+        canAttack = false;
+
+        onDodge = true;
+        onQSkill = true;
+        onWSkill = true;
+
+        curAttackDelay = attackDelay;
+
 
         StartCoroutine(StartMotion());
     }
 
     void Update()
     {
-        if (gameObject.transform.tag == "MainCharacter")
+        Tag(); 
+        CoolTime();
+        FindPlayers();
+        if (gameObject.transform.CompareTag("MainCharacter"))
         {
             curAttackDelay += Time.deltaTime;
             if (canMove)
@@ -128,47 +133,47 @@ public class ServerMyKarmen : ServerSubAIManager
             Stop();
             Dead();
         }
-        else if (gameObject.transform.tag == "SubCharacter")
+        else if (gameObject.transform.CompareTag("SubCharacter"))
         {
-            //attackDelay += Time.deltaTime;
-            //distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
+            attackDelay += Time.deltaTime;
+            distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
 
-            //if (currentState == characterState.trace)
-            //{
-            //    MainCharacterTrace(tagCharacter.transform.position);
-            //    myAnimator.SetBool("Run", true);
-            //    attackDelay = 1f;
-            //}
-            //else if (currentState == characterState.attack)
-            //{
-            //    SubAttack();
+            if (currentState == characterState.trace)
+            {
+                ServerLoginManager.playerList[0].subCharacterBehavior = 1;
+                MainCharacterTrace(tagCharacter.transform.position);
+                myAnimator.SetBool("Run", true);
+                attackDelay = 1f;
+            }
+            else if (currentState == characterState.attack)
+            {
+                SubAttack();
 
-            //    if (target)
-            //    {
-            //        Quaternion lookRotation = Quaternion.LookRotation(target.transform.position - transform.position);
-            //        Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
-            //        transform.rotation = Quaternion.Euler(0, euler.y, 0);
-            //    }
-            //    if (attackDelay > subAttackDelay && target != null)
-            //    {
-            //        moveSpeed = 0f;
-            //        myAnimator.SetBool("Run", false);
-            //        myAnimator.SetTrigger("Throwing");
-            //        vecTarget = transform.position;
+                if (target)
+                {
+                    Quaternion lookRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+                    Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
+                    transform.rotation = Quaternion.Euler(0, euler.y, 0);
+                }
+                if (attackDelay > subAttackDelay && target != null)
+                {
+                    ServerLoginManager.playerList[0].subCharacterBehavior = 3;
+                    moveSpeed = 0f;
+                    myAnimator.SetBool("Run", false);
+                    myAnimator.SetTrigger("Throwing");
+                    vecTarget = transform.position;
 
-            //        attackDelay = 0;
-            //    }
-            //}
-            //else if (currentState == characterState.idle)
-            //{
-            //    Idle();
-            //    myAnimator.SetBool("Run", false);
-            //    attackDelay = 1f;
-            //}
+                    attackDelay = 0;
+                }
+            }
+            else if (currentState == characterState.idle)
+            {
+                Idle();
+                ServerLoginManager.playerList[0].subCharacterBehavior = 0;
+                myAnimator.SetBool("Run", false);
+                attackDelay = 1f;
+            }
         }
-        CoolTime();
-        Tag();
-
     }
     void Move()
     {
@@ -331,6 +336,7 @@ public class ServerMyKarmen : ServerSubAIManager
         if (Input.GetKeyDown(KeyCode.F))
         {
             vecTarget = transform.position;
+            Debug.Log("еб╠в!!");
         }
     }
     void Q_Skill()

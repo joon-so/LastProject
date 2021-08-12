@@ -17,7 +17,6 @@ public class ServerSkillEpManager : MonoBehaviour
     {
         return karmenQEp;
     }
-
     public short KarmenWSkill()
     {
         return karmenWEp;
@@ -26,12 +25,10 @@ public class ServerSkillEpManager : MonoBehaviour
     {
         return jadeQEp;
     }
-
     public short JadeWSkill()
     {
         return jadeWEp;
     }
-
     public short LeinaQSkill()
     {
         return leinaQEp;
@@ -44,7 +41,6 @@ public class ServerSkillEpManager : MonoBehaviour
     {
         return evaQEp;
     }
-
     public short EvaWSkill()
     {
         return evaWEp;

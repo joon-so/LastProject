@@ -101,7 +101,8 @@ public class Enemy1 : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
-            mainCharacter = GameObject.FindGameObjectWithTag("SubCharacter");
+            if (PlayerManager.instance.onTag)
+                mainCharacter = GameObject.FindGameObjectWithTag("SubCharacter");
         }
     }
 

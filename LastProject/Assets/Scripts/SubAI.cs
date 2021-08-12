@@ -8,12 +8,14 @@ public class SubAI : MonoBehaviour
     public enum characterState { idle, trace, attack }
     public characterState currentState = characterState.idle;
 
-    public NavMeshAgent nav;
-    public Rigidbody rigidbody;
+    public NavMeshAgent navMesh;
+
     public GameObject tagCharacter;
+
+    protected GameObject target;
     protected List<GameObject> targets;
-    protected GameObject target = null;
     protected float distance;
+
     //private Transform 
     public float traceDistance = 5.0f;
     public float attackDistance = 6.0f;
@@ -29,7 +31,7 @@ public class SubAI : MonoBehaviour
         currentState = characterState.trace;
         if (distance > traceDistance)
         {
-            nav.SetDestination(movePos);
+            navMesh.SetDestination(movePos);
         }
         else
         {
@@ -72,7 +74,7 @@ public class SubAI : MonoBehaviour
             currentState = characterState.trace;
             target = null;
         }
-        nav.SetDestination(transform.position);
+        navMesh.SetDestination(transform.position);
     }
 
     public void FindEnemy()

@@ -32,11 +32,12 @@ public class ServerLoginManager : MonoBehaviour
     }
 
     public static ServerPlayer[] playerList = new ServerPlayer[4];
-    public static int curPlayerNum;
+    public InputField inputID;
 
     private void Start()
     {
-        curPlayerNum = 0;
+        playerList[0].playerID = LoginManager.playerID;
+        inputID.text = LoginManager.playerID;
     }
 
     public void GetIPAdress(InputField ip)
@@ -48,11 +49,6 @@ public class ServerLoginManager : MonoBehaviour
         playerList[0].ipAdress = ip.text;
     }
 
-    public void GetPlayerID(InputField id)
-    {
-        playerList[0].playerID = id.text;
-    }
-
     public void ClickJoin()
     {
         SceneManager.LoadScene("ServerCharacterSelect");
@@ -60,6 +56,6 @@ public class ServerLoginManager : MonoBehaviour
 
     public void ClickExit()
     {
-        //SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("Main");
     }
 }

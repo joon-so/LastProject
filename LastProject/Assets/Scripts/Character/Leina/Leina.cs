@@ -43,50 +43,79 @@ public class Leina : SubAI
     bool canDodge;
     bool canMove;
     bool canSkill;
+    bool falling;
 
     bool onDodge;
     bool onQSkill;
     bool onWSkill;
     bool onESkill;
-
-    float distanceWithPlayer;
+    int characterIndex;
 
     Vector3 vecTarget;
 
-    Animator anim;
+    Animator animator;
+    Rigidbody rigidbody;
+    ClientCollisionManager collisionManager;
+    ClientSkillEpManager skillEpManager;
 
     void Awake()
     {
-        anim = GetComponent<Animator>();
-        nav = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
+        navMesh = GetComponent<NavMeshAgent>();
+        rigidbody = GetComponent<Rigidbody>();
+        collisionManager = GameObject.Find("GameManager").GetComponent<ClientCollisionManager>();
+        skillEpManager = GameObject.Find("GameManager").GetComponent<ClientSkillEpManager>();
     }
     void Start()
     {
-        if (GameManager.instance.isMainLeina)
+        curDodgeCoolTime = dodgeCoolTime;
+        curQSkillCoolTime = qSkillCoolTime;
+        curWSkillCoolTime = wSkillCoolTime;
+        curESkillCoolTime = eSkillCoolTime;
+
+        if (gameObject.transform.CompareTag("MainCharacter"))
         {
-            nav.enabled = false;
             tagCharacter = GameManager.instance.character2;
+
+            characterIndex = 1;
+            PlayerManager.instance.c1DodgeCoolTime = dodgeCoolTime;
+            PlayerManager.instance.c1QSkillCoolTime = qSkillCoolTime;
+            PlayerManager.instance.c1WSkillCoolTime = wSkillCoolTime;
+            PlayerManager.instance.c1ESkillCoolTime = eSkillCoolTime;
+
+            PlayerManager.instance.curC1DodgeCoolTime = curDodgeCoolTime;
+            PlayerManager.instance.curC1QSkillCoolTime = curQSkillCoolTime;
+            PlayerManager.instance.curC1WSkillCoolTime = curWSkillCoolTime;
+            PlayerManager.instance.curC1ESkillCoolTime = curESkillCoolTime;
+            navMesh.enabled = false;
         }
-        else if (GameManager.instance.isSubLeina)
+        else if (gameObject.transform.CompareTag("SubCharacter"))
         {
             tagCharacter = GameManager.instance.character1;
-            nav.enabled = true;
+
+            characterIndex = 2;
+
+            PlayerManager.instance.c2DodgeCoolTime = dodgeCoolTime;
+            PlayerManager.instance.c2QSkillCoolTime = qSkillCoolTime;
+            PlayerManager.instance.c2WSkillCoolTime = wSkillCoolTime;
+            PlayerManager.instance.c2ESkillCoolTime = eSkillCoolTime;
+
+            PlayerManager.instance.curC2DodgeCoolTime = curDodgeCoolTime;
+            PlayerManager.instance.curC2QSkillCoolTime = curQSkillCoolTime;
+            PlayerManager.instance.curC2WSkillCoolTime = curWSkillCoolTime;
+            PlayerManager.instance.curC2ESkillCoolTime = curESkillCoolTime;
+            navMesh.enabled = true;
         }
 
         FindEnemys();
-
-        nav = GetComponent<NavMeshAgent>();
-        rigidbody = GetComponent<Rigidbody>();
-
+        rigidbody.freezeRotation = true;
         vecTarget = transform.position;
-        curDodgeCoolTime = 0;
-        curQSkillCoolTime = 0;
-        curWSkillCoolTime = 0;
 
         canMove = true;
         canDodge = true;
         canAttack = true;
         canSkill = true;
+        falling = false;
 
         onDodge = true;
         onQSkill = true;
@@ -98,31 +127,33 @@ public class Leina : SubAI
     void Update()
     {
         curFireDelay += Time.deltaTime;
-        if (gameObject.transform.tag == "MainCharacter")
+        if (gameObject.transform.CompareTag("MainCharacter"))
         {
-            if (canMove)
-                Move();
-            if (canAttack)
-                Attack();
-            if (canDodge)
-                Dodge();
-            if (canSkill)
+            if(!falling)
             {
-                Q_Skill();
-                W_Skill();
-                E_Skill();
+                if (canMove)
+                    Move();
+                if (canAttack)
+                    Attack();
+                if (canDodge)
+                    Dodge();
+                if (canSkill)
+                {
+                    Q_Skill();
+                    W_Skill();
+                    E_Skill();
+                }
+                Stop();
+                AttackRange();
             }
-            Stop();
-            AttackRange();
-            CoolTime();
         }
-        else if (gameObject.transform.tag == "SubCharacter")
+        else if (gameObject.transform.CompareTag("SubCharacter") && !falling)
         {
             distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
             if (currentState == characterState.trace)
             {
                 MainCharacterTrace(tagCharacter.transform.position);
-                anim.SetBool("Run", true);
+                animator.SetBool("Run", true);
                 curFireDelay = 1f;
             }
             else if (currentState == characterState.attack)
@@ -142,10 +173,10 @@ public class Leina : SubAI
                     arrowRigid.velocity = arrowPos.forward;
 
                     moveSpeed = 0f;
-                    anim.SetBool("Run", false);
+                    animator.SetBool("Run", false);
                     vecTarget = transform.position;
 
-                    anim.SetTrigger("Attack");
+                    animator.SetTrigger("Attack");
                     curFireDelay = 0;
 
                     StartCoroutine(AttackDelay());
@@ -154,7 +185,7 @@ public class Leina : SubAI
             else if (currentState == characterState.idle)
             {
                 Idle();
-                anim.SetBool("Run", false);
+                animator.SetBool("Run", false);
                 curFireDelay = 1f;
             }
         }
@@ -162,6 +193,7 @@ public class Leina : SubAI
         {
             E_Skill();
         }
+        CoolTime();
         Tag();
     }
     void Move()
@@ -182,14 +214,14 @@ public class Leina : SubAI
             }
         }
         transform.position = Vector3.MoveTowards(transform.position, vecTarget, moveSpeed * Time.deltaTime);
-        anim.SetBool("Run", vecTarget != transform.position);
+        animator.SetBool("Run", vecTarget != transform.position);
     }
     void Stop()
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
             moveSpeed = 0f;
-            anim.SetBool("Run", false);
+            animator.SetBool("Run", false);
             vecTarget = transform.position;
         }
     }
@@ -215,15 +247,15 @@ public class Leina : SubAI
             }
 
             moveSpeed *= 2;
-            anim.SetTrigger("Dodge");
+            animator.SetTrigger("Dodge");
 
             StartCoroutine(DodgeDelay());
         }
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Dodge"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Dodge"))
         {
             transform.Translate(Vector3.forward * 5 * Time.deltaTime);
             vecTarget = transform.position;
-            anim.SetBool("Run", false);
+            animator.SetBool("Run", false);
         }
     }
     void Attack()
@@ -251,10 +283,10 @@ public class Leina : SubAI
                 arrowRigid.velocity = arrowPos.forward;
 
                 moveSpeed = 0f;
-                anim.SetBool("Run", false);
+                animator.SetBool("Run", false);
                 vecTarget = transform.position;
 
-                anim.SetTrigger("Attack");
+                animator.SetTrigger("Attack");
                 curFireDelay = 0;
 
                 StartCoroutine(AttackDelay());
@@ -278,35 +310,46 @@ public class Leina : SubAI
         if (curDodgeCoolTime < dodgeCoolTime)
         {
             curDodgeCoolTime += Time.deltaTime;
+            if (characterIndex == 1)
+                PlayerManager.instance.curC1DodgeCoolTime = curDodgeCoolTime;
+            else if (characterIndex == 2)
+                PlayerManager.instance.curC2DodgeCoolTime = curDodgeCoolTime;
         }
         else
-        {
             onDodge = true;
-        }
+
         if (curQSkillCoolTime < qSkillCoolTime)
         {
             curQSkillCoolTime += Time.deltaTime;
+            if (characterIndex == 1)
+                PlayerManager.instance.curC1QSkillCoolTime = curQSkillCoolTime;
+            else if (characterIndex == 2)
+                PlayerManager.instance.curC2QSkillCoolTime = curQSkillCoolTime;
         }
         else
-        {
             onQSkill = true;
-        }
+
         if (curWSkillCoolTime < wSkillCoolTime)
         {
             curWSkillCoolTime += Time.deltaTime;
+            if (characterIndex == 1)
+                PlayerManager.instance.curC1WSkillCoolTime = curWSkillCoolTime;
+            else if (characterIndex == 2)
+                PlayerManager.instance.curC2WSkillCoolTime = curWSkillCoolTime;
         }
         else
-        {
             onWSkill = true;
-        }
+
         if (curESkillCoolTime < eSkillCoolTime)
         {
             curESkillCoolTime += Time.deltaTime;
+            if (characterIndex == 1)
+                PlayerManager.instance.curC1ESkillCoolTime = curESkillCoolTime;
+            else if (characterIndex == 2)
+                PlayerManager.instance.curC2ESkillCoolTime = curESkillCoolTime;
         }
         else
-        {
             onESkill = true;
-        }
     }
     void Q_Skill()
     {
@@ -314,12 +357,17 @@ public class Leina : SubAI
         {
             onQSkill = false;
             curQSkillCoolTime = 0;
-            anim.SetBool("Run", false);
+            animator.SetBool("Run", false);
 
             canAttack = false;
             canMove = false;
             canDodge = false;
             canSkill = false;
+
+            if (GameManager.instance.clientPlayer.curMainCharacter == 1)
+                GameManager.instance.clientPlayer.character1Ep -= skillEpManager.LeinaQSkill();
+            else if (GameManager.instance.clientPlayer.curMainCharacter == 2)
+                GameManager.instance.clientPlayer.character2Ep -= skillEpManager.LeinaQSkill();
 
             StartCoroutine(ChargingShot());
         }
@@ -330,20 +378,27 @@ public class Leina : SubAI
         {
             onWSkill = false;
             curWSkillCoolTime = 0;
-            anim.SetBool("Run", false);
+            animator.SetBool("Run", false);
 
             canAttack = false;
             canMove = false;
             canDodge = false;
             canSkill = false;
 
+            if (GameManager.instance.clientPlayer.curMainCharacter == 1)
+                GameManager.instance.clientPlayer.character1Ep -= skillEpManager.LeinaWSkill();
+            else if (GameManager.instance.clientPlayer.curMainCharacter == 2)
+                GameManager.instance.clientPlayer.character2Ep -= skillEpManager.LeinaWSkill();
+
             StartCoroutine(WideShot());
         }
     }
     void E_Skill()
     {
-        if (Input.GetKeyDown(KeyCode.E) && onESkill && gameObject.transform.tag == "MainCharacter")
+        if (Input.GetKeyDown(KeyCode.E) && onESkill && gameObject.transform.CompareTag("MainCharacter"))
         {
+            curESkillCoolTime = 0.0f;
+            
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit rayHit;
             Vector3 frontVec = transform.position;
@@ -353,9 +408,10 @@ public class Leina : SubAI
                 frontVec.y = 0;
                 transform.LookAt(transform.position + frontVec);
             }
+
             onESkill = false;
             moveSpeed = 0f;
-            anim.SetBool("Run", false);
+            animator.SetBool("Run", false);
             vecTarget = transform.position;
 
             StartCoroutine(SynergeSkill());
@@ -373,8 +429,10 @@ public class Leina : SubAI
 
             //}
         }
-        else if (Input.GetKeyDown(KeyCode.E) && onESkill && gameObject.transform.tag == "SubCharacter")
+        else if (Input.GetKeyDown(KeyCode.E) && onESkill && gameObject.transform.CompareTag("SubCharacter"))
         {
+            curESkillCoolTime = 0.0f; 
+            
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit rayHit;
             Vector3 frontVec = transform.position;
@@ -387,7 +445,7 @@ public class Leina : SubAI
 
             onESkill = false;
             moveSpeed = 0f;
-            anim.SetBool("Run", false);
+            animator.SetBool("Run", false);
             vecTarget = transform.position;
 
             StartCoroutine(SynergeSkill());
@@ -409,17 +467,18 @@ public class Leina : SubAI
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            vecTarget = transform.position;
+            if (PlayerManager.instance.onTag)
+                vecTarget = transform.position;
         }
     }
     IEnumerator AttackDelay()
     {
-        CharacterState.attackCheck = true;
+        //CharacterState.attackCheck = true;
         yield return new WaitForSeconds(0.5f);
         canMove = true;
         canDodge = true;
         canSkill = true;
-        CharacterState.attackCheck = false;
+        //CharacterState.attackCheck = false;
     }
     IEnumerator DodgeDelay()
     {
@@ -442,7 +501,7 @@ public class Leina : SubAI
             transform.LookAt(transform.position + nextVec);
             transform.Rotate(0, transform.rotation.y + 90, 0);
         }
-        anim.SetTrigger("QSkill");
+        animator.SetTrigger("QSkill");
         // Â÷Â¡
         yield return new WaitForSeconds(1.4f);
         GameObject instantArrow = Instantiate(posionArrow, posionArrowPos.position, posionArrowPos.rotation);
@@ -473,10 +532,10 @@ public class Leina : SubAI
         }
         SoundManager.instance.SFXPlay("Attack", attackClip);
 
-        anim.SetBool("Run", false);
+        animator.SetBool("Run", false);
         vecTarget = transform.position;
 
-        anim.SetTrigger("Attack");
+        animator.SetTrigger("Attack");
         // ¼¦
         Vector3 pos = arrowPos.position;
         GameObject instantArrow = Instantiate(arrow, pos, arrowPos.rotation * Quaternion.Euler(0f, -25f, 0));
@@ -523,12 +582,12 @@ public class Leina : SubAI
             transform.LookAt(transform.position + nextVec);
             transform.Rotate(0, transform.rotation.y + 90, 0);
         }
-        anim.SetTrigger("QSkill");
+        animator.SetTrigger("QSkill");
         // Â÷Â¡
         LeinaSynergeSkill.speed = 0;
         //SynergeFirstArrow.SetActive(true);
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(1.3f);
         GameObject instantArrow = Instantiate(SynergeArrow, posionArrowPos.position, posionArrowPos.rotation);
         // ¼¦
         yield return new WaitForSeconds(1f);
@@ -537,17 +596,61 @@ public class Leina : SubAI
         GameObject instantEffect = Instantiate(SynergeEffect, transform.position + -transform.right * 7f, transform.rotation);
         yield return new WaitForSeconds(1.0f);
     }
+    IEnumerator FallDown()
+    {
+        falling = true;
+        animator.SetTrigger("Attacked");
+        float hitTime = 0.8f;
+        while (hitTime > 0)
+        {
+            hitTime -= Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, transform.position - transform.forward * 2f, 5.0f * Time.deltaTime);
+            yield return null;
+        }
+        vecTarget = transform.position;
+        yield return new WaitForSeconds(2.6f);
+        falling = false;
+    }
+
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Enemy1Attack")
+        if (GameManager.instance.clientPlayer.character1Hp <= 0 || GameManager.instance.clientPlayer.character2Hp <= 0)
+            return;
+
+        if (collision.gameObject.tag == "Boss" && !falling)
         {
-            if (GameManager.instance.mainPlayerHp > 0)
-                GameManager.instance.mainPlayerHp -= Enemy1.damage;
+            GameObject boss = collision.gameObject;
+            Vector3 pos = boss.transform.position - boss.transform.forward * 2f;
+            pos.y = 0;
+            transform.LookAt(pos);
+            StartCoroutine(FallDown());
         }
-        if (collision.gameObject.tag == "Enemy2Attack")
-        {
-            if (GameManager.instance.mainPlayerHp > 0)
-                GameManager.instance.mainPlayerHp -= Enemy2.damage;
-        }
+        //if (gameObject.CompareTag("MainCharacter"))
+        //{
+        //    if (collision.gameObject.CompareTag("Enemy1Attack"))
+        //        collisionManager.Enemy1Attack();
+        //    if (collision.gameObject.CompareTag("Enemy2Attack"))
+        //        collisionManager.Enemy2Attack();
+        //    if (collision.gameObject.CompareTag("Enemy3Attack"))
+        //        collisionManager.Enemy3Attack();
+        //    if (collision.gameObject.CompareTag("Enemy4Attack"))
+        //        collisionManager.Enemy4Attack();
+        //    if (collision.gameObject.CompareTag("Enemy5Attack"))
+        //        collisionManager.Enemy5Attack();
+        //    if (collision.gameObject.CompareTag("Enemy6Attack"))
+        //        collisionManager.Enemy6Attack();
+        //    if (collision.gameObject.CompareTag("MiniBossAttack"))
+        //        collisionManager.MiniBossAttack();
+        //    if (collision.gameObject.CompareTag("BossAttack1"))
+        //        collisionManager.BossAttack1();
+        //    if (collision.gameObject.CompareTag("BossAttack2"))
+        //        collisionManager.BossAttack2();
+        //    if (collision.gameObject.CompareTag("BossAttack3"))
+        //        collisionManager.BossAttack3();
+        //    if (collision.gameObject.CompareTag("BossAttack4"))
+        //        collisionManager.BossAttack4();
+        //    if (collision.gameObject.CompareTag("BossAttack5"))
+        //        collisionManager.BossAttack5();
+        //}
     }
 }

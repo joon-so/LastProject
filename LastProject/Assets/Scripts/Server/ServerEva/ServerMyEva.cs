@@ -52,22 +52,9 @@ public class ServerMyEva : ServerSubAIManager
     }
     void Start()
     {
-        FindPlayers();
-
-        vecTarget = transform.position;
         curDodgeCoolTime = dodgeCoolTime;
         curQSkillCoolTime = qSkillCoolTime;
         curWSkillCoolTime = wSkillCoolTime;
-
-        canMove = false;
-        canDodge = false;
-        canAttack = false;
-
-        onDodge = true;
-        onQSkill = true;
-        onWSkill = true;
-
-        curAttackDelay = attackDelay;
 
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
@@ -82,6 +69,7 @@ public class ServerMyEva : ServerSubAIManager
             ServerMyPlayerManager.instance.curC1DodgeCoolTime = curDodgeCoolTime;
             ServerMyPlayerManager.instance.curC1QSkillCoolTime = curQSkillCoolTime;
             ServerMyPlayerManager.instance.curC1WSkillCoolTime = curWSkillCoolTime;
+            nav.enabled = false;
         }
         else if (gameObject.transform.CompareTag("SubCharacter"))
         {
@@ -96,7 +84,20 @@ public class ServerMyEva : ServerSubAIManager
             ServerMyPlayerManager.instance.curC2DodgeCoolTime = curDodgeCoolTime;
             ServerMyPlayerManager.instance.curC2QSkillCoolTime = curQSkillCoolTime;
             ServerMyPlayerManager.instance.curC2WSkillCoolTime = curWSkillCoolTime;
+            nav.enabled = true;
         }
+
+        vecTarget = transform.position;
+        
+        canMove = false;
+        canDodge = false;
+        canAttack = false;
+
+        onDodge = true;
+        onQSkill = true;
+        onWSkill = true;
+
+        curAttackDelay = attackDelay;
 
         StartCoroutine(StartMotion());
 
@@ -104,7 +105,10 @@ public class ServerMyEva : ServerSubAIManager
     }
     void Update()
     {
-        if (gameObject.transform.tag == "MainCharacter")
+        Tag();
+        CoolTime();
+        FindPlayers();
+        if (gameObject.transform.CompareTag("MainCharacter"))
         {
             curAttackDelay += Time.deltaTime;
             if (canMove)
@@ -121,27 +125,28 @@ public class ServerMyEva : ServerSubAIManager
             Stop();
             Dead();
         }
-        else if (gameObject.transform.tag == "SubCharacter")
+        else if (gameObject.transform.CompareTag("SubCharacter"))
         {
-            //distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
+            distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
 
-            //if (currentState == characterState.trace)
-            //{
-            //    MainCharacterTrace(tagCharacter.transform.position);
-            //    myAnimator.SetBool("Run", true);
-            //}
-            //else if (currentState == characterState.attack)
-            //{
-            //    SubAttack();
-            //}
-            //else if (currentState == characterState.idle)
-            //{
-            //    Idle();
-            //    myAnimator.SetBool("Run", false);
-            //}
+            if (currentState == characterState.trace)
+            {
+                MainCharacterTrace(tagCharacter.transform.position);
+                myAnimator.SetBool("Run", true);
+                ServerLoginManager.playerList[0].subCharacterBehavior = 1;
+            }
+            else if (currentState == characterState.attack)
+            {
+                ServerLoginManager.playerList[0].subCharacterBehavior = 3;
+                SubAttack();
+            }
+            else if (currentState == characterState.idle)
+            {
+                ServerLoginManager.playerList[0].subCharacterBehavior = 0;
+                Idle();
+                myAnimator.SetBool("Run", false);
+            }
         }
-        Tag();
-        CoolTime();
     }
     void Move()
     {
@@ -322,6 +327,8 @@ public class ServerMyEva : ServerSubAIManager
                 ServerLoginManager.playerList[0].character1Ep -= skillEpManager.EvaQSkill();
             else if (ServerLoginManager.playerList[0].is_Main_Character == 2)
                 ServerLoginManager.playerList[0].character2Ep -= skillEpManager.EvaQSkill();
+
+            ServerLoginManager.playerList[0].mainCharacterBehavior = 4;
             StartCoroutine(FireGun());
         }
     }
@@ -351,7 +358,8 @@ public class ServerMyEva : ServerSubAIManager
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            vecTarget = transform.position;
+                vecTarget = transform.position;
+                Debug.Log("еб╠в!!");
         }
     }
 
@@ -413,7 +421,6 @@ public class ServerMyEva : ServerSubAIManager
             nextVec.y = 0;
             transform.LookAt(transform.position + nextVec);
         }
-        ServerLoginManager.playerList[0].mainCharacterBehavior = 4;
 
         yield return new WaitForSeconds(5.0f);
         qSkill.SetActive(false);

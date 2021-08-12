@@ -22,7 +22,9 @@ public class ServerSubAIManager : MonoBehaviour
 
     public void FindPlayers()
     {
-        targets = GameObject.Find("OtherPlayers").GetComponent<ServerOtherPlayersList>().OtherPlayers;
+        targets = GameObject.Find("OtherPlayers").GetComponent<ServerOtherPlayersList>().mainPlayers;
+        for (int i = 0; i < targets.Count; ++i)
+            Debug.Log(i + " : " + targets[i]);
     }
 
     public void MainCharacterTrace(Vector3 movePos)

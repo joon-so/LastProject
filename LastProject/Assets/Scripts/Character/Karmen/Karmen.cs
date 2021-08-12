@@ -34,13 +34,14 @@ public class Karmen : SubAI
     float curWSkillCoolTime;
     float curESkillCoolTime;
 
-    float curFireDelay;
-    float subFireDelay = 1.5f;
+    float curAttackDelay;
+    float subAttackDelay = 1.5f;
 
     bool canMove;
     bool canDodge;
     bool canAttack;
     bool canSkill;
+    bool falling;
 
     bool onDodge;
     bool onQSkill;
@@ -51,51 +52,74 @@ public class Karmen : SubAI
     bool motionEndCheck;
     bool comboContinue;
 
-    bool canCombo;
-    int comboStep;
-
-    float distanceWithPlayer;
+    int characterIndex;
 
     Vector3 vecTarget;
 
-    Animator anim;
+    Animator animator;
+    Rigidbody rigidbody;
+    ClientCollisionManager collisionManager;
+    ClientSkillEpManager skillEpManager;
 
     void Awake()
     {
-        anim = GetComponentInChildren<Animator>();
-        nav = GetComponent<NavMeshAgent>();
+        animator = GetComponentInChildren<Animator>();
+        navMesh = GetComponent<NavMeshAgent>();
+        rigidbody = GetComponent<Rigidbody>();
+        collisionManager = GameObject.Find("GameManager").GetComponent<ClientCollisionManager>();
+        skillEpManager = GameObject.Find("GameManager").GetComponent<ClientSkillEpManager>();
     }
 
     void Start()
     {
-        if (GameManager.instance.isMainKarmen)
+        curDodgeCoolTime = dodgeCoolTime;
+        curQSkillCoolTime = qSkillCoolTime;
+        curWSkillCoolTime = wSkillCoolTime;
+        curESkillCoolTime = eSkillCoolTime;
+
+        if (gameObject.transform.CompareTag("MainCharacter"))
         {
-            nav.enabled = false;
             tagCharacter = GameManager.instance.character2;
+
+            characterIndex = 1;
+            PlayerManager.instance.c1DodgeCoolTime = dodgeCoolTime;
+            PlayerManager.instance.c1QSkillCoolTime = qSkillCoolTime;
+            PlayerManager.instance.c1WSkillCoolTime = wSkillCoolTime;
+            PlayerManager.instance.c1ESkillCoolTime = eSkillCoolTime;
+
+            PlayerManager.instance.curC1DodgeCoolTime = curDodgeCoolTime;
+            PlayerManager.instance.curC1QSkillCoolTime = curQSkillCoolTime;
+            PlayerManager.instance.curC1WSkillCoolTime = curWSkillCoolTime;
+            PlayerManager.instance.curC1ESkillCoolTime = curESkillCoolTime;
+            navMesh.enabled = false;
         }
-        else if (GameManager.instance.isSubKarmen)
+        else if (gameObject.transform.CompareTag("SubCharacter"))
         {
             tagCharacter = GameManager.instance.character1;
-            nav.enabled = true;
+
+            characterIndex = 2;
+
+            PlayerManager.instance.c2DodgeCoolTime = dodgeCoolTime;
+            PlayerManager.instance.c2QSkillCoolTime = qSkillCoolTime;
+            PlayerManager.instance.c2WSkillCoolTime = wSkillCoolTime;
+            PlayerManager.instance.c2ESkillCoolTime = eSkillCoolTime;
+
+            PlayerManager.instance.curC2DodgeCoolTime = curDodgeCoolTime;
+            PlayerManager.instance.curC2QSkillCoolTime = curQSkillCoolTime;
+            PlayerManager.instance.curC2WSkillCoolTime = curWSkillCoolTime;
+            PlayerManager.instance.curC2ESkillCoolTime = curESkillCoolTime;
+            navMesh.enabled = true;
         }
 
         FindEnemys();
-
-        nav = GetComponent<NavMeshAgent>();
-        rigidbody = GetComponent<Rigidbody>();
-
+        rigidbody.freezeRotation = true;
         vecTarget = transform.position;
-
-        curDodgeCoolTime = 0;
-        curQSkillCoolTime = 0;
-        curWSkillCoolTime = 0;
-        curESkillCoolTime = 0;
-
 
         canMove = false;
         canDodge = false;
         canAttack = false;
         canSkill = false;
+        falling = false;
 
         onDodge = true;
         onQSkill = true;
@@ -105,41 +129,45 @@ public class Karmen : SubAI
         doingAttack = false;
         motionEndCheck = true;
         comboContinue = true;
-        EvaKarmenSynergeWeapon.SetActive(false);
 
         attackDistance = 3.5f;
+
+        EvaKarmenSynergeWeapon.SetActive(false);
+
 
         StartCoroutine(StartMotion());
     }
     void Update()
     { 
-        if (gameObject.transform.tag == "MainCharacter")
+        if (gameObject.transform.CompareTag("MainCharacter"))
         {
-            if (canMove)
-                Move();
-            if (canAttack)
-                Attack();
-            if (canDodge)
-                Dodge();
-            if (canSkill)
+            if (!falling)
             {
-                Q_Skill();
-                W_Skill();
+                if (canMove)
+                    Move();
+                if (canAttack)
+                    Attack();
+                if (canDodge)
+                    Dodge();
+                if (canSkill)
+                {
+                    Q_Skill();
+                    W_Skill();
+                }
+                Stop();
+                AttackRange();
             }
-            Stop();
-            AttackRange();
-            CoolTime();
         }
-        else if (gameObject.transform.tag == "SubCharacter")
+        else if (gameObject.transform.CompareTag("SubCharacter") && !falling)
         {
-            curFireDelay += Time.deltaTime;
+            curAttackDelay += Time.deltaTime;
             distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
 
             if (currentState == characterState.trace)
             {
                 MainCharacterTrace(tagCharacter.transform.position);
-                anim.SetBool("isRun", true);
-                curFireDelay = 1f;
+                animator.SetBool("Run", true);
+                curAttackDelay = 1f;
             }
             else if (currentState == characterState.attack)
             {
@@ -151,27 +179,28 @@ public class Karmen : SubAI
                     Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
                     transform.rotation = Quaternion.Euler(0, euler.y, 0);
                 }
-                if (curFireDelay > subFireDelay && target != null)
+                if (curAttackDelay > subAttackDelay && target != null)
                 {
                     moveSpeed = 0f;
-                    anim.SetBool("isRun", false);
-                    anim.SetTrigger("Throwing");
+                    animator.SetBool("Run", false);
+                    animator.SetTrigger("Throwing");
                     vecTarget = transform.position;
 
-                    curFireDelay = 0;
+                    curAttackDelay = 0;
                 }
             }
             else if (currentState == characterState.idle)
             {
                 Idle();
-                anim.SetBool("isRun", false);
-                curFireDelay = 1f;
+                animator.SetBool("Run", false);
+                curAttackDelay = 1f;
             }
         }
         if (canSkill)
         {
             E_Skill();
         }
+        CoolTime();
         Tag();
     }
     void Move()
@@ -192,11 +221,11 @@ public class Karmen : SubAI
             }
         }
         transform.position = Vector3.MoveTowards(transform.position, vecTarget, moveSpeed * Time.deltaTime);
-        anim.SetBool("isRun", vecTarget != transform.position);
+        animator.SetBool("Run", vecTarget != transform.position);
 
         if (doingAttack)
         {
-            anim.SetBool("isRun", false);
+            animator.SetBool("Run", false);
             vecTarget = transform.position;
         }
     }
@@ -205,7 +234,7 @@ public class Karmen : SubAI
         if (Input.GetKeyDown(KeyCode.S))
         {
             moveSpeed = 0f;
-            anim.SetBool("Run", false);
+            animator.SetBool("Run", false);
             vecTarget = transform.position;
         }
     }
@@ -231,41 +260,41 @@ public class Karmen : SubAI
             }
 
             moveSpeed *= 2;
-            anim.SetTrigger("Dodge");
+            animator.SetTrigger("Dodge");
 
             StartCoroutine(DodgeDelay());
         }
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("salto2SS"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("salto2SS"))
         {
             transform.Translate(Vector3.forward * 5 * Time.deltaTime);
             vecTarget = transform.position;
-            anim.SetBool("Run", false);
+            animator.SetBool("Run", false);
         }
     }
     void Attack()
     {
         if (doingAttack)
         {
-            if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
-                && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f)
+            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
+                && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f)
             {
                 if (Input.GetMouseButtonDown(0))
                     if (comboContinue)
                         comboContinue = false;
                 motionEndCheck = false;
             }
-            else if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f && !motionEndCheck)
+            else if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f && !motionEndCheck)
             {
                 if (!comboContinue)
                 {
-                    anim.SetTrigger("nextCombo");
+                    animator.SetTrigger("nextCombo");
                     comboContinue = true;
                 }
                 else if (comboContinue)
                 {
                     doingAttack = false;
-                    anim.SetBool("doAttack", doingAttack);
-                    CharacterState.attackCheck = false;
+                    animator.SetBool("Attack", doingAttack);
+                    //CharacterState.attackCheck = false;
                 }
                 motionEndCheck = true;
             }
@@ -274,12 +303,12 @@ public class Karmen : SubAI
         if (Input.GetMouseButtonDown(0))
         {
             canMove = false;
-            anim.SetBool("isRun", canMove);
+            animator.SetBool("Run", canMove);
 
-            if ((doingAttack && anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
-                 && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8f)
-                 || anim.GetCurrentAnimatorStateInfo(0).IsName("Idle1SS")
-                 || anim.GetCurrentAnimatorStateInfo(0).IsName("runSS"))
+            if ((doingAttack && animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
+                 && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8f)
+                 || animator.GetCurrentAnimatorStateInfo(0).IsName("Idle1SS")
+                 || animator.GetCurrentAnimatorStateInfo(0).IsName("runSS"))
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
@@ -291,39 +320,19 @@ public class Karmen : SubAI
                 }
                 vecTarget = transform.position;
             }
-            CharacterState.attackCheck = true;
+            //CharacterState.attackCheck = true;
             moveSpeed = 0f;
             doingAttack = true;
-            anim.SetBool("doAttack", doingAttack);
+            animator.SetBool("Attack", doingAttack);
         }
 
         if (doingAttack && Input.GetMouseButtonDown(1))
         {
             doingAttack = false;
-            anim.SetBool("doAttack", doingAttack);
+            animator.SetBool("Attack", doingAttack);
             canMove = true;
-            anim.SetBool("isRun", canMove);
+            animator.SetBool("Run", canMove);
         }
-    }
-    public void CanCombo()
-    {
-        canCombo = true;
-    }
-
-    public void Combo()
-    {
-        if (comboStep == 2)
-            anim.Play("Attack2");
-        if (comboStep == 3)
-            anim.Play("Attack3");
-        if (comboStep == 4)
-            anim.Play("Attack4");
-    }
-
-    public void ComboReset()
-    {
-        canCombo = false;
-        comboStep = 0;
     }
     void AttackRange()
     {
@@ -342,35 +351,46 @@ public class Karmen : SubAI
         if (curDodgeCoolTime < dodgeCoolTime)
         {
             curDodgeCoolTime += Time.deltaTime;
+            if (characterIndex == 1)
+                PlayerManager.instance.curC1DodgeCoolTime = curDodgeCoolTime;
+            else if (characterIndex == 2)
+                PlayerManager.instance.curC2DodgeCoolTime = curDodgeCoolTime;
         }
         else
-        {
             onDodge = true;
-        }
+
         if (curQSkillCoolTime < qSkillCoolTime)
         {
             curQSkillCoolTime += Time.deltaTime;
+            if (characterIndex == 1)
+                PlayerManager.instance.curC1QSkillCoolTime = curQSkillCoolTime;
+            else if (characterIndex == 2)
+                PlayerManager.instance.curC2QSkillCoolTime = curQSkillCoolTime;
         }
         else
-        {
             onQSkill = true;
-        }
+
         if (curWSkillCoolTime < wSkillCoolTime)
         {
             curWSkillCoolTime += Time.deltaTime;
+            if (characterIndex == 1)
+                PlayerManager.instance.curC1WSkillCoolTime = curWSkillCoolTime;
+            else if (characterIndex == 2)
+                PlayerManager.instance.curC2WSkillCoolTime = curWSkillCoolTime;
         }
         else
-        {
             onWSkill = true;
-        }
+
         if (curESkillCoolTime < eSkillCoolTime)
         {
             curESkillCoolTime += Time.deltaTime;
+            if (characterIndex == 1)
+                PlayerManager.instance.curC1ESkillCoolTime = curESkillCoolTime;
+            else if (characterIndex == 2)
+                PlayerManager.instance.curC2ESkillCoolTime = curESkillCoolTime;
         }
         else
-        {
             onESkill = true;
-        }
     }
     void Q_Skill()
     {
@@ -378,13 +398,18 @@ public class Karmen : SubAI
         {
             onQSkill = false;
             curQSkillCoolTime = 0;
-            anim.SetBool("Run", false);
+            animator.SetBool("Run", false);
 
             canAttack = false;
             canMove = false;
             canDodge = false;
             canSkill = false;
-            
+
+            if (GameManager.instance.clientPlayer.curMainCharacter == 1)
+                GameManager.instance.clientPlayer.character1Ep -= skillEpManager.KarmenQSkill();
+            else if (GameManager.instance.clientPlayer.curMainCharacter == 2)
+                GameManager.instance.clientPlayer.character2Ep -= skillEpManager.KarmenQSkill();
+
             StartCoroutine(BigAttack());
         }
     }
@@ -394,20 +419,27 @@ public class Karmen : SubAI
         {
             onWSkill = false;
             curWSkillCoolTime = 0;
-            anim.SetBool("Run", false);
+            animator.SetBool("Run", false);
 
             canAttack = false;
             canMove = false;
             canDodge = false;
             canSkill = false;
-             
+
+            if (GameManager.instance.clientPlayer.curMainCharacter == 1)
+                GameManager.instance.clientPlayer.character1Ep -= skillEpManager.KarmenWSkill();
+            else if (GameManager.instance.clientPlayer.curMainCharacter == 2)
+                GameManager.instance.clientPlayer.character2Ep -= skillEpManager.KarmenWSkill();
+
             StartCoroutine(StraightAttack());
         }
     }
     void E_Skill()
     {
-        if (Input.GetKeyDown(KeyCode.E) && onESkill && gameObject.transform.tag == "MainCharacter")
+        if (Input.GetKeyDown(KeyCode.E) && onESkill && gameObject.transform.CompareTag("MainCharacter"))
         {
+            curESkillCoolTime = 0.0f;
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit rayHit;
             Vector3 frontVec = transform.position;
@@ -418,9 +450,15 @@ public class Karmen : SubAI
                 transform.LookAt(transform.position + frontVec);
             }
 
+            onESkill = false; 
             moveSpeed = 0f;
-            anim.SetBool("Run", false);
+            animator.SetBool("Run", false);
             vecTarget = transform.position;
+
+            if (GameManager.instance.clientPlayer.curMainCharacter == 1)
+                GameManager.instance.clientPlayer.character1Ep -= skillEpManager.KarmenESkill();
+            else if (GameManager.instance.clientPlayer.curMainCharacter == 2)
+                GameManager.instance.clientPlayer.character2Ep -= skillEpManager.KarmenESkill();
 
             StartCoroutine(KarmenEvaSynerge());
 
@@ -444,8 +482,10 @@ public class Karmen : SubAI
 
             //}
         }
-        else if (Input.GetKeyDown(KeyCode.E) && onESkill && gameObject.transform.tag == "SubCharacter")
+        else if (Input.GetKeyDown(KeyCode.E) && onESkill && gameObject.transform.CompareTag("SubCharacter"))
         {
+            curESkillCoolTime = 0.0f; 
+            
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit rayHit;
             Vector3 frontVec = transform.position;
@@ -456,8 +496,9 @@ public class Karmen : SubAI
                 transform.LookAt(transform.position + frontVec);
             }
 
+            onESkill = false;
             moveSpeed = 0f;
-            anim.SetBool("Run", false);
+            animator.SetBool("Run", false);
             vecTarget = transform.position;
 
             StartCoroutine(KarmenEvaSynerge());
@@ -479,7 +520,8 @@ public class Karmen : SubAI
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            vecTarget = transform.position;
+            if (PlayerManager.instance.onTag)
+                vecTarget = transform.position;
         }
     }
     IEnumerator AttackDelay()
@@ -499,7 +541,7 @@ public class Karmen : SubAI
     IEnumerator StartMotion()
     {
         yield return new WaitForSeconds(0.5f);
-        anim.SetTrigger("StartMotion");
+        animator.SetTrigger("StartMotion");
         yield return new WaitForSeconds(1.5f);
         leftStaffEffect.SetActive(true);
         rightStaffEffect.SetActive(true);
@@ -515,21 +557,21 @@ public class Karmen : SubAI
 
         leftStaffEffect.SetActive(false);
         rightStaffEffect.SetActive(false);
-      
-        anim.SetTrigger("QSkill");
-        anim.SetFloat("Speed", 0.2f);
+
+        animator.SetTrigger("QSkill");
+        animator.SetFloat("Speed", 0.2f);
         yield return new WaitForSeconds(0.5f);
         Instantiate(qSkill, qSkillPos.position, qSkillPos.rotation);
-        anim.SetFloat("Speed", 0.0f);
+        animator.SetFloat("Speed", 0.0f);
         yield return new WaitForSeconds(1.0f);
-        anim.SetFloat("Speed", 1.0f);
+        animator.SetFloat("Speed", 1.0f);
         yield return new WaitForSeconds(1.0f);
 
         leftStaffEffect.SetActive(true);
         rightStaffEffect.SetActive(true);
 
         vecTarget = transform.position;
-        anim.SetBool("Run", false);
+        animator.SetBool("Run", false);
 
         canAttack = true;
         canMove = true;
@@ -543,7 +585,7 @@ public class Karmen : SubAI
         leftStaffEffect.SetActive(false);
         rightStaffEffect.SetActive(false);
 
-        anim.SetTrigger("WSkill");
+        animator.SetTrigger("WSkill");
         wLeftEffect.SetActive(true);
         wRightEffect.SetActive(true);
         yield return new WaitForSeconds(2.8f);
@@ -555,7 +597,7 @@ public class Karmen : SubAI
         rightStaffEffect.SetActive(true);
 
         vecTarget = transform.position;
-        anim.SetBool("Run", false);
+        animator.SetBool("Run", false);
 
         canAttack = true;
         canMove = true;
@@ -623,33 +665,70 @@ public class Karmen : SubAI
             yield return null;
         }
     }
-
     IEnumerator KarmenEvaSynerge()
     {
         EvaKarmenSynergeWeapon.SetActive(true);
-        anim.SetTrigger("KarmenEvaSynerge");
+        animator.SetTrigger("KarmenEvaSynerge");
 
         yield return new WaitForSeconds(3.45f);
         Instantiate(EvaKarmenSynergeEffect, transform.position + transform.forward * 4.5f, transform.rotation);
         yield return new WaitForSeconds(0.4f);
         EvaKarmenSynergeWeapon.SetActive(false);
     }
+    IEnumerator FallDown()
+    {
+        falling = true;
+        animator.SetTrigger("Attacked");
+        float hitTime = 0.8f;
+        while (hitTime > 0)
+        {
+            hitTime -= Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, transform.position - transform.forward * 2f, 5.0f * Time.deltaTime);
+            yield return null;
+        }
+        vecTarget = transform.position;
+        yield return new WaitForSeconds(2.6f);
+        falling = false;
+    }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Enemy1Attack")
-        {
-            if (GameManager.instance.mainPlayerHp > 0)
-            {
-                GameManager.instance.mainPlayerHp -= Enemy1.damage;
-            }
-        }
+        if (GameManager.instance.clientPlayer.character1Hp <= 0 || GameManager.instance.clientPlayer.character2Hp <= 0)
+            return;
 
-        if (collision.gameObject.tag == "Enemy2Attack")
+        if (collision.gameObject.tag == "Boss" && !falling)
         {
-            if (GameManager.instance.mainPlayerHp > 0)
-            {
-                GameManager.instance.mainPlayerHp -= Enemy2.damage;
-            }
+            GameObject boss = collision.gameObject;
+            Vector3 pos = boss.transform.position - boss.transform.forward * 2f;
+            pos.y = 0;
+            transform.LookAt(pos);
+            StartCoroutine(FallDown());
         }
+        //if (gameObject.CompareTag("MainCharacter"))
+        //{
+        //    if (collision.gameObject.CompareTag("Enemy1Attack"))
+        //        collisionManager.Enemy1Attack();
+        //    if (collision.gameObject.CompareTag("Enemy2Attack"))
+        //        collisionManager.Enemy2Attack();
+        //    if (collision.gameObject.CompareTag("Enemy3Attack"))
+        //        collisionManager.Enemy3Attack();
+        //    if (collision.gameObject.CompareTag("Enemy4Attack"))
+        //        collisionManager.Enemy4Attack();
+        //    if (collision.gameObject.CompareTag("Enemy5Attack"))
+        //        collisionManager.Enemy5Attack();
+        //    if (collision.gameObject.CompareTag("Enemy6Attack"))
+        //        collisionManager.Enemy6Attack();
+        //    if (collision.gameObject.CompareTag("MiniBossAttack"))
+        //        collisionManager.MiniBossAttack();
+        //    if (collision.gameObject.CompareTag("BossAttack1"))
+        //        collisionManager.BossAttack1();
+        //    if (collision.gameObject.CompareTag("BossAttack2"))
+        //        collisionManager.BossAttack2();
+        //    if (collision.gameObject.CompareTag("BossAttack3"))
+        //        collisionManager.BossAttack3();
+        //    if (collision.gameObject.CompareTag("BossAttack4"))
+        //        collisionManager.BossAttack4();
+        //    if (collision.gameObject.CompareTag("BossAttack5"))
+        //        collisionManager.BossAttack5();
+        //}
     }
 }

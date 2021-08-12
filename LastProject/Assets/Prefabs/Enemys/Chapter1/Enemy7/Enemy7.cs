@@ -56,7 +56,8 @@ public class Enemy7 : MonoBehaviour
         //Change Target
         if (Input.GetKeyDown(KeyCode.F))
         {
-            mainCharacter = GameObject.FindGameObjectWithTag("SubCharacter");
+            if (PlayerManager.instance.onTag)
+                mainCharacter = GameObject.FindGameObjectWithTag("SubCharacter");
         }
     }
 
@@ -104,6 +105,7 @@ public class Enemy7 : MonoBehaviour
             if (alive)
             {
                 alive = false;
+                gameObject.tag = "Enmey7Attack";
                 StartCoroutine(ExploseAndDistroy());
             }
         }

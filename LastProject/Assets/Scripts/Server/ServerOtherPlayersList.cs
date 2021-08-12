@@ -14,7 +14,7 @@ public class ServerOtherPlayersList : MonoBehaviour
         OtherPlayers = GameObject.Find("ServerIngameManager").GetComponent<ServerIngameManager>().otherPlayerList;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (!addObj)
         {

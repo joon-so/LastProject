@@ -64,24 +64,9 @@ public class ServerMyJade : ServerSubAIManager
 
     void Start()
     {
-        FindPlayers();
-
-        vecTarget = transform.position;
-
         curDodgeCoolTime = dodgeCoolTime;
         curQSkillCoolTime = qSkillCoolTime;
         curWSkillCoolTime = wSkillCoolTime;
-
-        canMove = false;
-        canDodge = false;
-        canAttack = false;
-        canSkill = false;
-
-        onDodge = true;
-        onQSkill = true;
-        onWSkill = true;
-
-        curFireDelay = fireDelay;
         
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
@@ -96,6 +81,7 @@ public class ServerMyJade : ServerSubAIManager
             ServerMyPlayerManager.instance.curC1DodgeCoolTime = curDodgeCoolTime;
             ServerMyPlayerManager.instance.curC1QSkillCoolTime = curQSkillCoolTime;
             ServerMyPlayerManager.instance.curC1WSkillCoolTime = curWSkillCoolTime;
+            nav.enabled = false;
         }
         else if (gameObject.transform.CompareTag("SubCharacter"))
         {
@@ -110,13 +96,30 @@ public class ServerMyJade : ServerSubAIManager
             ServerMyPlayerManager.instance.curC2DodgeCoolTime = curDodgeCoolTime;
             ServerMyPlayerManager.instance.curC2QSkillCoolTime = curQSkillCoolTime;
             ServerMyPlayerManager.instance.curC2WSkillCoolTime = curWSkillCoolTime;
+            nav.enabled = true;
         }
 
+        vecTarget = transform.position;
+
+        canMove = false;
+        canDodge = false;
+        canAttack = false;
+        canSkill = false;
+
+        onDodge = true;
+        onQSkill = true;
+        onWSkill = true;
+
+        curFireDelay = fireDelay;
+        
         StartCoroutine(DrawAssaultRifle());
     }
 
     void Update()
     {
+        Tag();
+        CoolTime();
+        FindPlayers();
         curFireDelay += Time.deltaTime;
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
@@ -136,49 +139,49 @@ public class ServerMyJade : ServerSubAIManager
         }
         else if (gameObject.transform.CompareTag("SubCharacter"))
         {
-            //distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
+            distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
 
-            //if (currentState == characterState.trace)
-            //{
-            //    MainCharacterTrace(tagCharacter.transform.position);
-            //    myAnimator.SetBool("Run", true);
-            //    curFireDelay = 1f;
-            //}
-            //else if (currentState == characterState.attack)
-            //{
-            //    SubAttack();
-            //    if (target)
-            //    {
-            //        Quaternion lookRotation = Quaternion.LookRotation(target.transform.position - transform.position);
-            //        Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
-            //        transform.rotation = Quaternion.Euler(0, euler.y, 0);
+            if (currentState == characterState.trace)
+            {
+                MainCharacterTrace(tagCharacter.transform.position);
+                myAnimator.SetBool("Run", true);
+                ServerLoginManager.playerList[0].subCharacterBehavior = 1;
+                curFireDelay = 1f;
+            }
+            else if (currentState == characterState.attack)
+            {
+                SubAttack();
+                if (target)
+                {
+                    Quaternion lookRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+                    Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
+                    transform.rotation = Quaternion.Euler(0, euler.y, 0);
+                }
+                if (curFireDelay > subFireDelay && target != null)
+                {
+                    GameObject instantBullet = Instantiate(assaultRifleBullet, assaultRifleBulletPos.position, assaultRifleBulletPos.rotation);
+                    Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
+                    bulletRigid.velocity = assaultRifleBulletPos.forward;
 
-            //    }
-            //    if (curFireDelay > subFireDelay && target != null)
-            //    {
-            //        GameObject instantBullet = Instantiate(assaultRifleBullet, assaultRifleBulletPos.position, assaultRifleBulletPos.rotation);
-            //        Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
-            //        bulletRigid.velocity = assaultRifleBulletPos.forward;
+                    moveSpeed = 0f;
+                    myAnimator.SetBool("Run", false);
+                    vecTarget = transform.position;
 
-            //        moveSpeed = 0f;
-            //        myAnimator.SetBool("Run", false);
-            //        vecTarget = transform.position;
+                    myAnimator.SetTrigger("shootAssaultRifle");
+                    curFireDelay = 0;
 
-            //        myAnimator.SetTrigger("shootAssaultRifle");
-            //        curFireDelay = 0;
-
-            //        StartCoroutine(AttackDelay());
-            //    }
-            //}
-            //else if (currentState == characterState.idle)
-            //{
-            //    Idle();
-            //    myAnimator.SetBool("Run", false);
-            //    curFireDelay = 1f;
-            //}
+                    ServerLoginManager.playerList[0].subCharacterBehavior = 3;
+                    StartCoroutine(AttackDelay());
+                }
+            }
+            else if (currentState == characterState.idle)
+            {
+                Idle();
+                ServerLoginManager.playerList[0].subCharacterBehavior = 0;
+                myAnimator.SetBool("Run", false);
+                curFireDelay = 1f;
+            }
         }
-        CoolTime();
-        Tag();
     }
 
     void Move()
@@ -388,7 +391,8 @@ public class ServerMyJade : ServerSubAIManager
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            vecTarget = transform.position;
+                vecTarget = transform.position;
+                Debug.Log("еб╠в!!");
         }
     }
 

@@ -24,14 +24,12 @@ public class ServerMyPlayerManager : MonoBehaviour
     public GameObject character2;
 
     public string ID;
-    private bool isTag;
 
     // item
     public int myHpPotionCount;
     public int myEpPotionCount;
 
     // skill coolTime
-
     public float c1DodgeCoolTime;
     public float c1QSkillCoolTime;
     public float c1WSkillCoolTime;
@@ -61,6 +59,13 @@ public class ServerMyPlayerManager : MonoBehaviour
 
     private bool onHpPotion;
     private bool onEpPotion;
+
+    // tag
+    public float tagCoolTime;
+
+    public bool onTag;
+    private bool isTag;
+    public float curTagCoolTime;
 
     void Awake()
     {
@@ -154,8 +159,6 @@ public class ServerMyPlayerManager : MonoBehaviour
         character2.transform.position = ServerLoginManager.playerList[0].subCharacterPos;
         character2.transform.rotation = ServerLoginManager.playerList[0].subCharacterRot;
 
-        isTag = true;
-
         mainCameraControl.focus = character1.transform;
 
         myHpPotionCount = 2;
@@ -170,6 +173,10 @@ public class ServerMyPlayerManager : MonoBehaviour
         onHpPotion = true;
         onEpPotion = true;
 
+        tagCoolTime = 5.0f;
+        curTagCoolTime = tagCoolTime;
+        isTag = true;
+
         StartCoroutine("CoSendPacket");
     }
 
@@ -182,9 +189,11 @@ public class ServerMyPlayerManager : MonoBehaviour
         }
         else
         {
-            Click();
-            MainSubEffect();
-            PotionCount();
+            if (curTagCoolTime < tagCoolTime)
+                curTagCoolTime += Time.deltaTime;
+            else
+                onTag = true;
+
             if (Input.GetKeyDown(KeyCode.F))
             {
                 ServerMainSubTag();
@@ -197,6 +206,10 @@ public class ServerMyPlayerManager : MonoBehaviour
             {
                 ChangeTime();
             }
+
+            Click();
+            MainSubEffect();
+            PotionCount();
         }
     }
 
@@ -215,27 +228,33 @@ public class ServerMyPlayerManager : MonoBehaviour
 
     public void ServerMainSubTag()
     {
-        // main->sub
-        if (isTag)
+        if (onTag)
         {
-            mainCameraControl.focus = character2.transform;
-            character1.gameObject.tag = "SubCharacter";
-            character2.gameObject.tag = "MainCharacter";
-            character2.gameObject.GetComponent<NavMeshAgent>().enabled = true;
-            character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
-            ServerLoginManager.playerList[0].is_Main_Character = 2;
-            isTag = false;
-        }
-        else
-        {
-            mainCameraControl.focus = character1.transform;
-            character1.gameObject.tag = "MainCharacter";
-            character2.gameObject.tag = "SubCharacter";
+            curTagCoolTime = 0.0f;
+            onTag = false;
 
-            character2.gameObject.GetComponent<NavMeshAgent>().enabled = false;
-            character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
-            ServerLoginManager.playerList[0].is_Main_Character = 1;
-            isTag = true;
+            // main->sub
+            if (isTag)
+            {
+                mainCameraControl.focus = character2.transform;
+                character1.gameObject.tag = "SubCharacter";
+                character2.gameObject.tag = "MainCharacter";
+                character2.gameObject.GetComponent<NavMeshAgent>().enabled = true;
+                character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+                ServerLoginManager.playerList[0].is_Main_Character = 2;
+                isTag = false;
+            }
+            else
+            {
+                mainCameraControl.focus = character1.transform;
+                character1.gameObject.tag = "MainCharacter";
+                character2.gameObject.tag = "SubCharacter";
+
+                character2.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+                character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
+                ServerLoginManager.playerList[0].is_Main_Character = 1;
+                isTag = true;
+            }
         }
     }
 

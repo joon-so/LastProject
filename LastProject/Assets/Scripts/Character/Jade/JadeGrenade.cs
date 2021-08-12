@@ -9,8 +9,11 @@ public class JadeGrenade : MonoBehaviour
     public Rigidbody rigid;
     public AudioClip clip;
 
+    ClientCollisionManager collisionManager;
+
     void Start()
     {
+        collisionManager = GameObject.Find("GameManager").GetComponent<ClientCollisionManager>();
         StartCoroutine(Explosion());
     }
     IEnumerator Explosion()
@@ -26,10 +29,14 @@ public class JadeGrenade : MonoBehaviour
 
         yield return new WaitForSeconds(0.7f);
         Destroy(gameObject);
-        RaycastHit[] rayHits = Physics.SphereCastAll(transform.position, 15, Vector3.up, 0f, LayerMask.GetMask("MainCharacter"));
-        foreach(RaycastHit hitObj in rayHits)
+        Collider[] hitCol = Physics.OverlapSphere(gameObject.transform.position, 2f);
+
+        for (int i = 0; i < hitCol.Length; ++i)
         {
-            hitObj.transform.GetComponent<Enemy1>().HitJadeGrenade();
+            if (hitCol[i].gameObject.CompareTag("Enemy"))
+            {
+                collisionManager.JadeWSkillAttack();
+            }
         }
     }
 }
