@@ -27388,7 +27388,7 @@ GameObject:
   - component: {fileID: 1142059757271179195}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Enemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27522,6 +27522,8 @@ MonoBehaviour:
   Frame: {fileID: 5958552257471683711}
   FlyPattern2Effect: {fileID: 0}
   FlyEffect: {fileID: 3177627431876559039}
+  maxHp: 2000
+  currentHp: 0
 --- !u!65 &2819031441956197245
 BoxCollider:
   m_ObjectHideFlags: 0

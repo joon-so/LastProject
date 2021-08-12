@@ -36,6 +36,7 @@ public class Eva : SubAI
     bool canDodge;
     bool canAttack;
     bool canSkill;
+    bool falling;
 
     bool onDodge;
     bool onQSkill;
@@ -108,6 +109,8 @@ public class Eva : SubAI
 
         FindEnemys();
 
+        rigidbody.freezeRotation = true;
+
         vecTarget = transform.position;
 
         canMove = true;
@@ -119,6 +122,7 @@ public class Eva : SubAI
         onQSkill = true;
         onWSkill = true;
         onESkill = true;
+        falling = false;
 
         doingAttack = false;
         motionEndCheck = true;
@@ -132,23 +136,26 @@ public class Eva : SubAI
     {
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
-            if (canMove)
-                Move();
-            if (canAttack)
-                Attack();
-            if (canDodge)
-                Dodge();
-            if (canSkill)
+            if (!falling)
             {
-                Q_Skill();
-                W_Skill();
-                E_Skill();
+                if (canMove)
+                    Move();
+                if (canAttack)
+                    Attack();
+                if (canDodge)
+                    Dodge();
+                if (canSkill)
+                {
+                    Q_Skill();
+                    W_Skill();
+                    E_Skill();
+                }
+                Stop();
+                AttackRange();
             }
-            Stop();
-            AttackRange();
             CoolTime();
         }
-        else if (gameObject.transform.CompareTag("SubCharacter"))
+        else if (gameObject.transform.CompareTag("SubCharacter") && !falling)
         {
             distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
 
@@ -731,11 +738,35 @@ public class Eva : SubAI
         canSkill = true;
     }
 
+    IEnumerator FallDown()
+    {
+        falling = true;
+        animator.SetTrigger("Attacked");
+        float hitTime = 0.8f;
+        while (hitTime > 0)
+        {
+            hitTime -= Time.deltaTime;
+            transform.position = Vector3.MoveTowards(transform.position, transform.position - transform.forward * 2f, 5.0f * Time.deltaTime);
+            yield return null;
+        }
+        vecTarget = transform.position;
+        yield return new WaitForSeconds(2.2f);
+        falling = false;
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         if (GameManager.instance.clientPlayer.character1Hp <= 0 || GameManager.instance.clientPlayer.character2Hp <= 0)
             return;
 
+        if (collision.gameObject.tag == "Boss" && !falling)
+        {
+            GameObject boss = collision.gameObject;
+            Vector3 pos = boss.transform.position - boss.transform.forward * 2f;
+            pos.y = 0;
+            transform.LookAt(pos);
+            StartCoroutine(FallDown());
+        }
         //if (gameObject.CompareTag("MainCharacter"))
         //{
         //    if (collision.gameObject.CompareTag("Enemy1Attack"))

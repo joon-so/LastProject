@@ -71,7 +71,7 @@ public class JadeEvaSynergeBullet : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if ((collision.gameObject.layer != 8 || collision.gameObject.tag != "SubCharacter") && !collided && collision.gameObject.tag == "Enemy")
+        if ((collision.gameObject.layer != 8 || collision.gameObject.tag != "SubCharacter") && !collided && (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Boss"))
         {
             collided = true;
 
