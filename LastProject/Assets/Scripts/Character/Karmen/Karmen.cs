@@ -138,7 +138,9 @@ public class Karmen : SubAI
         StartCoroutine(StartMotion());
     }
     void Update()
-    { 
+    {
+        CoolTime();
+        Tag();
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
             if (!falling)
@@ -200,8 +202,10 @@ public class Karmen : SubAI
         {
             E_Skill();
         }
-        CoolTime();
-        Tag();
+    }
+    void FixedUpdate()
+    {
+        FindEnemys();
     }
     void Move()
     {
@@ -520,8 +524,7 @@ public class Karmen : SubAI
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (PlayerManager.instance.onTag)
-                vecTarget = transform.position;
+            vecTarget = transform.position;
         }
     }
     IEnumerator AttackDelay()
