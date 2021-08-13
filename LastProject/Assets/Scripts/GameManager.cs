@@ -93,10 +93,6 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("Stage1-3");
     }
-    public void ChangeSceneStage3To4()
-    {
-        SceneManager.LoadScene("Stage1-3To4");
-    }
     public void ChangeSceneStage4()
     {
         SceneManager.LoadScene("Stage1-4");
@@ -104,5 +100,33 @@ public class GameManager : MonoBehaviour
     public void ChangeSceneStage5()
     {
         SceneManager.LoadScene("Stage1-5");
+    }
+    public void ChangeSceneStage1To2()
+    {
+        SceneManager.LoadScene("Stage1-1To2");
+    }
+    public void ChangeSceneStage2To3()
+    {
+        SceneManager.LoadScene("Stage1-2To3");
+    }
+    public void ChangeSceneStage3To4()
+    {
+        SceneManager.LoadScene("Stage1-3To4");
+    }
+    public void ChangeSceneStage4To5()
+    {
+        SceneManager.LoadScene("Stage1-4To5");
+    }
+    public void ChangeSceneBoss1PageEnter()
+    {
+        SceneManager.LoadScene("StageBoss1PageEnter");
+    }
+    public void ChangeSceneBoss2PageEnter()
+    {
+        SceneManager.LoadScene("StageBoss2PageEnter");
+    }
+    public void ChangeSceneBoss3PageEnter()
+    {
+        SceneManager.LoadScene("StageBoss3PageEnter");
     }
 }

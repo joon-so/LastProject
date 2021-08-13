@@ -88,6 +88,7 @@ public class InGameUI : MonoBehaviour
                     TagCharacterSlot();
                 }
             }
+
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
