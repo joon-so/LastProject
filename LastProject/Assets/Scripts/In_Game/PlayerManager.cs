@@ -127,9 +127,33 @@ public class PlayerManager : MonoBehaviour
             {
                 GameManager.instance.ChangeSceneStage5();
             }
-            if (Input.GetKeyDown(KeyCode.F6))
+            if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                GameManager.instance.ChangeSceneStage1To2();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha6))
+            {
+                GameManager.instance.ChangeSceneStage2To3();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha7))
             {
                 GameManager.instance.ChangeSceneStage3To4();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha8))
+            {
+                GameManager.instance.ChangeSceneStage4To5();
+            }
+            if (Input.GetKeyDown(KeyCode.F9))
+            {
+                GameManager.instance.ChangeSceneBoss1PageEnter();
+            }
+            if (Input.GetKeyDown(KeyCode.F10))
+            {
+                GameManager.instance.ChangeSceneBoss2PageEnter();
+            }
+            if (Input.GetKeyDown(KeyCode.F11))
+            {
+                GameManager.instance.ChangeSceneBoss3PageEnter();
             }
             Zoom();
             Click();

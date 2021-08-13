@@ -4,14 +4,26 @@ using UnityEngine;
 
 public class CharacterSelect : MonoBehaviour
 {
+    LevelLoader levelLoader;
+
     [SerializeField] GameObject karmen;
     [SerializeField] GameObject jade;
     [SerializeField] GameObject leina;
     [SerializeField] GameObject eva;
 
+    Vector3 movePoint1;
+    Vector3 movePoint2;
+    Vector3 movePoint3;
+
     // Start is called before the first frame update
     void Start()
     {
+        levelLoader = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();
+
+        movePoint1 = new Vector3(1.97f, transform.position.y, 20.3f);
+        movePoint2 = new Vector3(1.94f, transform.position.y, 15.15f);
+        movePoint3 = new Vector3(6.35f, transform.position.y, 9.48f);
+
         if (GameManager.instance.clientPlayer.curMainCharacter == 1)
         {
             // Krammen
@@ -52,11 +64,29 @@ public class CharacterSelect : MonoBehaviour
                 eva.SetActive(true);
             }
         }
+        StartCoroutine(Motion());
     }
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator Motion()
     {
-        
+        transform.LookAt(movePoint1);
+        while (Vector3.Distance(transform.position, movePoint1) > 0.001f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, movePoint1, 4f * Time.deltaTime);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(0.1f);
+        transform.LookAt(movePoint2);
+        yield return new WaitForSeconds(0.1f);
+
+        yield return new WaitForSeconds(0.8f);
+        transform.LookAt(movePoint3);
+        while (Vector3.Distance(transform.position, movePoint3) > 0.001f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, movePoint3, 4f * Time.deltaTime);
+            yield return null;
+        }
+        levelLoader.LoadNextLevel();
     }
 }
