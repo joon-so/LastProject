@@ -38,8 +38,11 @@ public class ClientCollisionManager : MonoBehaviour
     public int bossAttack4;
     public int bossAttack5;
 
+    public bool hit;
+
     public void PlayerHpSetting(int damage)
     {
+        hit = true;
         if(GameManager.instance.clientPlayer.curMainCharacter == 1)
         {
             GameManager.instance.clientPlayer.character1Hp -= damage;

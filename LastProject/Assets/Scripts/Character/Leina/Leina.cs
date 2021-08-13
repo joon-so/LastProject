@@ -108,6 +108,7 @@ public class Leina : SubAI
         }
 
         FindEnemys();
+
         rigidbody.freezeRotation = true;
         vecTarget = transform.position;
 
@@ -126,6 +127,8 @@ public class Leina : SubAI
     }
     void Update()
     {
+        CoolTime();
+        Tag();
         curFireDelay += Time.deltaTime;
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
@@ -193,8 +196,10 @@ public class Leina : SubAI
         {
             E_Skill();
         }
-        CoolTime();
-        Tag();
+    }
+    void FixedUpdate()
+    {
+        FindEnemys();
     }
     void Move()
     {
@@ -467,8 +472,7 @@ public class Leina : SubAI
     {
         if (Input.GetKeyDown(KeyCode.F))
         {
-            if (PlayerManager.instance.onTag)
-                vecTarget = transform.position;
+            vecTarget = transform.position;
         }
     }
     IEnumerator AttackDelay()
@@ -607,7 +611,14 @@ public class Leina : SubAI
             transform.position = Vector3.MoveTowards(transform.position, transform.position - transform.forward * 2f, 5.0f * Time.deltaTime);
             yield return null;
         }
-        vecTarget = transform.position;
+        if (gameObject.tag == "MainCharacter")
+        {
+            vecTarget = transform.position;
+        }
+        else
+        {
+            navMesh.SetDestination(transform.position);
+        }
         yield return new WaitForSeconds(2.6f);
         falling = false;
     }
@@ -621,36 +632,36 @@ public class Leina : SubAI
         {
             GameObject boss = collision.gameObject;
             Vector3 pos = boss.transform.position - boss.transform.forward * 2f;
-            pos.y = 0;
+            pos.y = transform.position.y;
             transform.LookAt(pos);
             StartCoroutine(FallDown());
         }
-        //if (gameObject.CompareTag("MainCharacter"))
-        //{
-        //    if (collision.gameObject.CompareTag("Enemy1Attack"))
-        //        collisionManager.Enemy1Attack();
-        //    if (collision.gameObject.CompareTag("Enemy2Attack"))
-        //        collisionManager.Enemy2Attack();
-        //    if (collision.gameObject.CompareTag("Enemy3Attack"))
-        //        collisionManager.Enemy3Attack();
-        //    if (collision.gameObject.CompareTag("Enemy4Attack"))
-        //        collisionManager.Enemy4Attack();
-        //    if (collision.gameObject.CompareTag("Enemy5Attack"))
-        //        collisionManager.Enemy5Attack();
-        //    if (collision.gameObject.CompareTag("Enemy6Attack"))
-        //        collisionManager.Enemy6Attack();
-        //    if (collision.gameObject.CompareTag("MiniBossAttack"))
-        //        collisionManager.MiniBossAttack();
-        //    if (collision.gameObject.CompareTag("BossAttack1"))
-        //        collisionManager.BossAttack1();
-        //    if (collision.gameObject.CompareTag("BossAttack2"))
-        //        collisionManager.BossAttack2();
-        //    if (collision.gameObject.CompareTag("BossAttack3"))
-        //        collisionManager.BossAttack3();
-        //    if (collision.gameObject.CompareTag("BossAttack4"))
-        //        collisionManager.BossAttack4();
-        //    if (collision.gameObject.CompareTag("BossAttack5"))
-        //        collisionManager.BossAttack5();
-        //}
+        if (gameObject.CompareTag("MainCharacter"))
+        {
+            if (collision.gameObject.CompareTag("Enemy1Attack"))
+                collisionManager.Enemy1Attack();
+            //if (collision.gameObject.CompareTag("Enemy2Attack"))
+            //    collisionManager.Enemy2Attack();
+            //if (collision.gameObject.CompareTag("Enemy3Attack"))
+            //    collisionManager.Enemy3Attack();
+            //if (collision.gameObject.CompareTag("Enemy4Attack"))
+            //    collisionManager.Enemy4Attack();
+            //if (collision.gameObject.CompareTag("Enemy5Attack"))
+            //    collisionManager.Enemy5Attack();
+            //if (collision.gameObject.CompareTag("Enemy6Attack"))
+            //    collisionManager.Enemy6Attack();
+            //if (collision.gameObject.CompareTag("MiniBossAttack"))
+            //    collisionManager.MiniBossAttack();
+            //if (collision.gameObject.CompareTag("BossAttack1"))
+            //    collisionManager.BossAttack1();
+            //if (collision.gameObject.CompareTag("BossAttack2"))
+            //    collisionManager.BossAttack2();
+            //if (collision.gameObject.CompareTag("BossAttack3"))
+            //    collisionManager.BossAttack3();
+            //if (collision.gameObject.CompareTag("BossAttack4"))
+            //    collisionManager.BossAttack4();
+            //if (collision.gameObject.CompareTag("BossAttack5"))
+            //    collisionManager.BossAttack5();
+        }
     }
 }

@@ -59,9 +59,13 @@ public class PlayerManager : MonoBehaviour
     void Awake()
     {
         if (instance == null)
+        {
             instance = this;
+        }
         else
+        {
             Destroy(gameObject);
+        }
 
         DontDestroyOnLoad(gameObject);
     }
@@ -210,8 +214,10 @@ public class PlayerManager : MonoBehaviour
             {
                 mainCameraControl.focus = GameManager.instance.character2.transform;
                 GameManager.instance.character1.gameObject.tag = "SubCharacter";
+                GameManager.instance.character1.gameObject.layer = 7;
                 GameManager.instance.character2.gameObject.tag = "MainCharacter";
-                
+                GameManager.instance.character2.gameObject.layer = 6;
+
                 GameManager.instance.character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
                 GameManager.instance.character2.gameObject.GetComponent<NavMeshAgent>().enabled = false;
                 
@@ -226,7 +232,9 @@ public class PlayerManager : MonoBehaviour
             {
                 mainCameraControl.focus = GameManager.instance.character1.transform;
                 GameManager.instance.character1.gameObject.tag = "MainCharacter";
+                GameManager.instance.character1.gameObject.layer = 6;
                 GameManager.instance.character2.gameObject.tag = "SubCharacter";
+                GameManager.instance.character2.gameObject.layer = 7;
 
                 GameManager.instance.character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
                 GameManager.instance.character2.gameObject.GetComponent<NavMeshAgent>().enabled = true;
