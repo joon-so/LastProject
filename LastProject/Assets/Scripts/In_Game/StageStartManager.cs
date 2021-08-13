@@ -19,5 +19,7 @@ public class StageStartManager : MonoBehaviour
             GameManager.instance.character2.GetComponent<NavMeshAgent>().enabled = true;
         else if (GameManager.instance.clientPlayer.curMainCharacter == 2)
             GameManager.instance.character1.GetComponent<NavMeshAgent>().enabled = true;
+
+
     }
 }
