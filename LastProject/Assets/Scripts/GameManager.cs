@@ -93,6 +93,10 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("Stage1-3");
     }
+    public void ChangeSceneStage3To4()
+    {
+        SceneManager.LoadScene("Stage1-3To4");
+    }
     public void ChangeSceneStage4()
     {
         SceneManager.LoadScene("Stage1-4");
