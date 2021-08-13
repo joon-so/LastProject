@@ -51,6 +51,8 @@ public class InGameUI : MonoBehaviour
 
     [SerializeField] GameObject gameMenu;
 
+    [SerializeField] Image hitEffect;
+
     private GameObject mainC1;
     private GameObject subC1;
     private GameObject mainC2;
@@ -59,9 +61,12 @@ public class InGameUI : MonoBehaviour
     private GameObject c1Slot;
     private GameObject c2Slot;
 
+    ClientCollisionManager clientCollisionManager;
+
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        clientCollisionManager = GameObject.Find("GameManager").GetComponent<ClientCollisionManager>();
     }
     void Start()
     {
@@ -74,6 +79,7 @@ public class InGameUI : MonoBehaviour
             UpdateHp();
             UpdateCoolTimeUI();
             UpdatePlayerScore();
+            HitActiveEffect();
             if (Input.GetKeyDown(KeyCode.F))
             {
                 if(PlayerManager.instance.onTag)
@@ -183,6 +189,14 @@ public class InGameUI : MonoBehaviour
             textSubHp.text = string.Format("{0} / {1}", GameManager.instance.clientPlayer.character1Hp, GameManager.instance.character1MaxHp);
             textSubEp.text = string.Format("{0} / {1}", GameManager.instance.clientPlayer.character1Ep, GameManager.instance.character1MaxEp);
         }
+
+        if(imageMainHpFill.fillAmount <= 0.3f && imageMainHpFill.fillAmount > 0)
+        {
+            if(!hitEffect.enabled)
+            {
+                StartCoroutine(ActiveHitEffect());
+            }
+        }
     }
 
     void UpdateCoolTimeUI()
@@ -248,5 +262,29 @@ public class InGameUI : MonoBehaviour
     void UpdatePlayerScore()
     {
         playerScore.text = string.Format("{0}", GameManager.instance.playerScore);
+    }
+
+    public void HitActiveEffect()
+    {
+        if (clientCollisionManager.hit)
+        {
+            clientCollisionManager.hit = false;
+            StartCoroutine(ActiveHitEffect());
+        }
+    }
+    IEnumerator ActiveHitEffect()
+    {
+        hitEffect.enabled = true;
+        float alpha = hitEffect.color.a;
+        var tempColor = hitEffect.color;
+        while (tempColor.a > 0)
+        {
+            tempColor.a -= Time.deltaTime / 10;
+            hitEffect.color = tempColor;
+            yield return null;
+        }
+        hitEffect.enabled = false;
+        tempColor.a = alpha;
+        hitEffect.color = tempColor;
     }
 }

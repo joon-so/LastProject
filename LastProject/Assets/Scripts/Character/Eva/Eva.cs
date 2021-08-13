@@ -777,32 +777,32 @@ public class Eva : SubAI
             transform.LookAt(pos);
             StartCoroutine(FallDown());
         }
-        //if (gameObject.CompareTag("MainCharacter"))
-        //{
-        //    if (collision.gameObject.CompareTag("Enemy1Attack"))
-        //        collisionManager.Enemy1Attack();
-        //    if (collision.gameObject.CompareTag("Enemy2Attack"))
-        //        collisionManager.Enemy2Attack();
-        //    if (collision.gameObject.CompareTag("Enemy3Attack"))
-        //        collisionManager.Enemy3Attack();
-        //    if (collision.gameObject.CompareTag("Enemy4Attack"))
-        //        collisionManager.Enemy4Attack();
-        //    if (collision.gameObject.CompareTag("Enemy5Attack"))
-        //        collisionManager.Enemy5Attack();
-        //    if (collision.gameObject.CompareTag("Enemy6Attack"))
-        //        collisionManager.Enemy6Attack();
-        //    if (collision.gameObject.CompareTag("MiniBossAttack"))
-        //        collisionManager.MiniBossAttack();
-        //    if (collision.gameObject.CompareTag("BossAttack1"))
-        //        collisionManager.BossAttack1();
-        //    if (collision.gameObject.CompareTag("BossAttack2"))
-        //        collisionManager.BossAttack2();
-        //    if (collision.gameObject.CompareTag("BossAttack3"))
-        //        collisionManager.BossAttack3();
-        //    if (collision.gameObject.CompareTag("BossAttack4"))
-        //        collisionManager.BossAttack4();
-        //    if (collision.gameObject.CompareTag("BossAttack5"))
-        //        collisionManager.BossAttack5();
-        //}
+        if (gameObject.CompareTag("MainCharacter"))
+        {
+            if (collision.gameObject.CompareTag("Enemy1Attack"))
+                collisionManager.Enemy1Attack();
+            if (collision.gameObject.CompareTag("Enemy2Attack"))
+                collisionManager.Enemy2Attack();
+            if (collision.gameObject.CompareTag("Enemy3Attack"))
+                collisionManager.Enemy3Attack();
+            if (collision.gameObject.CompareTag("Enemy4Attack"))
+                collisionManager.Enemy4Attack();
+            if (collision.gameObject.CompareTag("Enemy5Attack"))
+                collisionManager.Enemy5Attack();
+            if (collision.gameObject.CompareTag("Enemy6Attack"))
+                collisionManager.Enemy6Attack();
+            if (collision.gameObject.CompareTag("MiniBossAttack"))
+                collisionManager.MiniBossAttack();
+            if (collision.gameObject.CompareTag("BossAttack1"))
+                collisionManager.BossAttack1();
+            if (collision.gameObject.CompareTag("BossAttack2"))
+                collisionManager.BossAttack2();
+            if (collision.gameObject.CompareTag("BossAttack3"))
+                collisionManager.BossAttack3();
+            if (collision.gameObject.CompareTag("BossAttack4"))
+                collisionManager.BossAttack4();
+            if (collision.gameObject.CompareTag("BossAttack5"))
+                collisionManager.BossAttack5();
+        }
     }
 }
