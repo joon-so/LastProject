@@ -127,6 +127,10 @@ public class PlayerManager : MonoBehaviour
             {
                 GameManager.instance.ChangeSceneStage5();
             }
+            if (Input.GetKeyDown(KeyCode.F6))
+            {
+                GameManager.instance.ChangeSceneStage3To4();
+            }
             Zoom();
             Click();
             MainSubEffect();
