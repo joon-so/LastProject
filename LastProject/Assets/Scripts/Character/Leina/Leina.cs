@@ -638,8 +638,8 @@ public class Leina : SubAI
         }
         if (gameObject.CompareTag("MainCharacter"))
         {
-            if (collision.gameObject.CompareTag("Enemy1Attack"))
-                collisionManager.Enemy1Attack();
+            //if (collision.gameObject.CompareTag("Enemy1Attack"))
+            //    collisionManager.Enemy1Attack();
             //if (collision.gameObject.CompareTag("Enemy2Attack"))
             //    collisionManager.Enemy2Attack();
             //if (collision.gameObject.CompareTag("Enemy3Attack"))

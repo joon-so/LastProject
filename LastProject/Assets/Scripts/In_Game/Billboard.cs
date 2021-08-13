@@ -7,14 +7,14 @@ public class Billboard : MonoBehaviour
     public Transform cam;
     private GameObject mainCamera;
 
-    void Start()
-    {
-        mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        cam = mainCamera.transform;
-    }
-
     void LateUpdate()
     {
+        if (mainCamera == null)
+        {
+            mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+            cam = mainCamera.transform;
+        }
+
         transform.LookAt(transform.position + cam.forward);    
     }
 }

@@ -18,6 +18,8 @@ public class CharacterSelect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SetActiveManager.instance.SetActiveFalse();
+
         levelLoader = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();
 
         movePoint1 = new Vector3(1.97f, transform.position.y, 20.3f);
