@@ -15,7 +15,7 @@ public class Stage3To4 : MonoBehaviour
     }
     IEnumerator NextScene()
     {
-        yield return new WaitForSeconds(6.5f);
+        yield return new WaitForSeconds(4.46f);
         levelLoader.LoadNextLevel();
     }
 }
