@@ -19,13 +19,11 @@ public class SetActiveManager : MonoBehaviour
 
     public void SetActiveFalse()
     {
-        Debug.Log("²¨Áà");
         gameUI.SetActive(false);
         player.SetActive(false);
     }
     public void SetActiveTrue()
     {
-        Debug.Log("ÄÑÁà");
         gameUI.SetActive(true);
         player.SetActive(true);
     }

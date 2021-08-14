@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Stage1To2 : MonoBehaviour
+public class Stage2To3 : MonoBehaviour
 {
     LevelLoader levelLoader;
 

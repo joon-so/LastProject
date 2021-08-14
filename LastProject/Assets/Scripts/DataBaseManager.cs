@@ -77,8 +77,9 @@ public class DataBaseManager : MonoBehaviour
 
     public void LoginBtn()
     {
+        SceneManager.LoadScene("Main");
         SoundManager.instance.SFXPlay("Click", uiButtonSound);
-        StartCoroutine(LoginCo());
+//        StartCoroutine(LoginCo());
     }
 
     public void applyAccountBtn()
