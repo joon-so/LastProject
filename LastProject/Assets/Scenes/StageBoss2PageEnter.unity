@@ -1034,7 +1034,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c13a7d149e933d74996672e3d46506e8, type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: c13a7d149e933d74996672e3d46506e8, type: 3}
       propertyPath: m_LocalScale.x
@@ -3144,7 +3144,7 @@ Transform:
   - {fileID: 705209906}
   - {fileID: 656726042}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &164153973
 PrefabInstance:
@@ -9447,7 +9447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5129194430758153039, guid: 18097d30d54ab4847abe723141dd2ed8, type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 5129194430758153039, guid: 18097d30d54ab4847abe723141dd2ed8, type: 3}
       propertyPath: m_LocalScale.x
@@ -13031,7 +13031,7 @@ GameObject:
   m_Component:
   - component: {fileID: 537067800}
   m_Layer: 0
-  m_Name: Train (2)
+  m_Name: Train
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13067,7 +13067,7 @@ Transform:
   - {fileID: 1579685697}
   - {fileID: 953538115}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 10.839}
 --- !u!1001 &545754512
 PrefabInstance:
@@ -14606,7 +14606,7 @@ GameObject:
   - component: {fileID: 640206411}
   - component: {fileID: 640206410}
   m_Layer: 0
-  m_Name: CM vcam2 (3)
+  m_Name: CM vcam5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17883,36 +17883,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4346979635813750, guid: d6ec55c27f24e0d4eb784216f08eeba4, type: 3}
   m_PrefabInstance: {fileID: 786947124}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &789990943
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 789990944}
-  m_Layer: 0
-  m_Name: Buildings
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &789990944
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 789990943}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -10.799995, y: 0, z: 49.9}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &794130238
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18892,7 +18862,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &839940199
 MonoBehaviour:
@@ -26062,7 +26032,7 @@ GameObject:
   - component: {fileID: 1201766468}
   - component: {fileID: 1201766467}
   m_Layer: 0
-  m_Name: CM vcam2 (2)
+  m_Name: CM vcam4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31571,7 +31541,7 @@ GameObject:
   - component: {fileID: 1473351613}
   - component: {fileID: 1473351614}
   m_Layer: 0
-  m_Name: Train (1)
+  m_Name: Train
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31596,7 +31566,7 @@ Transform:
   - {fileID: 1762352787}
   - {fileID: 1731941194}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1473351614
 Animator:
@@ -32483,8 +32453,8 @@ GameObject:
   - component: {fileID: 1509898221}
   - component: {fileID: 1509898224}
   m_Layer: 0
-  m_Name: Camera
-  m_TagString: Untagged
+  m_Name: MainCamera
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32547,7 +32517,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1509898220}
-  m_LocalRotation: {x: 0.080475904, y: 0.7025124, z: -0.080475904, w: 0.7025124}
+  m_LocalRotation: {x: 0.080475904, y: 0.7025124, z: -0.080475904, w: 0.6690338}
   m_LocalPosition: {x: 7.163, y: 5.097, z: 0.282}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -34201,7 +34171,7 @@ Transform:
   - {fileID: 24780547}
   - {fileID: 1716609665}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!95 &1552113391
 Animator:
@@ -43220,7 +43190,7 @@ GameObject:
   - component: {fileID: 1921617477}
   - component: {fileID: 1921617476}
   m_Layer: 0
-  m_Name: CM vcam2 (1)
+  m_Name: CM vcam3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
