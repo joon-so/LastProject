@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class CharacterSelect : MonoBehaviour
 {
-    LevelLoader levelLoader;
-
     [SerializeField] GameObject karmen;
     [SerializeField] GameObject jade;
     [SerializeField] GameObject leina;
@@ -18,10 +16,6 @@ public class CharacterSelect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetActiveManager.instance.SetActiveFalse();
-
-        levelLoader = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();
-
         movePoint1 = new Vector3(1.97f, transform.position.y, 20.3f);
         movePoint2 = new Vector3(1.94f, transform.position.y, 15.15f);
         movePoint3 = new Vector3(6.35f, transform.position.y, 9.48f);
@@ -66,7 +60,7 @@ public class CharacterSelect : MonoBehaviour
                 eva.SetActive(true);
             }
         }
-        StartCoroutine(Motion());
+        //StartCoroutine(Motion());
     }
 
     IEnumerator Motion()
@@ -89,6 +83,5 @@ public class CharacterSelect : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, movePoint3, 4f * Time.deltaTime);
             yield return null;
         }
-        levelLoader.LoadNextLevel();
     }
 }
