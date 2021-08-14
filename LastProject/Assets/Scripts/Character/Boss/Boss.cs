@@ -53,7 +53,7 @@ public class Boss : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
         boxCollider = GetComponent<BoxCollider>();
 
-        collisionManager = GameObject.Find("GameManager").GetComponent<ClientCollisionManager>();
+        //collisionManager = GameObject.Find("GameManager").GetComponent<ClientCollisionManager>();
 
         targetCharacter = GameObject.FindGameObjectWithTag("SubCharacter");
         FlyEffect.SetActive(false);
