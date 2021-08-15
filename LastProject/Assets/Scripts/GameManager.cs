@@ -120,10 +120,6 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("Stage3To4");
     }
-    public void ChangeSceneStage4To5()
-    {
-        SceneManager.LoadScene("Stage4To5");
-    }
     public void ChangeSceneBoss1PageEnter()
     {
         SceneManager.LoadScene("StageBoss1PageEnter");

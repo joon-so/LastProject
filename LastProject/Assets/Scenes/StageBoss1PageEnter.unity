@@ -1063,8 +1063,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 66125500}
-  m_LocalRotation: {x: 0.09229593, y: 0.7010574, z: -0.09229593, w: 0.5789473}
-  m_LocalPosition: {x: 113.990005, y: -0.7249999, z: 0.21600312}
+  m_LocalRotation: {x: 0.019127226, y: -0.588221, z: 0.013918448, w: 0.8083542}
+  m_LocalPosition: {x: 32.277855, y: 26.169159, z: 20.96527}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3669,7 +3669,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 187970306}
-  m_LocalRotation: {x: 0.01912947, y: -0.58697516, z: 0.013875047, w: 0.8092601}
+  m_LocalRotation: {x: 0.019127226, y: -0.588221, z: 0.013918448, w: 0.8083542}
   m_LocalPosition: {x: 32.277855, y: 26.169159, z: 20.96527}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -24277,7 +24277,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1135799219}
-  m_LocalRotation: {x: 0.23963037, y: 0.7571828, z: -0.38794, w: 0.46771154}
+  m_LocalRotation: {x: 0.23964688, y: 0.7572133, z: -0.38823035, w: 0.4674127}
   m_LocalPosition: {x: 109.9, y: 7.53, z: 3.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -26024,7 +26024,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1222192724}
-  m_LocalRotation: {x: -0.20276432, y: 0.79430246, z: -0.4414068, w: -0.36487022}
+  m_LocalRotation: {x: -0.21357365, y: 0.77816164, z: -0.34853604, w: -0.4768369}
   m_LocalPosition: {x: 12.29596, y: 15.464657, z: 6.265719}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -35995,8 +35995,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1652032892}
-  - component: {fileID: 1652032893}
   - component: {fileID: 1652032894}
+  - component: {fileID: 1652032893}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -36031,9 +36031,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1652032891}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34bee413485e4a04fa01466581a53b12, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b141e899e1348243bcf0f14ecace863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  karmen: {fileID: 226157663166043194}
+  jade: {fileID: 7966750313924696656}
+  leina: {fileID: 2587133061623177664}
+  eva: {fileID: 6150801196201930943}
 --- !u!95 &1652032894
 Animator:
   serializedVersion: 3

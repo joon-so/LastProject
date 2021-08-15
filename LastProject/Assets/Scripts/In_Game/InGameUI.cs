@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System;
 
 public class InGameUI : MonoBehaviour
@@ -63,6 +64,15 @@ public class InGameUI : MonoBehaviour
 
     ClientCollisionManager clientCollisionManager;
 
+    [Header("Explanation")]
+    [SerializeField] GameObject guide;
+    [SerializeField] Text headText;
+    [SerializeField] Text explanText;
+
+
+    [SerializeField] GameObject stageInfo;
+    [SerializeField] Text stageInfoText;
+
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -97,6 +107,35 @@ public class InGameUI : MonoBehaviour
             else
                 gameMenu.SetActive(true);
         }
+    }
+
+    void OnEnable()
+    {
+        if(SceneManager.GetActiveScene().buildIndex == 5)
+            StartCoroutine(StageInfo(SceneManager.GetActiveScene().name));
+        if (SceneManager.GetActiveScene().buildIndex == 7)
+            StartCoroutine(StageInfo(SceneManager.GetActiveScene().name));
+        if (SceneManager.GetActiveScene().buildIndex == 9)
+            StartCoroutine(StageInfo(SceneManager.GetActiveScene().name));
+        if (SceneManager.GetActiveScene().buildIndex == 11)
+            StartCoroutine(StageInfo(SceneManager.GetActiveScene().name));
+        if (SceneManager.GetActiveScene().buildIndex == 13)
+        {
+            if(GameManager.instance.bossPage == 1)
+                StartCoroutine(StageInfo("Boss 1Page"));
+            if (GameManager.instance.bossPage == 2)
+                StartCoroutine(StageInfo("Boss 2Page"));
+            if (GameManager.instance.bossPage == 3)
+                StartCoroutine(StageInfo("Boss 3Page"));
+        }
+    }
+
+    IEnumerator StageInfo(string text)
+    {
+        stageInfo.SetActive(true);
+        stageInfoText.text = text;
+        yield return new WaitForSeconds(1.0f);
+        stageInfo.SetActive(false);
     }
 
     void InitializeUI()
@@ -273,6 +312,7 @@ public class InGameUI : MonoBehaviour
             StartCoroutine(ActiveHitEffect());
         }
     }
+
     IEnumerator ActiveHitEffect()
     {
         hitEffect.enabled = true;
@@ -288,4 +328,41 @@ public class InGameUI : MonoBehaviour
         tempColor.a = alpha;
         hitEffect.color = tempColor;
     }
+
+    void ExplanManipulationMove()
+    {
+        guide.SetActive(true);
+        headText.text = " ";
+        explanText.text = " ";
+    }
+
+    void ExplanManipulationAttack()
+    {
+        guide.SetActive(true);
+        headText.text = " ";
+        explanText.text = " ";
+    }
+
+
+    void ExplanManipulationDodge()
+    {
+        guide.SetActive(true);
+        headText.text = " ";
+        explanText.text = " ";
+    }
+
+    void ExplanManipulationTag()
+    {
+        guide.SetActive(true);
+        headText.text = " ";
+        explanText.text = " ";
+    }
+
+    void ExplanManipulationSkill()
+    {
+        guide.SetActive(true);
+        headText.text = " ";
+        explanText.text = " ";
+    }
+
 }
