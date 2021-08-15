@@ -133,7 +133,6 @@ vector<cs_Login> login_vec;
 
 void disconnect_client(int id);
 
-
 void error_display(const char* msg, int err_no)
 {
     WCHAR* lpMsgBuf;
@@ -306,10 +305,6 @@ void send_data(int id)
     p.p4_sub_hp = playerdata.player4.Sub_HP;
     p.p4_sub_mp = playerdata.player4.Sub_MP;
 
-    //cout << p.p1_ID << p.p1_pos_x << endl;
-    //cout << p.p2_ID << p.p2_pos_x << endl;
-    //cout << p.p3_ID << p.p3_pos_x << endl;
-    //cout << p.p4_ID << p.p4_pos_x << endl;
 
     for (int i = 0; i < MAX_USER; i++) {
         if (g_clients[i].in_use == true) {
@@ -435,30 +430,7 @@ void process_packet(int id)
             playerdata.player1.Set_Name = true;
             playerdata.player1.Main_CH = p->main_charc;
             playerdata.player1.Sub_CH = p->sub_charc;
-            //if (p->main_charc == 1) {
-            //    playerdata.player1.Main_HP = 500;
-            //}
-            //else if (p->main_charc == 2) {
-            //    playerdata.player1.Main_HP = 400;
-            //}
-            //else if (p->main_charc == 3) {
-            //    playerdata.player1.Main_HP = 400;
-            //}
-            //else if (p->main_charc == 4) {
-            //    playerdata.player1.Main_HP = 500;
-            //}
-            //if (p->sub_charc == 1) {
-            //    playerdata.player1.Sub_HP = 500;
-            //}
-            //else if (p->sub_charc == 2) {
-            //    playerdata.player1.Sub_HP = 400;
-            //}
-            //else if (p->sub_charc == 3) {
-            //    playerdata.player1.Sub_HP = 400;
-            //}
-            //else if (p->sub_charc == 4) {
-            //    playerdata.player1.Sub_HP = 500;
-            //}
+
         }
         else if (playerdata.playerNum == 2 && playerdata.player2.Set_Name == false)
         {
@@ -466,30 +438,7 @@ void process_packet(int id)
             playerdata.player2.Set_Name = true;
             playerdata.player2.Main_CH = p->main_charc;
             playerdata.player2.Sub_CH = p->sub_charc;
-            //if (p->main_charc == 1) {
-            //    playerdata.player2.Main_HP = 500;
-            //}
-            //else if (p->main_charc == 2) {
-            //    playerdata.player2.Main_HP = 400;
-            //}
-            //else if (p->main_charc == 3) {
-            //    playerdata.player2.Main_HP = 400;
-            //}
-            //else if (p->main_charc == 4) {
-            //    playerdata.player2.Main_HP = 500;
-            //}
-            //if (p->sub_charc == 1) {
-            //    playerdata.player2.Sub_HP = 500;
-            //}
-            //else if (p->sub_charc == 2) {
-            //    playerdata.player2.Sub_HP = 400;
-            //}
-            //else if (p->sub_charc == 3) {
-            //    playerdata.player2.Sub_HP = 400;
-            //}
-            //else if (p->sub_charc == 4) {
-            //    playerdata.player2.Sub_HP = 500;
-            //}
+
         }
         else if (playerdata.playerNum == 3 && playerdata.player3.Set_Name == false)
         {
@@ -497,30 +446,7 @@ void process_packet(int id)
             playerdata.player3.Set_Name = true;
             playerdata.player3.Main_CH = p->main_charc;
             playerdata.player3.Sub_CH = p->sub_charc;
-            //if (p->main_charc == 1) {
-            //    playerdata.player3.Main_HP = 500;
-            //}
-            //else if (p->main_charc == 2) {
-            //    playerdata.player3.Main_HP = 400;
-            //}
-            //else if (p->main_charc == 3) {
-            //    playerdata.player3.Main_HP = 400;
-            //}
-            //else if (p->main_charc == 4) {
-            //    playerdata.player3.Main_HP = 500;
-            //}
-            //if (p->sub_charc == 1) {
-            //    playerdata.player3.Sub_HP = 500;
-            //}
-            //else if (p->sub_charc == 2) {
-            //    playerdata.player3.Sub_HP = 400;
-            //}
-            //else if (p->sub_charc == 3) {
-            //    playerdata.player3.Sub_HP = 400;
-            //}
-            //else if (p->sub_charc == 4) {
-            //    playerdata.player3.Sub_HP = 500;
-            //}
+
         }
         else if (playerdata.playerNum == 4 && playerdata.player4.Set_Name == false)
         {
@@ -528,30 +454,7 @@ void process_packet(int id)
             playerdata.player4.Set_Name = true;
             playerdata.player4.Main_CH = p->main_charc;
             playerdata.player4.Sub_CH = p->sub_charc;
-            //if (p->main_charc == 1) {
-            //    playerdata.player4.Main_HP = 500;
-            //}
-            //else if (p->main_charc == 2) {
-            //    playerdata.player4.Main_HP = 400;
-            //}
-            //else if (p->main_charc == 3) {
-            //    playerdata.player4.Main_HP = 400;
-            //}
-            //else if (p->main_charc == 4) {
-            //    playerdata.player4.Main_HP = 500;
-            //}
-            //if (p->sub_charc == 1) {
-            //    playerdata.player4.Sub_HP = 500;
-            //}
-            //else if (p->sub_charc == 2) {
-            //    playerdata.player4.Sub_HP = 400;
-            //}
-            //else if (p->sub_charc == 3) {
-            //    playerdata.player4.Sub_HP = 400;
-            //}
-            //else if (p->sub_charc == 4) {
-            //    playerdata.player4.Sub_HP = 500;
-            //}
+
         }
 
         cs_Login sp;
@@ -560,9 +463,6 @@ void process_packet(int id)
         strncpy_s(sp.ID, p->ID, sizeof(p->ID));
         sp.main_charc = p->main_charc;
         sp.sub_charc = p->sub_charc;
-        //cout << sp.ID << ' ' << sp.main_charc << ' ' << sp.sub_charc << ' ' << endl;
-        //cout << sp.size << endl;
-
 
 
         //맥스 유저 사용자로 바꾸자 for 문 부하 줄이기
@@ -902,38 +802,6 @@ void worker_thread()
             delete over_ex;
             break;
         }
-        //case OP_NPC_RESPAWN: {
-
-        //    delete over_ex;
-        //    break;
-        //}
-        //case OP_PLAYER_MOVE_NOTIFY: {
-        //    g_clients[key].lua_lock.lock();
-        //    g_clients[key].lua_lock.unlock();
-        //    delete over_ex;
-        //    break;
-        //}
-        //case OP_PLAYER_MOVE_1s: {
-        //    g_clients[key].move_1s_time = false;
-        //    delete over_ex;
-        //    break;
-        //}
-        //case OP_PLAYER_ATTACK_1s: {
-        //    g_clients[key].attack_1s_time = false;
-        //    delete over_ex;
-        //    break;
-        //}
-        //case OP_PLAYER_HP_RECOVERY_5s: {
-        //    g_clients[key].hp_recov_5s_time = false;
-
-        //    delete over_ex;
-        //    break;
-        //}
-        //case OP_NPC_ATTACK_1s: {
-        //    g_clients[key].attack_1s_time = false;
-        //    delete over_ex;
-        //    break;
-        //}
         }
     }
 }
