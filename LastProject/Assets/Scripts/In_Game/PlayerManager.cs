@@ -414,7 +414,6 @@ public class PlayerManager : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("플레이어 m");
         initTargetVec = true;
     }
 }

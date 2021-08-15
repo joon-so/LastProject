@@ -25,9 +25,6 @@ public class Karmen : SubAI
     public static float qSkillCoolTime = 5.0f;
     public static float wSkillCoolTime = 5.0f;
     public static float eSkillCoolTime = 5.0f;
-    public static int attackDamage = 20;
-    public static int qSkillDamage = 60;
-    public static int wSkillDamage = 10;
 
     float curDodgeCoolTime;
     float curQSkillCoolTime;
@@ -723,30 +720,26 @@ public class Karmen : SubAI
         }
         if (gameObject.CompareTag("MainCharacter"))
         {
-            //if (collision.gameObject.CompareTag("Enemy1Attack"))
-            //    collisionManager.Enemy1Attack();
-            //if (collision.gameObject.CompareTag("Enemy2Attack"))
-            //    collisionManager.Enemy2Attack();
-            //if (collision.gameObject.CompareTag("Enemy3Attack"))
-            //    collisionManager.Enemy3Attack();
-            //if (collision.gameObject.CompareTag("Enemy4Attack"))
-            //    collisionManager.Enemy4Attack();
-            //if (collision.gameObject.CompareTag("Enemy5Attack"))
-            //    collisionManager.Enemy5Attack();
-            //if (collision.gameObject.CompareTag("Enemy6Attack"))
-            //    collisionManager.Enemy6Attack();
-            //if (collision.gameObject.CompareTag("MiniBossAttack"))
-            //    collisionManager.MiniBossAttack();
-            //if (collision.gameObject.CompareTag("BossAttack1"))
-            //    collisionManager.BossAttack1();
-            //if (collision.gameObject.CompareTag("BossAttack2"))
-            //    collisionManager.BossAttack2();
-            //if (collision.gameObject.CompareTag("BossAttack3"))
-            //    collisionManager.BossAttack3();
-            //if (collision.gameObject.CompareTag("BossAttack4"))
-            //    collisionManager.BossAttack4();
-            //if (collision.gameObject.CompareTag("BossAttack5"))
-            //    collisionManager.BossAttack5();
+            if (collision.gameObject.CompareTag("Enemy1Attack"))
+                collisionManager.Enemy1Attack();
+            if (collision.gameObject.CompareTag("Enemy2Attack"))
+                collisionManager.Enemy2Attack();
+            if (collision.gameObject.CompareTag("Enemy3Attack"))
+                collisionManager.Enemy3Attack();
+            if (collision.gameObject.CompareTag("Enemy6Attack"))
+                collisionManager.Enemy6Attack();
+            if (collision.gameObject.CompareTag("Enemy7Attack"))
+                collisionManager.Enemy7Attack();
+            if (collision.gameObject.CompareTag("BossAttack1"))
+                collisionManager.BossAttack1();
+            if (collision.gameObject.CompareTag("BossAttack2"))
+                collisionManager.BossAttack2();
+            if (collision.gameObject.CompareTag("BossAttack3"))
+                collisionManager.BossAttack3();
+            if (collision.gameObject.CompareTag("BossAttack4"))
+                collisionManager.BossAttack4();
+            if (collision.gameObject.CompareTag("BossAttack5"))
+                collisionManager.BossAttack5();
         }
     }
 }

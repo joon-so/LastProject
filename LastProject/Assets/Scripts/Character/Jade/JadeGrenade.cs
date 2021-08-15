@@ -33,9 +33,22 @@ public class JadeGrenade : MonoBehaviour
 
         for (int i = 0; i < hitCol.Length; ++i)
         {
-            if (hitCol[i].gameObject.CompareTag("Enemy"))
+            if (hitCol[i].gameObject.CompareTag("Enemy1"))
             {
-                collisionManager.JadeWSkillAttack();
+                hitCol[i].gameObject.GetComponent<Enemy1>().HitJadeGrenade();
+                Debug.Log("ad");
+            }
+            if (hitCol[i].gameObject.CompareTag("Enemy2"))
+            {
+                GetComponent<Enemy2>().HitJadeGrenade();
+            }
+            if (hitCol[i].gameObject.CompareTag("Enemy3"))
+            {
+                GetComponent<Enemy3>().HitJadeGrenade();
+            }
+            if (hitCol[i].gameObject.CompareTag("Enemy6"))
+            {
+                GetComponent<Enemy6>().HitJadeGrenade();
             }
         }
     }

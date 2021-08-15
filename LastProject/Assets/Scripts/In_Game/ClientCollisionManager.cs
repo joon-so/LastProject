@@ -27,10 +27,9 @@ public class ClientCollisionManager : MonoBehaviour
     public int enemy1Attack;
     public int enemy2Attack;
     public int enemy3Attack;
-    public int enemy4Attack;
-    public int enemy5Attack;
     public int enemy6Attack;
-    
+    public int enemy7Attack;
+
     public int miniBossAttack;
     public int bossAttack1;
     public int bossAttack2;
@@ -57,11 +56,6 @@ public class ClientCollisionManager : MonoBehaviour
         }
     }
 
-    public void EnemyHpSetting(int damage)
-    {
-        // 플레이어가 깎은 enemy hp 처리
-    }
-
     public void Enemy1Attack()
     {
         PlayerHpSetting(enemy1Attack);
@@ -74,17 +68,13 @@ public class ClientCollisionManager : MonoBehaviour
     {
         PlayerHpSetting(enemy3Attack);
     }
-    public void Enemy4Attack()
-    {
-        PlayerHpSetting(enemy4Attack);
-    }
-    public void Enemy5Attack()
-    {
-        PlayerHpSetting(enemy5Attack);
-    }
     public void Enemy6Attack()
     {
         PlayerHpSetting(enemy6Attack);
+    }
+    public void Enemy7Attack()
+    {
+        PlayerHpSetting(enemy7Attack);
     }
     public void MiniBossAttack()
     {
@@ -109,73 +99,5 @@ public class ClientCollisionManager : MonoBehaviour
     public void BossAttack5()
     {
         PlayerHpSetting(bossAttack5);
-    }
-    
-    public void KarmenBasicAttack()
-    {
-        EnemyHpSetting(karmenAttackDamage);
-    }
-    public void KarmenQSkillAttack()
-    {
-        EnemyHpSetting(karmenQSkillDamage);
-    }
-    public void KarmenWSkillAttack()
-    {
-        EnemyHpSetting(karmenWSkillDamage);
-    }
-    public void KarmenESkillAttack()
-    {
-        EnemyHpSetting(karmenESkillDamage);
-    }
-
-    public void JadeBasicAttack()
-    {
-        EnemyHpSetting(jadeAttackDamage);
-    }
-    public void JadeQSkillAttack()
-    {
-        EnemyHpSetting(jadeQSkillDamage);
-    }
-    public void JadeWSkillAttack()
-    {
-        EnemyHpSetting(jadeWSkillDamage);
-    }
-    public void JadeESkillAttack()
-    {
-        EnemyHpSetting(jadeESkillDamage);
-    }
-
-    public void LeinaBasicAttack()
-    {
-        EnemyHpSetting(leinaAttackDamage);
-    }
-    public void LeinaQSkillAttack()
-    {
-        EnemyHpSetting(leinaQSkillDamage);
-    }
-    public void LeinaWSkillAttack()
-    {
-        EnemyHpSetting(leinaWSkillDamage);
-    }
-    public void LeinaESkillAttack()
-    {
-        EnemyHpSetting(leinaESkillDamage);
-    }
-
-    public void EvaBasicAttack()
-    {
-        EnemyHpSetting(evaAttackDamage);
-    }
-    public void EvaQSkillAttack()
-    {
-        EnemyHpSetting(evaQSkillDamage);
-    }
-    public void EvaWSkillAttack()
-    {
-        EnemyHpSetting(evaWSkillDamage);
-    }
-    public void EvaESkillAttack()
-    {
-        EnemyHpSetting(evaESkillDamage);
     }
 }
