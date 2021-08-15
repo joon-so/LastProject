@@ -202,6 +202,14 @@ public class Karmen : SubAI
         {
             E_Skill();
         }
+
+        if (PlayerManager.instance.initTargetVec == true)
+        {
+            moveSpeed = 0f;
+            animator.SetBool("Run", false);
+            vecTarget = transform.position;
+            PlayerManager.instance.initTargetVec = false;
+        }
     }
     void FixedUpdate()
     {

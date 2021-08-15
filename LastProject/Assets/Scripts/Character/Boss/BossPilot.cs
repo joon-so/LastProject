@@ -1,10 +1,12 @@
-using System.Collections;
+  using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class BossPilot : MonoBehaviour
 {
+    public static BossPilot instance;
+
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject respownEnemy;
     [SerializeField] Transform bulletShootPos;
@@ -28,6 +30,10 @@ public class BossPilot : MonoBehaviour
     float moveSpeed;
     float respownCooltime;
     float curRespownCooltime;
+
+    void Awake()
+    {
+    }
 
     void Start()
     {
