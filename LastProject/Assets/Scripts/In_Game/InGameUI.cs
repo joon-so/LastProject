@@ -84,6 +84,17 @@ public class InGameUI : MonoBehaviour
     }
     void Update()
     {
+        if (guide.activeSelf)
+        {
+            Time.timeScale = 0;
+            if (Input.GetMouseButtonDown(1))
+            {
+                guide.SetActive(false);
+                Time.timeScale = 1;
+            }
+            return;
+        }
+
         if (GameManager.instance.clientPlayer.character1Hp > 0 || GameManager.instance.clientPlayer.character2Hp > 0)
         {
             UpdateHp();
@@ -98,7 +109,6 @@ public class InGameUI : MonoBehaviour
                     TagCharacterSlot();
                 }
             }
-
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -111,8 +121,11 @@ public class InGameUI : MonoBehaviour
 
     void OnEnable()
     {
-        if(SceneManager.GetActiveScene().buildIndex == 5)
+        if (SceneManager.GetActiveScene().buildIndex == 5)
+        {
             StartCoroutine(StageInfo(SceneManager.GetActiveScene().name));
+            StartCoroutine(DelayTime());
+        }
         if (SceneManager.GetActiveScene().buildIndex == 7)
             StartCoroutine(StageInfo(SceneManager.GetActiveScene().name));
         if (SceneManager.GetActiveScene().buildIndex == 9)
@@ -329,40 +342,43 @@ public class InGameUI : MonoBehaviour
         hitEffect.color = tempColor;
     }
 
-    void ExplanManipulationMove()
+    public void ExplanManipulationMove()
     {
+        headText.text = "플레이어 이동";
+        explanText.text = "가고싶은 목적지에 마우스 우클릭을 합니다.";
         guide.SetActive(true);
-        headText.text = " ";
-        explanText.text = " ";
+    }
+    public void ExplanManipulationDodge()
+    {
+        headText.text = "플레이어 회피";
+        explanText.text = "회피하고자 하는 방향으로 마우스를 이동시키고 Space키를 누르면 됩니다.";
+        guide.SetActive(true);
+    }
+    public void ExplanManipulationTag()
+    {
+        headText.text = "플레이어 태그";
+        explanText.text = "플레이어는 태그(F키)로 메인 캐릭터와 서브캐릭터를 바꿀수 있습니다.\n" +
+                          "태크 쿨타임은 3초입니다.";
+        guide.SetActive(true);
+    }
+    public void ExplanManipulationAttack()
+    {
+        headText.text = "플레이어 공격";
+        explanText.text = "공격하고자 하는 방향으로 마우스 좌클릭을 합니다.";
+        guide.SetActive(true);
     }
 
-    void ExplanManipulationAttack()
+    public void ExplanManipulationSkill()
     {
+        headText.text = "플레이어 스킬";
+        explanText.text = "Q W E키를 눌러 캐릭터 스킬을 사용할 수 있습니다.\n" +
+                          "E스킬은 시너지스킬로 메인캐릭터와 서브캐릭터가 같이 공격합니다.";
         guide.SetActive(true);
-        headText.text = " ";
-        explanText.text = " ";
     }
-
-
-    void ExplanManipulationDodge()
+    
+    IEnumerator DelayTime()
     {
-        guide.SetActive(true);
-        headText.text = " ";
-        explanText.text = " ";
+        yield return new WaitForSeconds(1.1f);
+        ExplanManipulationMove();
     }
-
-    void ExplanManipulationTag()
-    {
-        guide.SetActive(true);
-        headText.text = " ";
-        explanText.text = " ";
-    }
-
-    void ExplanManipulationSkill()
-    {
-        guide.SetActive(true);
-        headText.text = " ";
-        explanText.text = " ";
-    }
-
 }

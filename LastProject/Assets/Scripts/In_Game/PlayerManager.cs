@@ -124,10 +124,6 @@ public class PlayerManager : MonoBehaviour
             {
                 GameManager.instance.ChangeSceneStage4();
             }
-            if (Input.GetKeyDown(KeyCode.F5))
-            {
-                //GameManager.instance.ChangeSceneStage5();
-            }
             if (Input.GetKeyDown(KeyCode.Alpha5))
             {
                 GameManager.instance.ChangeSceneStage1To2();
