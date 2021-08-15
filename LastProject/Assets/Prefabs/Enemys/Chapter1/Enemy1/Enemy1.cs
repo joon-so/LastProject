@@ -226,6 +226,7 @@ public class Enemy1 : MonoBehaviour
         born = true;
         movable = true;
         yield return new WaitForSeconds(1.9f);
+        rigid.constraints = RigidbodyConstraints.FreezeAll;
         shootable = true;
     }
 
