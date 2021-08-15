@@ -8,12 +8,14 @@ public class Boss2Page : MonoBehaviour
 
     void Start()
     {
+        SetActiveManager.instance.SetActiveFalse();
+
         levelLoader = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();
         StartCoroutine(NextScene());
     }
     IEnumerator NextScene()
     {
         yield return new WaitForSeconds(19.5f);
-        levelLoader.LoadNextLevel();
+        levelLoader.LoadBossStage();
     }
 }

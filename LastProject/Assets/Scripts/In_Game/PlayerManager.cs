@@ -56,6 +56,8 @@ public class PlayerManager : MonoBehaviour
     private bool isTag;
     public float curTagCoolTime;
 
+    public bool initTargetVec;
+
     void Awake()
     {
         if (instance == null)
@@ -85,7 +87,6 @@ public class PlayerManager : MonoBehaviour
 
         curTagCoolTime = GameManager.instance.tagCoolTime;
     }
-
     void Update()
     {
         if (GameManager.instance.clientPlayer.character1Hp <= 0 || GameManager.instance.clientPlayer.character2Hp <= 0)
@@ -129,17 +130,21 @@ public class PlayerManager : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Alpha5))
             {
-                GameManager.instance.ChangeSceneStage1To2();
+                GameManager.instance.ChangeSceneStage0To1();
             }
             if (Input.GetKeyDown(KeyCode.Alpha6))
             {
-                GameManager.instance.ChangeSceneStage2To3();
+                GameManager.instance.ChangeSceneStage1To2();
             }
             if (Input.GetKeyDown(KeyCode.Alpha7))
             {
-                GameManager.instance.ChangeSceneStage3To4();
+                GameManager.instance.ChangeSceneStage2To3();
             }
             if (Input.GetKeyDown(KeyCode.Alpha8))
+            {
+                GameManager.instance.ChangeSceneStage3To4();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha9))
             {
                 GameManager.instance.ChangeSceneStage4To5();
             }
@@ -405,5 +410,10 @@ public class PlayerManager : MonoBehaviour
         clickEffect.SetActive(true);
         yield return new WaitForSeconds(1f);
         clickEffect.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        initTargetVec = true;
     }
 }

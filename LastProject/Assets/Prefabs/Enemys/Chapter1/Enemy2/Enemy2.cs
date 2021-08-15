@@ -39,9 +39,12 @@ public class Enemy2 : MonoBehaviour
     public int maxHp = 200;
     public int currentHp;
     public HpBar hpBar;
+    ClientCollisionManager collisionManager;
 
     void Start()
     {
+        collisionManager = GameObject.Find("GameManager").GetComponent<ClientCollisionManager>();
+
         anim = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
         rigid = GetComponent<Rigidbody>();
@@ -65,7 +68,7 @@ public class Enemy2 : MonoBehaviour
         shootable = false;
         movable = false;
     }
-                                                                                                   
+
     void FixedUpdate()
     {
         if (mainCharacter == null)
@@ -85,7 +88,7 @@ public class Enemy2 : MonoBehaviour
         {
             Find();
         }
-        if(transform.position.y < 0)
+        if (transform.position.y < 0)
         {
             transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
         }
@@ -125,7 +128,7 @@ public class Enemy2 : MonoBehaviour
             playerDistance = Vector3.Distance(mainCharacter.transform.position, transform.position);
 
             //Attack
-            if(playerDistance < shootDistance)
+            if (playerDistance < shootDistance)
             {
                 if (movable)
                 {
@@ -153,13 +156,13 @@ public class Enemy2 : MonoBehaviour
             }
             else
             {
-                if(Vector3.Distance(startPoint, transform.position) < 0.1f)
+                if (Vector3.Distance(startPoint, transform.position) < 0.1f)
                 {
                     //anim.SetBool("isRun", false);
                 }
                 else
                 {
-                // anim.SetBool("isRun", true);
+                    // anim.SetBool("isRun", true);
                 }
                 //anim.SetBool("isAttack", false);
                 //anim.SetBool("isDetected", false);
@@ -216,87 +219,89 @@ public class Enemy2 : MonoBehaviour
 
     public void HitJadeGrenade()
     {
-        currentHp -= Jade.wSkillDamage;
+        currentHp -= collisionManager.jadeWSkillDamage;
         hpBar.SetHp(currentHp);
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "KarmenAttack")
-        {
-            currentHp -= Karmen.attackDamage;
-            hpBar.SetHp(currentHp);
-        }
-
-
-    }
-
     void OnCollisionEnter(Collision collision)
     {
         // Karmen
         if (collision.gameObject.tag == "KarmenAttack")
         {
-            currentHp -= Karmen.attackDamage;
+            currentHp -= collisionManager.karmenAttackDamage;
             hpBar.SetHp(currentHp);
         }
         if (collision.gameObject.tag == "KarmenQSkill")
         {
-            currentHp -= Karmen.qSkillDamage;
+            currentHp -= collisionManager.karmenQSkillDamage;
             hpBar.SetHp(currentHp);
         }
         if (collision.gameObject.tag == "KarmenWSkill")
         {
-            currentHp -= Karmen.wSkillDamage;
+            currentHp -= collisionManager.karmenWSkillDamage;
+            hpBar.SetHp(currentHp);
+        }
+        if (collision.gameObject.tag == "KarmenESkill")
+        {
+            currentHp -= collisionManager.karmenESkillDamage;
             hpBar.SetHp(currentHp);
         }
         // Jade
         if (collision.gameObject.tag == "JadeAttack")
         {
-            currentHp -= Jade.attackDamage;
+            currentHp -= collisionManager.jadeAttackDamage;
             hpBar.SetHp(currentHp);
         }
         if (collision.gameObject.tag == "JadeQSkill")
         {
-            currentHp -= Jade.qSkillDamage;
+            currentHp -= collisionManager.jadeQSkillDamage;
             hpBar.SetHp(currentHp);
         }
-        if (collision.gameObject.tag == "JadeWSkill")
+        if (collision.gameObject.tag == "JadeESkill")
         {
-            currentHp -= Jade.wSkillDamage;
+            currentHp -= collisionManager.jadeESkillDamage;
             hpBar.SetHp(currentHp);
         }
         // Leina
         if (collision.gameObject.tag == "LeinaAttack")
         {
-            currentHp -= Leina.attackDamage;
+            currentHp -= collisionManager.leinaAttackDamage;
             hpBar.SetHp(currentHp);
         }
         if (collision.gameObject.tag == "LeinaQSkill")
         {
-            currentHp -= Leina.qSkillDamage;
+            currentHp -= collisionManager.leinaQSkillDamage;
             hpBar.SetHp(currentHp);
         }
         if (collision.gameObject.tag == "LeinaWSkill")
         {
-            currentHp -= Leina.wSkillDamage;
+            currentHp -= collisionManager.leinaWSkillDamage;
+            hpBar.SetHp(currentHp);
+        }
+        if (collision.gameObject.tag == "LeinaESkill")
+        {
+            currentHp -= collisionManager.leinaESkillDamage;
             hpBar.SetHp(currentHp);
         }
         // Eva
         if (collision.gameObject.tag == "EvaAttack")
         {
-            currentHp -= Eva.attackDamage;
+            currentHp -= collisionManager.evaAttackDamage;
             hpBar.SetHp(currentHp);
         }
         if (collision.gameObject.tag == "EvaQSkill")
         {
-            currentHp -= Eva.qSkillDamage;
+            currentHp -= collisionManager.evaQSkillDamage;
             hpBar.SetHp(currentHp);
         }
         if (collision.gameObject.tag == "EvaWSkill")
         {
-            currentHp -= Eva.wSkillDamage;
+            currentHp -= collisionManager.evaWSkillDamage;
+            hpBar.SetHp(currentHp);
+        }
+        if (collision.gameObject.tag == "EvaESkill")
+        {
+            currentHp -= collisionManager.evaESkillDamage;
             hpBar.SetHp(currentHp);
         }
     }
-
 }

@@ -83,39 +83,43 @@ public class GameManager : MonoBehaviour
     }
     public void ChangeSceneStage1()
     {
-        SceneManager.LoadScene("Stage1-1");
+        SceneManager.LoadScene("Stage1");
     }
     public void ChangeSceneStage2()
     {
-        SceneManager.LoadScene("Stage1-2");
+        SceneManager.LoadScene("Stage2");
     }
     public void ChangeSceneStage3()
     {
-        SceneManager.LoadScene("Stage1-3");
+        SceneManager.LoadScene("Stage3");
     }
     public void ChangeSceneStage4()
     {
-        SceneManager.LoadScene("Stage1-4");
+        SceneManager.LoadScene("Stage4");
     }
     public void ChangeSceneStage5()
     {
-        SceneManager.LoadScene("Stage1-5");
+        SceneManager.LoadScene("Stage5");
+    }
+    public void ChangeSceneStage0To1()
+    {
+        SceneManager.LoadScene("Stage0To1");
     }
     public void ChangeSceneStage1To2()
     {
-        SceneManager.LoadScene("Stage1-1To2");
+        SceneManager.LoadScene("Stage1To2");
     }
     public void ChangeSceneStage2To3()
     {
-        SceneManager.LoadScene("Stage1-2To3");
+        SceneManager.LoadScene("Stage2To3");
     }
     public void ChangeSceneStage3To4()
     {
-        SceneManager.LoadScene("Stage1-3To4");
+        SceneManager.LoadScene("Stage3To4");
     }
     public void ChangeSceneStage4To5()
     {
-        SceneManager.LoadScene("Stage1-4To5");
+        SceneManager.LoadScene("Stage4To5");
     }
     public void ChangeSceneBoss1PageEnter()
     {

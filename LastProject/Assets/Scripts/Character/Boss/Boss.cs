@@ -375,78 +375,78 @@ public class Boss : MonoBehaviour
         canAttack = true;
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        // Karmen
-        if (collision.gameObject.tag == "MainCharacter")
-        {
-            if (canDash)
-                collisionManager.BossAttack2();
-        }
-        if (collision.gameObject.tag == "KarmenAttack")
-        {
-            currentHp -= Karmen.attackDamage;
-            //hpBar.SetHp(currentHp);
-        }
-        if (collision.gameObject.tag == "KarmenQSkill")
-        {
-            currentHp -= Karmen.qSkillDamage;
-            //hpBar.SetHp(currentHp);
-        }
-        if (collision.gameObject.tag == "KarmenWSkill")
-        {
-            currentHp -= Karmen.wSkillDamage;
-            //hpBar.SetHp(currentHp);
-        }
-        // Jade
-        if (collision.gameObject.tag == "JadeAttack")
-        {
-            currentHp -= Jade.attackDamage;
-            //hpBar.SetHp(currentHp);
-        }
-        if (collision.gameObject.tag == "JadeQSkill")
-        {
-            currentHp -= Jade.qSkillDamage;
-            //hpBar.SetHp(currentHp);
-        }
-        if (collision.gameObject.tag == "JadeWSkill")
-        {
-            currentHp -= Jade.wSkillDamage;
-            //hpBar.SetHp(currentHp);
-        }
-        // Leina
-        if (collision.gameObject.tag == "LeinaAttack")
-        {
-            currentHp -= Leina.attackDamage;
-            //hpBar.SetHp(currentHp);
-        }
-        if (collision.gameObject.tag == "LeinaQSkill")
-        {
-            currentHp -= Leina.qSkillDamage;
-            //hpBar.SetHp(currentHp);
-        }
-        if (collision.gameObject.tag == "LeinaWSkill")
-        {
-            currentHp -= Leina.wSkillDamage;
-            //hpBar.SetHp(currentHp);
-        }
-        // Eva
-        if (collision.gameObject.tag == "EvaAttack")
-        {
-            currentHp -= Eva.attackDamage;
-            //hpBar.SetHp(currentHp);
-        }
-        if (collision.gameObject.tag == "EvaQSkill")
-        {
-            currentHp -= Eva.qSkillDamage;
-            //hpBar.SetHp(currentHp);
-        }
-        if (collision.gameObject.tag == "EvaWSkill")
-        {
-            currentHp -= Eva.wSkillDamage;
-            //hpBar.SetHp(currentHp);
-        }
-    }
+    //void OnCollisionEnter(Collision collision)
+    //{
+    //    // Karmen
+    //    if (collision.gameObject.tag == "MainCharacter")
+    //    {
+    //        if (canDash)
+    //            collisionManager.BossAttack2();
+    //    }
+    //    if (collision.gameObject.tag == "KarmenAttack")
+    //    {
+    //        currentHp -= Karmen.attackDamage;
+    //        //hpBar.SetHp(currentHp);
+    //    }
+    //    if (collision.gameObject.tag == "KarmenQSkill")
+    //    {
+    //        currentHp -= Karmen.qSkillDamage;
+    //        //hpBar.SetHp(currentHp);
+    //    }
+    //    if (collision.gameObject.tag == "KarmenWSkill")
+    //    {
+    //        currentHp -= Karmen.wSkillDamage;
+    //        //hpBar.SetHp(currentHp);
+    //    }
+    //    // Jade
+    //    if (collision.gameObject.tag == "JadeAttack")
+    //    {
+    //        currentHp -= Jade.attackDamage;
+    //        //hpBar.SetHp(currentHp);
+    //    }
+    //    if (collision.gameObject.tag == "JadeQSkill")
+    //    {
+    //        currentHp -= Jade.qSkillDamage;
+    //        //hpBar.SetHp(currentHp);
+    //    }
+    //    if (collision.gameObject.tag == "JadeWSkill")
+    //    {
+    //        currentHp -= Jade.wSkillDamage;
+    //        //hpBar.SetHp(currentHp);
+    //    }
+    //    // Leina
+    //    if (collision.gameObject.tag == "LeinaAttack")
+    //    {
+    //        currentHp -= Leina.attackDamage;
+    //        //hpBar.SetHp(currentHp);
+    //    }
+    //    if (collision.gameObject.tag == "LeinaQSkill")
+    //    {
+    //        currentHp -= Leina.qSkillDamage;
+    //        //hpBar.SetHp(currentHp);
+    //    }
+    //    if (collision.gameObject.tag == "LeinaWSkill")
+    //    {
+    //        currentHp -= Leina.wSkillDamage;
+    //        //hpBar.SetHp(currentHp);
+    //    }
+    //    // Eva
+    //    if (collision.gameObject.tag == "EvaAttack")
+    //    {
+    //        currentHp -= Eva.attackDamage;
+    //        //hpBar.SetHp(currentHp);
+    //    }
+    //    if (collision.gameObject.tag == "EvaQSkill")
+    //    {
+    //        currentHp -= Eva.qSkillDamage;
+    //        //hpBar.SetHp(currentHp);
+    //    }
+    //    if (collision.gameObject.tag == "EvaWSkill")
+    //    {
+    //        currentHp -= Eva.wSkillDamage;
+    //        //hpBar.SetHp(currentHp);
+    //    }
+    //}
 
     Vector3 Bezier(Vector3 P_1, Vector3 P_2, Vector3 P_3, float value)
     {

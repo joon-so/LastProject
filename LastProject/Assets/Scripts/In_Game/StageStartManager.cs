@@ -18,8 +18,6 @@ public class StageStartManager : MonoBehaviour
         GameManager.instance.character1.transform.position = startPoint1.transform.position;
         GameManager.instance.character2.transform.position = startPoint2.transform.position;
 
-        Debug.Log("스타트 포지션 설정 완료");
-
         if (GameManager.instance.clientPlayer.curMainCharacter == 1)
             GameManager.instance.character2.GetComponent<NavMeshAgent>().enabled = true;
         else if (GameManager.instance.clientPlayer.curMainCharacter == 2)

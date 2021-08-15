@@ -246,7 +246,7 @@ public class CharacterSelectManager : MonoBehaviour
             return;
 
         GameManager.instance.clientPlayer.curMainCharacter = 1;
-        SceneManager.LoadScene("Stage1-0To1");
+        SceneManager.LoadScene("Stage0");
     }
     public void OnClickExit()
     {
