@@ -49,6 +49,9 @@ public class GameManager : MonoBehaviour
     public GameObject character1;
     public GameObject character2;
 
+
+    public int bossPage;
+
     void Awake()
     {
         if (instance == null)

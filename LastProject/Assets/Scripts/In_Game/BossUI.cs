@@ -9,33 +9,64 @@ public class BossUI : MonoBehaviour
     [SerializeField] Image boss2PageHp;
     [SerializeField] Image boss3PageHp;
 
-    [SerializeField] Image boss1PageMask;
-    [SerializeField] Image boss2PageMask;
-    [SerializeField] Image boss3PageMask;
+    [SerializeField] GameObject boss1PageHpObj;
+    [SerializeField] GameObject boss2PageHpObj;
+    [SerializeField] GameObject boss3PageHpObj;
 
-    private int bossPage;
+    [SerializeField] GameObject boss1PageMask;
+    [SerializeField] GameObject boss2PageMask;
+    [SerializeField] GameObject boss3PageMask;
+
+    private BossManager bossManager;
 
     void Start()
     {
-        bossPage = GameObject.Find("BossManager").GetComponent<BossManager>().bossPage;
+        bossManager = GameObject.Find("BossManager").GetComponent<BossManager>();
     }
 
     void Update()
     {
-        BossPilotHpUI();
+        BossMask();
         BossHpUI();
     }
 
     void BossMask()
     {
-    }
-
-    void BossPilotHpUI()
-    {
-
+        if (GameManager.instance.bossPage == 1)
+        {
+            boss1PageMask.SetActive(true);
+            boss2PageMask.SetActive(false);
+            boss3PageMask.SetActive(false);
+        }
+        else if (GameManager.instance.bossPage == 2)
+        {
+            boss1PageMask.SetActive(false);
+            boss2PageMask.SetActive(true);
+            boss3PageMask.SetActive(false);
+        }
+        else if (GameManager.instance.bossPage == 3)
+        {
+            boss1PageMask.SetActive(false);
+            boss2PageMask.SetActive(false);
+            boss3PageMask.SetActive(true);
+        }
     }
     void BossHpUI()
     {
-
+        if (GameManager.instance.bossPage == 1)
+        {
+            boss1PageHp.fillAmount = bossManager.curBoss1PageHp / bossManager.boss1PageHp;
+        }
+        if (GameManager.instance.bossPage == 2)
+        {
+            boss1PageHpObj.SetActive(false);
+            boss2PageHp.fillAmount = bossManager.curBoss2PageHp / bossManager.boss2PageHp;
+        }
+        if (GameManager.instance.bossPage == 3)
+        {
+            boss1PageHpObj.SetActive(false);
+            boss2PageHpObj.SetActive(false); 
+            boss3PageHp.fillAmount = bossManager.curBoss3PageHp / bossManager.boss3PageHp;
+        }
     }
 }
