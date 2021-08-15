@@ -75,11 +75,21 @@ public class DataBaseManager : MonoBehaviour
         socket.Connect(IPAddress.Parse("127.0.0.1"), 9090);
     }
 
+    public void OnEndEditPlayerID(InputField inputField)
+    {
+        playerID = inputField.text;
+    }
+
+    public void OnEndEditPlayerPassWord(InputField inputField)
+    {
+        playerPW = inputField.text;
+    }
+
     public void LoginBtn()
     {
         SceneManager.LoadScene("Main");
         SoundManager.instance.SFXPlay("Click", uiButtonSound);
-//        StartCoroutine(LoginCo());
+        //        StartCoroutine(LoginCo());
     }
 
     public void applyAccountBtn()

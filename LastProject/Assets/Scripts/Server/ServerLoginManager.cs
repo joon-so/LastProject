@@ -36,7 +36,7 @@ public class ServerLoginManager : MonoBehaviour
 
     private void Start()
     {
-        playerList[0].playerID = LoginManager.playerID;
+        playerList[0].playerID = DataBaseManager.playerID;
         inputID.text = LoginManager.playerID;
     }
 

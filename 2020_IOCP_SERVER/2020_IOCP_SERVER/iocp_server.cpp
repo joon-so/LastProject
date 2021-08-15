@@ -53,8 +53,8 @@ struct Player_Attribute {
     short Main_HP = 0;
     short Main_MP = 0;
     int Main_Behavior = 0;  //캐릭터 애니메이션
-    float Main_X = 0;
-    float Main_Z = 0;
+    float Main_X = 10;
+    float Main_Z = 10;
     float Main_Rot_Y = 0;
 
     //서브 캐릭터
@@ -62,8 +62,8 @@ struct Player_Attribute {
     short Sub_HP = 0;
     short Sub_MP = 0;
     int Sub_Behavior = 0;  //캐릭터 애니메이션
-    float Sub_X = 0;
-    float Sub_Z = 0;
+    float Sub_X = 10;
+    float Sub_Z = 10;
     float Sub_Rot_Y = 0;
 };
 
