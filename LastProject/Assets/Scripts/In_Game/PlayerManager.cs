@@ -92,7 +92,13 @@ public class PlayerManager : MonoBehaviour
         if (GameManager.instance.clientPlayer.character1Hp <= 0 || GameManager.instance.clientPlayer.character2Hp <= 0)
         {
             // 플레이어 사망 
+
         }
+        if (GameManager.instance.clientPlayer.character1Ep <= 0)
+            GameManager.instance.clientPlayer.character1Ep = 0;
+        if (GameManager.instance.clientPlayer.character2Ep <= 0)
+            GameManager.instance.clientPlayer.character2Ep = 0;
+
         else
         {
             if (curTagCoolTime < GameManager.instance.tagCoolTime)
@@ -100,54 +106,7 @@ public class PlayerManager : MonoBehaviour
             else
                 onTag = true;
 
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                MainSubTag();
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha0))
-            {
-                GameManager.instance.ChangeHpEp();
-            }
-            if (Input.GetKeyDown(KeyCode.F1))
-            {
-                GameManager.instance.ChangeSceneStage1();
-            }
-            if (Input.GetKeyDown(KeyCode.F2))
-            {
-                GameManager.instance.ChangeSceneStage2();
-            }
-            if (Input.GetKeyDown(KeyCode.F3))
-            {
-                GameManager.instance.ChangeSceneStage3();
-            }
-            if (Input.GetKeyDown(KeyCode.F4))
-            {
-                GameManager.instance.ChangeSceneStage4();
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha5))
-            {
-                GameManager.instance.ChangeSceneStage1To2();
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha6))
-            {
-                GameManager.instance.ChangeSceneStage2To3();
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha7))
-            {
-                GameManager.instance.ChangeSceneStage3To4();
-            }
-            if (Input.GetKeyDown(KeyCode.F9))
-            {
-                GameManager.instance.ChangeSceneBoss1PageEnter();
-            }
-            if (Input.GetKeyDown(KeyCode.F10))
-            {
-                GameManager.instance.ChangeSceneBoss2PageEnter();
-            }
-            if (Input.GetKeyDown(KeyCode.F11))
-            {
-                GameManager.instance.ChangeSceneBoss3PageEnter();
-            }
+            CheatMode();
             Zoom();
             Click();
             MainSubEffect();
@@ -222,7 +181,57 @@ public class PlayerManager : MonoBehaviour
             GameManager.instance.character2.gameObject.GetComponent<Rigidbody>().isKinematic = true;
         }
     }
-
+    void CheatMode()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            MainSubTag();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            GameManager.instance.ChangeHpEp();
+        }
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            GameManager.instance.ChangeSceneStage1();
+        }
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            GameManager.instance.ChangeSceneStage2();
+        }
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            GameManager.instance.ChangeSceneStage3();
+        }
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            GameManager.instance.ChangeSceneStage4();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            GameManager.instance.ChangeSceneStage1To2();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            GameManager.instance.ChangeSceneStage2To3();
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            GameManager.instance.ChangeSceneStage3To4();
+        }
+        if (Input.GetKeyDown(KeyCode.F9))
+        {
+            GameManager.instance.ChangeSceneBoss1PageEnter();
+        }
+        if (Input.GetKeyDown(KeyCode.F10))
+        {
+            GameManager.instance.ChangeSceneBoss2PageEnter();
+        }
+        if (Input.GetKeyDown(KeyCode.F11))
+        {
+            GameManager.instance.ChangeSceneBoss3PageEnter();
+        }
+    }
     void MainSubTag()
     {
         if (onTag)
