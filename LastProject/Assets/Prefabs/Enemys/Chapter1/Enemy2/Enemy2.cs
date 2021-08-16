@@ -213,8 +213,8 @@ public class Enemy2 : MonoBehaviour
         nav.enabled = true;
         born = true;
         movable = true;
-        yield return new WaitForSeconds(1.9f);
         rigid.constraints = RigidbodyConstraints.FreezeAll;
+        yield return new WaitForSeconds(1.9f);
         shootable = true;
     }
 
