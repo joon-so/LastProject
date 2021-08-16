@@ -8,6 +8,7 @@ public class Boss3Page : MonoBehaviour
 
     void Start()
     {
+        GameManager.instance.bossPage = 3;
         SetActiveManager.instance.SetActiveFalse();
 
         levelLoader = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();

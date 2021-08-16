@@ -18,8 +18,6 @@ public class BossManager : MonoBehaviour
     public float boss3PageHp;
     public float curBoss3PageHp;
 
-    public int bossPage;
-
     void Start()
     {
         levelLoader = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();
@@ -31,8 +29,6 @@ public class BossManager : MonoBehaviour
         curBoss1PageHp = boss1PageHp;
         curBoss2PageHp = boss2PageHp;
         curBoss3PageHp = boss3PageHp;
-
-        bossPage = 1;
     }
 
     void Update()
@@ -42,38 +38,38 @@ public class BossManager : MonoBehaviour
 
     void SetBossPage()
     {
-        if (boss1PageHp <= 0)
-        {
-            bossPage = 2;
-            levelLoader.LoadBossPage2();
-        }
-
-        if (boss2PageHp <= 0)
-        {
-            bossPage = 3;
-            levelLoader.LoadBossPage3();
-        }
-
-        if (boss3PageHp <= 0)
-        {
-            bossPage = 0;
-            levelLoader.LoadMain();
-        }
-
-        if(bossPage == 1)
+        if(GameManager.instance.bossPage == 1)
         {
             bossPilot.SetActive(true);
             boss.SetActive(false);
+
+            if (curBoss1PageHp <= 0)
+            {
+                levelLoader.LoadBossPage2();
+                curBoss1PageHp = 0;
+            }
         }
-        else if (bossPage == 2)
+        if (GameManager.instance.bossPage == 2)
         {
             bossPilot.SetActive(false);
             boss.SetActive(true);
+
+            if (curBoss2PageHp <= 0)
+            {
+                levelLoader.LoadBossPage3();
+                curBoss2PageHp = 0;
+            }
         }
-        else if (bossPage == 3)
+        if (GameManager.instance.bossPage == 3)
         {
             bossPilot.SetActive(false);
             boss.SetActive(true);
+
+            if (curBoss3PageHp <= 0)
+            {
+                levelLoader.LoadBossPage3();
+                curBoss3PageHp = 0;
+            }
         }
     }
 }

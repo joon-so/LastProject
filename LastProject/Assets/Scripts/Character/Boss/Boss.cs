@@ -16,7 +16,6 @@ public class Boss : MonoBehaviour
     public GameObject Frame;
     [SerializeField] GameObject FlyPattern2Effect;
     //[SerializeField] GameObject FlyPattern3Effect;
-    ClientCollisionManager collisionManager;
 
     public GameObject FlyEffect;
 
@@ -40,11 +39,11 @@ public class Boss : MonoBehaviour
     float GroundPattern2Distance;
     float spinSpeed;
 
-    public int maxHp = 2000;
-    public int currentHp;
-
     int page;
     int pattern;
+
+    ClientCollisionManager collisionManager;
+    BossManager bossManager;
 
     void Start()
     {
@@ -53,7 +52,8 @@ public class Boss : MonoBehaviour
         nav = GetComponent<NavMeshAgent>();
         boxCollider = GetComponent<BoxCollider>();
 
-        //collisionManager = GameObject.Find("GameManager").GetComponent<ClientCollisionManager>();
+        collisionManager = GameObject.Find("GameManager").GetComponent<ClientCollisionManager>();
+        bossManager = GameObject.Find("BossManager").GetComponent<BossManager>();
 
         targetCharacter = GameObject.FindGameObjectWithTag("SubCharacter");
         FlyEffect.SetActive(false);
@@ -66,8 +66,6 @@ public class Boss : MonoBehaviour
         canDash = false;
         shootDistance = 15f;
         detectDistance = 30f;
-
-        currentHp = maxHp;
 
         page = 1;
         pattern = 0;
@@ -375,78 +373,125 @@ public class Boss : MonoBehaviour
         canAttack = true;
     }
 
-    //void OnCollisionEnter(Collision collision)
-    //{
-    //    // Karmen
-    //    if (collision.gameObject.tag == "MainCharacter")
-    //    {
-    //        if (canDash)
-    //            collisionManager.BossAttack2();
-    //    }
-    //    if (collision.gameObject.tag == "KarmenAttack")
-    //    {
-    //        currentHp -= Karmen.attackDamage;
-    //        //hpBar.SetHp(currentHp);
-    //    }
-    //    if (collision.gameObject.tag == "KarmenQSkill")
-    //    {
-    //        currentHp -= Karmen.qSkillDamage;
-    //        //hpBar.SetHp(currentHp);
-    //    }
-    //    if (collision.gameObject.tag == "KarmenWSkill")
-    //    {
-    //        currentHp -= Karmen.wSkillDamage;
-    //        //hpBar.SetHp(currentHp);
-    //    }
-    //    // Jade
-    //    if (collision.gameObject.tag == "JadeAttack")
-    //    {
-    //        currentHp -= Jade.attackDamage;
-    //        //hpBar.SetHp(currentHp);
-    //    }
-    //    if (collision.gameObject.tag == "JadeQSkill")
-    //    {
-    //        currentHp -= Jade.qSkillDamage;
-    //        //hpBar.SetHp(currentHp);
-    //    }
-    //    if (collision.gameObject.tag == "JadeWSkill")
-    //    {
-    //        currentHp -= Jade.wSkillDamage;
-    //        //hpBar.SetHp(currentHp);
-    //    }
-    //    // Leina
-    //    if (collision.gameObject.tag == "LeinaAttack")
-    //    {
-    //        currentHp -= Leina.attackDamage;
-    //        //hpBar.SetHp(currentHp);
-    //    }
-    //    if (collision.gameObject.tag == "LeinaQSkill")
-    //    {
-    //        currentHp -= Leina.qSkillDamage;
-    //        //hpBar.SetHp(currentHp);
-    //    }
-    //    if (collision.gameObject.tag == "LeinaWSkill")
-    //    {
-    //        currentHp -= Leina.wSkillDamage;
-    //        //hpBar.SetHp(currentHp);
-    //    }
-    //    // Eva
-    //    if (collision.gameObject.tag == "EvaAttack")
-    //    {
-    //        currentHp -= Eva.attackDamage;
-    //        //hpBar.SetHp(currentHp);
-    //    }
-    //    if (collision.gameObject.tag == "EvaQSkill")
-    //    {
-    //        currentHp -= Eva.qSkillDamage;
-    //        //hpBar.SetHp(currentHp);
-    //    }
-    //    if (collision.gameObject.tag == "EvaWSkill")
-    //    {
-    //        currentHp -= Eva.wSkillDamage;
-    //        //hpBar.SetHp(currentHp);
-    //    }
-    //}
+    public void HitJadeGrenade()
+    {
+        if(GameManager.instance.bossPage == 2)
+            bossManager.curBoss2PageHp -= collisionManager.jadeWSkillDamage;
+        if (GameManager.instance.bossPage == 3)
+            bossManager.curBoss3PageHp -= collisionManager.jadeWSkillDamage;
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+        // Karmen
+        if (collision.gameObject.tag == "KarmenAttack")
+        {
+            if (GameManager.instance.bossPage == 2)
+                bossManager.curBoss2PageHp -= collisionManager.karmenAttackDamage;
+            if (GameManager.instance.bossPage == 3)
+                bossManager.curBoss3PageHp -= collisionManager.karmenAttackDamage;
+        }
+        if (collision.gameObject.tag == "KarmenQSkill")
+        {
+            if (GameManager.instance.bossPage == 2)
+                bossManager.curBoss2PageHp -= collisionManager.karmenQSkillDamage;
+            if (GameManager.instance.bossPage == 3)
+                bossManager.curBoss3PageHp -= collisionManager.karmenQSkillDamage;
+        }
+        if (collision.gameObject.tag == "KarmenWSkill")
+        {
+            if (GameManager.instance.bossPage == 2)
+                bossManager.curBoss2PageHp -= collisionManager.karmenWSkillDamage;
+            if (GameManager.instance.bossPage == 3)
+                bossManager.curBoss3PageHp -= collisionManager.karmenWSkillDamage;
+        }
+        if (collision.gameObject.tag == "KarmenESkill")
+        {
+            if (GameManager.instance.bossPage == 2)
+                bossManager.curBoss2PageHp -= collisionManager.karmenESkillDamage;
+            if (GameManager.instance.bossPage == 3)
+                bossManager.curBoss3PageHp -= collisionManager.karmenESkillDamage;
+        }
+        // Jade
+        if (collision.gameObject.tag == "JadeAttack")
+        {
+            if (GameManager.instance.bossPage == 2)
+                bossManager.curBoss2PageHp -= collisionManager.jadeAttackDamage;
+            if (GameManager.instance.bossPage == 3)
+                bossManager.curBoss3PageHp -= collisionManager.jadeAttackDamage;
+        }
+        if (collision.gameObject.tag == "JadeQSkill")
+        {
+            if (GameManager.instance.bossPage == 2)
+                bossManager.curBoss2PageHp -= collisionManager.jadeQSkillDamage;
+            if (GameManager.instance.bossPage == 3)
+                bossManager.curBoss3PageHp -= collisionManager.jadeQSkillDamage;
+        }
+        if (collision.gameObject.tag == "JadeESkill")
+        {
+            if (GameManager.instance.bossPage == 2)
+                bossManager.curBoss2PageHp -= collisionManager.jadeESkillDamage;
+            if (GameManager.instance.bossPage == 3)
+                bossManager.curBoss3PageHp -= collisionManager.jadeESkillDamage;
+        }
+        // Leina
+        if (collision.gameObject.tag == "LeinaAttack")
+        {
+            if (GameManager.instance.bossPage == 2)
+                bossManager.curBoss2PageHp -= collisionManager.leinaAttackDamage;
+            if (GameManager.instance.bossPage == 3)
+                bossManager.curBoss3PageHp -= collisionManager.leinaAttackDamage;
+        }
+        if (collision.gameObject.tag == "LeinaQSkill")
+        {
+            if (GameManager.instance.bossPage == 2)
+                bossManager.curBoss2PageHp -= collisionManager.leinaQSkillDamage;
+            if (GameManager.instance.bossPage == 3)
+                bossManager.curBoss3PageHp -= collisionManager.leinaQSkillDamage;
+        }
+        if (collision.gameObject.tag == "LeinaWSkill")
+        {
+            if (GameManager.instance.bossPage == 2)
+                bossManager.curBoss2PageHp -= collisionManager.leinaWSkillDamage;
+            if (GameManager.instance.bossPage == 3)
+                bossManager.curBoss3PageHp -= collisionManager.leinaWSkillDamage;
+        }
+        if (collision.gameObject.tag == "LeinaESkill")
+        {
+            if (GameManager.instance.bossPage == 2)
+                bossManager.curBoss2PageHp -= collisionManager.leinaESkillDamage;
+            if (GameManager.instance.bossPage == 3)
+                bossManager.curBoss3PageHp -= collisionManager.leinaESkillDamage;
+        }
+        // Eva
+        if (collision.gameObject.tag == "EvaAttack")
+        {
+            if (GameManager.instance.bossPage == 2)
+                bossManager.curBoss2PageHp -= collisionManager.evaAttackDamage;
+            if (GameManager.instance.bossPage == 3)
+                bossManager.curBoss3PageHp -= collisionManager.evaAttackDamage;
+        }
+        if (collision.gameObject.tag == "EvaQSkill")
+        {
+            if (GameManager.instance.bossPage == 2)
+                bossManager.curBoss2PageHp -= collisionManager.evaQSkillDamage;
+            if (GameManager.instance.bossPage == 3)
+                bossManager.curBoss3PageHp -= collisionManager.evaQSkillDamage;
+        }
+        if (collision.gameObject.tag == "EvaWSkill")
+        {
+            if (GameManager.instance.bossPage == 2)
+                bossManager.curBoss2PageHp -= collisionManager.evaWSkillDamage;
+            if (GameManager.instance.bossPage == 3)
+                bossManager.curBoss3PageHp -= collisionManager.evaWSkillDamage;
+        }
+        if (collision.gameObject.tag == "EvaESkill")
+        {
+            if (GameManager.instance.bossPage == 2)
+                bossManager.curBoss2PageHp -= collisionManager.evaESkillDamage;
+            if (GameManager.instance.bossPage == 3)
+                bossManager.curBoss3PageHp -= collisionManager.evaESkillDamage;
+        }
+    }
 
     Vector3 Bezier(Vector3 P_1, Vector3 P_2, Vector3 P_3, float value)
     {

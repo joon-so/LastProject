@@ -1063,8 +1063,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 66125500}
-  m_LocalRotation: {x: 0.09229593, y: 0.7010574, z: -0.09229593, w: 0.7010574}
-  m_LocalPosition: {x: 113.990005, y: -0.7249999, z: 0.21600312}
+  m_LocalRotation: {x: 0.019127226, y: -0.588221, z: 0.013918448, w: 0.8083542}
+  m_LocalPosition: {x: 32.277855, y: 26.169159, z: 20.96527}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -26024,7 +26024,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1222192724}
-  m_LocalRotation: {x: -0.21357366, y: 0.77816164, z: -0.348536, w: -0.47683686}
+  m_LocalRotation: {x: -0.21357365, y: 0.77816164, z: -0.34853604, w: -0.4768369}
   m_LocalPosition: {x: 12.29596, y: 15.464657, z: 6.265719}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -35995,8 +35995,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1652032892}
-  - component: {fileID: 1652032893}
   - component: {fileID: 1652032894}
+  - component: {fileID: 1652032893}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -36031,7 +36031,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1652032891}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34bee413485e4a04fa01466581a53b12, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b141e899e1348243bcf0f14ecace863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   karmen: {fileID: 226157663166043194}
@@ -47276,7 +47276,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &226157663166043195
 Animator:
   serializedVersion: 3
@@ -47286,7 +47286,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 226157663166043194}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 5637854c9d1faac44813c947719fddfe, type: 3}
   m_Controller: {fileID: 9100000, guid: aa82b542230963440b1e418e38ae7785, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -58284,7 +58284,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &2587133061623177665
 Animator:
   serializedVersion: 3
@@ -58294,11 +58294,11 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2587133061623177664}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 614f1d9a7b6d029409b722f6af265035, type: 3}
   m_Controller: {fileID: 9100000, guid: 5dce9fff3d0a70f449ed6b3f6d71c3a4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -64814,7 +64814,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2587133061623177664}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: -0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -64835,7 +64835,7 @@ Transform:
   - {fileID: 4385404622600206786}
   m_Father: {fileID: 1652032892}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!137 &3445633473633291684
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -81851,7 +81851,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &6150801196201930944
 Animator:
   serializedVersion: 3
@@ -81861,7 +81861,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6150801196201930943}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: ed7c53f8a82a1034c83d2179344ff995, type: 3}
   m_Controller: {fileID: 9100000, guid: 6f51de0aed3f7d74d8c00e66254c21c5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -98627,7 +98627,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!136 &7966750313924696657
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -98651,7 +98651,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7966750313924696656}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 7b28d230550026942bbe736edabf487d, type: 3}
   m_Controller: {fileID: 9100000, guid: 644201d1dfabd5f42a85783d5b9a90f0, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0

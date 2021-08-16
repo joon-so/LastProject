@@ -49,6 +49,9 @@ public class GameManager : MonoBehaviour
     public GameObject character1;
     public GameObject character2;
 
+
+    public int bossPage;
+
     void Awake()
     {
         if (instance == null)
@@ -116,10 +119,6 @@ public class GameManager : MonoBehaviour
     public void ChangeSceneStage3To4()
     {
         SceneManager.LoadScene("Stage3To4");
-    }
-    public void ChangeSceneStage4To5()
-    {
-        SceneManager.LoadScene("Stage4To5");
     }
     public void ChangeSceneBoss1PageEnter()
     {

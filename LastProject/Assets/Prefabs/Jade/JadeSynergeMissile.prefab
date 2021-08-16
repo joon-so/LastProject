@@ -94,8 +94,8 @@ GameObject:
   - component: {fileID: 3231646721843963484}
   - component: {fileID: -3102044546102218060}
   m_Layer: 0
-  m_Name: missile_green 1
-  m_TagString: Untagged
+  m_Name: JadeSynergeMissile
+  m_TagString: JadeESkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -158,13 +158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6098678bf5c8d46418c48516c0e7d608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 25
-  accuracy: 100
-  fireRate: 5
   muzzlePrefab: {fileID: 0}
   hitPrefab: {fileID: 1576947433937734, guid: a4fd27963ba944e429c95b735ceca3e4, type: 3}
-  trails: []
-  distance: 15
 --- !u!1 &167392
 GameObject:
   m_ObjectHideFlags: 0

@@ -24,6 +24,8 @@ public class SetActiveManager : MonoBehaviour
     }
     public void SetActiveTrue()
     {
+        gameUI.SetActive(false);
+        player.SetActive(false);
         gameUI.SetActive(true);
         player.SetActive(true);
     }

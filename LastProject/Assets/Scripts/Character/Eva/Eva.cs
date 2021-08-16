@@ -5,12 +5,17 @@ using UnityEngine.AI;
 
 public class Eva : SubAI
 {
+    [SerializeField] BoxCollider basicAttack1Collider;
+    [SerializeField] BoxCollider basicAttack2Collider;
+
     [SerializeField] GameObject attackRange = null;
     [SerializeField] GameObject qSkill = null;
     [SerializeField] GameObject wSkillEffect = null;
     [SerializeField] GameObject wSkillShockEffect = null;
     [SerializeField] GameObject EvaJadeSkillEffect = null;
     [SerializeField] GameObject EvaKarmenSkillEffect = null;
+    [SerializeField] GameObject eSkillHitBox = null;
+    [SerializeField] GameObject EvaHammer = null;
     public Transform wSkillPos = null;
 
     public float moveSpeed = 5.0f;
@@ -26,8 +31,9 @@ public class Eva : SubAI
     float curWSkillCoolTime;
     float curESkillCoolTime;
 
-    float curFireDelay;
-    float subFireDelay = 1.5f;
+    float attackDelay = 1.65f;
+    float curAttackDelay;
+    float subAttackDelay = 1.5f;
 
     bool canMove;
     bool canDodge;
@@ -125,6 +131,10 @@ public class Eva : SubAI
         motionEndCheck = true;
         comboContinue = true;
 
+        curAttackDelay = attackDelay;
+
+        eSkillHitBox.SetActive(false);
+
         attackDistance = 3.5f;
 
         qSkill.SetActive(false);
@@ -135,6 +145,7 @@ public class Eva : SubAI
         Tag();
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
+            curAttackDelay += Time.deltaTime;
             if (!falling)
             {
                 if (canMove)
@@ -155,16 +166,35 @@ public class Eva : SubAI
         }
         else if (gameObject.transform.CompareTag("SubCharacter") && !falling)
         {
+            curAttackDelay += Time.deltaTime;
             distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
 
             if (currentState == characterState.trace)
             {
                 MainCharacterTrace(tagCharacter.transform.position);
                 animator.SetBool("Run", true);
+                curAttackDelay = 1f;
             }
             else if (currentState == characterState.attack)
             {
                 SubAttack();
+
+                if (target)
+                {
+                    Quaternion lookRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+                    Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
+                    transform.rotation = Quaternion.Euler(0, euler.y, 0);
+                }
+                if (curAttackDelay > subAttackDelay && target != null)
+                {
+                    moveSpeed = 0f;
+                    animator.SetBool("Run", false);
+                    animator.SetTrigger("Throwing");
+                    Instantiate(EvaHammer, transform.position + transform.up * 1.5f + transform.forward* 0.5f, transform.rotation);
+                    vecTarget = transform.position;
+
+                    curAttackDelay = 0;
+                }
             }
             else if (currentState == characterState.idle)
             {
@@ -258,43 +288,16 @@ public class Eva : SubAI
     }
     void Attack()
     {
-        if (doingAttack)
-        {
-            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
-                && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f)
-            {
-                if (Input.GetMouseButtonDown(0))
-                    if (comboContinue)
-                        comboContinue = false;
-                motionEndCheck = false;
-            }
-            else if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f && !motionEndCheck)
-            {
-                if (!comboContinue)
-                {
-                    animator.SetTrigger("nextCombo");
-                    comboContinue = true;
-                }
-                else if (comboContinue)
-                {
-                    doingAttack = false;
-                    animator.SetBool("Attack", doingAttack);
-                    //CharacterState.attackCheck = false;
-                }
-                motionEndCheck = true;
-            }
-        }
-
         if (Input.GetMouseButtonDown(0))
         {
-            canMove = false;
-            animator.SetBool("Run", canMove);
-
-            if ((doingAttack && animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
-                 && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8f)
-                 || animator.GetCurrentAnimatorStateInfo(0).IsName("Idle_01")
-                 || animator.GetCurrentAnimatorStateInfo(0).IsName("Run"))
+            if (curAttackDelay > attackDelay)
             {
+                canMove = false;
+                canDodge = false;
+                canSkill = false;
+
+                animator.SetBool("Run", false);
+
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -303,20 +306,17 @@ public class Eva : SubAI
                     nextVec.y = 0;
                     transform.LookAt(transform.position + nextVec);
                 }
-                vecTarget = transform.position;
-            }
-            //CharacterState.attackCheck = true;
-            moveSpeed = 0f;
-            doingAttack = true;
-            animator.SetBool("Attack", doingAttack);
-        }
 
-        if (doingAttack && Input.GetMouseButtonDown(1))
-        {
-            doingAttack = false;
-            animator.SetBool("Attack", doingAttack);
-            canMove = true;
-            animator.SetBool("Run", canMove);
+                vecTarget = transform.position;
+                animator.SetTrigger("Attack");
+                basicAttack1Collider.enabled = true;
+                basicAttack2Collider.enabled = true;
+                ServerLoginManager.playerList[0].mainCharacterBehavior = 3;
+
+                curAttackDelay = 0;
+
+                StartCoroutine(AttackDelay());
+            }
         }
     }
     void AttackRange()
@@ -509,6 +509,16 @@ public class Eva : SubAI
             vecTarget = transform.position;
         }
     }
+    IEnumerator AttackDelay()
+    {
+        yield return new WaitForSeconds(1.1f);
+        basicAttack1Collider.enabled = false;
+        basicAttack2Collider.enabled = false;
+        yield return new WaitForSeconds(0.65f);
+        canMove = true;
+        canDodge = true;
+        canSkill = true;
+    }
     IEnumerator DodgeDelay()
     {
         yield return new WaitForSeconds(1.0f);
@@ -685,7 +695,9 @@ public class Eva : SubAI
         animator.SetFloat("Speed", 1.0f);
 
 
+        eSkillHitBox.SetActive(true);
         yield return new WaitForSeconds(1f);
+        eSkillHitBox.SetActive(false);
         animator.SetFloat("Speed", 1.0f);
 
 

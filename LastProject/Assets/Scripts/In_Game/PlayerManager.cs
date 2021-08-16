@@ -104,7 +104,7 @@ public class PlayerManager : MonoBehaviour
             {
                 MainSubTag();
             }
-            if (Input.GetKeyDown(KeyCode.Alpha5))
+            if (Input.GetKeyDown(KeyCode.Alpha0))
             {
                 GameManager.instance.ChangeHpEp();
             }
@@ -124,29 +124,17 @@ public class PlayerManager : MonoBehaviour
             {
                 GameManager.instance.ChangeSceneStage4();
             }
-            if (Input.GetKeyDown(KeyCode.F5))
-            {
-                GameManager.instance.ChangeSceneStage5();
-            }
             if (Input.GetKeyDown(KeyCode.Alpha5))
-            {
-                GameManager.instance.ChangeSceneStage0To1();
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha6))
             {
                 GameManager.instance.ChangeSceneStage1To2();
             }
-            if (Input.GetKeyDown(KeyCode.Alpha7))
+            if (Input.GetKeyDown(KeyCode.Alpha6))
             {
                 GameManager.instance.ChangeSceneStage2To3();
             }
-            if (Input.GetKeyDown(KeyCode.Alpha8))
+            if (Input.GetKeyDown(KeyCode.Alpha7))
             {
                 GameManager.instance.ChangeSceneStage3To4();
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha9))
-            {
-                GameManager.instance.ChangeSceneStage4To5();
             }
             if (Input.GetKeyDown(KeyCode.F9))
             {
