@@ -41,6 +41,7 @@ public class ServerMyLeina : ServerSubAIManager
     Rigidbody rigidbody;
     ServerCollisionManager collisionManager;
     ServerSkillEpManager skillEpManager;
+    CapsuleCollider capsuleCollider;
 
     int characterIndex;
 
@@ -49,6 +50,7 @@ public class ServerMyLeina : ServerSubAIManager
         myAnimator = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
         rigidbody = GetComponent<Rigidbody>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
         collisionManager = GameObject.Find("ServerIngameManager").GetComponent<ServerCollisionManager>();
         skillEpManager = GameObject.Find("ServerIngameManager").GetComponent<ServerSkillEpManager>();
     }
@@ -405,13 +407,15 @@ public class ServerMyLeina : ServerSubAIManager
 
     IEnumerator Death()
     {
-        Debug.Log("my jade Á×À½");
         canMove = false;
         canAttack = false;
         canSkill = false;
         canDodge = false;
+        rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        if (!capsuleCollider.isTrigger)
+            myAnimator.SetTrigger("Dead");
+        capsuleCollider.isTrigger = true;
         ServerLoginManager.playerList[0].mainCharacterBehavior = 6;
-        myAnimator.SetTrigger("Dead");
         yield return new WaitForSeconds(1.9f);
     }
 
