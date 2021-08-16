@@ -25,9 +25,9 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadBossPage2()
     {
-        StartCoroutine(BpssPage2());
+        StartCoroutine(BossPage2());
     }
-    IEnumerator BpssPage2()
+    IEnumerator BossPage2()
     {
         animator.SetTrigger("Start");
 
@@ -38,9 +38,9 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadBossPage3()
     {
-        StartCoroutine(BpssPage3());
+        StartCoroutine(BossPage3());
     }
-    IEnumerator BpssPage3()
+    IEnumerator BossPage3()
     {
         animator.SetTrigger("Start");
 
@@ -51,15 +51,28 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadBossStage()
     {
-        StartCoroutine(BpssStage());
+        StartCoroutine(BossStage());
     }
-    IEnumerator BpssStage()
+    IEnumerator BossStage()
     {
         animator.SetTrigger("Start");
 
         yield return new WaitForSeconds(transitionTime);
 
         SceneManager.LoadScene("Stage5");
+    }
+
+    public void LoadBossEnding()
+    {
+        StartCoroutine(BossEnding());
+    }
+    IEnumerator BossEnding()
+    {
+        animator.SetTrigger("Start");
+
+        yield return new WaitForSeconds(transitionTime);
+
+        SceneManager.LoadScene("StageBossEnding");
     }
 
     public void LoadMain()

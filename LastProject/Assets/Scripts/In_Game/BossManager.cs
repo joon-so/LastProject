@@ -67,7 +67,7 @@ public class BossManager : MonoBehaviour
 
             if (curBoss3PageHp <= 0)
             {
-                levelLoader.LoadBossPage3();
+                levelLoader.LoadBossEnding();
                 curBoss3PageHp = 0;
             }
         }
