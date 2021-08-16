@@ -65,6 +65,11 @@ public class Karmen : SubAI
     ClientSkillEpManager skillEpManager;
     CapsuleCollider capsuleCollider;
 
+    [SerializeField] AudioClip karmenAttackSound;
+    [SerializeField] AudioClip karmenQSkillSound;
+    [SerializeField] AudioClip karmenWSkillSound;
+    [SerializeField] AudioClip karmenESkillSound;
+
     void Awake()
     {
         animator = GetComponentInChildren<Animator>();
@@ -330,6 +335,9 @@ public class Karmen : SubAI
                 }
 
                 vecTarget = transform.position;
+
+                SoundManager.instance.SFXPlay("KarmenAttack", karmenAttackSound);
+
                 animator.SetTrigger("Attack");
                 leftStaff.enabled = true;
                 rightStaff.enabled = true;
@@ -571,6 +579,9 @@ public class Karmen : SubAI
 
         leftStaffEffect.SetActive(false);
         rightStaffEffect.SetActive(false);
+        rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
+
+        SoundManager.instance.SFXPlay("KarmenQSkill", karmenQSkillSound);
 
         animator.SetTrigger("QSkill");
         animator.SetFloat("Speed", 0.2f);
@@ -583,6 +594,8 @@ public class Karmen : SubAI
 
         leftStaffEffect.SetActive(true);
         rightStaffEffect.SetActive(true);
+
+        rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
 
         vecTarget = transform.position;
         animator.SetBool("Run", false);
@@ -598,6 +611,8 @@ public class Karmen : SubAI
 
         leftStaffEffect.SetActive(false);
         rightStaffEffect.SetActive(false);
+
+        SoundManager.instance.SFXPlay("KarmenWSkill", karmenWSkillSound);
 
         animator.SetTrigger("WSkill");
         wLeftEffect.SetActive(true);
@@ -681,6 +696,8 @@ public class Karmen : SubAI
     }
     IEnumerator KarmenEvaSynerge()
     {
+        SoundManager.instance.SFXPlay("KarmenESkill", karmenESkillSound);
+
         EvaKarmenSynergeWeapon.SetActive(true);
         animator.SetTrigger("KarmenEvaSynerge");
 

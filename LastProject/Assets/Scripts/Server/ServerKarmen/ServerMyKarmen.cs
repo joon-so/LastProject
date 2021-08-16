@@ -50,6 +50,10 @@ public class ServerMyKarmen : ServerSubAIManager
 
     int characterIndex;
 
+    [SerializeField] AudioClip karmenAttackSound;
+    [SerializeField] AudioClip karmenQSkillSound;
+    [SerializeField] AudioClip karmenWSkillSound;
+
     void Awake()
     {
         myAnimator = GetComponent<Animator>();
@@ -437,6 +441,7 @@ public class ServerMyKarmen : ServerSubAIManager
 
         leftStaffEffect.SetActive(false);
         rightStaffEffect.SetActive(false);
+        rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
 
         ServerLoginManager.playerList[0].mainCharacterBehavior = 4; // WSkill
         myAnimator.SetTrigger("QSkill");
@@ -456,6 +461,8 @@ public class ServerMyKarmen : ServerSubAIManager
         myAnimator.SetBool("Run", false);
 
         ServerLoginManager.playerList[0].mainCharacterBehavior = 0; // Idle
+
+        rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
 
         canAttack = true;
         canMove = true;

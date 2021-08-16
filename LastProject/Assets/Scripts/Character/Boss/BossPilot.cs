@@ -170,7 +170,6 @@ public class BossPilot : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("¾Æ¾æ");
         // Karmen
         if (collision.gameObject.tag == "KarmenAttack")
         {

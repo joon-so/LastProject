@@ -17,6 +17,6 @@ public class BossEndingPage : MonoBehaviour
     IEnumerator NextScene()
     {
         yield return new WaitForSeconds(9.0f);
-        levelLoader.LoadMain();
+        levelLoader.LoadLogin();
     }
 }
