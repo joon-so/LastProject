@@ -8,7 +8,8 @@ public class Stage1To2 : MonoBehaviour
 
     void Start()
     {
-        SetActiveManager.instance.SetActiveFalse();
+        if (SetActiveManager.instance != null)
+           SetActiveManager.instance.SetActiveFalse();
 
         levelLoader = GameObject.Find("LevelLoader").GetComponent<LevelLoader>();
         StartCoroutine(NextScene());

@@ -49,7 +49,6 @@ public class GameManager : MonoBehaviour
     public GameObject character1;
     public GameObject character2;
 
-
     public int bossPage;
 
     void Awake()
@@ -75,6 +74,10 @@ public class GameManager : MonoBehaviour
         epPotionValue = 50;
     }
 
+    public void DestroyGameManager()
+    {
+        Destroy(gameObject);
+    }
 
     // Mode Change
     public void ChangeHpEp()
@@ -83,6 +86,11 @@ public class GameManager : MonoBehaviour
         clientPlayer.character2Hp = 100;
         clientPlayer.character1Ep = 50;
         clientPlayer.character2Ep = 50;
+    }
+
+    public void ChangeSceneStage0()
+    {
+        SceneManager.LoadScene("Stage0");
     }
     public void ChangeSceneStage1()
     {

@@ -240,15 +240,12 @@ public class CharacterSelectManager : MonoBehaviour
 
     public void OnClickStart()
     {
-        SoundManager.instance.SFXPlay("Start", uiButtonClickSound2);
+        //SoundManager.instance.SFXPlay("Start", uiButtonClickSound2);
 
         if (GameManager.instance.clientPlayer.selectCharacter1 == 0 || GameManager.instance.clientPlayer.selectCharacter2 == 0)
             return;
 
         GameManager.instance.clientPlayer.curMainCharacter = 1;
-
-        // 임의적으로 스테이지 설정
-        DataBaseManager.PlayerPvELevel = 2;
 
         if (DataBaseManager.PlayerPvELevel ==0)
            SceneManager.LoadScene("Stage0");
@@ -257,8 +254,9 @@ public class CharacterSelectManager : MonoBehaviour
     }
     public void OnClickExit()
     {
-        SoundManager.instance.SFXPlay("Exit", uiButtonClickSound2);
-        SceneManager.LoadScene("Main");
+        //SoundManager.instance.SFXPlay("Exit", uiButtonClickSound2);
+        GameManager.instance.DestroyGameManager();
+        SceneManager.LoadScene("SelectPvEMode");
     }
     public void KarmenInfoMsg()
     {

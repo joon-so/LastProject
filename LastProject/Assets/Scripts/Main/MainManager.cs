@@ -8,7 +8,7 @@ public class MainManager : MonoBehaviour
 {
     [SerializeField] AudioClip uiButtonSound;
 
-    public void OnClickPvE()
+    public void OnClickLoadSelectPvEMode()
     {
        // SoundManager.instance.SFXPlay("Click", uiButtonSound);
         SceneManager.LoadScene("SelectPvEMode");
@@ -18,26 +18,12 @@ public class MainManager : MonoBehaviour
      //   SoundManager.instance.SFXPlay("Click", uiButtonSound);
         SceneManager.LoadScene("ServerLogin");
     }
-    public void OnClickExit()
+    public void OnClickExitGOLogin()
     {
-       // SoundManager.instance.SFXPlay("Click", uiButtonSound);
-        SceneManager.LoadScene("Main");
+        // SoundManager.instance.SFXPlay("Click", uiButtonSound);
+        SceneManager.LoadScene("Login");
     }
-    public void OnClickPvENewGame()
-    {
-      //  SoundManager.instance.SFXPlay("Click", uiButtonSound);
-        SceneManager.LoadScene("CharacterSelect");
-    }
-    public void OnClickPvELoadGame()
-    {
-      //  SoundManager.instance.SFXPlay("Click", uiButtonSound);
-        SceneManager.LoadScene("LoadPvELevel");
-    }
-    public void OnClickCharacterSelect()
-    {
-      //  SoundManager.instance.SFXPlay("Click", uiButtonSound);
-        SceneManager.LoadScene("CharacterSelect");
-    }
+
 }
 
 

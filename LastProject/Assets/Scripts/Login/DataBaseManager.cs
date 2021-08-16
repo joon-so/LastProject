@@ -70,6 +70,7 @@ public class DataBaseManager : MonoBehaviour
 
     void Start()
     {
+        PlayerPvELevel = 0;
     }
 
     void serverOn()
@@ -204,7 +205,6 @@ public class DataBaseManager : MonoBehaviour
                 SceneManager.LoadScene("Main");
                 playerID = IDInputField.text;
                 PlayerPvELevel = Rp.stageData;
-                Debug.Log(Rp.stageData);        //정상일경우 해당 스테이지 데이터 사용하길
             }
         }
         else

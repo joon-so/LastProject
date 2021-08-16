@@ -228,7 +228,7 @@ GameObject:
   - component: {fileID: 20057493}
   - component: {fileID: 20057494}
   m_Layer: 0
-  m_Name: MainManager
+  m_Name: SelectPvEModeManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -257,10 +257,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 20057492}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6986d6c7b247b604ba26efd42aa10dcf, type: 3}
+  m_Script: {fileID: 11500000, guid: 17bebad387a66a14c868f4cd1b0b4718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiButtonSound: {fileID: 0}
+  loadButtonImage: {fileID: 1938424985}
+  loadButton: {fileID: 2079472536}
 --- !u!1 &177648255
 GameObject:
   m_ObjectHideFlags: 0
@@ -3039,8 +3040,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 610576740}
-        m_TargetAssemblyTypeName: MainManager, Assembly-CSharp
+      - m_Target: {fileID: 20057494}
+        m_TargetAssemblyTypeName: SelectPvEMode, Assembly-CSharp
         m_MethodName: OnClickCharacterSelect
         m_Mode: 1
         m_Arguments:
@@ -3511,8 +3512,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 610576740}
-        m_TargetAssemblyTypeName: MainManager, Assembly-CSharp
+      - m_Target: {fileID: 20057494}
+        m_TargetAssemblyTypeName: SelectPvEMode, Assembly-CSharp
         m_MethodName: OnClickCharacterSelect
         m_Mode: 1
         m_Arguments:
@@ -3756,9 +3757,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 610576740}
-        m_TargetAssemblyTypeName: MainManager, Assembly-CSharp
-        m_MethodName: OnClickExit
+      - m_Target: {fileID: 20057494}
+        m_TargetAssemblyTypeName: SelectPvEMode, Assembly-CSharp
+        m_MethodName: OnClickExitGOMain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

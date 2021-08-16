@@ -7,6 +7,8 @@ using System;
 
 public class InGameUI : MonoBehaviour
 {
+    public static InGameUI instance;
+
     [SerializeField] GameObject mainKarmenMask;
     [SerializeField] GameObject mainJadeMask;
     [SerializeField] GameObject mainLeinaMask;
@@ -75,6 +77,11 @@ public class InGameUI : MonoBehaviour
 
     void Awake()
     {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+
         DontDestroyOnLoad(gameObject);
         clientCollisionManager = GameObject.Find("GameManager").GetComponent<ClientCollisionManager>();
     }

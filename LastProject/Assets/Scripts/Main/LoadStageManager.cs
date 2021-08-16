@@ -6,7 +6,7 @@ public class LoadStageManager : MonoBehaviour
 {
     public void Stage1Click()
     {
-        GameManager.instance.ChangeSceneStage0To1();
+        GameManager.instance.ChangeSceneStage0();
     }
     public void Stage2Click()
     {
