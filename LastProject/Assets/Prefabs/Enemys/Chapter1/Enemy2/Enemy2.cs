@@ -179,7 +179,7 @@ public class Enemy2 : MonoBehaviour
         Instantiate(bullet, bulletStartPoint.position, bulletStartPoint.rotation);
         movable = false;
         shootable = false;
-        //anim.SetBool("isAttack", true);
+        //anim.SetBool("isAttack", true); 
         //¿¬¼Ó 2¹ß
         yield return new WaitForSeconds(straightTime);
         Instantiate(bullet, bulletStartPoint.position, bulletStartPoint.rotation);

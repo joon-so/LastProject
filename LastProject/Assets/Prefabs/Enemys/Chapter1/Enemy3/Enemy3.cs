@@ -191,8 +191,9 @@ public class Enemy3 : MonoBehaviour
         movable = false;
         Instantiate(explosion, transform.position, transform.rotation);
         targets.Remove(gameObject);
+        GetComponent<TriangleExplosion>().ExplosionMesh();
         yield return new WaitForSeconds(1f);
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
     IEnumerator DropAndExplosion()
