@@ -87,4 +87,17 @@ public class LevelLoader : MonoBehaviour
 
         SceneManager.LoadScene("Main");
     }
+
+    public void LoadLogin()
+    {
+        StartCoroutine(Login());
+    }
+    IEnumerator Login()
+    {
+        animator.SetTrigger("Start");
+
+        yield return new WaitForSeconds(transitionTime);
+
+        SceneManager.LoadScene("Login");
+    }
 }

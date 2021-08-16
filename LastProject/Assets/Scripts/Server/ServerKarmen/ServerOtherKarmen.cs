@@ -21,7 +21,7 @@ public class ServerOtherKarmen : MonoBehaviour
     public int isMainCharacter;
 
     private Animator otherAnimator;
-    
+    Rigidbody rigidbody;
     private int preBehavior;
     private int index;
 
@@ -31,6 +31,7 @@ public class ServerOtherKarmen : MonoBehaviour
     void Start()
     {
         otherAnimator = GetComponent<Animator>();
+        rigidbody = GetComponent<Rigidbody>();
         preBehavior = 0;
         subAttackDelay = 1.5f;
         index = parentObject.GetComponent<ServerOtherPlayerManager>().index;
@@ -143,6 +144,7 @@ public class ServerOtherKarmen : MonoBehaviour
         preBehavior = 4;
         leftStaffEffect.SetActive(false);
         rightStaffEffect.SetActive(false);
+        rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
 
         otherAnimator.SetTrigger("QSkill");
         otherAnimator.SetFloat("Speed", 0.2f);
@@ -156,6 +158,8 @@ public class ServerOtherKarmen : MonoBehaviour
         qSkill.SetActive(false);
         leftStaffEffect.SetActive(true);
         rightStaffEffect.SetActive(true);
+
+        rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
 
         otherAnimator.SetBool("Run", false);
     }
