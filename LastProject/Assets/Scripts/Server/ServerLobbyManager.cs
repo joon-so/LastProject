@@ -10,6 +10,9 @@ public class ServerLobbyManager : MonoBehaviour
     public List<Text> playerTextID;
     NetworkManager _network;
 
+    [SerializeField] AudioClip uiButtonSound;
+    [SerializeField] AudioClip uiStartButtonSound;
+
     void Start()
     {
         _network = GameObject.Find("Network").GetComponent<NetworkManager>();
@@ -37,10 +40,16 @@ public class ServerLobbyManager : MonoBehaviour
 
     public void OnClickStartButton()
     {
+        SoundManager.instance.SFXPlay("UIStartButtonClick", uiStartButtonSound);
         send_Game_Start_packet();
     }
 
     public void OnClickExitButton()
+    {
+        SoundManager.instance.SFXPlay("UIButtonClick", uiButtonSound);
+        Invoke("LoadServerLogin", 1f);
+    }
+    void LoadServerLogin()
     {
         SceneManager.LoadScene("ServerLogin");
     }

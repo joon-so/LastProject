@@ -5,6 +5,7 @@ using UnityEngine;
 public class Eva3To4Script : MonoBehaviour
 {
     [SerializeField] GameObject explosion;
+    [SerializeField] AudioClip evaAttackSound;
 
     Vector3 movePoint1;
     Vector3 lookPoint1;
@@ -37,6 +38,7 @@ public class Eva3To4Script : MonoBehaviour
         anim.SetBool("Run", false);
 
         transform.LookAt(lookPoint1);
+        SoundManager.instance.SFXPlay("EvaAttack", evaAttackSound);
         anim.SetTrigger("Attack");
         yield return new WaitForSeconds(0.1f);
         Instantiate(explosion, ExplosionPoint, explosion.transform.rotation);

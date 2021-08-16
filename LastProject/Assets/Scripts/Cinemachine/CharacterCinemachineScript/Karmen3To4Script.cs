@@ -6,6 +6,7 @@ public class Karmen3To4Script : MonoBehaviour
 {
     [SerializeField] GameObject explosion;
     [SerializeField] GameObject weapon;
+    [SerializeField] AudioClip karmenAttackSound;
 
     Vector3 movePoint1;
     Vector3 lookPoint1;
@@ -41,6 +42,7 @@ public class Karmen3To4Script : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         transform.LookAt(lookPoint1);
         anim.SetBool("Attack",true);
+        SoundManager.instance.SFXPlay("KarmenAttack", karmenAttackSound);
         yield return new WaitForSeconds(0.3f);
         Instantiate(explosion, ExplosionPoint, explosion.transform.rotation);
         yield return new WaitForSeconds(0.65f);

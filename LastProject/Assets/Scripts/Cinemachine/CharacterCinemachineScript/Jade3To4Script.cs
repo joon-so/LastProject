@@ -7,6 +7,7 @@ public class Jade3To4Script : MonoBehaviour
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject bulletPos;
     [SerializeField] GameObject explosion;
+    [SerializeField] AudioClip jadeAttackSound;
 
     Vector3 movePoint1;
     Vector3 movePoint2;
@@ -39,6 +40,7 @@ public class Jade3To4Script : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         transform.LookAt(movePoint2);
         anim.SetTrigger("shootAssaultRifle");
+        SoundManager.instance.SFXPlay("JadeAttack", jadeAttackSound);
         Instantiate(bullet, bulletPos.transform.position, bulletPos.transform.rotation);
         yield return new WaitForSeconds(0.1f);
         Instantiate(explosion, ExplosionPoint, explosion.transform.rotation);

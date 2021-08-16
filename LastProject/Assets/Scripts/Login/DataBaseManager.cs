@@ -101,14 +101,20 @@ public class DataBaseManager : MonoBehaviour
 
     public void LoginBtn()
     {
-        SceneManager.LoadScene("Main");
-        SoundManager.instance.SFXPlay("Click", uiButtonSound);
+        SoundManager.instance.SFXPlay("UIButtonClik", uiButtonSound);
+        Invoke("LoadMainScene", 1f);
         //        StartCoroutine(LoginCo());
+    }
+
+    void LoadMainScene()
+    {
+        SceneManager.LoadScene("Main");
     }
 
     public void applyAccountBtn()
     {
         StartCoroutine(createAccountCo());
+        SoundManager.instance.SFXPlay("UIButtonClik", uiButtonSound);
         //StartCoroutine(changeStageDataCo());
     }
 

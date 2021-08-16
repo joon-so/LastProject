@@ -35,6 +35,8 @@ public class ServerLoginManager : MonoBehaviour
     public InputField inputID;
     public InputField inputIP;
 
+    [SerializeField] AudioClip uiButtonSound;
+
     private void Start()
     {
         playerList[0].playerID = DataBaseManager.playerID;
@@ -44,11 +46,21 @@ public class ServerLoginManager : MonoBehaviour
 
     public void ClickJoin()
     {
+        SoundManager.instance.SFXPlay("UIButtonClick", uiButtonSound);
+        Invoke("LoadServerCharacterSelect", 1f);
+    }
+    void LoadServerCharacterSelect()
+    {
         SceneManager.LoadScene("ServerCharacterSelect");
     }
 
     public void ClickExit()
     {
-        SceneManager.LoadScene("Main");
+        SoundManager.instance.SFXPlay("UIButtonClick", uiButtonSound);
+        Invoke("LoadLogin", 1f);
+    }
+    void LoadLogin()
+    {
+        SceneManager.LoadScene("Login");
     }
 }

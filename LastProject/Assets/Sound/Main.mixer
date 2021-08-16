@@ -50,9 +50,9 @@ AudioMixerController:
   m_UpdateMode: 0
   m_ExposedParameters:
   - guid: eb6d12ee7b548d5438f61dea104ab66b
-    name: BGSoundVolume
+    name: BGSound
   - guid: 69c23a8f906b7094ea90970ebaf2d692
-    name: SFXVolume
+    name: MyExposedParam
   m_AudioMixerGroupViews:
   - guids:
     - e95136768644b4743a374ab557ceaa8e
@@ -106,7 +106,8 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: f48c2edbe4b468044b088bf440a695b9
   m_FloatValues:
-    69c23a8f906b7094ea90970ebaf2d692: -9.833286
+    eb6d12ee7b548d5438f61dea104ab66b: 0
+    69c23a8f906b7094ea90970ebaf2d692: -10
   m_TransitionOverrides: {}
 --- !u!244 &8469657515546786417
 AudioMixerEffectController:

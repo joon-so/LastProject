@@ -31,10 +31,9 @@ public class CharacterSelectManager : MonoBehaviour
     private int mainCharacterIndex; // karmen : 1 eva :4
     private int subCharacterIndex;
 
-
-    public AudioClip uiButtonClickSound1;
-    public AudioClip uiButtonClickSound2;
-    public AudioClip uiCharacterClickSound;
+    [SerializeField] AudioClip uiButtonSound;
+    [SerializeField] AudioClip uiStartButtonSound;
+    [SerializeField] AudioClip uiCharacterClickSound;
 
     [Header("Character Hp Ep Setting")]
     [SerializeField] int karmenHp;
@@ -55,7 +54,7 @@ public class CharacterSelectManager : MonoBehaviour
 
     public void OnClickSelectKarmen()
     {
-        SoundManager.instance.SFXPlay("List", uiCharacterClickSound);
+        SoundManager.instance.SFXPlay("CharacterListClick", uiCharacterClickSound);
 
         if (mainOrsub == 1)
         {
@@ -77,7 +76,7 @@ public class CharacterSelectManager : MonoBehaviour
     }
     public void OnClickSelectJade()
     {
-        SoundManager.instance.SFXPlay("List", uiCharacterClickSound);
+        SoundManager.instance.SFXPlay("CharacterListClick", uiCharacterClickSound);
 
         if (mainOrsub == 1)
         {
@@ -98,7 +97,7 @@ public class CharacterSelectManager : MonoBehaviour
     }
     public void OnClickSelectLeina()
     {
-        SoundManager.instance.SFXPlay("List", uiCharacterClickSound);
+        SoundManager.instance.SFXPlay("CharacterListClick", uiCharacterClickSound);
 
         if (mainOrsub == 1)
         {
@@ -119,7 +118,7 @@ public class CharacterSelectManager : MonoBehaviour
     }
     public void OnClickSelectEva()
     {
-        SoundManager.instance.SFXPlay("List", uiCharacterClickSound);
+        SoundManager.instance.SFXPlay("CharacterListClick", uiCharacterClickSound);
 
         if (mainOrsub == 1)
         {
@@ -140,7 +139,7 @@ public class CharacterSelectManager : MonoBehaviour
     }
     public void OnClickSelectCharacter()
     {
-        SoundManager.instance.SFXPlay("Select", uiButtonClickSound1);
+        SoundManager.instance.SFXPlay("UIButtonClick", uiButtonSound);
 
         if (mainOrsub == 1)
         {
@@ -240,24 +239,42 @@ public class CharacterSelectManager : MonoBehaviour
 
     public void OnClickStart()
     {
-        //SoundManager.instance.SFXPlay("Start", uiButtonClickSound2);
-
         if (GameManager.instance.clientPlayer.selectCharacter1 == 0 || GameManager.instance.clientPlayer.selectCharacter2 == 0)
             return;
 
         GameManager.instance.clientPlayer.curMainCharacter = 1;
 
         if (DataBaseManager.PlayerPvELevel ==0)
-           SceneManager.LoadScene("Stage0");
+        {
+            SoundManager.instance.SFXPlay("UIStartButtonClick", uiStartButtonSound);
+            Invoke("LoadStage0", 1f);
+        }
         else
-            SceneManager.LoadScene("LoadPvELevel");
+        {
+            SoundManager.instance.SFXPlay("UIStartButtonClick", uiStartButtonSound);
+            Invoke("LoadPvELevel", 1f);
+        }
     }
+    void LoadStage0()
+    {
+        SceneManager.LoadScene("Stage0");
+    }
+    void LoadPvELevel()
+    {
+        SceneManager.LoadScene("LoadPvELevel");
+    }
+
     public void OnClickExit()
     {
-        //SoundManager.instance.SFXPlay("Exit", uiButtonClickSound2);
+        SoundManager.instance.SFXPlay("UIButtonClick", uiButtonSound);
         GameManager.instance.DestroyGameManager();
+        Invoke("LoadSelectPvEMode", 1f);
+    }
+    void LoadSelectPvEMode()
+    {
         SceneManager.LoadScene("SelectPvEMode");
     }
+
     public void KarmenInfoMsg()
     {
         characterInfoMsgText.text = "카르멘은 근거리 전투 캐릭터입니다." + "\n" +
