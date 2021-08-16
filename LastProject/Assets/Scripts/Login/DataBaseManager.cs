@@ -72,7 +72,7 @@ public class DataBaseManager : MonoBehaviour
     void serverOn()
     {
         socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
-        socket.Connect(IPAddress.Parse("127.0.0.1"), 9090);
+        socket.Connect(IPAddress.Parse("127.0.0.1"), 9080);
     }
 
     public void OnEndEditPlayerID(InputField inputField)

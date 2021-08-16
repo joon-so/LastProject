@@ -12,7 +12,7 @@
 
 // 수신 버퍼 사이즈
 #define BUFFERSIZE 1024
-#define PORT 9090
+#define PORT 9080
 using namespace std;
 
 //client -> server
@@ -178,7 +178,7 @@ int main()
         return 1;
     }
     // 서버를 시작한다.
-    cout << "Server Start" << endl;
+    cout << "Login,PvE Server Start" << endl;
     // 다중 접속을 위해 while로 소켓을 대기한다.
     while (1)
     {
