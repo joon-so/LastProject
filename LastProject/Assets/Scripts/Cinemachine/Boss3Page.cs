@@ -16,7 +16,7 @@ public class Boss3Page : MonoBehaviour
     }
     IEnumerator NextScene()
     {
-        yield return new WaitForSeconds(8.8f);
+        yield return new WaitForSeconds(9.0f);
         levelLoader.LoadBossStage();
     }
 }
