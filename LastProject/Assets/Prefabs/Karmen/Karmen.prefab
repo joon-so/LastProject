@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 414729905099542191}
   m_Layer: 0
   m_Name: Karmen
-  m_TagString: Untagged
+  m_TagString: KarmenAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -270,6 +270,9 @@ MonoBehaviour:
   rightStaffEffect: {fileID: 7475281872380490522}
   qSkill: {fileID: 8426777838863968483, guid: dd8952ee3a212184182dfddc4a74372e, type: 3}
   qSkillPos: {fileID: 8652797107322721045}
+  leftStaff: {fileID: 115853019396617962}
+  rightStaff: {fileID: 1172224082787761312}
+  throwingStaff: {fileID: 5596780959087779559}
   wLeftEffect: {fileID: 8652797105630888188}
   wRightEffect: {fileID: 7628219965541859316}
   EvaKarmenSynergeWeapon: {fileID: 614976779294991657, guid: 7f69ad9d5f6d54b4ba519370d191fde7, type: 3}
@@ -277,6 +280,7 @@ MonoBehaviour:
   moveSpeed: 5
   dodgeCoolTime: 5
   followDistance: 5
+  attackDelay: 0.5
 --- !u!54 &3279302803575345236
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -291,7 +295,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!136 &7269216707715993516
 CapsuleCollider:
@@ -360,6 +364,67 @@ Transform:
   m_Father: {fileID: 1930147956738828382}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &274677905928155904
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2012857059250919843}
+  - component: {fileID: 5596780959087779559}
+  - component: {fileID: 515261243374530440}
+  m_Layer: 0
+  m_Name: SubHitBox
+  m_TagString: KarmenAttack
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2012857059250919843
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274677905928155904}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5582750005800658346}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5596780959087779559
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274677905928155904}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.4, y: 0.4, z: 3.4}
+  m_Center: {x: 0, y: 0, z: 1.6}
+--- !u!54 &515261243374530440
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274677905928155904}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &326623111204119230
 GameObject:
   m_ObjectHideFlags: 0
@@ -2075,6 +2140,7 @@ Transform:
   m_Children:
   - {fileID: 1108822182276046183}
   - {fileID: 1753920809621077692}
+  - {fileID: 2012857059250919843}
   m_Father: {fileID: 5699094489596515816}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7304,7 +7370,7 @@ GameObject:
   - component: {fileID: 2335973350184465616}
   m_Layer: 0
   m_Name: polySurface218
-  m_TagString: Untagged
+  m_TagString: KarmenAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7316,13 +7382,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6649131229099862144}
-  m_LocalRotation: {x: 0.56943715, y: -0.47121754, z: 0.10094977, w: 0.6659613}
-  m_LocalPosition: {x: 0.0072347578, y: 0.0032630917, z: -0.005696487}
+  m_LocalRotation: {x: -0.13431758, y: -0.46638495, z: -0.23953491, w: 0.84087276}
+  m_LocalPosition: {x: 0.0185, y: 0.006, z: -0.0126}
   m_LocalScale: {x: 0.8777388, y: 0.8777388, z: 0.8777388}
   m_Children: []
   m_Father: {fileID: 5197606165419609938}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -26.7, y: -53.7, z: -18.1}
 --- !u!137 &10955616643821005
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -8022,14 +8088,15 @@ GameObject:
   - component: {fileID: 7469861993227624600}
   - component: {fileID: 7313581049560546176}
   - component: {fileID: 7312562565835312732}
-  - component: {fileID: 2735229869488313139}
+  - component: {fileID: 1172224082787761312}
+  - component: {fileID: 2327328821235306454}
   m_Layer: 0
   m_Name: StaffEffect
   m_TagString: KarmenAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7469861993227624600
 Transform:
   m_ObjectHideFlags: 0
@@ -8037,7 +8104,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7475281872380490522}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -0.45, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
@@ -8046,7 +8113,7 @@ Transform:
   - {fileID: 7470142460411293360}
   m_Father: {fileID: 3809340396151586969}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!199 &7313581049560546176
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -12894,7 +12961,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!136 &2735229869488313139
+--- !u!136 &1172224082787761312
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12902,12 +12969,28 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7475281872380490522}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 0
   m_Radius: 1
   m_Height: 3
-  m_Direction: 0
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &2327328821235306454
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7475281872380490522}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &7475885789681620354
 GameObject:
   m_ObjectHideFlags: 0
@@ -73489,14 +73572,15 @@ GameObject:
   - component: {fileID: 8652797107436684208}
   - component: {fileID: 8652797107436684204}
   - component: {fileID: 8652797107436684205}
-  - component: {fileID: 3154694532297450032}
+  - component: {fileID: 115853019396617962}
+  - component: {fileID: 7881881796323490307}
   m_Layer: 0
   m_Name: StaffEffect
   m_TagString: KarmenAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8652797107436684208
 Transform:
   m_ObjectHideFlags: 0
@@ -73504,7 +73588,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8652797107436684209}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -0.45, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
@@ -73513,7 +73597,7 @@ Transform:
   - {fileID: 8652797106294646036}
   m_Father: {fileID: 1180326162417788570}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!199 &8652797107436684204
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -78361,7 +78445,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!136 &3154694532297450032
+--- !u!136 &115853019396617962
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -78369,12 +78453,28 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8652797107436684209}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 0
   m_Radius: 1
   m_Height: 3
-  m_Direction: 0
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Direction: 1
+  m_Center: {x: -0.0000009536743, y: 0, z: 0.00000023841858}
+--- !u!54 &7881881796323490307
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8652797107436684209}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &8652797107538051537
 GameObject:
   m_ObjectHideFlags: 0
@@ -89032,13 +89132,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f69ad9d5f6d54b4ba519370d191fde7, type: 3}
---- !u!1 &2676396708058206103 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 614976778687877890, guid: 7f69ad9d5f6d54b4ba519370d191fde7, type: 3}
-  m_PrefabInstance: {fileID: 3291197563115117717}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2676396708663294386 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 614976779294991655, guid: 7f69ad9d5f6d54b4ba519370d191fde7, type: 3}
+  m_PrefabInstance: {fileID: 3291197563115117717}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2676396708058206103 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 614976778687877890, guid: 7f69ad9d5f6d54b4ba519370d191fde7, type: 3}
   m_PrefabInstance: {fileID: 3291197563115117717}
   m_PrefabAsset: {fileID: 0}

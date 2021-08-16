@@ -13,6 +13,10 @@ public class Karmen : SubAI
     [SerializeField] GameObject qSkill = null;
     public Transform qSkillPos = null;
 
+    [SerializeField] CapsuleCollider leftStaff;
+    [SerializeField] CapsuleCollider rightStaff;
+    [SerializeField] BoxCollider throwingStaff;
+
     [SerializeField] GameObject wLeftEffect = null;
     [SerializeField] GameObject wRightEffect = null;
     public GameObject EvaKarmenSynergeWeapon = null;
@@ -33,6 +37,7 @@ public class Karmen : SubAI
 
     float curAttackDelay;
     float subAttackDelay = 1.5f;
+    public float attackDelay = 0.8f;
 
     bool canMove;
     bool canDodge;
@@ -126,6 +131,9 @@ public class Karmen : SubAI
         doingAttack = false;
         motionEndCheck = true;
         comboContinue = true;
+        throwingStaff.enabled = false;
+
+        curAttackDelay = attackDelay;
 
         attackDistance = 3.5f;
 
@@ -140,6 +148,7 @@ public class Karmen : SubAI
         Tag();
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
+            curAttackDelay += Time.deltaTime;
             if (!falling)
             {
                 if (canMove)
@@ -183,7 +192,9 @@ public class Karmen : SubAI
                     moveSpeed = 0f;
                     animator.SetBool("Run", false);
                     animator.SetTrigger("Throwing");
+
                     vecTarget = transform.position;
+                    StartCoroutine(SubAttackHitBoxTime());
 
                     curAttackDelay = 0;
                 }
@@ -282,43 +293,16 @@ public class Karmen : SubAI
     }
     void Attack()
     {
-        if (doingAttack)
-        {
-            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
-                && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f)
-            {
-                if (Input.GetMouseButtonDown(0))
-                    if (comboContinue)
-                        comboContinue = false;
-                motionEndCheck = false;
-            }
-            else if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1f && !motionEndCheck)
-            {
-                if (!comboContinue)
-                {
-                    animator.SetTrigger("nextCombo");
-                    comboContinue = true;
-                }
-                else if (comboContinue)
-                {
-                    doingAttack = false;
-                    animator.SetBool("Attack", doingAttack);
-                    //CharacterState.attackCheck = false;
-                }
-                motionEndCheck = true;
-            }
-        }
-
         if (Input.GetMouseButtonDown(0))
         {
-            canMove = false;
-            animator.SetBool("Run", canMove);
-
-            if ((doingAttack && animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
-                 && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8f)
-                 || animator.GetCurrentAnimatorStateInfo(0).IsName("Idle1SS")
-                 || animator.GetCurrentAnimatorStateInfo(0).IsName("runSS"))
+            if (curAttackDelay > attackDelay)
             {
+                canMove = false;
+                canDodge = false;
+                canSkill = false;
+
+                animator.SetBool("Run", false);
+
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -327,20 +311,17 @@ public class Karmen : SubAI
                     nextVec.y = 0;
                     transform.LookAt(transform.position + nextVec);
                 }
-                vecTarget = transform.position;
-            }
-            //CharacterState.attackCheck = true;
-            moveSpeed = 0f;
-            doingAttack = true;
-            animator.SetBool("Attack", doingAttack);
-        }
 
-        if (doingAttack && Input.GetMouseButtonDown(1))
-        {
-            doingAttack = false;
-            animator.SetBool("Attack", doingAttack);
-            canMove = true;
-            animator.SetBool("Run", canMove);
+                vecTarget = transform.position;
+                animator.SetTrigger("Attack");
+                leftStaff.enabled = true;
+                rightStaff.enabled = true;
+                ServerLoginManager.playerList[0].mainCharacterBehavior = 3; // Attack
+
+                curAttackDelay = 0;
+
+                StartCoroutine(AttackDelay());
+            }
         }
     }
     void AttackRange()
@@ -532,12 +513,21 @@ public class Karmen : SubAI
             vecTarget = transform.position;
         }
     }
+    IEnumerator SubAttackHitBoxTime()
+    {
+        yield return new WaitForSeconds(0.3f);
+        throwingStaff.enabled = true;
+        yield return new WaitForSeconds(0.05f);
+        throwingStaff.enabled = false;
+    }
     IEnumerator AttackDelay()
     {
+        yield return new WaitForSeconds(0.8f);
         canMove = true;
         canDodge = true;
         canSkill = true;
-        yield return new WaitForSeconds(0.2f);
+        leftStaff.enabled = false;
+        rightStaff.enabled = false;
     }
     IEnumerator DodgeDelay()
     {

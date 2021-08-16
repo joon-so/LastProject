@@ -258,6 +258,8 @@ public class Eva : SubAI
             canMove = false;
             canSkill = false;
 
+            curDodgeCoolTime = 0.0f;
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -266,24 +268,19 @@ public class Eva : SubAI
                 nextVec.y = 0;
                 transform.LookAt(transform.position + nextVec);
             }
-            moveSpeed *= 2;
+            //moveSpeed *= 2;
             animator.SetTrigger("Dodge");
-
             StartCoroutine(DodgeDelay());
         }
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("02_Jump"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
         {
-            //transform.Translate(Vector3.forward * 2 * Time.deltaTime);
-            //vecTarget = transform.position;
-            //animator.SetBool("Run", false);
-            //if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
-            //    && anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.4f)
-            //{
-            //    moveSpeed = 100f;
-            //}
-            transform.Translate(Vector3.forward * 5 * Time.deltaTime);
+            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
             vecTarget = transform.position;
             animator.SetBool("Run", false);
+        }
+        else
+        {
+            moveSpeed = 5f;
         }
     }
     void Attack()
@@ -521,7 +518,15 @@ public class Eva : SubAI
     }
     IEnumerator DodgeDelay()
     {
-        yield return new WaitForSeconds(1.0f);
+        canAttack = false;
+        canMove = false;
+        canSkill = false;
+        yield return new WaitForSeconds(0.3f);
+        moveSpeed = 7f;
+        yield return new WaitForSeconds(1f);
+        moveSpeed = 0f;
+        yield return new WaitForSeconds(0.5f);
+        moveSpeed = 5f;
         canAttack = true;
         canMove = true;
         canSkill = true;
@@ -529,6 +534,7 @@ public class Eva : SubAI
     IEnumerator FireGun()
     {
         qSkill.SetActive(true);
+        canMove = false;
         animator.SetTrigger("QSkill");
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
