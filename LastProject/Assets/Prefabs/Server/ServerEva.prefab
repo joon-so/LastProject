@@ -11404,7 +11404,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &8330996397814036486
 MonoBehaviour:
@@ -16210,9 +16210,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2679458709588312067}
     m_Modifications:
+    - target: {fileID: -4723396713790185450, guid: d17a3dacac587f94488ad26b430efbbd, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 165344693493967027, guid: d17a3dacac587f94488ad26b430efbbd, type: 3}
       propertyPath: obj5
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 566078656673823017, guid: d17a3dacac587f94488ad26b430efbbd, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1184807086142623694, guid: d17a3dacac587f94488ad26b430efbbd, type: 3}
       propertyPath: m_RootOrder

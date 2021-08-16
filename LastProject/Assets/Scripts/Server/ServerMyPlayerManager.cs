@@ -82,6 +82,7 @@ public class ServerMyPlayerManager : MonoBehaviour
             serverKarmenObj.SetActive(true);
             character1 = serverKarmenObj;
             character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+            character1.gameObject.GetComponent<Rigidbody>().isKinematic = false;
             serverKarmenObj.tag = "MainCharacter";
             c1MaxHp = 500;
             c1MaxEp = 100;
@@ -91,6 +92,7 @@ public class ServerMyPlayerManager : MonoBehaviour
             serverJadeObj.SetActive(true);
             character1 = serverJadeObj;
             character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+            character1.gameObject.GetComponent<Rigidbody>().isKinematic = false;
             serverJadeObj.tag = "MainCharacter";
             c1MaxHp = 400;
             c1MaxEp = 200;
@@ -100,6 +102,7 @@ public class ServerMyPlayerManager : MonoBehaviour
             serverLeinaObj.SetActive(true);
             character1 = serverLeinaObj;
             character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+            character1.gameObject.GetComponent<Rigidbody>().isKinematic = false;
             serverLeinaObj.tag = "MainCharacter";
             c1MaxHp = 400;
             c1MaxEp = 200;
@@ -109,6 +112,7 @@ public class ServerMyPlayerManager : MonoBehaviour
             serverEvaObj.SetActive(true);
             character1 = serverEvaObj;
             character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+            character1.gameObject.GetComponent<Rigidbody>().isKinematic = false;
             serverEvaObj.tag = "MainCharacter";
             c1MaxHp = 500;
             c1MaxEp = 100;
@@ -243,6 +247,7 @@ public class ServerMyPlayerManager : MonoBehaviour
                 mainCameraControl.focus = character2.transform;
                 character1.gameObject.tag = "SubCharacter";
                 character2.gameObject.tag = "MainCharacter";
+
                 character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
                 character2.gameObject.GetComponent<NavMeshAgent>().enabled = false;
 
