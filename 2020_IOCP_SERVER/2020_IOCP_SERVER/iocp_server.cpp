@@ -809,6 +809,7 @@ void worker_thread()
 
 int main()
 {
+    cout << "PvP Server Start" << endl;
     std::wcout.imbue(std::locale("korean"));
 
     for (auto& cl : g_clients)

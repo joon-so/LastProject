@@ -16,14 +16,14 @@ using System.Runtime.InteropServices;
 
 public class Stage1 : MonoBehaviour
 {
-
+    bool once = false;
     byte[] buffer = new byte[1024]; // 버퍼의 크기 필요한 만큼 크기를 정하도록 하자 작을수록 좋음
     Socket socket;
 
     void serverOn()
     {
         socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
-        socket.Connect(IPAddress.Parse("127.0.0.1"), 9080);
+        socket.Connect(IPAddress.Parse(DataBaseManager.playerIP), 9080);
     }
 
     public const int BIND_SIZE_ChangeStagePacket = 4 + 20 + 4;
@@ -81,6 +81,10 @@ public class Stage1 : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //여기서 보냄
-        StartCoroutine(changeStageDataCo());
+        if(!once)
+        {
+            once = true;
+            StartCoroutine(changeStageDataCo());
+        }
     }
 }
