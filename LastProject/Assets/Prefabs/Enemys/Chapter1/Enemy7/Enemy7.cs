@@ -79,7 +79,7 @@ public class Enemy7 : MonoBehaviour
         SoundManager.instance.SFXPlay("Explosion", deadSound);
         movable = false;
         Instantiate(explosion, transform.position, transform.rotation);
-        //targets.Remove(gameObject);
+        targets.Remove(gameObject);
         GetComponent<TriangleExplosion>().ExplosionMesh();
         yield return new WaitForSeconds(1f);
         //Destroy(gameObject);

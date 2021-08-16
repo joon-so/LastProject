@@ -41,6 +41,7 @@ public class Leina : SubAI
     bool canMove;
     bool canSkill;
     bool falling;
+    bool dead;
 
     bool onDodge;
     bool onQSkill;
@@ -54,12 +55,14 @@ public class Leina : SubAI
     Rigidbody rigidbody;
     ClientCollisionManager collisionManager;
     ClientSkillEpManager skillEpManager;
+    CapsuleCollider capsuleCollider;
 
     void Awake()
     {
         animator = GetComponent<Animator>();
         navMesh = GetComponent<NavMeshAgent>();
         rigidbody = GetComponent<Rigidbody>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
         collisionManager = GameObject.Find("GameManager").GetComponent<ClientCollisionManager>();
         skillEpManager = GameObject.Find("GameManager").GetComponent<ClientSkillEpManager>();
     }
@@ -114,6 +117,7 @@ public class Leina : SubAI
         canAttack = true;
         canSkill = true;
         falling = false;
+        dead = false;
 
         onDodge = true;
         onQSkill = true;
@@ -204,6 +208,19 @@ public class Leina : SubAI
     }
     void FixedUpdate()
     {
+        if (GameManager.instance.clientPlayer.character1Hp <= 0 || GameManager.instance.clientPlayer.character2Hp <= 0)
+        {
+            if (!dead)
+            {
+                capsuleCollider.isTrigger = true;
+                canAttack = false;
+                canDodge = false;
+                canMove = false;
+                canSkill = false;
+                animator.SetTrigger("Dead");
+                dead = true;
+            }
+        }
         FindEnemys();
 
     }
@@ -631,7 +648,7 @@ public class Leina : SubAI
 
     void OnCollisionEnter(Collision collision)
     {
-        if (GameManager.instance.clientPlayer.character1Hp <= 0 || GameManager.instance.clientPlayer.character2Hp <= 0)
+        if (dead)
             return;
 
         if (collision.gameObject.tag == "Boss" && !falling)
@@ -653,7 +670,14 @@ public class Leina : SubAI
             if (collision.gameObject.CompareTag("Enemy6Attack"))
                 collisionManager.Enemy6Attack();
             if (collision.gameObject.CompareTag("Enemy7Attack"))
+            {
+                GameObject enemy = collision.gameObject;
+                Vector3 pos = enemy.transform.position - enemy.transform.forward * 2f;
+                pos.y = transform.position.y;
+                transform.LookAt(pos);
+                StartCoroutine(FallDown());
                 collisionManager.Enemy7Attack();
+            }
             if (collision.gameObject.CompareTag("BossAttack1"))
                 collisionManager.BossAttack1();
             if (collision.gameObject.CompareTag("BossAttack2"))

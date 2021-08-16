@@ -44,6 +44,7 @@ public class Karmen : SubAI
     bool canAttack;
     bool canSkill;
     bool falling;
+    bool dead;
 
     bool onDodge;
     bool onQSkill;
@@ -62,12 +63,14 @@ public class Karmen : SubAI
     Rigidbody rigidbody;
     ClientCollisionManager collisionManager;
     ClientSkillEpManager skillEpManager;
+    CapsuleCollider capsuleCollider;
 
     void Awake()
     {
         animator = GetComponentInChildren<Animator>();
         navMesh = GetComponent<NavMeshAgent>();
         rigidbody = GetComponent<Rigidbody>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
         collisionManager = GameObject.Find("GameManager").GetComponent<ClientCollisionManager>();
         skillEpManager = GameObject.Find("GameManager").GetComponent<ClientSkillEpManager>();
     }
@@ -122,6 +125,7 @@ public class Karmen : SubAI
         canAttack = false;
         canSkill = false;
         falling = false;
+        dead = false;
 
         onDodge = true;
         onQSkill = true;
@@ -221,6 +225,19 @@ public class Karmen : SubAI
     }
     void FixedUpdate()
     {
+        if (GameManager.instance.clientPlayer.character1Hp <= 0 || GameManager.instance.clientPlayer.character2Hp <= 0)
+        {
+            if (!dead)
+            {
+                capsuleCollider.isTrigger = true;
+                canAttack = false;
+                canDodge = false;
+                canMove = false;
+                canSkill = false;
+                animator.SetTrigger("Dead");
+                dead = true;
+            }
+        }
         FindEnemys();
     }
     void Move()
@@ -697,9 +714,9 @@ public class Karmen : SubAI
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (GameManager.instance.clientPlayer.character1Hp <= 0 || GameManager.instance.clientPlayer.character2Hp <= 0)
+        if (dead)
             return;
-
+       
         if (collision.gameObject.tag == "Boss" && !falling)
         {
             GameObject boss = collision.gameObject;
@@ -719,7 +736,14 @@ public class Karmen : SubAI
             if (collision.gameObject.CompareTag("Enemy6Attack"))
                 collisionManager.Enemy6Attack();
             if (collision.gameObject.CompareTag("Enemy7Attack"))
+            {
+                GameObject enemy = collision.gameObject;
+                Vector3 pos = enemy.transform.position - enemy.transform.forward * 2f;
+                pos.y = transform.position.y;
+                transform.LookAt(pos);
+                StartCoroutine(FallDown());
                 collisionManager.Enemy7Attack();
+            }
             if (collision.gameObject.CompareTag("BossAttack1"))
                 collisionManager.BossAttack1();
             if (collision.gameObject.CompareTag("BossAttack2"))

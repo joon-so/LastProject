@@ -56,6 +56,9 @@ public class InGameUI : MonoBehaviour
 
     [SerializeField] Image hitEffect;
 
+    [SerializeField] Image gameEnd;
+    [SerializeField] Text missionFail;
+
     private GameObject mainC1;
     private GameObject subC1;
     private GameObject mainC2;
@@ -102,7 +105,7 @@ public class InGameUI : MonoBehaviour
             return;
         }
 
-        if (GameManager.instance.clientPlayer.character1Hp > 0 || GameManager.instance.clientPlayer.character2Hp > 0)
+        if (GameManager.instance.clientPlayer.character1Hp > 0 && GameManager.instance.clientPlayer.character2Hp > 0)
         {
             UpdateHp();
             UpdateCoolTimeUI();
@@ -116,6 +119,11 @@ public class InGameUI : MonoBehaviour
                     TagCharacterSlot();
                 }
             }
+        }
+        else if((GameManager.instance.clientPlayer.character1Hp <= 0 || GameManager.instance.clientPlayer.character2Hp <= 0))
+        {
+            UpdateHp();
+            StartCoroutine(GameOver());
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -383,6 +391,28 @@ public class InGameUI : MonoBehaviour
         guide.SetActive(true);
     }
     
+    IEnumerator GameOver()
+    {
+        yield return new WaitForSeconds(2f);
+        float endTime = 3f;
+        float curTime = 0;
+        Color color = gameEnd.color;
+        Color color2 = missionFail.color;
+        while (curTime <= endTime)
+        {
+            curTime += 0.03f;
+            color.a = curTime / endTime;
+            color2.a = color.a;
+            gameEnd.color = color;
+            missionFail.color = color2;
+            yield return null;
+        }
+        yield return new WaitForSeconds(3f);
+
+        GameManager.instance.DestroyAllInstance();
+        GameManager.instance.ChangeSceneMain();
+    }
+
     IEnumerator DelayTime()
     {
         yield return new WaitForSeconds(1.1f);

@@ -40,6 +40,7 @@ public class Eva : SubAI
     bool canAttack;
     bool canSkill;
     bool falling;
+    bool dead;
 
     bool onDodge;
     bool onQSkill;
@@ -58,6 +59,7 @@ public class Eva : SubAI
     Rigidbody rigidbody;
     ClientCollisionManager collisionManager;
     ClientSkillEpManager skillEpManager;
+    CapsuleCollider capsuleCollider;
 
     public static List<GameObject> targetEnemys = new List<GameObject>();
     
@@ -66,6 +68,7 @@ public class Eva : SubAI
         animator = GetComponentInChildren<Animator>();
         navMesh = GetComponent<NavMeshAgent>();
         rigidbody = GetComponent<Rigidbody>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
         collisionManager = GameObject.Find("GameManager").GetComponent<ClientCollisionManager>();
         skillEpManager = GameObject.Find("GameManager").GetComponent<ClientSkillEpManager>();
     }
@@ -126,6 +129,7 @@ public class Eva : SubAI
         onWSkill = true;
         onESkill = true;
         falling = false;
+        dead = false;
 
         doingAttack = false;
         motionEndCheck = true;
@@ -217,6 +221,19 @@ public class Eva : SubAI
     }
     void FixedUpdate()
     {
+        if (GameManager.instance.clientPlayer.character1Hp <= 0 || GameManager.instance.clientPlayer.character2Hp <= 0)
+        {
+            if (!dead)
+            {
+                capsuleCollider.isTrigger = true;
+                canAttack = false;
+                canDodge = false;
+                canMove = false;
+                canSkill = false;
+                animator.SetTrigger("Dead");
+                dead = true;
+            }
+        }
         FindEnemys();
     }
     void Move()
@@ -789,7 +806,7 @@ public class Eva : SubAI
 
     void OnCollisionEnter(Collision collision)
     {
-        if (GameManager.instance.clientPlayer.character1Hp <= 0 || GameManager.instance.clientPlayer.character2Hp <= 0)
+        if (dead)
             return;
 
         if (collision.gameObject.tag == "Boss" && !falling)
@@ -811,7 +828,14 @@ public class Eva : SubAI
             if (collision.gameObject.CompareTag("Enemy6Attack"))
                 collisionManager.Enemy6Attack();
             if (collision.gameObject.CompareTag("Enemy7Attack"))
+            {
+                GameObject enemy = collision.gameObject;
+                Vector3 pos = enemy.transform.position - enemy.transform.forward * 2f;
+                pos.y = transform.position.y;
+                transform.LookAt(pos);
+                StartCoroutine(FallDown());
                 collisionManager.Enemy7Attack();
+            }
             if (collision.gameObject.CompareTag("BossAttack1"))
                 collisionManager.BossAttack1();
             if (collision.gameObject.CompareTag("BossAttack2"))

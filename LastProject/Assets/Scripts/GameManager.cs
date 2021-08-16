@@ -79,6 +79,14 @@ public class GameManager : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void DestroyAllInstance()
+    {
+        Destroy(gameObject);
+        Destroy(InGameUI.instance.gameObject);
+        Destroy(PlayerManager.instance.gameObject);
+    }
+
+
     // Mode Change
     public void ChangeHpEp()
     {
@@ -88,6 +96,10 @@ public class GameManager : MonoBehaviour
         clientPlayer.character2Ep = 50;
     }
 
+    public void ChangeSceneMain()
+    {
+        SceneManager.LoadScene("Main");
+    }
     public void ChangeSceneStage0()
     {
         SceneManager.LoadScene("Stage0");
