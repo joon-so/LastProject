@@ -11,6 +11,7 @@ public class ServerMyEva : ServerSubAIManager
     [SerializeField] GameObject qSkill;
     [SerializeField] GameObject wSkillEffect;
     [SerializeField] GameObject wSkillShockEffect;
+    [SerializeField] GameObject EvaHammer;
     public Transform wSkillPos = null;
 
     public float moveSpeed = 5.0f;
@@ -25,6 +26,7 @@ public class ServerMyEva : ServerSubAIManager
     float curQSkillCoolTime;
     float curWSkillCoolTime;
     float curAttackDelay;
+    float subAttackDelay = 1.5f;
 
     bool canMove;
     bool canDodge;
@@ -37,6 +39,7 @@ public class ServerMyEva : ServerSubAIManager
 
     Vector3 vecTarget;
     Animator myAnimator;
+    Rigidbody rigidbody;
     ServerCollisionManager collisionManager;
     ServerSkillEpManager skillEpManager;
 
@@ -86,7 +89,7 @@ public class ServerMyEva : ServerSubAIManager
             ServerMyPlayerManager.instance.curC2WSkillCoolTime = curWSkillCoolTime;
             nav.enabled = true;
         }
-
+        FindPlayers();
         vecTarget = transform.position;
         
         canMove = false;
@@ -107,7 +110,6 @@ public class ServerMyEva : ServerSubAIManager
     {
         Tag();
         CoolTime();
-        FindPlayers();
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
             curAttackDelay += Time.deltaTime;
@@ -127,6 +129,7 @@ public class ServerMyEva : ServerSubAIManager
         }
         else if (gameObject.transform.CompareTag("SubCharacter"))
         {
+            curAttackDelay += Time.deltaTime;
             distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
 
             if (currentState == characterState.trace)
@@ -137,8 +140,25 @@ public class ServerMyEva : ServerSubAIManager
             }
             else if (currentState == characterState.attack)
             {
-                ServerLoginManager.playerList[0].subCharacterBehavior = 3;
                 SubAttack();
+
+                if (target)
+                {
+                    Quaternion lookRotation = Quaternion.LookRotation(target.transform.position - transform.position);
+                    Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
+                    transform.rotation = Quaternion.Euler(0, euler.y, 0);
+                }
+                if (curAttackDelay > subAttackDelay && target != null)
+                {
+                    ServerLoginManager.playerList[0].subCharacterBehavior = 3;
+                    moveSpeed = 0f;
+                    myAnimator.SetBool("Run", false);
+                    myAnimator.SetTrigger("Throwing");
+                    Instantiate(EvaHammer, transform.position + transform.up * 1.5f + transform.forward * 0.5f, transform.rotation);
+                    vecTarget = transform.position;
+
+                    curAttackDelay = 0;
+                }
             }
             else if (currentState == characterState.idle)
             {
@@ -147,6 +167,10 @@ public class ServerMyEva : ServerSubAIManager
                 myAnimator.SetBool("Run", false);
             }
         }
+    }
+    void LateUpdate()
+    {
+        FindPlayers();
     }
     void Move()
     {

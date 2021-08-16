@@ -48,6 +48,7 @@ public class ServerMyJade : ServerSubAIManager
 
     Vector3 vecTarget;
     Animator myAnimator;
+    Rigidbody rigidbody; 
     ServerCollisionManager collisionManager;
     ServerSkillEpManager skillEpManager;
 
@@ -98,7 +99,7 @@ public class ServerMyJade : ServerSubAIManager
             ServerMyPlayerManager.instance.curC2WSkillCoolTime = curWSkillCoolTime;
             nav.enabled = true;
         }
-
+        FindPlayers();
         vecTarget = transform.position;
 
         canMove = false;
@@ -119,7 +120,6 @@ public class ServerMyJade : ServerSubAIManager
     {
         Tag();
         CoolTime();
-        FindPlayers();
         curFireDelay += Time.deltaTime;
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
@@ -183,7 +183,10 @@ public class ServerMyJade : ServerSubAIManager
             }
         }
     }
-
+    void FixedUpdate()
+    {
+        FindPlayers();
+    }
     void Move()
     {
         if (Input.GetMouseButton(1))

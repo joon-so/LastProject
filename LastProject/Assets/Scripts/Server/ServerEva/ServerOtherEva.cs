@@ -10,6 +10,7 @@ public class ServerOtherEva : MonoBehaviour
     [SerializeField] GameObject qSkill;
     [SerializeField] GameObject wSkillEffect;
     [SerializeField] GameObject wSkillShockEffect;
+    [SerializeField] GameObject EvaHammer;
     public Transform wSkillPos = null;
 
     [SerializeField] GameObject parentObject;
@@ -76,7 +77,6 @@ public class ServerOtherEva : MonoBehaviour
                 StartCoroutine(Death());
         }
     }
-
     public void SubAnimationControl()
     {
         if (ServerLoginManager.playerList[index].subCharacterBehavior == 0)
@@ -92,7 +92,7 @@ public class ServerOtherEva : MonoBehaviour
         else if (ServerLoginManager.playerList[index].subCharacterBehavior == 3)
         {
             if (preBehavior != 3)
-                StartCoroutine(AttackDelay());
+                StartCoroutine(subAttackDelay());
         }
         else if (ServerLoginManager.playerList[index].subCharacterBehavior == 6)
         {
@@ -124,6 +124,17 @@ public class ServerOtherEva : MonoBehaviour
         basicAttack2Collider.enabled = false;
         preBehavior = 0;
     }
+
+    IEnumerator subAttackDelay()
+    {
+        preBehavior = 3;
+        otherAnimator.SetTrigger("Throwing");
+        Instantiate(EvaHammer, transform.position + transform.up * 1.5f + transform.forward * 0.5f, transform.rotation);
+        yield return new WaitForSeconds(1.0f);
+        preBehavior = 0;
+    }
+
+
     IEnumerator FireGun()
     {
         preBehavior = 4;

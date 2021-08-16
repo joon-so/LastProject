@@ -9,7 +9,6 @@ public class SubAI : MonoBehaviour
     public characterState currentState = characterState.idle;
 
     public NavMeshAgent navMesh;
-
     public GameObject tagCharacter;
 
     protected GameObject target;
