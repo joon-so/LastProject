@@ -13374,6 +13374,7 @@ GameObject:
   - component: {fileID: 465377086}
   - component: {fileID: 465377088}
   - component: {fileID: 465377087}
+  - component: {fileID: 465377089}
   m_Layer: 0
   m_Name: EndPosition
   m_TagString: Untagged
@@ -13420,6 +13421,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &465377089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465377085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb4c64874b3d993448548559728cc24b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &471029294
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39732,7 +39745,7 @@ Transform:
   - {fileID: 1100051340}
   - {fileID: 179635937}
   m_Father: {fileID: 2024651119}
-  m_RootOrder: 71
+  m_RootOrder: 58
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1465291383
 PrefabInstance:
@@ -58601,6 +58614,7 @@ Transform:
   - {fileID: 1781063092}
   - {fileID: 349313115}
   - {fileID: 52829986}
+  - {fileID: 1464571374}
   - {fileID: 1805121554}
   - {fileID: 1531507542}
   - {fileID: 1181974606}
@@ -58611,10 +58625,9 @@ Transform:
   - {fileID: 1455102181}
   - {fileID: 232530359}
   - {fileID: 1161166610}
-  - {fileID: 1757558214}
   - {fileID: 1369842898}
   - {fileID: 888056203}
-  - {fileID: 1464571374}
+  - {fileID: 1757558214}
   - {fileID: 1066235228}
   - {fileID: 358791698}
   - {fileID: 1935522700}

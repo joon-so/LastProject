@@ -28,7 +28,7 @@ public class Jade0To1Script : MonoBehaviour
         rigidbody.constraints = RigidbodyConstraints.FreezePositionY;
         yield return new WaitForSeconds(5.30f);
         rigidbody.constraints = RigidbodyConstraints.None;
-        Vector3 pos = new Vector3(-31.63f, 9.37f, -20.03f);
+        Vector3 pos = new Vector3(transform.position.x, 9.37f, transform.position.z);
         transform.position = pos;
         rigidbody.useGravity = true;
         anim.speed = 1f;
