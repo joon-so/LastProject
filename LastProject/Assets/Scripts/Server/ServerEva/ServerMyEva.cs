@@ -226,14 +226,14 @@ public class ServerMyEva : ServerSubAIManager
                 transform.LookAt(transform.position + nextVec);
             }
             //moveSpeed *= 2;
-            animator.SetTrigger("Dodge");
+            myAnimator.SetTrigger("Dodge");
             StartCoroutine(DodgeDelay());
         }
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+        if (myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
         {
             transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
             vecTarget = transform.position;
-            animator.SetBool("Run", false);
+            myAnimator.SetBool("Run", false);
         }
         else
         {
