@@ -40,55 +40,36 @@ public class BossManager : MonoBehaviour
     {
         if(GameManager.instance.bossPage == 1)
         {
-            if (boss1PageHp <= 0)
+            bossPilot.SetActive(true);
+            boss.SetActive(false);
+
+            if (curBoss1PageHp <= 0)
             {
                 levelLoader.LoadBossPage2();
+                curBoss1PageHp = 0;
             }
         }
         if (GameManager.instance.bossPage == 2)
         {
-            if (boss2PageHp <= 0)
+            bossPilot.SetActive(false);
+            boss.SetActive(true);
+
+            if (curBoss2PageHp <= 0)
             {
                 levelLoader.LoadBossPage3();
+                curBoss2PageHp = 0;
             }
         }
         if (GameManager.instance.bossPage == 3)
         {
-            if (boss2PageHp <= 0)
+            bossPilot.SetActive(false);
+            boss.SetActive(true);
+
+            if (curBoss3PageHp <= 0)
             {
                 levelLoader.LoadBossPage3();
+                curBoss3PageHp = 0;
             }
-        }
-
-        if (boss1PageHp <= 0)
-        {
-            levelLoader.LoadBossPage2();
-        }
-
-        if (boss2PageHp <= 0)
-        {
-            levelLoader.LoadBossPage3();
-        }
-
-        if (boss3PageHp <= 0)
-        {
-            levelLoader.LoadMain();
-        }
-
-        if(GameManager.instance.bossPage == 1)
-        {
-            bossPilot.SetActive(true);
-            boss.SetActive(false);
-        }
-        else if (GameManager.instance.bossPage == 2)
-        {
-            bossPilot.SetActive(false);
-            boss.SetActive(true);
-        }
-        else if (GameManager.instance.bossPage == 3)
-        {
-            bossPilot.SetActive(false);
-            boss.SetActive(true);
         }
     }
 }

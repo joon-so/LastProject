@@ -49,6 +49,14 @@ public class JadeGrenade : MonoBehaviour
             {
                 hitCol[i].gameObject.GetComponent<Enemy6>().HitJadeGrenade();
             }
+            if (hitCol[i].gameObject.CompareTag("Pilot"))
+            {
+                hitCol[i].gameObject.GetComponent<BossPilot>().HitJadeGrenade();
+            }
+            if (hitCol[i].gameObject.CompareTag("Boss"))
+            {
+                hitCol[i].gameObject.GetComponent<Boss>().HitJadeGrenade();
+            }
         }
     }
 }
