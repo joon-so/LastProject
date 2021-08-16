@@ -80,7 +80,9 @@ public class JadeMissileBullet : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if ((collision.gameObject.layer != 8 || collision.gameObject.tag != "SubCharacter") && !collided)
+        if ((collision.gameObject.layer != 8 || collision.gameObject.tag != "SubCharacter" ||
+            collision.gameObject.tag != "EvaESkill" || collision.gameObject.tag != "KarmenESkill" ||
+            collision.gameObject.tag != "LeinaESkill") && !collided)
         {
             collided = true;
 
