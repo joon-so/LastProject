@@ -243,8 +243,8 @@ public class ServerMyPlayerManager : MonoBehaviour
                 mainCameraControl.focus = character2.transform;
                 character1.gameObject.tag = "SubCharacter";
                 character2.gameObject.tag = "MainCharacter";
-                character2.gameObject.GetComponent<NavMeshAgent>().enabled = true;
-                character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+                character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
+                character2.gameObject.GetComponent<NavMeshAgent>().enabled = false;
 
                 character1.gameObject.GetComponent<Rigidbody>().isKinematic = true;
                 character2.gameObject.GetComponent<Rigidbody>().isKinematic = false;
@@ -258,8 +258,8 @@ public class ServerMyPlayerManager : MonoBehaviour
                 character1.gameObject.tag = "MainCharacter";
                 character2.gameObject.tag = "SubCharacter";
 
-                character2.gameObject.GetComponent<NavMeshAgent>().enabled = false;
-                character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
+                character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+                character2.gameObject.GetComponent<NavMeshAgent>().enabled = true;
 
                 character1.gameObject.GetComponent<Rigidbody>().isKinematic = false;
                 character2.gameObject.GetComponent<Rigidbody>().isKinematic = true;

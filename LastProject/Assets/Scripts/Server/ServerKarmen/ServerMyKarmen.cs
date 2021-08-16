@@ -44,6 +44,7 @@ public class ServerMyKarmen : ServerSubAIManager
 
     Vector3 vecTarget;
     Animator myAnimator;
+    Rigidbody rigidbody;
     ServerCollisionManager collisionManager;
     ServerSkillEpManager skillEpManager;
 
@@ -95,6 +96,7 @@ public class ServerMyKarmen : ServerSubAIManager
             nav.enabled = true;
         }
 
+        FindPlayers();
         vecTarget = transform.position;
 
         canMove = false;
@@ -107,7 +109,6 @@ public class ServerMyKarmen : ServerSubAIManager
 
         curAttackDelay = attackDelay;
 
-
         StartCoroutine(StartMotion());
     }
 
@@ -115,7 +116,6 @@ public class ServerMyKarmen : ServerSubAIManager
     {
         Tag(); 
         CoolTime();
-        FindPlayers();
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
             curAttackDelay += Time.deltaTime;
@@ -135,7 +135,7 @@ public class ServerMyKarmen : ServerSubAIManager
         }
         else if (gameObject.transform.CompareTag("SubCharacter"))
         {
-            attackDelay += Time.deltaTime;
+            curAttackDelay += Time.deltaTime;
             distance = Vector3.Distance(tagCharacter.transform.position, transform.position);
 
             if (currentState == characterState.trace)
@@ -143,7 +143,7 @@ public class ServerMyKarmen : ServerSubAIManager
                 ServerLoginManager.playerList[0].subCharacterBehavior = 1;
                 MainCharacterTrace(tagCharacter.transform.position);
                 myAnimator.SetBool("Run", true);
-                attackDelay = 1f;
+                curAttackDelay = 1f;
             }
             else if (currentState == characterState.attack)
             {
@@ -155,7 +155,7 @@ public class ServerMyKarmen : ServerSubAIManager
                     Vector3 euler = Quaternion.RotateTowards(transform.rotation, lookRotation, spinSpeed * Time.deltaTime).eulerAngles;
                     transform.rotation = Quaternion.Euler(0, euler.y, 0);
                 }
-                if (attackDelay > subAttackDelay && target != null)
+                if (curAttackDelay > subAttackDelay && target != null)
                 {
                     ServerLoginManager.playerList[0].subCharacterBehavior = 3;
                     moveSpeed = 0f;
@@ -163,18 +163,23 @@ public class ServerMyKarmen : ServerSubAIManager
                     myAnimator.SetTrigger("Throwing");
                     vecTarget = transform.position;
 
-                    attackDelay = 0;
+                    curAttackDelay = 0;
                 }
             }
             else if (currentState == characterState.idle)
             {
-                Idle();
                 ServerLoginManager.playerList[0].subCharacterBehavior = 0;
+                Idle();
                 myAnimator.SetBool("Run", false);
-                attackDelay = 1f;
+                curAttackDelay = 1f;
             }
         }
     }
+    void FixedUpdate()
+    {
+        FindPlayers();
+    }
+
     void Move()
     {
         if (Input.GetMouseButton(1))

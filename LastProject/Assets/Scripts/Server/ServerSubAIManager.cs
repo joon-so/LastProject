@@ -9,12 +9,12 @@ public class ServerSubAIManager : MonoBehaviour
     public characterState currentState = characterState.idle;
 
     public NavMeshAgent nav;
-    public Rigidbody rigidbody;
     public GameObject tagCharacter;
 
     protected List<GameObject> targets;
     protected GameObject target = null;
     protected float distance;
+
     //private Transform 
     public float traceDistance = 5.0f;
     public float attackDistance = 6.0f;
@@ -23,8 +23,6 @@ public class ServerSubAIManager : MonoBehaviour
     public void FindPlayers()
     {
         targets = GameObject.Find("OtherPlayers").GetComponent<ServerOtherPlayersList>().mainPlayers;
-        for (int i = 0; i < targets.Count; ++i)
-            Debug.Log(i + " : " + targets[i]);
     }
 
     public void MainCharacterTrace(Vector3 movePos)

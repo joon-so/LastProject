@@ -38,6 +38,7 @@ public class ServerMyLeina : ServerSubAIManager
 
     Vector3 vecTarget;
     Animator myAnimator;
+    Rigidbody rigidbody;
     ServerCollisionManager collisionManager;
     ServerSkillEpManager skillEpManager;
 
@@ -87,7 +88,7 @@ public class ServerMyLeina : ServerSubAIManager
             ServerMyPlayerManager.instance.curC2WSkillCoolTime = curWSkillCoolTime;
             nav.enabled = true;
         }
-
+        FindPlayers();
         vecTarget = transform.position;
 
         canMove = true;
@@ -105,7 +106,6 @@ public class ServerMyLeina : ServerSubAIManager
     {
         Tag();
         CoolTime();
-        FindPlayers();
         curFireDelay += Time.deltaTime;
         if (gameObject.transform.CompareTag("MainCharacter"))
         {
@@ -169,6 +169,10 @@ public class ServerMyLeina : ServerSubAIManager
                 curFireDelay = 1f;
             }
         }
+    }
+    void FixedUpdate()
+    {
+        FindPlayers();
     }
     void Move()
     {
