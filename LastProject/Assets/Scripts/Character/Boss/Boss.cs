@@ -78,6 +78,7 @@ public class Boss : MonoBehaviour
 
     void FixedUpdate()
     {
+        page = GameManager.instance.bossPage - 1;
         if (targetCharacter == null)
         {
             targetCharacter = GameObject.FindGameObjectWithTag("MainCharacter");
@@ -151,15 +152,22 @@ public class Boss : MonoBehaviour
                 if (canAttack)
                 {
                     canAttack = false;
-                    if(pattern == 5)
+                    if(page == 1)
                     {
-                        pattern = 6;
+                        pattern = (int)Random.Range(1, 4);
                     }
-                    else
+                    if(page == 2)
                     {
-                        pattern = (int)Random.Range(1, 7);
-                        if (pattern > 4)
-                            pattern = 4;
+                        if(pattern == 5)
+                        {
+                            pattern = 6;
+                        }
+                        else
+                        {
+                            pattern = (int)Random.Range(1, 7);
+                            if (pattern > 4)
+                                pattern = 4;
+                        }
                     }
                     Pattern(pattern);
                 }
