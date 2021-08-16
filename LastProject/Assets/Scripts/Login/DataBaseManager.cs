@@ -60,6 +60,8 @@ public class DataBaseManager : MonoBehaviour
     // 플레이어 ID, PW 정보 들어있는 곳
     public static string playerID;
     public static string playerPW;
+    public static string playerIP;
+
     public AudioClip uiButtonSound;
 
     byte[] buffer = new byte[1024]; // 버퍼의 크기 필요한 만큼 크기를 정하도록 하자 작을수록 좋음
@@ -83,6 +85,16 @@ public class DataBaseManager : MonoBehaviour
     public void OnEndEditPlayerPassWord(InputField inputField)
     {
         playerPW = inputField.text;
+    }
+
+    public void OnEndEditPlayerIP(InputField inputField)
+    {
+        if (inputField.text == "0")
+        {
+            inputField.text = "127.0.0.1";
+        }
+
+        playerIP = inputField.text;
     }
 
     public void LoginBtn()

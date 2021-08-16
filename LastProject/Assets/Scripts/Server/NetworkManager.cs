@@ -33,7 +33,7 @@ public class NetworkManager : MonoBehaviour
 		// DNS (Domain Name System)
 		string host = Dns.GetHostName();
 		IPHostEntry ipHost = Dns.GetHostEntry(host);
-		IPAddress ipAddr = IPAddress.Parse(ServerLoginManager.playerList[0].ipAdress); //string 
+		IPAddress ipAddr = IPAddress.Parse(DataBaseManager.playerIP); //string 
 		IPEndPoint endPoint = new IPEndPoint(ipAddr, 9090);
 
 		Connector connector = new Connector();
