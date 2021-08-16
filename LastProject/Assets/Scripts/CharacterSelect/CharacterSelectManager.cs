@@ -246,7 +246,14 @@ public class CharacterSelectManager : MonoBehaviour
             return;
 
         GameManager.instance.clientPlayer.curMainCharacter = 1;
-        SceneManager.LoadScene("Stage0");
+
+        // 임의적으로 스테이지 설정
+        DataBaseManager.PlayerPvELevel = 2;
+
+        if (DataBaseManager.PlayerPvELevel ==0)
+           SceneManager.LoadScene("Stage0");
+        else
+            SceneManager.LoadScene("LoadPvELevel");
     }
     public void OnClickExit()
     {

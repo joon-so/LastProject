@@ -11,15 +11,32 @@ public class LoadPvELevel : MonoBehaviour
     [SerializeField] Image stage4;
     [SerializeField] Image stage5;
 
+    Color nonSelectColor = new Color(1f, 1f, 1f, 0.2f);
     void Start()
     {
-        Color nonSelectColor = new Color(1f, 1f, 1f, 0.2f);
-        stage1.color = nonSelectColor;
-        stage2.color = nonSelectColor;
-        stage3.color = nonSelectColor;
-        stage4.color = nonSelectColor;
-        stage5.color = nonSelectColor;
-
+        int i = DataBaseManager.PlayerPvELevel;
+        if (i == 0)
+        {
+            stage2.color = nonSelectColor;
+            stage3.color = nonSelectColor;
+            stage4.color = nonSelectColor;
+            stage5.color = nonSelectColor;
+        }
+        else if (i == 1)
+        {
+            stage3.color = nonSelectColor;
+            stage4.color = nonSelectColor;
+            stage5.color = nonSelectColor;
+        }
+        else if (i == 2)
+        {
+            stage4.color = nonSelectColor;
+            stage5.color = nonSelectColor;
+        }
+        else if (i == 3)
+        {
+            stage5.color = nonSelectColor;
+        }
     }
 
     void Update()

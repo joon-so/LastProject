@@ -61,6 +61,7 @@ public class DataBaseManager : MonoBehaviour
     public static string playerID;
     public static string playerPW;
     public static string playerIP;
+    public static int PlayerPvELevel;
 
     public AudioClip uiButtonSound;
 
@@ -202,6 +203,7 @@ public class DataBaseManager : MonoBehaviour
                 message.text = "로그인 완료!";
                 SceneManager.LoadScene("Main");
                 playerID = IDInputField.text;
+                PlayerPvELevel = Rp.stageData;
                 Debug.Log(Rp.stageData);        //정상일경우 해당 스테이지 데이터 사용하길
             }
         }
