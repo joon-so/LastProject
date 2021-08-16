@@ -216,7 +216,7 @@ public class ServerMyEva : ServerSubAIManager
             canSkill = false;
 
             curDodgeCoolTime = 0.0f;
-            
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
@@ -225,23 +225,19 @@ public class ServerMyEva : ServerSubAIManager
                 nextVec.y = 0;
                 transform.LookAt(transform.position + nextVec);
             }
-            myAnimator.SetTrigger("Dodge");
-            ServerLoginManager.playerList[0].mainCharacterBehavior = 2; 
+            //moveSpeed *= 2;
+            animator.SetTrigger("Dodge");
             StartCoroutine(DodgeDelay());
-
         }
-        if (myAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
         {
-            transform.Translate(Vector3.forward * 2 * Time.deltaTime);
+            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
             vecTarget = transform.position;
-            myAnimator.SetBool("Run", false);
-            ServerLoginManager.playerList[0].mainCharacterBehavior = 0;
-
-            if (myAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f
-                && myAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.4f)
-            {
-                moveSpeed = 100f;
-            }
+            animator.SetBool("Run", false);
+        }
+        else
+        {
+            moveSpeed = 5f;
         }
     }
 
