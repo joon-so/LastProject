@@ -33,20 +33,13 @@ public class ServerLoginManager : MonoBehaviour
 
     public static ServerPlayer[] playerList = new ServerPlayer[4];
     public InputField inputID;
+    public InputField inputIP;
 
     private void Start()
     {
         playerList[0].playerID = DataBaseManager.playerID;
-        inputID.text = LoginManager.playerID;
-    }
-
-    public void GetIPAdress(InputField ip)
-    {
-        if (ip.text == "0")
-        {
-            ip.text = "127.0.0.1";
-        }
-        playerList[0].ipAdress = ip.text;
+        inputID.text = DataBaseManager.playerID;
+        inputIP.text = DataBaseManager.playerIP;
     }
 
     public void ClickJoin()

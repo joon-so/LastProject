@@ -81,7 +81,7 @@ public class ServerMyPlayerManager : MonoBehaviour
         {
             serverKarmenObj.SetActive(true);
             character1 = serverKarmenObj;
-            character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
+            character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
             serverKarmenObj.tag = "MainCharacter";
             c1MaxHp = 500;
             c1MaxEp = 100;
@@ -90,7 +90,7 @@ public class ServerMyPlayerManager : MonoBehaviour
         {
             serverJadeObj.SetActive(true);
             character1 = serverJadeObj;
-            character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
+            character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
             serverJadeObj.tag = "MainCharacter";
             c1MaxHp = 400;
             c1MaxEp = 200;
@@ -99,7 +99,7 @@ public class ServerMyPlayerManager : MonoBehaviour
         {
             serverLeinaObj.SetActive(true);
             character1 = serverLeinaObj;
-            character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
+            character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
             serverLeinaObj.tag = "MainCharacter";
             c1MaxHp = 400;
             c1MaxEp = 200;
@@ -108,7 +108,7 @@ public class ServerMyPlayerManager : MonoBehaviour
         {
             serverEvaObj.SetActive(true);
             character1 = serverEvaObj;
-            character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
+            character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
             serverEvaObj.tag = "MainCharacter";
             c1MaxHp = 500;
             c1MaxEp = 100;
@@ -119,6 +119,7 @@ public class ServerMyPlayerManager : MonoBehaviour
             serverKarmenObj.SetActive(true);
             character2 = serverKarmenObj;
             character2.gameObject.GetComponent<NavMeshAgent>().enabled = true;
+            character2.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             serverKarmenObj.tag = "SubCharacter";
             c2MaxHp = 500;
             c2MaxEp = 100;
@@ -128,6 +129,7 @@ public class ServerMyPlayerManager : MonoBehaviour
             serverJadeObj.SetActive(true);
             character2 = serverJadeObj;
             character2.gameObject.GetComponent<NavMeshAgent>().enabled = true;
+            character2.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             serverJadeObj.tag = "SubCharacter";
             c2MaxHp = 400;
             c2MaxEp = 200;
@@ -137,6 +139,7 @@ public class ServerMyPlayerManager : MonoBehaviour
             serverLeinaObj.SetActive(true);
             character2 = serverLeinaObj;
             character2.gameObject.GetComponent<NavMeshAgent>().enabled = true;
+            character2.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             serverLeinaObj.tag = "SubCharacter";
             c2MaxHp = 400;
             c2MaxEp = 200;
@@ -146,6 +149,7 @@ public class ServerMyPlayerManager : MonoBehaviour
             serverEvaObj.SetActive(true);
             character2 = serverEvaObj;
             character2.gameObject.GetComponent<NavMeshAgent>().enabled = true;
+            character2.gameObject.GetComponent<Rigidbody>().isKinematic = true;
             serverEvaObj.tag = "SubCharacter";
             c2MaxHp = 500;
             c2MaxEp = 100;
@@ -241,6 +245,10 @@ public class ServerMyPlayerManager : MonoBehaviour
                 character2.gameObject.tag = "MainCharacter";
                 character2.gameObject.GetComponent<NavMeshAgent>().enabled = true;
                 character1.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+
+                character1.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+                character2.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+
                 ServerLoginManager.playerList[0].is_Main_Character = 2;
                 isTag = false;
             }
@@ -252,6 +260,10 @@ public class ServerMyPlayerManager : MonoBehaviour
 
                 character2.gameObject.GetComponent<NavMeshAgent>().enabled = false;
                 character1.gameObject.GetComponent<NavMeshAgent>().enabled = true;
+
+                character1.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+                character2.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+
                 ServerLoginManager.playerList[0].is_Main_Character = 1;
                 isTag = true;
             }
