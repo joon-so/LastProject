@@ -4,24 +4,51 @@ using UnityEngine;
 
 public class LoadStageManager : MonoBehaviour
 {
+    [SerializeField] AudioClip uiButtonSound;
     public void Stage1Click()
+    {
+        SoundManager.instance.SFXPlay("UIButtonClik", uiButtonSound);
+        Invoke("Stage1", 1f);
+    }
+    void Stage1()
     {
         GameManager.instance.ChangeSceneStage0();
     }
+
     public void Stage2Click()
     {
-        GameManager.instance.ChangeSceneStage1To2();
+        SoundManager.instance.SFXPlay("UIButtonClik", uiButtonSound);
+        Invoke("Stage2", 1f);
+    }
+    void Stage2()
+    {
+        GameManager.instance.ChangeSceneStage0();
     }
     public void Stage3Click()
     {
-        GameManager.instance.ChangeSceneStage2To3();
+        SoundManager.instance.SFXPlay("UIButtonClik", uiButtonSound);
+        Invoke("Stage3", 1f);
+    }
+    void Stage3()
+    {
+        GameManager.instance.ChangeSceneStage0();
     }
     public void Stage4Click()
     {
-        GameManager.instance.ChangeSceneStage3To4();
+        SoundManager.instance.SFXPlay("UIButtonClik", uiButtonSound);
+        Invoke("Stage4", 1f);
+    }
+    void Stage4()
+    {
+        GameManager.instance.ChangeSceneStage0();
     }
     public void Stage5Click()
     {
-        GameManager.instance.ChangeSceneBoss1PageEnter();
+        SoundManager.instance.SFXPlay("UIButtonClik", uiButtonSound);
+        Invoke("Stage5", 1f);
+    }
+    void Stage5()
+    {
+        GameManager.instance.ChangeSceneStage0();
     }
 }

@@ -17,7 +17,7 @@ public class Leina : SubAI
     [SerializeField] GameObject rainArrow = null;
     [SerializeField] Transform rainArrowPos = null;
 
-    public AudioClip attackClip;
+    [SerializeField] AudioClip attackClip;
 
     public float moveSpeed = 5.0f;
     public float dodgeCoolTime = 7.0f;

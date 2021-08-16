@@ -333,7 +333,6 @@ public class Karmen : SubAI
                 animator.SetTrigger("Attack");
                 leftStaff.enabled = true;
                 rightStaff.enabled = true;
-                ServerLoginManager.playerList[0].mainCharacterBehavior = 3; // Attack
 
                 curAttackDelay = 0;
 

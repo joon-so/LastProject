@@ -10,21 +10,31 @@ public class MainManager : MonoBehaviour
 
     public void OnClickLoadSelectPvEMode()
     {
-       // SoundManager.instance.SFXPlay("Click", uiButtonSound);
+        SoundManager.instance.SFXPlay("UIButtonClik", uiButtonSound);
+        Invoke("LoadPvEModeScene", 1f);
+    }
+    void LoadPvEModeScene()
+    {
         SceneManager.LoadScene("SelectPvEMode");
     }
+
     public void OnClickPvP()
     {
-     //   SoundManager.instance.SFXPlay("Click", uiButtonSound);
+        SoundManager.instance.SFXPlay("UIButtonClik", uiButtonSound);
+        Invoke("LoadPvPScene", 1f);
+    }
+    void LoadPvPScene()
+    {
         SceneManager.LoadScene("ServerLogin");
     }
+
     public void OnClickExitGOLogin()
     {
-        // SoundManager.instance.SFXPlay("Click", uiButtonSound);
+        SoundManager.instance.SFXPlay("UIButtonClik", uiButtonSound);
+        Invoke("LoadLoginScene", 1f);
+    }
+    void LoadLoginScene()
+    {
         SceneManager.LoadScene("Login");
     }
-
 }
-
-
-

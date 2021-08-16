@@ -22,12 +22,17 @@ public class ServerCharacterSelectManager : MonoBehaviour
     [SerializeField] Text characterInfoMsgText;
     private int mainOrSub;
 
+    [SerializeField] AudioClip uiButtonSound;
+    [SerializeField] AudioClip uiCharacterClickSound;
+
     void Start()
     {
         mainOrSub = 1;
     }
     public void OnClickSelectKarmen()
     {
+        SoundManager.instance.SFXPlay("CharacterListClick", uiCharacterClickSound);
+
         if (mainOrSub == 1)
         {
             mainKarmen.SetActive(true);
@@ -47,6 +52,8 @@ public class ServerCharacterSelectManager : MonoBehaviour
     }
     public void OnClickSelectJade()
     {
+        SoundManager.instance.SFXPlay("CharacterListClick", uiCharacterClickSound);
+
         if (mainOrSub == 1)
         {
             mainKarmen.SetActive(false);
@@ -66,6 +73,8 @@ public class ServerCharacterSelectManager : MonoBehaviour
     }
     public void OnClickSelectLeina()
     {
+        SoundManager.instance.SFXPlay("CharacterListClick", uiCharacterClickSound);
+
         if (mainOrSub == 1)
         {
             mainKarmen.SetActive(false);
@@ -85,6 +94,8 @@ public class ServerCharacterSelectManager : MonoBehaviour
     }
     public void OnClickSelectEva()
     {
+        SoundManager.instance.SFXPlay("CharacterListClick", uiCharacterClickSound);
+
         if (mainOrSub == 1)
         {
             mainKarmen.SetActive(false);
@@ -104,6 +115,8 @@ public class ServerCharacterSelectManager : MonoBehaviour
     }
     public void OnClickSelectButton()
     {
+        SoundManager.instance.SFXPlay("UIButtonClick", uiButtonSound);
+
         if (mainOrSub == 1)
         {
             if (mainKarmen.activeSelf)
@@ -187,14 +200,26 @@ public class ServerCharacterSelectManager : MonoBehaviour
 
     public void OnClickStartButton()
     {
-        SceneManager.LoadScene("ServerLobby");
+        SoundManager.instance.SFXPlay("UIButtonClick", uiButtonSound);
+        Invoke("LoadSererLobby", 1f);
+
         //로그인 패킷 전송
         send_Login_packet();
+    }
+    void LoadSererLobby()
+    {
+        SceneManager.LoadScene("ServerLobby");
     }
 
     public void OnClickExitButton()
     {
+        SoundManager.instance.SFXPlay("UIButtonClick", uiButtonSound);
+        Invoke("LoadSererLogin", 1f);
+    }
+    void LoadSererLogin()
+    {
         SceneManager.LoadScene("ServerLogin");
+
     }
 
     public void KarmenInfoMsg()
