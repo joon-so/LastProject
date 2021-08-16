@@ -11,7 +11,7 @@ public class MainManager : MonoBehaviour
     public void OnClickPvE()
     {
         SoundManager.instance.SFXPlay("Click", uiButtonSound);
-        SceneManager.LoadScene("CharacterSelect");
+        SceneManager.LoadScene("SelectPvEMode");
     }
     public void OnClickPvP()
     {
@@ -27,6 +27,16 @@ public class MainManager : MonoBehaviour
     void LoadLogin()
     {
         SceneManager.LoadScene("Login");
+    }
+    public void OnClickPvENewGame()
+    {
+        SoundManager.instance.SFXPlay("Click", uiButtonSound);
+        SceneManager.LoadScene("CharacterSelect");
+    }
+    public void OnClickPvELoadGame()
+    {
+        SoundManager.instance.SFXPlay("Click", uiButtonSound);
+        SceneManager.LoadScene("LoadPvELevel");
     }
 }
 
