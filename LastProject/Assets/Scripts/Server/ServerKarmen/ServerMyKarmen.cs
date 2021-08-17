@@ -347,7 +347,6 @@ public class ServerMyKarmen : ServerSubAIManager
         if (Input.GetKeyDown(KeyCode.F))
         {
             vecTarget = transform.position;
-            Debug.Log("еб╠в!!");
         }
     }
     void Q_Skill()
@@ -480,7 +479,7 @@ public class ServerMyKarmen : ServerSubAIManager
 
         leftStaffEffect.SetActive(false);
         rightStaffEffect.SetActive(false);
-
+        rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
         ServerLoginManager.playerList[0].mainCharacterBehavior = 5; // WSkill
         myAnimator.SetTrigger("WSkill");
         wLeftEffect.SetActive(true);
@@ -498,7 +497,7 @@ public class ServerMyKarmen : ServerSubAIManager
 
         vecTarget = transform.position;
         myAnimator.SetBool("Run", false);
-
+        rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
         ServerLoginManager.playerList[0].mainCharacterBehavior = 0; // Idle
 
         canAttack = true;

@@ -65,7 +65,7 @@ public class ServerIngameManager : MonoBehaviour
         }
 
         StartCoroutine(Setting());
-        playTime = 180.0f;
+        playTime = 60.0f;
     }
 
     void Update()

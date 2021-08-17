@@ -3321,6 +3321,7 @@ GameObject:
   - component: {fileID: 4020391903742618610}
   - component: {fileID: 3095393353879484702}
   - component: {fileID: 3545338949019792173}
+  - component: {fileID: 6538100621386257278}
   m_Layer: 0
   m_Name: Flames
   m_TagString: Untagged
@@ -6924,7 +6925,7 @@ ParticleSystem:
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
-    collisionMessages: 0
+    collisionMessages: 1
     collidesWithDynamic: 1
     interiorCollisions: 1
   TriggerModule:
@@ -7947,6 +7948,18 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!114 &6538100621386257278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5300641389367104880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0221fc4d3006d543ac8230c8a3e3c12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5423054688670915505
 GameObject:
   m_ObjectHideFlags: 0

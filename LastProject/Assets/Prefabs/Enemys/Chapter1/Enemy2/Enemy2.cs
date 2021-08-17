@@ -223,6 +223,11 @@ public class Enemy2 : MonoBehaviour
         currentHp -= collisionManager.jadeWSkillDamage;
         hpBar.SetHp(currentHp);
     }
+    public void HitEvaQSkill()
+    {
+        currentHp -= collisionManager.evaQSkillDamage;
+        hpBar.SetHp(currentHp);
+    }
     void OnCollisionEnter(Collision collision)
     {
         // Karmen

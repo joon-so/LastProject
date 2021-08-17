@@ -168,6 +168,11 @@ public class BossPilot : MonoBehaviour
         if (GameManager.instance.bossPage == 1)
             bossManager.curBoss1PageHp -= collisionManager.jadeWSkillDamage;
     }
+    public void HitEvaQSkill()
+    {
+        if (GameManager.instance.bossPage == 1)
+            bossManager.curBoss1PageHp -= collisionManager.evaQSkillDamage;
+    }
     void OnCollisionEnter(Collision collision)
     {
         // Karmen

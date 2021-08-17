@@ -388,6 +388,13 @@ public class Boss : MonoBehaviour
         if (GameManager.instance.bossPage == 3)
             bossManager.curBoss3PageHp -= collisionManager.jadeWSkillDamage;
     }
+    public void HitEvaQSkill()
+    {
+        if (GameManager.instance.bossPage == 2)
+            bossManager.curBoss2PageHp -= collisionManager.evaQSkillDamage;
+        if (GameManager.instance.bossPage == 3)
+            bossManager.curBoss3PageHp -= collisionManager.evaQSkillDamage;
+    }
     void OnCollisionEnter(Collision collision)
     {
         // Karmen
