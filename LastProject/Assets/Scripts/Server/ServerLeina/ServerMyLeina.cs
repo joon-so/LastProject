@@ -44,6 +44,10 @@ public class ServerMyLeina : ServerSubAIManager
 
     int characterIndex;
 
+    [SerializeField] AudioClip leinaAttackSound;
+    [SerializeField] AudioClip leinaQSkillSound;
+    [SerializeField] AudioClip leinaWSkillSound;
+
     void Awake()
     {
         myAnimator = GetComponent<Animator>();

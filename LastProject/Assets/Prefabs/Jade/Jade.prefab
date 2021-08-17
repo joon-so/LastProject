@@ -6056,8 +6056,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  nav: {fileID: 0}
-  rigidbody: {fileID: 0}
+  navMesh: {fileID: 0}
   tagCharacter: {fileID: 0}
   traceDistance: 2
   attackDistance: 1
@@ -6075,15 +6074,16 @@ MonoBehaviour:
   SynergeBullet: {fileID: 162538, guid: 1492ff056aec57445aee9daf3ac1d7f0, type: 3}
   grenadePos: {fileID: 7966750313374718420}
   Grenade: {fileID: 6059190706233498653, guid: 623872e6aa0cd4b4ba7eb9ae090d5103, type: 3}
-  attackClip: {fileID: 8300000, guid: 7185d08da7632af4281eb74802ec3a14, type: 3}
-  qSkillClip: {fileID: 8300000, guid: 12fe5de4b1f7f1e40824c7114340c0f7, type: 3}
-  wSkillClip: {fileID: 8300000, guid: 63c4e5e20a4bb4e428b38520978b49c7, type: 3}
   moveSpeed: 5
   dodgeCoolTime: 7
   fireDelay: 0.5
   subFireDelay: 1.5
   followDistance: 5
   grenadeDistance: 10
+  jadeAttackSound: {fileID: 8300000, guid: 7185d08da7632af4281eb74802ec3a14, type: 3}
+  jadeQSkillSound: {fileID: 8300000, guid: 12fe5de4b1f7f1e40824c7114340c0f7, type: 3}
+  jadeWSkillSound: {fileID: 8300000, guid: 63c4e5e20a4bb4e428b38520978b49c7, type: 3}
+  jadeESkillSound: {fileID: 8300000, guid: 594d4625fb28709449a1a778c5768f6a, type: 3}
 --- !u!54 &7966750312788935074
 Rigidbody:
   m_ObjectHideFlags: 0

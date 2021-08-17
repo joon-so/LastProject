@@ -1150,12 +1150,15 @@ MonoBehaviour:
   posionArrowPos: {fileID: 6374148070573737827}
   rainArrow: {fileID: 4090946686561165464, guid: 4c6df5da180c24b49a9b69560ebb2b3d, type: 3}
   rainArrowPos: {fileID: 4385404622400843517}
-  attackClip: {fileID: 8300000, guid: 79c278c674c2e4e4388bbbfb9a7abe7d, type: 3}
   moveSpeed: 5
   dodgeCoolTime: 7
   fireDelay: 1
   subFireDelay: 1.5
   followDistance: 5
+  leinaAttackSound: {fileID: 8300000, guid: 6d116839d97234e43826b97625e6f613, type: 3}
+  leinaQSkillSound: {fileID: 8300000, guid: 265ad9b7f682e2842a2b35485244573f, type: 3}
+  leinaWSkillSound: {fileID: 8300000, guid: 9477645b056a4364d9a2394525005e46, type: 3}
+  leinaESkillSound: {fileID: 8300000, guid: b8816ace9946f584980cabfb1f135c9f, type: 3}
 --- !u!195 &303485333146130485
 NavMeshAgent:
   m_ObjectHideFlags: 0

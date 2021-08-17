@@ -24,10 +24,6 @@ public class Jade : SubAI
     [SerializeField] Transform grenadePos = null;
     [SerializeField] GameObject Grenade = null;
 
-    public AudioClip attackClip;
-    public AudioClip qSkillClip;
-    public AudioClip wSkillClip;
-
     public float moveSpeed = 5.0f;
     public float dodgeCoolTime = 7.0f;
     public float fireDelay = 0.5f;
@@ -69,6 +65,11 @@ public class Jade : SubAI
     ClientCollisionManager collisionManager;
     ClientSkillEpManager skillEpManager;
     CapsuleCollider capsuleCollider;
+
+    [SerializeField] AudioClip jadeAttackSound;
+    [SerializeField] AudioClip jadeQSkillSound;
+    [SerializeField] AudioClip jadeWSkillSound;
+    [SerializeField] AudioClip jadeESkillSound;
 
     void Awake()
     {
@@ -320,7 +321,7 @@ public class Jade : SubAI
                     transform.LookAt(transform.position + nextVec);
                 }
 
-                SoundManager.instance.SFXPlay("Attack", attackClip);
+                SoundManager.instance.SFXPlay("JadeAttack", jadeAttackSound);
 
                 GameObject instantBullet = Instantiate(assaultRifleBullet, assaultRifleBulletPos.position, assaultRifleBulletPos.rotation);
                 Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
@@ -566,7 +567,7 @@ public class Jade : SubAI
             animator.SetBool("AimMissile", true);
             yield return new WaitForSeconds(0.5f);
             missileEffect.SetActive(true);
-            SoundManager.instance.SFXPlay("Attack", qSkillClip);
+            SoundManager.instance.SFXPlay("JadeQSkill", jadeQSkillSound);
 
             yield return new WaitForSeconds(1.0f);
             animator.SetBool("AimMissile", false);
@@ -607,7 +608,8 @@ public class Jade : SubAI
             nextVec.y = 0;
             transform.LookAt(transform.position + nextVec);
 
-            SoundManager.instance.SFXPlay("Grenade", wSkillClip);
+            SoundManager.instance.SFXPlay("JadeWSkill", jadeWSkillSound);
+
             GameObject instantGrenade = Instantiate(Grenade, grenadePos.position, grenadePos.rotation);
             Rigidbody rigidGrenade = instantGrenade.GetComponent<Rigidbody>();
             rigidGrenade.AddForce(nextVec, ForceMode.Impulse);
@@ -699,6 +701,9 @@ public class Jade : SubAI
         animator.SetBool("AimMissile", false);
 
         animator.SetTrigger("shootMissileLauncher");
+
+        SoundManager.instance.SFXPlay("JadeESkill", jadeESkillSound);
+
         GameObject instantBullet;
         Rigidbody bulletRigid;
         List<GameObject> enemys = new List<GameObject>();
