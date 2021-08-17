@@ -56,8 +56,8 @@ public class InGameUI : MonoBehaviour
 
     [SerializeField] Image hitEffect;
 
-    [SerializeField] Image gameEnd;
-    [SerializeField] Text missionFail;
+    [SerializeField] GameObject gameEnd;
+    [SerializeField] GameObject missionFail;
 
     private GameObject mainC1;
     private GameObject subC1;
@@ -394,21 +394,12 @@ public class InGameUI : MonoBehaviour
     IEnumerator GameOver()
     {
         yield return new WaitForSeconds(2f);
-        float endTime = 3f;
-        float curTime = 0;
-        Color color = gameEnd.color;
-        Color color2 = missionFail.color;
-        while (curTime <= endTime)
-        {
-            curTime += 0.03f;
-            color.a = curTime / endTime;
-            color2.a = color.a;
-            gameEnd.color = color;
-            missionFail.color = color2;
-            yield return null;
-        }
-        yield return new WaitForSeconds(3f);
+        gameEnd.SetActive(true);
+        missionFail.SetActive(true);
 
+        yield return new WaitForSeconds(3f);
+        gameEnd.SetActive(false);
+        missionFail.SetActive(false);
         GameManager.instance.DestroyAllInstance();
         GameManager.instance.ChangeSceneMain();
     }
