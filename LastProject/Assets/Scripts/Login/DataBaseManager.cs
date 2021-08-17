@@ -108,7 +108,8 @@ public class DataBaseManager : MonoBehaviour
 
     void LoadMainScene()
     {
-        StartCoroutine(LoginCo());
+        SceneManager.LoadScene("Main");
+       // StartCoroutine(LoginCo());
     }
 
     public void applyAccountBtn()

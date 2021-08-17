@@ -403,7 +403,6 @@ public class ServerMyJade : ServerSubAIManager
         if (Input.GetKeyDown(KeyCode.F))
         {
                 vecTarget = transform.position;
-                Debug.Log("еб╠в!!");
         }
     }
 

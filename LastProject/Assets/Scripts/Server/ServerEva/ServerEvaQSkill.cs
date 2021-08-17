@@ -21,7 +21,6 @@ public class ServerEvaQSkill : MonoBehaviour
 
         if (other.gameObject.CompareTag("MainCharacter"))
         {
-            Debug.Log("Å¸¿Ã¶óaa");
             collisionManager.EvaQSkillAttack();
         }
     }

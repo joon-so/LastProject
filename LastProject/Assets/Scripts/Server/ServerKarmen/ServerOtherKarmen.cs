@@ -186,7 +186,6 @@ public class ServerOtherKarmen : MonoBehaviour
 
     IEnumerator Death()
     {
-        Debug.Log("other karmen Á×À½");
         preBehavior = 6;
         otherAnimator.SetTrigger("Dead");
         yield return new WaitForSeconds(1.9f);

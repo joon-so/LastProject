@@ -388,7 +388,6 @@ public class ServerMyEva : ServerSubAIManager
         if (Input.GetKeyDown(KeyCode.F))
         {
                 vecTarget = transform.position;
-                Debug.Log("еб╠в!!");
         }
     }
 
