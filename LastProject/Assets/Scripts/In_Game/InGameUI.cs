@@ -401,7 +401,7 @@ public class InGameUI : MonoBehaviour
         gameEnd.SetActive(false);
         missionFail.SetActive(false);
         GameManager.instance.DestroyAllInstance();
-        GameManager.instance.ChangeSceneMain();
+        GameManager.instance.ChangeSceneLogin();
     }
 
     IEnumerator DelayTime()
