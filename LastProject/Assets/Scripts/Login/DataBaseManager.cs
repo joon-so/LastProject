@@ -103,7 +103,7 @@ public class DataBaseManager : MonoBehaviour
     {
         SoundManager.instance.SFXPlay("UIButtonClik", uiButtonSound);
         Invoke("LoadMainScene", 1f);
-        //        StartCoroutine(LoginCo());
+        StartCoroutine(LoginCo());
     }
 
     void LoadMainScene()
