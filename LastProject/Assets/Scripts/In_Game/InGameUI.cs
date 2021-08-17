@@ -136,18 +136,17 @@ public class InGameUI : MonoBehaviour
 
     void OnEnable()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 5)
-        {
-            StartCoroutine(StageInfo(SceneManager.GetActiveScene().name));
-            StartCoroutine(DelayTime());
-        }
         if (SceneManager.GetActiveScene().buildIndex == 7)
-            StartCoroutine(StageInfo(SceneManager.GetActiveScene().name));
+        {
+            StartCoroutine(StageInfoF(SceneManager.GetActiveScene().name));
+        }
         if (SceneManager.GetActiveScene().buildIndex == 9)
             StartCoroutine(StageInfo(SceneManager.GetActiveScene().name));
         if (SceneManager.GetActiveScene().buildIndex == 11)
             StartCoroutine(StageInfo(SceneManager.GetActiveScene().name));
         if (SceneManager.GetActiveScene().buildIndex == 13)
+            StartCoroutine(StageInfo(SceneManager.GetActiveScene().name));
+        if (SceneManager.GetActiveScene().buildIndex == 15)
         {
             if(GameManager.instance.bossPage == 1)
                 StartCoroutine(StageInfo("Boss 1Page"));
@@ -165,7 +164,14 @@ public class InGameUI : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         stageInfo.SetActive(false);
     }
-
+    IEnumerator StageInfoF(string text)
+    {
+        stageInfo.SetActive(true);
+        stageInfoText.text = text;
+        yield return new WaitForSeconds(1.0f);
+        stageInfo.SetActive(false);
+        ExplanManipulationMove();
+    }
     void InitializeUI()
     {
         if (GameManager.instance.clientPlayer.selectCharacter1 == 1)
@@ -402,11 +408,5 @@ public class InGameUI : MonoBehaviour
         missionFail.SetActive(false);
         GameManager.instance.DestroyAllInstance();
         GameManager.instance.ChangeSceneLogin();
-    }
-
-    IEnumerator DelayTime()
-    {
-        yield return new WaitForSeconds(1.1f);
-        ExplanManipulationMove();
     }
 }

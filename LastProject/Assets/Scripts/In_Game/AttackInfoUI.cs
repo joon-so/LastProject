@@ -8,7 +8,7 @@ public class AttackInfoUI : MonoBehaviour
     {
         if (other.gameObject.CompareTag("MainCharacter"))
         {
-            GameObject.Find("Canvas (UI)").GetComponent<InGameUI>().ExplanManipulationDodge();
+            GameObject.Find("Canvas (UI)").GetComponent<InGameUI>().ExplanManipulationAttack();
             gameObject.SetActive(false);
         }
     }

@@ -620,12 +620,12 @@ public class Leina : SubAI
         //SynergeFirstArrow.SetActive(true);
 
         yield return new WaitForSeconds(1.3f);
-        SoundManager.instance.SFXPlay("LeinaESkill", leinaESkillSound);
 
         GameObject instantArrow = Instantiate(SynergeArrow, posionArrowPos.position, posionArrowPos.rotation);
         // ¼¦
         yield return new WaitForSeconds(1f);
         Destroy(instantArrow);
+        SoundManager.instance.SFXPlay("LeinaESkill", leinaESkillSound);
 
         GameObject instantEffect = Instantiate(SynergeEffect, transform.position + -transform.right * 7f, transform.rotation);
         yield return new WaitForSeconds(1.0f);

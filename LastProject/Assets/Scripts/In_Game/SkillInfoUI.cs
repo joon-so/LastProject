@@ -8,7 +8,7 @@ public class SkillInfoUI : MonoBehaviour
     {
         if (other.gameObject.CompareTag("MainCharacter"))
         {
-            GameObject.Find("Canvas (UI)").GetComponent<InGameUI>().ExplanManipulationDodge();
+            GameObject.Find("Canvas (UI)").GetComponent<InGameUI>().ExplanManipulationSkill();
             gameObject.SetActive(false);
         }
     }
