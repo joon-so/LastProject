@@ -103,12 +103,12 @@ public class DataBaseManager : MonoBehaviour
     {
         SoundManager.instance.SFXPlay("UIButtonClik", uiButtonSound);
         Invoke("LoadMainScene", 1f);
-        StartCoroutine(LoginCo());
+
     }
 
     void LoadMainScene()
     {
-        SceneManager.LoadScene("Main");
+        StartCoroutine(LoginCo());
     }
 
     public void applyAccountBtn()
@@ -251,6 +251,7 @@ public class DataBaseManager : MonoBehaviour
         {
             if (Rp.result == 1)
             {
+                message.text = "계정 생성 완료! 로그인 하세요.";
                 Debug.Log("계정 생성 가능");
                 LoginPacket newAccountPacket = new LoginPacket();
                 newAccountPacket.type = 102;
