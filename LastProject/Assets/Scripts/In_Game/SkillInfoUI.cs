@@ -6,7 +6,10 @@ public class SkillInfoUI : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        GameObject.Find("Canvas (UI)").GetComponent<InGameUI>().ExplanManipulationSkill();
-        gameObject.SetActive(false);
+        if (other.gameObject.CompareTag("MainCharacter"))
+        {
+            GameObject.Find("Canvas (UI)").GetComponent<InGameUI>().ExplanManipulationSkill();
+            gameObject.SetActive(false);
+        }
     }
 }

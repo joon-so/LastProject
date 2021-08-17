@@ -42,14 +42,21 @@ public class ServerMyEva : ServerSubAIManager
     Rigidbody rigidbody;
     ServerCollisionManager collisionManager;
     ServerSkillEpManager skillEpManager;
+    CapsuleCollider capsuleCollider;
 
     int characterIndex;
+
+
+    [SerializeField] AudioClip evaAttackSound;
+    [SerializeField] AudioClip evaQSkillSound;
+    [SerializeField] AudioClip evaWSkillSound;
 
     void Awake()
     {
         myAnimator = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
         rigidbody = GetComponent<Rigidbody>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
         collisionManager = GameObject.Find("ServerIngameManager").GetComponent<ServerCollisionManager>();
         skillEpManager = GameObject.Find("ServerIngameManager").GetComponent<ServerSkillEpManager>();
     }
@@ -262,6 +269,8 @@ public class ServerMyEva : ServerSubAIManager
                     transform.LookAt(transform.position + nextVec);
                 }
 
+                SoundManager.instance.SFXPlay("EvaAttack", evaAttackSound);
+
                 vecTarget = transform.position;
                 myAnimator.SetTrigger("Attack");
                 basicAttack1Collider.enabled = true;
@@ -394,14 +403,15 @@ public class ServerMyEva : ServerSubAIManager
 
     IEnumerator Death()
     {
-        Debug.Log("my jade Á×À½");
-
         canMove = false;
         canAttack = false;
         canSkill = false;
         canDodge = false;
+        rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        if (!capsuleCollider.isTrigger)
+            myAnimator.SetTrigger("Dead");
+        capsuleCollider.isTrigger = true;
         ServerLoginManager.playerList[0].mainCharacterBehavior = 6;
-        myAnimator.SetTrigger("Dead");
         yield return new WaitForSeconds(1.9f);
     }
 
@@ -441,7 +451,7 @@ public class ServerMyEva : ServerSubAIManager
             nextVec.y = 0;
             transform.LookAt(transform.position + nextVec);
         }
-
+        SoundManager.instance.SFXPlay("EvaQSkill", evaQSkillSound);
         yield return new WaitForSeconds(5.0f);
         qSkill.SetActive(false);
 
@@ -478,6 +488,7 @@ public class ServerMyEva : ServerSubAIManager
 
 
         yield return new WaitForSeconds(0.3f);
+        SoundManager.instance.SFXPlay("EvaWSkill", evaWSkillSound);
         // »ý¼º
         wSkillShockEffect.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
         Instantiate(wSkillShockEffect, transform.position + transform.forward * 1.5f, transform.rotation);

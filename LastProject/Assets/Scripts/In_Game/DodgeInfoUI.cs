@@ -6,7 +6,10 @@ public class DodgeInfoUI : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        GameObject.Find("Canvas (UI)").GetComponent<InGameUI>().ExplanManipulationDodge();
-        gameObject.SetActive(false);
+        if(other.gameObject.CompareTag("MainCharacter"))
+        {
+            GameObject.Find("Canvas (UI)").GetComponent<InGameUI>().ExplanManipulationDodge();
+            gameObject.SetActive(false);
+        }
     }
 }

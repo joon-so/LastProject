@@ -51,14 +51,20 @@ public class ServerMyJade : ServerSubAIManager
     Rigidbody rigidbody; 
     ServerCollisionManager collisionManager;
     ServerSkillEpManager skillEpManager;
+    CapsuleCollider capsuleCollider;
 
     int characterIndex;
+
+    [SerializeField] AudioClip jadeAttackSound;
+    [SerializeField] AudioClip jadeQSkillSound;
+    [SerializeField] AudioClip jadeWSkillSound;
 
     void Awake()
     {
         myAnimator = GetComponent<Animator>();
         nav = GetComponent<NavMeshAgent>();
         rigidbody = GetComponent<Rigidbody>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
         collisionManager = GameObject.Find("ServerIngameManager").GetComponent<ServerCollisionManager>();
         skillEpManager = GameObject.Find("ServerIngameManager").GetComponent<ServerSkillEpManager>();
     }
@@ -275,6 +281,8 @@ public class ServerMyJade : ServerSubAIManager
                     transform.LookAt(transform.position + nextVec);
                 }
 
+                SoundManager.instance.SFXPlay("JadeAttack", jadeAttackSound);
+
                 GameObject instantBullet = Instantiate(assaultRifleBullet, assaultRifleBulletPos.position, assaultRifleBulletPos.rotation);
                 Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
                 bulletRigid.velocity = assaultRifleBulletPos.forward;
@@ -419,13 +427,15 @@ public class ServerMyJade : ServerSubAIManager
 
     IEnumerator Death()
     {
-        Debug.Log("my jade Á×À½");
         canMove = false;
         canAttack = false;
         canSkill = false;
         canDodge = false;
+        rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+        if (!capsuleCollider.isTrigger)
+            myAnimator.SetTrigger("Dead");
+        capsuleCollider.isTrigger = true;
         ServerLoginManager.playerList[0].mainCharacterBehavior = 6;
-        myAnimator.SetTrigger("Dead");
         yield return new WaitForSeconds(1.9f);
     }
 
@@ -465,7 +475,7 @@ public class ServerMyJade : ServerSubAIManager
             myAnimator.SetBool("AimMissile", true);
             yield return new WaitForSeconds(0.5f);
             missileEffect.SetActive(true);
-            //SoundManager.instance.SFXPlay("Attack", qSkillClip);
+            SoundManager.instance.SFXPlay("JadeQSkill", jadeQSkillSound);
 
             yield return new WaitForSeconds(1.0f);
             myAnimator.SetBool("AimMissile", false);
@@ -506,7 +516,7 @@ public class ServerMyJade : ServerSubAIManager
             nextVec.y = 0;
             transform.LookAt(transform.position + nextVec);
 
-            //SoundManager.instance.SFXPlay("Grenade", wSkillClip);
+            SoundManager.instance.SFXPlay("JadeWSkill", jadeWSkillSound);
 
             GameObject instantGrenade = Instantiate(Grenade, grenadePos.position, grenadePos.rotation);
             Rigidbody rigidGrenade = instantGrenade.GetComponent<Rigidbody>();

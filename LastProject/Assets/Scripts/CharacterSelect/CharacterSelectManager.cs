@@ -283,7 +283,7 @@ public class CharacterSelectManager : MonoBehaviour
                                     "기본공격(곤봉을 휘두름)\t\t\t\t\t\t공격력 : " + clientCollisionManager.karmenAttackDamage + "\n" +
                                     "Q스킬(기를 모아 한번 공격)\t\t\t\t\t공격력 : " + clientCollisionManager.karmenQSkillDamage + "\n" +
                                     "W스킬(빠른속도로 연속 공격)\t\t\t\t공격력 : " + clientCollisionManager.karmenWSkillDamage + "\n" +
-                                    "E스킬(커다란 곤봉을 휘두름)\t\t\t\t\t공격력 : " + clientCollisionManager.karmenESkillDamage + "\n" +
+                                    "E스킬(커다란 곤봉을 휘두름)\t\t\t\t공격력 : " + clientCollisionManager.karmenESkillDamage + "\n" +
                                     "곤봉으로 로봇을 처치하고싶으세요? 선택해주세요.\n";
     }
     public void JadeInfoMsg()
@@ -291,10 +291,10 @@ public class CharacterSelectManager : MonoBehaviour
         characterInfoMsgText.text = "제이드는 원거리 전투 캐릭터입니다." + "\n" +
                                     "Hp : " + jadeHp + "\n" +
                                     "Ep : " + jadeEp + "\n" +
-                                    "기본공격(총알 발사)\t\t\t\t\t\t\t\t공격력 : " + clientCollisionManager.jadeAttackDamage + "\n" +
+                                    "기본공격(총알 발사)\t\t\t\t\t\t\t공격력 : " + clientCollisionManager.jadeAttackDamage + "\n" +
                                     "Q스킬(미사일 발사)\t\t\t\t\t\t\t\t공격력 : " + clientCollisionManager.jadeQSkillDamage + "\n" +
                                     "W스킬(수료탄 발사)\t\t\t\t\t\t\t\t공격력 : " + clientCollisionManager.jadeWSkillDamage + "\n" +
-                                    "E스킬(10M반경으로 유도탄 발사)\t\t\t공격력 : " + clientCollisionManager.jadeESkillDamage + "\n" +
+                                    "E스킬(10M반경으로 유도탄 발사)\t\t공격력 : " + clientCollisionManager.jadeESkillDamage + "\n" +
                                     "총으로 로봇을 처치하고싶으세요? 선택해주세요.\n";
     }
     public void LeinaInfoMsg()
@@ -302,10 +302,10 @@ public class CharacterSelectManager : MonoBehaviour
         characterInfoMsgText.text = "레이나는 원거리 전투 캐릭터입니다." + "\n" +
                                     "Hp : " + leinaHp + "\n" +
                                     "Ep : " + leinaEp + "\n" +
-                                    "기본공격(화살 발사)\t\t\t\t\t\t\t\t공격력 : " + clientCollisionManager.leinaAttackDamage + "\n" +
-                                    "Q스킬(큰 화살 발사)\t\t\t\t\t\t\t\t공격력 : " + clientCollisionManager.leinaQSkillDamage + "\n" +
+                                    "기본공격(화살 발사)\t\t\t\t\t\t\t공격력 : " + clientCollisionManager.leinaAttackDamage + "\n" +
+                                    "Q스킬(큰 화살 발사)\t\t\t\t\t\t\t공격력 : " + clientCollisionManager.leinaQSkillDamage + "\n" +
                                     "W스킬(여러 방향으로 화살 발사)\t\t\t공격력 : " + clientCollisionManager.leinaWSkillDamage + "\n" +
-                                    "E스킬(하늘에서 수많은 화살발사)\t\t\t공격력 : " + clientCollisionManager.leinaESkillDamage + "\n" +
+                                    "E스킬(하늘에서 수많은 화살발사)\t\t공격력 : " + clientCollisionManager.leinaESkillDamage + "\n" +
                                     "화살로 로봇을 처치하고싶으세요? 선택해주세요.\n";
     }
     public void EvaInfoMsg()
@@ -316,7 +316,7 @@ public class CharacterSelectManager : MonoBehaviour
                                     "기본공격(칼을 휘두름)\t\t\t\t\t\t\t공격력 : " + clientCollisionManager.evaAttackDamage + "\n" +
                                     "Q스킬(화염방사기 발사)\t\t\t\t\t\t공격력 : " + clientCollisionManager.evaQSkillDamage + "\n" +
                                     "W스킬(땅을 내려쳐 충격파 생성)\t\t\t공격력 : " + clientCollisionManager.evaWSkillDamage + "\n" +
-                                    "E스킬(10M반경으로 적을 공격)\t\t\t\t공격력 : " + clientCollisionManager.evaESkillDamage + "\n" +
+                                    "E스킬(10M반경으로 적을 공격)\t\t공격력 : " + clientCollisionManager.evaESkillDamage + "\n" +
                                     "무식하게 로봇을 처치하고싶으세요? 선택해주세요.\n";
     }
 }

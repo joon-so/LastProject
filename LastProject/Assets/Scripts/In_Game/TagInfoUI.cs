@@ -6,7 +6,10 @@ public class TagInfoUI : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        GameObject.Find("Canvas (UI)").GetComponent<InGameUI>().ExplanManipulationTag();
-        gameObject.SetActive(false);
+        if (other.gameObject.CompareTag("MainCharacter"))
+        {
+            GameObject.Find("Canvas (UI)").GetComponent<InGameUI>().ExplanManipulationTag();
+            gameObject.SetActive(false);
+        }
     }
 }

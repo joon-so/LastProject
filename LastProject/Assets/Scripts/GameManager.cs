@@ -96,9 +96,9 @@ public class GameManager : MonoBehaviour
         clientPlayer.character2Ep = 50;
     }
 
-    public void ChangeSceneMain()
+    public void ChangeSceneLogin()
     {
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("Login");
     }
     public void ChangeSceneStage0()
     {

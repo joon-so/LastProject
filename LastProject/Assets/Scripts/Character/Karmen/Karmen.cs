@@ -696,6 +696,7 @@ public class Karmen : SubAI
     }
     IEnumerator KarmenEvaSynerge()
     {
+        rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
         SoundManager.instance.SFXPlay("KarmenESkill", karmenESkillSound);
 
         EvaKarmenSynergeWeapon.SetActive(true);
@@ -704,6 +705,8 @@ public class Karmen : SubAI
         yield return new WaitForSeconds(3.45f);
         Instantiate(EvaKarmenSynergeEffect, transform.position + transform.forward * 4.5f, transform.rotation);
         yield return new WaitForSeconds(0.4f);
+        rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
+
         EvaKarmenSynergeWeapon.SetActive(false);
     }
     IEnumerator FallDown()
@@ -726,6 +729,7 @@ public class Karmen : SubAI
             navMesh.SetDestination(transform.position);
         }
         yield return new WaitForSeconds(2.6f);
+
         falling = false;
     }
     void OnCollisionEnter(Collision collision)

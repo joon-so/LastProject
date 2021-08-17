@@ -62,7 +62,13 @@ public class Eva : SubAI
     CapsuleCollider capsuleCollider;
 
     public static List<GameObject> targetEnemys = new List<GameObject>();
-    
+
+
+    [SerializeField] AudioClip evaAttackSound;
+    [SerializeField] AudioClip evaQSkillSound;
+    [SerializeField] AudioClip evaWSkillSound;
+    [SerializeField] AudioClip evaESkillSound;
+
     void Awake()
     {
         animator = GetComponentInChildren<Animator>();
@@ -321,11 +327,13 @@ public class Eva : SubAI
                     transform.LookAt(transform.position + nextVec);
                 }
 
+
+                SoundManager.instance.SFXPlay("EvaAttack", evaAttackSound);
+
                 vecTarget = transform.position;
                 animator.SetTrigger("Attack");
                 basicAttack1Collider.enabled = true;
                 basicAttack2Collider.enabled = true;
-                ServerLoginManager.playerList[0].mainCharacterBehavior = 3;
 
                 curAttackDelay = 0;
 
@@ -562,6 +570,8 @@ public class Eva : SubAI
             transform.LookAt(transform.position + nextVec);
         }
 
+        SoundManager.instance.SFXPlay("EvaQSkill", evaQSkillSound);
+
         yield return new WaitForSeconds(5.0f);
         qSkill.SetActive(false);
 
@@ -596,6 +606,8 @@ public class Eva : SubAI
 
 
         yield return new WaitForSeconds(0.3f);
+        SoundManager.instance.SFXPlay("EvaWSkill", evaWSkillSound);
+
         // »ý¼º
         wSkillShockEffect.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
         Instantiate(wSkillShockEffect, transform.position + transform.forward * 1.5f, transform.rotation);
@@ -708,6 +720,7 @@ public class Eva : SubAI
         }
 
         animator.SetTrigger("WSkill");
+
         Instantiate(wSkillEffect, wSkillPos.position, wSkillPos.rotation);
         Quaternion rotation = Quaternion.identity;
         rotation.eulerAngles = new Vector3(-90, 0, 0);
@@ -716,7 +729,7 @@ public class Eva : SubAI
         animator.SetFloat("Speed", 0.0f);
         yield return new WaitForSeconds(0.5f);
         animator.SetFloat("Speed", 1.0f);
-
+        SoundManager.instance.SFXPlay("EvaEkill", evaESkillSound);
 
         eSkillHitBox.SetActive(true);
         yield return new WaitForSeconds(1f);

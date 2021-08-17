@@ -56,8 +56,8 @@ public class InGameUI : MonoBehaviour
 
     [SerializeField] Image hitEffect;
 
-    [SerializeField] Image gameEnd;
-    [SerializeField] Text missionFail;
+    [SerializeField] GameObject gameEnd;
+    [SerializeField] GameObject missionFail;
 
     private GameObject mainC1;
     private GameObject subC1;
@@ -136,18 +136,17 @@ public class InGameUI : MonoBehaviour
 
     void OnEnable()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 5)
-        {
-            StartCoroutine(StageInfo(SceneManager.GetActiveScene().name));
-            StartCoroutine(DelayTime());
-        }
         if (SceneManager.GetActiveScene().buildIndex == 7)
-            StartCoroutine(StageInfo(SceneManager.GetActiveScene().name));
+        {
+            StartCoroutine(StageInfoF(SceneManager.GetActiveScene().name));
+        }
         if (SceneManager.GetActiveScene().buildIndex == 9)
             StartCoroutine(StageInfo(SceneManager.GetActiveScene().name));
         if (SceneManager.GetActiveScene().buildIndex == 11)
             StartCoroutine(StageInfo(SceneManager.GetActiveScene().name));
         if (SceneManager.GetActiveScene().buildIndex == 13)
+            StartCoroutine(StageInfo(SceneManager.GetActiveScene().name));
+        if (SceneManager.GetActiveScene().buildIndex == 15)
         {
             if(GameManager.instance.bossPage == 1)
                 StartCoroutine(StageInfo("Boss 1Page"));
@@ -165,7 +164,14 @@ public class InGameUI : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         stageInfo.SetActive(false);
     }
-
+    IEnumerator StageInfoF(string text)
+    {
+        stageInfo.SetActive(true);
+        stageInfoText.text = text;
+        yield return new WaitForSeconds(1.0f);
+        stageInfo.SetActive(false);
+        ExplanManipulationMove();
+    }
     void InitializeUI()
     {
         if (GameManager.instance.clientPlayer.selectCharacter1 == 1)
@@ -394,28 +400,13 @@ public class InGameUI : MonoBehaviour
     IEnumerator GameOver()
     {
         yield return new WaitForSeconds(2f);
-        float endTime = 3f;
-        float curTime = 0;
-        Color color = gameEnd.color;
-        Color color2 = missionFail.color;
-        while (curTime <= endTime)
-        {
-            curTime += 0.03f;
-            color.a = curTime / endTime;
-            color2.a = color.a;
-            gameEnd.color = color;
-            missionFail.color = color2;
-            yield return null;
-        }
+        gameEnd.SetActive(true);
+        missionFail.SetActive(true);
+
         yield return new WaitForSeconds(3f);
-
+        gameEnd.SetActive(false);
+        missionFail.SetActive(false);
         GameManager.instance.DestroyAllInstance();
-        GameManager.instance.ChangeSceneMain();
-    }
-
-    IEnumerator DelayTime()
-    {
-        yield return new WaitForSeconds(1.1f);
-        ExplanManipulationMove();
+        GameManager.instance.ChangeSceneLogin();
     }
 }

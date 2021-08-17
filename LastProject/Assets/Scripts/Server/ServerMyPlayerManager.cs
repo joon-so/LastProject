@@ -193,7 +193,7 @@ public class ServerMyPlayerManager : MonoBehaviour
         if (ServerLoginManager.playerList[0].character1Hp <= 0 || ServerLoginManager.playerList[0].character2Hp <= 0)
         {
             // 플레이어 사망
-            ServerIngameManager.instance.TimeSclaeSetZero();
+            //ServerIngameManager.instance.TimeSclaeSetZero();
         }
         else
         {
