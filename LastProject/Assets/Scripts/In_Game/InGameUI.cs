@@ -109,7 +109,6 @@ public class InGameUI : MonoBehaviour
         {
             UpdateHp();
             UpdateCoolTimeUI();
-            UpdatePlayerScore();
             HitActiveEffect();
             if (Input.GetKeyDown(KeyCode.F))
             {
@@ -125,12 +124,19 @@ public class InGameUI : MonoBehaviour
             UpdateHp();
             StartCoroutine(GameOver());
         }
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (gameMenu.activeSelf)
+            {
+                Time.timeScale = 1f;
                 gameMenu.SetActive(false);
+            }
             else
+            {
+                Time.timeScale = 0f;
                 gameMenu.SetActive(true);
+            }
         }
     }
 
@@ -333,11 +339,6 @@ public class InGameUI : MonoBehaviour
         }
     }
 
-    void UpdatePlayerScore()
-    {
-        playerScore.text = string.Format("{0}", GameManager.instance.playerScore);
-    }
-
     public void HitActiveEffect()
     {
         if (clientCollisionManager.hit)
@@ -362,7 +363,6 @@ public class InGameUI : MonoBehaviour
         tempColor.a = alpha;
         hitEffect.color = tempColor;
     }
-
     public void ExplanManipulationMove()
     {
         headText.text = "플레이어 이동";

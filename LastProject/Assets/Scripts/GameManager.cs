@@ -26,9 +26,6 @@ public class GameManager : MonoBehaviour
 
     public ClientPlayer clientPlayer = new ClientPlayer();
 
-    // player Info
-    public int playerScore;
-
     public int character1MaxHp;
     public int character1MaxEp;
     public int character2MaxHp;
@@ -63,8 +60,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        playerScore = 0;
-             
         tagCoolTime = 5.0f;
 
         curHpPotionCount = 3;
@@ -84,6 +79,7 @@ public class GameManager : MonoBehaviour
         Destroy(gameObject);
         Destroy(InGameUI.instance.gameObject);
         Destroy(PlayerManager.instance.gameObject);
+        Destroy(SetActiveManager.instance.gameObject);
     }
 
 

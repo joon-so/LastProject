@@ -6,12 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class GameMenu : MonoBehaviour
 {
+    public void ClickResumeButton()
+    {
+        Time.timeScale = 1f;
+        gameObject.SetActive(false);
+    }
     public void ClickExitButton()
     {
-        //Destroy(GameManager.instance.gameObject);
-        //Destroy(SoundManager.instance.gameObject);
-        //Destroy(PlayerManager.instance.gameObject);
-
-        Application.Quit();
+        Time.timeScale = 1f;
+        GameManager.instance.ChangeSceneLogin();
+        GameManager.instance.DestroyAllInstance();
     }
 }
