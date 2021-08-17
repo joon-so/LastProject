@@ -6,7 +6,6 @@ public class EvaQSkill : MonoBehaviour
 {
     private void OnParticleCollision(GameObject other)
     {
-        Debug.Log("º¸½º ºÒ½÷");
         if (other.gameObject.CompareTag("Enemy1"))
         {
             other.gameObject.GetComponent<Enemy1>().HitEvaQSkill();

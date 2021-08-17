@@ -15,7 +15,6 @@ public class BossFlames : MonoBehaviour
     {
         if (other.gameObject.CompareTag("MainCharacter"))
         {
-            Debug.Log("º¸½º ºÒ½÷");
             collisionManager.BossAttack4();
         }
     }

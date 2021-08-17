@@ -241,7 +241,6 @@ public class Enemy1 : MonoBehaviour
 
     public void HitEvaQSkill()
     {
-        Debug.Log("¾Æ¾æ");
         currentHp -= collisionManager.evaQSkillDamage;
         hpBar.SetHp(currentHp);
     }
