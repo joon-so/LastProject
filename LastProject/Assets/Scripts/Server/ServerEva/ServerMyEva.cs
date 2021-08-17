@@ -46,6 +46,11 @@ public class ServerMyEva : ServerSubAIManager
 
     int characterIndex;
 
+
+    [SerializeField] AudioClip evaAttackSound;
+    [SerializeField] AudioClip evaQSkillSound;
+    [SerializeField] AudioClip evaWSkillSound;
+
     void Awake()
     {
         myAnimator = GetComponent<Animator>();
@@ -264,6 +269,8 @@ public class ServerMyEva : ServerSubAIManager
                     transform.LookAt(transform.position + nextVec);
                 }
 
+                SoundManager.instance.SFXPlay("EvaAttack", evaAttackSound);
+
                 vecTarget = transform.position;
                 myAnimator.SetTrigger("Attack");
                 basicAttack1Collider.enabled = true;
@@ -444,7 +451,7 @@ public class ServerMyEva : ServerSubAIManager
             nextVec.y = 0;
             transform.LookAt(transform.position + nextVec);
         }
-
+        SoundManager.instance.SFXPlay("EvaQSkill", evaQSkillSound);
         yield return new WaitForSeconds(5.0f);
         qSkill.SetActive(false);
 
@@ -481,6 +488,7 @@ public class ServerMyEva : ServerSubAIManager
 
 
         yield return new WaitForSeconds(0.3f);
+        SoundManager.instance.SFXPlay("EvaWSkill", evaWSkillSound);
         // »ý¼º
         wSkillShockEffect.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
         Instantiate(wSkillShockEffect, transform.position + transform.forward * 1.5f, transform.rotation);

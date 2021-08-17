@@ -17,8 +17,6 @@ public class Leina : SubAI
     [SerializeField] GameObject rainArrow = null;
     [SerializeField] Transform rainArrowPos = null;
 
-    [SerializeField] AudioClip attackClip;
-
     public float moveSpeed = 5.0f;
     public float dodgeCoolTime = 7.0f;
     public float fireDelay = 1.0f;
@@ -56,6 +54,11 @@ public class Leina : SubAI
     ClientCollisionManager collisionManager;
     ClientSkillEpManager skillEpManager;
     CapsuleCollider capsuleCollider;
+
+    [SerializeField] AudioClip leinaAttackSound;
+    [SerializeField] AudioClip leinaQSkillSound;
+    [SerializeField] AudioClip leinaWSkillSound;
+    [SerializeField] AudioClip leinaESkillSound;
 
     void Awake()
     {
@@ -304,7 +307,7 @@ public class Leina : SubAI
                     nextVec.y = 0;
                     transform.LookAt(transform.position + nextVec);
                 }
-                SoundManager.instance.SFXPlay("Attack", attackClip);
+                SoundManager.instance.SFXPlay("LeinaAttack", leinaAttackSound);
 
                 GameObject instantArrow = Instantiate(arrow, arrowPos.position, arrowPos.rotation);
                 Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
@@ -535,6 +538,7 @@ public class Leina : SubAI
         LeinaPosionArrow.speed = 0;
         // ¼¦
         yield return new WaitForSeconds(1f);
+        SoundManager.instance.SFXPlay("LeinaQSkill", leinaQSkillSound);
 
         Rigidbody arrowRigid = instantArrow.GetComponent<Rigidbody>();
         arrowRigid.velocity = posionArrowPos.forward;
@@ -557,7 +561,7 @@ public class Leina : SubAI
             nextVec.y = 0;
             transform.LookAt(transform.position + nextVec);
         }
-        SoundManager.instance.SFXPlay("Attack", attackClip);
+        SoundManager.instance.SFXPlay("LeinaAttack", leinaWSkillSound);
 
         animator.SetBool("Run", false);
         vecTarget = transform.position;
@@ -610,11 +614,14 @@ public class Leina : SubAI
             transform.Rotate(0, transform.rotation.y + 90, 0);
         }
         animator.SetTrigger("QSkill");
+        rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
         // Â÷Â¡
         LeinaSynergeSkill.speed = 0;
         //SynergeFirstArrow.SetActive(true);
 
         yield return new WaitForSeconds(1.3f);
+        SoundManager.instance.SFXPlay("LeinaESkill", leinaESkillSound);
+
         GameObject instantArrow = Instantiate(SynergeArrow, posionArrowPos.position, posionArrowPos.rotation);
         // ¼¦
         yield return new WaitForSeconds(1f);
@@ -622,6 +629,7 @@ public class Leina : SubAI
 
         GameObject instantEffect = Instantiate(SynergeEffect, transform.position + -transform.right * 7f, transform.rotation);
         yield return new WaitForSeconds(1.0f);
+        rigidbody.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
     }
     IEnumerator FallDown()
     {
