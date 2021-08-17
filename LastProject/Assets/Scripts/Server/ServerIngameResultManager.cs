@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class ServerIngameResultManager : MonoBehaviour
@@ -18,5 +19,6 @@ public class ServerIngameResultManager : MonoBehaviour
     public void ResultExitButton()
     {
         gameObject.SetActive(false);
+        SceneManager.LoadScene("ServerLogin");
     }
 }
